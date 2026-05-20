@@ -8,27 +8,116 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <style>
         body { background: #0f172a; }
-        .progress-bar { transition: width 0.6s ease; }
         .card { transition: all 0.3s; }
-        .card:hover { transform: translateY(-6px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); }
+        .card:hover { transform: translateY(-6px); }
     </style>
 </head>
-<body class="text-slate-200">
+<body class="text-slate-200 min-h-screen pb-12">
     <div class="max-w-7xl mx-auto p-6">
 
         <div class="flex justify-between items-center mb-10">
             <div>
                 <h1 class="text-4xl font-bold">Projekt Dashboard</h1>
-                <p class="text-slate-400 mt-1">Fortschritt • Status • Deadlines</p>
+                <p class="text-slate-400">Deine Projekte live tracken</p>
             </div>
-            <a href="/" class="flex items-center gap-2 text-blue-400 hover:text-blue-300">
-                <i class="fas fa-home"></i> Zur Startseite
+            <a href="/" class="text-blue-400 hover:text-blue-300 flex items-center gap-2">
+                <i class="fas fa-home"></i> Startseite
             </a>
         </div>
 
-        <!-- Deine Projekt-Karten kommen hier hin (wie im letzten Code) -->
-        <!-- ... (kopiere den Rest aus meiner vorherigen Nachricht) ... -->
+        <!-- Neues Projekt hinzufügen -->
+        <div class="bg-slate-900 rounded-3xl p-6 mb-10">
+            <h2 class="text-xl font-semibold mb-4">Neues Projekt hinzufügen</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <input id="proj-name" type="text" placeholder="Projektname" class="bg-slate-800 rounded-xl px-4 py-3">
+                <input id="proj-desc" type="text" placeholder="Kurze Beschreibung" class="bg-slate-800 rounded-xl px-4 py-3">
+                <input id="proj-deadline" type="date" class="bg-slate-800 rounded-xl px-4 py-3">
+                <button onclick="addProject()" class="bg-blue-600 hover:bg-blue-700 rounded-xl font-medium">
+                    <i class="fas fa-plus"></i> Hinzufügen
+                </button>
+            </div>
+        </div>
 
+        <!-- Projekte Liste -->
+        <div id="projects-list" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Wird per JavaScript gefüllt -->
+        </div>
     </div>
+
+    <script>
+        let projects = JSON.parse(localStorage.getItem('projects')) || [];
+
+        function saveProjects() {
+            localStorage.setItem('projects', JSON.stringify(projects));
+            renderProjects();
+        }
+
+        function addProject() {
+            const name = document.getElementById('proj-name').value;
+            if (!name) return alert("Bitte einen Projektnamen eingeben");
+
+            projects.push({
+                id: Date.now(),
+                name: name,
+                description: document.getElementById('proj-desc').value || "",
+                progress: 0,
+                status: "In Arbeit",
+                deadline: document.getElementById('proj-deadline').value || ""
+            });
+
+            saveProjects();
+            
+            // Felder leeren
+            document.getElementById('proj-name').value = '';
+            document.getElementById('proj-desc').value = '';
+            document.getElementById('proj-deadline').value = '';
+        }
+
+        function updateProgress(id, newProgress) {
+            const project = projects.find(p => p.id === id);
+            if (project) {
+                project.progress = parseInt(newProgress);
+                saveProjects();
+            }
+        }
+
+        function renderProjects() {
+            const container = document.getElementById('projects-list');
+            container.innerHTML = '';
+
+            projects.forEach(project => {
+                const div = document.createElement('div');
+                div.className = 'bg-slate-900 rounded-3xl p-7 card';
+                div.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-xl font-semibold">${project.name}</h3>
+                            <p class="text-slate-400 text-sm mt-1">${project.description}</p>
+                        </div>
+                        <span class="px-4 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm">${project.status}</span>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <div class="flex justify-between text-sm mb-2">
+                            <span>Fortschritt</span>
+                            <span class="font-medium">${project.progress}%</span>
+                        </div>
+                        <input type="range" min="0" max="100" value="${project.progress}" 
+                               class="w-full accent-blue-500" 
+                               oninput="updateProgress(${project.id}, this.value)">
+                        <div class="h-3 bg-slate-700 rounded-full overflow-hidden mt-2">
+                            <div class="h-3 bg-blue-500 rounded-full transition-all" style="width: ${project.progress}%"></div>
+                        </div>
+                    </div>
+                    
+                    ${project.deadline ? `<p class="text-slate-400 text-sm mt-6">Deadline: <strong>${project.deadline}</strong></p>` : ''}
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // Initial rendern
+        renderProjects();
+    </script>
 </body>
 </html>
