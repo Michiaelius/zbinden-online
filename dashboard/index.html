@@ -10,6 +10,7 @@
         body { background: #0f172a; }
         .card { transition: all 0.3s ease; }
         .card:hover { transform: translateY(-8px); }
+        input[type="range"] { accent-color: #3b82f6; }
     </style>
 </head>
 <body class="text-slate-200 min-h-screen pb-12">
@@ -31,14 +32,10 @@
                 <i class="fas fa-plus"></i> Neues Projekt hinzufügen
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
-                <input id="proj-name" type="text" placeholder="Projektname" 
-                       class="bg-slate-800 rounded-2xl px-5 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <input id="proj-desc" type="text" placeholder="Kurze Beschreibung" 
-                       class="bg-slate-800 rounded-2xl px-5 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <input id="proj-deadline" type="date" 
-                       class="bg-slate-800 rounded-2xl px-5 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <button onclick="addProject()" 
-                        class="bg-blue-600 hover:bg-blue-700 font-medium rounded-2xl flex items-center justify-center gap-2">
+                <input id="proj-name" type="text" placeholder="Projektname" class="bg-slate-800 rounded-2xl px-5 py-3">
+                <input id="proj-desc" type="text" placeholder="Kurze Beschreibung" class="bg-slate-800 rounded-2xl px-5 py-3">
+                <input id="proj-deadline" type="date" class="bg-slate-800 rounded-2xl px-5 py-3">
+                <button onclick="addProject()" class="bg-blue-600 hover:bg-blue-700 font-medium rounded-2xl flex items-center justify-center gap-2">
                     <i class="fas fa-plus"></i> Hinzufügen
                 </button>
             </div>
@@ -46,9 +43,7 @@
 
         <!-- Projekte -->
         <h2 class="text-2xl font-semibold mb-6">Aktuelle Projekte</h2>
-        <div id="projects-list" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <!-- Wird per JS gefüllt -->
-        </div>
+        <div id="projects-list" class="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
     </div>
 
     <script>
@@ -56,52 +51,6 @@
 
         function saveProjects() {
             localStorage.setItem('projects', JSON.stringify(projects));
-            renderProjects();
-        }
-
-        function addProject() {
-            const name = document.getElementById('proj-name').value.trim();
-            if (!name) return alert("Bitte einen Projektnamen eingeben!");
-
-            const deadline = document.getElementById('proj-deadline').value;
-            if (deadline) {
-                const selectedDate = new Date(deadline);
-                const today = new Date();
-                today.setHours(0,0,0,0);
-                if (selectedDate < today) {
-                    return alert("Deadline darf nicht in der Vergangenheit liegen!");
-                }
-            }
-
-            projects.push({
-                id: Date.now(),
-                name: name,
-                description: document.getElementById('proj-desc').value.trim() || "",
-                progress: 0,
-                deadline: deadline
-            });
-
-            saveProjects();
-
-            // Felder leeren
-            document.getElementById('proj-name').value = '';
-            document.getElementById('proj-desc').value = '';
-            document.getElementById('proj-deadline').value = '';
-        }
-
-        function updateProgress(id, newProgress) {
-            const project = projects.find(p => p.id === id);
-            if (project) {
-                project.progress = Math.max(0, Math.min(100, parseInt(newProgress) || 0));
-                saveProjects();
-            }
-        }
-
-        function deleteProject(id) {
-            if (confirm("Projekt wirklich löschen?")) {
-                projects = projects.filter(p => p.id !== id);
-                saveProjects();
-            }
         }
 
         function renderProjects() {
@@ -109,7 +58,7 @@
             container.innerHTML = '';
 
             if (projects.length === 0) {
-                container.innerHTML = `<p class="text-slate-400 text-center py-12 col-span-2">Noch keine Projekte. Füge das erste hinzu!</p>`;
+                container.innerHTML = `<p class="text-slate-400 text-center py-12">Noch keine Projekte vorhanden.</p>`;
                 return;
             }
 
@@ -117,38 +66,95 @@
                 const div = document.createElement('div');
                 div.className = 'bg-slate-900 rounded-3xl p-7 card';
                 div.innerHTML = `
-                    <div class="flex justify-between items-start">
+                    <div class="flex justify-between items-start mb-4">
                         <div class="flex-1">
                             <h3 class="text-xl font-semibold">${project.name}</h3>
-                            ${project.description ? `<p class="text-slate-400 text-sm mt-1">${project.description}</p>` : ''}
+                            ${project.description ? `<p class="text-slate-400 text-sm">${project.description}</p>` : ''}
                         </div>
-                        <button onclick="deleteProject(${project.id})" class="text-red-400 hover:text-red-500">
+                        <button onclick="deleteProject(${project.id})" class="text-red-400 hover:text-red-500 text-xl">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
 
-                    <div class="mt-6">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="text-sm">Fortschritt</span>
-                            <div class="flex items-center gap-3">
-                                <input type="number" min="0" max="100" value="${project.progress}" 
-                                       class="w-16 bg-slate-800 text-center rounded-xl py-1 text-sm"
-                                       onchange="updateProgress(${project.id}, this.value)">
-                                <span class="text-sm font-medium w-12">${project.progress}%</span>
-                            </div>
+                    <div class="mb-6">
+                        <div class="flex justify-between text-sm mb-2">
+                            <span>Fortschritt</span>
+                            <input type="number" min="0" max="100" value="${project.progress}" 
+                                   class="w-16 bg-slate-800 text-center rounded-xl py-1 text-sm font-medium"
+                                   onchange="updateProgress(${project.id}, this.value)">
+                            <span class="font-medium w-12 text-right">${project.progress}%</span>
                         </div>
+                        
+                        <!-- Smooth Slider -->
                         <input type="range" min="0" max="100" value="${project.progress}" 
-                               class="w-full accent-blue-500 cursor-pointer" 
-                               oninput="updateProgress(${project.id}, this.value)">
+                               class="w-full h-3 accent-blue-500 cursor-pointer"
+                               oninput="liveUpdateProgress(${project.id}, this.value)">
                     </div>
 
                     ${project.deadline ? `
-                    <p class="text-slate-400 text-sm mt-6">
+                    <p class="text-slate-400 text-sm">
                         Deadline: <strong>${new Date(project.deadline).toLocaleDateString('de-DE')}</strong>
                     </p>` : ''}
                 `;
                 container.appendChild(div);
             });
+        }
+
+        // Live Update während dem Schieben (ohne neu rendern)
+        function liveUpdateProgress(id, value) {
+            const project = projects.find(p => p.id === id);
+            if (project) {
+                project.progress = parseInt(value);
+                // Nur die Zahl aktualisieren, nicht alles neu rendern
+                const numberInput = document.querySelector(`input[onchange="updateProgress(${id}, this.value)"]`);
+                if (numberInput) numberInput.value = value;
+            }
+        }
+
+        function updateProgress(id, value) {
+            const project = projects.find(p => p.id === id);
+            if (project) {
+                project.progress = Math.max(0, Math.min(100, parseInt(value) || 0));
+                saveProjects();
+                renderProjects(); // Nur bei Eingabe im Number-Feld neu rendern
+            }
+        }
+
+        function addProject() {
+            const name = document.getElementById('proj-name').value.trim();
+            if (!name) return alert("Bitte Projektnamen eingeben!");
+
+            const deadlineInput = document.getElementById('proj-deadline').value;
+            if (deadlineInput) {
+                const selected = new Date(deadlineInput);
+                const today = new Date();
+                today.setHours(0,0,0,0);
+                if (selected < today) return alert("Deadline darf nicht in der Vergangenheit liegen!");
+            }
+
+            projects.push({
+                id: Date.now(),
+                name: name,
+                description: document.getElementById('proj-desc').value.trim() || "",
+                progress: 0,
+                deadline: deadlineInput
+            });
+
+            saveProjects();
+            renderProjects();
+
+            // Felder leeren
+            document.getElementById('proj-name').value = '';
+            document.getElementById('proj-desc').value = '';
+            document.getElementById('proj-deadline').value = '';
+        }
+
+        function deleteProject(id) {
+            if (confirm("Projekt wirklich löschen?")) {
+                projects = projects.filter(p => p.id !== id);
+                saveProjects();
+                renderProjects();
+            }
         }
 
         // Initial rendern
