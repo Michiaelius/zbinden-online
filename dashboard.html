@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projekt Dashboard - zbinden.online</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        body { background: #0f172a; }
+        .progress-bar { transition: width 0.6s ease; }
+        .card { transition: all 0.3s; }
+        .card:hover { transform: translateY(-6px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); }
+    </style>
+</head>
+<body class="text-slate-200">
+    <div class="max-w-7xl mx-auto p-6">
+
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-10">
+            <div>
+                <h1 class="text-4xl font-bold">Projekt Dashboard</h1>
+                <p class="text-slate-400 mt-1">Fortschritt • Status • Deadlines</p>
+            </div>
+            <a href="/" class="flex items-center gap-2 text-blue-400 hover:text-blue-300">
+                <i class="fas fa-home"></i> Zur Startseite
+            </a>
+        </div>
+
+        <!-- Übersichtskarten -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+            <div class="bg-slate-900 rounded-2xl p-6 card">
+                <p class="text-slate-400">Aktive Projekte</p>
+                <p class="text-5xl font-bold text-white mt-2">8</p>
+            </div>
+            <div class="bg-slate-900 rounded-2xl p-6 card">
+                <p class="text-slate-400">Gesamtfortschritt</p>
+                <p class="text-5xl font-bold text-emerald-400 mt-2">67%</p>
+            </div>
+            <div class="bg-slate-900 rounded-2xl p-6 card">
+                <p class="text-slate-400">In Verzug</p>
+                <p class="text-5xl font-bold text-amber-400 mt-2">2</p>
+            </div>
+            <div class="bg-slate-900 rounded-2xl p-6 card">
+                <p class="text-slate-400">Abgeschlossen</p>
+                <p class="text-5xl font-bold text-white mt-2">3</p>
+            </div>
+        </div>
+
+        <!-- Projekte -->
+        <h2 class="text-2xl font-semibold mb-6">Meine Projekte</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" id="projects">
+
+            <!-- Beispiel Projekt 1 -->
+            <div class="bg-slate-900 rounded-3xl p-7 card">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h3 class="text-xl font-semibold">KI-Chatbot Entwicklung</h3>
+                        <p class="text-slate-400 text-sm mt-1">Persönliches Projekt • Begonnen: 12. Mai</p>
+                    </div>
+                    <span class="px-4 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm">In Arbeit</span>
+                </div>
+                <div class="mt-6">
+                    <div class="flex justify-between text-sm mb-2">
+                        <span>Fortschritt</span>
+                        <span class="font-medium">78%</span>
+                    </div>
+                    <div class="h-3 bg-slate-700 rounded-full overflow-hidden">
+                        <div class="progress-bar h-3 bg-blue-500 rounded-full" style="width: 78%"></div>
+                    </div>
+                </div>
+                <p class="text-slate-400 text-sm mt-6">Nächster Meilenstein: <strong>Frontend Integration</strong> — Deadline 05. Juni</p>
+            </div>
+
+            <!-- Beispiel Projekt 2 -->
+            <div class="bg-slate-900 rounded-3xl p-7 card">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h3 class="text-xl font-semibold">zbinden.online Website</h3>
+                        <p class="text-slate-400 text-sm mt-1">Familienprojekt</p>
+                    </div>
+                    <span class="px-4 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm">Live</span>
+                </div>
+                <div class="mt-6">
+                    <div class="flex justify-between text-sm mb-2">
+                        <span>Fortschritt</span>
+                        <span class="font-medium">45%</span>
+                    </div>
+                    <div class="h-3 bg-slate-700 rounded-full overflow-hidden">
+                        <div class="progress-bar h-3 bg-emerald-500 rounded-full" style="width: 45%"></div>
+                    </div>
+                </div>
+                <p class="text-slate-400 text-sm mt-6">Nächster Schritt: Weitere Unterseiten + Blog</p>
+            </div>
+
+            <!-- Hier kannst du weitere Projekte kopieren und anpassen -->
+
+        </div>
+    </div>
+</body>
+</html>
