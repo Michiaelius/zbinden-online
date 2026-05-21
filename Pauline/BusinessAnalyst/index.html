@@ -9,20 +9,37 @@
     <style>
         body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
         .hero-bg { background: linear-gradient(135deg, #f5f0eb 0%, #f8f1e3 100%); }
+        .portrait {
+            width: 220px;
+            height: 220px;
+            object-fit: cover;
+            border: 6px solid white;
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+        }
     </style>
 </head>
 <body class="hero-bg min-h-screen py-16">
 
     <div class="max-w-4xl mx-auto px-6">
 
-        <!-- Header -->
-        <div class="text-center mb-12">
-            <h1 class="text-6xl md:text-7xl font-bold text-gray-900 tracking-tight">Pauline Zbinden</h1>
-            <p class="text-3xl md:text-4xl text-amber-900 mt-4 font-medium">Business Analystin / Wirtschafts-Informatikerin</p>
+        <!-- Foto + Name + Titel -->
+        <div class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 mb-12">
+            <!-- Foto -->
+            <div class="flex-shrink-0">
+                <img src="pauline-zbinden.jpg" 
+                     alt="Pauline Zbinden"
+                     class="portrait rounded-3xl">
+            </div>
+            
+            <!-- Name & Titel -->
+            <div class="text-center md:text-left">
+                <h1 class="text-6xl md:text-7xl font-bold text-gray-900 tracking-tight">Pauline Zbinden</h1>
+                <p class="text-3xl md:text-4xl text-amber-900 mt-4 font-medium">Business Analystin / Wirtschafts-Informatikerin</p>
+            </div>
         </div>
 
-        <!-- Verbessertes Kurzprofil -->
-        <div class="max-w-3xl mx-auto bg-white/70 backdrop-blur-md rounded-3xl p-10 shadow-sm">
+        <!-- Kurzprofil -->
+        <div class="max-w-3xl mx-auto bg-white/70 backdrop-blur-md rounded-3xl p-10 shadow-sm mb-12">
             <div class="text-center">
                 <p class="text-2xl text-gray-700 leading-relaxed">
                     Ich bin Pauline – eine passionierte Business Analystin und Wirtschafts-Informatikerin, 
@@ -34,30 +51,43 @@
                     Mit technischem Verständnis, analytischem Denken und einem guten Gespür für Anforderungen 
                     und digitale Lösungen helfe ich Teams, die richtigen Dinge auf die richtige Art umzusetzen.
                 </p>
+            </div>
+        </div>
 
-                <!-- Highlights -->
-                <div class="grid grid-cols-3 gap-6 mt-12">
+        <!-- Kontakt -->
+        <div class="max-w-2xl mx-auto mb-16">
+            <h2 class="text-center text-amber-900 font-semibold tracking-widest text-sm mb-6">KONTAKT</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <a href="tel:+41791936802" 
+                   class="flex flex-col items-center gap-3 bg-white/70 hover:bg-white rounded-2xl p-6 shadow-sm transition-all hover:shadow">
+                    <i class="fa-solid fa-phone text-3xl text-amber-800"></i>
                     <div class="text-center">
-                        <i class="fa-solid fa-diagram-project text-4xl text-amber-800 mb-3"></i>
-                        <p class="font-semibold">Prozesse optimieren</p>
-                        <p class="text-sm text-gray-500">Anforderungen klar machen</p>
+                        <p class="font-medium">Telefon</p>
+                        <p class="text-gray-700">+41 79 193 68 02</p>
                     </div>
+                </a>
+                
+                <a href="mailto:pm97.meyer@gmail.com" 
+                   class="flex flex-col items-center gap-3 bg-white/70 hover:bg-white rounded-2xl p-6 shadow-sm transition-all hover:shadow">
+                    <i class="fa-solid fa-envelope text-3xl text-amber-800"></i>
                     <div class="text-center">
-                        <i class="fa-solid fa-bridge text-4xl text-amber-800 mb-3"></i>
-                        <p class="font-semibold">Brücken bauen</p>
-                        <p class="text-sm text-gray-500">Zwischen Fach &amp; Technik</p>
+                        <p class="font-medium">E-Mail</p>
+                        <p class="text-gray-700">pm97.meyer@gmail.com</p>
                     </div>
+                </a>
+                
+                <div class="flex flex-col items-center gap-3 bg-white/70 rounded-2xl p-6 shadow-sm">
+                    <i class="fa-solid fa-location-dot text-3xl text-amber-800"></i>
                     <div class="text-center">
-                        <i class="fa-solid fa-lightbulb text-4xl text-amber-800 mb-3"></i>
-                        <p class="font-semibold">Lösungen schaffen</p>
-                        <p class="text-sm text-gray-500">Praktisch &amp; zukunftsweisend</p>
+                        <p class="font-medium">Adresse</p>
+                        <p class="text-gray-700">Chriesiweg 25<br>4334 Sisseln</p>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Großer Button -->
-        <div class="mt-16 flex justify-center">
+        <div class="flex justify-center">
             <a href="/Pauline/BusinessAnalyst/lebenslauf-pauline-zbinden.pdf" 
                target="_blank"
                class="group flex items-center gap-5 bg-amber-900 hover:bg-amber-950 text-white text-2xl font-semibold px-14 py-7 rounded-3xl shadow-2xl transition-all hover:scale-105 active:scale-95">
