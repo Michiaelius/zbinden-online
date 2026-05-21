@@ -7,259 +7,57 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@700&display=swap');
-        
-        :root {
-            --beige: #f5f0eb;
-        }
-        
-        * {
-            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-            transition-duration: 150ms;
-        }
-
-        .resume-container {
-            max-width: 1100px;
-            margin: 2rem auto;
-            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.15);
+        body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        .pdf-container {
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+            border-radius: 20px;
             overflow: hidden;
+            background: #fff;
         }
-
-        .sidebar {
-            background-color: #f5f0eb;
-        }
-
-        .header-name {
-            font-family: 'Playfair Display', serif;
-        }
-
         @media print {
-            .resume-container {
-                box-shadow: none;
-                margin: 0;
-                max-width: 100%;
-            }
-            .no-print {
-                display: none !important;
-            }
+            .no-print { display: none; }
         }
     </style>
 </head>
-<body class="bg-gray-100 py-8">
-    <div class="resume-container bg-white mx-auto grid grid-cols-1 lg:grid-cols-12">
+<body class="bg-gray-50 py-12">
+
+    <div class="max-w-6xl mx-auto px-6">
         
-        <!-- Linke Spalte / Sidebar -->
-        <div class="sidebar lg:col-span-4 p-8 flex flex-col">
-            
-            <!-- Foto -->
-            <div class="flex justify-center mb-6">
-                <div class="w-40 h-40 rounded-2xl overflow-hidden border-4 border-white shadow-lg">
-                    <!-- Hier dein Foto einsetzen -->
-                    <img src="https://via.placeholder.com/320x320/8d6e63/ffffff?text=Pauline" 
-                         alt="Pauline Zbinden"
-                         class="w-full h-full object-cover">
-                </div>
-            </div>
-
-            <!-- Name & Titel (mobil sichtbar) -->
-            <div class="text-center lg:hidden mb-8">
-                <h1 class="header-name text-4xl font-bold text-gray-900">Pauline Zbinden</h1>
-                <p class="text-xl text-amber-900 font-medium mt-1">Business Analystin / Wirtschafts-Informatikerin</p>
-            </div>
-
-            <!-- Kontakt -->
-            <div class="mb-8">
-                <h2 class="uppercase text-xs font-semibold tracking-widest text-amber-900 mb-4 flex items-center gap-2">
-                    <i class="fa-solid fa-address-card"></i> KONTAKT
-                </h2>
-                <div class="space-y-3 text-sm">
-                    <a href="tel:+41791936802" class="flex items-center gap-3 hover:text-amber-800">
-                        <i class="fa-solid fa-phone w-5"></i>
-                        <span>+41 79 193 68 02</span>
-                    </a>
-                    <a href="mailto:pm97.meyer@gmail.com" class="flex items-center gap-3 hover:text-amber-800">
-                        <i class="fa-solid fa-envelope w-5"></i>
-                        <span>pm97.meyer@gmail.com</span>
-                    </a>
-                    <div class="flex items-center gap-3">
-                        <i class="fa-solid fa-location-dot w-5"></i>
-                        <span>Chriesiweg 25<br>4334 Sisseln</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Kernkompetenzen -->
-            <div class="mb-8">
-                <h2 class="uppercase text-xs font-semibold tracking-widest text-amber-900 mb-4 flex items-center gap-2">
-                    <i class="fa-solid fa-medal"></i> KERNKOMPETENZEN
-                </h2>
-                <ul class="space-y-3 text-sm leading-relaxed">
-                    <li class="flex gap-2"><span class="text-amber-800 mt-1">•</span> Anforderungsmanagement und strukturierte Aufnahme fachlicher Bedürfnisse</li>
-                    <li class="flex gap-2"><span class="text-amber-800 mt-1">•</span> Prozessanalyse und prozessorientierte Arbeitsweise</li>
-                    <li class="flex gap-2"><span class="text-amber-800 mt-1">•</span> Schnittstellenfunktion zwischen Fachbereichen, technischen Teams und externen Ansprechpartnern</li>
-                    <li class="flex gap-2"><span class="text-amber-800 mt-1">•</span> Sicherer Umgang mit IT-Systemen, Applikationen und digitalen Tools</li>
-                    <li class="flex gap-2"><span class="text-amber-800 mt-1">•</span> Sehr gute Kenntnisse in M365 und MS Office</li>
-                    <li class="flex gap-2"><span class="text-amber-800 mt-1">•</span> Testing, Qualitätssicherung und strukturierte Umsetzung technischer Anforderungen</li>
-                    <li class="flex gap-2"><span class="text-amber-800 mt-1">•</span> Selbständige, zuverlässige und lösungsorientierte Arbeitsweise</li>
-                </ul>
-            </div>
-
-            <!-- Sprachen -->
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-6">
             <div>
-                <h2 class="uppercase text-xs font-semibold tracking-widest text-amber-900 mb-4 flex items-center gap-2">
-                    <i class="fa-solid fa-language"></i> SPRACHEN
-                </h2>
-                <div class="space-y-2 text-sm">
-                    <div class="flex justify-between"><span class="font-medium">Französisch</span><span class="text-amber-800">Muttersprache</span></div>
-                    <div class="flex justify-between"><span class="font-medium">Deutsch</span><span class="text-amber-800">Muttersprache</span></div>
-                    <div class="flex justify-between"><span class="font-medium">Englisch</span><span class="text-amber-800">Gut mündlich und schriftlich (B1)</span></div>
-                </div>
+                <h1 class="text-5xl font-bold text-gray-900">Pauline Zbinden</h1>
+                <p class="text-3xl text-amber-900 mt-2">Business Analystin / Wirtschafts-Informatikerin</p>
             </div>
-
-            <!-- Footer Sidebar -->
-            <div class="mt-auto pt-8 text-[10px] text-amber-800/60 text-center lg:text-left">
-                Lebenslauf erstellt für die Homepage • 2026
+            
+            <div class="flex gap-4">
+                <!-- Download Button -->
+                <a href="Lebenslauf Business Analystin Wirtschaftsinformatik.pdf" 
+                   download
+                   class="flex items-center gap-3 bg-amber-900 hover:bg-amber-800 text-white px-8 py-4 rounded-2xl font-semibold shadow-lg">
+                    <i class="fa-solid fa-download"></i>
+                    <span>PDF herunterladen</span>
+                </a>
             </div>
         </div>
 
-        <!-- Rechte Spalte / Hauptinhalt -->
-        <div class="lg:col-span-8 p-8 lg:p-10 bg-white">
-
-            <!-- Header (Desktop) -->
-            <div class="hidden lg:flex justify-between items-start mb-8">
-                <div>
-                    <h1 class="header-name text-5xl font-bold text-gray-900 leading-none">Pauline Zbinden</h1>
-                    <p class="text-2xl text-amber-900 mt-2 font-medium">Business Analystin / Wirtschafts-Informatikerin</p>
-                </div>
-                <div class="text-right text-sm text-gray-500">
-                    <p>Ich arbeite gerne strukturiert, selbständig und im Austausch mit anderen.<br>
-                    Dabei bringe ich technisches Verständnis, analytisches Denken und ein gutes Gespür für Anforderungen, Prozesse und digitale Lösungen mit.</p>
-                </div>
-            </div>
-
-            <!-- Mobile Intro -->
-            <div class="lg:hidden mb-8 text-gray-600">
-                <p class="text-base">Ich arbeite gerne strukturiert, selbständig und im Austausch mit anderen. Dabei bringe ich technisches Verständnis, analytisches Denken und ein gutes Gespür für Anforderungen, Prozesse und digitale Lösungen mit.</p>
-            </div>
-
-            <!-- Berufserfahrung -->
-            <section class="mb-10">
-                <h2 class="uppercase text-xs font-semibold tracking-widest text-amber-900 mb-6 flex items-center gap-2 border-b pb-2">
-                    <i class="fa-solid fa-briefcase"></i> BERUFSERFAHRUNG
-                </h2>
-                
-                <!-- Job 1 -->
-                <div class="mb-8">
-                    <div class="flex flex-col lg:flex-row lg:justify-between lg:items-baseline gap-y-1 mb-3">
-                        <div>
-                            <h3 class="font-semibold text-lg">Junior Consultant</h3>
-                            <p class="text-amber-800">Drees &amp; Sommer Schweiz • Zürich</p>
-                        </div>
-                        <p class="text-sm font-medium text-gray-500">03/2024 – 03/2025</p>
-                    </div>
-                    <ul class="list-disc pl-5 space-y-2 text-gray-700 text-[15px]">
-                        <li>Analyse von Anforderungen und Herausforderungen auf Kundenseite sowie strukturierte Aufbereitung für technische Teams</li>
-                        <li>Schnittstellenfunktion zwischen Fachbereichen, Kundschaft und Entwicklung</li>
-                        <li>Koordination von Projektaktivitäten in verschiedenen Phasen</li>
-                        <li>Recherche und Evaluation von ICT-bezogenen Lösungsansätzen</li>
-                        <li>Mitarbeit an praxisnahen Lösungsansätzen für unterschiedliche Anforderungen</li>
-                    </ul>
-                </div>
-
-                <!-- Job 2 -->
-                <div>
-                    <div class="flex flex-col lg:flex-row lg:justify-between lg:items-baseline gap-y-1 mb-3">
-                        <div>
-                            <h3 class="font-semibold text-lg">Embedded Software Developer (C++)</h3>
-                            <p class="text-amber-800">Hexagon Manufacturing Intelligence • Aarau</p>
-                        </div>
-                        <p class="text-sm font-medium text-gray-500">07/2019 – 02/2024</p>
-                    </div>
-                    <ul class="list-disc pl-5 space-y-2 text-gray-700 text-[15px]">
-                        <li>Mitarbeit an der Weiterentwicklung technischer Systeme in einem agilen, interdisziplinären Umfeld</li>
-                        <li>Analyse, Umsetzung und Testing technischer Anforderungen in Embedded-Software-Projekten</li>
-                        <li>Implementierung und Weiterentwicklung digitaler Funktionen und Schnittstellen</li>
-                        <li>Qualitätssicherung durch systematische Integrationstests</li>
-                        <li>Strukturierte Zusammenarbeit im Team zur kontinuierlichen Verbesserung technischer Lösungen</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Digitale Eigeninitiativen -->
-            <section class="mb-10">
-                <h2 class="uppercase text-xs font-semibold tracking-widest text-amber-900 mb-6 flex items-center gap-2 border-b pb-2">
-                    <i class="fa-solid fa-laptop"></i> DIGITALE EIGENINITIATIVEN
-                </h2>
-                <ul class="list-disc pl-5 space-y-2 text-gray-700 text-[15px]">
-                    <li>Konzeption und Umsetzung eigener Webprojekte mit Wix Studio und Jimdo</li>
-                    <li>Strukturierung digitaler Inhalte mit Fokus auf Nutzerführung, klare Abläufe und einfache Pflege</li>
-                    <li>Praktische Erfahrung in der eigenständigen Umsetzung kleiner digitalen Lösungen</li>
-                </ul>
-            </section>
-
-            <!-- Elternzeit & Kontinuierliche Weiterbildung -->
-            <section class="mb-10">
-                <h2 class="uppercase text-xs font-semibold tracking-widest text-amber-900 mb-6 flex items-center gap-2 border-b pb-2">
-                    <i class="fa-solid fa-baby"></i> ELTERNZEIT &amp; KONTINUIERLICHE WEITERBILDUNG
-                </h2>
-                <div class="flex flex-col lg:flex-row lg:justify-between lg:items-baseline mb-3">
-                    <p class="font-medium">03/2025 – heute • Elternzeit / Familienmanagement, Sisseln</p>
-                </div>
-                <ul class="list-disc pl-5 space-y-2 text-gray-700 text-[15px]">
-                    <li>Organisation und Priorisierung eines dynamischen Alltags mit hoher Eigenverantwortung</li>
-                    <li>Strukturierte Weiterbildung und eigenständige Einarbeitung in digitale Themen</li>
-                    <li>Ausbau von Anpassungsfähigkeit, Kommunikationsstärke und pragmatischem Problemlösen</li>
-                </ul>
-            </section>
-
-            <!-- Ausbildung -->
-            <section>
-                <h2 class="uppercase text-xs font-semibold tracking-widest text-amber-900 mb-6 flex items-center gap-2 border-b pb-2">
-                    <i class="fa-solid fa-graduation-cap"></i> AUSBILDUNG
-                </h2>
-                <div>
-                    <p class="font-medium">Projektmanagement in der Mechatronik (Trinational)</p>
-                    <p class="text-sm text-gray-500">2015 – 2019</p>
-                    <p class="text-sm text-gray-600 mt-1">
-                        Bachelor of Science (FHNW Muttenz), Bachelor of Engineering (DHBW Lörrach), Licence Mécanique (IUT Mulhouse)
-                    </p>
-                </div>
-            </section>
-
+        <!-- PDF Vorschau -->
+        <div class="pdf-container">
+            <iframe 
+                src="Lebenslauf Business Analystin Wirtschaftsinformatik.pdf" 
+                width="100%" 
+                height="1150px"
+                class="w-full"
+                style="border: none;">
+            </iframe>
         </div>
+
+        <div class="text-center mt-8 text-sm text-gray-500">
+            <p>Der Lebenslauf wird direkt aus dem GitHub-Repository geladen.<br>
+            Auf dem Handy einfach zoomen oder den Download-Button nutzen.</p>
+        </div>
+
     </div>
 
-    <!-- Kleiner Hinweis unten -->
-    <div class="max-w-[1100px] mx-auto text-center text-xs text-gray-400 mt-8 no-print">
-        <p>Dieser Lebenslauf wurde speziell für deine Homepage erstellt.<br>
-        Du kannst die Seite einfach drucken (Strg+P) – sie sieht dann wie das Original-PDF aus.<br>
-        Ersetze das Platzhalter-Foto durch das echte Portrait (z. B. eine URL zu einem Bild auf deinem Server).</p>
-    </div>
-
-    <script>
-        // Tailwind Script aktivieren
-        function initializeTailwind() {
-            return {
-                config(userConfig = {}) {
-                    return {
-                        configUser: userConfig,
-                        theme: {
-                            extend: {},
-                        },
-                    }
-                },
-                theme(userConfig = {}) {
-                    return {
-                        configUser: userConfig,
-                        theme: {
-                            extend: {},
-                        },
-                    }
-                },
-            }
-        }
-        document.documentElement.setAttribute('data-tailwind-config', JSON.stringify(initializeTailwind().config()))
-    </script>
 </body>
 </html>
