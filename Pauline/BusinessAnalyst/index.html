@@ -8,60 +8,62 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        .hero-bg { background: linear-gradient(135deg, #f5f0eb 0%, #f8f1e3 100%); }
     </style>
 </head>
-<body class="bg-gray-50 py-16">
+<body class="hero-bg min-h-screen py-16">
 
     <div class="max-w-4xl mx-auto px-6">
 
         <!-- Header -->
         <div class="text-center mb-12">
-            <h1 class="text-6xl font-bold text-gray-900">Pauline Zbinden</h1>
-            <p class="text-3xl text-amber-900 mt-3">Business Analystin / Wirtschafts-Informatikerin</p>
+            <h1 class="text-6xl md:text-7xl font-bold text-gray-900 tracking-tight">Pauline Zbinden</h1>
+            <p class="text-3xl md:text-4xl text-amber-900 mt-4 font-medium">Business Analystin / Wirtschafts-Informatikerin</p>
         </div>
 
         <!-- Persönliche Vorstellung -->
-        <div class="prose prose-lg mx-auto max-w-2xl text-center text-gray-700 leading-relaxed">
-            <p class="text-xl">
-                Ich arbeite gerne strukturiert, selbständig und im Austausch mit anderen. 
-                Dabei bringe ich technisches Verständnis, analytisches Denken und ein gutes Gespür 
-                für Anforderungen, Prozesse und digitale Lösungen mit.
-            </p>
-            
-            <p class="mt-8 text-lg">
-                Mit mehrjähriger Erfahrung als Embedded Software Developer und Junior Consultant 
-                verbinde ich fachliches Know-how mit klarer Kommunikation zwischen Fachbereichen und Technik.
-            </p>
+        <div class="max-w-2xl mx-auto text-center">
+            <div class="prose prose-lg text-gray-700 leading-relaxed text-xl">
+                <p>
+                    Ich arbeite gerne strukturiert, selbständig und im Austausch mit anderen. 
+                    Dabei bringe ich technisches Verständnis, analytisches Denken und ein gutes Gespür 
+                    für Anforderungen, Prozesse und digitale Lösungen mit.
+                </p>
+                <p class="mt-8">
+                    Mit Erfahrung als Junior Consultant und Embedded Software Developer verbinde ich 
+                    fachliches Know-how mit klarer Kommunikation zwischen Fachbereichen und Technik.
+                </p>
+            </div>
         </div>
 
-        <!-- Call-to-Action -->
+        <!-- Call-to-Action Button -->
         <div class="mt-16 flex justify-center">
-            <a href="lebenslauf-pauline-zbinden.pdf" 
+            <a href="/Pauline/BusinessAnalyst/lebenslauf-pauline-zbinden.pdf" 
                target="_blank"
-               class="group flex items-center gap-4 bg-amber-900 hover:bg-amber-800 text-white text-2xl font-semibold px-12 py-6 rounded-3xl shadow-2xl transition-all hover:scale-105">
-                <i class="fa-solid fa-file-pdf text-3xl"></i>
+               class="group flex items-center gap-5 bg-amber-900 hover:bg-amber-950 text-white text-2xl font-semibold px-14 py-7 rounded-3xl shadow-2xl transition-all hover:scale-105 active:scale-95">
+                <i class="fa-solid fa-file-pdf text-4xl"></i>
                 <span>Jetzt Lebenslauf ansehen</span>
-                <i class="fa-solid fa-arrow-right group-active:translate-x-1"></i>
+                <i class="fa-solid fa-arrow-right text-3xl group-active:translate-x-2 transition-transform"></i>
             </a>
         </div>
 
-        <div class="text-center mt-6 text-sm text-gray-500">
-            Original-PDF • direkt aus dem GitHub-Repository geladen
-        </div>
+        <p class="text-center mt-8 text-amber-800/70 text-sm">
+            Original-PDF • direkt aus dem GitHub-Repository
+        </p>
 
-        <!-- Optional: kleine Teaser-Infos -->
-        <div class="mt-20 grid grid-cols-3 gap-6 text-center text-sm">
-            <div>
+        <!-- Kleine Highlights -->
+        <div class="mt-20 grid md:grid-cols-3 gap-8 text-center">
+            <div class="bg-white/60 backdrop-blur-md rounded-2xl p-6 shadow-sm">
                 <p class="font-semibold text-amber-900">Junior Consultant</p>
-                <p class="text-gray-500">Drees &amp; Sommer Schweiz</p>
+                <p class="text-gray-600 text-sm mt-1">Drees &amp; Sommer Schweiz, Zürich</p>
             </div>
-            <div>
+            <div class="bg-white/60 backdrop-blur-md rounded-2xl p-6 shadow-sm">
                 <p class="font-semibold text-amber-900">Embedded Software Developer</p>
-                <p class="text-gray-500">Hexagon Manufacturing Intelligence</p>
+                <p class="text-gray-600 text-sm mt-1">Hexagon Manufacturing Intelligence, Aarau</p>
             </div>
-            <div>
+            <div class="bg-white/60 backdrop-blur-md rounded-2xl p-6 shadow-sm">
                 <p class="font-semibold text-amber-900">Trinationaler Bachelor</p>
-                <p class="text-gray-500">Mechatronik &amp; Wirtschaftsinformatik</p>
+                <p class="text-gray-600 text-sm mt-1">Mechatronik &amp; Wirtschaftsinformatik</p>
             </div>
         </div>
 
