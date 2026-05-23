@@ -18,7 +18,7 @@
       constructor() {
         super('MainScene');
         this.isDigging = false;
-        this.currentPath = null;
+        this.currentGraphics = null;
       }
 
       create() {
@@ -33,15 +33,15 @@
           this.add.circle(Math.random()*w, 210 + Math.random()*(h-260), Math.random()*3.5 + 1.5, 0xc99a5f);
         }
 
-        // Wasserbehälter — sehr ruhige Bewegung
+        // Wasserbehälter (ruhig)
         this.water = this.add.rectangle(w/2, 145, w, 175, 0x38bdf8);
         this.water.setStrokeStyle(22, 0x1e40af);
         this.shine = this.add.rectangle(w/2, 105, w-100, 55, 0xffffff).setAlpha(0.32);
 
         this.tweens.add({ 
           targets: this.water, 
-          y: 147, 
-          duration: 4500, 
+          y: 148, 
+          duration: 4200, 
           yoyo: true, 
           repeat: -1, 
           ease: 'Sine.easeInOut' 
@@ -55,22 +55,22 @@
           fontSize: '26px', color: '#bae6fd' 
         }).setOrigin(0.5);
 
-        // Grab-Mechanik mit dicken Linien
+        // ==================== GRAB-MECHANIK ====================
         this.input.on('pointerdown', (p) => {
           if (p.y < 200) return;
           this.isDigging = true;
-          this.startNewChannel(p.x, p.y);
+          this.startDigging(p.x, p.y);
         });
 
         this.input.on('pointermove', (p) => {
           if (this.isDigging && p.y > 200) {
-            this.continueChannel(p.x, p.y);
+            this.continueDigging(p.x, p.y);
           }
         });
 
         this.input.on('pointerup', () => {
           this.isDigging = false;
-          this.currentPath = null;
+          this.currentGraphics = null;
         });
 
         this.helpText = this.add.text(w/2, h - 40, '🖱️ Maustaste halten und ziehen = Kanal graben', {
@@ -78,22 +78,22 @@
         }).setOrigin(0.5);
       }
 
-      startNewChannel(x, y) {
-        this.currentPath = this.add.graphics();
-        this.currentPath.lineStyle(48, 0x6b5a3d, 1);   // dunkler Rand
-        this.currentPath.moveTo(x, y);
+      startDigging(x, y) {
+        this.currentGraphics = this.add.graphics();
+        this.currentGraphics.lineStyle(52, 0x6b5a3d, 1); // äußerer Rand
+        this.currentGraphics.moveTo(x, y);
       }
 
-      continueChannel(x, y) {
-        if (!this.currentPath) return;
-        
-        // Äußerer Rand
-        this.currentPath.lineStyle(48, 0x6b5a3d, 1);
-        this.currentPath.lineTo(x, y);
-        
-        // Innerer heller Kanal
-        this.currentPath.lineStyle(34, 0x8d6f47, 1);
-        this.currentPath.lineTo(x, y);
+      continueDigging(x, y) {
+        if (!this.currentGraphics) return;
+
+        // Äußerer dunkler Rand
+        this.currentGraphics.lineStyle(52, 0x6b5a3d, 1);
+        this.currentGraphics.lineTo(x, y);
+
+        // Innerer Kanal
+        this.currentGraphics.lineStyle(36, 0x8d6f47, 1);
+        this.currentGraphics.lineTo(x, y);
       }
     }
 
