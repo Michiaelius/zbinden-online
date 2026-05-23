@@ -8,7 +8,12 @@
       margin: 0; padding: 0; background: #0a2a4a;
       display: flex; justify-content: center; align-items: center; height: 100vh;
     }
-    #game { border: 18px solid #1e40af; border-radius: 28px; box-shadow: 0 0 90px rgba(0,0,0,0.95); overflow: hidden; }
+    #game { 
+      border: 20px solid #1e40af; 
+      border-radius: 30px; 
+      box-shadow: 0 0 100px rgba(0,0,0,0.95); 
+      overflow: hidden;
+    }
     canvas { display: block; }
   </style>
 </head>
@@ -17,99 +22,100 @@
 
   <script>
     const canvas = document.createElement('canvas');
-    canvas.width = 1100;
-    canvas.height = 680;
+    canvas.width = 1200;   // Größer gemacht
+    canvas.height = 750;
     document.getElementById('game').appendChild(canvas);
     const ctx = canvas.getContext('2d');
 
-    const GRID_SIZE = 20; // für späteres Wasser-Fließen wichtig
-
     let isDigging = false;
+    let lastX, lastY;
 
-    // === Schöner Hintergrund ===
+    // Hintergrund
     function drawBackground() {
-      // Himmel
-      const sky = ctx.createLinearGradient(0, 0, 0, 280);
-      sky.addColorStop(0, '#7dd3fc');
+      // Himmel (stärker sichtbar)
+      const sky = ctx.createLinearGradient(0, 0, 0, 320);
+      sky.addColorStop(0, '#60a5fa');
       sky.addColorStop(1, '#bae6fd');
       ctx.fillStyle = sky;
-      ctx.fillRect(0, 0, 1100, 280);
+      ctx.fillRect(0, 0, 1200, 320);
 
       // Sonne
-      ctx.fillStyle = '#facc15';
-      ctx.beginPath(); ctx.arc(880, 115, 65, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#fcd34d';
+      ctx.beginPath(); ctx.arc(950, 130, 70, 0, Math.PI*2); ctx.fill();
       ctx.fillStyle = '#fef08c';
-      ctx.beginPath(); ctx.arc(880, 115, 50, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(950, 130, 55, 0, Math.PI*2); ctx.fill();
 
-      // Wolken (einfach)
-      ctx.fillStyle = 'rgba(255,255,255,0.85)';
-      ctx.beginPath(); ctx.ellipse(220, 90, 80, 35, 0, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.ellipse(280, 75, 55, 30, 0, 0, Math.PI*2); ctx.fill();
+      // Wolke
+      ctx.fillStyle = 'rgba(255,255,255,0.9)';
+      ctx.beginPath(); ctx.ellipse(280, 95, 95, 38, 0, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(340, 80, 65, 32, 0, 0, Math.PI*2); ctx.fill();
 
       // Sand
       ctx.fillStyle = '#e2c18a';
-      ctx.fillRect(0, 220, 1100, 460);
+      ctx.fillRect(0, 250, 1200, 500);
 
-      // Sand Textur
+      // Sand-Textur
       ctx.fillStyle = '#c99a5f';
-      for (let i = 0; i < 3200; i++) {
+      for (let i = 0; i < 3500; i++) {
         ctx.beginPath();
-        ctx.arc(Math.random()*1100, 230 + Math.random()*440, Math.random()*4 + 1.5, 0, Math.PI*2);
+        ctx.arc(Math.random()*1200, 260 + Math.random()*480, Math.random()*4.5 + 1.5, 0, Math.PI*2);
         ctx.fill();
       }
     }
 
     drawBackground();
 
-    // === Wasserbehälter (jetzt mit Wellen) ===
-    function drawWaterReservoir() {
+    // Wasserbehälter mit besseren Wellen
+    function drawWater() {
       ctx.fillStyle = '#38bdf8';
-      ctx.fillRect(0, 72, 1100, 165);
+      ctx.fillRect(0, 85, 1200, 180);
 
       ctx.strokeStyle = '#1e40af';
-      ctx.lineWidth = 28;
-      ctx.strokeRect(0, 72, 1100, 165);
+      ctx.lineWidth = 35;
+      ctx.strokeRect(0, 85, 1200, 180);
 
-      // Wellen
+      // Wellen (besser sichtbar)
       ctx.strokeStyle = '#7dd3fc';
-      ctx.lineWidth = 6;
-      for (let i = 0; i < 6; i++) {
+      ctx.lineWidth = 12;
+      for (let i = 0; i < 5; i++) {
         ctx.beginPath();
-        ctx.moveTo(0, 95 + i*8);
-        ctx.quadraticCurveTo(250, 78 + i*5, 550, 96 + i*7);
-        ctx.quadraticCurveTo(850, 115 + i*4, 1100, 92 + i*6);
+        ctx.moveTo(0, 105 + i*12);
+        ctx.quadraticCurveTo(300, 85 + i*8, 600, 112 + i*10);
+        ctx.quadraticCurveTo(900, 95 + i*7, 1200, 108 + i*11);
         ctx.stroke();
       }
 
       // Glanz
-      ctx.fillStyle = 'rgba(255,255,255,0.55)';
-      ctx.fillRect(50, 82, 1000, 45);
+      ctx.fillStyle = 'rgba(255,255,255,0.6)';
+      ctx.fillRect(80, 95, 1040, 55);
     }
 
-    drawWaterReservoir();
+    drawWater();
 
-    // Titel
+    // Texte
     ctx.fillStyle = '#fff';
-    ctx.font = 'bold 56px Arial';
+    ctx.font = 'bold 62px Arial';
     ctx.textAlign = 'center';
-    ctx.fillText('💧 Wasser-Logik', 550, 48);
+    ctx.fillText('💧 Wasser-Logik', 600, 55);
 
-    ctx.font = '26px Arial';
+    ctx.font = '27px Arial';
     ctx.fillStyle = '#bae6fd';
-    ctx.fillText('Level 1 — Graben & Wasser lenken', 550, 82);
+    ctx.fillText('Level 1 — Graben & Wasser lenken', 600, 92);
 
-    ctx.font = '23px Arial';
+    ctx.font = '24px Arial';
     ctx.fillStyle = '#fef08c';
-    ctx.fillText('🖱️ Maustaste halten und ziehen = Kanal graben', 550, 645);
+    ctx.fillText('🖱️ Maustaste halten und ziehen = Kanal graben', 600, 710);
 
-    // === Graben mit besserer Kontrolle ===
+    // Graben – jetzt mit durchgehender dicker Linie
     canvas.addEventListener('mousedown', (e) => {
       const rect = canvas.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      if (y < 230) return;
+      if (y < 260) return;
+
       isDigging = true;
-      digAt(x, y);
+      lastX = x; lastY = y;
+      digLine(x, y, x, y);
     });
 
     canvas.addEventListener('mousemove', (e) => {
@@ -117,25 +123,34 @@
       const rect = canvas.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      if (y < 230) return;
-      digAt(x, y);
+      if (y < 260) return;
+
+      digLine(lastX, lastY, x, y);
+      lastX = x;
+      lastY = y;
     });
 
     canvas.addEventListener('mouseup', () => isDigging = false);
     canvas.addEventListener('mouseleave', () => isDigging = false);
 
-    function digAt(x, y) {
+    function digLine(x1, y1, x2, y2) {
       // Dunkler Rand
-      ctx.fillStyle = '#6b5a3d';
+      ctx.strokeStyle = '#6b5a3d';
+      ctx.lineWidth = 58;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
       ctx.beginPath();
-      ctx.arc(x, y, 26, 0, Math.PI*2);
-      ctx.fill();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.stroke();
 
-      // Innerer Sand-Kanal
-      ctx.fillStyle = '#8d6f47';
+      // Innerer Kanal (heller)
+      ctx.strokeStyle = '#8d6f47';
+      ctx.lineWidth = 38;
       ctx.beginPath();
-      ctx.arc(x, y, 17, 0, Math.PI*2);
-      ctx.fill();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.stroke();
     }
   </script>
 </body>
