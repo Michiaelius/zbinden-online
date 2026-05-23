@@ -7,12 +7,8 @@
     body {
       margin: 0; padding: 0; background: #0a2a4a;
       display: flex; justify-content: center; align-items: center; height: 100vh;
-      font-family: Arial, sans-serif;
     }
-    #game {
-      border: 18px solid #1e40af; border-radius: 28px;
-      box-shadow: 0 0 90px rgba(0,0,0,0.95); overflow: hidden;
-    }
+    #game { border: 18px solid #1e40af; border-radius: 28px; box-shadow: 0 0 90px rgba(0,0,0,0.95); overflow: hidden; }
     canvas { display: block; }
   </style>
 </head>
@@ -26,92 +22,94 @@
     document.getElementById('game').appendChild(canvas);
     const ctx = canvas.getContext('2d');
 
-    let isDigging = false;
-    let lastX, lastY;
+    const GRID_SIZE = 20; // für späteres Wasser-Fließen wichtig
 
-    // === Hintergrund einmal zeichnen ===
+    let isDigging = false;
+
+    // === Schöner Hintergrund ===
     function drawBackground() {
       // Himmel
-      const skyGrad = ctx.createLinearGradient(0, 0, 0, 280);
-      skyGrad.addColorStop(0, '#7dd3fc');
-      skyGrad.addColorStop(1, '#bae6fd');
-      ctx.fillStyle = skyGrad;
+      const sky = ctx.createLinearGradient(0, 0, 0, 280);
+      sky.addColorStop(0, '#7dd3fc');
+      sky.addColorStop(1, '#bae6fd');
+      ctx.fillStyle = sky;
       ctx.fillRect(0, 0, 1100, 280);
 
       // Sonne
       ctx.fillStyle = '#facc15';
-      ctx.beginPath(); ctx.arc(880, 120, 65, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(880, 115, 65, 0, Math.PI*2); ctx.fill();
       ctx.fillStyle = '#fef08c';
-      ctx.beginPath(); ctx.arc(880, 120, 52, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(880, 115, 50, 0, Math.PI*2); ctx.fill();
+
+      // Wolken (einfach)
+      ctx.fillStyle = 'rgba(255,255,255,0.85)';
+      ctx.beginPath(); ctx.ellipse(220, 90, 80, 35, 0, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(280, 75, 55, 30, 0, 0, Math.PI*2); ctx.fill();
 
       // Sand
       ctx.fillStyle = '#e2c18a';
       ctx.fillRect(0, 220, 1100, 460);
 
-      // Sand-Textur
+      // Sand Textur
       ctx.fillStyle = '#c99a5f';
       for (let i = 0; i < 3200; i++) {
         ctx.beginPath();
-        ctx.arc(Math.random()*1100, 230 + Math.random()*440, Math.random()*4.5 + 1.5, 0, Math.PI*2);
+        ctx.arc(Math.random()*1100, 230 + Math.random()*440, Math.random()*4 + 1.5, 0, Math.PI*2);
         ctx.fill();
       }
     }
 
     drawBackground();
 
-    // === Wasser (besser erkennbar) ===
-    function drawWater() {
-      // Wasserfläche
+    // === Wasserbehälter (jetzt mit Wellen) ===
+    function drawWaterReservoir() {
       ctx.fillStyle = '#38bdf8';
-      ctx.fillRect(0, 75, 1100, 165);
+      ctx.fillRect(0, 72, 1100, 165);
 
-      // Dunkler Rand unten
       ctx.strokeStyle = '#1e40af';
-      ctx.lineWidth = 32;
-      ctx.strokeRect(10, 78, 1080, 158);
+      ctx.lineWidth = 28;
+      ctx.strokeRect(0, 72, 1100, 165);
 
-      // Wellen-Effekt oben
+      // Wellen
       ctx.strokeStyle = '#7dd3fc';
-      ctx.lineWidth = 8;
-      for (let i = 0; i < 8; i++) {
+      ctx.lineWidth = 6;
+      for (let i = 0; i < 6; i++) {
         ctx.beginPath();
-        ctx.moveTo(0, 92 + i*6);
-        ctx.quadraticCurveTo(280, 78 + i*4, 550, 92 + i*5);
-        ctx.quadraticCurveTo(820, 105 + i*3, 1100, 88 + i*6);
+        ctx.moveTo(0, 95 + i*8);
+        ctx.quadraticCurveTo(250, 78 + i*5, 550, 96 + i*7);
+        ctx.quadraticCurveTo(850, 115 + i*4, 1100, 92 + i*6);
         ctx.stroke();
       }
 
       // Glanz
-      ctx.fillStyle = 'rgba(255,255,255,0.5)';
-      ctx.fillRect(60, 88, 980, 42);
+      ctx.fillStyle = 'rgba(255,255,255,0.55)';
+      ctx.fillRect(50, 82, 1000, 45);
     }
 
-    drawWater();
+    drawWaterReservoir();
 
     // Titel
-    ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 58px Arial';
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 56px Arial';
     ctx.textAlign = 'center';
-    ctx.fillText('💧 Wasser-Logik', 550, 52);
+    ctx.fillText('💧 Wasser-Logik', 550, 48);
 
     ctx.font = '26px Arial';
     ctx.fillStyle = '#bae6fd';
-    ctx.fillText('Level 1 — Graben & Wasser lenken', 550, 88);
+    ctx.fillText('Level 1 — Graben & Wasser lenken', 550, 82);
 
     ctx.font = '23px Arial';
     ctx.fillStyle = '#fef08c';
     ctx.fillText('🖱️ Maustaste halten und ziehen = Kanal graben', 550, 645);
 
-    // === Graben (saubere Linien) ===
+    // === Graben mit besserer Kontrolle ===
     canvas.addEventListener('mousedown', (e) => {
       const rect = canvas.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       if (y < 230) return;
-
       isDigging = true;
-      lastX = x; lastY = y;
-      drawDigSegment(x, y);
+      digAt(x, y);
     });
 
     canvas.addEventListener('mousemove', (e) => {
@@ -120,38 +118,24 @@
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       if (y < 230) return;
-
-      drawDigLine(lastX, lastY, x, y);
-      lastX = x;
-      lastY = y;
+      digAt(x, y);
     });
 
     canvas.addEventListener('mouseup', () => isDigging = false);
     canvas.addEventListener('mouseleave', () => isDigging = false);
 
-    function drawDigSegment(x, y) {
+    function digAt(x, y) {
+      // Dunkler Rand
       ctx.fillStyle = '#6b5a3d';
-      ctx.beginPath(); ctx.arc(x, y, 29, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath();
+      ctx.arc(x, y, 26, 0, Math.PI*2);
+      ctx.fill();
+
+      // Innerer Sand-Kanal
       ctx.fillStyle = '#8d6f47';
-      ctx.beginPath(); ctx.arc(x, y, 20, 0, Math.PI*2); ctx.fill();
-    }
-
-    function drawDigLine(x1, y1, x2, y2) {
-      ctx.strokeStyle = '#6b5a3d';
-      ctx.lineWidth = 56;
-      ctx.lineCap = 'round';
-      ctx.lineJoin = 'round';
       ctx.beginPath();
-      ctx.moveTo(x1, y1);
-      ctx.lineTo(x2, y2);
-      ctx.stroke();
-
-      ctx.strokeStyle = '#8d6f47';
-      ctx.lineWidth = 38;
-      ctx.beginPath();
-      ctx.moveTo(x1, y1);
-      ctx.lineTo(x2, y2);
-      ctx.stroke();
+      ctx.arc(x, y, 17, 0, Math.PI*2);
+      ctx.fill();
     }
   </script>
 </body>
