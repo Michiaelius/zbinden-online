@@ -27,18 +27,26 @@
 </head>
 <body>
 
-  <!-- Separater Header -->
   <div class="header">
     <h1 style="margin:0; color:white; font-size:58px;">💧 Wasser-Logik</h1>
     <p style="margin:8px 0 0 0; color:#bae6fd; font-size:28px;">Level 1 — Graben & Wasser lenken</p>
   </div>
 
-  <!-- Das eigentliche Spiel-Fenster -->
   <canvas id="game" width="1320" height="760"></canvas>
 
   <script>
     const canvas = document.getElementById('game');
     const ctx = canvas.getContext('2d');
+
+    // Wolken-Positionen
+    let cloud1X = 250;
+    let cloud2X = 820;
+    
+    // Vogel-Positionen
+    let birds = [
+      {x: -100, y: 180, speed: 1.2},
+      {x: -300, y: 240, speed: 0.9}
+    ];
 
     function drawBackground() {
       // Himmel
@@ -54,13 +62,14 @@
       ctx.fillStyle = '#fef08c';
       ctx.beginPath(); ctx.arc(1080, 170, 63, 0, Math.PI*2); ctx.fill();
 
-      // Wolken
+      // Wolke 1
       ctx.fillStyle = 'rgba(255,255,255,0.95)';
-      ctx.beginPath(); ctx.ellipse(250, 130, 120, 48, 0, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.ellipse(340, 110, 82, 38, 0, 0, Math.PI*2); ctx.fill();
-      
-      ctx.beginPath(); ctx.ellipse(820, 165, 110, 42, 0, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.ellipse(910, 145, 72, 35, 0, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(cloud1X, 130, 120, 48, 0, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(cloud1X + 90, 110, 82, 38, 0, 0, Math.PI*2); ctx.fill();
+
+      // Wolke 2
+      ctx.beginPath(); ctx.ellipse(cloud2X, 165, 110, 42, 0, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(cloud2X + 90, 145, 72, 35, 0, 0, Math.PI*2); ctx.fill();
 
       // Sand
       ctx.fillStyle = '#e2c18a';
@@ -75,7 +84,38 @@
       }
     }
 
-    drawBackground();
+    function drawBird(x, y) {
+      ctx.strokeStyle = '#334155';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(x+18, y-8);
+      ctx.moveTo(x, y);
+      ctx.lineTo(x+18, y+6);
+      ctx.stroke();
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, 1320, 760);
+      drawBackground();
+
+      // Wolken langsam bewegen
+      cloud1X += 0.4;
+      cloud2X += 0.35;
+      if (cloud1X > 1500) cloud1X = -200;
+      if (cloud2X > 1500) cloud2X = -200;
+
+      // Vögel
+      birds.forEach(bird => {
+        bird.x += bird.speed;
+        drawBird(bird.x, bird.y);
+        if (bird.x > 1400) bird.x = -100;
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
   </script>
 </body>
 </html>
