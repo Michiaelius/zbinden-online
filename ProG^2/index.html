@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wasser-Logik • Lernspiel</title>
+  <title>Wasser-Logik</title>
   <style>
     body {
       margin: 0;
@@ -14,108 +14,78 @@
     }
 
     #header {
-      background: #1e4a7a;
-      padding: 10px 20px;
+      background: linear-gradient(#1e4a7a, #0f3d6b);
+      padding: 12px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 3px solid #4a9eff;
+      border-bottom: 4px solid #60a5fa;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
 
-    #toolbar {
-      background: #1e4a7a;
-      padding: 10px;
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      border-bottom: 2px solid #4a9eff;
+    #water-reservoir {
+      height: 120px;
+      background: linear-gradient(to bottom, #3b82f6 0%, #60a5fa 30%, transparent 100%);
+      position: relative;
+      overflow: hidden;
+      border-bottom: 6px solid #1e40af;
     }
 
-    .tool {
-      width: 70px;
-      height: 70px;
-      background: #4a9eff;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 40px;
-      cursor: grab;
-      user-select: none;
+    #water-reservoir::after {
+      content: "🌊";
+      position: absolute;
+      font-size: 80px;
+      opacity: 0.15;
+      animation: wave 8s linear infinite;
+    }
+
+    @keyframes wave {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(50%); }
     }
 
     #playground {
       width: 100%;
-      height: calc(100vh - 140px);
+      height: calc(100vh - 200px);
       background: 
-        linear-gradient(#0f3d6b, #1a5a9c),
-        url('https://i.imgur.com/5zK8vL2.png') repeat; /* leichte Wassertextur */
+        linear-gradient(#d2b48c, #c19a6b),
+        url('https://i.imgur.com/8ZfK8vL.jpg') repeat; /* Sand-Textur */
+      background-size: cover;
       position: relative;
       overflow: hidden;
+      box-shadow: inset 0 0 80px rgba(0,0,0,0.4);
     }
 
     .element {
       position: absolute;
-      width: 80px;
-      height: 80px;
+      width: 70px;
+      height: 70px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 45px;
+      font-size: 40px;
       cursor: move;
-      transition: transform 0.2s;
-    }
-
-    .element:hover {
-      transform: scale(1.1);
+      user-select: none;
+      filter: drop-shadow(3px 3px 4px rgba(0,0,0,0.5));
     }
   </style>
 </head>
 <body>
 
   <div id="header">
-    <h1>💧 Wasser-Logik</h1>
-    <div>
-      <button onclick="switchMode()">Zu Baustein-Modus wechseln</button>
-    </div>
+    <h1>💧 Wasser-Logik — Entdecke & Baue</h1>
+    <button onclick="alert('Moduswechsel kommt später')">Zu Baustein-Modus</button>
   </div>
 
-  <!-- Werkzeugleiste -->
+  <!-- Wasser oben -->
+  <div id="water-reservoir"></div>
 
-<div id="toolbar">
-  <div class="tool" draggable="true" data-type="source" title="Wasserquelle">🚰</div>
-  <div class="tool" draggable="true" data-type="pipe" title="Rohr">🟦</div>
-  <div class="tool" draggable="true" data-type="and" title="UND">🔗</div>
-  <div class="tool" draggable="true" data-type="or" title="ODER">🔀</div>
-  <div class="tool" draggable="true" data-type="not" title="NICHT">⭯</div>
-  <div class="tool" draggable="true" data-type="sink" title="Ziel">🪣</div>
-</div>
-
-  <!-- Spielfeld -->
+  <!-- Sand-Spielbereich -->
   <div id="playground"></div>
 
 <script>
-// Einfache Drag & Drop Logik
+// Drag & Drop vorbereitet (später für Bausteine)
 const playground = document.getElementById('playground');
-
-document.querySelectorAll('.tool').forEach(tool => {
-  tool.addEventListener('dragstart', e => {
-    e.dataTransfer.setData('text/plain', tool.dataset.type);
-  });
-});
-
-playground.addEventListener('dragover', e => {
-  e.preventDefault();
-});
-
-playground.addEventListener('drop', e => {
-  e.preventDefault();
-  const type = e.dataTransfer.getData('text/plain');
-  const x = e.offsetX - 40;
-  const y = e.offsetY - 40;
-
-  createElement(type, x, y);
-});
 
 function createElement(type, x, y) {
   const el = document.createElement('div');
@@ -125,22 +95,51 @@ function createElement(type, x, y) {
 
   switch(type) {
     case 'source': el.textContent = '🚰'; break;
-    case 'pipe':   el.textContent = '➡️'; break;
-    case 'and':    el.textContent = '🔀'; el.style.background = '#4ade80'; break;
-    case 'or':     el.textContent = '🔀'; el.style.background = '#fbbf24'; break;
-    case 'not':    el.textContent = '🚫'; el.style.background = '#f87171'; break;
+    case 'pipe':   el.textContent = '🟦'; break;
+    case 'and':    el.textContent = '🔗'; break;
+    case 'not':    el.textContent = '⭯'; break;
     case 'sink':   el.textContent = '🪣'; break;
   }
 
-  // Einfach verschiebbar machen
-  el.draggable = true;
-  el.addEventListener('dragstart', e => {
-    e.dataTransfer.setData('text/plain', 'move');
-    setTimeout(() => el.style.opacity = '0.5', 0);
-  });
-
+  // Verschieben möglich
+  makeDraggable(el);
   playground.appendChild(el);
 }
+
+function makeDraggable(el) {
+  let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+  el.onmousedown = dragMouseDown;
+
+  function dragMouseDown(e) {
+    e.preventDefault();
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e.preventDefault();
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    el.style.top = (el.offsetTop - pos2) + "px";
+    el.style.left = (el.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+
+// Test-Elemente zum Start (kann später entfernt werden)
+window.onload = () => {
+  createElement('source', 150, 200);
+  createElement('sink', 600, 450);
+};
 </script>
 
 </body>
