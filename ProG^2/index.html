@@ -18,6 +18,7 @@
       constructor() {
         super('MainScene');
         this.isDigging = false;
+        this.graphics = null;
       }
 
       create() {
@@ -32,7 +33,7 @@
           this.add.circle(Math.random()*w, 210 + Math.random()*(h-260), Math.random()*3.5 + 1.5, 0xc99a5f);
         }
 
-        // Wasserbehälter (sehr ruhig)
+        // Wasserbehälter
         this.water = this.add.rectangle(w/2, 145, w, 175, 0x38bdf8);
         this.water.setStrokeStyle(22, 0x1e40af);
 
@@ -44,32 +45,33 @@
           fontSize: '26px', color: '#bae6fd' 
         }).setOrigin(0.5);
 
-        // Einfache, zuverlässige Grab-Mechanik
+        // Graphics für Kanäle
         this.graphics = this.add.graphics();
 
-        this.input.on('pointerdown', (p) => {
-          if (p.y < 200) return;
+        // Grab-Mechanik
+        this.input.on('pointerdown', (pointer) => {
+          if (pointer.y < 200) return;
+          
           this.isDigging = true;
-          this.graphics.lineStyle(48, 0x6b5a3d, 1);
-          this.graphics.moveTo(p.x, p.y);
+          this.graphics.lineStyle(52, 0x6b5a3d, 1);
+          this.graphics.moveTo(pointer.x, pointer.y);
         });
 
-        this.input.on('pointermove', (p) => {
-          if (!this.isDigging || p.y < 200) return;
+        this.input.on('pointermove', (pointer) => {
+          if (!this.isDigging || pointer.y < 200) return;
 
-          this.graphics.lineStyle(48, 0x6b5a3d, 1);
-          this.graphics.lineTo(p.x, p.y);
+          this.graphics.lineStyle(52, 0x6b5a3d, 1);
+          this.graphics.lineTo(pointer.x, pointer.y);
 
-          // Innerer heller Kanal
-          this.graphics.lineStyle(34, 0x8d6f47, 1);
-          this.graphics.lineTo(p.x, p.y);
+          this.graphics.lineStyle(36, 0x8d6f47, 1);
+          this.graphics.lineTo(pointer.x, pointer.y);
         });
 
         this.input.on('pointerup', () => {
           this.isDigging = false;
         });
 
-        this.helpText = this.add.text(w/2, h - 40, '🖱️ Maustaste halten und ziehen = Kanal graben', {
+        this.add.text(w/2, h - 40, '🖱️ Maustaste halten und ziehen = Kanal graben', {
           fontSize: '24px', color: '#fef08c'
         }).setOrigin(0.5);
       }
