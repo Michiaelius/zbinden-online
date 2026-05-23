@@ -2,12 +2,11 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wasser-Logik</title>
   <script src="https://cdn.jsdelivr.net/npm/phaser@4.1.0/dist/phaser.min.js"></script>
   <style>
     body { margin:0; padding:0; background:#0a2a4a; display:flex; justify-content:center; align-items:center; height:100vh; }
-    #game-container { border:12px solid #1e40af; border-radius:20px; box-shadow:0 0 60px rgba(0,0,0,0.9); }
+    #game-container { border:14px solid #1e40af; border-radius:24px; box-shadow:0 0 70px rgba(0,0,0,0.95); overflow:hidden; }
   </style>
 </head>
 <body>
@@ -18,76 +17,67 @@
       constructor() {
         super('MainScene');
         this.isDigging = false;
+        this.graphics = null;
       }
 
       create() {
         const w = 1100;
         const h = 680;
 
-        // Himmel
-        this.add.rectangle(w/2, h/2, w, h, 0x7dd3fc);
+        // Himmel mit Verlauf
+        const sky = this.add.graphics();
+        sky.fillGradientStyle(0x7dd3fc, 0x7dd3fc, 0xbae6fd, 0xbae6fd, 1);
+        sky.fillRect(0, 0, w, 280);
 
         // Sonne
-        this.add.circle(w - 180, 140, 55, 0xfacc15);
-        this.add.circle(w - 180, 140, 45, 0xfef08c);
+        this.add.circle(w - 160, 120, 58, 0xfacc15);
+        this.add.circle(w - 160, 120, 48, 0xfef08c);
 
         // Sand
-        this.add.rectangle(w/2, h/2 + 140, w, h, 0xe2c18a);
+        this.add.rectangle(w/2, h/2 + 140, w, h - 140, 0xe2c18a);
 
-        // Sand-Textur
-        for (let i = 0; i < 2200; i++) {
-          this.add.circle(Math.random()*w, 220 + Math.random()*(h-280), Math.random()*4 + 1.5, 0xc99a5f);
+        // Sand Textur
+        for (let i = 0; i < 2500; i++) {
+          this.add.circle(Math.random()*w, 220 + Math.random()*(h-260), Math.random()*4.5 + 1.8, 0xc99a5f);
         }
 
-        // Wasserbehälter (cartoon)
-        this.water = this.add.rectangle(w/2, 155, w, 190, 0x38bdf8);
-        this.water.setStrokeStyle(24, 0x1e40af);
+        // Wasserbehälter mit mehr Leben
+        this.water = this.add.rectangle(w/2, 158, w, 195, 0x38bdf8);
+        this.water.setStrokeStyle(26, 0x1e40af);
 
-        // Wasser-Glanz
-        this.shine = this.add.rectangle(w/2 - 20, 110, w-120, 60, 0xffffff).setAlpha(0.45);
+        // Glanz + Wellen-Effekt
+        this.shine = this.add.rectangle(w/2 - 30, 105, w-180, 65, 0xffffff).setAlpha(0.4);
 
-        // Leichte Wellen-Bewegung
-        this.tweens.add({ targets: this.water, y: 162, duration: 3800, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
+        this.tweens.add({ targets: this.water, y: 165, duration: 4200, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
 
         // Titel
-        this.add.text(w/2, 45, '💧 Wasser-Logik', { 
-          fontSize: '54px', color: '#fff', fontStyle: 'bold', stroke: '#1e40af', strokeThickness: 12 
-        }).setOrigin(0.5);
+        this.add.text(w/2, 48, '💧 Wasser-Logik', { fontSize: '56px', color: '#fff', fontStyle: 'bold', stroke: '#1e3a8a', strokeThickness: 14 }).setOrigin(0.5);
 
-        this.add.text(w/2, 88, 'Level 1 — Graben & Wasser lenken', { 
-          fontSize: '26px', color: '#bae6fd' 
-        }).setOrigin(0.5);
-
-        // ==================== GRABEN (zuverlässig) ====================
+        // Grab-Mechanik – jetzt mit einer durchgehenden Linie
         this.graphics = this.add.graphics();
 
         this.input.on('pointerdown', (p) => {
           if (p.y < 210) return;
           this.isDigging = true;
-          this.dig(p.x, p.y);
+          this.graphics.lineStyle(54, 0x6b5a3d, 1);
+          this.graphics.moveTo(p.x, p.y);
         });
 
         this.input.on('pointermove', (p) => {
-          if (this.isDigging && p.y > 210) {
-            this.dig(p.x, p.y);
-          }
+          if (!this.isDigging || p.y < 210) return;
+
+          this.graphics.lineStyle(54, 0x6b5a3d, 1);
+          this.graphics.lineTo(p.x, p.y);
+
+          this.graphics.lineStyle(38, 0x8d6f47, 1);
+          this.graphics.lineTo(p.x, p.y);
         });
 
         this.input.on('pointerup', () => this.isDigging = false);
 
-        this.helpText = this.add.text(w/2, h - 40, '🖱️ Maustaste halten und ziehen = Kanal graben', {
-          fontSize: '24px', color: '#fef08c'
+        this.add.text(w/2, h - 35, '🖱️ Maustaste halten und ziehen = Kanal graben', {
+          fontSize: '23px', color: '#fef08c'
         }).setOrigin(0.5);
-      }
-
-      dig(x, y) {
-        // Dunkler Rand
-        const outer = this.add.circle(x, y, 29, 0x6b5a3d);
-        // Heller Kanal
-        const inner = this.add.circle(x, y, 21, 0x8d6f47);
-        
-        // Kleiner Schatten
-        this.add.circle(x + 5, y + 5, 18, 0x5c4a35).setAlpha(0.5);
       }
     }
 
@@ -100,7 +90,7 @@
       scene: MainScene
     };
 
-    const game = new Phaser.Game(config);
+    new Phaser.Game(config);
   </script>
 </body>
 </html>
