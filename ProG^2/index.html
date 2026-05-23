@@ -18,6 +18,7 @@
       constructor() {
         super('MainScene');
         this.isDigging = false;
+        this.currentPath = null;
       }
 
       create() {
@@ -28,20 +29,19 @@
         this.add.rectangle(w/2, h/2 + 90, w, h, 0xe2c18a);
 
         // Sand-Textur
-        for (let i = 0; i < 2000; i++) {
+        for (let i = 0; i < 1800; i++) {
           this.add.circle(Math.random()*w, 210 + Math.random()*(h-260), Math.random()*3.5 + 1.5, 0xc99a5f);
         }
 
-        // Wasserbehälter — jetzt fast ruhig
+        // Wasserbehälter — sehr ruhige Bewegung
         this.water = this.add.rectangle(w/2, 145, w, 175, 0x38bdf8);
         this.water.setStrokeStyle(22, 0x1e40af);
-        this.shine = this.add.rectangle(w/2, 105, w-90, 50, 0xffffff).setAlpha(0.32);
+        this.shine = this.add.rectangle(w/2, 105, w-100, 55, 0xffffff).setAlpha(0.32);
 
-        // Sehr leichte Bewegung
         this.tweens.add({ 
           targets: this.water, 
-          y: 148, 
-          duration: 4000, 
+          y: 147, 
+          duration: 4500, 
           yoyo: true, 
           repeat: -1, 
           ease: 'Sine.easeInOut' 
@@ -55,45 +55,45 @@
           fontSize: '26px', color: '#bae6fd' 
         }).setOrigin(0.5);
 
-        // ==================== KANAL GRABEN ====================
+        // Grab-Mechanik mit dicken Linien
         this.input.on('pointerdown', (p) => {
           if (p.y < 200) return;
           this.isDigging = true;
-          this.digChannel(p.x, p.y);
+          this.startNewChannel(p.x, p.y);
         });
 
         this.input.on('pointermove', (p) => {
           if (this.isDigging && p.y > 200) {
-            this.digChannel(p.x, p.y);
+            this.continueChannel(p.x, p.y);
           }
         });
 
-        this.input.on('pointerup', () => this.isDigging = false);
+        this.input.on('pointerup', () => {
+          this.isDigging = false;
+          this.currentPath = null;
+        });
 
         this.helpText = this.add.text(w/2, h - 40, '🖱️ Maustaste halten und ziehen = Kanal graben', {
           fontSize: '24px', color: '#fef08c'
         }).setOrigin(0.5);
       }
 
-      digChannel(x, y) {
-        // Äußerer dunkler Rand
-        const outer = this.add.graphics();
-        outer.lineStyle(52, 0x6b5a3d, 1);
-        outer.strokeCircle(x, y, 26);
-        
-        // Innerer Kanal (heller)
-        const inner = this.add.graphics();
-        inner.lineStyle(36, 0x8d6f47, 1);
-        inner.strokeCircle(x, y, 26);
-
-        // Leichter Schatten unten
-        const shadow = this.add.graphics();
-        shadow.fillStyle(0x5c4a35, 0.6);
-        shadow.fillCircle(x + 4, y + 6, 18);
+      startNewChannel(x, y) {
+        this.currentPath = this.add.graphics();
+        this.currentPath.lineStyle(48, 0x6b5a3d, 1);   // dunkler Rand
+        this.currentPath.moveTo(x, y);
       }
 
-      update() {
-        // Kein Regen mehr
+      continueChannel(x, y) {
+        if (!this.currentPath) return;
+        
+        // Äußerer Rand
+        this.currentPath.lineStyle(48, 0x6b5a3d, 1);
+        this.currentPath.lineTo(x, y);
+        
+        // Innerer heller Kanal
+        this.currentPath.lineStyle(34, 0x8d6f47, 1);
+        this.currentPath.lineTo(x, y);
       }
     }
 
