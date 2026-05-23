@@ -5,21 +5,13 @@
   <title>Wasser-Logik</title>
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      background: #0a2a4a;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      margin: 0; padding: 0; background: #0a2a4a;
+      display: flex; justify-content: center; align-items: center; height: 100vh;
       font-family: Arial, sans-serif;
     }
     #game {
-      border: 16px solid #1e40af;
-      border-radius: 24px;
-      box-shadow: 0 0 80px rgba(0,0,0,0.9);
-      background: #fff;
-      overflow: hidden;
+      border: 18px solid #1e40af; border-radius: 28px;
+      box-shadow: 0 0 90px rgba(0,0,0,0.95); overflow: hidden;
     }
     canvas { display: block; }
   </style>
@@ -35,85 +27,91 @@
     const ctx = canvas.getContext('2d');
 
     let isDigging = false;
-    let lastX = 0, lastY = 0;
+    let lastX, lastY;
 
-    // Himmel
+    // === Hintergrund einmal zeichnen ===
     function drawBackground() {
       // Himmel
-      const grad = ctx.createLinearGradient(0, 0, 0, 280);
-      grad.addColorStop(0, '#7dd3fc');
-      grad.addColorStop(1, '#bae6fd');
-      ctx.fillStyle = grad;
+      const skyGrad = ctx.createLinearGradient(0, 0, 0, 280);
+      skyGrad.addColorStop(0, '#7dd3fc');
+      skyGrad.addColorStop(1, '#bae6fd');
+      ctx.fillStyle = skyGrad;
       ctx.fillRect(0, 0, 1100, 280);
 
       // Sonne
       ctx.fillStyle = '#facc15';
-      ctx.beginPath();
-      ctx.arc(920, 130, 58, 0, Math.PI * 2);
-      ctx.fill();
+      ctx.beginPath(); ctx.arc(880, 120, 65, 0, Math.PI*2); ctx.fill();
       ctx.fillStyle = '#fef08c';
-      ctx.beginPath();
-      ctx.arc(920, 130, 46, 0, Math.PI * 2);
-      ctx.fill();
+      ctx.beginPath(); ctx.arc(880, 120, 52, 0, Math.PI*2); ctx.fill();
 
       // Sand
       ctx.fillStyle = '#e2c18a';
       ctx.fillRect(0, 220, 1100, 460);
 
-      // Sand Textur
+      // Sand-Textur
       ctx.fillStyle = '#c99a5f';
-      for (let i = 0; i < 2800; i++) {
-        const x = Math.random() * 1100;
-        const y = 230 + Math.random() * 440;
-        const r = Math.random() * 4 + 1.5;
+      for (let i = 0; i < 3200; i++) {
         ctx.beginPath();
-        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.arc(Math.random()*1100, 230 + Math.random()*440, Math.random()*4.5 + 1.5, 0, Math.PI*2);
         ctx.fill();
       }
     }
 
     drawBackground();
 
-    // Wasserbehälter
+    // === Wasser (besser erkennbar) ===
     function drawWater() {
+      // Wasserfläche
       ctx.fillStyle = '#38bdf8';
-      ctx.fillRect(0, 80, 1100, 160);
+      ctx.fillRect(0, 75, 1100, 165);
+
+      // Dunkler Rand unten
       ctx.strokeStyle = '#1e40af';
-      ctx.lineWidth = 28;
-      ctx.strokeRect(0, 80, 1100, 160);
+      ctx.lineWidth = 32;
+      ctx.strokeRect(10, 78, 1080, 158);
+
+      // Wellen-Effekt oben
+      ctx.strokeStyle = '#7dd3fc';
+      ctx.lineWidth = 8;
+      for (let i = 0; i < 8; i++) {
+        ctx.beginPath();
+        ctx.moveTo(0, 92 + i*6);
+        ctx.quadraticCurveTo(280, 78 + i*4, 550, 92 + i*5);
+        ctx.quadraticCurveTo(820, 105 + i*3, 1100, 88 + i*6);
+        ctx.stroke();
+      }
 
       // Glanz
-      ctx.fillStyle = 'rgba(255,255,255,0.45)';
-      ctx.fillRect(80, 95, 940, 55);
+      ctx.fillStyle = 'rgba(255,255,255,0.5)';
+      ctx.fillRect(60, 88, 980, 42);
     }
 
     drawWater();
 
     // Titel
     ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 54px Arial';
+    ctx.font = 'bold 58px Arial';
     ctx.textAlign = 'center';
-    ctx.fillText('💧 Wasser-Logik', 550, 55);
+    ctx.fillText('💧 Wasser-Logik', 550, 52);
+
     ctx.font = '26px Arial';
     ctx.fillStyle = '#bae6fd';
-    ctx.fillText('Level 1 — Graben & Wasser lenken', 550, 92);
+    ctx.fillText('Level 1 — Graben & Wasser lenken', 550, 88);
 
-    // Hilfetext
-    ctx.font = '24px Arial';
+    ctx.font = '23px Arial';
     ctx.fillStyle = '#fef08c';
-    ctx.fillText('🖱️ Maustaste halten und ziehen = Kanal graben', 550, 640);
+    ctx.fillText('🖱️ Maustaste halten und ziehen = Kanal graben', 550, 645);
 
-    // Graben
+    // === Graben (saubere Linien) ===
     canvas.addEventListener('mousedown', (e) => {
       const rect = canvas.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      if (y < 220) return;
-      
+      if (y < 230) return;
+
       isDigging = true;
-      lastX = x;
-      lastY = y;
-      drawDig(x, y);
+      lastX = x; lastY = y;
+      drawDigSegment(x, y);
     });
 
     canvas.addEventListener('mousemove', (e) => {
@@ -121,7 +119,7 @@
       const rect = canvas.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      if (y < 220) return;
+      if (y < 230) return;
 
       drawDigLine(lastX, lastY, x, y);
       lastX = x;
@@ -131,23 +129,18 @@
     canvas.addEventListener('mouseup', () => isDigging = false);
     canvas.addEventListener('mouseleave', () => isDigging = false);
 
-    function drawDig(x, y) {
-      // Dunkler Rand
+    function drawDigSegment(x, y) {
       ctx.fillStyle = '#6b5a3d';
-      ctx.beginPath();
-      ctx.arc(x, y, 29, 0, Math.PI * 2);
-      ctx.fill();
-      // Innerer Kanal
+      ctx.beginPath(); ctx.arc(x, y, 29, 0, Math.PI*2); ctx.fill();
       ctx.fillStyle = '#8d6f47';
-      ctx.beginPath();
-      ctx.arc(x, y, 21, 0, Math.PI * 2);
-      ctx.fill();
+      ctx.beginPath(); ctx.arc(x, y, 20, 0, Math.PI*2); ctx.fill();
     }
 
     function drawDigLine(x1, y1, x2, y2) {
       ctx.strokeStyle = '#6b5a3d';
-      ctx.lineWidth = 54;
+      ctx.lineWidth = 56;
       ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
       ctx.beginPath();
       ctx.moveTo(x1, y1);
       ctx.lineTo(x2, y2);
