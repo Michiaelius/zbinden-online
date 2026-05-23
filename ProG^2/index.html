@@ -42,10 +42,11 @@
     let cloud2X = 820;
     
     let birds = [
-      {x: -150, y: 165, speed: 1.4},
-      {x: -420, y: 225, speed: 0.95}
+      {x: -100, y: 160, speed: 1.6},
+      {x: -380, y: 215, speed: 1.1}
     ];
 
+    // Statischen Hintergrund einmal zeichnen
     function drawStaticBackground() {
       // Himmel
       const sky = ctx.createLinearGradient(0, 0, 0, 460);
@@ -82,41 +83,41 @@
       ctx.beginPath(); ctx.ellipse(cloud2X, 165, 110, 42, 0, 0, Math.PI*2); ctx.fill();
       ctx.beginPath(); ctx.ellipse(cloud2X + 90, 145, 72, 35, 0, 0, Math.PI*2); ctx.fill();
 
-      // Vögel (besser)
+      // Bessere Vögel (V-Form)
       ctx.strokeStyle = '#1e2937';
-      ctx.lineWidth = 3.5;
+      ctx.lineWidth = 4;
       birds.forEach(bird => {
         ctx.beginPath();
         ctx.moveTo(bird.x, bird.y);
-        ctx.quadraticCurveTo(bird.x+12, bird.y-9, bird.x+24, bird.y);
+        ctx.lineTo(bird.x + 22, bird.y - 11);
         ctx.moveTo(bird.x, bird.y);
-        ctx.quadraticCurveTo(bird.x+12, bird.y+7, bird.x+24, bird.y);
+        ctx.lineTo(bird.x + 22, bird.y + 9);
         ctx.stroke();
       });
     }
 
     function animate() {
-      // Nur bewegte Teile neu zeichnen (Sand bleibt stabil!)
-      ctx.clearRect(0, 0, 1320, 460);   // Nur Himmel-Bereich löschen
-      drawStaticBackground();           // Sand bleibt unverändert
+      // Nur den Himmel-Bereich löschen → Sand bleibt stabil!
+      ctx.clearRect(0, 0, 1320, 460);
+
+      drawStaticBackground();   // Sand wird nicht neu generiert
       drawMovingElements();
 
-      // Wolken bewegen
+      // Bewegung
       cloud1X += 0.45;
       cloud2X += 0.38;
-      if (cloud1X > 1550) cloud1X = -250;
-      if (cloud2X > 1550) cloud2X = -180;
+      if (cloud1X > 1550) cloud1X = -280;
+      if (cloud2X > 1550) cloud2X = -220;
 
-      // Vögel bewegen
       birds.forEach(bird => {
         bird.x += bird.speed;
-        if (bird.x > 1450) bird.x = -150;
+        if (bird.x > 1450) bird.x = -200;
       });
 
       requestAnimationFrame(animate);
     }
 
-    // Initiales Zeichnen
+    // Start
     drawStaticBackground();
     animate();
   </script>
