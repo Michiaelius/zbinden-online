@@ -6,21 +6,8 @@
   <title>Wasser-Logik</title>
   <script src="https://cdn.jsdelivr.net/npm/phaser@4.1.0/dist/phaser.min.js"></script>
   <style>
-    body { 
-      margin: 0; 
-      padding: 0; 
-      background: #0a2a4a; 
-      display: flex; 
-      justify-content: center; 
-      align-items: center; 
-      height: 100vh;
-    }
-    #game-container {
-      border: 10px solid #1e40af;
-      border-radius: 12px;
-      box-shadow: 0 0 40px rgba(0,0,0,0.8);
-      overflow: hidden;
-    }
+    body { margin:0; padding:0; background:#0a2a4a; display:flex; justify-content:center; align-items:center; height:100vh; }
+    #game-container { border:10px solid #1e40af; border-radius:12px; box-shadow:0 0 40px rgba(0,0,0,0.8); }
   </style>
 </head>
 <body>
@@ -31,93 +18,80 @@
       constructor() {
         super('MainScene');
         this.holes = [];
-      }
-
-      preload() {
-        // Später echte Bilder laden
+        this.isDigging = false;
       }
 
       create() {
         const w = 1000;
         const h = 620;
 
-        // Sand-Hintergrund mit Textur
+        // Sand
         this.add.rectangle(w/2, h/2 + 80, w, h, 0xe2c18a);
 
-        // Sand-Textur (Punkte)
-        for (let i = 0; i < 1200; i++) {
+        // Sand-Textur
+        for (let i = 0; i < 1500; i++) {
           const x = Math.random() * w;
-          const y = 180 + Math.random() * (h - 200);
-          const size = Math.random() * 4 + 2;
-          this.add.circle(x, y, size, 0xc99a5f);
+          const y = 190 + Math.random() * (h - 220);
+          this.add.circle(x, y, Math.random()*3.5 + 1.5, 0xc99a5f);
         }
 
-        // Wasserbehälter (cartooniger)
-        const waterGroup = this.add.container(0, 0);
+        // Wasserbehälter
+        this.waterLevel = 140;
+        this.water = this.add.rectangle(w/2, this.waterLevel, w, 170, 0x38bdf8);
+        this.water.setStrokeStyle(18, 0x1e40af);
 
-        const water = this.add.rectangle(w/2, 110, w, 170, 0x38bdf8);
-        water.setStrokeStyle(18, 0x1e40af);
-        waterGroup.add(water);
+        this.shine = this.add.rectangle(w/2, 95, w-80, 45, 0xffffff).setAlpha(0.35);
 
-        // Wasser-Glanz
-        const shine = this.add.rectangle(w/2, 80, w-60, 50, 0xffffff);
-        shine.setAlpha(0.35);
-        waterGroup.add(shine);
+        this.tweens.add({ targets: this.water, y: this.waterLevel + 12, duration: 1800, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
+        this.tweens.add({ targets: this.shine, y: 88, duration: 2400, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
 
-        // Leichte Wasserbewegung
-        this.tweens.add({
-          targets: water,
-          y: 118,
-          duration: 2200,
-          yoyo: true,
-          repeat: -1,
-          ease: 'Sine.easeInOut'
+        this.add.text(w/2, 38, '💧 Wasser-Logik', { fontSize: '46px', color: '#fff', fontStyle: 'bold', stroke: '#1e40af', strokeThickness: 8 }).setOrigin(0.5);
+        this.add.text(w/2, 78, 'Level 1 — Graben & Wasser lenken', { fontSize: '24px', color: '#bae6fd' }).setOrigin(0.5);
+
+        // Grab-Mechanik (Drag = kontinuierlich graben)
+        this.input.on('pointerdown', (p) => {
+          if (p.y < 190) return;
+          this.isDigging = true;
+          this.dig(p.x, p.y);
         });
 
-        this.tweens.add({
-          targets: shine,
-          y: 72,
-          duration: 2800,
-          yoyo: true,
-          repeat: -1,
-          ease: 'Sine.easeInOut'
+        this.input.on('pointermove', (p) => {
+          if (this.isDigging && p.y > 190) {
+            this.dig(p.x, p.y);
+          }
         });
 
-        // Titel
-        this.add.text(w/2, 35, '💧 Wasser-Logik', {
-          fontSize: '48px',
-          color: '#fff',
-          fontStyle: 'bold',
-          stroke: '#1e40af',
-          strokeThickness: 8
-        }).setOrigin(0.5);
+        this.input.on('pointerup', () => this.isDigging = false);
 
-        // Level Info
-        this.add.text(w/2, 75, 'Level 1 — Lerne mit der Schaufel zu graben', {
-          fontSize: '22px',
-          color: '#bae6fd'
-        }).setOrigin(0.5);
-
-        // Grab-Mechanik
-        this.input.on('pointerdown', (pointer) => {
-          if (pointer.y < 190) return; // nicht ins Wasser klicken
-
-          const hole = this.add.circle(pointer.x, pointer.y, 42, 0x8d6f47);
-          hole.setStrokeStyle(8, 0x6b5a3d);
-          this.holes.push(hole);
-
-          console.log(`Kanal gegraben bei ${pointer.x.toFixed(0)}, ${pointer.y.toFixed(0)}`);
-        });
-
-        // Hinweis-Text
-        this.helpText = this.add.text(w/2, h - 40, '👇 Klicke in den Sand, um Kanäle zu graben', {
-          fontSize: '24px',
-          color: '#fef08c'
+        this.helpText = this.add.text(w/2, h - 40, '🖱️ Maustaste gedrückt halten und ziehen zum Graben', {
+          fontSize: '22px', color: '#fef08c'
         }).setOrigin(0.5);
       }
 
+      dig(x, y) {
+        const hole = this.add.circle(x, y, 28, 0x8d6f47);
+        hole.setStrokeStyle(6, 0x6b5a3d);
+        this.holes.push(hole);
+      }
+
       update() {
-        // Später Wasser-Simulation
+        // Einfache Wasser-Simulation (später verbessern)
+        if (Phaser.Math.Between(1, 8) === 1) {
+          this.simulateWaterFlow();
+        }
+      }
+
+      simulateWaterFlow() {
+        // Sehr einfache erste Version: Wasser tropft nach unten
+        const drop = this.add.circle(Phaser.Math.Between(200, 800), 160, 12, 0x60c0ff);
+        drop.setAlpha(0.9);
+
+        this.tweens.add({
+          targets: drop,
+          y: 620,
+          duration: 1800 + Phaser.Math.Between(0, 800),
+          onComplete: () => drop.destroy()
+        });
       }
     }
 
@@ -127,7 +101,8 @@
       height: 620,
       parent: 'game-container',
       backgroundColor: '#0a2a4a',
-      scene: MainScene
+      scene: MainScene,
+      physics: { default: 'arcade' }
     };
 
     const game = new Phaser.Game(config);
