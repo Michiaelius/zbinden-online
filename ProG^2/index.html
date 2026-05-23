@@ -38,17 +38,15 @@
     const canvas = document.getElementById('game');
     const ctx = canvas.getContext('2d');
 
-    // Wolken-Positionen
     let cloud1X = 250;
     let cloud2X = 820;
     
-    // Vogel-Positionen
     let birds = [
-      {x: -100, y: 180, speed: 1.2},
-      {x: -300, y: 240, speed: 0.9}
+      {x: -150, y: 165, speed: 1.4},
+      {x: -420, y: 225, speed: 0.95}
     ];
 
-    function drawBackground() {
+    function drawStaticBackground() {
       // Himmel
       const sky = ctx.createLinearGradient(0, 0, 0, 460);
       sky.addColorStop(0, '#60a5fa');
@@ -62,20 +60,11 @@
       ctx.fillStyle = '#fef08c';
       ctx.beginPath(); ctx.arc(1080, 170, 63, 0, Math.PI*2); ctx.fill();
 
-      // Wolke 1
-      ctx.fillStyle = 'rgba(255,255,255,0.95)';
-      ctx.beginPath(); ctx.ellipse(cloud1X, 130, 120, 48, 0, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.ellipse(cloud1X + 90, 110, 82, 38, 0, 0, Math.PI*2); ctx.fill();
-
-      // Wolke 2
-      ctx.beginPath(); ctx.ellipse(cloud2X, 165, 110, 42, 0, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.ellipse(cloud2X + 90, 145, 72, 35, 0, 0, Math.PI*2); ctx.fill();
-
-      // Sand
+      // Sand (einmalig!)
       ctx.fillStyle = '#e2c18a';
       ctx.fillRect(0, 410, 1320, 350);
 
-      // Sand-Textur
+      // Sand-Textur (einmalig!)
       ctx.fillStyle = '#c99a5f';
       for (let i = 0; i < 4500; i++) {
         ctx.beginPath();
@@ -84,37 +73,51 @@
       }
     }
 
-    function drawBird(x, y) {
-      ctx.strokeStyle = '#334155';
-      ctx.lineWidth = 3;
-      ctx.beginPath();
-      ctx.moveTo(x, y);
-      ctx.lineTo(x+18, y-8);
-      ctx.moveTo(x, y);
-      ctx.lineTo(x+18, y+6);
-      ctx.stroke();
+    function drawMovingElements() {
+      // Wolken
+      ctx.fillStyle = 'rgba(255,255,255,0.95)';
+      ctx.beginPath(); ctx.ellipse(cloud1X, 130, 120, 48, 0, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(cloud1X + 90, 110, 82, 38, 0, 0, Math.PI*2); ctx.fill();
+
+      ctx.beginPath(); ctx.ellipse(cloud2X, 165, 110, 42, 0, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(cloud2X + 90, 145, 72, 35, 0, 0, Math.PI*2); ctx.fill();
+
+      // Vögel (besser)
+      ctx.strokeStyle = '#1e2937';
+      ctx.lineWidth = 3.5;
+      birds.forEach(bird => {
+        ctx.beginPath();
+        ctx.moveTo(bird.x, bird.y);
+        ctx.quadraticCurveTo(bird.x+12, bird.y-9, bird.x+24, bird.y);
+        ctx.moveTo(bird.x, bird.y);
+        ctx.quadraticCurveTo(bird.x+12, bird.y+7, bird.x+24, bird.y);
+        ctx.stroke();
+      });
     }
 
     function animate() {
-      ctx.clearRect(0, 0, 1320, 760);
-      drawBackground();
+      // Nur bewegte Teile neu zeichnen (Sand bleibt stabil!)
+      ctx.clearRect(0, 0, 1320, 460);   // Nur Himmel-Bereich löschen
+      drawStaticBackground();           // Sand bleibt unverändert
+      drawMovingElements();
 
-      // Wolken langsam bewegen
-      cloud1X += 0.4;
-      cloud2X += 0.35;
-      if (cloud1X > 1500) cloud1X = -200;
-      if (cloud2X > 1500) cloud2X = -200;
+      // Wolken bewegen
+      cloud1X += 0.45;
+      cloud2X += 0.38;
+      if (cloud1X > 1550) cloud1X = -250;
+      if (cloud2X > 1550) cloud2X = -180;
 
-      // Vögel
+      // Vögel bewegen
       birds.forEach(bird => {
         bird.x += bird.speed;
-        drawBird(bird.x, bird.y);
-        if (bird.x > 1400) bird.x = -100;
+        if (bird.x > 1450) bird.x = -150;
       });
 
       requestAnimationFrame(animate);
     }
 
+    // Initiales Zeichnen
+    drawStaticBackground();
     animate();
   </script>
 </body>
