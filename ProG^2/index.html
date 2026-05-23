@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wasser-Logik • Lernspiel</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0a2a4a;
+      color: white;
+      overflow: hidden;
+    }
+
+    #header {
+      background: #1e4a7a;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 3px solid #4a9eff;
+    }
+
+    #toolbar {
+      background: #1e4a7a;
+      padding: 10px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      border-bottom: 2px solid #4a9eff;
+    }
+
+    .tool {
+      width: 70px;
+      height: 70px;
+      background: #4a9eff;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      cursor: grab;
+      user-select: none;
+    }
+
+    #playground {
+      width: 100%;
+      height: calc(100vh - 140px);
+      background: 
+        linear-gradient(#0f3d6b, #1a5a9c),
+        url('https://i.imgur.com/5zK8vL2.png') repeat; /* leichte Wassertextur */
+      position: relative;
+      overflow: hidden;
+    }
+
+    .element {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 45px;
+      cursor: move;
+      transition: transform 0.2s;
+    }
+
+    .element:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+
+  <div id="header">
+    <h1>💧 Wasser-Logik</h1>
+    <div>
+      <button onclick="switchMode()">Zu Baustein-Modus wechseln</button>
+    </div>
+  </div>
+
+  <!-- Werkzeugleiste -->
+  <div id="toolbar">
+    <div class="tool" draggable="true" data-type="source">🚰</div>   <!-- Wasserquelle -->
+    <div class="tool" draggable="true" data-type="pipe">➡️</div>     <!-- Rohr -->
+    <div class="tool" draggable="true" data-type="and">🔀</div>      <!-- UND -->
+    <div class="tool" draggable="true" data-type="or">🔀</div>       <!-- ODER -->
+    <div class="tool" draggable="true" data-type="not">🚫</div>      <!-- NICHT -->
+    <div class="tool" draggable="true" data-type="sink">🪣</div>     <!-- Becken / Ziel -->
+  </div>
+
+  <!-- Spielfeld -->
+  <div id="playground"></div>
+
+<script>
+// Einfache Drag & Drop Logik
+const playground = document.getElementById('playground');
+
+document.querySelectorAll('.tool').forEach(tool => {
+  tool.addEventListener('dragstart', e => {
+    e.dataTransfer.setData('text/plain', tool.dataset.type);
+  });
+});
+
+playground.addEventListener('dragover', e => {
+  e.preventDefault();
+});
+
+playground.addEventListener('drop', e => {
+  e.preventDefault();
+  const type = e.dataTransfer.getData('text/plain');
+  const x = e.offsetX - 40;
+  const y = e.offsetY - 40;
+
+  createElement(type, x, y);
+});
+
+function createElement(type, x, y) {
+  const el = document.createElement('div');
+  el.className = 'element';
+  el.style.left = x + 'px';
+  el.style.top = y + 'px';
+
+  switch(type) {
+    case 'source': el.textContent = '🚰'; break;
+    case 'pipe':   el.textContent = '➡️'; break;
+    case 'and':    el.textContent = '🔀'; el.style.background = '#4ade80'; break;
+    case 'or':     el.textContent = '🔀'; el.style.background = '#fbbf24'; break;
+    case 'not':    el.textContent = '🚫'; el.style.background = '#f87171'; break;
+    case 'sink':   el.textContent = '🪣'; break;
+  }
+
+  // Einfach verschiebbar machen
+  el.draggable = true;
+  el.addEventListener('dragstart', e => {
+    e.dataTransfer.setData('text/plain', 'move');
+    setTimeout(() => el.style.opacity = '0.5', 0);
+  });
+
+  playground.appendChild(el);
+}
+</script>
+
+</body>
+</html>
