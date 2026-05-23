@@ -6,16 +6,8 @@
   <title>Wasser-Logik</title>
   <script src="https://cdn.jsdelivr.net/npm/phaser@4.1.0/dist/phaser.min.js"></script>
   <style>
-    body { 
-      margin:0; padding:0; background:#0a2a4a; 
-      display:flex; justify-content:center; align-items:center; 
-      height:100vh; 
-    }
-    #game-container { 
-      border:12px solid #1e40af; 
-      border-radius:16px; 
-      box-shadow:0 0 50px rgba(0,0,0,0.9); 
-    }
+    body { margin:0; padding:0; background:#0a2a4a; display:flex; justify-content:center; align-items:center; height:100vh; }
+    #game-container { border:12px solid #1e40af; border-radius:16px; box-shadow:0 0 50px rgba(0,0,0,0.9); }
   </style>
 </head>
 <body>
@@ -25,9 +17,8 @@
     class MainScene extends Phaser.Scene {
       constructor() {
         super('MainScene');
-        this.holes = [];
+        this.channels = []; // für spätere Physik
         this.isDigging = false;
-        this.lastDigPos = null;
       }
 
       create() {
@@ -38,97 +29,54 @@
         this.add.rectangle(w/2, h/2 + 90, w, h, 0xe2c18a);
 
         // Sand-Textur
-        for (let i = 0; i < 2000; i++) {
-          const x = Math.random() * w;
-          const y = 210 + Math.random() * (h - 260);
-          this.add.circle(x, y, Math.random()*3.5 + 1.5, 0xc99a5f);
+        for (let i = 0; i < 1800; i++) {
+          this.add.circle(Math.random()*w, 210 + Math.random()*(h-260), Math.random()*3.5 + 1.5, 0xc99a5f);
         }
 
-        // Wasserbehälter (ruhiger)
+        // Wasserbehälter (ruhig)
         this.water = this.add.rectangle(w/2, 145, w, 175, 0x38bdf8);
         this.water.setStrokeStyle(20, 0x1e40af);
-
         this.shine = this.add.rectangle(w/2, 105, w-100, 55, 0xffffff).setAlpha(0.35);
 
-        // Leichte, dezente Bewegung
-        this.tweens.add({ 
-          targets: this.water, 
-          y: 152, 
-          duration: 2800, 
-          yoyo: true, 
-          repeat: -1, 
-          ease: 'Sine.easeInOut' 
-        });
+        this.tweens.add({ targets: this.water, y: 150, duration: 3200, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
 
-        this.add.text(w/2, 42, '💧 Wasser-Logik', { 
-          fontSize: '52px', color: '#fff', fontStyle: 'bold', stroke: '#1e40af', strokeThickness: 10 
-        }).setOrigin(0.5);
+        this.add.text(w/2, 42, '💧 Wasser-Logik', { fontSize: '52px', color: '#fff', fontStyle: 'bold', stroke: '#1e40af', strokeThickness: 10 }).setOrigin(0.5);
+        this.add.text(w/2, 85, 'Level 1 — Graben & Wasser lenken', { fontSize: '26px', color: '#bae6fd' }).setOrigin(0.5);
 
-        this.add.text(w/2, 85, 'Level 1 — Graben & Wasser lenken', { 
-          fontSize: '26px', color: '#bae6fd' 
-        }).setOrigin(0.5);
-
-        // ==================== GRAB MECHANIK ====================
+        // ==================== BESSERES GRABEN ====================
         this.input.on('pointerdown', (p) => {
           if (p.y < 200) return;
           this.isDigging = true;
-          this.lastDigPos = {x: p.x, y: p.y};
-          this.digAt(p.x, p.y);
+          this.digLine(p.x, p.y, p.x, p.y);
         });
 
         this.input.on('pointermove', (p) => {
-          if (!this.isDigging || p.y < 200) return;
-          if (this.lastDigPos) {
-            this.drawDigLine(this.lastDigPos.x, this.lastDigPos.y, p.x, p.y);
+          if (this.isDigging && p.y > 200) {
+            this.digLine(p.x - 8, p.y, p.x + 8, p.y); // dickere Linie
           }
-          this.lastDigPos = {x: p.x, y: p.y};
-          this.digAt(p.x, p.y);
         });
 
-        this.input.on('pointerup', () => {
-          this.isDigging = false;
-          this.lastDigPos = null;
-        });
+        this.input.on('pointerup', () => this.isDigging = false);
 
-        this.helpText = this.add.text(w/2, h - 40, '🖱️ Maustaste halten und ziehen zum Graben', {
+        this.helpText = this.add.text(w/2, h - 40, '🖱️ Maustaste halten und ziehen = Kanal graben', {
           fontSize: '24px', color: '#fef08c'
         }).setOrigin(0.5);
       }
 
-      digAt(x, y) {
-        const hole = this.add.circle(x, y, 27, 0x8d6f47);
-        hole.setStrokeStyle(6, 0x6b5a3d);
-        this.holes.push(hole);
-      }
-
-      drawDigLine(x1, y1, x2, y2) {
-        const distance = Phaser.Math.Distance.Between(x1, y1, x2, y2);
-        const steps = Math.max(2, Math.floor(distance / 16));
-
-        for (let i = 1; i <= steps; i++) {
-          const t = i / steps;
-          const x = Phaser.Math.Linear(x1, x2, t);
-          const y = Phaser.Math.Linear(y1, y2, t);
-          this.digAt(x, y);
-        }
+      // Bessere Kanal-Visualisierung (dicke Linie statt Kreise)
+      digLine(x1, y1, x2, y2) {
+        const line = this.add.graphics();
+        line.lineStyle(48, 0x8d6f47, 1);           // dicke braune Linie
+        line.lineBetween(x1, y1, x2, y2);
+        line.lineStyle(32, 0x6b5a3d, 1);           // etwas heller innen
+        line.lineBetween(x1, y1, x2, y2);
+        
+        this.channels.push(line);
       }
 
       update() {
-        if (Phaser.Math.Between(1, 5) === 1) {
-          this.dropWater();
-        }
-      }
-
-      dropWater() {
-        const drop = this.add.circle(Phaser.Math.Between(100, 1000), 165, 13, 0x67e8f9);
-        drop.setAlpha(0.9);
-
-        this.tweens.add({
-          targets: drop,
-          y: 680,
-          duration: 1200 + Phaser.Math.Between(300, 900),
-          onComplete: () => drop.destroy()
-        });
+        // Kein ständiges Regnen mehr!
+        // Wasser fließt nur, wenn wir später Kanäle haben
       }
     }
 
