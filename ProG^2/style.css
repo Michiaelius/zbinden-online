@@ -1,0 +1,81 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #0a2a4a;
+  color: white;
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#header {
+  background: linear-gradient(#1e4a7a, #0f3d6b);
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 5px solid #60a5fa;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  z-index: 10;
+}
+
+#header h1 {
+  font-size: 1.8rem;
+}
+
+#water-reservoir {
+  height: 130px;
+  background: linear-gradient(to bottom, #3b82f6, #60a5fa, rgba(59,130,246,0.3));
+  position: relative;
+  overflow: hidden;
+  border-bottom: 8px solid #1e40af;
+}
+
+#water-reservoir::before {
+  content: "🌊 🌊 🌊";
+  position: absolute;
+  font-size: 70px;
+  opacity: 0.25;
+  animation: wave 12s linear infinite;
+  white-space: nowrap;
+}
+
+@keyframes wave {
+  0% { transform: translateX(-30%); }
+  100% { transform: translateX(30%); }
+}
+
+#playground {
+  flex: 1;
+  background: 
+    linear-gradient(#d4b38a, #b38a5e),
+    url('https://i.imgur.com/8ZfK8vL.jpg') repeat;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 100px rgba(0,0,0,0.5);
+}
+
+.element {
+  position: absolute;
+  width: 75px;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42px;
+  cursor: move;
+  user-select: none;
+  filter: drop-shadow(4px 4px 6px rgba(0,0,0,0.6));
+  transition: transform 0.2s;
+}
+
+.element:hover {
+  transform: scale(1.12);
+}
