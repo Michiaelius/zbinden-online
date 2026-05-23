@@ -7,7 +7,7 @@
   <script src="https://cdn.jsdelivr.net/npm/phaser@4.1.0/dist/phaser.min.js"></script>
   <style>
     body { margin:0; padding:0; background:#0a2a4a; display:flex; justify-content:center; align-items:center; height:100vh; }
-    #game-container { border:12px solid #1e40af; border-radius:16px; box-shadow:0 0 50px rgba(0,0,0,0.9); }
+    #game-container { border:12px solid #1e40af; border-radius:20px; box-shadow:0 0 60px rgba(0,0,0,0.9); }
   </style>
 </head>
 <body>
@@ -18,62 +18,76 @@
       constructor() {
         super('MainScene');
         this.isDigging = false;
-        this.graphics = null;
       }
 
       create() {
         const w = 1100;
         const h = 680;
 
+        // Himmel
+        this.add.rectangle(w/2, h/2, w, h, 0x7dd3fc);
+
+        // Sonne
+        this.add.circle(w - 180, 140, 55, 0xfacc15);
+        this.add.circle(w - 180, 140, 45, 0xfef08c);
+
         // Sand
-        this.add.rectangle(w/2, h/2 + 90, w, h, 0xe2c18a);
+        this.add.rectangle(w/2, h/2 + 140, w, h, 0xe2c18a);
 
         // Sand-Textur
-        for (let i = 0; i < 1800; i++) {
-          this.add.circle(Math.random()*w, 210 + Math.random()*(h-260), Math.random()*3.5 + 1.5, 0xc99a5f);
+        for (let i = 0; i < 2200; i++) {
+          this.add.circle(Math.random()*w, 220 + Math.random()*(h-280), Math.random()*4 + 1.5, 0xc99a5f);
         }
 
-        // Wasserbehälter
-        this.water = this.add.rectangle(w/2, 145, w, 175, 0x38bdf8);
-        this.water.setStrokeStyle(22, 0x1e40af);
+        // Wasserbehälter (cartoon)
+        this.water = this.add.rectangle(w/2, 155, w, 190, 0x38bdf8);
+        this.water.setStrokeStyle(24, 0x1e40af);
 
-        this.add.text(w/2, 42, '💧 Wasser-Logik', { 
-          fontSize: '52px', color: '#fff', fontStyle: 'bold', stroke: '#1e40af', strokeThickness: 10 
+        // Wasser-Glanz
+        this.shine = this.add.rectangle(w/2 - 20, 110, w-120, 60, 0xffffff).setAlpha(0.45);
+
+        // Leichte Wellen-Bewegung
+        this.tweens.add({ targets: this.water, y: 162, duration: 3800, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
+
+        // Titel
+        this.add.text(w/2, 45, '💧 Wasser-Logik', { 
+          fontSize: '54px', color: '#fff', fontStyle: 'bold', stroke: '#1e40af', strokeThickness: 12 
         }).setOrigin(0.5);
 
-        this.add.text(w/2, 85, 'Level 1 — Graben & Wasser lenken', { 
+        this.add.text(w/2, 88, 'Level 1 — Graben & Wasser lenken', { 
           fontSize: '26px', color: '#bae6fd' 
         }).setOrigin(0.5);
 
-        // Graphics für Kanäle
+        // ==================== GRABEN (zuverlässig) ====================
         this.graphics = this.add.graphics();
 
-        // Grab-Mechanik
-        this.input.on('pointerdown', (pointer) => {
-          if (pointer.y < 200) return;
-          
+        this.input.on('pointerdown', (p) => {
+          if (p.y < 210) return;
           this.isDigging = true;
-          this.graphics.lineStyle(52, 0x6b5a3d, 1);
-          this.graphics.moveTo(pointer.x, pointer.y);
+          this.dig(p.x, p.y);
         });
 
-        this.input.on('pointermove', (pointer) => {
-          if (!this.isDigging || pointer.y < 200) return;
-
-          this.graphics.lineStyle(52, 0x6b5a3d, 1);
-          this.graphics.lineTo(pointer.x, pointer.y);
-
-          this.graphics.lineStyle(36, 0x8d6f47, 1);
-          this.graphics.lineTo(pointer.x, pointer.y);
+        this.input.on('pointermove', (p) => {
+          if (this.isDigging && p.y > 210) {
+            this.dig(p.x, p.y);
+          }
         });
 
-        this.input.on('pointerup', () => {
-          this.isDigging = false;
-        });
+        this.input.on('pointerup', () => this.isDigging = false);
 
-        this.add.text(w/2, h - 40, '🖱️ Maustaste halten und ziehen = Kanal graben', {
+        this.helpText = this.add.text(w/2, h - 40, '🖱️ Maustaste halten und ziehen = Kanal graben', {
           fontSize: '24px', color: '#fef08c'
         }).setOrigin(0.5);
+      }
+
+      dig(x, y) {
+        // Dunkler Rand
+        const outer = this.add.circle(x, y, 29, 0x6b5a3d);
+        // Heller Kanal
+        const inner = this.add.circle(x, y, 21, 0x8d6f47);
+        
+        // Kleiner Schatten
+        this.add.circle(x + 5, y + 5, 18, 0x5c4a35).setAlpha(0.5);
       }
     }
 
