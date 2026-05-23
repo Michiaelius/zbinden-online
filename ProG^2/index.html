@@ -4,60 +4,70 @@
   <meta charset="UTF-8">
   <title>Wasser-Logik - Schritt 1</title>
   <style>
-    body { margin:0; padding:0; background:#0a2a4a; display:flex; justify-content:center; align-items:center; height:100vh; }
-    canvas { border:20px solid #1e40af; border-radius:30px; box-shadow:0 0 100px rgba(0,0,0,0.9); }
+    body { 
+      margin:0; padding:0; background:#0a2a4a; 
+      display:flex; justify-content:center; align-items:center; height:100vh; 
+    }
+    canvas { 
+      border:22px solid #1e40af; 
+      border-radius:32px; 
+      box-shadow:0 0 110px rgba(0,0,0,0.95); 
+    }
   </style>
 </head>
 <body>
-  <canvas id="game" width="1200" height="750"></canvas>
+  <canvas id="game" width="1280" height="820"></canvas>
 
   <script>
     const canvas = document.getElementById('game');
     const ctx = canvas.getContext('2d');
 
     function drawBackground() {
-      // Himmel
-      const sky = ctx.createLinearGradient(0, 0, 0, 320);
+      // Himmel (deutlich höher)
+      const sky = ctx.createLinearGradient(0, 0, 0, 420);
       sky.addColorStop(0, '#60a5fa');
       sky.addColorStop(1, '#bae6fd');
       ctx.fillStyle = sky;
-      ctx.fillRect(0, 0, 1200, 320);
+      ctx.fillRect(0, 0, 1280, 420);
 
       // Sonne
       ctx.fillStyle = '#fcd34d';
-      ctx.beginPath(); ctx.arc(950, 130, 70, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(1050, 160, 75, 0, Math.PI*2); ctx.fill();
       ctx.fillStyle = '#fef08c';
-      ctx.beginPath(); ctx.arc(950, 130, 55, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(1050, 160, 58, 0, Math.PI*2); ctx.fill();
 
       // Wolken
       ctx.fillStyle = 'rgba(255,255,255,0.95)';
-      ctx.beginPath(); ctx.ellipse(280, 95, 95, 38, 0, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.ellipse(340, 80, 65, 32, 0, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(280, 110, 110, 42, 0, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(360, 92, 75, 35, 0, 0, Math.PI*2); ctx.fill();
+      
+      ctx.beginPath(); ctx.ellipse(820, 145, 95, 38, 0, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(890, 130, 65, 30, 0, 0, Math.PI*2); ctx.fill();
 
-      // Sand
+      // Sand (unten)
       ctx.fillStyle = '#e2c18a';
-      ctx.fillRect(0, 250, 1200, 500);
+      ctx.fillRect(0, 380, 1280, 440);
 
-      // Sandkörner
+      // Sand-Textur
       ctx.fillStyle = '#c99a5f';
-      for (let i = 0; i < 3500; i++) {
+      for (let i = 0; i < 4000; i++) {
         ctx.beginPath();
-        ctx.arc(Math.random()*1200, 260 + Math.random()*480, Math.random()*4.5 + 1.5, 0, Math.PI*2);
+        ctx.arc(Math.random()*1280, 390 + Math.random()*420, Math.random()*4.5 + 1.6, 0, Math.PI*2);
         ctx.fill();
       }
     }
 
     drawBackground();
 
-    // Titel
+    // Titel (jetzt über dem Wasserbereich)
     ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 62px Arial';
+    ctx.font = 'bold 68px Arial';
     ctx.textAlign = 'center';
-    ctx.fillText('💧 Wasser-Logik', 600, 55);
+    ctx.fillText('💧 Wasser-Logik', 640, 68);
 
-    ctx.font = '27px Arial';
+    ctx.font = '28px Arial';
     ctx.fillStyle = '#bae6fd';
-    ctx.fillText('Level 1 — Graben & Wasser lenken', 600, 92);
+    ctx.fillText('Level 1 — Graben & Wasser lenken', 640, 110);
   </script>
 </body>
 </html>
