@@ -2,37 +2,21 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Wasser-Logik</title>
+  <title>Wasser-Logik - Schritt 1</title>
   <style>
-    body {
-      margin: 0; padding: 0; background: #0a2a4a;
-      display: flex; justify-content: center; align-items: center; height: 100vh;
-    }
-    #game { 
-      border: 20px solid #1e40af; 
-      border-radius: 30px; 
-      box-shadow: 0 0 100px rgba(0,0,0,0.95); 
-      overflow: hidden;
-    }
-    canvas { display: block; }
+    body { margin:0; padding:0; background:#0a2a4a; display:flex; justify-content:center; align-items:center; height:100vh; }
+    canvas { border:20px solid #1e40af; border-radius:30px; box-shadow:0 0 100px rgba(0,0,0,0.9); }
   </style>
 </head>
 <body>
-  <div id="game"></div>
+  <canvas id="game" width="1200" height="750"></canvas>
 
   <script>
-    const canvas = document.createElement('canvas');
-    canvas.width = 1200;   // Größer gemacht
-    canvas.height = 750;
-    document.getElementById('game').appendChild(canvas);
+    const canvas = document.getElementById('game');
     const ctx = canvas.getContext('2d');
 
-    let isDigging = false;
-    let lastX, lastY;
-
-    // Hintergrund
     function drawBackground() {
-      // Himmel (stärker sichtbar)
+      // Himmel
       const sky = ctx.createLinearGradient(0, 0, 0, 320);
       sky.addColorStop(0, '#60a5fa');
       sky.addColorStop(1, '#bae6fd');
@@ -45,8 +29,8 @@
       ctx.fillStyle = '#fef08c';
       ctx.beginPath(); ctx.arc(950, 130, 55, 0, Math.PI*2); ctx.fill();
 
-      // Wolke
-      ctx.fillStyle = 'rgba(255,255,255,0.9)';
+      // Wolken
+      ctx.fillStyle = 'rgba(255,255,255,0.95)';
       ctx.beginPath(); ctx.ellipse(280, 95, 95, 38, 0, 0, Math.PI*2); ctx.fill();
       ctx.beginPath(); ctx.ellipse(340, 80, 65, 32, 0, 0, Math.PI*2); ctx.fill();
 
@@ -54,7 +38,7 @@
       ctx.fillStyle = '#e2c18a';
       ctx.fillRect(0, 250, 1200, 500);
 
-      // Sand-Textur
+      // Sandkörner
       ctx.fillStyle = '#c99a5f';
       for (let i = 0; i < 3500; i++) {
         ctx.beginPath();
@@ -65,35 +49,8 @@
 
     drawBackground();
 
-    // Wasserbehälter mit besseren Wellen
-    function drawWater() {
-      ctx.fillStyle = '#38bdf8';
-      ctx.fillRect(0, 85, 1200, 180);
-
-      ctx.strokeStyle = '#1e40af';
-      ctx.lineWidth = 35;
-      ctx.strokeRect(0, 85, 1200, 180);
-
-      // Wellen (besser sichtbar)
-      ctx.strokeStyle = '#7dd3fc';
-      ctx.lineWidth = 12;
-      for (let i = 0; i < 5; i++) {
-        ctx.beginPath();
-        ctx.moveTo(0, 105 + i*12);
-        ctx.quadraticCurveTo(300, 85 + i*8, 600, 112 + i*10);
-        ctx.quadraticCurveTo(900, 95 + i*7, 1200, 108 + i*11);
-        ctx.stroke();
-      }
-
-      // Glanz
-      ctx.fillStyle = 'rgba(255,255,255,0.6)';
-      ctx.fillRect(80, 95, 1040, 55);
-    }
-
-    drawWater();
-
-    // Texte
-    ctx.fillStyle = '#fff';
+    // Titel
+    ctx.fillStyle = '#ffffff';
     ctx.font = 'bold 62px Arial';
     ctx.textAlign = 'center';
     ctx.fillText('💧 Wasser-Logik', 600, 55);
@@ -101,57 +58,6 @@
     ctx.font = '27px Arial';
     ctx.fillStyle = '#bae6fd';
     ctx.fillText('Level 1 — Graben & Wasser lenken', 600, 92);
-
-    ctx.font = '24px Arial';
-    ctx.fillStyle = '#fef08c';
-    ctx.fillText('🖱️ Maustaste halten und ziehen = Kanal graben', 600, 710);
-
-    // Graben – jetzt mit durchgehender dicker Linie
-    canvas.addEventListener('mousedown', (e) => {
-      const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      if (y < 260) return;
-
-      isDigging = true;
-      lastX = x; lastY = y;
-      digLine(x, y, x, y);
-    });
-
-    canvas.addEventListener('mousemove', (e) => {
-      if (!isDigging) return;
-      const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      if (y < 260) return;
-
-      digLine(lastX, lastY, x, y);
-      lastX = x;
-      lastY = y;
-    });
-
-    canvas.addEventListener('mouseup', () => isDigging = false);
-    canvas.addEventListener('mouseleave', () => isDigging = false);
-
-    function digLine(x1, y1, x2, y2) {
-      // Dunkler Rand
-      ctx.strokeStyle = '#6b5a3d';
-      ctx.lineWidth = 58;
-      ctx.lineCap = 'round';
-      ctx.lineJoin = 'round';
-      ctx.beginPath();
-      ctx.moveTo(x1, y1);
-      ctx.lineTo(x2, y2);
-      ctx.stroke();
-
-      // Innerer Kanal (heller)
-      ctx.strokeStyle = '#8d6f47';
-      ctx.lineWidth = 38;
-      ctx.beginPath();
-      ctx.moveTo(x1, y1);
-      ctx.lineTo(x2, y2);
-      ctx.stroke();
-    }
   </script>
 </body>
 </html>
