@@ -48,8 +48,8 @@ function createElement(type, x, y) {
   playground.appendChild(el);
 }
 
-// Testelemente beim Start
+// === KEINE automatischen Test-Elemente mehr ===
 window.onload = () => {
-  createElement('source', 180, 180);
-  createElement('sink', 650, 420);
+  // Hier bleibt es leer → sauberes Spielfeld
+  console.log("Wasser-Logik bereit. Spielfeld ist leer.");
 };
