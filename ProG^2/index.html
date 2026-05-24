@@ -42,21 +42,21 @@
     let clouds = [];
 
     function spawnCloud() {
-      const isFar = Math.random() > 0.65;
+      const isFar = Math.random() > 0.6;
       clouds.push({
-        x: Math.random() * 1400 - 200,
+        x: Math.random() * 1600 - 300,
         y: isFar ? 85 + Math.random() * 55 : 115 + Math.random() * 70,
-        size: isFar ? 0.4 + Math.random() * 0.35 : 0.55 + Math.random() * 0.45, // deutlich kleiner
-        speed: isFar ? 0.15 + Math.random() * 0.18 : 0.28 + Math.random() * 0.25,
+        size: isFar ? 0.38 + Math.random() * 0.32 : 0.52 + Math.random() * 0.4,
+        speed: isFar ? 0.03 + Math.random() * 0.04 : 0.045 + Math.random() * 0.055, // 1/5 Geschwindigkeit
         direction: Math.random() > 0.5 ? 1 : -1,
-        opacity: isFar ? 0.7 : 0.92,
+        opacity: isFar ? 0.68 : 0.9,
         pause: 0,
         life: 1.0,
         dissolving: false
       });
     }
 
-    // Nur wenige Wolken am Anfang
+    // Nur anfängliche Wolken (kein Nachspawnen)
     for (let i = 0; i < 3; i++) spawnCloud();
 
     const sandCanvas = document.createElement('canvas');
@@ -174,7 +174,7 @@
       drawStaticBackground();
       drawMovingElements();
 
-      // Wolken Update
+      // Wolken Update - nur noch Auflösen, keine neuen
       for (let i = clouds.length - 1; i >= 0; i--) {
         const c = clouds[i];
 
@@ -184,14 +184,13 @@
           c.x += c.speed * c.direction;
         }
 
-        if (Math.random() < 0.004) c.pause = 90 + Math.random() * 140;
+        if (Math.random() < 0.0045) c.pause = 120 + Math.random() * 180;
 
-        if (!c.dissolving && Math.random() < 0.0015) c.dissolving = true;
-        if (c.dissolving) c.life -= 0.009;
+        if (!c.dissolving && Math.random() < 0.0018) c.dissolving = true;
+        if (c.dissolving) c.life -= 0.0075;
 
-        if (c.x < -400 || c.x > 1700 || c.life <= 0) {
+        if (c.x < -450 || c.x > 1750 || c.life <= 0) {
           clouds.splice(i, 1);
-          if (clouds.length < 4) spawnCloud();   // maximal ~4 Wolken
         }
       }
 
@@ -211,7 +210,6 @@
       }
 
       if (birds.length < 3 && Math.random() < 0.0055) spawnBird();
-      if (clouds.length < 4 && Math.random() < 0.012) spawnCloud();
 
       requestAnimationFrame(animate);
     }
