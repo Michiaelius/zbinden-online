@@ -86,7 +86,7 @@
           x: dir > 0 ? -90 - i*40 : 1410 + i*40,
           y: 95 + Math.random() * 115,
           baseY: 95 + Math.random() * 115,
-          speed: baseSpeed,           // normale Geschwindigkeit
+          speed: baseSpeed,
           currentSpeed: baseSpeed,
           targetSpeed: baseSpeed,
           direction: dir,
@@ -124,7 +124,7 @@
       ctx.drawImage(sandCanvas, 0, 250);
     }
 
-    function drawCloud(cloud) { /* ... unverändert ... */ 
+    function drawCloud(cloud) {
       ctx.globalAlpha = cloud.opacity * cloud.life;
       const s = cloud.size;
       const x = cloud.x;
@@ -200,32 +200,32 @@
       for (let i = birds.length - 1; i >= 0; i--) {
         const b = birds[i];
 
-        // Geschwindigkeits-Management (sanftes Beschleunigen / Verlangsamen)
-        b.currentSpeed += (b.targetSpeed - b.currentSpeed) * 0.085;
+        // Sanfte Geschwindigkeitsänderung
+        b.currentSpeed += (b.targetSpeed - b.currentSpeed) * 0.065;
 
         b.wave += 0.0018;
         b.x += b.currentSpeed * b.direction;
         b.y = b.baseY + Math.sin(b.wave) * 16;
 
-        b.flap += 0.06;
+        b.flap += 0.06;   // ← langsamer Flügelschlag
 
         // Sanfte Rotation
         if (Math.random() < 0.0025) b.rollSpeed = (Math.random() - 0.5) * 0.12;
         b.roll += b.rollSpeed;
         if (Math.abs(b.roll) > 0.18) b.rollSpeed *= -0.65;
 
-        // === RICHTUNGSÄNDERUNG mit Verlangsamen ===
-        if (!b.isTurning && Date.now() - b.lastTurn > 2200 && Math.random() < 0.002) {
+        // === RICHTUNGSÄNDERUNG - stärker + länger ===
+        if (!b.isTurning && Date.now() - b.lastTurn > 2500 && Math.random() < 0.0019) {
           b.isTurning = true;
           b.turnPhase = 0;
-          b.targetSpeed = b.speed * 0.35;   // stark verlangsamen
+          b.targetSpeed = b.speed * 0.18;   // stärker verlangsamen
         }
 
         if (b.isTurning) {
           b.turnPhase++;
-          if (b.turnPhase > 28) {           // ca. 0.45–0.5 Sekunden langsam
+          if (b.turnPhase > 52) {           // deutlich länger (~0.85 Sekunden)
             b.direction *= -1;
-            b.targetSpeed = b.speed;        // wieder beschleunigen
+            b.targetSpeed = b.speed;        // wieder normal beschleunigen
             b.isTurning = false;
             b.lastTurn = Date.now();
           }
