@@ -99,53 +99,56 @@
 
     // ==================== Sichtbare Berglandschaft ====================
     function drawMountains() {
-      // Hinterste Berge (hellgrau)
+      // Hinterste Berge (mittelgrau)
       ctx.fillStyle = '#64748b';
       ctx.beginPath();
       ctx.moveTo(0, 250);
-      ctx.lineTo(200, 85);
-      ctx.lineTo(450, 210);
-      ctx.lineTo(680, 55);
-      ctx.lineTo(950, 180);
-      ctx.lineTo(1200, 90);
+      ctx.lineTo(160, 72);
+      ctx.lineTo(380, 215);
+      ctx.lineTo(650, 48);
+      ctx.lineTo(890, 185);
+      ctx.lineTo(1150, 82);
       ctx.lineTo(1320, 250);
       ctx.fill();
 
-      // Mittlere Berge
+      // Mittlere Berge (dunkler)
       ctx.fillStyle = '#475569';
       ctx.beginPath();
       ctx.moveTo(0, 250);
-      ctx.lineTo(120, 130);
-      ctx.lineTo(380, 225);
-      ctx.lineTo(610, 95);
-      ctx.lineTo(850, 190);
-      ctx.lineTo(1080, 75);
+      ctx.lineTo(90, 125);
+      ctx.lineTo(310, 228);
+      ctx.lineTo(570, 88);
+      ctx.lineTo(810, 198);
+      ctx.lineTo(1040, 95);
       ctx.lineTo(1320, 250);
       ctx.fill();
 
-      // Vorderste dunkle Berge
-      ctx.fillStyle = '#334155';
+      // Vorderste Berge (sehr dunkel)
+      ctx.fillStyle = '#1e2937';
       ctx.beginPath();
       ctx.moveTo(0, 250);
-      ctx.lineTo(70, 155);
-      ctx.lineTo(290, 235);
-      ctx.lineTo(520, 115);
-      ctx.lineTo(760, 200);
-      ctx.lineTo(990, 135);
-      ctx.lineTo(1220, 220);
+      ctx.lineTo(50, 158);
+      ctx.lineTo(260, 235);
+      ctx.lineTo(490, 118);
+      ctx.lineTo(730, 205);
+      ctx.lineTo(960, 140);
+      ctx.lineTo(1190, 222);
       ctx.lineTo(1320, 250);
       ctx.fill();
     }
 
     function drawStaticBackground() {
+      // Himmel
       const sky = ctx.createLinearGradient(0, 0, 0, 250);
       sky.addColorStop(0, '#60a5fa');
       sky.addColorStop(1, '#bae6fd');
       ctx.fillStyle = sky;
       ctx.fillRect(0, 0, 1320, 250);
 
-      drawMountains();        // Berge direkt nach dem Himmel
+      // Berge (wichtig: direkt nach Himmel)
+      drawMountains();
 
+      // Sonne
       const sunX = 1050; const sunY = 135;
       ctx.shadowColor = '#fef08c'; ctx.shadowBlur = 50;
       ctx.fillStyle = '#fef08c';
@@ -157,6 +160,7 @@
       ctx.fillStyle = '#fbbf24';
       ctx.beginPath(); ctx.arc(sunX, sunY, 27, 0, Math.PI*2); ctx.fill();
 
+      // Sand
       ctx.drawImage(sandCanvas, 0, 250);
     }
 
