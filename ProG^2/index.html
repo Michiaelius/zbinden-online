@@ -121,28 +121,29 @@
       // Sand
       ctx.drawImage(sandCanvas, 0, 250);
 
-      // === NATÜRLICHER WASSERBEHÄLTER / SEEUFER (Schnittansicht) ===
-      const sourceX = 120;
+      // === NATÜRLICHES WASSERRESERVOIR (Seeufer-Schnitt) ===
+      const sourceX = 140;
       const sourceY = 255;
-      const sourceW = 340;
-      const sourceH = 105;
+      const sourceW = 360;
+      const sourceH = 125;
 
-      // Erdboden / Ufer (braun, leicht unregelmäßig)
+      // Ufer / Erde (braun, leicht uneben)
       ctx.fillStyle = '#8d6f47';
       ctx.beginPath();
-      ctx.moveTo(sourceX - 20, sourceY - 25);
-      ctx.lineTo(sourceX + sourceW + 20, sourceY - 28);
-      ctx.lineTo(sourceX + sourceW + 15, sourceY + 12);
-      ctx.lineTo(sourceX - 15, sourceY + 18);
+      ctx.moveTo(sourceX - 25, sourceY - 20);
+      ctx.quadraticCurveTo(sourceX + 80, sourceY - 35, sourceX + 180, sourceY - 18);
+      ctx.quadraticCurveTo(sourceX + 280, sourceY - 32, sourceX + sourceW + 20, sourceY - 22);
+      ctx.lineTo(sourceX + sourceW + 25, sourceY + sourceH + 10);
+      ctx.lineTo(sourceX - 30, sourceY + sourceH + 15);
       ctx.closePath();
       ctx.fill();
 
       // Wasserfläche
       ctx.fillStyle = '#0ea5e9';
       ctx.beginPath();
-      ctx.moveTo(sourceX, sourceY);
-      ctx.quadraticCurveTo(sourceX + 80, sourceY + 35, sourceX + 160, sourceY + 18);
-      ctx.quadraticCurveTo(sourceX + 240, sourceY + 45, sourceX + sourceW, sourceY + 12);
+      ctx.moveTo(sourceX, sourceY + 8);
+      ctx.quadraticCurveTo(sourceX + 70, sourceY + 45, sourceX + 165, sourceY + 28);
+      ctx.quadraticCurveTo(sourceX + 255, sourceY + 52, sourceX + sourceW, sourceY + 22);
       ctx.lineTo(sourceX + sourceW, sourceY + sourceH);
       ctx.lineTo(sourceX, sourceY + sourceH);
       ctx.closePath();
@@ -152,15 +153,15 @@
       waterTime += 0.055;
       ctx.strokeStyle = '#38bdf8';
       ctx.lineWidth = 4.5;
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < 4; i++) {
         ctx.beginPath();
-        ctx.moveTo(sourceX + 25, sourceY + 28 + i*24);
-        for (let x = 45; x < sourceW - 35; x += 32) {
+        ctx.moveTo(sourceX + 25, sourceY + 35 + i*22);
+        for (let x = 45; x < sourceW - 40; x += 30) {
           ctx.quadraticCurveTo(
             sourceX + x,
-            sourceY + 24 + i*24 + Math.sin(waterTime + x*0.035) * 8,
-            sourceX + x + 32,
-            sourceY + 28 + i*24
+            sourceY + 32 + i*22 + Math.sin(waterTime + x*0.04) * 7,
+            sourceX + x + 30,
+            sourceY + 35 + i*22
           );
         }
         ctx.stroke();
@@ -212,7 +213,7 @@
       drawStaticBackground();
       drawMovingElements();
 
-      // Wolken & Vögel Update (wie vorher)
+      // Wolken & Vögel (unverändert)
       for (let i = clouds.length - 1; i >= 0; i--) {
         const c = clouds[i];
         if (c.pause > 0) c.pause--;
