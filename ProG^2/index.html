@@ -200,32 +200,43 @@
       for (let i = birds.length - 1; i >= 0; i--) {
         const b = birds[i];
 
-        // Sanfte Geschwindigkeitsänderung
-        b.currentSpeed += (b.targetSpeed - b.currentSpeed) * 0.065;
+        b.currentSpeed += (b.targetSpeed - b.currentSpeed) * 0.055;
 
         b.wave += 0.0018;
         b.x += b.currentSpeed * b.direction;
         b.y = b.baseY + Math.sin(b.wave) * 16;
 
-        b.flap += 0.06;   // ← langsamer Flügelschlag
+        b.flap += 0.06;
 
         // Sanfte Rotation
         if (Math.random() < 0.0025) b.rollSpeed = (Math.random() - 0.5) * 0.12;
         b.roll += b.rollSpeed;
         if (Math.abs(b.roll) > 0.18) b.rollSpeed *= -0.65;
 
-        // === RICHTUNGSÄNDERUNG - stärker + länger ===
-        if (!b.isTurning && Date.now() - b.lastTurn > 2500 && Math.random() < 0.0019) {
+        // === NATÜRLICHE WENDE mit kurzem Anhalten ===
+        if (!b.isTurning && Date.now() - b.lastTurn > 2800 && Math.random() < 0.0017) {
           b.isTurning = true;
           b.turnPhase = 0;
-          b.targetSpeed = b.speed * 0.18;   // stärker verlangsamen
+          b.targetSpeed = 0.08;        // fast zum Stillstand
         }
 
         if (b.isTurning) {
           b.turnPhase++;
-          if (b.turnPhase > 52) {           // deutlich länger (~0.85 Sekunden)
+
+          if (b.turnPhase < 38) {
+            // Phase 1: Stark verlangsamen
+            b.targetSpeed = 0.08;
+          } else if (b.turnPhase < 68) {
+            // Phase 2: Kurz anhalten (ca. 0.5 Sekunden)
+            b.targetSpeed = 0;
+            b.currentSpeed = 0;
+          } else if (b.turnPhase < 85) {
+            // Phase 3: Richtung wechseln + leicht beschleunigen
             b.direction *= -1;
-            b.targetSpeed = b.speed;        // wieder normal beschleunigen
+            b.targetSpeed = b.speed * 0.45;
+          } else {
+            // Phase 4: Normal beschleunigen
+            b.targetSpeed = b.speed;
             b.isTurning = false;
             b.lastTurn = Date.now();
           }
