@@ -118,29 +118,29 @@
       // Sand
       ctx.drawImage(sandCanvas, 0, 250);
 
-      // === NATÜRLICHE MULDE / WASSERQUELLE ===
-      const x = 120;
+      // === NATÜRLICHES SEEUFER IM QUERSCHNITT (links oben) ===
+      const x = 100;
 
       // Braunes Ufer (flach abfallend, organisch)
       ctx.fillStyle = '#8d6f47';
       ctx.beginPath();
       ctx.moveTo(x, 255);
-      ctx.quadraticCurveTo(x + 75, 225, x + 165, 248);
-      ctx.quadraticCurveTo(x + 245, 215, x + 340, 242);
-      ctx.quadraticCurveTo(x + 410, 255, x + 455, 290);
-      ctx.lineTo(x + 460, 380);
-      ctx.lineTo(x - 25, 385);
+      ctx.quadraticCurveTo(x + 70, 230, x + 160, 248);
+      ctx.quadraticCurveTo(x + 240, 215, x + 330, 245);
+      ctx.quadraticCurveTo(x + 400, 260, x + 440, 295);
+      ctx.lineTo(x + 450, 380);
+      ctx.lineTo(x - 15, 385);
       ctx.closePath();
       ctx.fill();
 
-      // Wasser (schöne Muldenform)
+      // Wasser in der Mulde
       ctx.fillStyle = '#0ea5e9';
       ctx.beginPath();
-      ctx.moveTo(x + 18, 262);
-      ctx.quadraticCurveTo(x + 95, 295, x + 175, 265);
-      ctx.quadraticCurveTo(x + 255, 305, x + 345, 272);
-      ctx.lineTo(x + 435, 365);
-      ctx.lineTo(x + 30, 368);
+      ctx.moveTo(x + 20, 262);
+      ctx.quadraticCurveTo(x + 90, 295, x + 175, 268);
+      ctx.quadraticCurveTo(x + 255, 305, x + 340, 275);
+      ctx.lineTo(x + 430, 365);
+      ctx.lineTo(x + 25, 370);
       ctx.closePath();
       ctx.fill();
 
