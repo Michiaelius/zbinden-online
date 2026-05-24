@@ -118,45 +118,45 @@
       // Sand
       ctx.drawImage(sandCanvas, 0, 250);
 
-      // === NATÜRLICHES UFER / QUELLE (wie deine grüne Skizze) ===
-      const x = 140;
+      // === NATÜRLICHES WASSERUFER (wie deine grüne Skizze) ===
+      const x = 110;
       const y = 255;
 
-      // Erde / Ufer (unregelmäßig, abfallend)
+      // Braunes Ufer (unregelmäßig, abfallend)
       ctx.fillStyle = '#8d6f47';
       ctx.beginPath();
-      ctx.moveTo(x - 20, y - 8);
-      ctx.quadraticCurveTo(x + 60, y - 38, x + 145, y - 15);
-      ctx.quadraticCurveTo(x + 230, y - 42, x + 355, y - 12);
-      ctx.lineTo(x + 370, y + 105);
-      ctx.lineTo(x - 25, y + 112);
+      ctx.moveTo(x - 25, y - 12);
+      ctx.quadraticCurveTo(x + 45, y - 38, x + 135, y - 22);
+      ctx.quadraticCurveTo(x + 215, y - 45, x + 325, y - 18);
+      ctx.lineTo(x + 355, y + 115);
+      ctx.lineTo(x - 30, y + 125);
       ctx.closePath();
       ctx.fill();
 
-      // Wasser (Mulde)
+      // Wasser (blau, passend zur Mulde)
       ctx.fillStyle = '#0ea5e9';
       ctx.beginPath();
-      ctx.moveTo(x + 12, y + 5);
-      ctx.quadraticCurveTo(x + 85, y + 48, x + 165, y + 22);
-      ctx.quadraticCurveTo(x + 255, y + 52, x + 340, y + 18);
-      ctx.lineTo(x + 355, y + 98);
-      ctx.lineTo(x + 20, y + 98);
+      ctx.moveTo(x + 8, y + 8);
+      ctx.quadraticCurveTo(x + 75, y + 52, x + 155, y + 28);
+      ctx.quadraticCurveTo(x + 245, y + 58, x + 325, y + 25);
+      ctx.lineTo(x + 340, y + 105);
+      ctx.lineTo(x + 15, y + 108);
       ctx.closePath();
       ctx.fill();
 
       // Wellen
       waterTime += 0.055;
       ctx.strokeStyle = '#38bdf8';
-      ctx.lineWidth = 4;
+      ctx.lineWidth = 4.5;
       for (let i = 0; i < 3; i++) {
         ctx.beginPath();
-        ctx.moveTo(x + 35, y + 32 + i*22);
-        for (let px = 55; px < 320; px += 32) {
+        ctx.moveTo(x + 30, y + 35 + i*23);
+        for (let px = 50; px < 310; px += 32) {
           ctx.quadraticCurveTo(
             x + px,
-            y + 28 + i*22 + Math.sin(waterTime + px*0.04) * 7,
+            y + 32 + i*23 + Math.sin(waterTime + px*0.04) * 7,
             x + px + 32,
-            y + 32 + i*22
+            y + 35 + i*23
           );
         }
         ctx.stroke();
@@ -208,7 +208,6 @@
       drawStaticBackground();
       drawMovingElements();
 
-      // Wolken & Vögel Update...
       for (let i = clouds.length - 1; i >= 0; i--) {
         const c = clouds[i];
         if (c.pause > 0) c.pause--;
