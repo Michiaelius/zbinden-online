@@ -80,19 +80,24 @@
       const dir = Math.random() > 0.5 ? 1 : -1;
       const count = Math.random() < 0.7 ? 1 : 2;
       for (let i = 0; i < count; i++) {
+        const baseSpeed = 1.05 + Math.random() * 0.75;
         const scale = 0.32 + Math.random() * 0.38;
         birds.push({
           x: dir > 0 ? -90 - i*40 : 1410 + i*40,
           y: 95 + Math.random() * 115,
           baseY: 95 + Math.random() * 115,
-          speed: 1.05 + Math.random() * 0.75,
+          speed: baseSpeed,           // normale Geschwindigkeit
+          currentSpeed: baseSpeed,
+          targetSpeed: baseSpeed,
           direction: dir,
           flap: Math.random() * 10,
           scale: scale,
           wave: Math.random() * Math.PI * 2,
           roll: 0,
           rollSpeed: 0,
-          lastTurn: Date.now()
+          lastTurn: Date.now(),
+          isTurning: false,
+          turnPhase: 0
         });
       }
     }
@@ -119,7 +124,7 @@
       ctx.drawImage(sandCanvas, 0, 250);
     }
 
-    function drawCloud(cloud) {
+    function drawCloud(cloud) { /* ... unverändert ... */ 
       ctx.globalAlpha = cloud.opacity * cloud.life;
       const s = cloud.size;
       const x = cloud.x;
@@ -146,11 +151,8 @@
       const flap = Math.sin(bird.flap) * 10;
       ctx.save();
       ctx.translate(bird.x, bird.y);
-      
-      // Sehr sanfte Rotation (kaum noch Kippen)
       const rotation = bird.roll * 0.25;
       if (rotation !== 0) ctx.rotate(rotation);
-      
       if (bird.direction < 0) ctx.scale(-1, 1);
       ctx.scale(bird.scale, bird.scale);
 
@@ -159,38 +161,15 @@
       ctx.lineWidth = 2.6;
 
       // Schwanz
-      ctx.beginPath();
-      ctx.moveTo(8, 8);
-      ctx.lineTo(1, 6);
-      ctx.lineTo(2, 10);
-      ctx.closePath();
-      ctx.fill();
-      ctx.stroke();
-
+      ctx.beginPath(); ctx.moveTo(8, 8); ctx.lineTo(1, 6); ctx.lineTo(2, 10); ctx.closePath(); ctx.fill(); ctx.stroke();
       // Flügel
-      ctx.beginPath();
-      ctx.moveTo(23, 13);
-      ctx.quadraticCurveTo(12, -22 + flap*4, 12, -2);
-      ctx.quadraticCurveTo(21, 3, 14, 13);
-      ctx.fill();
-      ctx.stroke();
-
+      ctx.beginPath(); ctx.moveTo(23, 13); ctx.quadraticCurveTo(12, -22 + flap*4, 12, -2); ctx.quadraticCurveTo(21, 3, 14, 13); ctx.fill(); ctx.stroke();
       // Körper
-      ctx.beginPath(); 
-      ctx.ellipse(19.5, 8, 10, 7, 0.05, 0, Math.PI*2); 
-      ctx.fill();
-
+      ctx.beginPath(); ctx.ellipse(19.5, 8, 10, 7, 0.05, 0, Math.PI*2); ctx.fill();
       // Kopf
-      ctx.beginPath(); 
-      ctx.arc(29, 4, 6, 0, Math.PI*2); 
-      ctx.fill();
-
+      ctx.beginPath(); ctx.arc(29, 4, 6, 0, Math.PI*2); ctx.fill();
       // Schnabel
-      ctx.beginPath(); 
-      ctx.moveTo(34, 3); 
-      ctx.lineTo(45, 4); 
-      ctx.lineTo(34, 5.5); 
-      ctx.fill();
+      ctx.beginPath(); ctx.moveTo(34, 3); ctx.lineTo(45, 4); ctx.lineTo(34, 5.5); ctx.fill();
 
       ctx.restore();
     }
@@ -205,6 +184,7 @@
       drawStaticBackground();
       drawMovingElements();
 
+      // Wolken
       for (let i = clouds.length - 1; i >= 0; i--) {
         const c = clouds[i];
         if (c.pause > 0) c.pause--;
@@ -216,23 +196,39 @@
       }
       if (clouds.length < 12 && Math.random() < 0.038) spawnCloud();
 
+      // Vögel
       for (let i = birds.length - 1; i >= 0; i--) {
         const b = birds[i];
-        b.wave += 0.0018;                    // Wellen-Geschwindigkeit
-        b.x += b.speed * b.direction;
-        b.y = b.baseY + Math.sin(b.wave) * 16;   // Wellen-Höhe (kleiner = flacher)
+
+        // Geschwindigkeits-Management (sanftes Beschleunigen / Verlangsamen)
+        b.currentSpeed += (b.targetSpeed - b.currentSpeed) * 0.085;
+
+        b.wave += 0.0018;
+        b.x += b.currentSpeed * b.direction;
+        b.y = b.baseY + Math.sin(b.wave) * 16;
 
         b.flap += 0.06;
 
-        // Sehr sanfte Rotation
+        // Sanfte Rotation
         if (Math.random() < 0.0025) b.rollSpeed = (Math.random() - 0.5) * 0.12;
         b.roll += b.rollSpeed;
         if (Math.abs(b.roll) > 0.18) b.rollSpeed *= -0.65;
 
-        // Richtung ändern (mind. ca. 2 Sekunden)
-        if (Date.now() - b.lastTurn > 2000 && Math.random() < 0.0018) {
-          b.direction *= -1;
-          b.lastTurn = Date.now();
+        // === RICHTUNGSÄNDERUNG mit Verlangsamen ===
+        if (!b.isTurning && Date.now() - b.lastTurn > 2200 && Math.random() < 0.002) {
+          b.isTurning = true;
+          b.turnPhase = 0;
+          b.targetSpeed = b.speed * 0.35;   // stark verlangsamen
+        }
+
+        if (b.isTurning) {
+          b.turnPhase++;
+          if (b.turnPhase > 28) {           // ca. 0.45–0.5 Sekunden langsam
+            b.direction *= -1;
+            b.targetSpeed = b.speed;        // wieder beschleunigen
+            b.isTurning = false;
+            b.lastTurn = Date.now();
+          }
         }
 
         if (b.x < -180 || b.x > 1500) birds.splice(i, 1);
