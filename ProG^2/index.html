@@ -192,25 +192,27 @@
         if (Math.abs(b.roll) > 0.14) b.rollSpeed *= -0.7;
 
         // === Zuverlässiger Richtungswechsel ===
-        if (!b.isTurning && Date.now() - b.lastTurn > 3500 && Math.random() < 0.002) {
+        if (!b.isTurning && Date.now() - b.lastTurn > 3200 && Math.random() < 0.0022) {
           b.isTurning = true;
           b.turnPhase = 0;
-          b.targetSpeed = b.speed * 0.15;
+          b.targetSpeed = b.speed * 0.18;
         }
 
         if (b.isTurning) {
           b.turnPhase++;
 
-          if (b.turnPhase < 50) {
-            b.targetSpeed = b.speed * 0.15;           // verlangsamen
-          } else if (b.turnPhase < 110) {
-            b.targetSpeed = 0.05;                     // Pause
-          } else if (b.turnPhase === 111) {           // ← hier wird gedreht
+          if (b.turnPhase < 45) {
+            b.targetSpeed = b.speed * 0.18;
+          } else if (b.turnPhase < 100) {
+            b.targetSpeed = 0.04;           // Pause
+          } else if (!b.hasTurned) {        // ← Nur einmal drehen
             b.direction *= -1;
-            b.targetSpeed = b.speed * 0.5;
-          } else if (b.turnPhase > 150) {
+            b.hasTurned = true;
+            b.targetSpeed = b.speed * 0.55;
+          } else if (b.turnPhase > 160) {
             b.targetSpeed = b.speed;
             b.isTurning = false;
+            b.hasTurned = false;
             b.lastTurn = Date.now();
           }
         }
