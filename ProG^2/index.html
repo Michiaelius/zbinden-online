@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Wasser-Logik - Basis</title>
+  <title>Wasser-Logik - Basis B</title>
   <style>
     body {
       margin:0; padding:20px 0; background:#0a2a4a;
@@ -40,7 +40,7 @@
     let clouds = [];
 
     function spawnCloud() {
-      const type = Math.random(); // 0-1 für verschiedene Typen
+      const type = Math.random(); 
       const isFar = Math.random() > 0.45;
       const fromLeft = Math.random() > 0.5;
 
@@ -54,7 +54,8 @@
         pause: 0,
         life: 1.0,
         dissolving: Math.random() < 0.1,
-        type: type < 0.4 ? 1 : type < 0.75 ? 2 : 3   // 3 verschiedene Wolken-Typen
+        type: type < 0.4 ? 1 : type < 0.75 ? 2 : 3,
+        lastTurn: Date.now()
       });
     }
     for (let i = 0; i < 8; i++) spawnCloud();
@@ -128,24 +129,20 @@
       ctx.fillStyle = '#ffffff';
 
       if (cloud.type === 1) {
-        // Typ 1: Klassische fluffige Wolke
         ctx.beginPath(); ctx.ellipse(x, y, 115*s, 42*s, 0, 0, Math.PI*2); ctx.fill();
         ctx.beginPath(); ctx.ellipse(x + 82*s, y - 18*s, 72*s, 38*s, 0, 0, Math.PI*2); ctx.fill();
         ctx.beginPath(); ctx.ellipse(x + 40*s, y - 26*s, 52*s, 33*s, 0, 0, Math.PI*2); ctx.fill();
       } 
       else if (cloud.type === 2) {
-        // Typ 2: Längere, flachere Wolke
         ctx.beginPath(); ctx.ellipse(x, y, 160*s, 35*s, 0, 0, Math.PI*2); ctx.fill();
         ctx.beginPath(); ctx.ellipse(x + 95*s, y - 14*s, 85*s, 32*s, 0, 0, Math.PI*2); ctx.fill();
         ctx.beginPath(); ctx.ellipse(x + 45*s, y - 22*s, 55*s, 28*s, 0, 0, Math.PI*2); ctx.fill();
       } 
       else {
-        // Typ 3: Kleine, runde Puff-Wolke
         ctx.beginPath(); ctx.ellipse(x, y, 68*s, 38*s, 0, 0, Math.PI*2); ctx.fill();
         ctx.beginPath(); ctx.ellipse(x + 48*s, y - 12*s, 52*s, 32*s, 0, 0, Math.PI*2); ctx.fill();
         ctx.beginPath(); ctx.ellipse(x - 35*s, y - 10*s, 45*s, 29*s, 0, 0, Math.PI*2); ctx.fill();
       }
-
       ctx.globalAlpha = 1;
     }
 
@@ -161,15 +158,18 @@
       ctx.fillStyle = '#1e2937';
       ctx.lineWidth = 3.2;
 
+      // Schmalere Flügel (ca. 1/4 der vorherigen Breite)
       ctx.beginPath();
       ctx.moveTo(0, 0);
-      ctx.quadraticCurveTo(14, -19 + flap, 35, -10);
-      ctx.quadraticCurveTo(26, -5, 11, 4);
-      ctx.fill(); ctx.stroke();
+      ctx.quadraticCurveTo(8, -19 + flap, 22, -9);   // viel schmaler
+      ctx.quadraticCurveTo(18, -6, 9, 3);
+      ctx.fill(); 
+      ctx.stroke();
 
+      // Körper & Kopf
       ctx.beginPath(); ctx.ellipse(19, 5, 13, 8, 0.2, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.arc(30, 1, 6.5, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.moveTo(35, 0); ctx.lineTo(43, 2); ctx.lineTo(35, 4); ctx.fill();
+      ctx.beginPath(); ctx.arc(29, 1, 6.5, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(34, 0); ctx.lineTo(40, 2); ctx.lineTo(34, 4); ctx.fill();
 
       ctx.restore();
     }
