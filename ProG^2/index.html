@@ -39,11 +39,12 @@
     let birds = [];
     let clouds = [];
 
+    // ... (spawnCloud, createFixedSand, spawnBird, drawStaticBackground, drawCloud bleiben gleich) ...
+
     function spawnCloud() {
       const type = Math.random(); 
       const isFar = Math.random() > 0.45;
       const fromLeft = Math.random() > 0.5;
-
       clouds.push({
         x: fromLeft ? -380 : 1700,
         y: isFar ? 38 + Math.random() * 58 : 72 + Math.random() * 72,
@@ -80,24 +81,19 @@
       const dir = Math.random() > 0.5 ? 1 : -1;
       const count = Math.random() < 0.7 ? 1 : 2;
       for (let i = 0; i < count; i++) {
-        const baseSpeed = 1.05 + Math.random() * 0.75;
         const scale = 0.32 + Math.random() * 0.38;
         birds.push({
           x: dir > 0 ? -90 - i*40 : 1410 + i*40,
           y: 95 + Math.random() * 115,
           baseY: 95 + Math.random() * 115,
-          speed: baseSpeed,
-          currentSpeed: baseSpeed,
-          targetSpeed: baseSpeed,
+          speed: 1.05 + Math.random() * 0.75,
           direction: dir,
           flap: Math.random() * 10,
           scale: scale,
           wave: Math.random() * Math.PI * 2,
           roll: 0,
           rollSpeed: 0,
-          lastTurn: Date.now(),
-          isTurning: false,
-          turnPhase: 0
+          lastTurn: Date.now()
         });
       }
     }
@@ -151,8 +147,11 @@
       const flap = Math.sin(bird.flap) * 10;
       ctx.save();
       ctx.translate(bird.x, bird.y);
-      const rotation = bird.roll * 0.25;
-      if (rotation !== 0) ctx.rotate(rotation);
+      
+      // SEHR stark reduzierte Rotation → Schnabel bleibt fast stabil
+      const rotation = bird.roll * 0.08;   
+      if (Math.abs(rotation) > 0.001) ctx.rotate(rotation);
+      
       if (bird.direction < 0) ctx.scale(-1, 1);
       ctx.scale(bird.scale, bird.scale);
 
@@ -160,15 +159,10 @@
       ctx.fillStyle = '#1e2937';
       ctx.lineWidth = 2.6;
 
-      // Schwanz
       ctx.beginPath(); ctx.moveTo(8, 8); ctx.lineTo(1, 6); ctx.lineTo(2, 10); ctx.closePath(); ctx.fill(); ctx.stroke();
-      // Flügel
       ctx.beginPath(); ctx.moveTo(23, 13); ctx.quadraticCurveTo(12, -22 + flap*4, 12, -2); ctx.quadraticCurveTo(21, 3, 14, 13); ctx.fill(); ctx.stroke();
-      // Körper
       ctx.beginPath(); ctx.ellipse(19.5, 8, 10, 7, 0.05, 0, Math.PI*2); ctx.fill();
-      // Kopf
       ctx.beginPath(); ctx.arc(29, 4, 6, 0, Math.PI*2); ctx.fill();
-      // Schnabel
       ctx.beginPath(); ctx.moveTo(34, 3); ctx.lineTo(45, 4); ctx.lineTo(34, 5.5); ctx.fill();
 
       ctx.restore();
@@ -184,7 +178,6 @@
       drawStaticBackground();
       drawMovingElements();
 
-      // Wolken (unverändert)
       for (let i = clouds.length - 1; i >= 0; i--) {
         const c = clouds[i];
         if (c.pause > 0) c.pause--;
@@ -196,51 +189,16 @@
       }
       if (clouds.length < 12 && Math.random() < 0.038) spawnCloud();
 
-      // Vögel
       for (let i = birds.length - 1; i >= 0; i--) {
         const b = birds[i];
+        b.wave += 0.0028;
+        b.x += b.speed * b.direction;
+        b.y = b.baseY + Math.sin(b.wave) * 22;
+        b.flap += 0.06;                     // langsam
 
-        // Sehr sanfte Geschwindigkeitsänderung
-        b.currentSpeed += (b.targetSpeed - b.currentSpeed) * 0.038;
-
-        b.wave += 0.0018;
-        b.x += b.currentSpeed * b.direction;
-        b.y = b.baseY + Math.sin(b.wave) * 16;
-
-        b.flap += 0.06;
-
-        // Sanfte Rotation
-        if (Math.random() < 0.0025) b.rollSpeed = (Math.random() - 0.5) * 0.12;
+        if (Math.random() < 0.008) b.rollSpeed = (Math.random() - 0.5) * 0.12;
         b.roll += b.rollSpeed;
-        if (Math.abs(b.roll) > 0.18) b.rollSpeed *= -0.65;
-
-        // === SEHR WEICHE WENDE ===
-        if (!b.isTurning && Date.now() - b.lastTurn > 3200 && Math.random() < 0.0016) {
-          b.isTurning = true;
-          b.turnPhase = 0;
-          b.targetSpeed = b.speed * 0.12;   // stark verlangsamen
-        }
-
-        if (b.isTurning) {
-          b.turnPhase++;
-
-          if (b.turnPhase < 45) {
-            // Langsam verlangsamen
-            b.targetSpeed = b.speed * 0.12;
-          } else if (b.turnPhase < 95) {
-            // Langes Anhalten (ca. 0.8 Sekunden)
-            b.targetSpeed = 0;
-          } else if (b.turnPhase < 125) {
-            // Richtung wechseln + langsam wieder losfliegen
-            b.direction *= -1;
-            b.targetSpeed = b.speed * 0.35;
-          } else {
-            // Normalgeschwindigkeit
-            b.targetSpeed = b.speed;
-            b.isTurning = false;
-            b.lastTurn = Date.now();
-          }
-        }
+        if (Math.abs(b.roll) > 0.22) b.rollSpeed *= -0.7;
 
         if (b.x < -180 || b.x > 1500) birds.splice(i, 1);
       }
