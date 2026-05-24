@@ -97,59 +97,55 @@
     }
     for (let i = 0; i < 2; i++) spawnBird();
 
-    // ==================== Berglandschaft (stark sichtbar) ====================
+    // ==================== Sichtbare Berglandschaft ====================
     function drawMountains() {
-      // Sehr dunkle hinterste Berge
-      ctx.fillStyle = '#475569';
+      // Hinterste Berge (hellgrau)
+      ctx.fillStyle = '#64748b';
       ctx.beginPath();
       ctx.moveTo(0, 250);
-      ctx.lineTo(150, 95);
-      ctx.lineTo(380, 220);
-      ctx.lineTo(620, 70);
-      ctx.lineTo(880, 195);
-      ctx.lineTo(1120, 105);
+      ctx.lineTo(200, 85);
+      ctx.lineTo(450, 210);
+      ctx.lineTo(680, 55);
+      ctx.lineTo(950, 180);
+      ctx.lineTo(1200, 90);
       ctx.lineTo(1320, 250);
       ctx.fill();
 
       // Mittlere Berge
-      ctx.fillStyle = '#334155';
+      ctx.fillStyle = '#475569';
       ctx.beginPath();
       ctx.moveTo(0, 250);
-      ctx.lineTo(80, 145);
-      ctx.lineTo(320, 235);
-      ctx.lineTo(550, 110);
-      ctx.lineTo(790, 205);
-      ctx.lineTo(1010, 125);
-      ctx.lineTo(1250, 230);
+      ctx.lineTo(120, 130);
+      ctx.lineTo(380, 225);
+      ctx.lineTo(610, 95);
+      ctx.lineTo(850, 190);
+      ctx.lineTo(1080, 75);
       ctx.lineTo(1320, 250);
       ctx.fill();
 
       // Vorderste dunkle Berge
-      ctx.fillStyle = '#1e2937';
+      ctx.fillStyle = '#334155';
       ctx.beginPath();
       ctx.moveTo(0, 250);
-      ctx.lineTo(50, 175);
-      ctx.lineTo(240, 240);
-      ctx.lineTo(480, 130);
-      ctx.lineTo(710, 215);
-      ctx.lineTo(930, 150);
-      ctx.lineTo(1170, 235);
+      ctx.lineTo(70, 155);
+      ctx.lineTo(290, 235);
+      ctx.lineTo(520, 115);
+      ctx.lineTo(760, 200);
+      ctx.lineTo(990, 135);
+      ctx.lineTo(1220, 220);
       ctx.lineTo(1320, 250);
       ctx.fill();
     }
 
     function drawStaticBackground() {
-      // Himmel
       const sky = ctx.createLinearGradient(0, 0, 0, 250);
       sky.addColorStop(0, '#60a5fa');
       sky.addColorStop(1, '#bae6fd');
       ctx.fillStyle = sky;
       ctx.fillRect(0, 0, 1320, 250);
 
-      // Berge
-      drawMountains();
+      drawMountains();        // Berge direkt nach dem Himmel
 
-      // Sonne
       const sunX = 1050; const sunY = 135;
       ctx.shadowColor = '#fef08c'; ctx.shadowBlur = 50;
       ctx.fillStyle = '#fef08c';
@@ -161,7 +157,6 @@
       ctx.fillStyle = '#fbbf24';
       ctx.beginPath(); ctx.arc(sunX, sunY, 27, 0, Math.PI*2); ctx.fill();
 
-      // Sand
       ctx.drawImage(sandCanvas, 0, 250);
     }
 
