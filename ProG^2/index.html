@@ -154,39 +154,11 @@
       ctx.fillStyle = '#1e2937';
       ctx.lineWidth = 2.6;
 
-      // Schwanz
-      ctx.beginPath();
-      ctx.moveTo(8, 8);
-      ctx.lineTo(1, 6);
-      ctx.lineTo(2, 10);
-      ctx.closePath();
-      ctx.fill();
-      ctx.stroke();
-
-      // Flügel
-      ctx.beginPath();
-      ctx.moveTo(23, 13);
-      ctx.quadraticCurveTo(12, -22 + flap*4, 12, -2);
-      ctx.quadraticCurveTo(21, 3, 14, 13);
-      ctx.fill();
-      ctx.stroke();
-
-      // Körper
-      ctx.beginPath(); 
-      ctx.ellipse(19.5, 8, 10, 7, 0.05, 0, Math.PI*2); 
-      ctx.fill();
-
-      // Kopf
-      ctx.beginPath(); 
-      ctx.arc(29, 4, 6, 0, Math.PI*2); 
-      ctx.fill();
-
-      // Schnabel
-      ctx.beginPath(); 
-      ctx.moveTo(34, 3); 
-      ctx.lineTo(45, 4); 
-      ctx.lineTo(34, 5.5); 
-      ctx.fill();
+      ctx.beginPath(); ctx.moveTo(8, 8); ctx.lineTo(1, 6); ctx.lineTo(2, 10); ctx.closePath(); ctx.fill(); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(23, 13); ctx.quadraticCurveTo(12, -22 + flap*4, 12, -2); ctx.quadraticCurveTo(21, 3, 14, 13); ctx.fill(); ctx.stroke();
+      ctx.beginPath(); ctx.ellipse(19.5, 8, 10, 7, 0.05, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(29, 4, 6, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(34, 3); ctx.lineTo(45, 4); ctx.lineTo(34, 5.5); ctx.fill();
 
       ctx.restore();
     }
@@ -201,7 +173,7 @@
       drawStaticBackground();
       drawMovingElements();
 
-      // Wolken Update
+      // Wolken
       for (let i = clouds.length - 1; i >= 0; i--) {
         const c = clouds[i];
         if (c.pause > 0) c.pause--;
@@ -213,7 +185,7 @@
       }
       if (clouds.length < 12 && Math.random() < 0.038) spawnCloud();
 
-      // Vögel Update
+      // Vögel
       for (let i = birds.length - 1; i >= 0; i--) {
         const b = birds[i];
         b.wave += 0.0028;
