@@ -40,11 +40,8 @@
 
     let cloud1X = 180;
     let cloud2X = 780;
-    
-    let birds = [
-      {x: -80, y: 145, speed: 1.65, flap: 0},
-      {x: -420, y: 198, speed: 1.1, flap: 0}
-    ];
+
+    let birds = [];
 
     // Fixierter Sand
     const sandCanvas = document.createElement('canvas');
@@ -64,6 +61,21 @@
     }
     createFixedSand();
 
+    function spawnBird() {
+      const fromLeft = Math.random() > 0.5;
+      birds.push({
+        x: fromLeft ? -60 : 1380,
+        y: 120 + Math.random() * 160,
+        speed: 1.1 + Math.random() * 1.1,
+        direction: fromLeft ? 1 : -1,
+        flap: Math.random() * 10,
+        size: 0.75 + Math.random() * 0.4   // etwas Variation in Größe
+      });
+    }
+
+    // Initial ein paar Vögel
+    for (let i = 0; i < 5; i++) spawnBird();
+
     function drawStaticBackground() {
       const sky = ctx.createLinearGradient(0, 0, 0, 460);
       sky.addColorStop(0, '#60a5fa');
@@ -81,39 +93,38 @@
     }
 
     function drawBird(bird) {
-      const flap = Math.sin(bird.flap) * 6;
-
+      const flap = Math.sin(bird.flap) * 7;
       ctx.save();
       ctx.translate(bird.x, bird.y);
+      if (bird.direction < 0) ctx.scale(-1, 1);   // umdrehen bei Flug nach links
 
       ctx.strokeStyle = '#1e2937';
       ctx.fillStyle = '#1e2937';
-      ctx.lineWidth = 3.5;
-      ctx.lineJoin = 'round';
+      ctx.lineWidth = 3.2;
 
-      // Flügel oben
+      // Flügel
       ctx.beginPath();
       ctx.moveTo(0, 0);
-      ctx.quadraticCurveTo(18, -22 + flap, 38, -12);
-      ctx.quadraticCurveTo(28, -8, 12, 2);
+      ctx.quadraticCurveTo(14, -18 + flap, 34, -9);
+      ctx.quadraticCurveTo(26, -4, 10, 4);
       ctx.fill();
       ctx.stroke();
 
       // Körper
       ctx.beginPath();
-      ctx.ellipse(18, 4, 14, 8, 0, 0, Math.PI*2);
+      ctx.ellipse(19, 5, 13, 8, 0.2, 0, Math.PI*2);
       ctx.fill();
 
       // Kopf
       ctx.beginPath();
-      ctx.arc(29, -2, 6, 0, Math.PI*2);
+      ctx.arc(30, 1, 6.5, 0, Math.PI*2);
       ctx.fill();
 
       // Schnabel
       ctx.beginPath();
-      ctx.moveTo(34, -2);
-      ctx.lineTo(42, 0);
-      ctx.lineTo(34, 3);
+      ctx.moveTo(35, 0);
+      ctx.lineTo(43, 2);
+      ctx.lineTo(35, 4);
       ctx.fill();
 
       ctx.restore();
@@ -128,7 +139,6 @@
       ctx.beginPath(); ctx.ellipse(cloud2X, 170, 118, 45, 0, 0, Math.PI*2); ctx.fill();
       ctx.beginPath(); ctx.ellipse(cloud2X + 92, 150, 78, 36, 0, 0, Math.PI*2); ctx.fill();
 
-      // Vögel
       birds.forEach(bird => drawBird(bird));
     }
 
@@ -138,16 +148,27 @@
       drawStaticBackground();
       drawMovingElements();
 
+      // Wolken
       cloud1X += 0.42;
       cloud2X += 0.37;
       if (cloud1X > 1650) cloud1X = -320;
       if (cloud2X > 1650) cloud2X = -280;
 
-      birds.forEach(bird => {
-        bird.x += bird.speed;
-        bird.flap += 0.22;
-        if (bird.x > 1500) bird.x = -300;
-      });
+      // Vögel updaten
+      for (let i = birds.length - 1; i >= 0; i--) {
+        const b = birds[i];
+        b.x += b.speed * b.direction;
+        b.flap += 0.25;
+
+        // Entfernen wenn außerhalb
+        if (b.x < -100 || b.x > 1420) {
+          birds.splice(i, 1);
+          spawnBird();   // neuen Vogel spawnen
+        }
+      }
+
+      // Gelegentlich neuen Vogel spawnen
+      if (Math.random() < 0.03) spawnBird();
 
       requestAnimationFrame(animate);
     }
