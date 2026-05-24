@@ -40,6 +40,7 @@
     let clouds = [];
     let waterTime = 0;
 
+    // Wolken (wie vorher)
     function spawnCloud() {
       const isFar = Math.random() > 0.55;
       clouds.push({
@@ -56,6 +57,7 @@
     }
     for (let i = 0; i < 6; i++) spawnCloud();
 
+    // Sand
     const sandCanvas = document.createElement('canvas');
     sandCanvas.width = 1320;
     sandCanvas.height = 510;
@@ -73,6 +75,7 @@
     }
     createFixedSand();
 
+    // Vögel
     function spawnBird() {
       const dir = Math.random() > 0.5 ? 1 : -1;
       const count = Math.random() < 0.7 ? 1 : 2;
@@ -118,45 +121,48 @@
       // Sand
       ctx.drawImage(sandCanvas, 0, 250);
 
-      // === NATÜRLICHES WASSERUFER (wie deine grüne Skizze) ===
-      const ux = 140;   // Ufer Start
-      const uy = 255;
+      // === NATÜRLICHES SEEUFER / WASSERRESERVOIR (Schnittansicht) ===
+      const sx = 130;      // Start X
+      const sy = 265;      // Oberkante des Wassers
+      const sw = 380;      // Breite
+      const sh = 130;      // Tiefe des Beckens
 
-      // Brauner Erdboden / Ufer (abfallend)
+      // 1. Ufer / Erde (braun, leicht abfallend und unregelmäßig)
       ctx.fillStyle = '#8d6f47';
       ctx.beginPath();
-      ctx.moveTo(ux - 30, uy - 22);
-      ctx.quadraticCurveTo(ux + 90, uy - 38, ux + 210, uy - 12);
-      ctx.quadraticCurveTo(ux + 310, uy - 30, ux + 390, uy - 18);
-      ctx.lineTo(ux + 410, uy + 135);
-      ctx.lineTo(ux - 40, uy + 135);
+      ctx.moveTo(sx - 30, sy - 15);
+      ctx.quadraticCurveTo(sx + 60, sy - 40, sx + 140, sy - 12);
+      ctx.quadraticCurveTo(sx + 240, sy - 38, sx + 320, sy - 18);
+      ctx.quadraticCurveTo(sx + sw + 25, sy - 30, sx + sw + 35, sy + 25);
+      ctx.lineTo(sx + sw + 40, sy + sh + 20);
+      ctx.lineTo(sx - 35, sy + sh + 25);
       ctx.closePath();
       ctx.fill();
 
-      // Wasserfläche (leicht eingesenkt)
+      // 2. Wasserfläche (etwas heller und mit leichtem Rand)
       ctx.fillStyle = '#0ea5e9';
       ctx.beginPath();
-      ctx.moveTo(ux + 25, uy + 12);
-      ctx.quadraticCurveTo(ux + 110, uy + 48, ux + 195, uy + 25);
-      ctx.quadraticCurveTo(ux + 290, uy + 55, ux + 375, uy + 18);
-      ctx.lineTo(ux + 375, uy + 115);
-      ctx.lineTo(ux + 25, uy + 118);
+      ctx.moveTo(sx + 10, sy + 5);
+      ctx.quadraticCurveTo(sx + 90, sy + 48, sx + 175, sy + 22);
+      ctx.quadraticCurveTo(sx + 270, sy + 55, sx + sw - 15, sy + 18);
+      ctx.lineTo(sx + sw - 10, sy + sh - 5);
+      ctx.lineTo(sx + 15, sy + sh - 5);
       ctx.closePath();
       ctx.fill();
 
-      // Wellen
+      // 3. Wellen
       waterTime += 0.055;
       ctx.strokeStyle = '#38bdf8';
-      ctx.lineWidth = 4;
-      for (let i = 0; i < 3; i++) {
+      ctx.lineWidth = 4.2;
+      for (let i = 0; i < 4; i++) {
         ctx.beginPath();
-        ctx.moveTo(ux + 40, uy + 32 + i*26);
-        for (let x = 55; x < 355; x += 32) {
+        ctx.moveTo(sx + 30, sy + 32 + i*22);
+        for (let x = 55; x < sw - 45; x += 32) {
           ctx.quadraticCurveTo(
-            ux + x,
-            uy + 28 + i*26 + Math.sin(waterTime + x*0.04) * 6.5,
-            ux + x + 32,
-            uy + 32 + i*26
+            sx + x,
+            sy + 28 + i*22 + Math.sin(waterTime + x*0.038) * 7,
+            sx + x + 32,
+            sy + 32 + i*22
           );
         }
         ctx.stroke();
@@ -208,7 +214,7 @@
       drawStaticBackground();
       drawMovingElements();
 
-      // Wolken & Vögel Update...
+      // Wolken & Vögel (unverändert)
       for (let i = clouds.length - 1; i >= 0; i--) {
         const c = clouds[i];
         if (c.pause > 0) c.pause--;
