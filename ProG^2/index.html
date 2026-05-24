@@ -147,7 +147,7 @@
       ctx.save();
       ctx.translate(bird.x, bird.y);
       if (bird.roll !== 0) ctx.rotate(bird.roll);
-      if (bird.direction < 0) ctx.scale(-1, 1);
+      if (bird.direction < 0) ctx.scale(-1, 1);   // Spiegelung für Linksflug
       ctx.scale(bird.scale, bird.scale);
 
       ctx.strokeStyle = '#1e2937';
@@ -181,10 +181,10 @@
       ctx.arc(29, 4, 6, 0, Math.PI*2); 
       ctx.fill();
 
-      // Schnabel
+      // Schnabel – immer nach vorne (rechts bei Normal, links bei Spiegelung)
       ctx.beginPath(); 
       ctx.moveTo(34, 3); 
-      ctx.lineTo(39.5, 4); 
+      ctx.lineTo(42, 4);     // länger nach vorne
       ctx.lineTo(34, 5.5); 
       ctx.fill();
 
@@ -201,7 +201,6 @@
       drawStaticBackground();
       drawMovingElements();
 
-      // Wolken Update
       for (let i = clouds.length - 1; i >= 0; i--) {
         const c = clouds[i];
         if (c.pause > 0) c.pause--;
@@ -216,13 +215,11 @@
       }
       if (clouds.length < 12 && Math.random() < 0.038) spawnCloud();
 
-      // Vögel Update - Langsamere Hoch/Runter-Bewegung
       for (let i = birds.length - 1; i >= 0; i--) {
         const b = birds[i];
-        b.wave += 0.0028;                    // <-- war 0.0058, jetzt viel langsamer
+        b.wave += 0.0028;
         b.x += b.speed * b.direction;
-        b.y = b.baseY + Math.sin(b.wave) * 22;   // Amplitude etwas reduziert
-
+        b.y = b.baseY + Math.sin(b.wave) * 22;
         b.flap += 0.22;
 
         if (Math.random() < 0.008) b.rollSpeed = (Math.random() - 0.5) * 0.25;
