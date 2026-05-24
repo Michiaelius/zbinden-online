@@ -38,8 +38,8 @@
 
     let birds = [];
     let clouds = [];
-    let waterTime = 0;
 
+    // Wolken
     function spawnCloud() {
       const isFar = Math.random() > 0.55;
       clouds.push({
@@ -56,6 +56,7 @@
     }
     for (let i = 0; i < 6; i++) spawnCloud();
 
+    // Sand
     const sandCanvas = document.createElement('canvas');
     sandCanvas.width = 1320;
     sandCanvas.height = 510;
@@ -73,6 +74,7 @@
     }
     createFixedSand();
 
+    // Vögel
     function spawnBird() {
       const dir = Math.random() > 0.5 ? 1 : -1;
       const count = Math.random() < 0.7 ? 1 : 2;
@@ -117,50 +119,6 @@
 
       // Sand
       ctx.drawImage(sandCanvas, 0, 250);
-
-      // === NATÜRLICHES ABFALLENDES UFER ===
-      const startX = 95;
-
-      // Braunes Ufer (unregelmäßig, flach abfallend)
-      ctx.fillStyle = '#8d6f47';
-      ctx.beginPath();
-      ctx.moveTo(startX, 255);
-      ctx.quadraticCurveTo(startX + 95, 238, startX + 185, 255);
-      ctx.quadraticCurveTo(startX + 255, 225, startX + 340, 248);
-      ctx.quadraticCurveTo(startX + 410, 265, startX + 455, 295);
-      ctx.lineTo(startX + 460, 380);
-      ctx.lineTo(startX - 20, 385);
-      ctx.closePath();
-      ctx.fill();
-
-      // Wasser in der Mulde
-      ctx.fillStyle = '#0ea5e9';
-      ctx.beginPath();
-      ctx.moveTo(startX + 25, 262);
-      ctx.quadraticCurveTo(startX + 110, 292, startX + 195, 265);
-      ctx.quadraticCurveTo(startX + 265, 295, startX + 355, 270);
-      ctx.lineTo(startX + 445, 365);
-      ctx.lineTo(startX + 30, 370);
-      ctx.closePath();
-      ctx.fill();
-
-      // Wellen
-      waterTime += 0.055;
-      ctx.strokeStyle = '#38bdf8';
-      ctx.lineWidth = 4;
-      for (let i = 0; i < 3; i++) {
-        ctx.beginPath();
-        ctx.moveTo(startX + 45, 275 + i*24);
-        for (let px = 70; px < 380; px += 35) {
-          ctx.quadraticCurveTo(
-            startX + px,
-            272 + i*24 + Math.sin(waterTime + px*0.035) * 6.5,
-            startX + px + 35,
-            275 + i*24
-          );
-        }
-        ctx.stroke();
-      }
     }
 
     function drawCloud(cloud) {
@@ -208,6 +166,7 @@
       drawStaticBackground();
       drawMovingElements();
 
+      // Wolken
       for (let i = clouds.length - 1; i >= 0; i--) {
         const c = clouds[i];
         if (c.pause > 0) c.pause--;
@@ -219,6 +178,7 @@
       }
       if (clouds.length < 8 && Math.random() < 0.025) spawnCloud();
 
+      // Vögel
       for (let i = birds.length - 1; i >= 0; i--) {
         const b = birds[i];
         b.wave += 0.0058;
