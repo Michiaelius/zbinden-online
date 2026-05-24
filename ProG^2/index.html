@@ -118,28 +118,29 @@
       // Sand
       ctx.drawImage(sandCanvas, 0, 250);
 
-      // === NATÜRLICHE MULDE / WASSERQUELLE (wie deine Skizze) ===
-      const x = 95;
+      // === NATÜRLICHES ABFALLENDES UFER ===
+      const startX = 95;
 
-      // Braunes Ufer (unregelmäßig, natürlich abfallend)
+      // Braunes Ufer (unregelmäßig, flach abfallend)
       ctx.fillStyle = '#8d6f47';
       ctx.beginPath();
-      ctx.moveTo(x, 255);
-      ctx.quadraticCurveTo(x + 85, 235, x + 165, 252);
-      ctx.quadraticCurveTo(x + 245, 228, x + 355, 255);
-      ctx.lineTo(x + 370, 370);
-      ctx.lineTo(x - 10, 375);
+      ctx.moveTo(startX, 255);
+      ctx.quadraticCurveTo(startX + 95, 238, startX + 185, 255);
+      ctx.quadraticCurveTo(startX + 255, 225, startX + 340, 248);
+      ctx.quadraticCurveTo(startX + 410, 265, startX + 455, 295);
+      ctx.lineTo(startX + 460, 380);
+      ctx.lineTo(startX - 20, 385);
       ctx.closePath();
       ctx.fill();
 
       // Wasser in der Mulde
       ctx.fillStyle = '#0ea5e9';
       ctx.beginPath();
-      ctx.moveTo(x + 15, 262);
-      ctx.quadraticCurveTo(x + 95, 295, x + 175, 268);
-      ctx.quadraticCurveTo(x + 255, 305, x + 335, 270);
-      ctx.lineTo(x + 355, 365);
-      ctx.lineTo(x + 20, 365);
+      ctx.moveTo(startX + 25, 262);
+      ctx.quadraticCurveTo(startX + 110, 292, startX + 195, 265);
+      ctx.quadraticCurveTo(startX + 265, 295, startX + 355, 270);
+      ctx.lineTo(startX + 445, 365);
+      ctx.lineTo(startX + 30, 370);
       ctx.closePath();
       ctx.fill();
 
@@ -149,21 +150,53 @@
       ctx.lineWidth = 4;
       for (let i = 0; i < 3; i++) {
         ctx.beginPath();
-        ctx.moveTo(x + 35, 275 + i*26);
-        for (let px = 55; px < 320; px += 32) {
+        ctx.moveTo(startX + 45, 275 + i*24);
+        for (let px = 70; px < 380; px += 35) {
           ctx.quadraticCurveTo(
-            x + px,
-            272 + i*26 + Math.sin(waterTime + px*0.04) * 7,
-            x + px + 32,
-            275 + i*26
+            startX + px,
+            272 + i*24 + Math.sin(waterTime + px*0.035) * 6.5,
+            startX + px + 35,
+            275 + i*24
           );
         }
         ctx.stroke();
       }
     }
 
-    function drawCloud(cloud) { /* ... */ }
-    function drawBird(bird) { /* ... */ }
+    function drawCloud(cloud) {
+      ctx.globalAlpha = cloud.opacity * cloud.life;
+      const s = cloud.size;
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath(); ctx.ellipse(cloud.x, cloud.y, 115*s, 42*s, 0, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(cloud.x + 82*s, cloud.y - 18*s, 72*s, 38*s, 0, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(cloud.x + 40*s, cloud.y - 26*s, 52*s, 33*s, 0, 0, Math.PI*2); ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+
+    function drawBird(bird) {
+      const flap = Math.sin(bird.flap) * 7;
+      ctx.save();
+      ctx.translate(bird.x, bird.y);
+      if (bird.roll !== 0) ctx.rotate(bird.roll);
+      if (bird.direction < 0) ctx.scale(-1, 1);
+      ctx.scale(bird.scale, bird.scale);
+
+      ctx.strokeStyle = '#1e2937';
+      ctx.fillStyle = '#1e2937';
+      ctx.lineWidth = 3.2;
+
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.quadraticCurveTo(14, -19 + flap, 35, -10);
+      ctx.quadraticCurveTo(26, -5, 11, 4);
+      ctx.fill(); ctx.stroke();
+
+      ctx.beginPath(); ctx.ellipse(19, 5, 13, 8, 0.2, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(30, 1, 6.5, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(35, 0); ctx.lineTo(43, 2); ctx.lineTo(35, 4); ctx.fill();
+
+      ctx.restore();
+    }
 
     function drawMovingElements() {
       clouds.forEach(cloud => drawCloud(cloud));
@@ -175,7 +208,36 @@
       drawStaticBackground();
       drawMovingElements();
 
-      // Wolken & Vögel Update (wie vorher) ...
+      for (let i = clouds.length - 1; i >= 0; i--) {
+        const c = clouds[i];
+        if (c.pause > 0) c.pause--;
+        else c.x += c.speed * c.direction;
+        if (Math.random() < 0.0035) c.pause = 90 + Math.random()*160;
+        if (!c.dissolving && Math.random() < 0.0015) c.dissolving = true;
+        if (c.dissolving) c.life -= 0.0065;
+        if (c.x < -450 || c.x > 1750 || c.life <= 0) clouds.splice(i, 1);
+      }
+      if (clouds.length < 8 && Math.random() < 0.025) spawnCloud();
+
+      for (let i = birds.length - 1; i >= 0; i--) {
+        const b = birds[i];
+        b.wave += 0.0058;
+        b.x += b.speed * b.direction;
+        b.y = b.baseY + Math.sin(b.wave) * 24;
+        b.flap += 0.22;
+
+        if (Math.random() < 0.008) b.rollSpeed = (Math.random() - 0.5) * 0.25;
+        b.roll += b.rollSpeed;
+        if (Math.abs(b.roll) > 0.35) b.rollSpeed *= -0.7;
+
+        if (Date.now() - b.lastTurn > 15000 && Math.random() < 0.0015) {
+          b.direction *= -1;
+          b.lastTurn = Date.now();
+        }
+
+        if (b.x < -180 || b.x > 1500) birds.splice(i, 1);
+      }
+      if (birds.length < 3 && Math.random() < 0.006) spawnBird();
 
       requestAnimationFrame(animate);
     }
