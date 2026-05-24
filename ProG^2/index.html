@@ -143,7 +143,7 @@
     }
 
     function drawBird(bird) {
-      const flap = Math.sin(bird.flap) * 1;
+      const flap = Math.sin(bird.flap) * 10;
       ctx.save();
       ctx.translate(bird.x, bird.y);
       if (bird.roll !== 0) ctx.rotate(bird.roll);
@@ -167,7 +167,7 @@
       ctx.beginPath();
       ctx.moveTo(23, 15);
       ctx.quadraticCurveTo(12, -20 + flap*4, 12,0 );
-      ctx.quadraticCurveTo(21, 5, 14, 15);
+      ctx.quadraticCurveTo(21, 5, 14, 10);
       ctx.fill();
       ctx.stroke();
 
