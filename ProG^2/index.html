@@ -99,56 +99,53 @@
 
     // ==================== Berglandschaft ====================
     function drawMountains() {
-      // Hinterste Berge (hellgrau)
+      // Hinterste Berge
       ctx.fillStyle = '#64748b';
       ctx.beginPath();
-      ctx.moveTo(-50, 250);
+      ctx.moveTo(0, 250);
       ctx.lineTo(180, 95);
-      ctx.lineTo(420, 235);
+      ctx.lineTo(420, 225);
       ctx.lineTo(680, 75);
-      ctx.lineTo(920, 210);
-      ctx.lineTo(1180, 105);
-      ctx.lineTo(1350, 250);
+      ctx.lineTo(920, 200);
+      ctx.lineTo(1180, 110);
+      ctx.lineTo(1320, 250);
       ctx.fill();
 
-      // Mittlere Berge (dunkler)
+      // Mittlere Berge
       ctx.fillStyle = '#475569';
       ctx.beginPath();
-      ctx.moveTo(-30, 250);
-      ctx.lineTo(120, 135);
-      ctx.lineTo(350, 225);
+      ctx.moveTo(0, 250);
+      ctx.lineTo(130, 140);
+      ctx.lineTo(380, 235);
       ctx.lineTo(590, 105);
       ctx.lineTo(830, 195);
       ctx.lineTo(1050, 85);
       ctx.lineTo(1320, 250);
       ctx.fill();
 
-      // Vorderste Berge (am dunkelsten)
+      // Vorderste Berge
       ctx.fillStyle = '#334155';
       ctx.beginPath();
       ctx.moveTo(0, 250);
       ctx.lineTo(90, 165);
-      ctx.lineTo(280, 235);
-      ctx.lineTo(510, 125);
-      ctx.lineTo(740, 205);
+      ctx.lineTo(310, 235);
+      ctx.lineTo(520, 125);
+      ctx.lineTo(760, 205);
       ctx.lineTo(970, 145);
-      ctx.lineTo(1190, 230);
+      ctx.lineTo(1190, 225);
       ctx.lineTo(1320, 250);
       ctx.fill();
     }
 
     function drawStaticBackground() {
-      // Himmel
       const sky = ctx.createLinearGradient(0, 0, 0, 250);
       sky.addColorStop(0, '#60a5fa');
       sky.addColorStop(1, '#bae6fd');
       ctx.fillStyle = sky;
       ctx.fillRect(0, 0, 1320, 250);
 
-      // Berge
       drawMountains();
 
-      // Sonne
       const sunX = 1050; const sunY = 135;
       ctx.shadowColor = '#fef08c'; ctx.shadowBlur = 50;
       ctx.fillStyle = '#fef08c';
@@ -160,11 +157,10 @@
       ctx.fillStyle = '#fbbf24';
       ctx.beginPath(); ctx.arc(sunX, sunY, 27, 0, Math.PI*2); ctx.fill();
 
-      // Sand
       ctx.drawImage(sandCanvas, 0, 250);
     }
 
-    function drawCloud(cloud) { /* ... deine originale Funktion ... */ 
+    function drawCloud(cloud) {
       ctx.globalAlpha = cloud.opacity * cloud.life;
       const s = cloud.size;
       const x = cloud.x;
