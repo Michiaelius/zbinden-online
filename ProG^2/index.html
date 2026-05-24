@@ -63,13 +63,15 @@
 
     function spawnBird() {
       const fromLeft = Math.random() > 0.5;
+      const scale = 0.35 + Math.random() * 0.45;   // zwischen ca. 35% und 80% der alten Größe
+
       birds.push({
         x: fromLeft ? -80 : 1400,
-        y: 115 + Math.random() * 165,
-        speed: 1.15 + Math.random() * 0.85,
+        y: 110 + Math.random() * 170,
+        speed: 1.1 + Math.random() * 0.9,
         direction: fromLeft ? 1 : -1,
         flap: Math.random() * 10,
-        size: 0.8 + Math.random() * 0.3
+        scale: scale
       });
     }
 
@@ -95,12 +97,14 @@
       const flap = Math.sin(bird.flap) * 7;
       ctx.save();
       ctx.translate(bird.x, bird.y);
+      ctx.scale(bird.scale, bird.scale);           // Größenvariation
       if (bird.direction < 0) ctx.scale(-1, 1);
 
       ctx.strokeStyle = '#1e2937';
       ctx.fillStyle = '#1e2937';
       ctx.lineWidth = 3.2;
 
+      // Flügel
       ctx.beginPath();
       ctx.moveTo(0, 0);
       ctx.quadraticCurveTo(14, -19 + flap, 35, -10);
@@ -108,14 +112,17 @@
       ctx.fill();
       ctx.stroke();
 
+      // Körper
       ctx.beginPath();
       ctx.ellipse(19, 5, 13, 8, 0.2, 0, Math.PI*2);
       ctx.fill();
 
+      // Kopf
       ctx.beginPath();
       ctx.arc(30, 1, 6.5, 0, Math.PI*2);
       ctx.fill();
 
+      // Schnabel
       ctx.beginPath();
       ctx.moveTo(35, 0);
       ctx.lineTo(43, 2);
@@ -157,7 +164,6 @@
         }
       }
 
-      // Sehr seltener Spawn (max. 4-5 Vögel)
       if (birds.length < 4 && Math.random() < 0.008) {
         spawnBird();
       }
