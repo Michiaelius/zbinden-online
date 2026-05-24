@@ -24,31 +24,12 @@
       // === DEIN SEEUFER ===
       const startX = 0;
 
-      ctx.fillStyle = '#8d6f47';           // Ufer-Farbe (braun)
-      ctx.beginPath();
-      ctx.moveTo(startX, 255);                    // Startpunkt
-
-      // Erste Kurve (flach abfallend)
-      ctx.quadraticCurveTo(startX + 0, 400, startX + 100, 350);
-
-      // Zweite Kurve (etwas tiefer)
-      ctx.quadraticCurveTo(startX + 100, 350, startX + 300, 150);
-
-      // Dritte Kurve (nach unten)
-      ctx.quadraticCurveTo(startX + 300, 150, startX + 450, 50);
-
-      // Unten schließen
-      ctx.lineTo(startX + 460, 385);
-      ctx.lineTo(startX - 25, 390);
-      ctx.closePath();
-      ctx.fill();
-
       // === WASSER ===
       ctx.fillStyle = '#0ea5e9';
       ctx.beginPath();
-      ctx.moveTo(startX + 22, 262);
+      ctx.moveTo(startX + 0, 262);
 
-      ctx.quadraticCurveTo(startX + 95, 292, startX + 185, 265);
+      ctx.quadraticCurveTo(startX + 0, 292, startX + 185, 265);
       ctx.quadraticCurveTo(startX + 260, 305, startX + 350, 272);
 
       ctx.lineTo(startX + 440, 370);
