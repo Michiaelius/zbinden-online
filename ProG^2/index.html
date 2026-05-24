@@ -40,21 +40,21 @@
     let clouds = [];
 
     function spawnCloud() {
-      const isFar = Math.random() > 0.5;
+      const isFar = Math.random() > 0.45;
       clouds.push({
-        x: Math.random() > 0.5 ? -320 : 1640,
-        y: isFar ? 48 + Math.random() * 52 : 75 + Math.random() * 68,
-        size: isFar ? 0.42 + Math.random() * 0.38 : 0.68 + Math.random() * 0.52,
-        speed: isFar ? 0.065 + Math.random() * 0.055 : 0.095 + Math.random() * 0.07,
+        x: Math.random() > 0.5 ? -380 : 1700,
+        y: isFar ? 42 + Math.random() * 58 : 78 + Math.random() * 72,
+        size: isFar ? 0.48 + Math.random() * 0.32 : 0.72 + Math.random() * 0.48,
+        speed: isFar ? 0.055 + Math.random() * 0.045 : 0.085 + Math.random() * 0.055,
         direction: Math.random() > 0.5 ? 1 : -1,
-        opacity: isFar ? 0.68 : 0.94,
+        opacity: isFar ? 0.72 : 0.93,
         pause: 0,
         life: 1.0,
-        dissolving: Math.random() < 0.25,   // nur 25% der Wolken lösen sich auf
+        dissolving: Math.random() < 0.18,   // nur wenige lösen sich auf
         lastTurn: Date.now()
       });
     }
-    for (let i = 0; i < 6; i++) spawnCloud();
+    for (let i = 0; i < 7; i++) spawnCloud();
 
     const sandCanvas = document.createElement('canvas');
     sandCanvas.width = 1320;
@@ -126,7 +126,7 @@
       ctx.globalAlpha = 1;
     }
 
-    function drawBird(bird) { /* unverändert */ 
+    function drawBird(bird) {
       const flap = Math.sin(bird.flap) * 7;
       ctx.save();
       ctx.translate(bird.x, bird.y);
@@ -166,22 +166,15 @@
         if (c.pause > 0) c.pause--;
         else c.x += c.speed * c.direction;
 
-        // Gelegentlicher Richtungswechsel
-        if (Date.now() - c.lastTurn > 18000 && Math.random() < 0.0012) {
-          c.direction *= -1;
-          c.lastTurn = Date.now();
-        }
+        if (Math.random() < 0.0025) c.pause = 120 + Math.random()*200;
 
-        if (Math.random() < 0.003) c.pause = 80 + Math.random()*140;
+        if (c.dissolving) c.life -= 0.007;
+        else if (Math.random() < 0.0006) c.dissolving = true;
 
-        // Nur manche Wolken lösen sich auf
-        if (c.dissolving) c.life -= 0.008;
-        else if (Math.random() < 0.0008) c.dissolving = true;
-
-        if (c.x < -480 || c.x > 1800 || c.life <= 0) clouds.splice(i, 1);
+        if (c.x < -500 || c.x > 1820 || c.life <= 0) clouds.splice(i, 1);
       }
 
-      if (clouds.length < 9 && Math.random() < 0.028) spawnCloud();
+      if (clouds.length < 12 && Math.random() < 0.035) spawnCloud();
 
       for (let i = birds.length - 1; i >= 0; i--) {
         const b = birds[i];
