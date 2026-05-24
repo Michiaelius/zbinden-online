@@ -39,27 +39,25 @@
     const ctx = canvas.getContext('2d');
 
     let birds = [];
-
-    // === Wolken ===
     let clouds = [];
 
     function spawnCloud() {
-      const isFar = Math.random() > 0.6; // weiter hinten
+      const isFar = Math.random() > 0.65;
       clouds.push({
         x: Math.random() * 1400 - 200,
-        y: isFar ? 80 + Math.random() * 70 : 110 + Math.random() * 90,
-        size: isFar ? 0.65 + Math.random() * 0.5 : 1.1 + Math.random() * 0.9,
-        speed: isFar ? 0.18 + Math.random() * 0.22 : 0.35 + Math.random() * 0.32,
+        y: isFar ? 85 + Math.random() * 55 : 115 + Math.random() * 70,
+        size: isFar ? 0.4 + Math.random() * 0.35 : 0.55 + Math.random() * 0.45, // deutlich kleiner
+        speed: isFar ? 0.15 + Math.random() * 0.18 : 0.28 + Math.random() * 0.25,
         direction: Math.random() > 0.5 ? 1 : -1,
-        opacity: isFar ? 0.65 : 0.95,
+        opacity: isFar ? 0.7 : 0.92,
         pause: 0,
-        life: 1.0,           // für Auflösen
+        life: 1.0,
         dissolving: false
       });
     }
 
-    // Anfangswolken
-    for (let i = 0; i < 6; i++) spawnCloud();
+    // Nur wenige Wolken am Anfang
+    for (let i = 0; i < 3; i++) spawnCloud();
 
     const sandCanvas = document.createElement('canvas');
     sandCanvas.width = 1320;
@@ -104,7 +102,6 @@
       ctx.fillStyle = sky;
       ctx.fillRect(0, 0, 1320, 460);
 
-      // Sonne
       ctx.fillStyle = '#fcd34d';
       ctx.beginPath(); ctx.arc(1080, 170, 82, 0, Math.PI*2); ctx.fill();
       ctx.fillStyle = '#fef08c';
@@ -119,19 +116,19 @@
       
       ctx.fillStyle = 'rgba(255,255,255,1)';
       ctx.beginPath();
-      ctx.ellipse(cloud.x, cloud.y, 128*s, 48*s, 0, 0, Math.PI*2);
+      ctx.ellipse(cloud.x, cloud.y, 115*s, 42*s, 0, 0, Math.PI*2);
       ctx.fill();
       ctx.beginPath();
-      ctx.ellipse(cloud.x + 95*s, cloud.y - 18*s, 82*s, 42*s, 0, 0, Math.PI*2);
+      ctx.ellipse(cloud.x + 78*s, cloud.y - 16*s, 68*s, 36*s, 0, 0, Math.PI*2);
       ctx.fill();
       ctx.beginPath();
-      ctx.ellipse(cloud.x + 45*s, cloud.y - 25*s, 55*s, 35*s, 0, 0, Math.PI*2);
+      ctx.ellipse(cloud.x + 38*s, cloud.y - 22*s, 48*s, 31*s, 0, 0, Math.PI*2);
       ctx.fill();
 
       ctx.globalAlpha = 1;
     }
 
-    function drawBird(bird) { /* ... unverändert ... */ 
+    function drawBird(bird) {
       const flap = Math.sin(bird.flap) * 7;
       ctx.save();
       ctx.translate(bird.x, bird.y);
@@ -187,20 +184,18 @@
           c.x += c.speed * c.direction;
         }
 
-        // Gelegentlich pausieren
-        if (Math.random() < 0.003) c.pause = 80 + Math.random() * 120;
+        if (Math.random() < 0.004) c.pause = 90 + Math.random() * 140;
 
-        // Auflösen
-        if (!c.dissolving && Math.random() < 0.0012) c.dissolving = true;
-        if (c.dissolving) c.life -= 0.008;
+        if (!c.dissolving && Math.random() < 0.0015) c.dissolving = true;
+        if (c.dissolving) c.life -= 0.009;
 
         if (c.x < -400 || c.x > 1700 || c.life <= 0) {
           clouds.splice(i, 1);
-          spawnCloud();
+          if (clouds.length < 4) spawnCloud();   // maximal ~4 Wolken
         }
       }
 
-      // Vögel Update (unverändert)
+      // Vögel Update
       for (let i = birds.length - 1; i >= 0; i--) {
         const b = birds[i];
         b.wave += 0.0058;
@@ -216,7 +211,7 @@
       }
 
       if (birds.length < 3 && Math.random() < 0.0055) spawnBird();
-      if (clouds.length < 7 && Math.random() < 0.018) spawnCloud();
+      if (clouds.length < 4 && Math.random() < 0.012) spawnCloud();
 
       requestAnimationFrame(animate);
     }
