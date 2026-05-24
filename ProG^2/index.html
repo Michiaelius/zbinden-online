@@ -201,6 +201,7 @@
       drawStaticBackground();
       drawMovingElements();
 
+      // Wolken Update
       for (let i = clouds.length - 1; i >= 0; i--) {
         const c = clouds[i];
         if (c.pause > 0) c.pause--;
@@ -212,12 +213,13 @@
       }
       if (clouds.length < 12 && Math.random() < 0.038) spawnCloud();
 
+      // Vögel Update
       for (let i = birds.length - 1; i >= 0; i--) {
         const b = birds[i];
         b.wave += 0.0028;
         b.x += b.speed * b.direction;
         b.y = b.baseY + Math.sin(b.wave) * 22;
-        b.flap += 0.14;                    // Flügelschlag
+        b.flap += 0.14;
 
         if (Math.random() < 0.008) b.rollSpeed = (Math.random() - 0.5) * 0.25;
         b.roll += b.rollSpeed;
