@@ -65,16 +65,16 @@
       const fromLeft = Math.random() > 0.5;
       birds.push({
         x: fromLeft ? -80 : 1400,
-        y: 110 + Math.random() * 170,
-        speed: 1.2 + Math.random() * 0.9,
+        y: 115 + Math.random() * 165,
+        speed: 1.15 + Math.random() * 0.85,
         direction: fromLeft ? 1 : -1,
         flap: Math.random() * 10,
-        size: 0.8 + Math.random() * 0.35
+        size: 0.8 + Math.random() * 0.3
       });
     }
 
-    // Nur wenige Vögel am Anfang
-    for (let i = 0; i < 3; i++) spawnBird();
+    // Sehr wenige am Anfang
+    for (let i = 0; i < 2; i++) spawnBird();
 
     function drawStaticBackground() {
       const sky = ctx.createLinearGradient(0, 0, 0, 460);
@@ -101,7 +101,6 @@
       ctx.fillStyle = '#1e2937';
       ctx.lineWidth = 3.2;
 
-      // Flügel
       ctx.beginPath();
       ctx.moveTo(0, 0);
       ctx.quadraticCurveTo(14, -19 + flap, 35, -10);
@@ -109,17 +108,14 @@
       ctx.fill();
       ctx.stroke();
 
-      // Körper
       ctx.beginPath();
       ctx.ellipse(19, 5, 13, 8, 0.2, 0, Math.PI*2);
       ctx.fill();
 
-      // Kopf
       ctx.beginPath();
       ctx.arc(30, 1, 6.5, 0, Math.PI*2);
       ctx.fill();
 
-      // Schnabel
       ctx.beginPath();
       ctx.moveTo(35, 0);
       ctx.lineTo(43, 2);
@@ -130,7 +126,6 @@
     }
 
     function drawMovingElements() {
-      // Wolken
       ctx.fillStyle = 'rgba(255,255,255,0.95)';
       ctx.beginPath(); ctx.ellipse(cloud1X, 130, 128, 48, 0, 0, Math.PI*2); ctx.fill();
       ctx.beginPath(); ctx.ellipse(cloud1X + 95, 110, 85, 39, 0, 0, Math.PI*2); ctx.fill();
@@ -159,12 +154,13 @@
 
         if (b.x < -120 || b.x > 1440) {
           birds.splice(i, 1);
-          if (birds.length < 5) spawnBird();   // maximal ~5 Vögel
         }
       }
 
-      // Sehr selten neuen Vogel spawnen
-      if (Math.random() < 0.012) spawnBird();
+      // Sehr seltener Spawn (max. 4-5 Vögel)
+      if (birds.length < 4 && Math.random() < 0.008) {
+        spawnBird();
+      }
 
       requestAnimationFrame(animate);
     }
