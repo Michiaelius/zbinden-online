@@ -98,7 +98,8 @@
           lastTurn: Date.now(),
           isTurning: false,
           turnPhase: 0,
-          turnArc: 0
+          turnArc: 0,
+          turnUp: false   // wird beim Start der Wende zufällig gesetzt
         });
       }
     }
@@ -152,7 +153,7 @@
       const flap = Math.sin(bird.flap) * 10;
       ctx.save();
       ctx.translate(bird.x, bird.y);
-      const rotation = bird.roll * 0.22;
+      const rotation = bird.roll * 0.2;
       if (rotation !== 0) ctx.rotate(rotation);
       if (bird.direction < 0) ctx.scale(-1, 1);
       ctx.scale(bird.scale, bird.scale);
@@ -180,6 +181,7 @@
       drawStaticBackground();
       drawMovingElements();
 
+      // Wolken
       for (let i = clouds.length - 1; i >= 0; i--) {
         const c = clouds[i];
         if (c.pause > 0) c.pause--;
@@ -191,64 +193,34 @@
       }
       if (clouds.length < 12 && Math.random() < 0.038) spawnCloud();
 
+      // Vögel
       for (let i = birds.length - 1; i >= 0; i--) {
         const b = birds[i];
 
-        b.currentSpeed += (b.targetSpeed - b.currentSpeed) * 0.032;
+        b.currentSpeed += (b.targetSpeed - b.currentSpeed) * 0.028;
 
-        b.wave += 0.0018;
+        b.wave += 0.0016;
         b.x += b.currentSpeed * b.direction;
 
-        let targetY = b.baseY + Math.sin(b.wave) * 16;
+        let targetY = b.baseY + Math.sin(b.wave) * 14;
 
         if (b.isTurning) {
-          // Einmalige sanfte Bogenbewegung (langsamer)
-          b.turnArc = Math.sin(b.turnPhase * 0.045) * 26;   // nur eine sanfte Kurve
+          // Einmalige sanfte Bogenbewegung
+          const progress = b.turnPhase / 160;
+          b.turnArc = b.turnUp ? -Math.sin(progress * Math.PI) * 24 : Math.sin(progress * Math.PI) * 24;
           targetY += b.turnArc;
-          b.scale = b.baseScale * (0.94 + Math.sin(b.turnPhase * 0.05) * 0.07);
+
+          // Leichte Größenänderung
+          b.scale = b.baseScale * (0.93 + Math.sin(progress * Math.PI) * 0.09);
         }
 
         b.y = targetY;
         b.flap += 0.06;
 
-        if (Math.random() < 0.002) b.rollSpeed = (Math.random() - 0.5) * 0.11;
+        // Sanfte Rotation
+        if (Math.random() < 0.0018) b.rollSpeed = (Math.random() - 0.5) * 0.1;
         b.roll += b.rollSpeed;
-        if (Math.abs(b.roll) > 0.16) b.rollSpeed *= -0.68;
+        if (Math.abs(b.roll) > 0.14) b.rollSpeed *= -0.7;
 
-        // Kurven-Wende
-        if (!b.isTurning && Date.now() - b.lastTurn > 3800 && Math.random() < 0.0014) {
-          b.isTurning = true;
-          b.turnPhase = 0;
-          b.targetSpeed = b.speed * 0.18;
-        }
-
-        if (b.isTurning) {
-          b.turnPhase++;
-
-          if (b.turnPhase < 65) {
-            b.targetSpeed = b.speed * 0.18;
-          } else if (b.turnPhase < 135) {
-            b.targetSpeed = 0.06;        // sanfter Stillstand
-          } else if (b.turnPhase < 175) {
-            b.direction *= -1;
-            b.targetSpeed = b.speed * 0.45;
-          } else {
-            b.targetSpeed = b.speed;
-            b.isTurning = false;
-            b.lastTurn = Date.now();
-            b.scale = b.baseScale;
-          }
-        }
-
-        if (b.x < -180 || b.x > 1500) birds.splice(i, 1);
-      }
-      if (birds.length < 3 && Math.random() < 0.006) spawnBird();
-
-      requestAnimationFrame(animate);
-    }
-
-    drawStaticBackground();
-    animate();
-  </script>
-</body>
-</html>
+        // Wende-Logik
+        if (!b.isTurning && Date.now() - b.lastTurn > 4000 && Math.random() < 0.
