@@ -40,25 +40,24 @@
     let clouds = [];
 
     function spawnCloud() {
+      const type = Math.random(); // 0-1 für verschiedene Typen
       const isFar = Math.random() > 0.45;
       const fromLeft = Math.random() > 0.5;
 
       clouds.push({
-        x: fromLeft ? -450 : 1770,
-        y: isFar ? 35 + Math.random() * 65 : 75 + Math.random() * 70,
-        size: isFar ? 0.5 + Math.random() * 0.4 : 0.8 + Math.random() * 0.6,
-        speed: isFar ? 0.065 + Math.random() * 0.05 : 0.095 + Math.random() * 0.07,
+        x: fromLeft ? -380 : 1700,
+        y: isFar ? 38 + Math.random() * 58 : 72 + Math.random() * 72,
+        size: isFar ? 0.48 + Math.random() * 0.35 : 0.75 + Math.random() * 0.55,
+        speed: isFar ? 0.055 + Math.random() * 0.045 : 0.085 + Math.random() * 0.06,
         direction: fromLeft ? 1 : -1,
-        opacity: isFar ? 0.7 : 0.94,
+        opacity: isFar ? 0.68 : 0.93,
         pause: 0,
         life: 1.0,
-        dissolving: Math.random() < 0.08,     // nur sehr wenige lösen sich auf
-        lastTurn: Date.now()
+        dissolving: Math.random() < 0.1,
+        type: type < 0.4 ? 1 : type < 0.75 ? 2 : 3   // 3 verschiedene Wolken-Typen
       });
     }
-
-    // Mehr Wolken am Anfang + häufiger Nachschub
-    for (let i = 0; i < 9; i++) spawnCloud();
+    for (let i = 0; i < 8; i++) spawnCloud();
 
     const sandCanvas = document.createElement('canvas');
     sandCanvas.width = 1320;
@@ -123,10 +122,30 @@
     function drawCloud(cloud) {
       ctx.globalAlpha = cloud.opacity * cloud.life;
       const s = cloud.size;
+      const x = cloud.x;
+      const y = cloud.y;
+
       ctx.fillStyle = '#ffffff';
-      ctx.beginPath(); ctx.ellipse(cloud.x, cloud.y, 115*s, 42*s, 0, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.ellipse(cloud.x + 82*s, cloud.y - 18*s, 72*s, 38*s, 0, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.ellipse(cloud.x + 40*s, cloud.y - 26*s, 52*s, 33*s, 0, 0, Math.PI*2); ctx.fill();
+
+      if (cloud.type === 1) {
+        // Typ 1: Klassische fluffige Wolke
+        ctx.beginPath(); ctx.ellipse(x, y, 115*s, 42*s, 0, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.ellipse(x + 82*s, y - 18*s, 72*s, 38*s, 0, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.ellipse(x + 40*s, y - 26*s, 52*s, 33*s, 0, 0, Math.PI*2); ctx.fill();
+      } 
+      else if (cloud.type === 2) {
+        // Typ 2: Längere, flachere Wolke
+        ctx.beginPath(); ctx.ellipse(x, y, 160*s, 35*s, 0, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.ellipse(x + 95*s, y - 14*s, 85*s, 32*s, 0, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.ellipse(x + 45*s, y - 22*s, 55*s, 28*s, 0, 0, Math.PI*2); ctx.fill();
+      } 
+      else {
+        // Typ 3: Kleine, runde Puff-Wolke
+        ctx.beginPath(); ctx.ellipse(x, y, 68*s, 38*s, 0, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.ellipse(x + 48*s, y - 12*s, 52*s, 32*s, 0, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.ellipse(x - 35*s, y - 10*s, 45*s, 29*s, 0, 0, Math.PI*2); ctx.fill();
+      }
+
       ctx.globalAlpha = 1;
     }
 
@@ -170,16 +189,15 @@
         if (c.pause > 0) c.pause--;
         else c.x += c.speed * c.direction;
 
-        if (Math.random() < 0.0018) c.pause = 140 + Math.random()*200;
+        if (Math.random() < 0.0018) c.pause = 140 + Math.random()*180;
 
-        if (c.dissolving) c.life -= 0.005;
-        else if (Math.random() < 0.00035) c.dissolving = true;
+        if (c.dissolving) c.life -= 0.006;
+        else if (Math.random() < 0.0004) c.dissolving = true;
 
-        if (c.x < -600 || c.x > 1920 || c.life <= 0) clouds.splice(i, 1);
+        if (c.x < -550 || c.x > 1880 || c.life <= 0) clouds.splice(i, 1);
       }
 
-      // Häufiger Nachschub
-      if (clouds.length < 14 && Math.random() < 0.055) spawnCloud();
+      if (clouds.length < 12 && Math.random() < 0.038) spawnCloud();
 
       for (let i = birds.length - 1; i >= 0; i--) {
         const b = birds[i];
