@@ -39,7 +39,7 @@
     let birds = [];
     let clouds = [];
 
-    function spawnCloud() { /* unverändert */ 
+    function spawnCloud() {
       const type = Math.random(); 
       const isFar = Math.random() > 0.45;
       const fromLeft = Math.random() > 0.5;
@@ -104,7 +104,7 @@
     }
     for (let i = 0; i < 2; i++) spawnBird();
 
-    function drawStaticBackground() { /* unverändert */ 
+    function drawStaticBackground() {
       const sky = ctx.createLinearGradient(0, 0, 0, 250);
       sky.addColorStop(0, '#60a5fa');
       sky.addColorStop(1, '#bae6fd');
@@ -125,7 +125,7 @@
       ctx.drawImage(sandCanvas, 0, 250);
     }
 
-    function drawCloud(cloud) { /* unverändert */ 
+    function drawCloud(cloud) {
       ctx.globalAlpha = cloud.opacity * cloud.life;
       const s = cloud.size;
       const x = cloud.x;
@@ -152,10 +152,8 @@
       const flap = Math.sin(bird.flap) * 10;
       ctx.save();
       ctx.translate(bird.x, bird.y);
-      
       const rotation = bird.roll * 0.22;
       if (rotation !== 0) ctx.rotate(rotation);
-      
       if (bird.direction < 0) ctx.scale(-1, 1);
       ctx.scale(bird.scale, bird.scale);
 
@@ -163,15 +161,10 @@
       ctx.fillStyle = '#1e2937';
       ctx.lineWidth = 2.6;
 
-      // Schwanz
       ctx.beginPath(); ctx.moveTo(8, 8); ctx.lineTo(1, 6); ctx.lineTo(2, 10); ctx.closePath(); ctx.fill(); ctx.stroke();
-      // Flügel
       ctx.beginPath(); ctx.moveTo(23, 13); ctx.quadraticCurveTo(12, -22 + flap*4, 12, -2); ctx.quadraticCurveTo(21, 3, 14, 13); ctx.fill(); ctx.stroke();
-      // Körper
       ctx.beginPath(); ctx.ellipse(19.5, 8, 10, 7, 0.05, 0, Math.PI*2); ctx.fill();
-      // Kopf
       ctx.beginPath(); ctx.arc(29, 4, 6, 0, Math.PI*2); ctx.fill();
-      // Schnabel
       ctx.beginPath(); ctx.moveTo(34, 3); ctx.lineTo(45, 4); ctx.lineTo(34, 5.5); ctx.fill();
 
       ctx.restore();
@@ -187,7 +180,6 @@
       drawStaticBackground();
       drawMovingElements();
 
-      // Wolken
       for (let i = clouds.length - 1; i >= 0; i--) {
         const c = clouds[i];
         if (c.pause > 0) c.pause--;
@@ -199,59 +191,52 @@
       }
       if (clouds.length < 12 && Math.random() < 0.038) spawnCloud();
 
-      // Vögel - Kurvenflug
       for (let i = birds.length - 1; i >= 0; i--) {
         const b = birds[i];
 
-        b.currentSpeed += (b.targetSpeed - b.currentSpeed) * 0.032;  // noch weicher
+        b.currentSpeed += (b.targetSpeed - b.currentSpeed) * 0.032;
 
         b.wave += 0.0018;
         b.x += b.currentSpeed * b.direction;
 
-        // Normale Wellenbewegung
         let targetY = b.baseY + Math.sin(b.wave) * 16;
 
         if (b.isTurning) {
-          // Kurven-Bewegung auf Y-Achse
-          b.turnArc = Math.sin(b.turnPhase * 0.08) * 38;
+          // Einmalige sanfte Bogenbewegung (langsamer)
+          b.turnArc = Math.sin(b.turnPhase * 0.045) * 26;   // nur eine sanfte Kurve
           targetY += b.turnArc;
-          
-          // Leichte Größenänderung (Tiefe)
-          b.scale = b.baseScale * (0.92 + Math.sin(b.turnPhase * 0.1) * 0.08);
+          b.scale = b.baseScale * (0.94 + Math.sin(b.turnPhase * 0.05) * 0.07);
         }
 
         b.y = targetY;
-
         b.flap += 0.06;
 
-        // Sanfte Rotation
         if (Math.random() < 0.002) b.rollSpeed = (Math.random() - 0.5) * 0.11;
         b.roll += b.rollSpeed;
         if (Math.abs(b.roll) > 0.16) b.rollSpeed *= -0.68;
 
-        // === Kurven-Wende ===
-        if (!b.isTurning && Date.now() - b.lastTurn > 3500 && Math.random() < 0.0015) {
+        // Kurven-Wende
+        if (!b.isTurning && Date.now() - b.lastTurn > 3800 && Math.random() < 0.0014) {
           b.isTurning = true;
           b.turnPhase = 0;
-          b.turnArc = 0;
-          b.targetSpeed = b.speed * 0.15;
+          b.targetSpeed = b.speed * 0.18;
         }
 
         if (b.isTurning) {
           b.turnPhase++;
 
-          if (b.turnPhase < 55) {
-            b.targetSpeed = b.speed * 0.15;
-          } else if (b.turnPhase < 110) {
-            b.targetSpeed = 0.05;           // fast Stillstand + Kurve
-          } else if (b.turnPhase < 145) {
+          if (b.turnPhase < 65) {
+            b.targetSpeed = b.speed * 0.18;
+          } else if (b.turnPhase < 135) {
+            b.targetSpeed = 0.06;        // sanfter Stillstand
+          } else if (b.turnPhase < 175) {
             b.direction *= -1;
-            b.targetSpeed = b.speed * 0.4;
+            b.targetSpeed = b.speed * 0.45;
           } else {
             b.targetSpeed = b.speed;
             b.isTurning = false;
             b.lastTurn = Date.now();
-            b.scale = b.baseScale;          // Größe zurücksetzen
+            b.scale = b.baseScale;
           }
         }
 
