@@ -143,7 +143,7 @@
     }
 
     function drawBird(bird) {
-      const flap = Math.sin(bird.flap) * 12;   // deutlich sichtbare Amplitude
+      const flap = Math.sin(bird.flap) * 9;
       ctx.save();
       ctx.translate(bird.x, bird.y);
       if (bird.roll !== 0) ctx.rotate(bird.roll);
@@ -163,11 +163,11 @@
       ctx.fill();
       ctx.stroke();
 
-      // Flügel - starke Bewegung
+      // Flügel
       ctx.beginPath();
       ctx.moveTo(23, 13);
-      ctx.quadraticCurveTo(11, -26 + flap*4.5, 11, -3);
-      ctx.quadraticCurveTo(22, 4, 15, 13);
+      ctx.quadraticCurveTo(12, -22 + flap*4, 12, -2);
+      ctx.quadraticCurveTo(21, 3, 14, 13);
       ctx.fill();
       ctx.stroke();
 
@@ -176,11 +176,12 @@
       ctx.ellipse(19.5, 8, 10, 7, 0.05, 0, Math.PI*2); 
       ctx.fill();
 
-      // Kopf + Schnabel
+      // Kopf
       ctx.beginPath(); 
       ctx.arc(29, 4, 6, 0, Math.PI*2); 
       ctx.fill();
 
+      // Schnabel
       ctx.beginPath(); 
       ctx.moveTo(34, 3); 
       ctx.lineTo(45, 4); 
@@ -216,7 +217,7 @@
         b.wave += 0.0028;
         b.x += b.speed * b.direction;
         b.y = b.baseY + Math.sin(b.wave) * 22;
-        b.flap += 0.14;           // Flügelschlag-Geschwindigkeit
+        b.flap += 0.22;           // Original-Geschwindigkeit
 
         if (Math.random() < 0.008) b.rollSpeed = (Math.random() - 0.5) * 0.25;
         b.roll += b.rollSpeed;
