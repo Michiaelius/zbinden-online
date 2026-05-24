@@ -40,25 +40,25 @@
     let clouds = [];
 
     function spawnCloud() {
-      const isFar = Math.random() > 0.4;
+      const isFar = Math.random() > 0.45;
       const fromLeft = Math.random() > 0.5;
 
       clouds.push({
-        x: fromLeft ? -380 : 1700,
-        y: isFar ? 38 + Math.random() * 62 : 72 + Math.random() * 75,
-        size: isFar ? 0.45 + Math.random() * 0.35 : 0.78 + Math.random() * 0.55,
-        speed: isFar ? 0.038 + Math.random() * 0.032 : 0.055 + Math.random() * 0.045,  // sehr langsam
+        x: fromLeft ? -450 : 1770,
+        y: isFar ? 35 + Math.random() * 65 : 75 + Math.random() * 70,
+        size: isFar ? 0.5 + Math.random() * 0.4 : 0.8 + Math.random() * 0.6,
+        speed: isFar ? 0.065 + Math.random() * 0.05 : 0.095 + Math.random() * 0.07,
         direction: fromLeft ? 1 : -1,
-        opacity: isFar ? 0.65 : 0.92,
+        opacity: isFar ? 0.7 : 0.94,
         pause: 0,
         life: 1.0,
-        dissolving: Math.random() < 0.12,   // nur 12% lösen sich auf
+        dissolving: Math.random() < 0.08,     // nur sehr wenige lösen sich auf
         lastTurn: Date.now()
       });
     }
 
-    // Mehr Wolken am Anfang
-    for (let i = 0; i < 8; i++) spawnCloud();
+    // Mehr Wolken am Anfang + häufiger Nachschub
+    for (let i = 0; i < 9; i++) spawnCloud();
 
     const sandCanvas = document.createElement('canvas');
     sandCanvas.width = 1320;
@@ -167,26 +167,20 @@
 
       for (let i = clouds.length - 1; i >= 0; i--) {
         const c = clouds[i];
-        if (c.pause > 0) {
-          c.pause--;
-        } else {
-          c.x += c.speed * c.direction;
-        }
+        if (c.pause > 0) c.pause--;
+        else c.x += c.speed * c.direction;
 
-        if (Math.random() < 0.002) c.pause = 100 + Math.random()*180;
+        if (Math.random() < 0.0018) c.pause = 140 + Math.random()*200;
 
-        if (c.dissolving) c.life -= 0.006;
-        else if (Math.random() < 0.0004) c.dissolving = true;
+        if (c.dissolving) c.life -= 0.005;
+        else if (Math.random() < 0.00035) c.dissolving = true;
 
-        if (c.x < -520 || c.x > 1850 || c.life <= 0) {
-          clouds.splice(i, 1);
-        }
+        if (c.x < -600 || c.x > 1920 || c.life <= 0) clouds.splice(i, 1);
       }
 
-      // Häufiger neue Wolken spawnen
-      if (clouds.length < 11 && Math.random() < 0.042) spawnCloud();
+      // Häufiger Nachschub
+      if (clouds.length < 14 && Math.random() < 0.055) spawnCloud();
 
-      // Vögel (unverändert)
       for (let i = birds.length - 1; i >= 0; i--) {
         const b = birds[i];
         b.wave += 0.0058;
