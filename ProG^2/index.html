@@ -38,7 +38,6 @@
 
     let birds = [];
     let clouds = [];
-    let waterTime = 0;
 
     function spawnCloud() {
       const isFar = Math.random() > 0.55;
@@ -96,14 +95,12 @@
     for (let i = 0; i < 2; i++) spawnBird();
 
     function drawStaticBackground() {
-      // Himmel
       const sky = ctx.createLinearGradient(0, 0, 0, 250);
       sky.addColorStop(0, '#60a5fa');
       sky.addColorStop(1, '#bae6fd');
       ctx.fillStyle = sky;
       ctx.fillRect(0, 0, 1320, 250);
 
-      // Sonne
       const sunX = 1050; const sunY = 135;
       ctx.shadowColor = '#fef08c'; ctx.shadowBlur = 50;
       ctx.fillStyle = '#fef08c';
@@ -115,52 +112,7 @@
       ctx.fillStyle = '#fbbf24';
       ctx.beginPath(); ctx.arc(sunX, sunY, 27, 0, Math.PI*2); ctx.fill();
 
-      // Sand
       ctx.drawImage(sandCanvas, 0, 250);
-
-      // === NATÜRLICHES SEEUFER IM QUERSCHNITT (links oben) ===
-      const x = 100;
-
-      // Braunes Ufer (flach abfallend, organisch)
-      ctx.fillStyle = '#8d6f47';
-      ctx.beginPath();
-      ctx.moveTo(x, 255);
-      ctx.quadraticCurveTo(x + 70, 230, x + 160, 248);
-      ctx.quadraticCurveTo(x + 240, 215, x + 330, 245);
-      ctx.quadraticCurveTo(x + 400, 260, x + 440, 295);
-      ctx.lineTo(x + 450, 380);
-      ctx.lineTo(x - 15, 385);
-      ctx.closePath();
-      ctx.fill();
-
-      // Wasser in der Mulde
-      ctx.fillStyle = '#0ea5e9';
-      ctx.beginPath();
-      ctx.moveTo(x + 20, 262);
-      ctx.quadraticCurveTo(x + 90, 295, x + 175, 268);
-      ctx.quadraticCurveTo(x + 255, 305, x + 340, 275);
-      ctx.lineTo(x + 430, 365);
-      ctx.lineTo(x + 25, 370);
-      ctx.closePath();
-      ctx.fill();
-
-      // Wellen
-      waterTime += 0.055;
-      ctx.strokeStyle = '#38bdf8';
-      ctx.lineWidth = 4.5;
-      for (let i = 0; i < 3; i++) {
-        ctx.beginPath();
-        ctx.moveTo(x + 40, 275 + i*24);
-        for (let px = 65; px < 370; px += 32) {
-          ctx.quadraticCurveTo(
-            x + px,
-            272 + i*24 + Math.sin(waterTime + px*0.035) * 7,
-            x + px + 32,
-            275 + i*24
-          );
-        }
-        ctx.stroke();
-      }
     }
 
     function drawCloud(cloud) {
