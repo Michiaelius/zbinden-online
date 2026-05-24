@@ -64,17 +64,17 @@
     function spawnBird() {
       const fromLeft = Math.random() > 0.5;
       birds.push({
-        x: fromLeft ? -60 : 1380,
-        y: 120 + Math.random() * 160,
-        speed: 1.1 + Math.random() * 1.1,
+        x: fromLeft ? -80 : 1400,
+        y: 110 + Math.random() * 170,
+        speed: 1.2 + Math.random() * 0.9,
         direction: fromLeft ? 1 : -1,
         flap: Math.random() * 10,
-        size: 0.75 + Math.random() * 0.4   // etwas Variation in Größe
+        size: 0.8 + Math.random() * 0.35
       });
     }
 
-    // Initial ein paar Vögel
-    for (let i = 0; i < 5; i++) spawnBird();
+    // Nur wenige Vögel am Anfang
+    for (let i = 0; i < 3; i++) spawnBird();
 
     function drawStaticBackground() {
       const sky = ctx.createLinearGradient(0, 0, 0, 460);
@@ -83,7 +83,6 @@
       ctx.fillStyle = sky;
       ctx.fillRect(0, 0, 1320, 460);
 
-      // Sonne
       ctx.fillStyle = '#fcd34d';
       ctx.beginPath(); ctx.arc(1080, 170, 82, 0, Math.PI*2); ctx.fill();
       ctx.fillStyle = '#fef08c';
@@ -96,7 +95,7 @@
       const flap = Math.sin(bird.flap) * 7;
       ctx.save();
       ctx.translate(bird.x, bird.y);
-      if (bird.direction < 0) ctx.scale(-1, 1);   // umdrehen bei Flug nach links
+      if (bird.direction < 0) ctx.scale(-1, 1);
 
       ctx.strokeStyle = '#1e2937';
       ctx.fillStyle = '#1e2937';
@@ -105,8 +104,8 @@
       // Flügel
       ctx.beginPath();
       ctx.moveTo(0, 0);
-      ctx.quadraticCurveTo(14, -18 + flap, 34, -9);
-      ctx.quadraticCurveTo(26, -4, 10, 4);
+      ctx.quadraticCurveTo(14, -19 + flap, 35, -10);
+      ctx.quadraticCurveTo(26, -5, 11, 4);
       ctx.fill();
       ctx.stroke();
 
@@ -148,27 +147,24 @@
       drawStaticBackground();
       drawMovingElements();
 
-      // Wolken
       cloud1X += 0.42;
       cloud2X += 0.37;
       if (cloud1X > 1650) cloud1X = -320;
       if (cloud2X > 1650) cloud2X = -280;
 
-      // Vögel updaten
       for (let i = birds.length - 1; i >= 0; i--) {
         const b = birds[i];
         b.x += b.speed * b.direction;
-        b.flap += 0.25;
+        b.flap += 0.22;
 
-        // Entfernen wenn außerhalb
-        if (b.x < -100 || b.x > 1420) {
+        if (b.x < -120 || b.x > 1440) {
           birds.splice(i, 1);
-          spawnBird();   // neuen Vogel spawnen
+          if (birds.length < 5) spawnBird();   // maximal ~5 Vögel
         }
       }
 
-      // Gelegentlich neuen Vogel spawnen
-      if (Math.random() < 0.03) spawnBird();
+      // Sehr selten neuen Vogel spawnen
+      if (Math.random() < 0.012) spawnBird();
 
       requestAnimationFrame(animate);
     }
