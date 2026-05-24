@@ -31,8 +31,8 @@
     sandCtx.fillStyle = '#e2c18a';
     sandCtx.fillRect(0, 0, 1320, 500);
     sandCtx.fillStyle = '#d4a76a';
-    for (let i = 0; i < 6800; i++) {
-      sandCtx.fillRect(Math.random()*1320, Math.random()*500, 2.8, 2.8);
+    for (let i = 0; i < 7200; i++) {
+      sandCtx.fillRect(Math.random()*1320, Math.random()*500, 2.5 + Math.random()*2, 2.5 + Math.random()*2);
     }
 
     function spawnCloud() {
@@ -73,7 +73,7 @@
       ctx.fillStyle = sky;
       ctx.fillRect(0, 0, 1320, 270);
 
-      // Sonne (wie früher)
+      // Sonne
       const sunX = 1050; const sunY = 135;
       ctx.shadowColor = '#fef08c'; ctx.shadowBlur = 60;
       ctx.fillStyle = '#fef08c';
@@ -112,16 +112,11 @@
       ctx.fillStyle = '#1e2937';
       ctx.lineWidth = 2.6;
 
-      // Schwanz
-      ctx.beginPath(); ctx.moveTo(8,8); ctx.lineTo(0,4); ctx.lineTo(2,13); ctx.fill();
-      // Flügel
-      ctx.beginPath(); ctx.moveTo(23,13); ctx.quadraticCurveTo(11, -25 + flap*4.5, 11, -3); ctx.quadraticCurveTo(22,5,15,13); ctx.fill();
-      // Körper
-      ctx.beginPath(); ctx.ellipse(19,8,10,7,0,0,Math.PI*2); ctx.fill();
-      // Kopf
-      ctx.beginPath(); ctx.arc(29,5,6,0,Math.PI*2); ctx.fill();
-      // Schnabel
-      ctx.beginPath(); ctx.moveTo(34,3); ctx.lineTo(46,4); ctx.lineTo(34,6); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(8,8); ctx.lineTo(0,4); ctx.lineTo(2,13); ctx.fill(); // Schwanz
+      ctx.beginPath(); ctx.moveTo(23,13); ctx.quadraticCurveTo(11, -25 + flap*4.5, 11, -3); ctx.quadraticCurveTo(22,5,15,13); ctx.fill(); // Flügel
+      ctx.beginPath(); ctx.ellipse(19,8,10,7,0,0,Math.PI*2); ctx.fill(); // Körper
+      ctx.beginPath(); ctx.arc(29,5,6,0,Math.PI*2); ctx.fill(); // Kopf
+      ctx.beginPath(); ctx.moveTo(34,3); ctx.lineTo(46,4); ctx.lineTo(34,6); ctx.fill(); // Schnabel
 
       ctx.restore();
     }
