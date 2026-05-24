@@ -143,7 +143,7 @@
     }
 
     function drawBird(bird) {
-      const flap = Math.sin(bird.flap) * 10;
+      const flap = Math.sin(bird.flap) * 1;
       ctx.save();
       ctx.translate(bird.x, bird.y);
       if (bird.roll !== 0) ctx.rotate(bird.roll);
