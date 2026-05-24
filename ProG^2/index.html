@@ -55,8 +55,6 @@
         dissolving: false
       });
     }
-    
-    // Mehr Wolken am Anfang
     for (let i = 0; i < 5; i++) spawnCloud();
 
     // Sand
@@ -123,31 +121,37 @@
       // Sand
       ctx.drawImage(sandCanvas, 0, 250);
 
-      // Wasserbehälter oben
-      const tankX = 180;
+      // === BESSERER WASSERBEHÄLTER ===
+      const tankX = 160;
       const tankY = 255;
-      const tankW = 260;
-      const tankH = 95;
+      const tankW = 280;
+      const tankH = 92;
 
+      // Erdboden / Rand
       ctx.fillStyle = '#8d6f47';
-      ctx.fillRect(tankX - 12, tankY - 18, tankW + 24, tankH + 35);
+      ctx.fillRect(tankX - 20, tankY - 22, tankW + 40, tankH + 45);
 
+      // Wasser
       ctx.fillStyle = '#0ea5e9';
       ctx.fillRect(tankX, tankY, tankW, tankH);
 
-      // Wellen im Behälter
-      waterTime += 0.055;
+      // Glanz oben
+      ctx.fillStyle = 'rgba(255,255,255,0.35)';
+      ctx.fillRect(tankX + 8, tankY + 8, tankW - 16, 18);
+
+      // Wellen
+      waterTime += 0.06;
       ctx.strokeStyle = '#38bdf8';
-      ctx.lineWidth = 5;
+      ctx.lineWidth = 4;
       for (let i = 0; i < 3; i++) {
         ctx.beginPath();
-        ctx.moveTo(tankX + 20, tankY + 25 + i*22);
-        for (let x = 35; x < tankW - 25; x += 28) {
+        ctx.moveTo(tankX + 25, tankY + 28 + i*24);
+        for (let x = 45; x < tankW - 30; x += 32) {
           ctx.quadraticCurveTo(
-            tankX + x,
-            tankY + 22 + i*22 + Math.sin(waterTime + x*0.03) * 6,
-            tankX + x + 28,
-            tankY + 25 + i*22
+            tankX + x, 
+            tankY + 24 + i*24 + Math.sin(waterTime + x*0.04) * 7,
+            tankX + x + 32, 
+            tankY + 28 + i*24
           );
         }
         ctx.stroke();
@@ -199,7 +203,7 @@
       drawStaticBackground();
       drawMovingElements();
 
-      // Wolken
+      // Wolken Update
       for (let i = clouds.length - 1; i >= 0; i--) {
         const c = clouds[i];
         if (c.pause > 0) c.pause--;
@@ -211,11 +215,9 @@
 
         if (c.x < -500 || c.x > 1800 || c.life <= 0) clouds.splice(i, 1);
       }
-
-      // Mehr Wolken-Nachschub
       if (clouds.length < 7 && Math.random() < 0.018) spawnCloud();
 
-      // Vögel
+      // Vögel Update
       for (let i = birds.length - 1; i >= 0; i--) {
         const b = birds[i];
         b.wave += 0.0058;
@@ -234,7 +236,6 @@
 
         if (b.x < -180 || b.x > 1500) birds.splice(i, 1);
       }
-
       if (birds.length < 3 && Math.random() < 0.006) spawnBird();
 
       requestAnimationFrame(animate);
