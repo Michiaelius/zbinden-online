@@ -45,7 +45,7 @@
         x: Math.random() > 0.5 ? -300 : 1650,
         y: isFar ? 45 + Math.random() * 55 : 72 + Math.random() * 65,
         size: isFar ? 0.45 + Math.random() * 0.35 : 0.75 + Math.random() * 0.55,
-        speed: isFar ? 0.22 + Math.random() * 0.18 : 0.38 + Math.random() * 0.25,
+        speed: isFar ? 0.044 + Math.random() * 0.036 : 0.076 + Math.random() * 0.05,   // 5x langsamer
         direction: Math.random() > 0.5 ? 1 : -1,
         opacity: isFar ? 0.75 : 0.95,
         pause: 0,
@@ -164,9 +164,11 @@
         const c = clouds[i];
         if (c.pause > 0) c.pause--;
         else c.x += c.speed * c.direction;
+
         if (Math.random() < 0.0035) c.pause = 90 + Math.random()*160;
         if (!c.dissolving && Math.random() < 0.0015) c.dissolving = true;
         if (c.dissolving) c.life -= 0.0065;
+
         if (c.x < -450 || c.x > 1750 || c.life <= 0) clouds.splice(i, 1);
       }
       if (clouds.length < 8 && Math.random() < 0.025) spawnCloud();
