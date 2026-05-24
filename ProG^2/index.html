@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <title>Wasser-Logik - Schritt 1</title>
   <style>
-    body { 
-      margin:0; padding:20px 0; background:#0a2a4a; 
-      display:flex; flex-direction:column; align-items:center; 
+    body {
+      margin:0; padding:20px 0; background:#0a2a4a;
+      display:flex; flex-direction:column; align-items:center;
       min-height:100vh; font-family: Arial, sans-serif;
     }
     .header {
@@ -18,20 +18,18 @@
       margin-bottom: 15px;
       text-align: center;
     }
-    canvas { 
-      border: 25px solid #1e40af; 
-      border-radius: 25px; 
-      box-shadow: 0 25px 90px rgba(0,0,0,0.95); 
+    canvas {
+      border: 25px solid #1e40af;
+      border-radius: 25px;
+      box-shadow: 0 25px 90px rgba(0,0,0,0.95);
     }
   </style>
 </head>
 <body>
-
   <div class="header">
     <h1 style="margin:0; color:white; font-size:58px;">💧 Wasser-Logik</h1>
     <p style="margin:8px 0 0 0; color:#bae6fd; font-size:28px;">Level 1 — Graben & Wasser lenken</p>
   </div>
-
   <canvas id="game" width="1320" height="760"></canvas>
 
   <script>
@@ -40,12 +38,14 @@
 
     let birds = [];
     let clouds = [];
+    let waterTime = 0;
 
+    // Wolken
     function spawnCloud() {
       const isFar = Math.random() > 0.6;
       clouds.push({
         x: Math.random() > 0.5 ? -280 : 1600,
-        y: isFar ? 55 + Math.random() * 50 : 78 + Math.random() * 55,
+        y: isFar ? 55 + Math.random() * 45 : 78 + Math.random() * 55,
         size: isFar ? 0.38 + Math.random() * 0.32 : 0.52 + Math.random() * 0.38,
         speed: isFar ? 0.028 + Math.random() * 0.035 : 0.042 + Math.random() * 0.045,
         direction: Math.random() > 0.5 ? 1 : -1,
@@ -55,10 +55,11 @@
         dissolving: false
       });
     }
+    
+    // Mehr Wolken am Anfang
+    for (let i = 0; i < 5; i++) spawnCloud();
 
-    // Wenige Wolken am Anfang
-    for (let i = 0; i < 3; i++) spawnCloud();
-
+    // Sand
     const sandCanvas = document.createElement('canvas');
     sandCanvas.width = 1320;
     sandCanvas.height = 510;
@@ -76,10 +77,10 @@
     }
     createFixedSand();
 
+    // Vögel
     function spawnBird() {
       const dir = Math.random() > 0.5 ? 1 : -1;
-      const count = Math.random() < 0.7 ? 1 : 2;   // meist einzeln
-
+      const count = Math.random() < 0.7 ? 1 : 2;
       for (let i = 0; i < count; i++) {
         const scale = 0.32 + Math.random() * 0.38;
         birds.push({
@@ -97,33 +98,60 @@
         });
       }
     }
-
     for (let i = 0; i < 2; i++) spawnBird();
 
     function drawStaticBackground() {
+      // Himmel
       const sky = ctx.createLinearGradient(0, 0, 0, 250);
       sky.addColorStop(0, '#60a5fa');
       sky.addColorStop(1, '#bae6fd');
       ctx.fillStyle = sky;
       ctx.fillRect(0, 0, 1320, 250);
 
-      // Schöne kleine Sonne
-      const sunX = 1050;
-      const sunY = 135;
-      ctx.shadowColor = '#fef08c';
-      ctx.shadowBlur = 50;
+      // Sonne
+      const sunX = 1050; const sunY = 135;
+      ctx.shadowColor = '#fef08c'; ctx.shadowBlur = 50;
       ctx.fillStyle = '#fef08c';
       ctx.beginPath(); ctx.arc(sunX, sunY, 46, 0, Math.PI*2); ctx.fill();
-
       ctx.shadowBlur = 25;
       ctx.fillStyle = '#fcd34d';
       ctx.beginPath(); ctx.arc(sunX, sunY, 36, 0, Math.PI*2); ctx.fill();
-
       ctx.shadowBlur = 0;
       ctx.fillStyle = '#fbbf24';
       ctx.beginPath(); ctx.arc(sunX, sunY, 27, 0, Math.PI*2); ctx.fill();
 
+      // Sand
       ctx.drawImage(sandCanvas, 0, 250);
+
+      // Wasserbehälter oben
+      const tankX = 180;
+      const tankY = 255;
+      const tankW = 260;
+      const tankH = 95;
+
+      ctx.fillStyle = '#8d6f47';
+      ctx.fillRect(tankX - 12, tankY - 18, tankW + 24, tankH + 35);
+
+      ctx.fillStyle = '#0ea5e9';
+      ctx.fillRect(tankX, tankY, tankW, tankH);
+
+      // Wellen im Behälter
+      waterTime += 0.055;
+      ctx.strokeStyle = '#38bdf8';
+      ctx.lineWidth = 5;
+      for (let i = 0; i < 3; i++) {
+        ctx.beginPath();
+        ctx.moveTo(tankX + 20, tankY + 25 + i*22);
+        for (let x = 35; x < tankW - 25; x += 28) {
+          ctx.quadraticCurveTo(
+            tankX + x,
+            tankY + 22 + i*22 + Math.sin(waterTime + x*0.03) * 6,
+            tankX + x + 28,
+            tankY + 25 + i*22
+          );
+        }
+        ctx.stroke();
+      }
     }
 
     function drawCloud(cloud) {
@@ -174,20 +202,18 @@
       // Wolken
       for (let i = clouds.length - 1; i >= 0; i--) {
         const c = clouds[i];
-        if (c.pause > 0) c.pause--; 
+        if (c.pause > 0) c.pause--;
         else c.x += c.speed * c.direction;
 
         if (Math.random() < 0.004) c.pause = 120 + Math.random()*180;
         if (!c.dissolving && Math.random() < 0.0018) c.dissolving = true;
         if (c.dissolving) c.life -= 0.007;
 
-        if (c.x < -500 || c.x > 1800 || c.life <= 0) {
-          clouds.splice(i, 1);
-        }
+        if (c.x < -500 || c.x > 1800 || c.life <= 0) clouds.splice(i, 1);
       }
 
-      // Sehr selten neue Wolke
-      if (clouds.length < 4 && Math.random() < 0.007) spawnCloud();
+      // Mehr Wolken-Nachschub
+      if (clouds.length < 7 && Math.random() < 0.018) spawnCloud();
 
       // Vögel
       for (let i = birds.length - 1; i >= 0; i--) {
@@ -197,12 +223,10 @@
         b.y = b.baseY + Math.sin(b.wave) * 24;
         b.flap += 0.22;
 
-        // Sehr seltene Rolle
         if (Math.random() < 0.008) b.rollSpeed = (Math.random() - 0.5) * 0.25;
         b.roll += b.rollSpeed;
         if (Math.abs(b.roll) > 0.35) b.rollSpeed *= -0.7;
 
-        // Extrem seltener Richtungswechsel
         if (Date.now() - b.lastTurn > 15000 && Math.random() < 0.0015) {
           b.direction *= -1;
           b.lastTurn = Date.now();
@@ -211,7 +235,6 @@
         if (b.x < -180 || b.x > 1500) birds.splice(i, 1);
       }
 
-      // Sehr ruhiger Nachschub
       if (birds.length < 3 && Math.random() < 0.006) spawnBird();
 
       requestAnimationFrame(animate);
