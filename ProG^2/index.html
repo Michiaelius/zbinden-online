@@ -97,9 +97,7 @@
           rollSpeed: 0,
           lastTurn: Date.now(),
           isTurning: false,
-          turnPhase: 0,
-          turnArc: 0,
-          turnUp: false   // wird beim Start der Wende zufällig gesetzt
+          turnPhase: 0
         });
       }
     }
@@ -193,28 +191,16 @@
       }
       if (clouds.length < 12 && Math.random() < 0.038) spawnCloud();
 
-      // Vögel
+      // Vögel - nur Verlangsamen + Anhalten + Drehen
       for (let i = birds.length - 1; i >= 0; i--) {
         const b = birds[i];
 
-        b.currentSpeed += (b.targetSpeed - b.currentSpeed) * 0.028;
+        b.currentSpeed += (b.targetSpeed - b.currentSpeed) * 0.035;
 
         b.wave += 0.0016;
         b.x += b.currentSpeed * b.direction;
+        b.y = b.baseY + Math.sin(b.wave) * 14;
 
-        let targetY = b.baseY + Math.sin(b.wave) * 14;
-
-        if (b.isTurning) {
-          // Einmalige sanfte Bogenbewegung
-          const progress = b.turnPhase / 160;
-          b.turnArc = b.turnUp ? -Math.sin(progress * Math.PI) * 24 : Math.sin(progress * Math.PI) * 24;
-          targetY += b.turnArc;
-
-          // Leichte Größenänderung
-          b.scale = b.baseScale * (0.93 + Math.sin(progress * Math.PI) * 0.09);
-        }
-
-        b.y = targetY;
         b.flap += 0.06;
 
         // Sanfte Rotation
@@ -222,5 +208,39 @@
         b.roll += b.rollSpeed;
         if (Math.abs(b.roll) > 0.14) b.rollSpeed *= -0.7;
 
-        // Wende-Logik
-        if (!b.isTurning && Date.now() - b.lastTurn > 4000 && Math.random() < 0.
+        // Wende-Logik (ohne Hoch/Runter)
+        if (!b.isTurning && Date.now() - b.lastTurn > 3800 && Math.random() < 0.0014) {
+          b.isTurning = true;
+          b.turnPhase = 0;
+          b.targetSpeed = b.speed * 0.12;
+        }
+
+        if (b.isTurning) {
+          b.turnPhase++;
+
+          if (b.turnPhase < 60) {
+            b.targetSpeed = b.speed * 0.12;        // verlangsamen
+          } else if (b.turnPhase < 130) {
+            b.targetSpeed = 0.03;                  // fast Stillstand
+          } else if (b.turnPhase < 165) {
+            b.direction *= -1;
+            b.targetSpeed = b.speed * 0.4;
+          } else {
+            b.targetSpeed = b.speed;
+            b.isTurning = false;
+            b.lastTurn = Date.now();
+          }
+        }
+
+        if (b.x < -180 || b.x > 1500) birds.splice(i, 1);
+      }
+      if (birds.length < 3 && Math.random() < 0.006) spawnBird();
+
+      requestAnimationFrame(animate);
+    }
+
+    drawStaticBackground();
+    animate();
+  </script>
+</body>
+</html>
