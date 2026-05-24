@@ -4,9 +4,25 @@
   <meta charset="UTF-8">
   <title>Wasser-Logik - Basis B</title>
   <style>
-    body { margin:0; padding:20px 0; background:#0a2a4a; display:flex; flex-direction:column; align-items:center; min-height:100vh; font-family: Arial, sans-serif; }
-    .header { width: 1320px; background: linear-gradient(#1e3a8a, #3b82f6); padding: 20px 0; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); margin-bottom: 15px; text-align: center; }
-    canvas { border: 25px solid #1e40af; border-radius: 25px; box-shadow: 0 25px 90px rgba(0,0,0,0.95); }
+    body {
+      margin:0; padding:20px 0; background:#0a2a4a;
+      display:flex; flex-direction:column; align-items:center;
+      min-height:100vh; font-family: Arial, sans-serif;
+    }
+    .header {
+      width: 1320px;
+      background: linear-gradient(#1e3a8a, #3b82f6);
+      padding: 20px 0;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    canvas {
+      border: 25px solid #1e40af;
+      border-radius: 25px;
+      box-shadow: 0 25px 90px rgba(0,0,0,0.95);
+    }
   </style>
 </head>
 <body>
@@ -36,6 +52,7 @@
     }
 
     function spawnCloud() {
+      const type = Math.random();
       const isFar = Math.random() > 0.45;
       const fromLeft = Math.random() > 0.5;
       clouds.push({
@@ -45,7 +62,8 @@
         speed: isFar ? 0.052 + Math.random() * 0.038 : 0.085 + Math.random() * 0.055,
         direction: fromLeft ? 1 : -1,
         life: 1.0,
-        dissolving: Math.random() < 0.1
+        dissolving: Math.random() < 0.1,
+        type: type
       });
     }
     for (let i = 0; i < 9; i++) spawnCloud();
@@ -95,9 +113,18 @@
       const x = c.x;
       const y = c.y;
 
-      ctx.beginPath(); ctx.ellipse(x, y, 118*s, 38*s, 0, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.ellipse(x + 78*s, y - 19*s, 72*s, 35*s, 0, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.ellipse(x + 38*s, y - 26*s, 55*s, 31*s, 0, 0, Math.PI*2); ctx.fill();
+      if (c.type < 0.4) {
+        ctx.beginPath(); ctx.ellipse(x, y, 118*s, 38*s, 0, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.ellipse(x + 78*s, y - 19*s, 72*s, 35*s, 0, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.ellipse(x + 38*s, y - 26*s, 55*s, 31*s, 0, 0, Math.PI*2); ctx.fill();
+      } else if (c.type < 0.75) {
+        ctx.beginPath(); ctx.ellipse(x, y, 145*s, 42*s, 0, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.ellipse(x + 92*s, y - 22*s, 82*s, 36*s, 0, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.ellipse(x + 45*s, y - 28*s, 62*s, 33*s, 0, 0, Math.PI*2); ctx.fill();
+      } else {
+        ctx.beginPath(); ctx.ellipse(x, y, 98*s, 35*s, 0, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.ellipse(x + 65*s, y - 16*s, 58*s, 32*s, 0, 0, Math.PI*2); ctx.fill();
+      }
 
       ctx.globalAlpha = 1;
     }
