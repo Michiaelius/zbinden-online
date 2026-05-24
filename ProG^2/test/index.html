@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Wasser-Logik - Selbst zeichnen lernen</title>
+  <style>
+    body { margin:0; padding:20px; background:#0a2a4a; font-family: Arial, sans-serif; color:white; }
+    canvas { border: 25px solid #1e40af; border-radius: 25px; box-shadow: 0 25px 90px rgba(0,0,0,0.95); }
+  </style>
+</head>
+<body>
+  <h1>Wasser-Logik - Selbst ein Ufer zeichnen</h1>
+  <canvas id="game" width="1320" height="760"></canvas>
+
+  <script>
+    const canvas = document.getElementById('game');
+    const ctx = canvas.getContext('2d');
+
+    function drawNaturalWater() {
+      // 1. Sand-Hintergrund (nur zum Test)
+      ctx.fillStyle = '#e2c18a';
+      ctx.fillRect(0, 250, 1320, 510);
+
+      // === DEIN SEEUFER ===
+      const startX = 120;
+
+      ctx.fillStyle = '#8d6f47';           // Ufer-Farbe (braun)
+      ctx.beginPath();
+      ctx.moveTo(startX, 255);                    // Startpunkt
+
+      // Erste Kurve (flach abfallend)
+      ctx.quadraticCurveTo(startX + 90, 215, startX + 190, 248);
+
+      // Zweite Kurve (etwas tiefer)
+      ctx.quadraticCurveTo(startX + 270, 205, startX + 355, 245);
+
+      // Dritte Kurve (nach unten)
+      ctx.quadraticCurveTo(startX + 420, 260, startX + 455, 295);
+
+      // Unten schließen
+      ctx.lineTo(startX + 460, 385);
+      ctx.lineTo(startX - 25, 390);
+      ctx.closePath();
+      ctx.fill();
+
+      // === WASSER ===
+      ctx.fillStyle = '#0ea5e9';
+      ctx.beginPath();
+      ctx.moveTo(startX + 22, 262);
+
+      ctx.quadraticCurveTo(startX + 95, 292, startX + 185, 265);
+      ctx.quadraticCurveTo(startX + 260, 305, startX + 350, 272);
+
+      ctx.lineTo(startX + 440, 370);
+      ctx.lineTo(startX + 35, 372);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    drawNaturalWater();
+  </script>
+</body>
+</html>
