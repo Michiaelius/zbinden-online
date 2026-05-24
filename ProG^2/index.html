@@ -216,10 +216,10 @@
       // Vögel Update
       for (let i = birds.length - 1; i >= 0; i--) {
         const b = birds[i];
-        b.wave += 0.0028;
+        b.wave += 0.0008;
         b.x += b.speed * b.direction;
-        b.y = b.baseY + Math.sin(b.wave) * 22;
-        b.flap += 0.14;
+        b.y = b.baseY + Math.sin(b.wave) * 7;
+        b.flap += 0.04;
 
         if (Math.random() < 0.008) b.rollSpeed = (Math.random() - 0.5) * 0.25;
         b.roll += b.rollSpeed;
