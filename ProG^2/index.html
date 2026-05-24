@@ -191,7 +191,7 @@
       }
       if (clouds.length < 12 && Math.random() < 0.038) spawnCloud();
 
-      // Vögel - nur Verlangsamen + Anhalten + Drehen
+      // Vögel - Nur Geschwindigkeit, kein Y während Wende
       for (let i = birds.length - 1; i >= 0; i--) {
         const b = birds[i];
 
@@ -199,16 +199,15 @@
 
         b.wave += 0.0016;
         b.x += b.currentSpeed * b.direction;
-        b.y = b.baseY + Math.sin(b.wave) * 14;
+        b.y = b.baseY + Math.sin(b.wave) * 14;   // nur normale leichte Welle
 
         b.flap += 0.06;
 
-        // Sanfte Rotation
         if (Math.random() < 0.0018) b.rollSpeed = (Math.random() - 0.5) * 0.1;
         b.roll += b.rollSpeed;
         if (Math.abs(b.roll) > 0.14) b.rollSpeed *= -0.7;
 
-        // Wende-Logik (ohne Hoch/Runter)
+        // Wende nur mit Geschwindigkeit
         if (!b.isTurning && Date.now() - b.lastTurn > 3800 && Math.random() < 0.0014) {
           b.isTurning = true;
           b.turnPhase = 0;
@@ -218,13 +217,13 @@
         if (b.isTurning) {
           b.turnPhase++;
 
-          if (b.turnPhase < 60) {
-            b.targetSpeed = b.speed * 0.12;        // verlangsamen
-          } else if (b.turnPhase < 130) {
-            b.targetSpeed = 0.03;                  // fast Stillstand
+          if (b.turnPhase < 55) {
+            b.targetSpeed = b.speed * 0.12;
+          } else if (b.turnPhase < 125) {
+            b.targetSpeed = 0.04;        // Stillstand
           } else if (b.turnPhase < 165) {
             b.direction *= -1;
-            b.targetSpeed = b.speed * 0.4;
+            b.targetSpeed = b.speed * 0.45;
           } else {
             b.targetSpeed = b.speed;
             b.isTurning = false;
