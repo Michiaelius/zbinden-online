@@ -42,11 +42,11 @@
     let cloud2X = 780;
     
     let birds = [
-      {x: -120, y: 148, speed: 1.8, wing: 0},
-      {x: -480, y: 205, speed: 1.15, wing: 0}
+      {x: -80, y: 145, speed: 1.65, flap: 0},
+      {x: -420, y: 198, speed: 1.1, flap: 0}
     ];
 
-    // Offscreen Sand (fixiert)
+    // Fixierter Sand
     const sandCanvas = document.createElement('canvas');
     sandCanvas.width = 1320;
     sandCanvas.height = 350;
@@ -55,7 +55,6 @@
     function createFixedSand() {
       sandCtx.fillStyle = '#e2c18a';
       sandCtx.fillRect(0, 0, 1320, 350);
-
       sandCtx.fillStyle = '#c99a5f';
       for (let i = 0; i < 5200; i++) {
         sandCtx.beginPath();
@@ -82,24 +81,42 @@
     }
 
     function drawBird(bird) {
+      const flap = Math.sin(bird.flap) * 6;
+
+      ctx.save();
+      ctx.translate(bird.x, bird.y);
+
       ctx.strokeStyle = '#1e2937';
-      ctx.lineWidth = 4.5;
-      ctx.lineCap = 'round';
+      ctx.fillStyle = '#1e2937';
+      ctx.lineWidth = 3.5;
+      ctx.lineJoin = 'round';
 
-      const flap = Math.sin(bird.wing) * 4;   // leichte Flügelbewegung
-
+      // Flügel oben
       ctx.beginPath();
-      ctx.moveTo(bird.x, bird.y);
-      ctx.lineTo(bird.x + 32, bird.y - 12 + flap);
-      ctx.moveTo(bird.x + 8, bird.y);
-      ctx.lineTo(bird.x + 34, bird.y + 13 - flap);
+      ctx.moveTo(0, 0);
+      ctx.quadraticCurveTo(18, -22 + flap, 38, -12);
+      ctx.quadraticCurveTo(28, -8, 12, 2);
+      ctx.fill();
       ctx.stroke();
 
-      // Kleiner Körper
-      ctx.fillStyle = '#1e2937';
+      // Körper
       ctx.beginPath();
-      ctx.arc(bird.x + 14, bird.y + 1, 5, 0, Math.PI*2);
+      ctx.ellipse(18, 4, 14, 8, 0, 0, Math.PI*2);
       ctx.fill();
+
+      // Kopf
+      ctx.beginPath();
+      ctx.arc(29, -2, 6, 0, Math.PI*2);
+      ctx.fill();
+
+      // Schnabel
+      ctx.beginPath();
+      ctx.moveTo(34, -2);
+      ctx.lineTo(42, 0);
+      ctx.lineTo(34, 3);
+      ctx.fill();
+
+      ctx.restore();
     }
 
     function drawMovingElements() {
@@ -128,7 +145,7 @@
 
       birds.forEach(bird => {
         bird.x += bird.speed;
-        bird.wing += 0.18;   // Flügel schlagen
+        bird.flap += 0.22;
         if (bird.x > 1500) bird.x = -300;
       });
 
