@@ -42,22 +42,20 @@
     let cloud2X = 780;
     
     let birds = [
-      {x: -120, y: 155, speed: 1.65},
-      {x: -480, y: 218, speed: 1.1}
+      {x: -120, y: 148, speed: 1.8, wing: 0},
+      {x: -480, y: 205, speed: 1.15, wing: 0}
     ];
 
-    // Offscreen Canvas für den fixierten Sand
+    // Offscreen Sand (fixiert)
     const sandCanvas = document.createElement('canvas');
     sandCanvas.width = 1320;
     sandCanvas.height = 350;
     const sandCtx = sandCanvas.getContext('2d');
 
     function createFixedSand() {
-      // Sandfarbe
       sandCtx.fillStyle = '#e2c18a';
       sandCtx.fillRect(0, 0, 1320, 350);
 
-      // Sandkörner (einmalig!)
       sandCtx.fillStyle = '#c99a5f';
       for (let i = 0; i < 5200; i++) {
         sandCtx.beginPath();
@@ -65,11 +63,9 @@
         sandCtx.fill();
       }
     }
-
     createFixedSand();
 
     function drawStaticBackground() {
-      // Himmel
       const sky = ctx.createLinearGradient(0, 0, 0, 460);
       sky.addColorStop(0, '#60a5fa');
       sky.addColorStop(1, '#bae6fd');
@@ -82,8 +78,28 @@
       ctx.fillStyle = '#fef08c';
       ctx.beginPath(); ctx.arc(1080, 170, 63, 0, Math.PI*2); ctx.fill();
 
-      // Fixierten Sand zeichnen
       ctx.drawImage(sandCanvas, 0, 410);
+    }
+
+    function drawBird(bird) {
+      ctx.strokeStyle = '#1e2937';
+      ctx.lineWidth = 4.5;
+      ctx.lineCap = 'round';
+
+      const flap = Math.sin(bird.wing) * 4;   // leichte Flügelbewegung
+
+      ctx.beginPath();
+      ctx.moveTo(bird.x, bird.y);
+      ctx.lineTo(bird.x + 32, bird.y - 12 + flap);
+      ctx.moveTo(bird.x + 8, bird.y);
+      ctx.lineTo(bird.x + 34, bird.y + 13 - flap);
+      ctx.stroke();
+
+      // Kleiner Körper
+      ctx.fillStyle = '#1e2937';
+      ctx.beginPath();
+      ctx.arc(bird.x + 14, bird.y + 1, 5, 0, Math.PI*2);
+      ctx.fill();
     }
 
     function drawMovingElements() {
@@ -96,20 +112,11 @@
       ctx.beginPath(); ctx.ellipse(cloud2X + 92, 150, 78, 36, 0, 0, Math.PI*2); ctx.fill();
 
       // Vögel
-      ctx.strokeStyle = '#1e2937';
-      ctx.lineWidth = 4.5;
-      birds.forEach(bird => {
-        ctx.beginPath();
-        ctx.moveTo(bird.x, bird.y);
-        ctx.lineTo(bird.x + 28, bird.y - 14);
-        ctx.moveTo(bird.x + 5, bird.y);
-        ctx.lineTo(bird.x + 30, bird.y + 11);
-        ctx.stroke();
-      });
+      birds.forEach(bird => drawBird(bird));
     }
 
     function animate() {
-      ctx.clearRect(0, 0, 1320, 460);   // Nur Himmel löschen
+      ctx.clearRect(0, 0, 1320, 460);
 
       drawStaticBackground();
       drawMovingElements();
@@ -121,6 +128,7 @@
 
       birds.forEach(bird => {
         bird.x += bird.speed;
+        bird.wing += 0.18;   // Flügel schlagen
         if (bird.x > 1500) bird.x = -300;
       });
 
