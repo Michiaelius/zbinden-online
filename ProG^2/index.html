@@ -141,7 +141,7 @@
     }
 
     function drawBird(bird) {
-      const flap = Math.sin(bird.flap) * 9;     // Amplitude des Flügelschlags
+      const flap = Math.sin(bird.flap) * 10;   // Amplitude
       ctx.save();
       ctx.translate(bird.x, bird.y);
       if (bird.roll !== 0) ctx.rotate(bird.roll);
@@ -161,10 +161,10 @@
       ctx.fill();
       ctx.stroke();
 
-      // Flügel
+      // Flügel - hier passiert der Schlag
       ctx.beginPath();
       ctx.moveTo(23, 13);
-      ctx.quadraticCurveTo(12, -22 + flap*4, 12, -2);
+      ctx.quadraticCurveTo(12, -22 + flap * 4, 12, -2);
       ctx.quadraticCurveTo(21, 3, 14, 13);
       ctx.fill();
       ctx.stroke();
@@ -199,6 +199,7 @@
       drawStaticBackground();
       drawMovingElements();
 
+      // Wolken
       for (let i = clouds.length - 1; i >= 0; i--) {
         const c = clouds[i];
         if (c.pause > 0) c.pause--;
@@ -210,13 +211,14 @@
       }
       if (clouds.length < 12 && Math.random() < 0.038) spawnCloud();
 
+      // Vögel
       for (let i = birds.length - 1; i >= 0; i--) {
         const b = birds[i];
         b.wave += 0.0028;
         b.x += b.speed * b.direction;
         b.y = b.baseY + Math.sin(b.wave) * 22;
         
-        b.flap += 0.13;        // ← Hier die Flügelgeschwindigkeit (0.13 = angenehm langsam)
+        b.flap += 0.12;        // ← Flügelschlag-Geschwindigkeit (langsamer)
 
         if (Math.random() < 0.008) b.rollSpeed = (Math.random() - 0.5) * 0.25;
         b.roll += b.rollSpeed;
