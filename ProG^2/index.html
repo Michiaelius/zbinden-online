@@ -39,6 +39,7 @@
     let birds = [];
     let clouds = [];
 
+    // Spawn Funktionen (wie zuvor)
     function spawnCloud() {
       const type = Math.random(); 
       const isFar = Math.random() > 0.45;
@@ -97,42 +98,40 @@
     }
     for (let i = 0; i < 2; i++) spawnBird();
 
-    // ==================== Sichtbare Berglandschaft ====================
+    // ==================== SEHR SICHTBARE BERGE ====================
     function drawMountains() {
-      // Hinterste Berge (mittelgrau)
-      ctx.fillStyle = '#64748b';
+      ctx.fillStyle = '#2c3e50';
       ctx.beginPath();
       ctx.moveTo(0, 250);
-      ctx.lineTo(160, 72);
-      ctx.lineTo(380, 215);
-      ctx.lineTo(650, 48);
-      ctx.lineTo(890, 185);
-      ctx.lineTo(1150, 82);
+      ctx.lineTo(120, 90);
+      ctx.lineTo(340, 230);
+      ctx.lineTo(580, 55);
+      ctx.lineTo(820, 190);
+      ctx.lineTo(1060, 80);
       ctx.lineTo(1320, 250);
       ctx.fill();
 
-      // Mittlere Berge (dunkler)
-      ctx.fillStyle = '#475569';
+      ctx.fillStyle = '#34495e';
       ctx.beginPath();
       ctx.moveTo(0, 250);
-      ctx.lineTo(90, 125);
-      ctx.lineTo(310, 228);
-      ctx.lineTo(570, 88);
-      ctx.lineTo(810, 198);
-      ctx.lineTo(1040, 95);
+      ctx.lineTo(80, 140);
+      ctx.lineTo(290, 235);
+      ctx.lineTo(510, 105);
+      ctx.lineTo(760, 200);
+      ctx.lineTo(980, 115);
+      ctx.lineTo(1220, 225);
       ctx.lineTo(1320, 250);
       ctx.fill();
 
-      // Vorderste Berge (sehr dunkel)
-      ctx.fillStyle = '#1e2937';
+      ctx.fillStyle = '#1f2a38';
       ctx.beginPath();
       ctx.moveTo(0, 250);
-      ctx.lineTo(50, 158);
-      ctx.lineTo(260, 235);
-      ctx.lineTo(490, 118);
-      ctx.lineTo(730, 205);
-      ctx.lineTo(960, 140);
-      ctx.lineTo(1190, 222);
+      ctx.lineTo(40, 165);
+      ctx.lineTo(250, 240);
+      ctx.lineTo(470, 125);
+      ctx.lineTo(700, 210);
+      ctx.lineTo(940, 145);
+      ctx.lineTo(1180, 230);
       ctx.lineTo(1320, 250);
       ctx.fill();
     }
@@ -145,7 +144,7 @@
       ctx.fillStyle = sky;
       ctx.fillRect(0, 0, 1320, 250);
 
-      // Berge (wichtig: direkt nach Himmel)
+      // Berge
       drawMountains();
 
       // Sonne
