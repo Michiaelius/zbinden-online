@@ -221,7 +221,7 @@
 
         if (Math.random() < 0.008) b.rollSpeed = (Math.random() - 0.5) * 0.25;
         b.roll*0.1 += b.rollSpeed;
-        if (Math.abs(b.roll) > 0.35) b.rollSpeed *= -0.7;
+        if (Math.abs(b.roll) > 0.35) b.rollSpeed *= -0.07;
 
         if (Date.now() - b.lastTurn > 15000 && Math.random() < 0.0015) {
           b.direction *= -1;
