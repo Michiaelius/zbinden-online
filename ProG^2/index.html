@@ -40,13 +40,12 @@
 
     let birds = [];
     let clouds = [];
-    let waterTime = 0;
 
     function spawnCloud() {
       const isFar = Math.random() > 0.6;
       clouds.push({
         x: Math.random() > 0.5 ? -280 : 1600,
-        y: isFar ? 55 + Math.random() * 45 : 78 + Math.random() * 55,
+        y: isFar ? 55 + Math.random() * 50 : 78 + Math.random() * 55,
         size: isFar ? 0.38 + Math.random() * 0.32 : 0.52 + Math.random() * 0.38,
         speed: isFar ? 0.028 + Math.random() * 0.035 : 0.042 + Math.random() * 0.045,
         direction: Math.random() > 0.5 ? 1 : -1,
@@ -56,6 +55,8 @@
         dissolving: false
       });
     }
+
+    // Wenige Wolken am Anfang
     for (let i = 0; i < 3; i++) spawnCloud();
 
     const sandCanvas = document.createElement('canvas');
@@ -77,7 +78,8 @@
 
     function spawnBird() {
       const dir = Math.random() > 0.5 ? 1 : -1;
-      const count = Math.random() < 0.7 ? 1 : 2;
+      const count = Math.random() < 0.7 ? 1 : 2;   // meist einzeln
+
       for (let i = 0; i < count; i++) {
         const scale = 0.32 + Math.random() * 0.38;
         birds.push({
@@ -95,62 +97,33 @@
         });
       }
     }
+
     for (let i = 0; i < 2; i++) spawnBird();
 
     function drawStaticBackground() {
-      // Himmel
       const sky = ctx.createLinearGradient(0, 0, 0, 250);
       sky.addColorStop(0, '#60a5fa');
       sky.addColorStop(1, '#bae6fd');
       ctx.fillStyle = sky;
       ctx.fillRect(0, 0, 1320, 250);
 
-      // Sonne
-      const sunX = 1050; const sunY = 135;
-      ctx.shadowColor = '#fef08c'; ctx.shadowBlur = 50;
+      // Schöne kleine Sonne
+      const sunX = 1050;
+      const sunY = 135;
+      ctx.shadowColor = '#fef08c';
+      ctx.shadowBlur = 50;
       ctx.fillStyle = '#fef08c';
       ctx.beginPath(); ctx.arc(sunX, sunY, 46, 0, Math.PI*2); ctx.fill();
+
       ctx.shadowBlur = 25;
       ctx.fillStyle = '#fcd34d';
       ctx.beginPath(); ctx.arc(sunX, sunY, 36, 0, Math.PI*2); ctx.fill();
+
       ctx.shadowBlur = 0;
       ctx.fillStyle = '#fbbf24';
       ctx.beginPath(); ctx.arc(sunX, sunY, 27, 0, Math.PI*2); ctx.fill();
 
-      // Sand
       ctx.drawImage(sandCanvas, 0, 250);
-
-      // === SEE genau wie rot markiert ===
-      const basinX = 920;
-      const basinY = 630;
-      const basinW = 340;
-      const basinH = 105;
-
-      // Brauner Rand oben
-      ctx.fillStyle = '#8d6f47';
-      ctx.fillRect(basinX - 12, basinY - 25, basinW + 24, 32);
-
-      // Wasser
-      ctx.fillStyle = '#0ea5e9';
-      ctx.fillRect(basinX, basinY, basinW, basinH);
-
-      // Wellen
-      waterTime += 0.045;
-      ctx.strokeStyle = '#38bdf8';
-      ctx.lineWidth = 4.5;
-      for (let i = 0; i < 4; i++) {
-        ctx.beginPath();
-        ctx.moveTo(basinX + 20, basinY + 22 + i*19);
-        for (let x = 40; x < basinW - 20; x += 28) {
-          ctx.quadraticCurveTo(
-            basinX + x, 
-            basinY + 18 + i*19 + Math.sin(waterTime + x*0.025) * 7,
-            basinX + x + 28, 
-            basinY + 22 + i*19
-          );
-        }
-        ctx.stroke();
-      }
     }
 
     function drawCloud(cloud) {
@@ -198,8 +171,48 @@
       drawStaticBackground();
       drawMovingElements();
 
-      // Wolken + Vögel Update (kurz)
-      // ... (die Logik bleibt gleich wie in der guten vorherigen Version)
+      // Wolken
+      for (let i = clouds.length - 1; i >= 0; i--) {
+        const c = clouds[i];
+        if (c.pause > 0) c.pause--; 
+        else c.x += c.speed * c.direction;
+
+        if (Math.random() < 0.004) c.pause = 120 + Math.random()*180;
+        if (!c.dissolving && Math.random() < 0.0018) c.dissolving = true;
+        if (c.dissolving) c.life -= 0.007;
+
+        if (c.x < -500 || c.x > 1800 || c.life <= 0) {
+          clouds.splice(i, 1);
+        }
+      }
+
+      // Sehr selten neue Wolke
+      if (clouds.length < 4 && Math.random() < 0.007) spawnCloud();
+
+      // Vögel
+      for (let i = birds.length - 1; i >= 0; i--) {
+        const b = birds[i];
+        b.wave += 0.0058;
+        b.x += b.speed * b.direction;
+        b.y = b.baseY + Math.sin(b.wave) * 24;
+        b.flap += 0.22;
+
+        // Sehr seltene Rolle
+        if (Math.random() < 0.008) b.rollSpeed = (Math.random() - 0.5) * 0.25;
+        b.roll += b.rollSpeed;
+        if (Math.abs(b.roll) > 0.35) b.rollSpeed *= -0.7;
+
+        // Extrem seltener Richtungswechsel
+        if (Date.now() - b.lastTurn > 15000 && Math.random() < 0.0015) {
+          b.direction *= -1;
+          b.lastTurn = Date.now();
+        }
+
+        if (b.x < -180 || b.x > 1500) birds.splice(i, 1);
+      }
+
+      // Sehr ruhiger Nachschub
+      if (birds.length < 3 && Math.random() < 0.006) spawnBird();
 
       requestAnimationFrame(animate);
     }
