@@ -39,7 +39,6 @@
     let birds = [];
     let clouds = [];
 
-    // Spawn Funktionen (wie zuvor)
     function spawnCloud() {
       const type = Math.random(); 
       const isFar = Math.random() > 0.45;
@@ -58,7 +57,7 @@
         lastTurn: Date.now()
       });
     }
-    for (let i = 0; i < 8; i++) spawnCloud();
+    for (let i = 0; i < 14; i++) spawnCloud();
 
     const sandCanvas = document.createElement('canvas');
     sandCanvas.width = 1320; sandCanvas.height = 510;
@@ -78,7 +77,7 @@
 
     function spawnBird() {
       const dir = Math.random() > 0.5 ? 1 : -1;
-      const count = Math.random() < 0.7 ? 1 : 2;
+      const count = Math.random() < 0.4 ? 1 : 0;   // sehr selten 1 Vogel
       for (let i = 0; i < count; i++) {
         const scale = 0.32 + Math.random() * 0.38;
         birds.push({
@@ -96,70 +95,66 @@
         });
       }
     }
-    for (let i = 0; i < 2; i++) spawnBird();
+    for (let i = 0; i < 1; i++) spawnBird();   // nur maximal 1 Vogel am Anfang
 
-    // ==================== SEHR SICHTBARE BERGE ====================
     function drawMountains() {
-      ctx.fillStyle = '#2c3e50';
+      ctx.fillStyle = '#64748b';
       ctx.beginPath();
       ctx.moveTo(0, 250);
-      ctx.lineTo(120, 90);
-      ctx.lineTo(340, 230);
-      ctx.lineTo(580, 55);
-      ctx.lineTo(820, 190);
-      ctx.lineTo(1060, 80);
+      ctx.lineTo(200, 125);
+      ctx.lineTo(450, 225);
+      ctx.lineTo(680, 105);
+      ctx.lineTo(920, 195);
+      ctx.lineTo(1180, 135);
       ctx.lineTo(1320, 250);
       ctx.fill();
 
-      ctx.fillStyle = '#34495e';
+      ctx.fillStyle = '#475569';
       ctx.beginPath();
       ctx.moveTo(0, 250);
-      ctx.lineTo(80, 140);
-      ctx.lineTo(290, 235);
-      ctx.lineTo(510, 105);
-      ctx.lineTo(760, 200);
-      ctx.lineTo(980, 115);
-      ctx.lineTo(1220, 225);
+      ctx.lineTo(130, 155);
+      ctx.lineTo(380, 230);
+      ctx.lineTo(610, 120);
+      ctx.lineTo(850, 200);
+      ctx.lineTo(1070, 130);
       ctx.lineTo(1320, 250);
       ctx.fill();
 
-      ctx.fillStyle = '#1f2a38';
+      ctx.fillStyle = '#334155';
       ctx.beginPath();
       ctx.moveTo(0, 250);
-      ctx.lineTo(40, 165);
-      ctx.lineTo(250, 240);
-      ctx.lineTo(470, 125);
-      ctx.lineTo(700, 210);
-      ctx.lineTo(940, 145);
-      ctx.lineTo(1180, 230);
+      ctx.lineTo(80, 170);
+      ctx.lineTo(300, 235);
+      ctx.lineTo(520, 150);
+      ctx.lineTo(750, 210);
+      ctx.lineTo(970, 160);
+      ctx.lineTo(1190, 225);
       ctx.lineTo(1320, 250);
       ctx.fill();
     }
 
     function drawStaticBackground() {
-      // Himmel
       const sky = ctx.createLinearGradient(0, 0, 0, 250);
       sky.addColorStop(0, '#60a5fa');
       sky.addColorStop(1, '#bae6fd');
       ctx.fillStyle = sky;
       ctx.fillRect(0, 0, 1320, 250);
 
-      // Berge
       drawMountains();
 
-      // Sonne
-      const sunX = 1050; const sunY = 135;
-      ctx.shadowColor = '#fef08c'; ctx.shadowBlur = 50;
+      const sunX = 1050; 
+      const sunY = 92;
+      ctx.shadowColor = '#fef08c'; 
+      ctx.shadowBlur = 40;
       ctx.fillStyle = '#fef08c';
-      ctx.beginPath(); ctx.arc(sunX, sunY, 46, 0, Math.PI*2); ctx.fill();
-      ctx.shadowBlur = 25;
+      ctx.beginPath(); ctx.arc(sunX, sunY, 34, 0, Math.PI*2); ctx.fill();
+      ctx.shadowBlur = 18;
       ctx.fillStyle = '#fcd34d';
-      ctx.beginPath(); ctx.arc(sunX, sunY, 36, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(sunX, sunY, 26, 0, Math.PI*2); ctx.fill();
       ctx.shadowBlur = 0;
       ctx.fillStyle = '#fbbf24';
-      ctx.beginPath(); ctx.arc(sunX, sunY, 27, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(sunX, sunY, 19, 0, Math.PI*2); ctx.fill();
 
-      // Sand
       ctx.drawImage(sandCanvas, 0, 250);
     }
 
@@ -227,7 +222,7 @@
         else if (Math.random() < 0.0004) c.dissolving = true;
         if (c.x < -550 || c.x > 1880 || c.life <= 0) clouds.splice(i, 1);
       }
-      if (clouds.length < 12 && Math.random() < 0.038) spawnCloud();
+      if (clouds.length < 18 && Math.random() < 0.055) spawnCloud();
 
       for (let i = birds.length - 1; i >= 0; i--) {
         const b = birds[i];
@@ -242,7 +237,7 @@
 
         if (b.x < -180 || b.x > 1500) birds.splice(i, 1);
       }
-      if (birds.length < 3 && Math.random() < 0.006) spawnBird();
+      if (birds.length < 2 && Math.random() < 0.0025) spawnBird();   // sehr selten neue Vögel
 
       requestAnimationFrame(animate);
     }
