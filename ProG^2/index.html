@@ -23,54 +23,69 @@
     let birds = [];
     let clouds = [];
 
+    // === Wolken spawnen ===
     function spawnCloud() {
       const isFar = Math.random() > 0.45;
       const fromLeft = Math.random() > 0.5;
       clouds.push({
         x: fromLeft ? -380 : 1700,
-        y: isFar ? 45 + Math.random() * 55 : 75 + Math.random() * 65,
-        size: isFar ? 0.5 + Math.random() * 0.35 : 0.75 + Math.random() * 0.5,
-        speed: isFar ? 0.055 + Math.random() * 0.04 : 0.09 + Math.random() * 0.05,
+        y: isFar ? 42 + Math.random() * 58 : 72 + Math.random() * 68,
+        size: isFar ? 0.48 + Math.random() * 0.35 : 0.78 + Math.random() * 0.52,
+        speed: isFar ? 0.052 + Math.random() * 0.038 : 0.085 + Math.random() * 0.055,
         direction: fromLeft ? 1 : -1,
         life: 1.0,
-        dissolving: false
+        dissolving: Math.random() < 0.12
       });
     }
-    for (let i = 0; i < 9; i++) spawnCloud();
+    for (let i = 0; i < 8; i++) spawnCloud();
 
+    // === Vögel spawnen ===
     function spawnBird() {
       const dir = Math.random() > 0.5 ? 1 : -1;
       birds.push({
-        x: dir > 0 ? -120 : 1440,
-        y: 105 + Math.random() * 125,
-        baseY: 105 + Math.random() * 125,
-        speed: 1.1 + Math.random() * 0.8,
+        x: dir > 0 ? -140 : 1460,
+        y: 98 + Math.random() * 118,
+        baseY: 98 + Math.random() * 118,
+        speed: 1.15 + Math.random() * 0.75,
         direction: dir,
         flap: Math.random() * 10,
-        scale: 0.38 + Math.random() * 0.32,
+        scale: 0.36 + Math.random() * 0.34,
         wave: Math.random() * Math.PI * 2
       });
     }
     for (let i = 0; i < 4; i++) spawnBird();
 
+    // === Sand Textur (einmalig) ===
+    const sandCanvas = document.createElement('canvas');
+    sandCanvas.width = 1320;
+    sandCanvas.height = 500;
+    const sandCtx = sandCanvas.getContext('2d');
+    sandCtx.fillStyle = '#e2c18a';
+    sandCtx.fillRect(0, 0, 1320, 500);
+    sandCtx.fillStyle = '#d4a76a';
+    for (let i = 0; i < 6800; i++) {
+      sandCtx.fillRect(Math.random()*1320, Math.random()*500, 2.5, 2.5);
+    }
+
     function drawStaticBackground() {
       // Himmel
-      const sky = ctx.createLinearGradient(0, 0, 0, 260);
+      const sky = ctx.createLinearGradient(0, 0, 0, 270);
       sky.addColorStop(0, '#60a5fa');
       sky.addColorStop(1, '#bae6fd');
       ctx.fillStyle = sky;
-      ctx.fillRect(0, 0, 1320, 260);
+      ctx.fillRect(0, 0, 1320, 270);
 
       // Sonne
-      const sunX = 1050; const sunY = 135;
-      ctx.shadowColor = '#fef08c'; ctx.shadowBlur = 55;
+      ctx.shadowColor = '#fef08c';
+      ctx.shadowBlur = 60;
       ctx.fillStyle = '#fef08c';
-      ctx.beginPath(); ctx.arc(sunX, sunY, 46, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath();
+      ctx.arc(1050, 135, 46, 0, Math.PI*2);
+      ctx.fill();
       ctx.shadowBlur = 0;
 
       // Sand
-      ctx.fillStyle = '#e2c18a';
-      ctx.fillRect(0, 260, 1320, 500);
+      ctx.drawImage(sandCanvas, 0, 260);
     }
 
     function drawBird(b) {
@@ -81,19 +96,17 @@
       ctx.scale(b.scale, b.scale);
 
       ctx.fillStyle = '#1e2937';
-      ctx.strokeStyle = '#1e2937';
       ctx.lineWidth = 2.6;
 
       // Schwanz
-      ctx.beginPath(); ctx.moveTo(8,8); ctx.lineTo(1,4); ctx.lineTo(2,13); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(8,8); ctx.lineTo(0,5); ctx.lineTo(2,13); ctx.fill();
       // Flügel
-      ctx.beginPath(); ctx.moveTo(23,13); ctx.quadraticCurveTo(11, -24 + flap*4.5, 11, -3); ctx.quadraticCurveTo(22,5,15,13); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(23,13); ctx.quadraticCurveTo(11, -25 + flap*4.5, 11, -3); ctx.quadraticCurveTo(22,5,15,13); ctx.fill();
       // Körper
       ctx.beginPath(); ctx.ellipse(19,8,10,7,0,0,Math.PI*2); ctx.fill();
-      // Kopf
+      // Kopf + Schnabel
       ctx.beginPath(); ctx.arc(29,5,6,0,Math.PI*2); ctx.fill();
-      // Schnabel
-      ctx.beginPath(); ctx.moveTo(34,3); ctx.lineTo(45,4); ctx.lineTo(34,6); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(34,3); ctx.lineTo(46,4); ctx.lineTo(34,6); ctx.fill();
 
       ctx.restore();
     }
@@ -102,15 +115,28 @@
       ctx.clearRect(0, 0, 1320, 760);
       drawStaticBackground();
 
-      // Wolken
+      // Wolken aktualisieren + zeichnen
       for (let i = clouds.length - 1; i >= 0; i--) {
         const c = clouds[i];
         c.x += c.speed * c.direction;
-        if (Math.random() < 0.0006) c.dissolving = true;
+        if (Math.random() < 0.0007) c.dissolving = true;
         if (c.dissolving) c.life -= 0.007;
-        if (c.x < -600 || c.x > 1900 || c.life <= 0) clouds.splice(i, 1);
+
+        // Wolke zeichnen (hier vereinfacht - kann später erweitert werden)
+        ctx.globalAlpha = c.life;
+        ctx.fillStyle = '#ffffff';
+        const s = c.size;
+        ctx.beginPath();
+        ctx.ellipse(c.x, c.y, 120*s, 38*s, 0, 0, Math.PI*2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(c.x + 75*s, c.y - 18*s, 68*s, 34*s, 0, 0, Math.PI*2);
+        ctx.fill();
+        ctx.globalAlpha = 1;
+
+        if (c.x < -700 || c.x > 1950 || c.life <= 0) clouds.splice(i, 1);
       }
-      if (clouds.length < 10 && Math.random() < 0.035) spawnCloud();
+      if (clouds.length < 11 && Math.random() < 0.032) spawnCloud();
 
       // Vögel
       for (let i = birds.length - 1; i >= 0; i--) {
@@ -122,10 +148,10 @@
 
         drawBird(b);
 
-        if (b.x < -250 || b.x > 1570) birds.splice(i, 1);
+        if (b.x < -280 || b.x > 1600) birds.splice(i, 1);
       }
 
-      if (birds.length < 5 && Math.random() < 0.018) spawnBird();
+      if (birds.length < 5 && Math.random() < 0.019) spawnBird();
 
       requestAnimationFrame(animate);
     }
