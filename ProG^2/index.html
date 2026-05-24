@@ -184,7 +184,7 @@
       drawStaticBackground();
       drawMovingElements();
 
-      // Wolken
+      // Wolken (unverändert)
       for (let i = clouds.length - 1; i >= 0; i--) {
         const c = clouds[i];
         if (c.pause > 0) c.pause--;
@@ -200,7 +200,8 @@
       for (let i = birds.length - 1; i >= 0; i--) {
         const b = birds[i];
 
-        b.currentSpeed += (b.targetSpeed - b.currentSpeed) * 0.055;
+        // Sehr sanfte Geschwindigkeitsänderung
+        b.currentSpeed += (b.targetSpeed - b.currentSpeed) * 0.038;
 
         b.wave += 0.0018;
         b.x += b.currentSpeed * b.direction;
@@ -213,29 +214,28 @@
         b.roll += b.rollSpeed;
         if (Math.abs(b.roll) > 0.18) b.rollSpeed *= -0.65;
 
-        // === NATÜRLICHE WENDE mit kurzem Anhalten ===
-        if (!b.isTurning && Date.now() - b.lastTurn > 2800 && Math.random() < 0.0017) {
+        // === SEHR WEICHE WENDE ===
+        if (!b.isTurning && Date.now() - b.lastTurn > 3200 && Math.random() < 0.0016) {
           b.isTurning = true;
           b.turnPhase = 0;
-          b.targetSpeed = 0.08;        // fast zum Stillstand
+          b.targetSpeed = b.speed * 0.12;   // stark verlangsamen
         }
 
         if (b.isTurning) {
           b.turnPhase++;
 
-          if (b.turnPhase < 38) {
-            // Phase 1: Stark verlangsamen
-            b.targetSpeed = 0.08;
-          } else if (b.turnPhase < 68) {
-            // Phase 2: Kurz anhalten (ca. 0.5 Sekunden)
+          if (b.turnPhase < 45) {
+            // Langsam verlangsamen
+            b.targetSpeed = b.speed * 0.12;
+          } else if (b.turnPhase < 95) {
+            // Langes Anhalten (ca. 0.8 Sekunden)
             b.targetSpeed = 0;
-            b.currentSpeed = 0;
-          } else if (b.turnPhase < 85) {
-            // Phase 3: Richtung wechseln + leicht beschleunigen
+          } else if (b.turnPhase < 125) {
+            // Richtung wechseln + langsam wieder losfliegen
             b.direction *= -1;
-            b.targetSpeed = b.speed * 0.45;
+            b.targetSpeed = b.speed * 0.35;
           } else {
-            // Phase 4: Normal beschleunigen
+            // Normalgeschwindigkeit
             b.targetSpeed = b.speed;
             b.isTurning = false;
             b.lastTurn = Date.now();
