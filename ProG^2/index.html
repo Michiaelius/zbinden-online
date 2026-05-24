@@ -38,8 +38,8 @@
 
     let birds = [];
     let clouds = [];
+    let waterTime = 0;
 
-    // Wolken
     function spawnCloud() {
       const isFar = Math.random() > 0.55;
       clouds.push({
@@ -56,7 +56,6 @@
     }
     for (let i = 0; i < 6; i++) spawnCloud();
 
-    // Sand
     const sandCanvas = document.createElement('canvas');
     sandCanvas.width = 1320;
     sandCanvas.height = 510;
@@ -74,7 +73,6 @@
     }
     createFixedSand();
 
-    // Vögel
     function spawnBird() {
       const dir = Math.random() > 0.5 ? 1 : -1;
       const count = Math.random() < 0.7 ? 1 : 2;
@@ -119,6 +117,50 @@
 
       // Sand
       ctx.drawImage(sandCanvas, 0, 250);
+
+      // === NATÜRLICHE MULDE / WASSERQUELLE ===
+      const x = 120;
+
+      // Braunes Ufer (flach abfallend, organisch)
+      ctx.fillStyle = '#8d6f47';
+      ctx.beginPath();
+      ctx.moveTo(x, 255);
+      ctx.quadraticCurveTo(x + 75, 225, x + 165, 248);
+      ctx.quadraticCurveTo(x + 245, 215, x + 340, 242);
+      ctx.quadraticCurveTo(x + 410, 255, x + 455, 290);
+      ctx.lineTo(x + 460, 380);
+      ctx.lineTo(x - 25, 385);
+      ctx.closePath();
+      ctx.fill();
+
+      // Wasser (schöne Muldenform)
+      ctx.fillStyle = '#0ea5e9';
+      ctx.beginPath();
+      ctx.moveTo(x + 18, 262);
+      ctx.quadraticCurveTo(x + 95, 295, x + 175, 265);
+      ctx.quadraticCurveTo(x + 255, 305, x + 345, 272);
+      ctx.lineTo(x + 435, 365);
+      ctx.lineTo(x + 30, 368);
+      ctx.closePath();
+      ctx.fill();
+
+      // Wellen
+      waterTime += 0.055;
+      ctx.strokeStyle = '#38bdf8';
+      ctx.lineWidth = 4.5;
+      for (let i = 0; i < 3; i++) {
+        ctx.beginPath();
+        ctx.moveTo(x + 40, 275 + i*24);
+        for (let px = 65; px < 370; px += 32) {
+          ctx.quadraticCurveTo(
+            x + px,
+            272 + i*24 + Math.sin(waterTime + px*0.035) * 7,
+            x + px + 32,
+            275 + i*24
+          );
+        }
+        ctx.stroke();
+      }
     }
 
     function drawCloud(cloud) {
@@ -166,7 +208,6 @@
       drawStaticBackground();
       drawMovingElements();
 
-      // Wolken
       for (let i = clouds.length - 1; i >= 0; i--) {
         const c = clouds[i];
         if (c.pause > 0) c.pause--;
@@ -178,7 +219,6 @@
       }
       if (clouds.length < 8 && Math.random() < 0.025) spawnCloud();
 
-      // Vögel
       for (let i = birds.length - 1; i >= 0; i--) {
         const b = birds[i];
         b.wave += 0.0058;
