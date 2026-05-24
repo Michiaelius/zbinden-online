@@ -217,10 +217,10 @@
         b.wave += 0.0028;
         b.x += b.speed * b.direction;
         b.y = b.baseY + Math.sin(b.wave) * 22;
-        b.flap += 0.11;           // Original-Geschwindigkeit
+        b.flap += 0.01;           // Original-Geschwindigkeit
 
         if (Math.random() < 0.008) b.rollSpeed = (Math.random() - 0.5) * 0.25;
-        b.roll += b.rollSpeed;
+        b.roll*0.1 += b.rollSpeed;
         if (Math.abs(b.roll) > 0.35) b.rollSpeed *= -0.7;
 
         if (Date.now() - b.lastTurn > 15000 && Math.random() < 0.0015) {
