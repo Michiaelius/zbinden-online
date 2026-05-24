@@ -179,7 +179,7 @@
       for (let i = birds.length - 1; i >= 0; i--) {
         const b = birds[i];
 
-        b.currentSpeed += (b.targetSpeed - b.currentSpeed) * 0.035;
+        b.currentSpeed += (b.targetSpeed - b.currentSpeed) * 0.04;
 
         b.wave += 0.0016;
         b.x += b.currentSpeed * b.direction;
@@ -191,28 +191,26 @@
         b.roll += b.rollSpeed;
         if (Math.abs(b.roll) > 0.14) b.rollSpeed *= -0.7;
 
-        // === Zuverlässiger Richtungswechsel ===
-        if (!b.isTurning && Date.now() - b.lastTurn > 3200 && Math.random() < 0.0022) {
+        // === Einfache & robuste Wende-Logik ===
+        if (!b.isTurning && Date.now() - b.lastTurn > 3000 && Math.random() < 0.003) {
           b.isTurning = true;
           b.turnPhase = 0;
-          b.targetSpeed = b.speed * 0.18;
+          b.targetSpeed = b.speed * 0.2;
         }
 
         if (b.isTurning) {
           b.turnPhase++;
 
           if (b.turnPhase < 45) {
-            b.targetSpeed = b.speed * 0.18;
+            b.targetSpeed = b.speed * 0.2;
           } else if (b.turnPhase < 100) {
-            b.targetSpeed = 0.04;           // Pause
-          } else if (!b.hasTurned) {        // ← Nur einmal drehen
-            b.direction *= -1;
-            b.hasTurned = true;
-            b.targetSpeed = b.speed * 0.55;
-          } else if (b.turnPhase > 160) {
+            b.targetSpeed = 0.05;
+          } else if (b.turnPhase < 110) {
+            b.direction *= -1;        // Hier wird gedreht
+            b.targetSpeed = b.speed * 0.6;
+          } else {
             b.targetSpeed = b.speed;
             b.isTurning = false;
-            b.hasTurned = false;
             b.lastTurn = Date.now();
           }
         }
