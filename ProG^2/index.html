@@ -43,7 +43,6 @@
 
     let birds = [];
 
-    // Fixierter Sand
     const sandCanvas = document.createElement('canvas');
     sandCanvas.width = 1320;
     sandCanvas.height = 350;
@@ -63,20 +62,23 @@
 
     function spawnBird() {
       const fromLeft = Math.random() > 0.5;
-      const scale = 0.35 + Math.random() * 0.45;   // zwischen ca. 35% und 80% der alten Größe
+      const scale = 0.32 + Math.random() * 0.38;
 
       birds.push({
         x: fromLeft ? -80 : 1400,
-        y: 110 + Math.random() * 170,
-        speed: 1.1 + Math.random() * 0.9,
+        y: 120 + Math.random() * 150,
+        baseY: 120 + Math.random() * 150,
+        speed: 1.05 + Math.random() * 0.75,
         direction: fromLeft ? 1 : -1,
         flap: Math.random() * 10,
-        scale: scale
+        scale: scale,
+        wave: Math.random() * Math.PI * 2,
+        roll: 0,
+        rollSpeed: 0
       });
     }
 
-    // Sehr wenige am Anfang
-    for (let i = 0; i < 2; i++) spawnBird();
+    for (let i = 0; i < 1; i++) spawnBird();   // nur 1 Vogel am Start
 
     function drawStaticBackground() {
       const sky = ctx.createLinearGradient(0, 0, 0, 460);
@@ -97,14 +99,15 @@
       const flap = Math.sin(bird.flap) * 7;
       ctx.save();
       ctx.translate(bird.x, bird.y);
-      ctx.scale(bird.scale, bird.scale);           // Größenvariation
+      
+      if (bird.roll !== 0) ctx.rotate(bird.roll);
       if (bird.direction < 0) ctx.scale(-1, 1);
+      ctx.scale(bird.scale, bird.scale);
 
       ctx.strokeStyle = '#1e2937';
       ctx.fillStyle = '#1e2937';
       ctx.lineWidth = 3.2;
 
-      // Flügel
       ctx.beginPath();
       ctx.moveTo(0, 0);
       ctx.quadraticCurveTo(14, -19 + flap, 35, -10);
@@ -112,17 +115,14 @@
       ctx.fill();
       ctx.stroke();
 
-      // Körper
       ctx.beginPath();
       ctx.ellipse(19, 5, 13, 8, 0.2, 0, Math.PI*2);
       ctx.fill();
 
-      // Kopf
       ctx.beginPath();
       ctx.arc(30, 1, 6.5, 0, Math.PI*2);
       ctx.fill();
 
-      // Schnabel
       ctx.beginPath();
       ctx.moveTo(35, 0);
       ctx.lineTo(43, 2);
@@ -156,15 +156,27 @@
 
       for (let i = birds.length - 1; i >= 0; i--) {
         const b = birds[i];
+        
+        b.wave += 0.035;
         b.x += b.speed * b.direction;
+        b.y = b.baseY + Math.sin(b.wave) * 22;   // leichte Wellenbewegung
+
         b.flap += 0.22;
+
+        // Gelegentliche kleine Luftrolle
+        if (Math.random() < 0.008) {
+          b.rollSpeed = (Math.random() - 0.5) * 0.25;
+        }
+        b.roll += b.rollSpeed;
+        if (Math.abs(b.roll) > 0.4) b.rollSpeed *= -0.6;
 
         if (b.x < -120 || b.x > 1440) {
           birds.splice(i, 1);
         }
       }
 
-      if (birds.length < 4 && Math.random() < 0.008) {
+      // Sehr selten neuer Vogel
+      if (birds.length < 3 && Math.random() < 0.006) {
         spawnBird();
       }
 
