@@ -77,7 +77,7 @@
 
     function spawnBird() {
       const dir = Math.random() > 0.5 ? 1 : -1;
-      const count = Math.random() < 0.4 ? 1 : 0;   // sehr selten 1 Vogel
+      const count = Math.random() < 0.25 ? 1 : 0;   // sehr selten
       for (let i = 0; i < count; i++) {
         const scale = 0.32 + Math.random() * 0.38;
         birds.push({
@@ -95,41 +95,59 @@
         });
       }
     }
-    for (let i = 0; i < 1; i++) spawnBird();   // nur maximal 1 Vogel am Anfang
+    for (let i = 0; i < 1; i++) spawnBird();   // maximal 1 Vogel am Anfang
 
+    // ==================== Schöne Berge ====================
     function drawMountains() {
-      ctx.fillStyle = '#64748b';
+      // Hinterste Berge
+      ctx.fillStyle = '#6b7a94';
       ctx.beginPath();
       ctx.moveTo(0, 250);
-      ctx.lineTo(200, 125);
-      ctx.lineTo(450, 225);
-      ctx.lineTo(680, 105);
+      ctx.lineTo(180, 105);
+      ctx.lineTo(420, 225);
+      ctx.lineTo(670, 85);
       ctx.lineTo(920, 195);
-      ctx.lineTo(1180, 135);
+      ctx.lineTo(1170, 115);
       ctx.lineTo(1320, 250);
       ctx.fill();
 
-      ctx.fillStyle = '#475569';
+      // Mittlere Berge
+      ctx.fillStyle = '#4a5b78';
       ctx.beginPath();
       ctx.moveTo(0, 250);
-      ctx.lineTo(130, 155);
-      ctx.lineTo(380, 230);
-      ctx.lineTo(610, 120);
-      ctx.lineTo(850, 200);
-      ctx.lineTo(1070, 130);
+      ctx.lineTo(110, 145);
+      ctx.lineTo(350, 230);
+      ctx.lineTo(590, 105);
+      ctx.lineTo(830, 200);
+      ctx.lineTo(1060, 125);
       ctx.lineTo(1320, 250);
       ctx.fill();
 
-      ctx.fillStyle = '#334155';
+      // Vorderste Berge + leichte Schneekappen
+      ctx.fillStyle = '#2c3e50';
       ctx.beginPath();
       ctx.moveTo(0, 250);
-      ctx.lineTo(80, 170);
-      ctx.lineTo(300, 235);
-      ctx.lineTo(520, 150);
-      ctx.lineTo(750, 210);
-      ctx.lineTo(970, 160);
+      ctx.lineTo(70, 165);
+      ctx.lineTo(280, 235);
+      ctx.lineTo(510, 135);
+      ctx.lineTo(740, 210);
+      ctx.lineTo(960, 150);
       ctx.lineTo(1190, 225);
       ctx.lineTo(1320, 250);
+      ctx.fill();
+
+      // Schneekappen auf den höchsten Spitzen
+      ctx.fillStyle = '#e2e8f0';
+      ctx.beginPath();
+      ctx.moveTo(650, 85);
+      ctx.lineTo(670, 105);
+      ctx.lineTo(690, 92);
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.moveTo(1050, 125);
+      ctx.lineTo(1070, 140);
+      ctx.lineTo(1090, 128);
       ctx.fill();
     }
 
@@ -237,7 +255,7 @@
 
         if (b.x < -180 || b.x > 1500) birds.splice(i, 1);
       }
-      if (birds.length < 2 && Math.random() < 0.0025) spawnBird();   // sehr selten neue Vögel
+      if (birds.length < 2 && Math.random() < 0.0018) spawnBird();   // extrem wenige Vögel
 
       requestAnimationFrame(animate);
     }
