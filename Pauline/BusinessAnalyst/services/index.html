@@ -1,1 +1,95 @@
 
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pauline Zbinden – Business Analystin / Wirtschafts-Informatikerin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        .hero-bg { background: linear-gradient(135deg, #f5f0eb 0%, #f8f1e3 100%); }
+        .portrait {
+            width: 280px;
+            height: 370px;                    /* deutlich höher → ganzer Kopf sichtbar */
+            object-fit: cover;
+            object-position: top center;      /* Stirn bleibt oben vollständig sichtbar */
+            border: 8px solid white;
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+        }
+    </style>
+</head>
+<body class="hero-bg min-h-screen py-16">
+
+    <div class="max-w-5xl mx-auto px-6">
+
+        <!-- Header mit Foto -->
+        <div class="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16 mb-16">
+            
+            <!-- Foto -->
+            <div class="flex-shrink-0">
+                <img src="/Pauline/BusinessAnalyst/pauline-zbinden.jpg" 
+                     alt="Pauline Zbinden"
+                     class="portrait rounded-3xl">
+            </div>
+
+            <!-- Name + Titel + Einleitung -->
+            <div class="flex-1 text-center md:text-left max-w-lg">
+                <h1 class="text-6xl md:text-7xl font-bold text-gray-900 tracking-tight">Pauline Zbinden</h1>
+                <p class="text-4xl text-amber-900 mt-4 font-medium">Business Analystin</p>
+                <p class="text-4xl text-amber-900 mt-1 font-medium">Wirtschafts-Informatikerin</p>
+                
+                <p class="mt-10 text-xl text-gray-700 leading-relaxed">
+                    Ich arbeite gerne strukturiert, selbständig und im Austausch mit anderen. 
+                    Dabei bringe ich technisches Verständnis, analytisches Denken und ein gutes Gespür 
+                    für Anforderungen, Prozesse und digitale Lösungen mit.
+                </p>
+            </div>
+        </div>
+
+        <!-- Kontakt -->
+        <div class="max-w-2xl mx-auto mb-16">
+            <h2 class="text-center text-amber-900 font-semibold tracking-widest text-sm mb-6">KONTAKT</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <a href="tel:+41791936802" class="flex flex-col items-center gap-3 bg-white/70 hover:bg-white rounded-2xl p-6 shadow-sm transition-all hover:shadow">
+                    <i class="fa-solid fa-phone text-3xl text-amber-800"></i>
+                    <div class="text-center">
+                        <p class="font-medium">Telefon</p>
+                        <p class="text-gray-700">+41 79 193 68 02</p>
+                    </div>
+                </a>
+                
+                <a href="mailto:pm97.meyer@gmail.com" class="flex flex-col items-center gap-3 bg-white/70 hover:bg-white rounded-2xl p-6 shadow-sm transition-all hover:shadow">
+                    <i class="fa-solid fa-envelope text-3xl text-amber-800"></i>
+                    <div class="text-center">
+                        <p class="font-medium">E-Mail</p>
+                        <p class="text-gray-700">pm97.meyer@gmail.com</p>
+                    </div>
+                </a>
+                
+                <div class="flex flex-col items-center gap-3 bg-white/70 rounded-2xl p-6 shadow-sm">
+                    <i class="fa-solid fa-location-dot text-3xl text-amber-800"></i>
+                    <div class="text-center">
+                        <p class="font-medium">Adresse</p>
+                        <p class="text-gray-700">Chriesiweg 25<br>4334 Sisseln</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Button -->
+        <div class="flex justify-center">
+            <a href="/Pauline/BusinessAnalyst/lebenslauf-pauline-zbinden.pdf" 
+               target="_blank"
+               class="group flex items-center gap-5 bg-amber-900 hover:bg-amber-950 text-white text-2xl font-semibold px-14 py-7 rounded-3xl shadow-2xl transition-all hover:scale-105 active:scale-95">
+                <i class="fa-solid fa-file-pdf text-4xl"></i>
+                <span>Jetzt meinen Lebenslauf entdecken</span>
+                <i class="fa-solid fa-arrow-right text-3xl group-active:translate-x-2 transition-transform"></i>
+            </a>
+        </div>
+
+    </div>
+
+</body>
+</html>
