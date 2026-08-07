@@ -62,17 +62,30 @@
     #build-bar {
       background: #161b22;
       border-top: 2px solid #30363d;
-      padding: 10px 16px;
+      padding: 8px 12px 10px;
       display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      min-height: 70px;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 90px;
     }
-    #build-bar .label {
-      font-size: 0.85rem;
+    #build-tabs {
+      display: flex;
+      gap: 6px;
+    }
+    #build-tabs button {
+      background: #21262d;
       color: #8b949e;
-      white-space: nowrap;
+      border: 1px solid #30363d;
+      padding: 5px 14px;
+      border-radius: 6px 6px 0 0;
+      cursor: pointer;
+      font-size: 0.82rem;
+      min-width: auto;
+    }
+    #build-tabs button.active-tab {
+      background: #30363d;
+      color: #58a6ff;
+      border-color: #58a6ff;
     }
     #building-buttons {
       display: flex;
@@ -189,9 +202,15 @@
   <div id="game-container">
     <div id="top-bar">
       <div id="race-display"></div>
-      <div class="res-item">🪵 <span id="res-wood">0</span></div>
-      <div class="res-item">🪨 <span id="res-stone">0</span></div>
-      <div class="res-item">🌾 <span id="res-food">0</span></div>
+      <div class="res-item" title="Baumstämme">🪵 <span id="res-wood">0</span></div>
+      <div class="res-item" title="Bretter">▭ <span id="res-planks">0</span></div>
+      <div class="res-item" title="Steine">🪨 <span id="res-stone">0</span></div>
+      <div class="res-item" title="Ziegel">🧱 <span id="res-bricks">0</span></div>
+      <div class="res-item" title="Eisen">⚙️ <span id="res-iron">0</span></div>
+      <div class="res-item" title="Werkzeuge">🔨 <span id="res-tools">0</span></div>
+      <div class="res-item" title="Getreide">🌾 <span id="res-grain">0</span></div>
+      <div class="res-item" title="Mehl">🥣 <span id="res-flour">0</span></div>
+      <div class="res-item" title="Nahrung">🍞 <span id="res-food">0</span></div>
       <div class="res-item">👥 <span id="res-pop">0/0</span></div>
       <div class="hint-text">Träger = gelb · Bauarbeiter = orange · Arbeiter = blau · Idle = Volksfarbe</div>
     </div>
@@ -201,7 +220,11 @@
     </div>
 
     <div id="build-bar">
-      <div class="label">Gebäude:</div>
+      <div id="build-tabs">
+        <button class="active-tab" data-tab="ressourcen">Ressourcen</button>
+        <button data-tab="nahrung">Nahrung</button>
+        <button data-tab="weitere">Weitere</button>
+      </div>
       <div id="building-buttons"></div>
     </div>
   </div>
@@ -210,9 +233,10 @@
 
   <script>
     const TILE = 32;
-    const MAP_W = 100;
-    const MAP_H = 75;
+    const MAP_W = 220;
+    const MAP_H = 160;
     const BUILDING_STORAGE_MAX = 16;
+    const BUILD_RADIUS = 22; // Baubereich um Versammlungsplatz (Felder)
     const STOCKPILE_MAX = 64;
 
     const TERRAIN = { GRASS: 0, FOREST: 1, MOUNTAIN: 2, WATER: 3 };
@@ -252,90 +276,135 @@
     const BUILDINGS = {
       hq: {
         name: 'Versammlungsplatz',
-        cost: { wood: 0, stone: 0 },
-        size: 2, produces: null, pop: 0, color: '#d2a86a',
-        maxWorkers: 0
+        cost: { wood: 0, planks: 0, bricks: 0 },
+        size: 2, produces: null, converts: null, pop: 0, color: '#d2a86a',
+        maxWorkers: 0, category: 'weitere'
       },
       house: {
         name: 'Wohnhaus',
-        cost: { wood: 4, stone: 2 },
-        size: 1, produces: null, pop: 3, color: '#e3b341',
-        maxWorkers: 0
+        cost: { wood: 1, planks: 4, bricks: 2 },
+        size: 1, produces: null, converts: null, pop: 3, color: '#e3b341',
+        maxWorkers: 0, category: 'weitere'
       },
       woodcutter: {
         name: 'Holzfäller',
-        cost: { wood: 3, stone: 1 },
-        size: 1, produces: { wood: 0.18 }, pop: 0, color: '#3fb950',
-        maxWorkers: 1
+        cost: { wood: 1, planks: 2, bricks: 1 },
+        size: 1, produces: { wood: 0.036 }, converts: null, pop: 0, color: '#3fb950',
+        maxWorkers: 1, category: 'ressourcen', needsTool: true
       },
       mine: {
         name: 'Steinbruch',
-        cost: { wood: 2, stone: 1 },
-        size: 1, produces: { stone: 0.14 }, pop: 0, color: '#8b949e',
-        maxWorkers: 1
+        cost: { wood: 1, planks: 1, bricks: 1 },
+        size: 1, produces: { stone: 0.028 }, converts: null, pop: 0, color: '#8b949e',
+        maxWorkers: 1, category: 'ressourcen', needsTool: true
       },
-      farm: {
-        name: 'Bauernhof',
-        cost: { wood: 4, stone: 2 },
-        size: 2, produces: { food: 0.2 }, pop: 0, color: '#d29922',
-        maxWorkers: 2
+      sawmill: {
+        name: 'Sägewerk',
+        cost: { wood: 1, planks: 3, bricks: 2 },
+        size: 2, produces: null, converts: { from: 'wood', to: 'planks', rate: 0.09 },
+        pop: 0, color: '#8B5A2B',
+        maxWorkers: 1, category: 'ressourcen', needsTool: true
+      },
+      brickworks: {
+        name: 'Ziegelei',
+        cost: { wood: 1, planks: 2, bricks: 2 },
+        size: 2, produces: null, converts: { from: 'stone', to: 'bricks', rate: 0.056 },
+        pop: 0, color: '#c4704b',
+        maxWorkers: 1, category: 'ressourcen', needsTool: true
+      },
+      ironmine: {
+        name: 'Eisenmine',
+        cost: { wood: 1, planks: 2, bricks: 2 },
+        size: 1, produces: { iron: 0.022 }, converts: null, pop: 0, color: '#6e7781',
+        maxWorkers: 1, category: 'ressourcen', needsTool: true
+      },
+      smithy: {
+        name: 'Schmiede',
+        cost: { wood: 1, planks: 3, bricks: 3 },
+        size: 2, produces: null, converts: { from: 'iron', to: 'tools', rate: 0.04 },
+        pop: 0, color: '#7d8590',
+        maxWorkers: 1, category: 'ressourcen', needsTool: false
       },
       warehouse: {
         name: 'Lager',
-        cost: { wood: 5, stone: 3 },
-        size: 2, produces: null, pop: 0, color: '#b08968',
-        maxWorkers: 1
+        cost: { wood: 1, planks: 4, bricks: 3 },
+        size: 2, produces: null, converts: null, pop: 0, color: '#b08968',
+        maxWorkers: 1, category: 'ressourcen', needsTool: false
+      },
+      farm: {
+        name: 'Bauernhof',
+        cost: { wood: 1, planks: 3, bricks: 2 },
+        size: 2, produces: { grain: 0.04 }, converts: null, pop: 0, color: '#d29922',
+        maxWorkers: 2, category: 'nahrung', needsTool: true
+      },
+      mill: {
+        name: 'Mühle',
+        cost: { wood: 1, planks: 3, bricks: 2 },
+        size: 1, produces: null, converts: { from: 'grain', to: 'flour', rate: 0.03 },
+        pop: 0, color: '#d4a574',
+        maxWorkers: 1, category: 'nahrung', needsTool: true
+      },
+      bakery: {
+        name: 'Bäckerei',
+        cost: { wood: 1, planks: 3, bricks: 2 },
+        size: 1, produces: null, converts: { from: 'flour', to: 'food', rate: 0.028 },
+        pop: 0, color: '#e8c39e',
+        maxWorkers: 1, category: 'nahrung', needsTool: true
       }
     };
 
-    // Materialien pro Phase – Summe ergibt exakt die Baukosten
+    // Materialien pro Phase – Summe ≈ Baukosten
+    // Phase 0 Abstecken: 1 Baumstamm
+    // Phase 1 Planieren: Ziegel
+    // Phase 2 Rohbau: Bretter + restliche Ziegel
+    // Phase 3 Schluss: nichts
     function getPhaseNeeds(type, phase) {
       const cost = BUILDINGS[type].cost;
-      if (type === 'hq') return { wood: 0, stone: 0 };
+      if (type === 'hq') return { wood: 0, planks: 0, bricks: 0 };
 
-      const woodStake = Math.min(1, cost.wood);
-      const stonePlan = cost.stone > 0 ? Math.max(1, Math.floor(cost.stone * 0.5)) : 0;
-      const woodBuild = cost.wood - woodStake;
-      const stoneBuild = cost.stone - stonePlan;
+      const woodStake = Math.min(1, cost.wood || 0);
+      const bricksPlan = cost.bricks > 0 ? Math.max(1, Math.floor(cost.bricks * 0.4)) : 0;
+      const planksBuild = cost.planks || 0;
+      const bricksBuild = (cost.bricks || 0) - bricksPlan;
 
       switch (phase) {
-        case 0: return { wood: woodStake, stone: 0 };
-        case 1: return { wood: 0, stone: stonePlan };
-        case 2: return { wood: woodBuild, stone: stoneBuild };
-        case 3: return { wood: 0, stone: 0 };
-        default: return { wood: 0, stone: 0 };
+        case 0: return { wood: woodStake, planks: 0, bricks: 0 };
+        case 1: return { wood: 0, planks: 0, bricks: bricksPlan };
+        case 2: return { wood: 0, planks: planksBuild, bricks: bricksBuild };
+        case 3: return { wood: 0, planks: 0, bricks: 0 };
+        default: return { wood: 0, planks: 0, bricks: 0 };
       }
     }
 
-    // Gesamter noch benötigter Materialbedarf ab aktueller Phase
     function totalRemainingNeeds(site) {
-      let wood = 0, stone = 0;
+      let wood = 0, planks = 0, bricks = 0;
       for (let p = site.phase; p < 3; p++) {
         const n = getPhaseNeeds(site.type, p);
         wood += n.wood;
-        stone += n.stone;
+        planks += n.planks;
+        bricks += n.bricks;
       }
-      // schon am Standort gelagert abziehen
-      wood = Math.max(0, wood - (site.stock?.wood || 0));
-      stone = Math.max(0, stone - (site.stock?.stone || 0));
-      return { wood, stone };
+      const st = site.stock || {};
+      wood = Math.max(0, wood - (st.wood || 0));
+      planks = Math.max(0, planks - (st.planks || 0));
+      bricks = Math.max(0, bricks - (st.bricks || 0));
+      return { wood, planks, bricks };
     }
 
-    // Reicht das gelagerte Material für die aktuelle Phase?
     function hasMaterialsForPhase(site) {
       const need = getPhaseNeeds(site.type, site.phase);
-      return (site.stock?.wood || 0) >= need.wood &&
-             (site.stock?.stone || 0) >= need.stone;
+      const st = site.stock || {};
+      return (st.wood || 0) >= need.wood &&
+             (st.planks || 0) >= need.planks &&
+             (st.bricks || 0) >= need.bricks;
     }
 
-    // Material für aktuelle Phase verbrauchen
     function consumePhaseMaterials(site) {
       const need = getPhaseNeeds(site.type, site.phase);
-      if (!site.stock) site.stock = { wood: 0, stone: 0 };
-      site.stock.wood -= need.wood;
-      site.stock.stone -= need.stone;
-      if (site.stock.wood < 0) site.stock.wood = 0;
-      if (site.stock.stone < 0) site.stock.stone = 0;
+      if (!site.stock) site.stock = { wood: 0, planks: 0, bricks: 0 };
+      site.stock.wood = Math.max(0, (site.stock.wood || 0) - need.wood);
+      site.stock.planks = Math.max(0, (site.stock.planks || 0) - need.planks);
+      site.stock.bricks = Math.max(0, (site.stock.bricks || 0) - need.bricks);
     }
 
     let race = null;
@@ -362,20 +431,16 @@
     }
 
     function totalResources() {
-      let wood = 0, stone = 0, food = 0;
+      const t = { wood:0, planks:0, stone:0, bricks:0, iron:0, tools:0, grain:0, flour:0, food:0 };
       for (const b of buildings) {
         if (b.storage) {
-          wood += b.storage.wood;
-          stone += b.storage.stone;
-          food += b.storage.food;
+          for (const k of Object.keys(t)) t[k] += b.storage[k] || 0;
         }
-        if (b.stockpile) {
-          wood += b.stockpile.storage.wood;
-          stone += b.stockpile.storage.stone;
-          food += b.stockpile.storage.food;
+        if (b.stockpile && b.stockpile.storage) {
+          for (const k of Object.keys(t)) t[k] += b.stockpile.storage[k] || 0;
         }
       }
-      return { wood, stone, food };
+      return t;
     }
 
     function isTileFree(tx, ty) {
@@ -405,9 +470,25 @@
       return { x: c.x, y: c.y, storage: { wood: 0, stone: 0, food: 0 } };
     }
 
+    function getHQ() {
+      return buildings.find(b => b.type === 'hq' && !b.isSite);
+    }
+
+    function inBuildRadius(tx, ty, size) {
+      const hq = getHQ();
+      if (!hq) return true;
+      const cx = hq.x + BUILDINGS.hq.size / 2;
+      const cy = hq.y + BUILDINGS.hq.size / 2;
+      // Gebäude-Mittelpunkt muss im Radius liegen
+      const mx = tx + size / 2;
+      const my = ty + size / 2;
+      return Math.hypot(mx - cx, my - cy) <= BUILD_RADIUS;
+    }
+
     function canPlace(type, tx, ty) {
       const b = BUILDINGS[type];
       const raceData = RACES[race];
+      if (type !== 'hq' && !inBuildRadius(tx, ty, b.size)) return false;
       for (let dy = 0; dy < b.size; dy++) {
         for (let dx = 0; dx < b.size; dx++) {
           const x = tx + dx, y = ty + dy;
@@ -437,7 +518,7 @@
           phase: 4,
           needed: { wood: 0, stone: 0 },
           delivered: { wood: 0, stone: 0 },
-          storage: { wood: 60, stone: 40, food: 50 },
+          storage: { wood: 40, planks: 30, stone: 30, bricks: 25, iron: 10, tools: 8, grain: 20, flour: 15, food: 40 },
           stockpile: null,
           workProgress: 0
         });
@@ -451,9 +532,9 @@
         type, x: tx, y: ty,
         isSite: true,
         phase: 0,
-        stock: { wood: 0, stone: 0 },       // vorzeitig anlieferbar
+        stock: { wood: 0, planks: 0, bricks: 0 },
         materialsConsumed: false,           // für aktuelle Phase schon verbraucht?
-        storage: { wood: 0, stone: 0, food: 0 },
+        storage: { wood: 0, planks: 0, stone: 0, bricks: 0, iron: 0, tools: 0, grain: 0, flour: 0, food: 0 },
         stockpile: null,
         workProgress: 0,
         assignedBuilder: null,
@@ -613,7 +694,7 @@
         y: y * TILE + TILE / 2,
         targetX: x * TILE + TILE / 2,
         targetY: y * TILE + TILE / 2,
-        speed: 0.75 + Math.random() * 0.25,
+        speed: 0.18 + Math.random() * 0.08,
         state: 'idle',
         profession: isBuilder ? 'builder' : 'general',  // builder = fix Bauarbeiter
         workplace: null,
@@ -632,7 +713,7 @@
       const type = building.type;
       let wanted = null;
       if (type === 'woodcutter') wanted = TERRAIN.FOREST;
-      else if (type === 'mine') wanted = TERRAIN.MOUNTAIN;
+      else if (type === 'mine' || type === 'ironmine') wanted = TERRAIN.MOUNTAIN;
       else if (type === 'farm') wanted = TERRAIN.GRASS;
       else return null;
 
@@ -742,60 +823,134 @@
 
       // ========== ALLGEMEINE SIEDLER ==========
 
-      // 1. Produktionsgebäude
+      // 1. Produktionsgebäude – nur nächste freie Siedler
       const needingWorkers = buildings.filter(b => {
         if (b.isSite) return false;
         const max = BUILDINGS[b.type].maxWorkers;
         return max > 0 && countWorkers(b) < max;
       });
 
-      if (needingWorkers.length > 0) {
-        const b = needingWorkers[Math.floor(Math.random() * needingWorkers.length)];
-        s.state = 'worker';
-        s.workplace = b;
-        s.targetSite = null;
-        s.sourceBuilding = null;
-        s.carrying = null;
-        s.setupTimer = 2.5;
-        if (!b.workTile) b.workTile = findNearestResourceTile(b);
-        const bs = BUILDINGS[b.type].size;
-        s.targetX = (b.x + bs/2) * TILE;
-        s.targetY = (b.y + bs/2) * TILE;
-        return;
-      }
-
-      // 2. Träger – Material für alle noch offenen Phasen anliefern
-      const transportSites = buildings.filter(b => b.isSite && b.phase < 3);
-      if (transportSites.length > 0) {
-        const needy = [];
-        for (const site of transportSites) {
-          const still = totalRemainingNeeds(site);
-          const stillNeed = still.wood + still.stone;
-          if (stillNeed <= 0) continue;
-
-          const enRoute = settlers.filter(o =>
-            (o.state === 'to_source' || o.state === 'to_site') && o.targetSite === site
-          ).length;
-
-          if (enRoute < stillNeed) {
-            needy.push({ site, still, stillNeed });
-          }
+      if (needingWorkers.length > 0 && s.profession !== 'builder') {
+        // Nächstes Gebäude das Arbeiter braucht
+        let bestB = null, bestD = Infinity;
+        for (const b of needingWorkers) {
+          const d = Math.hypot(
+            (b.x + BUILDINGS[b.type].size/2)*TILE - s.x,
+            (b.y + BUILDINGS[b.type].size/2)*TILE - s.y
+          );
+          if (d < bestD) { bestD = d; bestB = b; }
         }
 
-        if (needy.length > 0) {
-          let best = null, bestD = Infinity;
-          for (const n of needy) {
-            const cx = (n.site.x + BUILDINGS[n.site.type].size/2) * TILE;
-            const cy = (n.site.y + BUILDINGS[n.site.type].size/2) * TILE;
-            const d = Math.hypot(cx - s.x, cy - s.y);
-            if (d < bestD) { bestD = d; best = n; }
-          }
+        // Freie Nicht-Bauarbeiter, sortiert nach Distanz zum Gebäude
+        const free = settlers.filter(o =>
+          o.profession !== 'builder' && o.state === 'idle'
+        ).map(o => ({
+          s: o,
+          d: Math.hypot(
+            (bestB.x + BUILDINGS[bestB.type].size/2)*TILE - o.x,
+            (bestB.y + BUILDINGS[bestB.type].size/2)*TILE - o.y
+          )
+        })).sort((a,b) => a.d - b.d);
 
-          const needRes = best.still.wood > 0 ? 'wood' : 'stone';
+        const slots = BUILDINGS[bestB.type].maxWorkers - countWorkers(bestB);
+        const chosen = free.slice(0, slots);
+        // Werkzeug prüfen
+        const needTool = BUILDINGS[bestB.type].needsTool;
+        const toolsHere = (bestB.storage && bestB.storage.tools) || 0;
+        const workersNow = countWorkers(bestB);
+        if (needTool && toolsHere < workersNow + 1) {
+          // kein freies Werkzeug – nicht besetzen (Träger sollen Werkzeug bringen)
+        } else if (chosen.some(c => c.s === s)) {
+          s.state = 'worker';
+          s.workplace = bestB;
+          s.targetSite = null;
+          s.sourceBuilding = null;
+          s.carrying = null;
+          s.setupTimer = 6;
+          if (!bestB.workTile) bestB.workTile = findNearestResourceTile(bestB);
+          const bs = BUILDINGS[bestB.type].size;
+          s.targetX = (bestB.x + bs/2) * TILE;
+          s.targetY = (bestB.y + bs/2) * TILE;
+          return;
+        }
+      }
+
+      // 1b. Werkzeuge an Betriebsgebäude liefern
+      const needTools = buildings.filter(b => {
+        if (b.isSite) return false;
+        const def = BUILDINGS[b.type];
+        if (!def.needsTool) return false;
+        const tools = (b.storage && b.storage.tools) || 0;
+        return tools < def.maxWorkers;
+      });
+      for (const b of needTools) {
+        const already = settlers.some(o =>
+          (o.state === 'to_source' || o.state === 'to_site') && o.targetSite === b && o.carrying === 'tools'
+        );
+        if (already) continue;
+        const free = settlers.filter(o => o.profession !== 'builder' && o.state === 'idle');
+        const ranked = free.map(o => ({
+          s: o,
+          d: Math.hypot((b.x+BUILDINGS[b.type].size/2)*TILE - o.x, (b.y+BUILDINGS[b.type].size/2)*TILE - o.y)
+        })).sort((a,b) => a.d - b.d);
+        if (ranked.length && ranked[0].s === s) {
+          const source = findNearestSource('tools', s.x, s.y);
+          if (source && source !== b) {
+            s.state = 'to_source';
+            s.targetSite = b;
+            s.sourceBuilding = source;
+            s.carrying = 'tools';
+            s.workplace = null;
+            const bs = BUILDINGS[source.type].size;
+            s.targetX = (source.x + bs/2) * TILE;
+            s.targetY = (source.y + bs/2) * TILE;
+            return;
+          }
+        }
+      }
+
+      // 2. Träger – nur so viele wie nötig, und nur die nächsten Freien
+      const freeGenerals = settlers.filter(o =>
+        o.profession !== 'builder' && o.state === 'idle'
+      );
+
+      // Baustellen-Bedarf
+      const transportSites = buildings.filter(b => b.isSite && b.phase < 3);
+      for (const site of transportSites) {
+        const still = totalRemainingNeeds(site);
+        const stillNeed = (still.wood||0) + (still.planks||0) + (still.bricks||0);
+        if (stillNeed <= 0) continue;
+
+        const enRoute = settlers.filter(o =>
+          (o.state === 'to_source' || o.state === 'to_site') && o.targetSite === site
+        ).length;
+        const slots = stillNeed - enRoute;
+        if (slots <= 0) continue;
+
+        // Welche Ressource zuerst?
+        const needRes = still.wood > 0 ? 'wood' :
+                        still.planks > 0 ? 'planks' :
+                        still.bricks > 0 ? 'bricks' : null;
+        if (!needRes) continue;
+
+        // Nächste freie Siedler zu dieser Baustelle
+        const ranked = freeGenerals
+          .map(o => ({
+            s: o,
+            d: Math.hypot(
+              (site.x + BUILDINGS[site.type].size/2)*TILE - o.x,
+              (site.y + BUILDINGS[site.type].size/2)*TILE - o.y
+            )
+          }))
+          .sort((a, b) => a.d - b.d)
+          .slice(0, slots);
+
+        // Bin ich einer der nächsten?
+        if (ranked.some(r => r.s === s)) {
           const source = findNearestSource(needRes, s.x, s.y);
           if (source) {
             s.state = 'to_source';
-            s.targetSite = best.site;
+            s.targetSite = site;
             s.sourceBuilding = source;
             s.carrying = needRes;
             s.workplace = null;
@@ -807,6 +962,51 @@
               s.targetX = (source.x + bs/2) * TILE;
               s.targetY = (source.y + bs/2) * TILE;
             }
+            return;
+          }
+        }
+      }
+
+      // 3. Rohstoffe zu Verarbeitungsgebäuden – max 1 Träger pro Gebäude
+      const converters = buildings.filter(b => {
+        if (b.isSite) return false;
+        const def = BUILDINGS[b.type];
+        if (!def.converts) return false;
+        if (countWorkers(b) === 0) return false;
+        const from = def.converts.from;
+        const to = def.converts.to;
+        return (b.storage[from] || 0) < 8 && (b.storage[to] || 0) < BUILDING_STORAGE_MAX;
+      });
+
+      for (const b of converters) {
+        const already = settlers.some(o =>
+          (o.state === 'to_source' || o.state === 'to_site') && o.targetSite === b
+        );
+        if (already) continue;
+
+        const from = BUILDINGS[b.type].converts.from;
+        // Nächster freier Siedler
+        const ranked = freeGenerals
+          .map(o => ({
+            s: o,
+            d: Math.hypot(
+              (b.x + BUILDINGS[b.type].size/2)*TILE - o.x,
+              (b.y + BUILDINGS[b.type].size/2)*TILE - o.y
+            )
+          }))
+          .sort((a, b) => a.d - b.d);
+
+        if (ranked.length && ranked[0].s === s) {
+          const source = findNearestSource(from, s.x, s.y);
+          if (source && source !== b) {
+            s.state = 'to_source';
+            s.targetSite = b;
+            s.sourceBuilding = source;
+            s.carrying = from;
+            s.workplace = null;
+            const bs = BUILDINGS[source.type].size;
+            s.targetX = (source.x + bs/2) * TILE;
+            s.targetY = (source.y + bs/2) * TILE;
             return;
           }
         }
@@ -848,19 +1048,33 @@
           continue;
         }
 
-        // ===== Träger: an Baustelle abliefern =====
+        // ===== Träger: abliefern (Baustelle oder Sägewerk/Ziegelei) =====
         if (s.state === 'to_site' && s.targetSite) {
           const site = s.targetSite;
-          if (s.carrying && site.isSite) {
-            const still = totalRemainingNeeds(site);
-            if (still[s.carrying] > 0) {
-              if (!site.stock) site.stock = { wood: 0, stone: 0 };
-              site.stock[s.carrying] = (site.stock[s.carrying] || 0) + 1;
-            } else {
-              // Überlieferung → zurück zum Versammlungsplatz
-              const plaza = buildings.find(b => b.type === 'hq' && !b.isSite);
-              if (plaza && plaza.storage) {
-                plaza.storage[s.carrying] = (plaza.storage[s.carrying] || 0) + 1;
+          if (s.carrying) {
+            if (site.isSite) {
+              const still = totalRemainingNeeds(site);
+              if ((still[s.carrying] || 0) > 0) {
+                if (!site.stock) site.stock = { wood: 0, planks: 0, bricks: 0 };
+                site.stock[s.carrying] = (site.stock[s.carrying] || 0) + 1;
+              } else {
+                const plaza = buildings.find(b => b.type === 'hq' && !b.isSite);
+                if (plaza && plaza.storage) {
+                  plaza.storage[s.carrying] = (plaza.storage[s.carrying] || 0) + 1;
+                }
+              }
+            } else if (!site.isSite && site.storage !== undefined) {
+              // Abladen an Betriebsgebäude (Werkzeuge, Rohstoffe für Converter, …)
+              if (!site.storage) site.storage = { wood:0,planks:0,stone:0,bricks:0,iron:0,tools:0,grain:0,flour:0,food:0 };
+              const cap = site.type === 'warehouse' ? 200 : BUILDING_STORAGE_MAX;
+              const space = cap - (site.storage[s.carrying] || 0);
+              if (space > 0) {
+                site.storage[s.carrying] = (site.storage[s.carrying] || 0) + 1;
+              } else {
+                const plaza = buildings.find(b => b.type === 'hq' && !b.isSite);
+                if (plaza && plaza.storage) {
+                  plaza.storage[s.carrying] = (plaza.storage[s.carrying] || 0) + 1;
+                }
               }
             }
           }
@@ -900,14 +1114,14 @@
             o.targetSite === site &&
             Math.hypot(o.x - (site.x+bs/2)*TILE, o.y - (site.y+bs/2)*TILE) < 28
           ).length;
-          const speed = 0.9 + Math.max(0, buildersHere - 1) * 0.55;
+          const speed = 0.2 + Math.max(0, buildersHere - 1) * 0.12;
 
           if (site.phase < 3) {
             if (!hasMaterialsForPhase(site)) {
               // Warten auf Material
               site.waitTimer = (site.waitTimer || 0) + dt;
               // Nach 6 Sekunden Warten → andere Baustelle suchen die bereit ist
-              if (site.waitTimer > 18) {
+              if (site.waitTimer > 40) {
                 s.state = 'idle';
                 s.targetSite = null;
                 s.waitTimer = 0;
@@ -921,7 +1135,7 @@
               }
               site.waitTimer = 0;
               site.workProgress = (site.workProgress || 0) + dt * speed;
-              const needed = site.phase === 0 ? 5 : (site.phase === 1 ? 7 : 12);
+              const needed = site.phase === 0 ? 12 : (site.phase === 1 ? 18 : 28);
               if (site.workProgress >= needed) {
                 advancePhase(site);
               }
@@ -930,7 +1144,7 @@
             // Schlussarbeiten (kein Material)
             site.waitTimer = 0;
             site.workProgress = (site.workProgress || 0) + dt * speed;
-            if (site.workProgress >= 22) {
+            if (site.workProgress >= 50) {
               advancePhase(site);
               s.state = 'idle';
               s.targetSite = null;
@@ -970,7 +1184,7 @@
             if (s.carrying) {
               const atWh = Math.hypot(s.x - (b.x+bs/2)*TILE, s.y - (b.y+bs/2)*TILE) < 16;
               if (atWh) {
-                if (!b.storage) b.storage = { wood: 0, stone: 0, food: 0 };
+                if (!b.storage) b.storage = { wood: 0, planks: 0, stone: 0, bricks: 0, grain: 0, flour: 0, food: 0 };
                 // Lager hat hohe Kapazität
                 const WH_MAX = 200;
                 if ((b.storage[s.carrying] || 0) < WH_MAX) {
@@ -1011,7 +1225,7 @@
               if (atTarget) {
                 // Eine Ressource mitnehmen (die mit dem meisten Bestand)
                 let bestRes = null, bestAmt = 0;
-                for (const res of ['wood', 'stone', 'food']) {
+                for (const res of ['wood', 'planks', 'stone', 'bricks', 'iron', 'tools', 'grain', 'flour', 'food']) {
                   if ((target.storage[res] || 0) > bestAmt) {
                     bestAmt = target.storage[res];
                     bestRes = res;
@@ -1088,24 +1302,74 @@
     function productionTick() {
       const bonus = RACES[race].bonus;
 
+      function takeFood(amount) {
+        let left = amount;
+        const sources = buildings.filter(x =>
+          !x.isSite && x.storage && (x.storage.food || 0) > 0
+        ).sort((a, b) => {
+          // HQ und Lager bevorzugen
+          const pa = a.type === 'hq' || a.type === 'warehouse' ? 0 : 1;
+          const pb = b.type === 'hq' || b.type === 'warehouse' ? 0 : 1;
+          return pa - pb;
+        });
+        for (const src of sources) {
+          if (left <= 0) break;
+          const take = Math.min(src.storage.food, left);
+          src.storage.food -= take;
+          left -= take;
+        }
+        return left <= 0.001; // true = genug Nahrung vorhanden
+      }
+
       for (const b of buildings) {
-        if (b.isSite || !BUILDINGS[b.type].produces) continue;
+        if (b.isSite) continue;
         const workers = countWorkers(b);
         if (workers === 0) continue;
-
         const def = BUILDINGS[b.type];
+        if (!def.produces && !def.converts) continue; // nur echte Betriebsgebäude
+        if (!b.storage) b.storage = { wood: 0, planks: 0, stone: 0, bricks: 0, grain: 0, flour: 0, food: 0 };
+
+        // Nahrung verbrauchen – ohne Nahrung keine Produktion
+        const foodNeed = 0.1 * workers;
+        if (!takeFood(foodNeed)) continue;
+
         const add = (res, amount) => {
           const space = BUILDING_STORAGE_MAX - (b.storage[res] || 0);
-          if (space <= 0) return; // voll – wartet auf Abholung durch Lager
+          if (space <= 0) return;
           b.storage[res] = (b.storage[res] || 0) + Math.min(space, amount);
         };
 
-        if (def.produces.wood) add('wood', def.produces.wood * bonus.wood * workers);
-        if (def.produces.stone) add('stone', def.produces.stone * bonus.stone * workers);
-        if (def.produces.food) add('food', def.produces.food * bonus.food * workers);
+        // Werkzeug-Pflicht
+        if (def.needsTool) {
+          const toolsHere = b.storage.tools || 0;
+          if (toolsHere < workers) continue; // nicht genug Werkzeuge
+        }
+
+        if (def.produces) {
+          if (def.produces.wood) add('wood', def.produces.wood * bonus.wood * workers);
+          if (def.produces.stone) add('stone', def.produces.stone * bonus.stone * workers);
+          if (def.produces.iron) add('iron', def.produces.iron * workers);
+          if (def.produces.grain) add('grain', def.produces.grain * bonus.food * workers);
+          if (def.produces.food) add('food', def.produces.food * bonus.food * workers);
+        }
+
+        if (def.converts) {
+          const { from, to, rate } = def.converts;
+          const available = b.storage[from] || 0;
+          if (available > 0) {
+            const amount = Math.min(available, rate * workers);
+            const space = BUILDING_STORAGE_MAX - (b.storage[to] || 0);
+            if (space > 0) {
+              const made = Math.min(amount, space);
+              b.storage[from] -= made;
+              b.storage[to] = (b.storage[to] || 0) + made;
+            }
+          }
+        }
       }
 
       const totals = totalResources();
+
       if (totals.food > 8 && population < maxPop && Math.random() < 0.18) {
         const plaza = buildings.find(b => b.type === 'hq' && !b.isSite);
         if (plaza && plaza.storage.food >= 4) {
@@ -1212,9 +1476,9 @@
           // Fortschritt der aktuellen Phase
           let progress = 0;
           if (b.phase === 3) {
-            progress = Math.min(1, (b.workProgress || 0) / 22);
+            progress = Math.min(1, (b.workProgress || 0) / 50);
           } else {
-            const workNeed = b.phase === 0 ? 5 : (b.phase === 1 ? 7 : 12);
+            const workNeed = b.phase === 0 ? 12 : (b.phase === 1 ? 18 : 28);
             if (b.materialsConsumed) {
               progress = Math.min(1, (b.workProgress || 0) / workNeed);
             } else {
@@ -1234,15 +1498,15 @@
           ctx.fillText(phase.short, px + s / 2, py + s / 2 - 8);
 
           // Gelagertes Material an der Baustelle
-          const sw = Math.floor(b.stock?.wood || 0);
-          const ss = Math.floor(b.stock?.stone || 0);
           ctx.fillStyle = '#eee';
-          ctx.font = '8px sans-serif';
+          ctx.font = '7px sans-serif';
           if (b.phase < 3) {
-            const need = getPhaseNeeds(b.type, b.phase);
+            const sw = Math.floor(b.stock?.wood || 0);
+            const sp = Math.floor(b.stock?.planks || 0);
+            const sb = Math.floor(b.stock?.bricks || 0);
             const ready = hasMaterialsForPhase(b);
             ctx.fillText(
-              (ready ? '✓ ' : '') + '🪵' + sw + ' 🪨' + ss,
+              (ready ? '✓ ' : '') + '🪵' + sw + ' ▭' + sp + ' 🧱' + sb,
               px + s / 2, py + s / 2 + 5
             );
           } else {
@@ -1267,13 +1531,19 @@
           if (b.storage) {
             const parts = [];
             if (b.storage.wood >= 1) parts.push('🪵' + Math.floor(b.storage.wood));
+            if (b.storage.planks >= 1) parts.push('▭' + Math.floor(b.storage.planks));
             if (b.storage.stone >= 1) parts.push('🪨' + Math.floor(b.storage.stone));
-            if (b.storage.food >= 1) parts.push('🌾' + Math.floor(b.storage.food));
+            if (b.storage.bricks >= 1) parts.push('🧱' + Math.floor(b.storage.bricks));
+            if (b.storage.iron >= 1) parts.push('⚙️' + Math.floor(b.storage.iron));
+            if (b.storage.tools >= 1) parts.push('🔨' + Math.floor(b.storage.tools));
+            if (b.storage.grain >= 1) parts.push('🌾' + Math.floor(b.storage.grain));
+            if (b.storage.flour >= 1) parts.push('🥣' + Math.floor(b.storage.flour));
+            if (b.storage.food >= 1) parts.push('🍞' + Math.floor(b.storage.food));
             if (parts.length > 0) {
               ctx.fillStyle = 'rgba(0,0,0,0.55)';
               ctx.fillRect(px + 2, py + s - 14, s - 4, 12);
               ctx.fillStyle = '#fff';
-              ctx.font = '8px sans-serif';
+              ctx.font = '7px sans-serif';
               ctx.textAlign = 'center';
               ctx.fillText(parts.join(' '), px + s / 2, py + s - 7);
             }
@@ -1287,9 +1557,31 @@
                         b.type === 'house' ? 'Haus' :
                         b.type === 'woodcutter' ? 'Holz' :
                         b.type === 'mine' ? 'Stein' :
-                        b.type === 'warehouse' ? 'Lager' : 'Hof';
+                        b.type === 'sawmill' ? 'Säge' :
+                        b.type === 'brickworks' ? 'Ziegel' :
+                        b.type === 'ironmine' ? 'Eisen' :
+                        b.type === 'smithy' ? 'Schmiede' :
+                        b.type === 'warehouse' ? 'Lager' :
+                        b.type === 'mill' ? 'Mühle' :
+                        b.type === 'bakery' ? 'Bäcker' : 'Hof';
           ctx.fillText(label, px + s / 2, py + s / 2 - 3);
         }
+      }
+
+      // Baubereich um HQ anzeigen
+      const hq = buildings.find(b => b.type === 'hq' && !b.isSite);
+      if (hq && placing) {
+        const hcx = (hq.x + BUILDINGS.hq.size / 2) * TILE;
+        const hcy = (hq.y + BUILDINGS.hq.size / 2) * TILE;
+        ctx.beginPath();
+        ctx.arc(hcx, hcy, BUILD_RADIUS * TILE, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(88, 166, 255, 0.45)';
+        ctx.lineWidth = 2;
+        ctx.setLineDash([8, 6]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = 'rgba(88, 166, 255, 0.06)';
+        ctx.fill();
       }
 
       if (placing) {
@@ -1325,7 +1617,7 @@
           ctx.fillStyle = '#fff';
           ctx.font = '9px sans-serif';
           ctx.textAlign = 'center';
-          const icon = s.carrying === 'wood' ? '🪵' : (s.carrying === 'stone' ? '🪨' : '🌾');
+          const icon = ({wood:'🪵',planks:'▭',stone:'🪨',bricks:'🧱',iron:'⚙️',tools:'🔨',grain:'🌾',flour:'🥣',food:'🍞'})[s.carrying] || '?';
           ctx.fillText(icon, s.x, s.y - 10);
         }
       }
@@ -1336,18 +1628,32 @@
     function updateUI() {
       const t = totalResources();
       document.getElementById('res-wood').textContent = Math.floor(t.wood);
+      document.getElementById('res-planks').textContent = Math.floor(t.planks);
       document.getElementById('res-stone').textContent = Math.floor(t.stone);
+      document.getElementById('res-bricks').textContent = Math.floor(t.bricks);
+      document.getElementById('res-iron').textContent = Math.floor(t.iron);
+      document.getElementById('res-tools').textContent = Math.floor(t.tools);
+      document.getElementById('res-grain').textContent = Math.floor(t.grain);
+      document.getElementById('res-flour').textContent = Math.floor(t.flour);
       document.getElementById('res-food').textContent = Math.floor(t.food);
       document.getElementById('res-pop').textContent = population + '/' + maxPop;
     }
+
+    let currentTab = 'ressourcen';
 
     function updateButtons() {
       const container = document.getElementById('building-buttons');
       container.innerHTML = '';
       for (const [key, def] of Object.entries(BUILDINGS)) {
         if (key === 'hq' && buildings.some(b => b.type === 'hq')) continue;
+        if (def.category && def.category !== currentTab) continue;
+        if (key === 'hq') continue;
+
         const btn = document.createElement('button');
-        const costText = key === 'hq' ? 'Start' : def.cost.wood + '🪵 ' + def.cost.stone + '🪨';
+        const costText =
+          ((def.cost.wood ? def.cost.wood + '🪵 ' : '') +
+           (def.cost.planks ? def.cost.planks + '▭ ' : '') +
+           (def.cost.bricks ? def.cost.bricks + '🧱' : '')).trim() || '–';
         btn.innerHTML = '<b>' + def.name + '</b><br><small style="opacity:0.8">' + costText + '</small>';
         if (placing === key) btn.classList.add('active');
         btn.onclick = () => {
@@ -1441,7 +1747,7 @@
           isSite: false, phase: 4,
           needed: { wood: 0, stone: 0 },
           delivered: { wood: 0, stone: 0 },
-          storage: { wood: 60, stone: 40, food: 50 },
+          storage: { wood: 40, planks: 30, stone: 30, bricks: 25, iron: 10, tools: 8, grain: 20, flour: 15, food: 40 },
           stockpile: null,
           workProgress: 0
         });
@@ -1450,7 +1756,7 @@
         // Kamera auf Startposition
         camera.x = (startX + 1) * TILE;
         camera.y = (startY + 1) * TILE;
-        camera.zoom = 0.85;
+        camera.zoom = 0.55;
 
         for (let i = 0; i < 30; i++) {
           spawnSettler(startX, startY);
@@ -1474,6 +1780,17 @@
       });
     });
 
+    
+    document.getElementById('build-tabs').addEventListener('click', e => {
+      const btn = e.target.closest('button[data-tab]');
+      if (!btn) return;
+      currentTab = btn.dataset.tab;
+      document.querySelectorAll('#build-tabs button').forEach(b => b.classList.remove('active-tab'));
+      btn.classList.add('active-tab');
+      placing = null;
+      updateButtons();
+    });
+
     window.addEventListener('resize', resize);
 
     let lastTime = performance.now();
@@ -1482,7 +1799,7 @@
       lastTime = now;
 
       tickTimer += dt;
-      if (tickTimer >= 2.2) {
+      if (tickTimer >= 5.0) {
         tickTimer = 0;
         productionTick();
       }
