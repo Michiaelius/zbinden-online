@@ -1953,7 +1953,7 @@
       buildings.push({
         type: 'hq', x: best.x, y: best.y,
         isSite: false, phase: 4,
-        storage: { wood: 40, planks: 30, stone: 30, bricks: 25, iron: 10, tools: 8, grain: 20, flour: 15, food: 40 },
+        storage: { wood: 120, planks: 90, stone: 80, bricks: 70, iron: 30, tools: 25, grain: 50, flour: 30, food: 100 },
         stockpile: null, workProgress: 0,
         owner: ownerId
       });
@@ -2013,16 +2013,20 @@
       candidates.sort((a, b) => a.r - b.r);
       const pick = candidates[Math.floor(Math.random() * Math.min(5, candidates.length))];
 
-      st.wood = Math.max(0, st.wood - (cost.wood || 0));
-      st.planks = Math.max(0, st.planks - (cost.planks || 0));
-      st.bricks = Math.max(0, st.bricks - (cost.bricks || 0));
+      // Material vom HQ direkt auf die Baustelle legen (nicht vernichten)
+      const putWood = Math.min(st.wood || 0, cost.wood || 0);
+      const putPlanks = Math.min(st.planks || 0, cost.planks || 0);
+      const putBricks = Math.min(st.bricks || 0, cost.bricks || 0);
+      st.wood = Math.max(0, (st.wood || 0) - putWood);
+      st.planks = Math.max(0, (st.planks || 0) - putPlanks);
+      st.bricks = Math.max(0, (st.bricks || 0) - putBricks);
 
       const site = {
         type, x: pick.tx, y: pick.ty,
         isSite: true, phase: 0,
-        stock: { wood: 0, planks: 0, bricks: 0 },
+        stock: { wood: putWood, planks: putPlanks, bricks: putBricks },
         materialsConsumed: false,
-        storage: { wood:0,planks:0,stone:0,bricks:0,iron:0,tools:0,grain:0,flour:0,food:0 },
+        storage: { wood:0,planks:0,stone:0,bricks:0,iron:0,tools:2,grain:0,flour:0,food:0 },
         stockpile: null, workProgress: 0,
         assignedBuilder: null, waitTimer: 0,
         owner: ownerId
@@ -2045,12 +2049,16 @@
 
     function updateAI(dt) {
       aiTimer += dt;
-      if (aiTimer < 14) return;
+      if (aiTimer < 20) return; // etwas langsamer: erst fertigbauen lassen
       aiTimer = 0;
 
       function tickOwner(ownerId, raceId, indexRef) {
         const hq = buildings.find(b => b.type === 'hq' && b.owner === ownerId && !b.isSite);
         if (!hq) return indexRef;
+        // Nicht mehr als 2 offene Baustellen gleichzeitig
+        const openSites = buildings.filter(b => b.isSite && b.owner === ownerId).length;
+        if (openSites >= 2) return indexRef;
+
         let idx = indexRef;
         if (idx >= AI_BUILD_ORDER.length) idx = 3;
         const next = AI_BUILD_ORDER[idx];
