@@ -216,7 +216,7 @@
       <div class="res-item" title="Nahrung">🍞 <span id="res-food">0</span></div>
       <div class="res-item">👥 <span id="res-pop">0/0</span></div>
       <div id="sim-stats" style="display:none;font-size:0.8rem;color:#c9d1d9;margin-left:12px"></div>
-      <div class="hint-text" id="hint-text">🔨 Werkzeuge gebunden · Verbauschutz · KI-Gegner</div>
+      <div class="hint-text" id="hint-text">⚔ Wachtürme erweitern Gebiet · Kaserne bildet Krieger aus</div>
     </div>
 
     <div id="canvas-wrap">
@@ -227,6 +227,7 @@
       <div id="build-tabs">
         <button class="active-tab" data-tab="ressourcen">Ressourcen</button>
         <button data-tab="nahrung">Nahrung</button>
+        <button data-tab="militaer">Militär</button>
         <button data-tab="weitere">Weitere</button>
       </div>
       <div id="building-buttons"></div>
@@ -355,6 +356,19 @@
         size: 1, produces: null, converts: { from: 'flour', to: 'food', rate: 0.028 },
         pop: 0, color: '#e8c39e',
         maxWorkers: 1, category: 'nahrung', needsTool: true
+      },
+      barracks: {
+        name: 'Kaserne',
+        cost: { wood: 1, planks: 4, bricks: 3 },
+        size: 2, produces: null, converts: null, pop: 0, color: '#8b3a3a',
+        maxWorkers: 1, category: 'militaer', needsTool: false
+      },
+      watchtower: {
+        name: 'Wachturm',
+        cost: { wood: 1, planks: 3, bricks: 4 },
+        size: 1, produces: null, converts: null, pop: 0, color: '#6e2c2c',
+        maxWorkers: 0, category: 'militaer', needsTool: false,
+        garrisonMax: 3, radius: 18
       }
     };
 
@@ -431,7 +445,8 @@
     const AI_BUILD_ORDER = [
       'woodcutter', 'mine', 'sawmill', 'warehouse', 'house',
       'ironmine', 'smithy', 'farm', 'brickworks', 'mill', 'bakery',
-      'woodcutter', 'house', 'mine', 'farm', 'warehouse'
+      'barracks', 'watchtower', 'house',
+      'woodcutter', 'mine', 'farm', 'warehouse', 'watchtower'
     ];
 
     const canvas = document.getElementById('canvas');
@@ -503,25 +518,61 @@
       return { x: c.x, y: c.y, storage: { wood: 0, stone: 0, food: 0 } };
     }
 
-    function getHQ() {
-      return buildings.find(b => b.type === 'hq' && !b.isSite);
+    function getHQ(owner) {
+      owner = owner || 'player';
+      return buildings.find(b => b.type === 'hq' && !b.isSite && (b.owner || 'player') === owner);
     }
 
-    function inBuildRadius(tx, ty, size) {
-      const hq = getHQ();
-      if (!hq) return true;
-      const cx = hq.x + BUILDINGS.hq.size / 2;
-      const cy = hq.y + BUILDINGS.hq.size / 2;
-      // Gebäude-Mittelpunkt muss im Radius liegen
+    // Militärzentren die Gebiet geben: HQ + besetzte Wachtürme
+    function getTerritoryCenters(owner) {
+      owner = owner || 'player';
+      const centers = [];
+      for (const b of buildings) {
+        if (b.isSite) continue;
+        if ((b.owner || 'player') !== owner) continue;
+        if (b.type === 'hq') {
+          centers.push({
+            x: b.x + BUILDINGS.hq.size / 2,
+            y: b.y + BUILDINGS.hq.size / 2,
+            r: BUILD_RADIUS,
+            building: b
+          });
+        } else if (b.type === 'watchtower') {
+          const garrison = (b.garrison || []).length;
+          if (garrison > 0) {
+            const rad = BUILDINGS.watchtower.radius || 18;
+            centers.push({
+              x: b.x + 0.5,
+              y: b.y + 0.5,
+              r: rad,
+              building: b
+            });
+          }
+        }
+      }
+      return centers;
+    }
+
+    function inBuildRadius(tx, ty, size, owner) {
+      owner = owner || 'player';
+      const centers = getTerritoryCenters(owner);
+      if (centers.length === 0) return true;
       const mx = tx + size / 2;
       const my = ty + size / 2;
-      return Math.hypot(mx - cx, my - cy) <= BUILD_RADIUS;
+      for (const c of centers) {
+        if (Math.hypot(mx - c.x, my - c.y) <= c.r) return true;
+      }
+      return false;
+    }
+
+    function countGarrison(tower) {
+      return (tower.garrison || []).length;
     }
 
     function canPlace(type, tx, ty) {
       const b = BUILDINGS[type];
       const raceData = RACES[race];
-      if (type !== 'hq' && !inBuildRadius(tx, ty, b.size)) return false;
+      if (type !== 'hq' && !inBuildRadius(tx, ty, b.size, 'player')) return false;
       for (let dy = 0; dy < b.size; dy++) {
         for (let dx = 0; dx < b.size; dx++) {
           const x = tx + dx, y = ty + dy;
@@ -609,7 +660,9 @@
         if (BUILDINGS[site.type].pop && (site.owner || 'player') === 'player') {
           maxPop += BUILDINGS[site.type].pop;
         }
-        // externes Lager an Betriebsgebäuden entfernt – Lager-Gebäude übernimmt das
+        if (site.type === 'watchtower') {
+          site.garrison = site.garrison || [];
+        }
         if ((site.owner || 'player') === 'player') {
           showMessage(BUILDINGS[site.type].name + ' ist fertiggestellt!');
         }
@@ -868,6 +921,72 @@
         return;
       }
 
+      // ========== KRIEGER ==========
+      if (s.profession === 'warrior') {
+        // Bereits in Garnison?
+        if (s.state === 'garrisoned' && s.targetTower) {
+          if (!buildings.includes(s.targetTower) || s.targetTower.isSite) {
+            s.state = 'idle';
+            s.targetTower = null;
+          }
+          return;
+        }
+        // Unterwegs zu Turm / Angriff – bleibt bei Auftrag
+        if (s.state === 'to_tower' || s.state === 'to_attack' || s.state === 'fighting') {
+          return;
+        }
+
+        const owner = s.owner || 'player';
+
+        // 1. Eigenen unbesetzten / unterbesetzten Wachturm besetzen
+        const ownTowers = buildings.filter(b =>
+          !b.isSite && b.type === 'watchtower' && (b.owner || 'player') === owner
+        );
+        for (const t of ownTowers) {
+          if (!t.garrison) t.garrison = [];
+          const maxG = BUILDINGS.watchtower.garrisonMax || 3;
+          // Wie viele sind schon unterwegs dorthin?
+          const enRoute = settlers.filter(o =>
+            o.profession === 'warrior' &&
+            (o.state === 'to_tower') && o.targetTower === t
+          ).length;
+          if (t.garrison.length + enRoute < maxG) {
+            s.state = 'to_tower';
+            s.targetTower = t;
+            s.targetX = (t.x + 0.5) * TILE;
+            s.targetY = (t.y + 0.5) * TILE;
+            return;
+          }
+        }
+
+        // 2. Feindlichen Wachturm angreifen (nächster)
+        const enemyTowers = buildings.filter(b =>
+          !b.isSite && b.type === 'watchtower' && (b.owner || 'player') !== owner
+        );
+        if (enemyTowers.length > 0) {
+          let best = null, bestD = Infinity;
+          for (const t of enemyTowers) {
+            const d = Math.hypot((t.x+0.5)*TILE - s.x, (t.y+0.5)*TILE - s.y);
+            if (d < bestD) { bestD = d; best = t; }
+          }
+          // Nur angreifen wenn wir freie Krieger übrig haben (nicht alle in Garnison binden)
+          const freeWarriors = settlers.filter(o =>
+            o.profession === 'warrior' && (o.owner||'player') === owner &&
+            (o.state === 'idle' || o.state === 'to_attack')
+          ).length;
+          if (freeWarriors >= 1 && bestD < 80 * TILE) {
+            s.state = 'to_attack';
+            s.targetTower = best;
+            s.targetX = (best.x + 0.5) * TILE;
+            s.targetY = (best.y + 0.5) * TILE;
+            return;
+          }
+        }
+
+        goToPlaza(s);
+        return;
+      }
+
       // ========== ALLGEMEINE SIEDLER ==========
 
       // 1. Produktionsgebäude – nur nächste freie Siedler
@@ -891,7 +1010,8 @@
 
         // Freie Nicht-Bauarbeiter, sortiert nach Distanz zum Gebäude
         const free = settlers.filter(o =>
-          o.profession !== 'builder' && o.state === 'idle'
+          o.profession === 'general' && o.state === 'idle' &&
+          (o.owner || 'player') === (s.owner || 'player')
         ).map(o => ({
           s: o,
           d: Math.hypot(
@@ -937,7 +1057,7 @@
           (o.state === 'to_source' || o.state === 'to_site') && o.targetSite === b && o.carrying === 'tools'
         );
         if (already) continue;
-        const free = settlers.filter(o => o.profession !== 'builder' && o.state === 'idle');
+        const free = settlers.filter(o => o.profession === 'general' && o.state === 'idle' && (o.owner||'player') === (s.owner||'player'));
         const ranked = free.map(o => ({
           s: o,
           d: Math.hypot((b.x+BUILDINGS[b.type].size/2)*TILE - o.x, (b.y+BUILDINGS[b.type].size/2)*TILE - o.y)
@@ -960,7 +1080,7 @@
 
       // 2. Träger – nur so viele wie nötig, und nur die nächsten Freien
       const freeGenerals = settlers.filter(o =>
-        o.profession !== 'builder' && o.state === 'idle' &&
+        o.profession === 'general' && o.state === 'idle' &&
         (o.owner || 'player') === (s.owner || 'player')
       );
 
@@ -1358,6 +1478,83 @@
           continue;
         }
 
+        // ===== KRIEGER: Turm besetzen =====
+        if (s.profession === 'warrior' && s.state === 'to_tower' && s.targetTower) {
+          const t = s.targetTower;
+          if (!buildings.includes(t) || t.isSite || (t.owner||'player') !== (s.owner||'player')) {
+            s.state = 'idle'; s.targetTower = null; continue;
+          }
+          const at = Math.hypot(s.x - (t.x+0.5)*TILE, s.y - (t.y+0.5)*TILE) < 16;
+          if (at) {
+            if (!t.garrison) t.garrison = [];
+            const maxG = BUILDINGS.watchtower.garrisonMax || 3;
+            if (t.garrison.length < maxG && !t.garrison.includes(s)) {
+              t.garrison.push(s);
+              s.state = 'garrisoned';
+              s.targetX = (t.x + 0.3 + Math.random()*0.4) * TILE;
+              s.targetY = (t.y + 0.3 + Math.random()*0.4) * TILE;
+            } else {
+              s.state = 'idle'; s.targetTower = null;
+            }
+          } else {
+            s.targetX = (t.x + 0.5) * TILE;
+            s.targetY = (t.y + 0.5) * TILE;
+          }
+          continue;
+        }
+
+        // ===== KRIEGER: Feindturm angreifen / erobern =====
+        if (s.profession === 'warrior' && (s.state === 'to_attack' || s.state === 'fighting') && s.targetTower) {
+          const t = s.targetTower;
+          if (!buildings.includes(t) || t.isSite) {
+            s.state = 'idle'; s.targetTower = null; continue;
+          }
+          // Schon erobert von uns?
+          if ((t.owner || 'player') === (s.owner || 'player')) {
+            s.state = 'idle'; s.targetTower = null; continue;
+          }
+          const at = Math.hypot(s.x - (t.x+0.5)*TILE, s.y - (t.y+0.5)*TILE) < 18;
+          if (!at) {
+            s.state = 'to_attack';
+            s.targetX = (t.x + 0.5) * TILE;
+            s.targetY = (t.y + 0.5) * TILE;
+            continue;
+          }
+          s.state = 'fighting';
+          s.fightTimer = (s.fightTimer || 0) + dt;
+          // Kampf alle ~1.2 Sekunden ein Schlag
+          if (s.fightTimer >= 1.2) {
+            s.fightTimer = 0;
+            if (!t.garrison) t.garrison = [];
+            // Verteidiger entfernen (Garnison)
+            if (t.garrison.length > 0) {
+              const def = t.garrison.pop();
+              // Verteidiger stirbt / wird idle-entfernt
+              const idx = settlers.indexOf(def);
+              if (idx >= 0) settlers.splice(idx, 1);
+              if ((t.owner||'player') === 'player' || (s.owner||'player') === 'player') {
+                showMessage('Kampf am Wachturm!', 1500);
+              }
+            } else {
+              // Turm erobert!
+              const oldOwner = t.owner;
+              t.owner = s.owner || 'player';
+              t.garrison = [s];
+              s.state = 'garrisoned';
+              s.targetX = (t.x + 0.5) * TILE;
+              s.targetY = (t.y + 0.5) * TILE;
+              if (oldOwner === 'player' || t.owner === 'player') {
+                showMessage('Wachturm erobert!', 3000);
+              }
+            }
+          }
+          continue;
+        }
+
+        if (s.profession === 'warrior' && s.state === 'garrisoned') {
+          continue;
+        }
+
         // Idle → Job suchen
         if (s.state === 'idle') {
           findJobForSettler(s);
@@ -1442,6 +1639,51 @@
             }
           }
         }
+      }
+
+      // Kasernen: Krieger ausbilden (1 Nahrung + 1 Eisen → 1 Krieger)
+      for (const b of buildings) {
+        if (b.isSite || b.type !== 'barracks') continue;
+        if (countWorkers(b) === 0) continue;
+        const owner = b.owner || 'player';
+        // Ausbildungstimer
+        b.trainTimer = (b.trainTimer || 0) + 1;
+        if (b.trainTimer < 3) continue; // alle 3 Produktionsticks
+        b.trainTimer = 0;
+
+        // Ressourcen prüfen
+        const sources = buildings.filter(x =>
+          !x.isSite && (x.owner||'player') === owner && x.storage &&
+          ((x.storage.food||0) >= 2 && (x.storage.iron||0) >= 1)
+        );
+        if (sources.length === 0) continue;
+
+        // Idle Siedler (kein Bauarbeiter, kein Krieger)
+        const recruit = settlers.find(s =>
+          (s.owner||'player') === owner &&
+          s.profession === 'general' &&
+          s.state === 'idle'
+        );
+        if (!recruit) continue;
+
+        // Kosten abziehen
+        let foodLeft = 2, ironLeft = 1;
+        for (const src of sources) {
+          if (foodLeft > 0 && (src.storage.food||0) > 0) {
+            const t = Math.min(src.storage.food, foodLeft);
+            src.storage.food -= t; foodLeft -= t;
+          }
+          if (ironLeft > 0 && (src.storage.iron||0) > 0) {
+            const t = Math.min(src.storage.iron, ironLeft);
+            src.storage.iron -= t; ironLeft -= t;
+          }
+        }
+        if (foodLeft > 0 || ironLeft > 0) continue;
+
+        recruit.profession = 'warrior';
+        recruit.state = 'idle';
+        recruit.workplace = null;
+        if (owner === 'player') showMessage('Krieger ausgebildet!', 2000);
       }
 
       // Bevölkerung nur Spieler
@@ -1640,25 +1882,40 @@
                         b.type === 'smithy' ? 'Schmiede' :
                         b.type === 'warehouse' ? 'Lager' :
                         b.type === 'mill' ? 'Mühle' :
-                        b.type === 'bakery' ? 'Bäcker' : 'Hof';
+                        b.type === 'bakery' ? 'Bäcker' :
+                        b.type === 'barracks' ? 'Kaserne' :
+                        b.type === 'watchtower' ? 'Turm' : 'Hof';
           ctx.fillText(label, px + s / 2, py + s / 2 - 3);
+          if (b.type === 'watchtower' && !b.isSite) {
+            const g = (b.garrison || []).length;
+            const maxG = BUILDINGS.watchtower.garrisonMax || 3;
+            ctx.fillStyle = g > 0 ? '#3fb950' : '#f85149';
+            ctx.font = '9px sans-serif';
+            ctx.fillText('⚔' + g + '/' + maxG, px + s / 2, py + s / 2 + 8);
+          }
         }
       }
 
-      // Baubereich um HQ anzeigen
-      const hq = buildings.find(b => b.type === 'hq' && !b.isSite);
-      if (hq && placing) {
-        const hcx = (hq.x + BUILDINGS.hq.size / 2) * TILE;
-        const hcy = (hq.y + BUILDINGS.hq.size / 2) * TILE;
-        ctx.beginPath();
-        ctx.arc(hcx, hcy, BUILD_RADIUS * TILE, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(88, 166, 255, 0.45)';
-        ctx.lineWidth = 2;
-        ctx.setLineDash([8, 6]);
-        ctx.stroke();
-        ctx.setLineDash([]);
-        ctx.fillStyle = 'rgba(88, 166, 255, 0.06)';
-        ctx.fill();
+      // Baubereiche: HQ + besetzte Wachtürme
+      {
+        const owners = simMode ? ['ai', 'ai2'] : ['player', 'ai'];
+        for (const own of owners) {
+          const centers = getTerritoryCenters(own);
+          for (const c of centers) {
+            const col = own === 'ai' ? '248,81,73' : '88,166,255';
+            ctx.beginPath();
+            ctx.arc(c.x * TILE, c.y * TILE, c.r * TILE, 0, Math.PI * 2);
+            ctx.strokeStyle = 'rgba(' + col + ',0.35)';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([8, 6]);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            if (placing && own === 'player') {
+              ctx.fillStyle = 'rgba(' + col + ',0.05)';
+              ctx.fill();
+            }
+          }
+        }
       }
 
       if (placing) {
@@ -1685,10 +1942,15 @@
           else if (s.owner === 'ai2') color = '#79c0ff';
           else color = '#e67e22';
         }
+        if (s.profession === 'warrior') {
+          color = s.owner === 'ai' ? '#da3633' : (s.owner === 'ai2' ? '#1f6feb' : '#a371f7');
+        }
         if (s.state === 'to_source' || s.state === 'to_site') {
           color = s.owner === 'ai' ? '#ffa198' : (s.owner === 'ai2' ? '#a5d6ff' : '#f0c000');
         } else if (s.state === 'worker') {
           color = s.owner === 'ai' ? '#ff9bce' : (s.owner === 'ai2' ? '#d2a8ff' : '#58a6ff');
+        } else if (s.state === 'fighting') {
+          color = '#ff0000';
         }
 
         ctx.beginPath();
@@ -1972,9 +2234,7 @@
       const hq = buildings.find(b => b.type === 'hq' && b.owner === ownerId && !b.isSite);
       if (!hq) return false;
       const aiRaceData = RACES[raceId || 'human'];
-      const cx = hq.x + BUILDINGS.hq.size / 2;
-      const cy = hq.y + BUILDINGS.hq.size / 2;
-      if (Math.hypot(tx + def.size/2 - cx, ty + def.size/2 - cy) > BUILD_RADIUS) return false;
+      if (!inBuildRadius(tx, ty, def.size, ownerId)) return false;
 
       for (let dy = 0; dy < def.size; dy++) {
         for (let dx = 0; dx < def.size; dx++) {
@@ -2029,7 +2289,8 @@
         storage: { wood:0,planks:0,stone:0,bricks:0,iron:0,tools:2,grain:0,flour:0,food:0 },
         stockpile: null, workProgress: 0,
         assignedBuilder: null, waitTimer: 0,
-        owner: ownerId
+        owner: ownerId,
+        garrison: type === 'watchtower' ? [] : undefined
       };
       buildings.push(site);
 
