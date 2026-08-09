@@ -835,6 +835,11 @@
             <dt data-i18n="contact-dt-zone">Zone d'intervention</dt>
             <dd style="font-weight:400;" data-i18n="contact-zone-value">Sur site, en Suisse</dd>
           </div>
+          <div class="divider"></div>
+          <div>
+            <dt data-i18n="contact-dt-lang">Langues</dt>
+            <dd style="font-weight:400;" data-i18n="contact-lang-value">Allemand, suisse allemand, français</dd>
+          </div>
         </dl>
       </div>
     </div>
@@ -1320,7 +1325,9 @@
       "contact-dt-email": "Email",
       "contact-dt-phone": "Téléphone",
       "contact-dt-zone": "Zone d'intervention",
-      "contact-zone-value": "Sur site, en Suisse",
+      "contact-zone-value": "Basé à Sisseln (AG) — interventions sur site dans toute la Suisse",
+      "contact-dt-lang": "Langues",
+      "contact-lang-value": "Allemand, suisse allemand, français",
       "footer-tagline": "Audit de processus · Applications sur mesure",
       "mailto-subject": "Diagnostic de processus"
     },
@@ -1380,7 +1387,9 @@
       "contact-dt-email": "E-Mail",
       "contact-dt-phone": "Telefon",
       "contact-dt-zone": "Einsatzgebiet",
-      "contact-zone-value": "Vor Ort, in der Schweiz",
+      "contact-zone-value": "Standort Sisseln (AG) — Einsätze schweizweit vor Ort",
+      "contact-dt-lang": "Sprachen",
+      "contact-lang-value": "Deutsch, Schweizerdeutsch, Französisch",
       "footer-tagline": "Prozessanalyse · Massgeschneiderte Software",
       "mailto-subject": "Prozessdiagnose"
     },
@@ -1440,7 +1449,9 @@
       "contact-dt-email": "Email",
       "contact-dt-phone": "Phone",
       "contact-dt-zone": "Coverage area",
-      "contact-zone-value": "On-site, in Switzerland",
+      "contact-zone-value": "Based in Sisseln (AG) — on-site anywhere in Switzerland",
+      "contact-dt-lang": "Languages",
+      "contact-lang-value": "German, Swiss German, French",
       "footer-tagline": "Process audits · Custom software",
       "mailto-subject": "Process diagnostic"
     }
@@ -1481,8 +1492,8 @@
       var stored = localStorage.getItem('zsw-lang');
       if (stored && STRINGS[stored]) return stored;
     } catch (e) {}
-    var nav = (navigator.language || 'fr').slice(0, 2).toLowerCase();
-    return STRINGS[nav] ? nav : 'fr';
+    var nav = (navigator.language || 'de').slice(0, 2).toLowerCase();
+    return STRINGS[nav] ? nav : 'de';
   }
 
   document.querySelectorAll('.lang-switch button').forEach(function(btn){
