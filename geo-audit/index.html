@@ -351,9 +351,9 @@
               <span class="typing-dots" id="typingDots"><span></span><span></span><span></span></span>
               <span id="aiIntro" hidden></span>
               <ul class="msg-list" id="aiList" hidden>
-                <li data-i="1"><span class="arrow">›</span>Klinik A — Hautbehandlungen</li>
-                <li data-i="2"><span class="arrow">›</span>Klinik B — Faltenunterspritzung</li>
-                <li data-i="3"><span class="arrow">›</span>Klinik C — hohe Bewertungen</li>
+                <li data-i="1"><span class="arrow">›</span><span class="li-text"></span></li>
+                <li data-i="2"><span class="arrow">›</span><span class="li-text"></span></li>
+                <li data-i="3"><span class="arrow">›</span><span class="li-text"></span></li>
               </ul>
               <span class="msg-closing" id="aiClosing" hidden></span>
             </div>
@@ -370,11 +370,11 @@
   <div class="wrap stats">
     <div class="stat-grid">
       <div class="stat-cell">
-        <div class="n">45<small>/100</small></div>
-        <p>Durchschnittlicher GEO-Score der Deutschschweizer Gesundheits- und Ästhetikpraxen, die ich bisher geprüft habe.</p>
+        <div class="n">47<small>/100</small></div>
+        <p>Durchschnittlicher GEO-Score der Deutschschweizer Unternehmen, die ich bisher geprüft habe — von Arztpraxen bis Software-Anbietern.</p>
       </div>
       <div class="stat-cell">
-        <div class="n">12<small>/13</small></div>
+        <div class="n">14<small>/17</small></div>
         <p>davon lagen unter der Schwelle von 60 Punkten — für KI-Systeme praktisch unauffindbar.</p>
       </div>
       <div class="stat-cell">
@@ -434,7 +434,7 @@
       <div class="pain-list">
         <div class="pain-item">
           <span class="tag">Häufig</span>
-          <p>Kein Organization- oder MedicalBusiness-Schema — Suchmaschinen und KI-Systeme können Name, Adresse und Öffnungszeiten nicht zuverlässig zuordnen.</p>
+          <p>Kein Organization- oder branchenspezifisches Schema (z. B. LegalService, Dentist, LocalBusiness) — Suchmaschinen und KI-Systeme können Name, Adresse und Öffnungszeiten nicht zuverlässig zuordnen.</p>
         </div>
         <div class="pain-item coral">
           <span class="tag">Häufig</span>
@@ -446,7 +446,7 @@
         </div>
         <div class="pain-item coral">
           <span class="tag">Regelmässig</span>
-          <p>Keine namentlich genannte, qualifizierte Fachperson — für Gesundheitsinhalte eine der wichtigsten Vertrauenssignale, die fehlt.</p>
+          <p>Keine namentlich genannte, qualifizierte verantwortliche Person — ob Ärztin, Anwalt oder Meisterbetrieb: eines der wichtigsten Vertrauenssignale, das oft fehlt.</p>
         </div>
       </div>
       <p class="find-note">Anonymisierte, wiederkehrende Muster aus bisherigen Prüfungen — keine Angaben zu einzelnen Unternehmen.</p>
@@ -558,19 +558,47 @@
     var listItems = listEl.querySelectorAll('li');
     var closingEl = document.getElementById('aiClosing');
 
-    var question = 'bestes ästhetik-institut zürich?';
-    var intro = 'Hier sind die besten Optionen in Zürich:';
-    var closing = 'Ihr Unternehmen wird nicht erwähnt.';
+    var scenarios = [
+      {
+        query: 'bestes ästhetik-institut zürich?',
+        intro: 'Hier sind die besten Optionen in Zürich:',
+        items: ['Klinik A — Hautbehandlungen', 'Klinik B — Faltenunterspritzung', 'Klinik C — hohe Bewertungen'],
+        closing: 'Ihr Unternehmen wird nicht erwähnt.'
+      },
+      {
+        query: 'beste anwaltskanzlei zürich?',
+        intro: 'Hier sind die besten Kanzleien in Zürich:',
+        items: ['Kanzlei A — Wirtschaftsrecht', 'Kanzlei B — Familienrecht', 'Kanzlei C — hohe Bewertungen'],
+        closing: 'Ihre Kanzlei wird nicht erwähnt.'
+      },
+      {
+        query: 'bester zahnarzt zürich?',
+        intro: 'Hier sind die besten Praxen in Zürich:',
+        items: ['Praxis A — Implantologie', 'Praxis B — Kieferorthopädie', 'Praxis C — hohe Bewertungen'],
+        closing: 'Ihre Praxis wird nicht erwähnt.'
+      },
+      {
+        query: 'beste uhren-boutique zürich?',
+        intro: 'Hier sind die besten Adressen in Zürich:',
+        items: ['Boutique A — Schweizer Uhren', 'Boutique B — Massgeschneiderter Schmuck', 'Boutique C — hohe Bewertungen'],
+        closing: 'Ihr Geschäft wird nicht erwähnt.'
+      }
+    ];
+    var s = scenarios[Math.floor(Math.random() * scenarios.length)];
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function finalState(){
-      qEl.textContent = question;
+      qEl.textContent = s.query;
       qCursor.style.display = 'none';
       typingDots.style.display = 'none';
       aiRow.classList.add('in');
-      introEl.hidden = false; introEl.textContent = intro;
-      listEl.hidden = false; listItems.forEach(function(li){ li.classList.add('in'); });
-      closingEl.hidden = false; closingEl.textContent = closing;
+      introEl.hidden = false; introEl.textContent = s.intro;
+      listEl.hidden = false;
+      listItems.forEach(function(li, idx){
+        li.querySelector('.li-text').textContent = s.items[idx];
+        li.classList.add('in');
+      });
+      closingEl.hidden = false; closingEl.textContent = s.closing;
     }
 
     function streamWords(el, text, delay, done){
@@ -587,8 +615,11 @@
     function revealListItems(done){
       var idx = 0;
       var t = setInterval(function(){
-        if (idx < listItems.length) { listItems[idx].classList.add('in'); idx++; }
-        else { clearInterval(t); if (done) setTimeout(done, 150); }
+        if (idx < listItems.length) {
+          listItems[idx].querySelector('.li-text').textContent = s.items[idx];
+          listItems[idx].classList.add('in');
+          idx++;
+        } else { clearInterval(t); if (done) setTimeout(done, 150); }
       }, 320);
     }
 
@@ -597,9 +628,9 @@
       // 1. type the question
       var i = 0;
       var typeTimer = setInterval(function(){
-        qEl.textContent = question.slice(0, i + 1);
+        qEl.textContent = s.query.slice(0, i + 1);
         i++;
-        if (i >= question.length) {
+        if (i >= s.query.length) {
           clearInterval(typeTimer);
           qCursor.style.display = 'none';
           setTimeout(showTyping, 450);
@@ -612,11 +643,11 @@
       setTimeout(function(){
         typingDots.style.display = 'none';
         introEl.hidden = false;
-        streamWords(introEl, intro, 110, function(){
+        streamWords(introEl, s.intro, 110, function(){
           listEl.hidden = false;
           revealListItems(function(){
             closingEl.hidden = false;
-            streamWords(closingEl, closing, 130);
+            streamWords(closingEl, s.closing, 130);
           });
         });
       }, 850);
