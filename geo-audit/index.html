@@ -12,25 +12,18 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.zbinden.online/geo-audit">
 <meta property="og:locale" content="de_CH">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%2314202B'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%23E3AC5C'/%3E%3Ccircle cx='50' cy='50' r='24' fill='none' stroke='%23E3AC5C' stroke-width='4' stroke-dasharray='6 8'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230a0d26'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%239483ff'/%3E%3Ccircle cx='50' cy='50' r='24' fill='none' stroke='%239483ff' stroke-width='4' stroke-dasharray='6 8'/%3E%3C/svg%3E">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "Zbinden Software — GEO-Audit",
   "url": "https://www.zbinden.online/geo-audit",
-  "email": "pauline.zbinden4334@gmail.com",
+  "email": "info@zbinden.online",
   "telephone": "+41791936802",
   "areaServed": "CH",
-  "founder": {
-    "@type": "Person",
-    "name": "Pauline Zbinden"
-  },
-  "parentOrganization": {
-    "@type": "Organization",
-    "name": "Zbinden Software",
-    "url": "https://www.zbinden.online/"
-  },
+  "founder": { "@type": "Person", "name": "Pauline Zbinden" },
+  "parentOrganization": { "@type": "Organization", "name": "Zbinden Software", "url": "https://www.zbinden.online/" },
   "makesOffer": {
     "@type": "Offer",
     "itemOffered": {
@@ -42,497 +35,619 @@
 }
 </script>
 <style>
-  :root {
-    --bg: #F6F3EC;
-    --surface: #FFFFFF;
-    --surface-sunk: #EFEAE0;
-    --ink: #16222C;
-    --ink-soft: #52626C;
-    --ink-faint: #8996A0;
-    --line: #DED6C4;
-    --accent: #A9711F;
-    --accent-ink: #7C5314;
-    --accent-soft: #F1E2C4;
-    --critical: #A71C1C;
-    --critical-soft: #FBE7E4;
-    --warn: #C2610C;
-    --warn-soft: #FBEADB;
-    --good: #17604F;
-    --good-soft: #DCEEE8;
-    --mono-bg: #14202B;
-    --mono-ink: #E8E2D3;
-    --shadow: 0 1px 2px rgba(22,34,44,0.06), 0 8px 24px -12px rgba(22,34,44,0.18);
-    --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
-    --font-body: "Segoe UI", "Segoe UI Variable", system-ui, -apple-system, sans-serif;
-    --font-mono: Consolas, "SF Mono", "Liberation Mono", Menlo, monospace;
+  :root{
+    --bg:#0a0d26;
+    --bg-2:#111536;
+    --glass:rgba(255,255,255,.055);
+    --glass-strong:rgba(255,255,255,.09);
+    --ink:#f5f3ff;
+    --muted:#a9a6cf;
+    --coral:#ff6b4a;
+    --coral-light:#ffb199;
+    --on-coral:#1c0e07;
+    --coral-soft:rgba(255,107,74,.16);
+    --violet:#9483ff;
+    --violet-light:#c7bfff;
+    --on-violet:#0e0a2e;
+    --violet-soft:rgba(148,131,255,.16);
+    --line:rgba(255,255,255,.14);
+    --line-strong:rgba(255,255,255,.26);
+    --focus:#c9beff;
+    --r-lg:22px;
+    --r-md:14px;
+    --r-sm:10px;
+    --r-pill:999px;
+    --font-display:"Poppins","Helvetica Neue",Helvetica,Arial,sans-serif;
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #10161D;
-      --surface: #171F28;
-      --surface-sunk: #0D1218;
-      --ink: #EDE8DC;
-      --ink-soft: #A7B2BA;
-      --ink-faint: #6C7981;
-      --line: #2B3541;
-      --accent: #E3AC5C;
-      --accent-ink: #F3CB8C;
-      --accent-soft: #2E2310;
-      --critical: #E0776C;
-      --critical-soft: #2E1512;
-      --warn: #E3A15C;
-      --warn-soft: #2E2110;
-      --good: #6FBBA5;
-      --good-soft: #12241F;
-      --mono-bg: #0B1117;
-      --mono-ink: #DCE6EC;
-      --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 12px 28px -14px rgba(0,0,0,0.6);
-    }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  html,body{margin:0;padding:0;overflow-x:hidden;max-width:100%;}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
   }
-  :root[data-theme="dark"] {
-    --bg: #10161D;
-    --surface: #171F28;
-    --surface-sunk: #0D1218;
-    --ink: #EDE8DC;
-    --ink-soft: #A7B2BA;
-    --ink-faint: #6C7981;
-    --line: #2B3541;
-    --accent: #E3AC5C;
-    --accent-ink: #F3CB8C;
-    --accent-soft: #2E2310;
-    --critical: #E0776C;
-    --critical-soft: #2E1512;
-    --warn: #E3A15C;
-    --warn-soft: #2E2110;
-    --good: #6FBBA5;
-    --good-soft: #12241F;
-    --mono-bg: #0B1117;
-    --mono-ink: #DCE6EC;
-    --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 12px 28px -14px rgba(0,0,0,0.6);
+  ::selection{background:var(--violet);color:var(--on-violet);}
+  a{color:inherit;}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--focus);outline-offset:3px;}
+  .num{font-family:var(--font-display); font-variant-numeric:tabular-nums;}
+
+  .eyebrow{
+    font-family:var(--font-display); font-weight:600; font-size:.72rem; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--violet-light);
   }
 
-  * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: var(--font-body);
-    font-size: 16px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
+  .wrap{ position:relative; z-index:1; max-width:1120px; margin:0 auto; padding:0 clamp(20px,4vw,40px); }
+
+  /* ---------- Header ---------- */
+  header{
+    border-bottom:1px solid var(--line); position:sticky; top:0;
+    background:rgba(10,13,38,.72); backdrop-filter:blur(10px); z-index:20;
   }
-  a { color: inherit; }
-  h1, h2, h3 { font-family: var(--font-display); font-weight: 700; text-wrap: balance; margin: 0; }
-  .num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
-  ::selection { background: var(--accent-soft); color: var(--accent-ink); }
-
-  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
-  .prose { max-width: 62ch; }
-
-  /* ---------- Nav ---------- */
-  nav.top {
-    position: sticky; top: 0; z-index: 20;
-    background: color-mix(in srgb, var(--bg) 88%, transparent);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--line);
+  .header-row{
+    display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px 16px;
+    padding:14px clamp(20px,4vw,40px); max-width:1120px; margin:0 auto;
   }
-  nav.top .wrap { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; padding-bottom: 16px; }
-  .brand { display: flex; align-items: baseline; gap: 10px; font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; letter-spacing: 0.01em; }
-  .brand .tag { font-family: var(--font-mono); font-weight: 400; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-ink); background: var(--accent-soft); padding: 3px 8px; border-radius: 3px; }
-  .navlinks { display: flex; gap: 28px; font-size: 0.92rem; color: var(--ink-soft); }
-  .navlinks a { text-decoration: none; }
-  .navlinks a:hover { color: var(--ink); }
-  @media (max-width: 720px) { .navlinks { display: none; } }
-
-  .btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-family: var(--font-body); font-weight: 600; font-size: 0.94rem;
-    padding: 11px 20px; border-radius: 3px; text-decoration: none;
-    border: 1px solid transparent; cursor: pointer; white-space: nowrap;
+  .wordmark{
+    font-family:var(--font-display); font-weight:700; font-size:1rem; letter-spacing:.01em;
+    display:flex; align-items:baseline; gap:.4em; text-decoration:none; color:var(--ink);
   }
-  .btn-primary { background: var(--accent); color: #1A1200; }
-  .btn-primary:hover { background: var(--accent-ink); }
-  .btn-ghost { border-color: var(--line); color: var(--ink); }
-  .btn-ghost:hover { border-color: var(--accent); color: var(--accent-ink); }
+  .wordmark .dot{color:var(--violet);}
+  .wordmark .sub{
+    font-family:var(--font-display); font-weight:700; font-size:.68rem; letter-spacing:.06em;
+    text-transform:uppercase; color:var(--violet-light); background:var(--violet-soft);
+    border:1px solid rgba(148,131,255,.35); padding:.35em .65em; border-radius:var(--r-pill);
+  }
+  nav.top-nav{ display:flex; gap:clamp(16px,3vw,32px); font-size:.85rem; }
+  nav.top-nav a{ text-decoration:none; color:var(--muted); }
+  nav.top-nav a:hover{ color:var(--ink); }
+  @media (max-width:780px){ nav.top-nav{display:none;} }
+  .header-cta{
+    font-family:var(--font-display); font-size:.8rem; padding:.55em 1.1em; border:1px solid var(--violet);
+    border-radius:var(--r-pill); color:var(--violet-light); text-decoration:none; white-space:nowrap; font-weight:600;
+  }
+  .header-cta:hover{ background:var(--violet); color:var(--on-violet); }
+
+  /* ---------- Reveal ---------- */
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:none;}
+  @media (prefers-reduced-motion:reduce){ .reveal{opacity:1;transform:none;} }
+  .d1{transition-delay:.05s;} .d2{transition-delay:.12s;} .d3{transition-delay:.19s;} .d4{transition-delay:.26s;}
+
+  /* ---------- Section scaffolding ---------- */
+  section{ position:relative; border-bottom:1px solid var(--line); padding:clamp(48px,8vw,88px) 0; }
+  section:last-of-type{border-bottom:none;}
+  .section-head{ display:grid; grid-template-columns:120px 1fr; gap:24px; margin-bottom:clamp(28px,5vw,48px); }
+  @media (max-width:640px){ .section-head{grid-template-columns:1fr; gap:8px;} }
+  .section-head h2{
+    font-family:var(--font-display); margin:0; font-size:clamp(1.5rem,3vw,2.1rem);
+    font-weight:700; letter-spacing:-.01em; text-wrap:balance;
+  }
+  h1,h2,h3{text-wrap:balance;}
 
   /* ---------- Hero ---------- */
-  header.hero { padding: 88px 0 96px; }
-  .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }
-  @media (max-width: 880px) { .hero-grid { grid-template-columns: 1fr; gap: 48px; } header.hero { padding: 56px 0 64px; } }
-
-  .eyebrow {
-    font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--accent-ink); display: flex; align-items: center; gap: 10px; margin-bottom: 22px;
+  .hero{ padding-top:clamp(40px,7vw,64px); padding-bottom:clamp(56px,8vw,84px); }
+  .hero-grid{ display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(32px,5vw,56px); align-items:center; }
+  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
+  .hero h1{
+    font-family:var(--font-display); font-size:clamp(2.1rem,4.6vw,3.2rem); line-height:1.08;
+    font-weight:800; letter-spacing:-.02em; margin:.5em 0 .45em;
   }
-  .eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
-
-  h1.headline { font-size: clamp(2rem, 4.1vw, 3.05rem); line-height: 1.12; letter-spacing: -0.01em; }
-  h1.headline em { font-style: normal; color: var(--accent-ink); }
-
-  .sub { margin-top: 22px; font-size: 1.14rem; color: var(--ink-soft); max-width: 46ch; }
-  .cta-row { margin-top: 34px; display: flex; gap: 14px; flex-wrap: wrap; }
-
-  /* ---------- Chat mockup ---------- */
-  .mock {
-    background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
-    box-shadow: var(--shadow); padding: 22px; position: relative;
+  .hero h1 em{
+    font-style:normal;
+    background:linear-gradient(100deg, var(--violet) 0%, var(--violet-light) 45%, var(--coral-light) 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
   }
-  .mock-bar { display: flex; align-items: center; gap: 7px; margin-bottom: 18px; }
-  .mock-bar span { width: 9px; height: 9px; border-radius: 50%; background: var(--line); }
-  .bubble-q {
-    background: var(--surface-sunk); border-radius: 10px 10px 10px 2px; padding: 12px 15px;
-    font-size: 0.95rem; max-width: 82%; margin-bottom: 16px;
+  .hero p.lede{ font-size:1.08rem; line-height:1.6; color:var(--muted); max-width:46ch; margin:0 0 2em; }
+  .cta-row{ display:flex; flex-wrap:wrap; gap:14px; align-items:center; }
+
+  .btn-primary{
+    background:linear-gradient(120deg, var(--violet), #b3a6ff); color:var(--on-violet); text-decoration:none;
+    font-family:var(--font-display); font-weight:700; font-size:.92rem; padding:.95em 1.5em; display:inline-block;
+    border:1px solid transparent; border-radius:var(--r-pill); box-shadow:0 10px 28px -8px rgba(148,131,255,.55);
+    transition:transform .15s ease, box-shadow .15s ease; cursor:pointer;
   }
-  .bubble-a { display: flex; gap: 12px; }
-  .bubble-a .dot { flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-ink); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; }
-  .bubble-a .txt { font-size: 0.95rem; }
-  .bubble-a ol { margin: 8px 0 0; padding-left: 20px; }
-  .bubble-a li { margin-bottom: 4px; }
-  .bubble-a .missing { color: var(--ink-faint); font-style: italic; margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--line); }
+  .btn-primary:hover{ transform:translateY(-1px); box-shadow:0 12px 32px -6px rgba(148,131,255,.65); }
+  .btn-primary:disabled{ opacity:.6; cursor:default; transform:none; }
+  .btn-secondary{
+    text-decoration:none; font-family:var(--font-display); font-weight:600; font-size:.88rem; color:var(--ink);
+    padding:.95em 1.4em; border:1px solid var(--line-strong); border-radius:var(--r-pill); background:var(--glass);
+  }
+  .btn-secondary:hover{ border-color:var(--coral); color:var(--coral-light); }
+
+  /* ---------- Phone chat mockup ---------- */
+  .phone-frame{
+    max-width:336px; margin:0 auto; border:1px solid var(--line-strong); border-radius:34px;
+    background:var(--glass-strong); backdrop-filter:blur(18px); box-shadow:0 30px 70px -30px rgba(0,0,0,.6);
+    overflow:hidden; display:flex; flex-direction:column;
+  }
+  .phone-notch{ width:64px; height:16px; background:var(--bg); border-radius:var(--r-pill); margin:12px auto 2px; }
+  .phone-header{ display:flex; align-items:center; gap:10px; padding:8px 18px 14px; border-bottom:1px solid var(--line); }
+  .phone-avatar{
+    flex:0 0 auto; width:32px; height:32px; border-radius:50%; background:var(--violet-soft); color:var(--violet-light);
+    display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:.68rem; font-weight:700;
+  }
+  .phone-header-text{ display:flex; flex-direction:column; line-height:1.35; }
+  .phone-name{ font-family:var(--font-display); font-size:.86rem; font-weight:700; color:var(--ink); }
+  .phone-status{ font-size:.7rem; color:var(--muted); display:flex; align-items:center; gap:5px; }
+  .status-dot{ width:6px; height:6px; border-radius:50%; background:#5fd98a; display:inline-block; }
+  .phone-body{ padding:18px 16px; display:flex; flex-direction:column; gap:14px; min-height:236px; background:var(--bg-2); }
+  .msg{ display:flex; gap:8px; max-width:90%; }
+  .msg-user{ align-self:flex-end; flex-direction:row-reverse; }
+  .msg-ai{ align-self:flex-start; opacity:0; transform:translateY(6px); transition:opacity .3s ease, transform .3s ease; }
+  .msg-ai.in{ opacity:1; transform:none; }
+  .msg-avatar{
+    flex:0 0 auto; width:22px; height:22px; border-radius:50%; background:var(--violet-soft); color:var(--violet-light);
+    display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:.58rem; font-weight:700; margin-top:2px;
+  }
+  .msg-bubble{ padding:10px 13px; border-radius:16px; font-size:.87rem; line-height:1.55; }
+  .msg-user .msg-bubble{
+    background:linear-gradient(120deg,var(--violet),#b3a6ff); color:var(--on-violet);
+    border-bottom-right-radius:4px; font-weight:500; min-height:1.55em;
+  }
+  .msg-ai .msg-bubble{ background:var(--glass); border:1px solid var(--line); color:var(--ink); border-bottom-left-radius:4px; }
+  .type-cursor{ display:inline-block; width:2px; height:1em; background:currentColor; vertical-align:middle; margin-left:1px; animation:blink 1s step-end infinite; }
+  @keyframes blink{ 50%{ opacity:0; } }
+  .typing-dots{ display:inline-flex; gap:4px; padding:3px 2px; }
+  .typing-dots span{ width:6px; height:6px; border-radius:50%; background:var(--muted); display:inline-block; animation:bounce 1.2s infinite ease-in-out; }
+  .typing-dots span:nth-child(2){ animation-delay:.15s; }
+  .typing-dots span:nth-child(3){ animation-delay:.3s; }
+  @keyframes bounce{ 0%,60%,100%{ transform:translateY(0); opacity:.5; } 30%{ transform:translateY(-4px); opacity:1; } }
+  .msg-list{ margin:6px 0 0; padding-left:0; list-style:none; }
+  .msg-list li{ margin-bottom:3px; opacity:0; transform:translateX(-4px); transition:opacity .3s ease, transform .3s ease; }
+  .msg-list li.in{ opacity:1; transform:none; }
+  .msg-list li .arrow{ color:var(--violet-light); margin-right:5px; }
+  .msg-closing{ display:block; margin-top:8px; color:var(--coral-light); font-style:italic; }
+  .phone-inputbar{ display:flex; align-items:center; gap:10px; padding:12px 16px; border-top:1px solid var(--line); background:var(--bg-2); }
+  .phone-input-placeholder{ flex:1; font-size:.8rem; color:var(--muted); background:var(--glass); border:1px solid var(--line); border-radius:var(--r-pill); padding:8px 14px; }
+  .phone-send{ color:var(--violet-light); font-size:1rem; }
+  @media (prefers-reduced-motion:reduce){
+    .typing-dots span{ animation:none; opacity:1; }
+    .type-cursor{ animation:none; }
+    .msg-ai, .msg-list li{ transition:none; }
+  }
 
   /* ---------- Stat band ---------- */
-  .stats { padding: 8px 0 64px; }
-  .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
-  @media (max-width: 720px) { .stat-grid { grid-template-columns: 1fr; } }
-  .stat-cell { background: var(--surface); padding: 30px 26px; }
-  .stat-cell .n { font-family: var(--font-mono); font-size: 2.4rem; font-weight: 700; color: var(--accent-ink); line-height: 1; }
-  .stat-cell .n small { font-size: 1.1rem; color: var(--ink-faint); font-weight: 400; }
-  .stat-cell p { margin: 10px 0 0; font-size: 0.92rem; color: var(--ink-soft); }
-
-  /* ---------- Section shell ---------- */
-  section { padding: 72px 0; border-top: 1px solid var(--line); }
-  .head-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 42px; flex-wrap: wrap; }
-  .head-row h2 { font-size: clamp(1.5rem, 2.6vw, 2rem); }
-  .head-row .kicker { font-family: var(--font-mono); font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 10px; display: block; }
+  .stats{ padding:8px 0 64px; }
+  .stat-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  @media (max-width:720px){ .stat-grid{grid-template-columns:1fr;} }
+  .stat-cell{ background:var(--glass); backdrop-filter:blur(14px); border:1px solid var(--line); border-radius:var(--r-md); padding:26px 24px; }
+  .stat-cell .n{ font-family:var(--font-display); font-size:2.3rem; font-weight:800; color:var(--violet-light); line-height:1; }
+  .stat-cell .n small{ font-size:1.05rem; color:var(--muted); font-weight:400; }
+  .stat-cell p{ margin:10px 0 0; font-size:.92rem; color:var(--muted); }
 
   /* ---------- Method grid ---------- */
-  .method-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  @media (max-width: 880px) { .method-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 560px) { .method-grid { grid-template-columns: 1fr; } }
-  .method-card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 22px; }
-  .method-card .top-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
-  .method-card h3 { font-family: var(--font-body); font-size: 0.98rem; font-weight: 700; }
-  .method-card .wt { font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent-ink); }
-  .method-card p { margin: 0; font-size: 0.87rem; color: var(--ink-soft); }
-  .bar-track { height: 4px; background: var(--surface-sunk); border-radius: 2px; margin-top: 14px; overflow: hidden; }
-  .bar-fill { height: 100%; background: var(--accent); width: 0; border-radius: 2px; transition: width 1s cubic-bezier(.2,.7,.2,1); }
-  .method-card.revealed .bar-fill { width: var(--w); }
+  .method-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  @media (max-width:880px){ .method-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .method-grid{grid-template-columns:1fr;} }
+  .method-item{ background:var(--glass); backdrop-filter:blur(14px); border:1px solid var(--line); border-radius:var(--r-md); padding:24px 22px; }
+  .method-item .top-row{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px; }
+  .method-item h3{ font-family:var(--font-display); font-size:.98rem; font-weight:700; margin:0; }
+  .method-item .wt{ font-family:var(--font-display); font-size:.8rem; color:var(--violet-light); font-weight:700; }
+  .method-item p{ margin:0; font-size:.87rem; color:var(--muted); line-height:1.5; }
+  .bar-track{ height:4px; background:var(--bg-2); border-radius:2px; margin-top:14px; overflow:hidden; }
+  .bar-fill{ height:100%; background:linear-gradient(90deg,var(--violet),var(--coral-light)); width:0; border-radius:2px; transition:width 1s cubic-bezier(.2,.7,.2,1); }
+  .method-item.revealed .bar-fill{ width:var(--w); }
 
-  /* ---------- Findings ---------- */
-  .find-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-  @media (max-width: 720px) { .find-grid { grid-template-columns: 1fr; } }
-  .find-card { border-radius: 6px; padding: 20px 22px; border-left: 4px solid var(--critical); background: var(--critical-soft); }
-  .find-card.warn { border-color: var(--warn); background: var(--warn-soft); }
-  .find-card .tag { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--critical); font-weight: 700; }
-  .find-card.warn .tag { color: var(--warn); }
-  .find-card p { margin: 8px 0 0; font-size: 0.93rem; color: var(--ink); }
-  .find-note { margin-top: 22px; font-size: 0.84rem; color: var(--ink-faint); }
-
-  /* ---------- Process ---------- */
-  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; counter-reset: step; }
-  @media (max-width: 780px) { .steps { grid-template-columns: 1fr; } }
-  .step { position: relative; padding-left: 46px; }
-  .step::before {
-    counter-increment: step; content: counter(step);
-    position: absolute; left: 0; top: 0; width: 32px; height: 32px; border-radius: 50%;
-    background: var(--surface); border: 1px solid var(--line);
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-mono); font-size: 0.86rem; color: var(--accent-ink); font-weight: 700;
+  /* ---------- Findings (pain-item pattern) ---------- */
+  .pain-list{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+  @media (max-width:640px){ .pain-list{grid-template-columns:1fr;} }
+  .pain-item{ background:var(--glass); backdrop-filter:blur(14px); border:1px solid var(--line); border-radius:var(--r-md); padding:22px 24px; }
+  .pain-item .tag{
+    display:inline-block; font-size:.68rem; padding:.3em .7em; border-radius:var(--r-pill);
+    margin-bottom:.8em; font-weight:600; border:1px solid rgba(148,131,255,.3); background:var(--violet-soft); color:var(--violet-light);
   }
-  .step h3 { font-family: var(--font-body); font-size: 1rem; margin-bottom: 6px; }
-  .step p { margin: 0; font-size: 0.9rem; color: var(--ink-soft); }
+  .pain-item.coral .tag{ border-color:rgba(255,107,74,.3); background:var(--coral-soft); color:var(--coral-light); }
+  .pain-item p{ margin:0; line-height:1.55; font-size:.96rem; color:var(--ink); }
+  .find-note{ margin-top:22px; font-size:.84rem; color:var(--muted); }
+
+  /* ---------- Process (phase pattern) ---------- */
+  .phase-list{ display:flex; flex-direction:column; gap:14px; }
+  .phase{
+    display:grid; grid-template-columns:120px 1fr; gap:24px; padding:26px;
+    border:1px solid var(--line); border-radius:var(--r-md); background:var(--glass); backdrop-filter:blur(14px);
+  }
+  @media (max-width:640px){ .phase{grid-template-columns:1fr; gap:8px;} }
+  .phase .num{ font-family:var(--font-display); font-size:.8rem; letter-spacing:.08em; color:var(--violet-light); padding-top:.2em; font-weight:700; }
+  .phase h3{ font-family:var(--font-display); margin:0 0 .5em; font-size:1.15rem; font-weight:700; }
+  .phase p{ margin:0; color:var(--muted); line-height:1.6; max-width:62ch; }
 
   /* ---------- About ---------- */
-  .about-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 48px; align-items: start; }
-  @media (max-width: 780px) { .about-grid { grid-template-columns: 1fr; } }
-  .about-card { background: var(--mono-bg); color: var(--mono-ink); border-radius: 10px; padding: 26px; font-family: var(--font-mono); font-size: 0.82rem; line-height: 1.7; }
-  .about-card .k { color: var(--accent); }
-  .about-card .ln { opacity: 0.55; }
-
-  /* ---------- CTA band ---------- */
-  .cta-band { background: var(--mono-bg); color: var(--mono-ink); border-radius: 12px; padding: 54px 48px; margin: 0; }
-  .cta-band h2 { font-family: var(--font-display); color: var(--mono-ink); font-size: clamp(1.4rem, 2.6vw, 1.9rem); max-width: 34ch; margin-bottom: 36px; }
-  .cta-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 48px; align-items: start; }
-  @media (max-width: 780px) { .cta-grid { grid-template-columns: 1fr; gap: 36px; } }
-  .cta-band .contact { font-family: var(--font-mono); font-size: 0.9rem; color: #B7C3CB; line-height: 2; }
-  .cta-band .contact a { color: var(--accent); text-decoration: none; }
-  .cta-band .contact a:hover { text-decoration: underline; }
-  .cta-band .contact .lbl { display: block; margin-top: 26px; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: #7C8B96; }
-  .cta-band .contact .lbl:first-child { margin-top: 0; }
-
-  form.request { display: grid; gap: 16px; }
-  .field { display: grid; gap: 7px; }
-  .field label { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: #93A2AC; }
-  .field input, .field textarea {
-    background: #0B1119; border: 1px solid #2B3846; border-radius: 5px; color: var(--mono-ink);
-    font-family: var(--font-body); font-size: 0.95rem; padding: 11px 13px; resize: vertical;
+  .about-grid{ display:grid; grid-template-columns:.85fr 1.15fr; gap:48px; align-items:start; }
+  @media (max-width:780px){ .about-grid{grid-template-columns:1fr;} }
+  .about-card{
+    background:var(--bg-2); border:1px solid var(--line); border-radius:var(--r-lg); padding:26px;
+    font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace; font-size:.82rem; line-height:1.7;
   }
-  .field input:focus, .field textarea:focus { outline: none; border-color: var(--accent); }
-  .field textarea { min-height: 88px; }
-  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  @media (max-width: 480px) { .field-row { grid-template-columns: 1fr; } }
-  form.request .btn-primary { justify-self: start; margin-top: 4px; border: none; font-size: 0.94rem; }
-  .form-note { font-size: 0.78rem; color: #7C8B96; margin-top: -4px; }
-  .form-status { font-family: var(--font-mono); font-size: 0.88rem; padding: 14px 16px; border-radius: 6px; margin-top: 16px; }
-  .form-status.ok { background: rgba(111,187,165,0.12); color: #8FD4BC; border: 1px solid rgba(111,187,165,0.3); }
-  .form-status.err { background: rgba(224,119,108,0.12); color: #F0A79C; border: 1px solid rgba(224,119,108,0.3); }
-  .form-status[hidden] { display: none; }
+  .about-card .k{ color:var(--violet-light); }
+  .about-card .ln{ color:var(--muted); }
 
-  footer { padding: 40px 0 64px; }
-  .foot-row { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; font-size: 0.82rem; color: var(--ink-faint); }
-  .foot-row a { color: var(--ink-soft); text-decoration: none; }
-  .foot-row a:hover { color: var(--accent-ink); }
-
-  @media (prefers-reduced-motion: reduce) {
-    .bar-fill { transition: none; }
+  /* ---------- CTA / Kontakt ---------- */
+  .cta-band{
+    border:1px solid var(--line-strong); border-radius:var(--r-lg); background:var(--glass-strong);
+    backdrop-filter:blur(18px); padding:clamp(32px,5vw,54px); box-shadow:0 30px 70px -30px rgba(0,0,0,.6);
   }
+  .cta-band h2{ font-family:var(--font-display); font-size:clamp(1.4rem,2.6vw,1.9rem); max-width:34ch; margin:0 0 36px; font-weight:700; }
+  .cta-grid{ display:grid; grid-template-columns:.8fr 1.2fr; gap:48px; align-items:start; }
+  @media (max-width:780px){ .cta-grid{grid-template-columns:1fr; gap:36px;} }
+  .contact{ font-size:.9rem; color:var(--muted); line-height:2; }
+  .contact a{ font-family:var(--font-display); font-weight:600; color:var(--ink); text-decoration:none; }
+  .contact a:hover{ color:var(--violet-light); }
+  .contact .lbl{ display:block; margin-top:26px; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); font-family:var(--font-display); }
+  .contact .lbl:first-child{ margin-top:0; }
+
+  form.request{ display:grid; gap:16px; }
+  .field{ display:grid; gap:7px; }
+  .field label{ font-family:var(--font-display); font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); font-weight:600; }
+  .field input, .field textarea{
+    background:var(--bg-2); border:1px solid var(--line-strong); border-radius:var(--r-sm); color:var(--ink);
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-size:.95rem; padding:11px 13px; resize:vertical;
+  }
+  .field input:focus, .field textarea:focus{ outline:none; border-color:var(--violet); }
+  .field textarea{ min-height:88px; }
+  .field-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:480px){ .field-row{grid-template-columns:1fr;} }
+  form.request .btn-primary{ justify-self:start; margin-top:4px; border:none; font-size:.94rem; }
+  .form-note{ font-size:.78rem; color:var(--muted); margin-top:-4px; }
+  .form-status{ font-family:var(--font-display); font-size:.88rem; padding:14px 16px; border-radius:var(--r-sm); margin-top:16px; }
+  .form-status.ok{ background:rgba(148,131,255,.12); color:var(--violet-light); border:1px solid rgba(148,131,255,.3); }
+  .form-status.err{ background:rgba(255,107,74,.12); color:var(--coral-light); border:1px solid rgba(255,107,74,.3); }
+  .form-status[hidden]{ display:none; }
+
+  footer{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
+    max-width:1120px; margin:0 auto; padding:32px clamp(20px,4vw,40px) 56px; font-size:.8rem; color:var(--muted);
+  }
+  footer .mono{ font-family:var(--font-display); font-weight:600; letter-spacing:.05em; }
+  footer a{ text-decoration:none; color:var(--muted); }
+  footer a:hover{ color:var(--coral-light); }
 </style>
 </head>
 <body>
 
-<nav class="top">
-  <div class="wrap">
-    <div class="brand">Zbinden Software <span class="tag">GEO-Audit</span></div>
-    <div class="navlinks">
+<header>
+  <div class="header-row">
+    <a class="wordmark" href="#top">ZBINDEN<span class="dot">·</span>SOFTWARE <span class="sub">GEO-AUDIT</span></a>
+    <nav class="top-nav">
       <a href="#methode">Methode</a>
       <a href="#befunde">Typische Befunde</a>
       <a href="#ablauf">Ablauf</a>
       <a href="#ueber">Über mich</a>
-    </div>
-    <a class="btn btn-primary" href="#kontakt">Kurz-Check anfragen</a>
-  </div>
-</nav>
-
-<header class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <span class="eyebrow">KI-Sichtbarkeits-Audit für Schweizer Unternehmen</span>
-      <h1 class="headline">Ihre Kundschaft fragt längst die KI. <em>Kennt sie Ihr Unternehmen?</em></h1>
-      <p class="sub">Ich prüfe, ob ChatGPT, Perplexity und Google AI Ihr Unternehmen überhaupt finden und empfehlen — und liefere einen konkreten, priorisierten Plan, damit sie es tun.</p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="#kontakt">Kostenlosen Kurz-Check anfragen</a>
-        <a class="btn btn-ghost" href="#methode">Wie ich prüfe</a>
-      </div>
-    </div>
-    <div class="mock" role="img" aria-label="Beispielhafte KI-Antwort, die ein Unternehmen nicht erwähnt">
-      <div class="mock-bar"><span></span><span></span><span></span></div>
-      <div class="bubble-q">„Beste Ästhetikklinik in Zürich?“</div>
-      <div class="bubble-a">
-        <div class="dot">KI</div>
-        <div class="txt">
-          Hier sind drei empfohlene Praxen in Zürich:
-          <ol>
-            <li>Klinik A — bekannt für Hautbehandlungen</li>
-            <li>Klinik B — spezialisiert auf Faltenunterspritzung</li>
-            <li>Klinik C — hohe Bewertungen auf Google</li>
-          </ol>
-          <div class="missing">Ihr Unternehmen taucht nicht auf.</div>
-        </div>
-      </div>
-    </div>
+    </nav>
+    <a class="header-cta" href="#kontakt">Kurz-Check anfragen</a>
   </div>
 </header>
 
-<div class="wrap stats">
-  <div class="stat-grid">
-    <div class="stat-cell">
-      <div class="n">45<small>/100</small></div>
-      <p>Durchschnittlicher GEO-Score der Deutschschweizer Gesundheits- und Ästhetikpraxen, die ich bisher geprüft habe.</p>
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow reveal d1">KI-Sichtbarkeits-Audit für Schweizer Unternehmen</p>
+        <h1 class="reveal d2">Ihre Kundschaft fragt längst die KI. <em>Kennt sie Ihr Unternehmen?</em></h1>
+        <p class="lede reveal d3">Ich prüfe, ob ChatGPT, Perplexity und Google AI Ihr Unternehmen überhaupt finden und empfehlen — und liefere einen konkreten, priorisierten Plan, damit sie es tun.</p>
+        <div class="cta-row reveal d4">
+          <a class="btn-primary" href="#kontakt">Kostenlosen Kurz-Check anfragen</a>
+          <a class="btn-secondary" href="#methode">Wie ich prüfe</a>
+        </div>
+      </div>
+      <div class="phone-frame reveal d2" id="phoneMock" role="img" aria-label="Simulierte KI-Chat-Antwort: drei Konkurrenten werden empfohlen, das eigene Unternehmen nicht erwähnt">
+        <div class="phone-notch" aria-hidden="true"></div>
+        <div class="phone-header">
+          <span class="phone-avatar">KI</span>
+          <div class="phone-header-text">
+            <span class="phone-name">KI-Assistent</span>
+            <span class="phone-status"><span class="status-dot"></span>Online</span>
+          </div>
+        </div>
+        <div class="phone-body">
+          <div class="msg msg-user">
+            <div class="msg-bubble"><span id="phoneQ"></span><span class="type-cursor" id="qCursor"></span></div>
+          </div>
+          <div class="msg msg-ai" id="aiRow">
+            <span class="msg-avatar">KI</span>
+            <div class="msg-bubble">
+              <span class="typing-dots" id="typingDots"><span></span><span></span><span></span></span>
+              <span id="aiIntro" hidden></span>
+              <ul class="msg-list" id="aiList" hidden>
+                <li data-i="1"><span class="arrow">›</span>Klinik A — Hautbehandlungen</li>
+                <li data-i="2"><span class="arrow">›</span>Klinik B — Faltenunterspritzung</li>
+                <li data-i="3"><span class="arrow">›</span>Klinik C — hohe Bewertungen</li>
+              </ul>
+              <span class="msg-closing" id="aiClosing" hidden></span>
+            </div>
+          </div>
+        </div>
+        <div class="phone-inputbar" aria-hidden="true">
+          <span class="phone-input-placeholder">Nachricht schreiben…</span>
+          <span class="phone-send">➤</span>
+        </div>
+      </div>
     </div>
-    <div class="stat-cell">
-      <div class="n">12<small>/13</small></div>
-      <p>davon lagen unter der Schwelle von 60 Punkten — für KI-Systeme praktisch unauffindbar.</p>
-    </div>
-    <div class="stat-cell">
-      <div class="n">4<small>×</small></div>
-      <p>So viel besser konvertiert KI-Suchverkehr im Schnitt gegenüber klassischem Google-Traffic.</p>
+  </section>
+
+  <div class="wrap stats">
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="n">45<small>/100</small></div>
+        <p>Durchschnittlicher GEO-Score der Deutschschweizer Gesundheits- und Ästhetikpraxen, die ich bisher geprüft habe.</p>
+      </div>
+      <div class="stat-cell">
+        <div class="n">12<small>/13</small></div>
+        <p>davon lagen unter der Schwelle von 60 Punkten — für KI-Systeme praktisch unauffindbar.</p>
+      </div>
+      <div class="stat-cell">
+        <div class="n">4<small>×</small></div>
+        <p>So viel besser konvertiert KI-Suchverkehr im Schnitt gegenüber klassischem Google-Traffic.</p>
+      </div>
     </div>
   </div>
-</div>
 
-<section id="methode">
-  <div class="wrap">
-    <div class="head-row">
-      <div>
-        <span class="kicker">Methode</span>
+  <section id="methode">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Methode</span>
         <h2>Sechs Kategorien, ein Score</h2>
       </div>
-      <p class="prose" style="color:var(--ink-soft); font-size:0.95rem; max-width:38ch; margin:0;">Derselbe gewichtete Rahmen, den ich für jeden Bericht verwende — vom AI-Crawler-Zugriff bis zu strukturierten Daten.</p>
+      <div class="method-grid" id="methodGrid">
+        <div class="method-item" style="--w:25%">
+          <div class="top-row"><h3>AI Citability</h3><span class="wt num">25%</span></div>
+          <p>Wie zitierfähig Ihre Inhalte für KI-Systeme sind.</p>
+          <div class="bar-track"><div class="bar-fill"></div></div>
+        </div>
+        <div class="method-item" style="--w:20%">
+          <div class="top-row"><h3>Markenautorität</h3><span class="wt num">20%</span></div>
+          <p>Ob Drittquellen Ihr Unternehmen als reale Entität bestätigen.</p>
+          <div class="bar-track"><div class="bar-fill"></div></div>
+        </div>
+        <div class="method-item" style="--w:20%">
+          <div class="top-row"><h3>Content E-E-A-T</h3><span class="wt num">20%</span></div>
+          <p>Erfahrung, Expertise, Autorität und Vertrauenswürdigkeit.</p>
+          <div class="bar-track"><div class="bar-fill"></div></div>
+        </div>
+        <div class="method-item" style="--w:15%">
+          <div class="top-row"><h3>Technisches GEO</h3><span class="wt num">15%</span></div>
+          <p>Crawler-Zugriff, Rendering, llms.txt, Ladezeit.</p>
+          <div class="bar-track"><div class="bar-fill"></div></div>
+        </div>
+        <div class="method-item" style="--w:10%">
+          <div class="top-row"><h3>Strukturierte Daten</h3><span class="wt num">10%</span></div>
+          <p>Schema.org-Markup — die Sprache, die Maschinen lesen.</p>
+          <div class="bar-track"><div class="bar-fill"></div></div>
+        </div>
+        <div class="method-item" style="--w:10%">
+          <div class="top-row"><h3>Plattform-Optimierung</h3><span class="wt num">10%</span></div>
+          <p>Bereitschaft für AI Overviews, ChatGPT, Perplexity, Gemini.</p>
+          <div class="bar-track"><div class="bar-fill"></div></div>
+        </div>
+      </div>
     </div>
-    <div class="method-grid" id="methodGrid">
-      <div class="method-card" style="--w:25%">
-        <div class="top-row"><h3>AI Citability</h3><span class="wt num">25%</span></div>
-        <p>Wie zitierfähig Ihre Inhalte für KI-Systeme sind.</p>
-        <div class="bar-track"><div class="bar-fill"></div></div>
-      </div>
-      <div class="method-card" style="--w:20%">
-        <div class="top-row"><h3>Markenautorität</h3><span class="wt num">20%</span></div>
-        <p>Ob Drittquellen Ihr Unternehmen als reale Entität bestätigen.</p>
-        <div class="bar-track"><div class="bar-fill"></div></div>
-      </div>
-      <div class="method-card" style="--w:20%">
-        <div class="top-row"><h3>Content E-E-A-T</h3><span class="wt num">20%</span></div>
-        <p>Erfahrung, Expertise, Autorität und Vertrauenswürdigkeit.</p>
-        <div class="bar-track"><div class="bar-fill"></div></div>
-      </div>
-      <div class="method-card" style="--w:15%">
-        <div class="top-row"><h3>Technisches GEO</h3><span class="wt num">15%</span></div>
-        <p>Crawler-Zugriff, Rendering, llms.txt, Ladezeit.</p>
-        <div class="bar-track"><div class="bar-fill"></div></div>
-      </div>
-      <div class="method-card" style="--w:10%">
-        <div class="top-row"><h3>Strukturierte Daten</h3><span class="wt num">10%</span></div>
-        <p>Schema.org-Markup — die Sprache, die Maschinen lesen.</p>
-        <div class="bar-track"><div class="bar-fill"></div></div>
-      </div>
-      <div class="method-card" style="--w:10%">
-        <div class="top-row"><h3>Plattform-Optimierung</h3><span class="wt num">10%</span></div>
-        <p>Bereitschaft für AI Overviews, ChatGPT, Perplexity, Gemini.</p>
-        <div class="bar-track"><div class="bar-fill"></div></div>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<section id="befunde">
-  <div class="wrap">
-    <div class="head-row">
-      <div>
-        <span class="kicker">Was ich typischerweise finde</span>
+  <section id="befunde">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Was ich typischerweise finde</span>
         <h2>Muster, die sich wiederholen</h2>
       </div>
+      <div class="pain-list">
+        <div class="pain-item">
+          <span class="tag">Häufig</span>
+          <p>Kein Organization- oder MedicalBusiness-Schema — Suchmaschinen und KI-Systeme können Name, Adresse und Öffnungszeiten nicht zuverlässig zuordnen.</p>
+        </div>
+        <div class="pain-item coral">
+          <span class="tag">Häufig</span>
+          <p>Kein Impressum oder eines, das auf eine nicht existierende Seite verweist — ein Vertrauensproblem, das über GEO hinausgeht.</p>
+        </div>
+        <div class="pain-item">
+          <span class="tag">Regelmässig</span>
+          <p>Strukturierte Daten mit falscher Kontakt-E-Mail — meist ein Überbleibsel aus der Website-Erstellung, das niemand korrigiert hat.</p>
+        </div>
+        <div class="pain-item coral">
+          <span class="tag">Regelmässig</span>
+          <p>Keine namentlich genannte, qualifizierte Fachperson — für Gesundheitsinhalte eine der wichtigsten Vertrauenssignale, die fehlt.</p>
+        </div>
+      </div>
+      <p class="find-note">Anonymisierte, wiederkehrende Muster aus bisherigen Prüfungen — keine Angaben zu einzelnen Unternehmen.</p>
     </div>
-    <div class="find-grid">
-      <div class="find-card">
-        <span class="tag">Häufig</span>
-        <p>Kein Organization- oder MedicalBusiness-Schema — Suchmaschinen und KI-Systeme können Name, Adresse und Öffnungszeiten nicht zuverlässig zuordnen.</p>
-      </div>
-      <div class="find-card warn">
-        <span class="tag">Häufig</span>
-        <p>Kein Impressum oder eines, das auf eine nicht existierende Seite verweist — ein Vertrauensproblem, das über GEO hinausgeht.</p>
-      </div>
-      <div class="find-card">
-        <span class="tag">Regelmässig</span>
-        <p>Strukturierte Daten mit falscher Kontakt-E-Mail — meist ein Überbleibsel aus der Website-Erstellung, das niemand korrigiert hat.</p>
-      </div>
-      <div class="find-card warn">
-        <span class="tag">Regelmässig</span>
-        <p>Keine namentlich genannte, qualifizierte Fachperson — für Gesundheitsinhalte eine der wichtigsten Vertrauenssignale, die fehlt.</p>
-      </div>
-    </div>
-    <p class="find-note">Anonymisierte, wiederkehrende Muster aus bisherigen Prüfungen — keine Angaben zu einzelnen Unternehmen.</p>
-  </div>
-</section>
+  </section>
 
-<section id="ablauf">
-  <div class="wrap">
-    <div class="head-row">
-      <div>
-        <span class="kicker">Ablauf</span>
+  <section id="ablauf">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Ablauf</span>
         <h2>Drei Schritte bis zum Plan</h2>
       </div>
-    </div>
-    <div class="steps">
-      <div class="step">
-        <h3>Kurz-Check</h3>
-        <p>Ich prüfe Ihre Website in ersten Grundzügen und sage Ihnen ehrlich, ob sich ein vollständiger Audit lohnt.</p>
-      </div>
-      <div class="step">
-        <h3>Vollständiger Audit</h3>
-        <p>Sechs Kategorien, priorisierte Befunde, ein 30-Tage-Aktionsplan — als klar strukturierter Bericht.</p>
-      </div>
-      <div class="step">
-        <h3>Gespräch &amp; Umsetzung</h3>
-        <p>15 Minuten, in denen ich den Bericht durchgehe. Kein Verkaufsgespräch — Sie entscheiden danach.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="ueber">
-  <div class="wrap about-grid">
-    <div class="about-card">
-      <div><span class="k">$</span> whoami</div>
-      <div class="ln">Pauline Zbinden</div>
-      <div class="ln">Zbinden Software</div>
-      <div class="ln">Sisseln, Schweiz</div>
-      <br>
-      <div><span class="k">$</span> leistungen</div>
-      <div class="ln">→ KI-Sichtbarkeits-Audits (GEO)</div>
-      <div class="ln">→ Individuelle Software für Produktion &amp; Betrieb</div>
-    </div>
-    <div>
-      <span class="kicker" style="display:block; margin-bottom:10px;">Über mich</span>
-      <h2 style="font-size:1.6rem; margin-bottom:16px;">Ich prüfe Websites so, wie KI-Systeme sie lesen — nicht so, wie Menschen sie sehen.</h2>
-      <p class="prose" style="color:var(--ink-soft);">Als Gründerin von Zbinden Software analysiere ich, wie sichtbar Schweizer Unternehmen für ChatGPT, Perplexity, Google AI und Co. tatsächlich sind. Die meisten Websites wurden für Menschen und klassische Suchmaschinen gebaut — nicht für die Art, wie KI-Systeme heute Empfehlungen aussprechen. Jeder Audit folgt derselben nachvollziehbaren Methodik und endet mit einem konkreten, priorisierten Plan statt vager Empfehlungen.</p>
-    </div>
-  </div>
-</section>
-
-<section id="kontakt" style="border-top:none; padding-top:0;">
-  <div class="wrap">
-    <div class="cta-band">
-      <h2>Wollen Sie wissen, wo Ihr Unternehmen steht?</h2>
-      <div class="cta-grid">
-        <div class="contact">
-          <span class="lbl">Telefon</span>
-          <a href="tel:+41791936802">+41 79 193 68 02</a>
-          <span class="lbl">E-Mail</span>
-          <a href="mailto:pauline.zbinden4334@gmail.com">pauline.zbinden4334@gmail.com</a>
+      <div class="phase-list">
+        <div class="phase">
+          <span class="num">01</span>
+          <div><h3>Kurz-Check</h3><p>Ich prüfe Ihre Website in ersten Grundzügen und sage Ihnen ehrlich, ob sich ein vollständiger Audit lohnt.</p></div>
         </div>
-        <div>
-          <form class="request" id="requestForm" action="https://formspree.io/f/mvkpbaar" method="POST">
-            <div class="field-row">
-              <div class="field">
-                <label for="f-name">Name</label>
-                <input type="text" id="f-name" name="name" required>
-              </div>
-              <div class="field">
-                <label for="f-email">E-Mail</label>
-                <input type="email" id="f-email" name="email" required>
-              </div>
-            </div>
-            <div class="field">
-              <label for="f-company">Unternehmen</label>
-              <input type="text" id="f-company" name="company">
-            </div>
-            <div class="field">
-              <label for="f-message">Ihr Anliegen</label>
-              <textarea id="f-message" name="message" placeholder="z. B. Ihre Website-URL und was Sie wissen möchten"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Anfrage senden</button>
-            <p class="form-note">Ich melde mich innerhalb von 1–2 Werktagen zurück.</p>
-          </form>
-          <div class="form-status ok" id="formOk" hidden>Danke für Ihre Anfrage — ich melde mich in Kürze bei Ihnen.</div>
-          <div class="form-status err" id="formErr" hidden>Das hat leider nicht geklappt. Schreiben Sie mir direkt an <a href="mailto:pauline.zbinden4334@gmail.com" style="color:inherit; text-decoration:underline;">pauline.zbinden4334@gmail.com</a>.</div>
+        <div class="phase">
+          <span class="num">02</span>
+          <div><h3>Vollständiger Audit</h3><p>Sechs Kategorien, priorisierte Befunde, ein 30-Tage-Aktionsplan — als klar strukturierter Bericht.</p></div>
+        </div>
+        <div class="phase">
+          <span class="num">03</span>
+          <div><h3>Gespräch &amp; Umsetzung</h3><p>15 Minuten, in denen ich den Bericht durchgehe. Kein Verkaufsgespräch — Sie entscheiden danach.</p></div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <section id="ueber">
+    <div class="wrap about-grid">
+      <div class="about-card">
+        <div><span class="k">$</span> whoami</div>
+        <div class="ln">Pauline Zbinden</div>
+        <div class="ln">Zbinden Software</div>
+        <div class="ln">Sisseln, Schweiz</div>
+        <br>
+        <div><span class="k">$</span> leistungen</div>
+        <div class="ln">→ KI-Sichtbarkeits-Audits (GEO)</div>
+        <div class="ln">→ Individuelle Software für Produktion &amp; Betrieb</div>
+      </div>
+      <div>
+        <span class="eyebrow" style="display:block; margin-bottom:10px;">Über mich</span>
+        <h2 style="font-family:var(--font-display); font-size:1.6rem; margin-bottom:16px; font-weight:700;">Ich prüfe Websites so, wie KI-Systeme sie lesen — nicht so, wie Menschen sie sehen.</h2>
+        <p style="color:var(--muted); line-height:1.7; max-width:62ch;">Als Gründerin von Zbinden Software analysiere ich, wie sichtbar Schweizer Unternehmen für ChatGPT, Perplexity, Google AI und Co. tatsächlich sind. Die meisten Websites wurden für Menschen und klassische Suchmaschinen gebaut — nicht für die Art, wie KI-Systeme heute Empfehlungen aussprechen. Jeder Audit folgt derselben nachvollziehbaren Methodik und endet mit einem konkreten, priorisierten Plan statt vager Empfehlungen.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt" style="border-top:none;">
+    <div class="wrap">
+      <div class="cta-band">
+        <h2>Wollen Sie wissen, wo Ihr Unternehmen steht?</h2>
+        <div class="cta-grid">
+          <div class="contact">
+            <span class="lbl">Telefon</span>
+            <a href="tel:+41791936802">+41 79 193 68 02</a>
+            <span class="lbl">E-Mail</span>
+            <a href="mailto:info@zbinden.online">info@zbinden.online</a>
+          </div>
+          <div>
+            <form class="request" id="requestForm" action="https://formspree.io/f/mvkpbaar" method="POST">
+              <div class="field-row">
+                <div class="field">
+                  <label for="f-name">Name</label>
+                  <input type="text" id="f-name" name="name" required>
+                </div>
+                <div class="field">
+                  <label for="f-email">E-Mail</label>
+                  <input type="email" id="f-email" name="email" required>
+                </div>
+              </div>
+              <div class="field">
+                <label for="f-company">Unternehmen</label>
+                <input type="text" id="f-company" name="company">
+              </div>
+              <div class="field">
+                <label for="f-message">Ihr Anliegen</label>
+                <textarea id="f-message" name="message" placeholder="z. B. Ihre Website-URL und was Sie wissen möchten"></textarea>
+              </div>
+              <button type="submit" class="btn-primary">Anfrage senden</button>
+              <p class="form-note">Ich melde mich innerhalb von 1–2 Werktagen zurück.</p>
+            </form>
+            <div class="form-status ok" id="formOk" hidden>Danke für Ihre Anfrage — ich melde mich in Kürze bei Ihnen.</div>
+            <div class="form-status err" id="formErr" hidden>Das hat leider nicht geklappt. Schreiben Sie mir direkt an <a href="mailto:info@zbinden.online" style="color:inherit; text-decoration:underline;">info@zbinden.online</a>.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
 
 <footer>
-  <div class="wrap foot-row">
-    <span>© 2026 Zbinden Software</span>
-    <span>Auch individuelle Produktionssoftware? <a href="https://www.zbinden.online/custom-software">Mehr zum Software-Angebot →</a></span>
-  </div>
+  <span>© 2026 Zbinden Software</span>
+  <span class="mono">GEO-Audits · <a href="https://www.zbinden.online/custom-software">Individuelle Software →</a></span>
 </footer>
 
 <script>
-  var cards = document.querySelectorAll('.method-card');
+  (function(){
+    var phone = document.getElementById('phoneMock');
+    if (!phone) return;
+    var qEl = document.getElementById('phoneQ');
+    var qCursor = document.getElementById('qCursor');
+    var aiRow = document.getElementById('aiRow');
+    var typingDots = document.getElementById('typingDots');
+    var introEl = document.getElementById('aiIntro');
+    var listEl = document.getElementById('aiList');
+    var listItems = listEl.querySelectorAll('li');
+    var closingEl = document.getElementById('aiClosing');
+
+    var question = 'bestes ästhetik-institut zürich?';
+    var intro = 'Hier sind die besten Optionen in Zürich:';
+    var closing = 'Ihr Unternehmen wird nicht erwähnt.';
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function finalState(){
+      qEl.textContent = question;
+      qCursor.style.display = 'none';
+      typingDots.style.display = 'none';
+      aiRow.classList.add('in');
+      introEl.hidden = false; introEl.textContent = intro;
+      listEl.hidden = false; listItems.forEach(function(li){ li.classList.add('in'); });
+      closingEl.hidden = false; closingEl.textContent = closing;
+    }
+
+    function streamWords(el, text, delay, done){
+      var words = text.split(' ');
+      var i = 0;
+      el.textContent = '';
+      var t = setInterval(function(){
+        el.textContent += (i === 0 ? '' : ' ') + words[i];
+        i++;
+        if (i >= words.length) { clearInterval(t); if (done) setTimeout(done, 200); }
+      }, delay);
+    }
+
+    function revealListItems(done){
+      var idx = 0;
+      var t = setInterval(function(){
+        if (idx < listItems.length) { listItems[idx].classList.add('in'); idx++; }
+        else { clearInterval(t); if (done) setTimeout(done, 150); }
+      }, 320);
+    }
+
+    function runSequence(){
+      if (reduced) { finalState(); return; }
+      // 1. type the question
+      var i = 0;
+      var typeTimer = setInterval(function(){
+        qEl.textContent = question.slice(0, i + 1);
+        i++;
+        if (i >= question.length) {
+          clearInterval(typeTimer);
+          qCursor.style.display = 'none';
+          setTimeout(showTyping, 450);
+        }
+      }, 35);
+    }
+
+    function showTyping(){
+      aiRow.classList.add('in');
+      setTimeout(function(){
+        typingDots.style.display = 'none';
+        introEl.hidden = false;
+        streamWords(introEl, intro, 110, function(){
+          listEl.hidden = false;
+          revealListItems(function(){
+            closingEl.hidden = false;
+            streamWords(closingEl, closing, 130);
+          });
+        });
+      }, 850);
+    }
+
+    if ('IntersectionObserver' in window) {
+      var phoneIo = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting) { runSequence(); phoneIo.unobserve(e.target); }
+        });
+      }, { threshold: 0.4 });
+      phoneIo.observe(phone);
+    } else {
+      finalState();
+    }
+  })();
+
+  var items = document.querySelectorAll('.method-item, .reveal');
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
-        if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); }
+        if (e.isIntersecting) {
+          e.target.classList.add('revealed');
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
       });
-    }, { threshold: 0.35 });
-    cards.forEach(function(c){ io.observe(c); });
+    }, { threshold: 0.3 });
+    items.forEach(function(el){ io.observe(el); });
   } else {
-    cards.forEach(function(c){ c.classList.add('revealed'); });
+    items.forEach(function(el){ el.classList.add('revealed'); el.classList.add('in'); });
   }
 
   var form = document.getElementById('requestForm');
