@@ -1,0 +1,12 @@
+# Zbinden Software
+
+> Audits de processus, logiciels sur mesure et audits de visibilité IA (GEO) pour PME suisses.
+
+Zbinden Software est dirigée par Pauline Zbinden et propose deux prestations :
+
+- Audit de processus & logiciels sur mesure : https://www.zbinden.online/custom-software
+  J'observe le fonctionnement réel des équipes, identifie les pertes de temps (ressaisies, fichiers dispersés, validations papier) et développe l'application qui règle précisément ce problème.
+- GEO-Audit (audit de visibilité IA) : https://www.zbinden.online/geo-audit
+  Je vérifie si ChatGPT, Perplexity et Google AI trouvent et recommandent une entreprise, sur six critères pondérés (citabilité IA, autorité de marque, E-E-A-T, GEO technique, données structurées, optimisation plateforme), avec un plan d'action priorisé.
+
+Contact : info@zbinden.online, +41 79 193 68 02
