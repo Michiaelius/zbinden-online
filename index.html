@@ -1,61 +1,422 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>zbinden.online</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
-            color: white;
-            text-align: center;
-            padding: 100px 20px;
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        h1 {
-            font-size: 3.8rem;
-            margin-bottom: 20px;
-        }
-        p {
-            font-size: 1.5rem;
-            max-width: 700px;
-            margin: 0 auto 40px;
-            line-height: 1.4;
-        }
-        .loader {
-            border: 6px solid rgba(255,255,255,0.3);
-            border-top: 6px solid white;
-            border-radius: 50%;
-            width: 70px;
-            height: 70px;
-            animation: spin 1s linear infinite;
-            margin: 40px auto;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        a {
-            color: #ffffff;
-            text-decoration: underline;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zbinden Software</title>
+<meta name="description" content="Audits de processus, logiciels sur mesure et audits de visibilité IA (GEO) pour PME suisses.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.zbinden.online/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Zbinden Software",
+  "url": "https://www.zbinden.online/",
+  "email": "info@zbinden.online",
+  "telephone": "+41791936802",
+  "founder": { "@type": "Person", "name": "Pauline Zbinden" },
+  "makesOffer": [
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Audit de processus & logiciels sur mesure",
+        "url": "https://www.zbinden.online/custom-software"
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "GEO-Audit (KI-Sichtbarkeitsprüfung)",
+        "url": "https://geo.zbinden.online/"
+      }
+    }
+  ]
+}
+</script>
+<style>
+  :root{
+    --bg:#0a0d26;
+    --bg-2:#111536;
+    --glass:rgba(255,255,255,.055);
+    --glass-strong:rgba(255,255,255,.09);
+    --ink:#f5f3ff;
+    --muted:#a9a6cf;
+    --coral:#ff6b4a;
+    --coral-light:#ffb199;
+    --on-coral:#1c0e07;
+    --coral-soft:rgba(255,107,74,.16);
+    --violet:#9483ff;
+    --violet-soft:rgba(148,131,255,.16);
+    --line:rgba(255,255,255,.14);
+    --line-strong:rgba(255,255,255,.26);
+    --focus:#c9beff;
+    --r-lg:22px;
+    --r-md:14px;
+    --r-sm:10px;
+    --r-pill:999px;
+    --font-display:"Poppins","Helvetica Neue",Helvetica,Arial,sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  html,body{margin:0;padding:0;overflow-x:hidden;max-width:100%;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--coral);color:var(--on-coral);}
+  a{color:inherit;}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--focus);outline-offset:3px;}
+
+  .eyebrow{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:.72rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--violet);
+  }
+
+  .wrap{
+    position:relative;
+    z-index:1;
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 clamp(20px,4vw,40px);
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    border-bottom:1px solid var(--line);
+    position:sticky;
+    top:0;
+    background:rgba(10,13,38,.72);
+    backdrop-filter:blur(10px);
+    z-index:20;
+  }
+  .header-row{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px 16px;
+    padding:14px clamp(20px,4vw,40px);
+    max-width:1120px;
+    margin:0 auto;
+  }
+  .wordmark{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:1rem;
+    letter-spacing:.01em;
+    display:flex;
+    align-items:baseline;
+    gap:.4em;
+    text-decoration:none;
+    color:var(--ink);
+  }
+  .wordmark .dot{color:var(--coral);}
+  .lang-switch{
+    display:flex;
+    align-items:center;
+    gap:2px;
+    border:1px solid var(--line-strong);
+    border-radius:var(--r-pill);
+    padding:3px;
+  }
+  .lang-switch button{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:.7rem;
+    letter-spacing:.04em;
+    color:var(--muted);
+    background:transparent;
+    border:none;
+    border-radius:var(--r-pill);
+    padding:.4em .7em;
+    cursor:pointer;
+  }
+  .lang-switch button:hover{color:var(--ink);}
+  .lang-switch button[aria-pressed="true"]{background:var(--coral);color:var(--on-coral);}
+  .header-cta{
+    font-family:var(--font-display);
+    font-size:.8rem;
+    padding:.55em 1.1em;
+    border:1px solid var(--coral);
+    border-radius:var(--r-pill);
+    color:var(--coral-light);
+    text-decoration:none;
+    white-space:nowrap;
+    font-weight:600;
+  }
+  .header-cta:hover{background:var(--coral);color:var(--on-coral);}
+
+  /* ---------- Reveal ---------- */
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:none;}
+  @media (prefers-reduced-motion:reduce){ .reveal{opacity:1;transform:none;} }
+  .d1{transition-delay:.05s;} .d2{transition-delay:.12s;} .d3{transition-delay:.19s;} .d4{transition-delay:.26s;}
+
+  /* ---------- Section scaffolding ---------- */
+  section{ position:relative; border-bottom:1px solid var(--line); padding:clamp(48px,8vw,88px) 0; }
+  section:last-of-type{border-bottom:none;}
+  .section-head{ display:grid; grid-template-columns:120px 1fr; gap:24px; margin-bottom:clamp(28px,5vw,48px); }
+  @media (max-width:640px){ .section-head{grid-template-columns:1fr; gap:8px;} }
+  .section-head h2{
+    font-family:var(--font-display); margin:0; font-size:clamp(1.5rem,3vw,2.1rem);
+    font-weight:700; letter-spacing:-.01em; text-wrap:balance;
+  }
+  h1,h2,h3{text-wrap:balance;}
+
+  /* ---------- Hero ---------- */
+  .hero{ padding-top:clamp(40px,7vw,64px); padding-bottom:clamp(56px,8vw,84px); }
+  .hero h1{
+    font-family:var(--font-display); font-size:clamp(2.1rem,4.8vw,3.3rem);
+    line-height:1.06; font-weight:800; letter-spacing:-.02em; margin:.5em 0 .45em; max-width:18ch;
+  }
+  .hero h1 em{
+    font-style:normal;
+    background:linear-gradient(100deg, var(--coral) 0%, var(--coral-light) 45%, var(--violet) 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero p.lede{ font-size:1.08rem; line-height:1.6; color:var(--muted); max-width:52ch; margin:0; }
+
+  .btn-primary{
+    background:linear-gradient(120deg, var(--coral), #ff9466); color:var(--on-coral); text-decoration:none;
+    font-family:var(--font-display); font-weight:700; font-size:.92rem; padding:.95em 1.5em; display:inline-block;
+    border:1px solid transparent; border-radius:var(--r-pill); box-shadow:0 10px 28px -8px rgba(255,107,74,.55);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-primary:hover{ transform:translateY(-1px); box-shadow:0 12px 32px -6px rgba(255,107,74,.65); }
+  .btn-secondary{
+    text-decoration:none; font-family:var(--font-display); font-weight:600; font-size:.88rem; color:var(--ink);
+    padding:.95em 1.4em; border:1px solid var(--line-strong); border-radius:var(--r-pill); background:var(--glass);
+  }
+  .btn-secondary:hover{ border-color:var(--violet); color:var(--violet); }
+
+  /* ---------- Service cards ---------- */
+  .service-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  @media (max-width:820px){ .service-grid{grid-template-columns:1fr;} }
+  .service-card{
+    border:1px solid var(--line-strong); border-radius:var(--r-lg); background:var(--glass-strong);
+    backdrop-filter:blur(18px); padding:clamp(28px,4vw,36px); display:flex; flex-direction:column; gap:14px;
+    box-shadow:0 30px 70px -30px rgba(0,0,0,.6); text-decoration:none; color:var(--ink);
+    transition:border-color .18s ease, transform .18s ease;
+  }
+  .service-card:hover{ transform:translateY(-3px); }
+  .service-card.coral{ border-color:rgba(255,107,74,.35); }
+  .service-card.coral:hover{ border-color:var(--coral); }
+  .service-card.violet{ border-color:rgba(148,131,255,.35); }
+  .service-card.violet:hover{ border-color:var(--violet); }
+  .service-tag{
+    font-family:var(--font-display); font-weight:600; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase;
+    padding:.4em .8em; border-radius:var(--r-pill); width:fit-content;
+  }
+  .service-card.coral .service-tag{ background:var(--coral-soft); color:var(--coral-light); }
+  .service-card.violet .service-tag{ background:var(--violet-soft); color:var(--violet); }
+  .service-card h3{ font-family:var(--font-display); font-size:1.4rem; font-weight:700; margin:0; letter-spacing:-.01em; }
+  .service-card p{ color:var(--muted); font-size:.96rem; line-height:1.6; margin:0; flex:1; }
+  .service-card .go{
+    font-family:var(--font-display); font-weight:600; font-size:.86rem; display:inline-flex; align-items:center; gap:6px;
+  }
+  .service-card.coral .go{ color:var(--coral-light); }
+  .service-card.violet .go{ color:var(--violet); }
+  .service-card .go svg{ transition:transform .15s ease; }
+  .service-card:hover .go svg{ transform:translateX(3px); }
+
+  /* ---------- About / contact ---------- */
+  .about-grid{ display:grid; grid-template-columns:0.9fr 1.1fr; gap:48px; align-items:center; }
+  @media (max-width:780px){ .about-grid{grid-template-columns:1fr;} }
+  .about-grid p{ color:var(--muted); font-size:1.02rem; line-height:1.7; margin:0; max-width:52ch; }
+  .contact-card{
+    border:1px solid var(--line-strong); border-radius:var(--r-lg); background:var(--glass);
+    padding:28px 30px; display:flex; flex-direction:column; gap:16px;
+  }
+  .contact-card a{
+    font-family:var(--font-display); font-weight:600; text-decoration:none; color:var(--ink); font-size:1.02rem;
+  }
+  .contact-card a:hover{ color:var(--coral-light); }
+  .contact-card .lbl{ font-family:var(--font-display); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); display:block; margin-bottom:4px; }
+
+  footer{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
+    max-width:1120px; margin:0 auto; padding:32px clamp(20px,4vw,40px) 56px; font-size:.8rem; color:var(--muted);
+  }
+  footer .mono{ font-family:var(--font-display); font-weight:600; letter-spacing:.05em; }
+</style>
 </head>
 <body>
-    <h1>zbinden.online</h1>
-    <p><strong>Unsere neue Homepage ist noch im Aufbau.</strong><br>
-       Wir arbeiten mit Hochdruck daran – bald geht’s los! 🚧</p>
-    
-    <div class="loader"></div>
-    
-    <p>Bei Fragen oder Anliegen einfach eine E-Mail schreiben:<br>
-       <a href="mailto:michael.zbinden@me.com">michael.zbinden@me.com</a>
-    </p>
+
+<header>
+  <div class="header-row">
+    <a class="wordmark" href="#top">ZBINDEN<span class="dot">·</span>SOFTWARE</a>
+    <div class="lang-switch" role="group" aria-label="Langue / Sprache">
+      <button type="button" data-lang="fr" aria-pressed="true">FR</button>
+      <button type="button" data-lang="de" aria-pressed="false">DE</button>
+    </div>
+    <a class="header-cta" href="#kontakt" data-i18n="header-cta">Contact</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow reveal d1" data-i18n="hero-eyebrow">Zbinden Software</p>
+      <h1 class="reveal d2" data-i18n-html="hero-h1">Deux façons de rendre votre entreprise plus <em>efficace</em>.</h1>
+      <p class="lede reveal d3" data-i18n="hero-lede">J'accompagne les PME suisses sur deux fronts distincts : des applications sur mesure qui suppriment le travail répétitif, et des audits qui vérifient si les IA de recherche trouvent votre entreprise.</p>
+    </div>
+  </section>
+
+  <section id="leistungen">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow" data-i18n="services-eyebrow">Angebot</span>
+        <h2 data-i18n="services-h2">Zwei eigenständige Angebote</h2>
+      </div>
+      <div class="service-grid">
+        <a class="service-card coral" href="https://www.zbinden.online/custom-software">
+          <span class="service-tag" data-i18n="card1-tag">Prozesse & Software</span>
+          <h3 data-i18n="card1-h3">Audit de processus & logiciels sur mesure</h3>
+          <p data-i18n="card1-p">J'observe comment vos équipes travaillent réellement, je repère où le temps se perd, puis je développe l'application qui règle précisément ce problème-là.</p>
+          <span class="go" data-i18n="card1-go">Découvrir <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+        <a class="service-card violet" href="https://geo.zbinden.online/">
+          <span class="service-tag" data-i18n="card2-tag">KI-Sichtbarkeit</span>
+          <h3 data-i18n="card2-h3">GEO-Audit — KI-Sichtbarkeitsprüfung</h3>
+          <p data-i18n="card2-p">Ich prüfe, ob ChatGPT, Perplexity und Google AI Ihr Unternehmen finden und empfehlen, und liefere einen priorisierten Aktionsplan.</p>
+          <span class="go" data-i18n="card2-go">Entdecken <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt">
+    <div class="wrap about-grid">
+      <div>
+        <span class="eyebrow" data-i18n="about-eyebrow">À propos</span>
+        <h2 style="font-family:var(--font-display); font-size:1.7rem; margin:12px 0 16px; font-weight:700;" data-i18n="about-h2">Pauline Zbinden</h2>
+        <p data-i18n="about-p">Fondatrice de Zbinden Software. Je conçois des outils sur mesure et j'analyse la visibilité des entreprises suisses, pour des IA autant que pour des humains.</p>
+      </div>
+      <div class="contact-card">
+        <div>
+          <span class="lbl" data-i18n="contact-lbl-mail">E-mail</span>
+          <a href="mailto:info@zbinden.online">info@zbinden.online</a>
+        </div>
+        <div>
+          <span class="lbl" data-i18n="contact-lbl-tel">Téléphone</span>
+          <a href="tel:+41791936802">+41 79 193 68 02</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>© 2026 Zbinden Software</span>
+  <span class="mono" data-i18n="footer-tagline">Audit de processus · Applications sur mesure · GEO</span>
+</footer>
+
+<script>
+(function(){
+  var STRINGS = {
+    fr: {
+      "title": "Zbinden Software",
+      "header-cta": "Contact",
+      "hero-eyebrow": "Zbinden Software",
+      "hero-h1": "Deux façons de rendre votre entreprise plus <em>efficace</em>.",
+      "hero-lede": "J'accompagne les PME suisses sur deux fronts distincts : des applications sur mesure qui suppriment le travail répétitif, et des audits qui vérifient si les IA de recherche trouvent votre entreprise.",
+      "services-eyebrow": "Offre",
+      "services-h2": "Deux offres distinctes",
+      "card1-tag": "Processus & logiciels",
+      "card1-h3": "Audit de processus & logiciels sur mesure",
+      "card1-p": "J'observe comment vos équipes travaillent réellement, je repère où le temps se perd, puis je développe l'application qui règle précisément ce problème-là.",
+      "card1-go": "Découvrir",
+      "card2-tag": "Visibilité IA",
+      "card2-h3": "Audit GEO — visibilité pour les IA de recherche",
+      "card2-p": "Je vérifie si ChatGPT, Perplexity et Google AI trouvent et recommandent votre entreprise, et je livre un plan d'action priorisé.",
+      "card2-go": "Explorer",
+      "about-eyebrow": "À propos",
+      "about-h2": "Pauline Zbinden",
+      "about-p": "Fondatrice de Zbinden Software. Je conçois des outils sur mesure et j'analyse la visibilité des entreprises suisses, pour des IA autant que pour des humains.",
+      "contact-lbl-mail": "E-mail",
+      "contact-lbl-tel": "Téléphone",
+      "footer-tagline": "Audit de processus · Applications sur mesure · GEO"
+    },
+    de: {
+      "title": "Zbinden Software",
+      "header-cta": "Kontakt",
+      "hero-eyebrow": "Zbinden Software",
+      "hero-h1": "Zwei Wege, Ihr Unternehmen <em>effizienter</em> zu machen.",
+      "hero-lede": "Ich begleite Schweizer KMU auf zwei Ebenen: individuelle Software, die repetitive Arbeit abschafft, und Audits, die prüfen, ob KI-Suchsysteme Ihr Unternehmen überhaupt finden.",
+      "services-eyebrow": "Angebot",
+      "services-h2": "Zwei eigenständige Angebote",
+      "card1-tag": "Prozesse & Software",
+      "card1-h3": "Prozessaudit & individuelle Software",
+      "card1-p": "Ich beobachte vor Ort, wie Ihre Teams wirklich arbeiten, finde heraus, wo Zeit verloren geht, und entwickle die Anwendung, die genau dieses Problem löst.",
+      "card1-go": "Entdecken",
+      "card2-tag": "KI-Sichtbarkeit",
+      "card2-h3": "GEO-Audit — KI-Sichtbarkeitsprüfung",
+      "card2-p": "Ich prüfe, ob ChatGPT, Perplexity und Google AI Ihr Unternehmen finden und empfehlen, und liefere einen priorisierten Aktionsplan.",
+      "card2-go": "Entdecken",
+      "about-eyebrow": "Über mich",
+      "about-h2": "Pauline Zbinden",
+      "about-p": "Gründerin von Zbinden Software. Ich entwickle massgeschneiderte Tools und analysiere die Sichtbarkeit Schweizer Unternehmen — für KI-Systeme ebenso wie für Menschen.",
+      "contact-lbl-mail": "E-Mail",
+      "contact-lbl-tel": "Telefon",
+      "footer-tagline": "Prozessaudits · Individuelle Software · GEO"
+    }
+  };
+
+  function applyLang(lang){
+    var dict = STRINGS[lang] || STRINGS.fr;
+    document.documentElement.setAttribute('lang', lang);
+    document.title = dict.title;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if (dict[key] != null) el.textContent = dict[key];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+      var key = el.getAttribute('data-i18n-html');
+      if (dict[key] != null) el.innerHTML = dict[key];
+    });
+    document.querySelectorAll('.lang-switch button').forEach(function(btn){
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-lang') === lang ? 'true' : 'false');
+    });
+    try { localStorage.setItem('zsw-lang', lang); } catch (e) {}
+  }
+
+  function detectLang(){
+    try {
+      var stored = localStorage.getItem('zsw-lang');
+      if (stored && STRINGS[stored]) return stored;
+    } catch (e) {}
+    var nav = (navigator.language || 'fr').slice(0, 2).toLowerCase();
+    return STRINGS[nav] ? nav : 'fr';
+  }
+
+  document.querySelectorAll('.lang-switch button').forEach(function(btn){
+    btn.addEventListener('click', function(){ applyLang(btn.getAttribute('data-lang')); });
+  });
+
+  applyLang(detectLang());
+
+  var els = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.2 });
+    els.forEach(function(el){ io.observe(el); });
+  } else {
+    els.forEach(function(el){ el.classList.add('in'); });
+  }
+})();
+</script>
 </body>
 </html>
