@@ -1,0 +1,10 @@
+# Zbinden Software — GEO-Audit
+
+> KI-Sichtbarkeits-Audits für Schweizer Unternehmen. Prüfung, ob ChatGPT, Perplexity und Google AI ein Unternehmen finden und empfehlen, mit priorisiertem Aktionsplan.
+
+Zbinden Software wird von Pauline Zbinden geführt und bietet zwei Dienstleistungen an:
+
+- GEO-Audit (diese Seite): KI-Sichtbarkeitsprüfung für Unternehmen anhand von sechs gewichteten Kategorien (AI Citability, Markenautorität, Content E-E-A-T, Technisches GEO, Strukturierte Daten, Plattform-Optimierung).
+- Individuelle Software für Produktion und Betrieb: https://www.zbinden.online/custom-software
+
+Kontakt: pauline.zbinden4334@gmail.com, +41 79 193 68 02
