@@ -1,5 +1,12 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
 <title>Zbinden Software — Audit de processus &amp; logiciels sur mesure</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rufina:wght@400;700&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   /*
     Zbinden Software commits to a single dark identity: deep indigo ground,
@@ -34,27 +41,56 @@
   }
 
   :root{
-    --bg:#0a0d26;
-    --bg-2:#111536;
-    --glass:rgba(255,255,255,.055);
-    --glass-strong:rgba(255,255,255,.09);
-    --ink:#f5f3ff;
-    --muted:#a9a6cf;
-    --coral:#ff6b4a;
-    --coral-light:#ffb199;
-    --on-coral:#1c0e07;
-    --coral-soft:rgba(255,107,74,.16);
-    --violet:#9483ff;
-    --violet-soft:rgba(148,131,255,.16);
-    --line:rgba(255,255,255,.14);
-    --line-strong:rgba(255,255,255,.26);
-    --focus:#c9beff;
-    --r-lg:22px;
+    --bg:#0a0a0a;
+    --bg-2:#141210;
+    --glass:rgba(255,255,255,.04);
+    --glass-strong:rgba(255,255,255,.06);
+    --ink:#f6f3ec;
+    --muted:#a9a297;
+    --coral:#ffffff;
+    --coral-light:#d8d5cd;
+    --on-coral:#0a0a0a;
+    --coral-soft:rgba(255,255,255,.12);
+    --violet:#c7c3ba;
+    --violet-soft:rgba(199,195,186,.14);
+    --line:rgba(255,255,255,.10);
+    --line-strong:rgba(255,255,255,.18);
+    --focus:#ffffff;
+    --r-lg:20px;
     --r-md:14px;
-    --r-sm:10px;
+    --r-sm:11px;
     --r-pill:999px;
-    --font-display:"Poppins","Helvetica Neue",Helvetica,Arial,sans-serif;
+    --font-display:"Rufina","Georgia","Times New Roman",serif;
+    --font-ui:"Jost","Helvetica Neue",Helvetica,Arial,sans-serif;
   }
+  /* Light section override — same variable names, so every existing rule
+     that already reads var(--bg)/var(--ink)/var(--coral)/etc. picks this up
+     automatically. Root stays dark (unchanged) so the canvas JS, which reads
+     colors from document.documentElement, keeps working exactly as before. */
+  .section-light{
+    --bg:#ffffff;
+    --bg-2:#faf8f4;
+    --ink:#141210;
+    --muted:#726a5c;
+    --glass:rgba(10,8,0,.035);
+    --glass-strong:rgba(10,8,0,.05);
+    --coral:#111111;
+    --coral-light:#3a3a3a;
+    --on-coral:#ffffff;
+    --coral-soft:rgba(10,8,0,.08);
+    --violet:#4a4a4a;
+    --violet-soft:rgba(10,8,0,.06);
+    --line:rgba(10,8,0,.10);
+    --line-strong:rgba(10,8,0,.20);
+    --focus:#111111;
+  }
+  /* Decorative full-bleed background canvases (hero-waves, constats-waves,
+     methode-waves, livrables-waves) are direct children of their <section> —
+     hide them on white sections; they were tuned for a dark backdrop.
+     The .diagram-box's #flow canvas is nested deeper, so it is unaffected. */
+  .section-light > canvas{ display:none; }
+  .section-light .diagram-box{ background:#141210; border-color:rgba(255,255,255,.18); }
+  .section-light .diagram-caption{ border-top-color:rgba(255,255,255,.14); color:#a9a297; background:rgba(255,255,255,.03); }
 
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -62,7 +98,7 @@
   body{
     background:var(--bg);
     color:var(--ink);
-    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family:"Jost","Helvetica Neue",Helvetica,Arial,sans-serif; font-weight:300;
     -webkit-font-smoothing:antialiased;
   }
   ::selection{background:var(--coral);color:var(--on-coral);}
@@ -92,12 +128,12 @@
     padding:0 clamp(20px,4vw,40px);
   }
 
-  /* ---------- Header ---------- */
+  /* ---------- Header (always light, sits above whichever section scrolls under it) ---------- */
   header{
     border-bottom:1px solid var(--line);
     position:sticky;
     top:0;
-    background:rgba(10,13,38,.72);
+    background:rgba(255,255,255,.86);
     backdrop-filter:blur(10px);
     z-index:20;
   }
@@ -174,7 +210,7 @@
     right:0;
     flex-direction:column;
     padding:10px clamp(20px,4vw,40px) 18px;
-    background:rgba(10,13,38,.96);
+    background:rgba(255,255,255,.96);
     backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
   }
@@ -241,8 +277,11 @@
   section{
     position:relative;
     overflow:hidden;
+    background:var(--bg);
+    color:var(--ink);
     border-bottom:1px solid var(--line);
     padding:clamp(48px,8vw,88px) 0;
+    transition:background .3s ease;
   }
   section:last-of-type{border-bottom:none;}
   .section-bg{
@@ -312,7 +351,10 @@
   }
   .hero h1 em{
     font-style:normal;
-    background:linear-gradient(100deg, var(--coral) 0%, var(--coral-light) 45%, var(--violet) 100%);
+    /* Hardcoded (not theme-scoped) — the hero is always the light section, and
+       this needs to read as visibly lighter than the near-black heading text
+       around it, which var(--coral)/var(--violet) (also near-black here) can't. */
+    background:linear-gradient(100deg, #3a3a3a 0%, #9a9690 50%, #e2ded4 100%);
     -webkit-background-clip:text;
     background-clip:text;
     color:transparent;
@@ -331,7 +373,7 @@
     align-items:center;
   }
   .btn-primary{
-    background:linear-gradient(120deg, var(--coral), #ff9466);
+    background:linear-gradient(120deg, var(--coral), var(--coral-light));
     color:var(--on-coral);
     text-decoration:none;
     font-family:var(--font-display);
@@ -341,12 +383,18 @@
     display:inline-block;
     border:1px solid transparent;
     border-radius:var(--r-pill);
-    box-shadow:0 10px 28px -8px rgba(255,107,74,.55);
+    box-shadow:0 10px 28px -8px rgba(0,0,0,.4);
     transition:transform .15s ease, box-shadow .15s ease;
+  }
+  /* On white sections var(--coral)/var(--coral-light) are both near-black
+     (tuned for text/borders, not a shiny button fill) — hardcode a lighter,
+     more visible sheen here instead, dark enough to keep the white label legible. */
+  .section-light .btn-primary{
+    background:linear-gradient(120deg, #262626 0%, #6e6e6e 100%);
   }
   .btn-primary:hover{
     transform:translateY(-1px);
-    box-shadow:0 12px 32px -6px rgba(255,107,74,.65);
+    box-shadow:0 12px 32px -6px rgba(0,0,0,.5);
   }
   .btn-secondary{
     text-decoration:none;
@@ -428,7 +476,7 @@
     display:inline-block;
     font-size:.68rem;
     padding:.3em .7em;
-    border:1px solid rgba(255,107,74,.3);
+    border:1px solid var(--line-strong);
     border-radius:var(--r-pill);
     background:var(--coral-soft);
     color:var(--coral-light);
@@ -630,7 +678,10 @@
   }
 </style>
 
-<header>
+</head>
+<body>
+
+<header class="section-light">
   <div class="header-row">
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu">
       <svg class="icon-open" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
@@ -665,7 +716,7 @@
 
 <main id="top">
 
-  <section class="hero">
+  <section class="hero section-light">
     <canvas id="hero-waves" aria-hidden="true"></canvas>
     <div class="wrap">
       <div class="hero-grid">
@@ -673,8 +724,8 @@
           <p class="eyebrow reveal d1" data-i18n="hero-eyebrow">Audit de processus — application sur mesure</p>
           <h1 class="reveal d2" data-i18n-html="hero-h1">Le travail répétitif n'est pas une <em>fatalité</em> de l'entreprise.</h1>
           <p class="lede reveal d3" data-i18n="hero-lede">Je viens sur place observer comment vos équipes travaillent réellement, je repère où le temps se perd — ressaisies, fichiers dispersés, validations papier — puis je développe l'application qui règle précisément ce problème-là.</p>
-          <div class="cta-row reveal d4">
-            <a class="btn-primary" data-mailto-subject data-i18n="hero-btn-primary" href="mailto:info@zbinden.online?subject=Diagnostic%20de%20processus">Planifier un diagnostic</a>
+          <div class="cta-row">
+            <a class="btn-primary" data-mailto-subject data-i18n="hero-btn-primary" href="mailto:pauline.zbinden4334@gmail.com?subject=Diagnostic%20de%20processus">Planifier un diagnostic</a>
             <a class="btn-secondary" href="tel:+41791936802">+41 79 193 68 02</a>
           </div>
         </div>
@@ -696,7 +747,7 @@
     </div>
   </section>
 
-  <section id="constats">
+  <section id="constats" class="section-light">
     <canvas class="section-bg" id="constats-waves" aria-hidden="true"></canvas>
     <div class="wrap">
       <div class="section-head reveal">
@@ -724,7 +775,7 @@
     </div>
   </section>
 
-  <section id="methode">
+  <section id="methode" class="section-light">
     <canvas class="section-bg" id="methode-waves" aria-hidden="true"></canvas>
     <div class="wrap">
       <div class="section-head reveal">
@@ -757,7 +808,7 @@
     </div>
   </section>
 
-  <section id="livrables">
+  <section id="livrables" class="section-light">
     <canvas class="section-bg" id="livrables-waves" aria-hidden="true"></canvas>
     <div class="wrap">
       <div class="section-head reveal">
@@ -816,14 +867,14 @@
         <h2 data-i18n="contact-h2">Un premier échange, sans engagement.</h2>
         <p class="lede" data-i18n="contact-lede">Décrivez-moi le processus qui vous fait perdre le plus de temps. On regarde ensemble s'il vaut la peine d'être audité sur site.</p>
         <div class="cta-row">
-          <a class="btn-primary" data-mailto-subject data-i18n="contact-btn" href="mailto:info@zbinden.online?subject=Diagnostic%20de%20processus">Écrire un email</a>
+          <a class="btn-primary" data-mailto-subject data-i18n="contact-btn" href="mailto:pauline.zbinden4334@gmail.com?subject=Diagnostic%20de%20processus">Écrire un email</a>
         </div>
       </div>
       <div class="contact-card reveal d2">
         <dl>
           <div>
             <dt data-i18n="contact-dt-email">Email</dt>
-            <dd><a href="mailto:info@zbinden.online">info@zbinden.online</a></dd>
+            <dd><a href="mailto:pauline.zbinden4334@gmail.com">pauline.zbinden4334@gmail.com</a></dd>
           </div>
           <div class="divider"></div>
           <div>
@@ -935,7 +986,7 @@
     // Connecting lines — only once the ring has arrived.
     if (tLine > 0){
       ctx.lineWidth = 1.25;
-      ctx.strokeStyle = 'rgba(148,131,255,' + (0.4 * tLine).toFixed(3) + ')';
+      ctx.strokeStyle = 'rgba(255,255,255,' + (0.35 * tLine).toFixed(3) + ')';
       nodes.forEach(function(n){
         ctx.beginPath();
         ctx.moveTo(n.cx, n.cy);
@@ -1047,12 +1098,12 @@
     var css = getComputedStyle(document.documentElement);
     return {
       deep:    css.getPropertyValue('--bg').trim(),
-      blueBase:'#2c3170',   // the medium indigo-blue that dominates the lower half
-      violet:  '#6b4fa6',   // top-corner violet
-      pink:    '#d95a8d',   // the pink ring around the glow
-      indigo:  '#4a4499',   // transition band between pink and blue
-      peach:   '255,190,140', // warm core of the glow, as r,g,b for rgba()
-      blobEdge:'#3a3f9e'    // cool rim colour inside each blob (used later)
+      blueBase:'#0d0d0d',   // near-black base that dominates the lower half
+      violet:  '#4a4a4a',   // mid-grey ring
+      pink:    '#8a8a8a',   // lighter grey ring around the glow
+      indigo:  '#2a2a2a',   // dark-grey transition band
+      peach:   '235,235,232', // near-white core of the glow, as r,g,b for rgba()
+      blobEdge:'#151515'    // dark rim colour inside each blob (used later)
     };
   }
 
@@ -1092,7 +1143,7 @@
       rg.addColorStop(0.30, c.pink);
       rg.addColorStop(0.62, c.violet);
       rg.addColorStop(0.85, c.indigo);
-      rg.addColorStop(1,    'rgba(44,49,112,0)');
+      rg.addColorStop(1,    'rgba(20,18,16,0)');
       ctx.fillStyle = rg;
       ctx.beginPath();
       ctx.arc(cx, cy, gr, 0, Math.PI * 2);
@@ -1123,7 +1174,7 @@
         ctx.globalCompositeOperation = 'multiply';
         var tg = ctx.createLinearGradient(0, 0, 0, H * opts.topFade);
         tg.addColorStop(0, c.deep);
-        tg.addColorStop(1, 'rgba(10,13,38,0)');
+        tg.addColorStop(1, 'rgba(10,10,10,0)');
         ctx.fillStyle = tg;
         ctx.fillRect(0, 0, W, H * opts.topFade);
         ctx.restore();
@@ -1584,3 +1635,5 @@
   update();
 })();
 </script>
+</body>
+</html>
