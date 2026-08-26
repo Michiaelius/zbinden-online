@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="de">
 <head>
 <meta charset="UTF-8">
 <title>Zbinden Software — Audit de processus &amp; logiciels sur mesure</title>
@@ -699,8 +699,8 @@
       <a href="#contact" data-i18n="nav-contact">Contact</a>
     </nav>
     <div class="lang-switch" role="group" aria-label="Langue / Sprache / Language">
-      <button type="button" data-lang="fr" aria-pressed="true">FR</button>
-      <button type="button" data-lang="de" aria-pressed="false">DE</button>
+      <button type="button" data-lang="fr" aria-pressed="false">FR</button>
+      <button type="button" data-lang="de" aria-pressed="true">DE</button>
       <button type="button" data-lang="en" aria-pressed="false">EN</button>
     </div>
     <div class="header-break" aria-hidden="true"></div>
@@ -909,9 +909,18 @@
   var ctx = canvas.getContext('2d');
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  var labels = ['EXCEL','MAIL','PAPIER','TÉL','ERP','SMS'];
+  var LABELS_BY_LANG = {
+    fr: ['EXCEL','MAIL','PAPIER','TÉL','ERP','SMS'],
+    de: ['EXCEL','MAIL','PAPIER','TEL','ERP','SMS'],
+    en: ['EXCEL','MAIL','PAPER','TEL','ERP','SMS']
+  };
+  var labels = LABELS_BY_LANG.de;
   var nodes = labels.map(function(l){ return { label: l }; });
   var target = { label: 'APP' };
+  document.addEventListener('zsw:langchange', function(e){
+    var arr = LABELS_BY_LANG[e.detail] || LABELS_BY_LANG.de;
+    nodes.forEach(function(n, i){ n.label = arr[i]; });
+  });
 
   var W = 0, H = 0, DPR = 1;
 
@@ -1536,6 +1545,7 @@
     });
 
     try { localStorage.setItem('zsw-lang', lang); } catch (e) {}
+    document.dispatchEvent(new CustomEvent('zsw:langchange', { detail: lang }));
   }
 
   function detectLang(){
@@ -1543,8 +1553,7 @@
       var stored = localStorage.getItem('zsw-lang');
       if (stored && STRINGS[stored]) return stored;
     } catch (e) {}
-    var nav = (navigator.language || 'de').slice(0, 2).toLowerCase();
-    return STRINGS[nav] ? nav : 'de';
+    return 'de';
   }
 
   document.querySelectorAll('.lang-switch button').forEach(function(btn){

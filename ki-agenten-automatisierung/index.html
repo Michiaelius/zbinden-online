@@ -128,6 +128,13 @@
     text-decoration:none; white-space:nowrap; transition:background .2s ease, color .2s ease;
   }
   .header-cta:hover{ background:var(--sec-gold); color:#fff; box-shadow:0 0 22px var(--sec-glow-soft); }
+  .lang-switch{ display:flex; align-items:center; gap:2px; border:1px solid var(--sec-line-strong); border-radius:var(--r-pill); padding:3px; }
+  .lang-switch button{
+    font-family:var(--font-ui); font-weight:600; font-size:.7rem; letter-spacing:.04em;
+    color:var(--sec-muted); background:transparent; border:none; border-radius:var(--r-pill); padding:.4em .8em; cursor:pointer;
+  }
+  .lang-switch button:hover{ color:var(--sec-ink); }
+  .lang-switch button[aria-pressed="true"]{ background:var(--sec-gold); color:#fff; }
 
   /* ---------- Reveal ---------- */
   .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
@@ -251,13 +258,18 @@
 
 <header class="section-light">
   <div class="header-row">
-    <a class="wordmark" href="https://www.zbinden.online/">ZBINDEN<span class="dot">·</span>SOFTWARE <span class="sub">KI &amp; AUTOMATION</span></a>
+    <a class="wordmark" href="https://www.zbinden.online/">ZBINDEN<span class="dot">·</span>SOFTWARE <span class="sub" data-i18n="wordmark-badge">KI &amp; AUTOMATION</span></a>
     <nav class="top-nav">
-      <a href="#pakete">Pakete</a>
-      <a href="#fuer-wen">Für wen?</a>
-      <a href="#kontakt">Kontakt</a>
+      <a href="#pakete" data-i18n="nav-pakete">Pakete</a>
+      <a href="#fuer-wen" data-i18n="nav-fuerwen">Für wen?</a>
+      <a href="#kontakt" data-i18n="nav-kontakt">Kontakt</a>
     </nav>
-    <a class="header-cta" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener">Gespräch vereinbaren</a>
+    <div class="lang-switch" role="group" aria-label="Langue / Sprache / Language">
+      <button type="button" data-lang="fr" aria-pressed="false">FR</button>
+      <button type="button" data-lang="de" aria-pressed="true">DE</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <a class="header-cta" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener" data-i18n="header-cta">Gespräch vereinbaren</a>
   </div>
 </header>
 
@@ -265,12 +277,12 @@
 
   <section class="hero section-light">
     <div class="wrap">
-      <p class="eyebrow with-rule reveal d1">KI-Agenten &amp; Prozessautomatisierung</p>
-      <h1 class="reveal d2">Pragmatische <em>Automatisierung</em> statt monatelanger IT-Projekte.</h1>
-      <p class="lede reveal d3">Pragmatische Lösungen für Schweizer Unternehmen — schnell umsetzbar und mit messbarem Nutzen.</p>
+      <p class="eyebrow with-rule reveal d1" data-i18n="hero-eyebrow">KI-Agenten &amp; Prozessautomatisierung</p>
+      <h1 class="reveal d2" data-i18n-html="hero-h1">Pragmatische <em>Automatisierung</em> statt monatelanger IT-Projekte.</h1>
+      <p class="lede reveal d3" data-i18n="hero-lede">Pragmatische Lösungen für Schweizer Unternehmen — schnell umsetzbar und mit messbarem Nutzen.</p>
       <div class="cta-row reveal d4">
-        <a class="btn-primary" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener">Gespräch vereinbaren</a>
-        <a class="btn-secondary" href="#pakete">Pakete ansehen</a>
+        <a class="btn-primary" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener" data-i18n="hero-btn-primary">Gespräch vereinbaren</a>
+        <a class="btn-secondary" href="#pakete" data-i18n="hero-btn-secondary">Pakete ansehen</a>
       </div>
     </div>
   </section>
@@ -278,45 +290,45 @@
   <section id="pakete" class="section-light">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">Angebot</span>
-        <h2>Zwei Pakete, klar abgegrenzt</h2>
+        <span class="eyebrow" data-i18n="pakete-eyebrow">Angebot</span>
+        <h2 data-i18n="pakete-h2">Zwei Pakete, klar abgegrenzt</h2>
       </div>
       <div class="package-grid">
 
         <div class="package-card reveal d1">
-          <span class="package-tag">Schnellstart</span>
+          <span class="package-tag" data-i18n="pkg1-tag">Schnellstart</span>
           <h3>Quick Win Automation</h3>
           <div class="package-meta">
-            <div><span class="lbl">Dauer</span><span class="val">1–2 Wochen</span></div>
-            <div><span class="lbl">Preis</span><span class="val price">ab CHF 4'500</span></div>
+            <div><span class="lbl" data-i18n="meta-lbl-dauer">Dauer</span><span class="val" data-i18n="pkg1-dur-val">1–2 Wochen</span></div>
+            <div><span class="lbl" data-i18n="meta-lbl-preis">Preis</span><span class="val price" data-i18n="pkg1-price">ab CHF 4'500</span></div>
           </div>
           <ul class="package-list">
-            <li>Identifikation eines prioritären, wiederkehrenden Prozesses</li>
-            <li>Umsetzung der Automatisierung (mit oder ohne KI-Agent)</li>
-            <li>Tests und Go-Live</li>
-            <li>Kurze Einschulung (1–2 Stunden)</li>
-            <li>Einfache Dokumentation</li>
+            <li data-i18n="pkg1-li1">Identifikation eines prioritären, wiederkehrenden Prozesses</li>
+            <li data-i18n="pkg1-li2">Umsetzung der Automatisierung (mit oder ohne KI-Agent)</li>
+            <li data-i18n="pkg1-li3">Tests und Go-Live</li>
+            <li data-i18n="pkg1-li4">Kurze Einschulung (1–2 Stunden)</li>
+            <li data-i18n="pkg1-li5">Einfache Dokumentation</li>
           </ul>
-          <a class="btn-secondary" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener">Gespräch vereinbaren</a>
+          <a class="btn-secondary" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener" data-i18n="hero-btn-primary">Gespräch vereinbaren</a>
         </div>
 
         <div class="package-card featured reveal d2">
-          <span class="package-tag">Nächster Schritt</span>
+          <span class="package-tag" data-i18n="pkg2-tag">Nächster Schritt</span>
           <h3>KI-Agent Starter</h3>
           <div class="package-meta">
-            <div><span class="lbl">Dauer</span><span class="val">3–5 Wochen</span></div>
-            <div><span class="lbl">Preis</span><span class="val price">ab CHF 8'500</span></div>
+            <div><span class="lbl" data-i18n="meta-lbl-dauer">Dauer</span><span class="val" data-i18n="pkg2-dur-val">3–5 Wochen</span></div>
+            <div><span class="lbl" data-i18n="meta-lbl-preis">Preis</span><span class="val price" data-i18n="pkg2-price">ab CHF 8'500</span></div>
           </div>
           <ul class="package-list">
-            <li>Kick-off / Cadrage-Gespräch</li>
-            <li>Konzeption und Aufbau eines KI-Agenten</li>
-            <li>Grundlegende Integrationen</li>
-            <li>Zugehörige Automatisierungen</li>
-            <li>Tests und Anpassungen</li>
-            <li>Einschulung + Dokumentation</li>
-            <li>2 Wochen Support nach Go-Live</li>
+            <li data-i18n="pkg2-li1">Kick-off / Cadrage-Gespräch</li>
+            <li data-i18n="pkg2-li2">Konzeption und Aufbau eines KI-Agenten</li>
+            <li data-i18n="pkg2-li3">Grundlegende Integrationen</li>
+            <li data-i18n="pkg2-li4">Zugehörige Automatisierungen</li>
+            <li data-i18n="pkg2-li5">Tests und Anpassungen</li>
+            <li data-i18n="pkg2-li6">Einschulung + Dokumentation</li>
+            <li data-i18n="pkg2-li7">2 Wochen Support nach Go-Live</li>
           </ul>
-          <a class="btn-primary" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener">Gespräch vereinbaren</a>
+          <a class="btn-primary" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener" data-i18n="hero-btn-primary">Gespräch vereinbaren</a>
         </div>
 
       </div>
@@ -326,21 +338,21 @@
   <section id="fuer-wen" class="section-light">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">Eignung</span>
-        <h2>Für wen ist das geeignet?</h2>
+        <span class="eyebrow" data-i18n="fit-eyebrow">Eignung</span>
+        <h2 data-i18n="fit-h2">Für wen ist das geeignet?</h2>
       </div>
       <div class="fit-grid">
         <div class="fit-item reveal d1">
           <span class="n">01</span>
-          <p>KMU mit wiederkehrenden, manuellen Abläufen — in Administration, Support oder Reporting — bei denen spürbar Zeit verloren geht.</p>
+          <p data-i18n="fit-1">KMU mit wiederkehrenden, manuellen Abläufen — in Administration, Support oder Reporting — bei denen spürbar Zeit verloren geht.</p>
         </div>
         <div class="fit-item reveal d2">
           <span class="n">02</span>
-          <p>Unternehmen, die einen ersten, risikoarmen Schritt mit KI-Agenten machen wollen, statt gleich ein grosses Projekt zu starten.</p>
+          <p data-i18n="fit-2">Unternehmen, die einen ersten, risikoarmen Schritt mit KI-Agenten machen wollen, statt gleich ein grosses Projekt zu starten.</p>
         </div>
         <div class="fit-item reveal d3">
           <span class="n">03</span>
-          <p>Teams, die schnelle, messbare Resultate erwarten — kein monatelanges IT-Projekt, sondern eine funktionierende Lösung in Wochen.</p>
+          <p data-i18n="fit-3">Teams, die schnelle, messbare Resultate erwarten — kein monatelanges IT-Projekt, sondern eine funktionierende Lösung in Wochen.</p>
         </div>
       </div>
     </div>
@@ -349,47 +361,47 @@
   <section id="kontakt" class="section-dark" style="border-top:none;">
     <div class="wrap">
       <div class="cta-band">
-        <h2>Bereit für den ersten Schritt?</h2>
+        <h2 data-i18n="cta-h2">Bereit für den ersten Schritt?</h2>
         <div class="cta-grid">
           <div class="contact">
-            <span class="lbl">Telefon</span>
+            <span class="lbl" data-i18n="contact-lbl-tel">Telefon</span>
             <a href="tel:+41791936802">+41 79 193 68 02</a>
-            <span class="lbl">E-Mail</span>
+            <span class="lbl" data-i18n="contact-lbl-mail">E-Mail</span>
             <a href="mailto:info@zbinden.online">info@zbinden.online</a>
           </div>
           <div>
             <form class="request" id="requestForm" action="https://formspree.io/f/mvkpbaar" method="POST">
               <div class="field-row">
                 <div class="field">
-                  <label for="f-name">Name</label>
+                  <label for="f-name" data-i18n="form-lbl-name">Name</label>
                   <input type="text" id="f-name" name="name" required>
                 </div>
                 <div class="field">
-                  <label for="f-email">E-Mail</label>
+                  <label for="f-email" data-i18n="form-lbl-email">E-Mail</label>
                   <input type="email" id="f-email" name="email" required>
                 </div>
               </div>
               <div class="field">
-                <label for="f-company">Unternehmen</label>
+                <label for="f-company" data-i18n="form-lbl-company">Unternehmen</label>
                 <input type="text" id="f-company" name="company">
               </div>
               <div class="field">
-                <label for="f-package">Interesse</label>
+                <label for="f-package" data-i18n="form-lbl-package">Interesse</label>
                 <select id="f-package" name="package">
-                  <option value="">Noch offen</option>
+                  <option value="" data-i18n="form-opt-open">Noch offen</option>
                   <option value="Quick Win Automation">Quick Win Automation</option>
                   <option value="KI-Agent Starter">KI-Agent Starter</option>
                 </select>
               </div>
               <div class="field">
-                <label for="f-message">Ihr Anliegen</label>
-                <textarea id="f-message" name="message" placeholder="z. B. welcher Prozess Sie am meisten Zeit kostet"></textarea>
+                <label for="f-message" data-i18n="form-lbl-message">Ihr Anliegen</label>
+                <textarea id="f-message" name="message" data-i18n-placeholder="form-placeholder-message" placeholder="z. B. welcher Prozess Sie am meisten Zeit kostet"></textarea>
               </div>
-              <button type="submit" class="btn-primary">Anfrage senden</button>
-              <p class="form-note">Ich melde mich innerhalb von 1–2 Werktagen zurück.</p>
+              <button type="submit" class="btn-primary" data-i18n="form-submit">Anfrage senden</button>
+              <p class="form-note" data-i18n="form-note">Ich melde mich innerhalb von 1–2 Werktagen zurück.</p>
             </form>
-            <div class="form-status ok" id="formOk" hidden>Danke für Ihre Anfrage — ich melde mich in Kürze bei Ihnen.</div>
-            <div class="form-status err" id="formErr" hidden>Das hat leider nicht geklappt. Schreiben Sie mir direkt an <a href="mailto:info@zbinden.online" style="color:inherit; text-decoration:underline;">info@zbinden.online</a>.</div>
+            <div class="form-status ok" id="formOk" hidden data-i18n="form-ok">Danke für Ihre Anfrage — ich melde mich in Kürze bei Ihnen.</div>
+            <div class="form-status err" id="formErr" hidden data-i18n-html="form-err">Das hat leider nicht geklappt. Schreiben Sie mir direkt an <a href="mailto:info@zbinden.online" style="color:inherit; text-decoration:underline;">info@zbinden.online</a>.</div>
           </div>
         </div>
       </div>
@@ -404,6 +416,214 @@
 </footer>
 
 <script>
+(function(){
+  var STRINGS = {
+    fr: {
+      "title": "Zbinden Software — Agents IA & automatisation des processus",
+      "wordmark-badge": "IA & AUTOMATISATION",
+      "nav-pakete": "Forfaits",
+      "nav-fuerwen": "Pour qui ?",
+      "nav-kontakt": "Contact",
+      "header-cta": "Réserver un appel",
+      "hero-eyebrow": "Agents IA & automatisation des processus",
+      "hero-h1": "Une <em>automatisation</em> pragmatique plutôt qu'un projet IT de plusieurs mois.",
+      "hero-lede": "Des solutions pragmatiques pour les entreprises suisses — rapides à mettre en place, avec un bénéfice mesurable.",
+      "hero-btn-primary": "Réserver un appel",
+      "hero-btn-secondary": "Voir les forfaits",
+      "pakete-eyebrow": "Offre",
+      "pakete-h2": "Deux forfaits, clairement définis",
+      "pkg1-tag": "Démarrage rapide",
+      "meta-lbl-dauer": "Durée",
+      "meta-lbl-preis": "Prix",
+      "pkg1-dur-val": "1–2 semaines",
+      "pkg1-price": "dès CHF 4'500",
+      "pkg1-li1": "Identification d'un processus prioritaire et récurrent",
+      "pkg1-li2": "Mise en œuvre de l'automatisation (avec ou sans agent IA)",
+      "pkg1-li3": "Tests et mise en production",
+      "pkg1-li4": "Courte formation (1–2 heures)",
+      "pkg1-li5": "Documentation simple",
+      "pkg2-tag": "Étape suivante",
+      "pkg2-dur-val": "3–5 semaines",
+      "pkg2-price": "dès CHF 8'500",
+      "pkg2-li1": "Entretien de cadrage / kick-off",
+      "pkg2-li2": "Conception et développement d'un agent IA",
+      "pkg2-li3": "Intégrations de base",
+      "pkg2-li4": "Automatisations associées",
+      "pkg2-li5": "Tests et ajustements",
+      "pkg2-li6": "Formation + documentation",
+      "pkg2-li7": "2 semaines de support après la mise en production",
+      "fit-eyebrow": "Pour qui ?",
+      "fit-h2": "Pour qui est-ce fait ?",
+      "fit-1": "Les PME avec des processus manuels récurrents — en administration, support ou reporting — qui font visiblement perdre du temps.",
+      "fit-2": "Les entreprises qui veulent faire un premier pas, à faible risque, avec des agents IA plutôt que de lancer d'emblée un grand projet.",
+      "fit-3": "Les équipes qui attendent des résultats rapides et mesurables — pas un projet IT de plusieurs mois, mais une solution qui fonctionne en quelques semaines.",
+      "cta-h2": "Prêt·e à faire le premier pas ?",
+      "contact-lbl-tel": "Téléphone",
+      "contact-lbl-mail": "E-mail",
+      "form-lbl-name": "Nom",
+      "form-lbl-email": "E-mail",
+      "form-lbl-company": "Entreprise",
+      "form-lbl-package": "Intérêt",
+      "form-opt-open": "Pas encore décidé",
+      "form-lbl-message": "Votre demande",
+      "form-placeholder-message": "p. ex. quel processus vous fait perdre le plus de temps",
+      "form-submit": "Envoyer la demande",
+      "form-sending": "Envoi en cours …",
+      "form-note": "Je vous réponds sous 1 à 2 jours ouvrés.",
+      "form-ok": "Merci pour votre demande — je reviens vers vous très prochainement.",
+      "form-err": "Un problème est survenu. Écrivez-moi directement à <a href=\"mailto:info@zbinden.online\" style=\"color:inherit; text-decoration:underline;\">info@zbinden.online</a>."
+    },
+    de: {
+      "title": "Zbinden Software — KI-Agenten & Prozessautomatisierung",
+      "wordmark-badge": "KI & AUTOMATION",
+      "nav-pakete": "Pakete",
+      "nav-fuerwen": "Für wen?",
+      "nav-kontakt": "Kontakt",
+      "header-cta": "Gespräch vereinbaren",
+      "hero-eyebrow": "KI-Agenten & Prozessautomatisierung",
+      "hero-h1": "Pragmatische <em>Automatisierung</em> statt monatelanger IT-Projekte.",
+      "hero-lede": "Pragmatische Lösungen für Schweizer Unternehmen — schnell umsetzbar und mit messbarem Nutzen.",
+      "hero-btn-primary": "Gespräch vereinbaren",
+      "hero-btn-secondary": "Pakete ansehen",
+      "pakete-eyebrow": "Angebot",
+      "pakete-h2": "Zwei Pakete, klar abgegrenzt",
+      "pkg1-tag": "Schnellstart",
+      "meta-lbl-dauer": "Dauer",
+      "meta-lbl-preis": "Preis",
+      "pkg1-dur-val": "1–2 Wochen",
+      "pkg1-price": "ab CHF 4'500",
+      "pkg1-li1": "Identifikation eines prioritären, wiederkehrenden Prozesses",
+      "pkg1-li2": "Umsetzung der Automatisierung (mit oder ohne KI-Agent)",
+      "pkg1-li3": "Tests und Go-Live",
+      "pkg1-li4": "Kurze Einschulung (1–2 Stunden)",
+      "pkg1-li5": "Einfache Dokumentation",
+      "pkg2-tag": "Nächster Schritt",
+      "pkg2-dur-val": "3–5 Wochen",
+      "pkg2-price": "ab CHF 8'500",
+      "pkg2-li1": "Kick-off / Cadrage-Gespräch",
+      "pkg2-li2": "Konzeption und Aufbau eines KI-Agenten",
+      "pkg2-li3": "Grundlegende Integrationen",
+      "pkg2-li4": "Zugehörige Automatisierungen",
+      "pkg2-li5": "Tests und Anpassungen",
+      "pkg2-li6": "Einschulung + Dokumentation",
+      "pkg2-li7": "2 Wochen Support nach Go-Live",
+      "fit-eyebrow": "Eignung",
+      "fit-h2": "Für wen ist das geeignet?",
+      "fit-1": "KMU mit wiederkehrenden, manuellen Abläufen — in Administration, Support oder Reporting — bei denen spürbar Zeit verloren geht.",
+      "fit-2": "Unternehmen, die einen ersten, risikoarmen Schritt mit KI-Agenten machen wollen, statt gleich ein grosses Projekt zu starten.",
+      "fit-3": "Teams, die schnelle, messbare Resultate erwarten — kein monatelanges IT-Projekt, sondern eine funktionierende Lösung in Wochen.",
+      "cta-h2": "Bereit für den ersten Schritt?",
+      "contact-lbl-tel": "Telefon",
+      "contact-lbl-mail": "E-Mail",
+      "form-lbl-name": "Name",
+      "form-lbl-email": "E-Mail",
+      "form-lbl-company": "Unternehmen",
+      "form-lbl-package": "Interesse",
+      "form-opt-open": "Noch offen",
+      "form-lbl-message": "Ihr Anliegen",
+      "form-placeholder-message": "z. B. welcher Prozess Sie am meisten Zeit kostet",
+      "form-submit": "Anfrage senden",
+      "form-sending": "Wird gesendet …",
+      "form-note": "Ich melde mich innerhalb von 1–2 Werktagen zurück.",
+      "form-ok": "Danke für Ihre Anfrage — ich melde mich in Kürze bei Ihnen.",
+      "form-err": "Das hat leider nicht geklappt. Schreiben Sie mir direkt an <a href=\"mailto:info@zbinden.online\" style=\"color:inherit; text-decoration:underline;\">info@zbinden.online</a>."
+    },
+    en: {
+      "title": "Zbinden Software — AI Agents & Process Automation",
+      "wordmark-badge": "AI & AUTOMATION",
+      "nav-pakete": "Packages",
+      "nav-fuerwen": "Who it's for",
+      "nav-kontakt": "Contact",
+      "header-cta": "Book a call",
+      "hero-eyebrow": "AI Agents & Process Automation",
+      "hero-h1": "Pragmatic <em>automation</em> instead of months-long IT projects.",
+      "hero-lede": "Pragmatic solutions for Swiss companies — quick to implement, with measurable impact.",
+      "hero-btn-primary": "Book a call",
+      "hero-btn-secondary": "View packages",
+      "pakete-eyebrow": "Offering",
+      "pakete-h2": "Two clearly defined packages",
+      "pkg1-tag": "Quick start",
+      "meta-lbl-dauer": "Duration",
+      "meta-lbl-preis": "Price",
+      "pkg1-dur-val": "1–2 weeks",
+      "pkg1-price": "from CHF 4'500",
+      "pkg1-li1": "Identification of one priority, recurring process",
+      "pkg1-li2": "Implementation of the automation (with or without an AI agent)",
+      "pkg1-li3": "Testing and go-live",
+      "pkg1-li4": "Short onboarding (1–2 hours)",
+      "pkg1-li5": "Simple documentation",
+      "pkg2-tag": "Next step",
+      "pkg2-dur-val": "3–5 weeks",
+      "pkg2-price": "from CHF 8'500",
+      "pkg2-li1": "Kick-off / scoping call",
+      "pkg2-li2": "Design and build of an AI agent",
+      "pkg2-li3": "Basic integrations",
+      "pkg2-li4": "Related automations",
+      "pkg2-li5": "Testing and refinements",
+      "pkg2-li6": "Onboarding + documentation",
+      "pkg2-li7": "2 weeks of support after go-live",
+      "fit-eyebrow": "Fit",
+      "fit-h2": "Who is this for?",
+      "fit-1": "SMEs with recurring, manual workflows — in admin, support or reporting — that visibly cost time.",
+      "fit-2": "Companies who want a low-risk first step with AI agents instead of launching a big project right away.",
+      "fit-3": "Teams who expect fast, measurable results — not a months-long IT project, but a working solution within weeks.",
+      "cta-h2": "Ready for the first step?",
+      "contact-lbl-tel": "Phone",
+      "contact-lbl-mail": "Email",
+      "form-lbl-name": "Name",
+      "form-lbl-email": "Email",
+      "form-lbl-company": "Company",
+      "form-lbl-package": "Interest",
+      "form-opt-open": "Not decided yet",
+      "form-lbl-message": "Your request",
+      "form-placeholder-message": "e.g. which process costs you the most time",
+      "form-submit": "Send request",
+      "form-sending": "Sending …",
+      "form-note": "I'll get back to you within 1–2 business days.",
+      "form-ok": "Thanks for your request — I'll be in touch shortly.",
+      "form-err": "Something went wrong. Please write to me directly at <a href=\"mailto:info@zbinden.online\" style=\"color:inherit; text-decoration:underline;\">info@zbinden.online</a>."
+    }
+  };
+
+  var currentLang = 'de';
+
+  function applyLang(lang){
+    var dict = STRINGS[lang] || STRINGS.de;
+    currentLang = lang;
+    document.documentElement.setAttribute('lang', lang);
+    document.title = dict.title;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if (dict[key] != null) el.textContent = dict[key];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+      var key = el.getAttribute('data-i18n-html');
+      if (dict[key] != null) el.innerHTML = dict[key];
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){
+      var key = el.getAttribute('data-i18n-placeholder');
+      if (dict[key] != null) el.setAttribute('placeholder', dict[key]);
+    });
+    document.querySelectorAll('.lang-switch button').forEach(function(btn){
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-lang') === lang ? 'true' : 'false');
+    });
+    try { localStorage.setItem('zsw-lang', lang); } catch (e) {}
+  }
+
+  function detectLang(){
+    try {
+      var stored = localStorage.getItem('zsw-lang');
+      if (stored && STRINGS[stored]) return stored;
+    } catch (e) {}
+    return 'de';
+  }
+
+  document.querySelectorAll('.lang-switch button').forEach(function(btn){
+    btn.addEventListener('click', function(){ applyLang(btn.getAttribute('data-lang')); });
+  });
+
+  applyLang(detectLang());
+
   var items = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function(entries){
@@ -425,8 +645,9 @@
       okBox.hidden = true;
       errBox.hidden = true;
       var submitBtn = form.querySelector('button[type="submit"]');
+      var dict = STRINGS[currentLang] || STRINGS.de;
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Wird gesendet …';
+      submitBtn.textContent = dict['form-sending'];
       fetch(form.action, {
         method: 'POST',
         body: new FormData(form),
@@ -439,15 +660,16 @@
         } else {
           errBox.hidden = false;
           submitBtn.disabled = false;
-          submitBtn.textContent = 'Anfrage senden';
+          submitBtn.textContent = dict['form-submit'];
         }
       }).catch(function () {
         errBox.hidden = false;
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Anfrage senden';
+        submitBtn.textContent = dict['form-submit'];
       });
     });
   }
+})();
 </script>
 </body>
 </html>

@@ -119,6 +119,13 @@
     text-decoration:none; white-space:nowrap; transition:background .2s ease, color .2s ease;
   }
   .header-cta:hover{ background:var(--sec-gold); color:#fff; box-shadow:0 0 22px var(--sec-glow-soft); }
+  .lang-switch{ display:flex; align-items:center; gap:2px; border:1px solid var(--sec-line-strong); border-radius:var(--r-pill); padding:3px; }
+  .lang-switch button{
+    font-family:var(--font-ui); font-weight:600; font-size:.7rem; letter-spacing:.04em;
+    color:var(--sec-muted); background:transparent; border:none; border-radius:var(--r-pill); padding:.4em .8em; cursor:pointer;
+  }
+  .lang-switch button:hover{ color:var(--sec-ink); }
+  .lang-switch button[aria-pressed="true"]{ background:var(--sec-gold); color:#fff; }
 
   /* ---------- Reveal ---------- */
   .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
@@ -325,14 +332,19 @@
 
 <header class="section-light">
   <div class="header-row">
-    <a class="wordmark" href="https://www.zbinden.online/">ZBINDEN<span class="dot">·</span>SOFTWARE <span class="sub">GEO-AUDIT</span></a>
+    <a class="wordmark" href="https://www.zbinden.online/">ZBINDEN<span class="dot">·</span>SOFTWARE <span class="sub" data-i18n="wordmark-badge">GEO-AUDIT</span></a>
     <nav class="top-nav">
-      <a href="#methode">Methode</a>
-      <a href="#befunde">Typische Befunde</a>
-      <a href="#ablauf">Ablauf</a>
-      <a href="#ueber">Über mich</a>
+      <a href="#methode" data-i18n="nav-methode">Methode</a>
+      <a href="#befunde" data-i18n="nav-befunde">Typische Befunde</a>
+      <a href="#ablauf" data-i18n="nav-ablauf">Ablauf</a>
+      <a href="#ueber" data-i18n="nav-ueber">Über mich</a>
     </nav>
-    <a class="header-cta" href="#kontakt">Kurz-Check anfragen</a>
+    <div class="lang-switch" role="group" aria-label="Langue / Sprache / Language">
+      <button type="button" data-lang="fr" aria-pressed="false">FR</button>
+      <button type="button" data-lang="de" aria-pressed="true">DE</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <a class="header-cta" href="#kontakt" data-i18n="header-cta">Kurz-Check anfragen</a>
   </div>
 </header>
 
@@ -341,21 +353,21 @@
   <section class="hero section-light">
     <div class="wrap hero-grid">
       <div>
-        <p class="eyebrow with-rule reveal d1">KI-Sichtbarkeits-Audit für Schweizer Unternehmen</p>
-        <h1 class="reveal d2">Ihre Konkurrenz wird von der KI empfohlen. <em>Sie auch?</em></h1>
-        <p class="lede reveal d3">Ich prüfe, ob ChatGPT, Perplexity und Google AI Ihr Unternehmen überhaupt finden und empfehlen — und liefere einen konkreten, priorisierten Plan, damit sie es tun.</p>
+        <p class="eyebrow with-rule reveal d1" data-i18n="hero-eyebrow">KI-Sichtbarkeits-Audit für Schweizer Unternehmen</p>
+        <h1 class="reveal d2" data-i18n-html="hero-h1">Ihre Konkurrenz wird von der KI empfohlen. <em>Sie auch?</em></h1>
+        <p class="lede reveal d3" data-i18n="hero-lede">Ich prüfe, ob ChatGPT, Perplexity und Google AI Ihr Unternehmen überhaupt finden und empfehlen — und liefere einen konkreten, priorisierten Plan, damit sie es tun.</p>
         <div class="cta-row reveal d4">
-          <a class="btn-primary" href="#kontakt">Kostenlosen Kurz-Check anfragen</a>
-          <a class="btn-secondary" href="#methode">Wie ich prüfe</a>
+          <a class="btn-primary" href="#kontakt" data-i18n="hero-btn-primary">Kostenlosen Kurz-Check anfragen</a>
+          <a class="btn-secondary" href="#methode" data-i18n="hero-btn-secondary">Wie ich prüfe</a>
         </div>
       </div>
-      <div class="phone-frame reveal d2" id="phoneMock" role="img" aria-label="Simulierte KI-Chat-Antwort: drei Konkurrenten werden empfohlen, das eigene Unternehmen nicht erwähnt">
+      <div class="phone-frame reveal d2" id="phoneMock" role="img" data-i18n-aria-label="phone-aria-label" aria-label="Simulierte KI-Chat-Antwort: drei Konkurrenten werden empfohlen, das eigene Unternehmen nicht erwähnt">
         <div class="phone-notch" aria-hidden="true"></div>
         <div class="phone-header">
           <span class="phone-avatar">KI</span>
           <div class="phone-header-text">
-            <span class="phone-name">KI-Assistent</span>
-            <span class="phone-status"><span class="status-dot"></span>Online</span>
+            <span class="phone-name" data-i18n="phone-assistant-name">KI-Assistent</span>
+            <span class="phone-status"><span class="status-dot"></span><span data-i18n="phone-online">Online</span></span>
           </div>
         </div>
         <div class="phone-body">
@@ -377,7 +389,7 @@
           </div>
         </div>
         <div class="phone-inputbar" aria-hidden="true">
-          <span class="phone-input-placeholder">Nachricht schreiben…</span>
+          <span class="phone-input-placeholder" data-i18n="phone-input-placeholder">Nachricht schreiben…</span>
           <span class="phone-send">➤</span>
         </div>
       </div>
@@ -387,38 +399,38 @@
   <section id="methode" class="section-light">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">Methode</span>
-        <h2>Sechs Kategorien, ein Score</h2>
+        <span class="eyebrow" data-i18n="methode-eyebrow">Methode</span>
+        <h2 data-i18n="methode-h2">Sechs Kategorien, ein Score</h2>
       </div>
       <div class="method-grid" id="methodGrid">
         <div class="method-item" style="--w:25%">
           <div class="top-row"><h3>AI Citability</h3><span class="wt num">25%</span></div>
-          <p>Wie zitierfähig Ihre Inhalte für KI-Systeme sind.</p>
+          <p data-i18n="method-1-p">Wie zitierfähig Ihre Inhalte für KI-Systeme sind.</p>
           <div class="bar-track"><div class="bar-fill"></div></div>
         </div>
         <div class="method-item" style="--w:20%">
-          <div class="top-row"><h3>Markenautorität</h3><span class="wt num">20%</span></div>
-          <p>Ob Drittquellen Ihr Unternehmen als reale Entität bestätigen.</p>
+          <div class="top-row"><h3 data-i18n="method-2-h3">Markenautorität</h3><span class="wt num">20%</span></div>
+          <p data-i18n="method-2-p">Ob Drittquellen Ihr Unternehmen als reale Entität bestätigen.</p>
           <div class="bar-track"><div class="bar-fill"></div></div>
         </div>
         <div class="method-item" style="--w:20%">
           <div class="top-row"><h3>Content E-E-A-T</h3><span class="wt num">20%</span></div>
-          <p>Erfahrung, Expertise, Autorität und Vertrauenswürdigkeit.</p>
+          <p data-i18n="method-3-p">Erfahrung, Expertise, Autorität und Vertrauenswürdigkeit.</p>
           <div class="bar-track"><div class="bar-fill"></div></div>
         </div>
         <div class="method-item" style="--w:15%">
-          <div class="top-row"><h3>Technisches GEO</h3><span class="wt num">15%</span></div>
-          <p>Crawler-Zugriff, Rendering, llms.txt, Ladezeit.</p>
+          <div class="top-row"><h3 data-i18n="method-4-h3">Technisches GEO</h3><span class="wt num">15%</span></div>
+          <p data-i18n="method-4-p">Crawler-Zugriff, Rendering, llms.txt, Ladezeit.</p>
           <div class="bar-track"><div class="bar-fill"></div></div>
         </div>
         <div class="method-item" style="--w:10%">
-          <div class="top-row"><h3>Strukturierte Daten</h3><span class="wt num">10%</span></div>
-          <p>Schema.org-Markup — die Sprache, die Maschinen lesen.</p>
+          <div class="top-row"><h3 data-i18n="method-5-h3">Strukturierte Daten</h3><span class="wt num">10%</span></div>
+          <p data-i18n="method-5-p">Schema.org-Markup — die Sprache, die Maschinen lesen.</p>
           <div class="bar-track"><div class="bar-fill"></div></div>
         </div>
         <div class="method-item" style="--w:10%">
-          <div class="top-row"><h3>Plattform-Optimierung</h3><span class="wt num">10%</span></div>
-          <p>Bereitschaft für AI Overviews, ChatGPT, Perplexity, Gemini.</p>
+          <div class="top-row"><h3 data-i18n="method-6-h3">Plattform-Optimierung</h3><span class="wt num">10%</span></div>
+          <p data-i18n="method-6-p">Bereitschaft für AI Overviews, ChatGPT, Perplexity, Gemini.</p>
           <div class="bar-track"><div class="bar-fill"></div></div>
         </div>
       </div>
@@ -428,49 +440,49 @@
   <section id="befunde" class="section-dark">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">Was ich typischerweise finde</span>
-        <h2>Muster, die sich wiederholen</h2>
+        <span class="eyebrow" data-i18n="befunde-eyebrow">Was ich typischerweise finde</span>
+        <h2 data-i18n="befunde-h2">Muster, die sich wiederholen</h2>
       </div>
       <div class="pain-list">
         <div class="pain-item">
-          <span class="tag">Häufig</span>
-          <p>Kein Organization- oder branchenspezifisches Schema (z. B. LegalService, Dentist, LocalBusiness) — Suchmaschinen und KI-Systeme können Name, Adresse und Öffnungszeiten nicht zuverlässig zuordnen.</p>
+          <span class="tag" data-i18n="tag-haeufig">Häufig</span>
+          <p data-i18n="pain-1">Kein Organization- oder branchenspezifisches Schema (z. B. LegalService, Dentist, LocalBusiness) — Suchmaschinen und KI-Systeme können Name, Adresse und Öffnungszeiten nicht zuverlässig zuordnen.</p>
         </div>
         <div class="pain-item coral">
-          <span class="tag">Häufig</span>
-          <p>Kein Impressum oder eines, das auf eine nicht existierende Seite verweist — ein Vertrauensproblem, das über GEO hinausgeht.</p>
+          <span class="tag" data-i18n="tag-haeufig">Häufig</span>
+          <p data-i18n="pain-2">Kein Impressum oder eines, das auf eine nicht existierende Seite verweist — ein Vertrauensproblem, das über GEO hinausgeht.</p>
         </div>
         <div class="pain-item">
-          <span class="tag">Regelmässig</span>
-          <p>Strukturierte Daten mit falscher Kontakt-E-Mail — meist ein Überbleibsel aus der Website-Erstellung, das niemand korrigiert hat.</p>
+          <span class="tag" data-i18n="tag-regelmaessig">Regelmässig</span>
+          <p data-i18n="pain-3">Strukturierte Daten mit falscher Kontakt-E-Mail — meist ein Überbleibsel aus der Website-Erstellung, das niemand korrigiert hat.</p>
         </div>
         <div class="pain-item coral">
-          <span class="tag">Regelmässig</span>
-          <p>Keine namentlich genannte, qualifizierte verantwortliche Person — ob Ärztin, Anwalt oder Meisterbetrieb: eines der wichtigsten Vertrauenssignale, das oft fehlt.</p>
+          <span class="tag" data-i18n="tag-regelmaessig">Regelmässig</span>
+          <p data-i18n="pain-4">Keine namentlich genannte, qualifizierte verantwortliche Person — ob Ärztin, Anwalt oder Meisterbetrieb: eines der wichtigsten Vertrauenssignale, das oft fehlt.</p>
         </div>
       </div>
-      <p class="find-note">Anonymisierte, wiederkehrende Muster aus bisherigen Prüfungen — keine Angaben zu einzelnen Unternehmen.</p>
+      <p class="find-note" data-i18n="find-note">Anonymisierte, wiederkehrende Muster aus bisherigen Prüfungen — keine Angaben zu einzelnen Unternehmen.</p>
     </div>
   </section>
 
   <section id="ablauf" class="section-light">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">Ablauf</span>
-        <h2>Drei Schritte bis zum Plan</h2>
+        <span class="eyebrow" data-i18n="ablauf-eyebrow">Ablauf</span>
+        <h2 data-i18n="ablauf-h2">Drei Schritte bis zum Plan</h2>
       </div>
       <div class="phase-list">
         <div class="phase">
           <span class="num">01</span>
-          <div><h3>Kurz-Check</h3><p>Ich prüfe Ihre Website in ersten Grundzügen und sage Ihnen ehrlich, ob sich ein vollständiger Audit lohnt.</p></div>
+          <div><h3 data-i18n="phase1-h3">Kurz-Check</h3><p data-i18n="phase1-p">Ich prüfe Ihre Website in ersten Grundzügen und sage Ihnen ehrlich, ob sich ein vollständiger Audit lohnt.</p></div>
         </div>
         <div class="phase">
           <span class="num">02</span>
-          <div><h3>Vollständiger Audit</h3><p>Sechs Kategorien, priorisierte Befunde, ein 30-Tage-Aktionsplan — als klar strukturierter Bericht.</p></div>
+          <div><h3 data-i18n="phase2-h3">Vollständiger Audit</h3><p data-i18n="phase2-p">Sechs Kategorien, priorisierte Befunde, ein 30-Tage-Aktionsplan — als klar strukturierter Bericht.</p></div>
         </div>
         <div class="phase">
           <span class="num">03</span>
-          <div><h3>Gespräch &amp; Umsetzung</h3><p>15 Minuten, in denen ich den Bericht durchgehe. Kein Verkaufsgespräch — Sie entscheiden danach.</p></div>
+          <div><h3 data-i18n="phase3-h3">Gespräch &amp; Umsetzung</h3><p data-i18n="phase3-p">15 Minuten, in denen ich den Bericht durchgehe. Kein Verkaufsgespräch — Sie entscheiden danach.</p></div>
         </div>
       </div>
     </div>
@@ -479,20 +491,20 @@
   <section id="ueber" class="section-light">
     <div class="wrap about-grid">
       <div class="about-card">
-        <span class="ac-eyebrow">Gründerin</span>
+        <span class="ac-eyebrow" data-i18n="ac-founder">Gründerin</span>
         <h3 class="ac-name">Pauline Zbinden</h3>
-        <p class="ac-role">Zbinden Software · Sisseln, Schweiz</p>
+        <p class="ac-role" data-i18n="ac-role">Zbinden Software · Sisseln, Schweiz</p>
         <div class="ac-rule"></div>
-        <span class="ac-eyebrow">Leistungen</span>
+        <span class="ac-eyebrow" data-i18n="ac-services">Leistungen</span>
         <ul class="ac-list">
-          <li>KI-Sichtbarkeits-Audits (GEO)</li>
-          <li>Individuelle Software für Produktion &amp; Betrieb</li>
+          <li data-i18n="ac-list-1">KI-Sichtbarkeits-Audits (GEO)</li>
+          <li data-i18n="ac-list-2">Individuelle Software für Produktion &amp; Betrieb</li>
         </ul>
       </div>
       <div>
-        <span class="eyebrow" style="display:block; margin-bottom:12px;">Über mich</span>
-        <h2 style="font-family:var(--font-display); font-size:1.7rem; margin-bottom:18px; font-weight:600;">Ich prüfe Websites so, wie KI-Systeme sie lesen — nicht so, wie Menschen sie sehen.</h2>
-        <p style="color:var(--sec-muted); line-height:1.75; max-width:62ch; font-weight:300;">Als Gründerin von Zbinden Software analysiere ich, wie sichtbar Schweizer Unternehmen für ChatGPT, Perplexity, Google AI und Co. tatsächlich sind. Die meisten Websites wurden für Menschen und klassische Suchmaschinen gebaut — nicht für die Art, wie KI-Systeme heute Empfehlungen aussprechen. Jeder Audit folgt derselben nachvollziehbaren Methodik und endet mit einem konkreten, priorisierten Plan statt vager Empfehlungen.</p>
+        <span class="eyebrow" style="display:block; margin-bottom:12px;" data-i18n="ueber-eyebrow">Über mich</span>
+        <h2 style="font-family:var(--font-display); font-size:1.7rem; margin-bottom:18px; font-weight:600;" data-i18n="ueber-h2">Ich prüfe Websites so, wie KI-Systeme sie lesen — nicht so, wie Menschen sie sehen.</h2>
+        <p style="color:var(--sec-muted); line-height:1.75; max-width:62ch; font-weight:300;" data-i18n="ueber-p">Als Gründerin von Zbinden Software analysiere ich, wie sichtbar Schweizer Unternehmen für ChatGPT, Perplexity, Google AI und Co. tatsächlich sind. Die meisten Websites wurden für Menschen und klassische Suchmaschinen gebaut — nicht für die Art, wie KI-Systeme heute Empfehlungen aussprechen. Jeder Audit folgt derselben nachvollziehbaren Methodik und endet mit einem konkreten, priorisierten Plan statt vager Empfehlungen.</p>
       </div>
     </div>
   </section>
@@ -500,39 +512,39 @@
   <section id="kontakt" class="section-dark" style="border-top:none;">
     <div class="wrap">
       <div class="cta-band">
-        <h2>Wollen Sie wissen, wo Ihr Unternehmen steht?</h2>
+        <h2 data-i18n="kontakt-h2">Wollen Sie wissen, wo Ihr Unternehmen steht?</h2>
         <div class="cta-grid">
           <div class="contact">
-            <span class="lbl">Telefon</span>
+            <span class="lbl" data-i18n="contact-lbl-tel">Telefon</span>
             <a href="tel:+41791936802">+41 79 193 68 02</a>
-            <span class="lbl">E-Mail</span>
+            <span class="lbl" data-i18n="contact-lbl-mail">E-Mail</span>
             <a href="mailto:info@zbinden.online">info@zbinden.online</a>
           </div>
           <div>
             <form class="request" id="requestForm" action="https://formspree.io/f/mvkpbaar" method="POST">
               <div class="field-row">
                 <div class="field">
-                  <label for="f-name">Name</label>
+                  <label for="f-name" data-i18n="form-lbl-name">Name</label>
                   <input type="text" id="f-name" name="name" required>
                 </div>
                 <div class="field">
-                  <label for="f-email">E-Mail</label>
+                  <label for="f-email" data-i18n="form-lbl-email">E-Mail</label>
                   <input type="email" id="f-email" name="email" required>
                 </div>
               </div>
               <div class="field">
-                <label for="f-company">Unternehmen</label>
+                <label for="f-company" data-i18n="form-lbl-company">Unternehmen</label>
                 <input type="text" id="f-company" name="company">
               </div>
               <div class="field">
-                <label for="f-message">Ihr Anliegen</label>
-                <textarea id="f-message" name="message" placeholder="z. B. Ihre Website-URL und was Sie wissen möchten"></textarea>
+                <label for="f-message" data-i18n="form-lbl-message">Ihr Anliegen</label>
+                <textarea id="f-message" name="message" data-i18n-placeholder="form-placeholder-message" placeholder="z. B. Ihre Website-URL und was Sie wissen möchten"></textarea>
               </div>
-              <button type="submit" class="btn-primary">Anfrage senden</button>
-              <p class="form-note">Ich melde mich innerhalb von 1–2 Werktagen zurück.</p>
+              <button type="submit" class="btn-primary" data-i18n="form-submit">Anfrage senden</button>
+              <p class="form-note" data-i18n="form-note">Ich melde mich innerhalb von 1–2 Werktagen zurück.</p>
             </form>
-            <div class="form-status ok" id="formOk" hidden>Danke für Ihre Anfrage — ich melde mich in Kürze bei Ihnen.</div>
-            <div class="form-status err" id="formErr" hidden>Das hat leider nicht geklappt. Schreiben Sie mir direkt an <a href="mailto:info@zbinden.online" style="color:inherit; text-decoration:underline;">info@zbinden.online</a>.</div>
+            <div class="form-status ok" id="formOk" hidden data-i18n="form-ok">Danke für Ihre Anfrage — ich melde mich in Kürze bei Ihnen.</div>
+            <div class="form-status err" id="formErr" hidden data-i18n-html="form-err">Das hat leider nicht geklappt. Schreiben Sie mir direkt an <a href="mailto:info@zbinden.online" style="color:inherit; text-decoration:underline;">info@zbinden.online</a>.</div>
           </div>
         </div>
       </div>
@@ -547,6 +559,278 @@
 </footer>
 
 <script>
+(function(){
+  var STRINGS = {
+    fr: {
+      "title": "Zbinden Software — Audit GEO : votre entreprise est-elle visible pour l'IA ?",
+      "wordmark-badge": "AUDIT GEO",
+      "nav-methode": "Méthode",
+      "nav-befunde": "Constats typiques",
+      "nav-ablauf": "Déroulement",
+      "nav-ueber": "À propos",
+      "header-cta": "Demander un check rapide",
+      "hero-eyebrow": "Audit de visibilité IA pour les entreprises suisses",
+      "hero-h1": "Vos concurrents sont recommandés par l'IA. <em>Et vous ?</em>",
+      "hero-lede": "Je vérifie si ChatGPT, Perplexity et Google AI trouvent et recommandent réellement votre entreprise — et je livre un plan concret et priorisé pour que ce soit le cas.",
+      "hero-btn-primary": "Demander un check rapide gratuit",
+      "hero-btn-secondary": "Comment je procède",
+      "phone-aria-label": "Simulation d'une réponse de chat IA : trois concurrents sont recommandés, votre entreprise n'est pas mentionnée",
+      "phone-assistant-name": "Assistant IA",
+      "phone-online": "En ligne",
+      "phone-input-placeholder": "Écrire un message…",
+      "methode-eyebrow": "Méthode",
+      "methode-h2": "Six catégories, un score",
+      "method-1-p": "À quel point vos contenus sont citables par les systèmes d'IA.",
+      "method-2-h3": "Autorité de marque",
+      "method-2-p": "Si des sources tierces confirment votre entreprise comme une entité réelle.",
+      "method-3-p": "Expérience, expertise, autorité et fiabilité.",
+      "method-4-h3": "GEO technique",
+      "method-4-p": "Accès des crawlers, rendu, llms.txt, temps de chargement.",
+      "method-5-h3": "Données structurées",
+      "method-5-p": "Balisage Schema.org — le langage que lisent les machines.",
+      "method-6-h3": "Optimisation par plateforme",
+      "method-6-p": "Préparation pour AI Overviews, ChatGPT, Perplexity, Gemini.",
+      "befunde-eyebrow": "Ce que je constate le plus souvent",
+      "befunde-h2": "Des schémas qui se répètent",
+      "tag-haeufig": "Fréquent",
+      "tag-regelmaessig": "Régulier",
+      "pain-1": "Aucun schéma Organization ou spécifique au secteur (p. ex. LegalService, Dentist, LocalBusiness) — les moteurs de recherche et systèmes d'IA ne peuvent pas associer de manière fiable le nom, l'adresse et les horaires.",
+      "pain-2": "Pas de mentions légales, ou un lien qui pointe vers une page inexistante — un problème de confiance qui dépasse le seul GEO.",
+      "pain-3": "Des données structurées avec une adresse e-mail de contact erronée — souvent un reste de la création du site que personne n'a corrigé.",
+      "pain-4": "Aucune personne responsable, qualifiée et nommément citée — médecin, avocat ou artisan diplômé : l'un des signaux de confiance les plus importants, souvent absent.",
+      "find-note": "Schémas anonymisés et récurrents issus d'audits précédents — aucune information sur des entreprises individuelles.",
+      "ablauf-eyebrow": "Déroulement",
+      "ablauf-h2": "Trois étapes jusqu'au plan",
+      "phase1-h3": "Check rapide",
+      "phase1-p": "Je passe votre site en revue dans les grandes lignes et vous dis honnêtement si un audit complet en vaut la peine.",
+      "phase2-h3": "Audit complet",
+      "phase2-p": "Six catégories, des constats priorisés, un plan d'action sur 30 jours — dans un rapport clairement structuré.",
+      "phase3-h3": "Entretien & mise en œuvre",
+      "phase3-p": "15 minutes pendant lesquelles je parcours le rapport avec vous. Pas un entretien commercial — vous décidez ensuite.",
+      "ac-founder": "Fondatrice",
+      "ac-role": "Zbinden Software · Sisseln, Suisse",
+      "ac-services": "Prestations",
+      "ac-list-1": "Audits de visibilité IA (GEO)",
+      "ac-list-2": "Logiciels sur mesure pour la production & l'exploitation",
+      "ueber-eyebrow": "À propos",
+      "ueber-h2": "J'examine les sites web comme les systèmes d'IA les lisent — pas comme les humains les voient.",
+      "ueber-p": "En tant que fondatrice de Zbinden Software, j'analyse la visibilité réelle des entreprises suisses pour ChatGPT, Perplexity, Google AI et consorts. La plupart des sites web ont été conçus pour les humains et les moteurs de recherche classiques — pas pour la manière dont les systèmes d'IA formulent leurs recommandations aujourd'hui. Chaque audit suit la même méthodologie transparente et se termine par un plan concret et priorisé plutôt que des recommandations vagues.",
+      "kontakt-h2": "Vous voulez savoir où en est votre entreprise ?",
+      "contact-lbl-tel": "Téléphone",
+      "contact-lbl-mail": "E-mail",
+      "form-lbl-name": "Nom",
+      "form-lbl-email": "E-mail",
+      "form-lbl-company": "Entreprise",
+      "form-lbl-message": "Votre demande",
+      "form-placeholder-message": "p. ex. l'URL de votre site et ce que vous aimeriez savoir",
+      "form-submit": "Envoyer la demande",
+      "form-sending": "Envoi en cours …",
+      "form-note": "Je vous réponds sous 1 à 2 jours ouvrés.",
+      "form-ok": "Merci pour votre demande — je reviens vers vous très prochainement.",
+      "form-err": "Un problème est survenu. Écrivez-moi directement à <a href=\"mailto:info@zbinden.online\" style=\"color:inherit; text-decoration:underline;\">info@zbinden.online</a>."
+    },
+    de: {
+      "title": "Zbinden Software — GEO-Audit: Ist Ihr Unternehmen für KI sichtbar?",
+      "wordmark-badge": "GEO-AUDIT",
+      "nav-methode": "Methode",
+      "nav-befunde": "Typische Befunde",
+      "nav-ablauf": "Ablauf",
+      "nav-ueber": "Über mich",
+      "header-cta": "Kurz-Check anfragen",
+      "hero-eyebrow": "KI-Sichtbarkeits-Audit für Schweizer Unternehmen",
+      "hero-h1": "Ihre Konkurrenz wird von der KI empfohlen. <em>Sie auch?</em>",
+      "hero-lede": "Ich prüfe, ob ChatGPT, Perplexity und Google AI Ihr Unternehmen überhaupt finden und empfehlen — und liefere einen konkreten, priorisierten Plan, damit sie es tun.",
+      "hero-btn-primary": "Kostenlosen Kurz-Check anfragen",
+      "hero-btn-secondary": "Wie ich prüfe",
+      "phone-aria-label": "Simulierte KI-Chat-Antwort: drei Konkurrenten werden empfohlen, das eigene Unternehmen nicht erwähnt",
+      "phone-assistant-name": "KI-Assistent",
+      "phone-online": "Online",
+      "phone-input-placeholder": "Nachricht schreiben…",
+      "methode-eyebrow": "Methode",
+      "methode-h2": "Sechs Kategorien, ein Score",
+      "method-1-p": "Wie zitierfähig Ihre Inhalte für KI-Systeme sind.",
+      "method-2-h3": "Markenautorität",
+      "method-2-p": "Ob Drittquellen Ihr Unternehmen als reale Entität bestätigen.",
+      "method-3-p": "Erfahrung, Expertise, Autorität und Vertrauenswürdigkeit.",
+      "method-4-h3": "Technisches GEO",
+      "method-4-p": "Crawler-Zugriff, Rendering, llms.txt, Ladezeit.",
+      "method-5-h3": "Strukturierte Daten",
+      "method-5-p": "Schema.org-Markup — die Sprache, die Maschinen lesen.",
+      "method-6-h3": "Plattform-Optimierung",
+      "method-6-p": "Bereitschaft für AI Overviews, ChatGPT, Perplexity, Gemini.",
+      "befunde-eyebrow": "Was ich typischerweise finde",
+      "befunde-h2": "Muster, die sich wiederholen",
+      "tag-haeufig": "Häufig",
+      "tag-regelmaessig": "Regelmässig",
+      "pain-1": "Kein Organization- oder branchenspezifisches Schema (z. B. LegalService, Dentist, LocalBusiness) — Suchmaschinen und KI-Systeme können Name, Adresse und Öffnungszeiten nicht zuverlässig zuordnen.",
+      "pain-2": "Kein Impressum oder eines, das auf eine nicht existierende Seite verweist — ein Vertrauensproblem, das über GEO hinausgeht.",
+      "pain-3": "Strukturierte Daten mit falscher Kontakt-E-Mail — meist ein Überbleibsel aus der Website-Erstellung, das niemand korrigiert hat.",
+      "pain-4": "Keine namentlich genannte, qualifizierte verantwortliche Person — ob Ärztin, Anwalt oder Meisterbetrieb: eines der wichtigsten Vertrauenssignale, das oft fehlt.",
+      "find-note": "Anonymisierte, wiederkehrende Muster aus bisherigen Prüfungen — keine Angaben zu einzelnen Unternehmen.",
+      "ablauf-eyebrow": "Ablauf",
+      "ablauf-h2": "Drei Schritte bis zum Plan",
+      "phase1-h3": "Kurz-Check",
+      "phase1-p": "Ich prüfe Ihre Website in ersten Grundzügen und sage Ihnen ehrlich, ob sich ein vollständiger Audit lohnt.",
+      "phase2-h3": "Vollständiger Audit",
+      "phase2-p": "Sechs Kategorien, priorisierte Befunde, ein 30-Tage-Aktionsplan — als klar strukturierter Bericht.",
+      "phase3-h3": "Gespräch & Umsetzung",
+      "phase3-p": "15 Minuten, in denen ich den Bericht durchgehe. Kein Verkaufsgespräch — Sie entscheiden danach.",
+      "ac-founder": "Gründerin",
+      "ac-role": "Zbinden Software · Sisseln, Schweiz",
+      "ac-services": "Leistungen",
+      "ac-list-1": "KI-Sichtbarkeits-Audits (GEO)",
+      "ac-list-2": "Individuelle Software für Produktion & Betrieb",
+      "ueber-eyebrow": "Über mich",
+      "ueber-h2": "Ich prüfe Websites so, wie KI-Systeme sie lesen — nicht so, wie Menschen sie sehen.",
+      "ueber-p": "Als Gründerin von Zbinden Software analysiere ich, wie sichtbar Schweizer Unternehmen für ChatGPT, Perplexity, Google AI und Co. tatsächlich sind. Die meisten Websites wurden für Menschen und klassische Suchmaschinen gebaut — nicht für die Art, wie KI-Systeme heute Empfehlungen aussprechen. Jeder Audit folgt derselben nachvollziehbaren Methodik und endet mit einem konkreten, priorisierten Plan statt vager Empfehlungen.",
+      "kontakt-h2": "Wollen Sie wissen, wo Ihr Unternehmen steht?",
+      "contact-lbl-tel": "Telefon",
+      "contact-lbl-mail": "E-Mail",
+      "form-lbl-name": "Name",
+      "form-lbl-email": "E-Mail",
+      "form-lbl-company": "Unternehmen",
+      "form-lbl-message": "Ihr Anliegen",
+      "form-placeholder-message": "z. B. Ihre Website-URL und was Sie wissen möchten",
+      "form-submit": "Anfrage senden",
+      "form-sending": "Wird gesendet …",
+      "form-note": "Ich melde mich innerhalb von 1–2 Werktagen zurück.",
+      "form-ok": "Danke für Ihre Anfrage — ich melde mich in Kürze bei Ihnen.",
+      "form-err": "Das hat leider nicht geklappt. Schreiben Sie mir direkt an <a href=\"mailto:info@zbinden.online\" style=\"color:inherit; text-decoration:underline;\">info@zbinden.online</a>."
+    },
+    en: {
+      "title": "Zbinden Software — GEO Audit: Is your business visible to AI?",
+      "wordmark-badge": "GEO AUDIT",
+      "nav-methode": "Method",
+      "nav-befunde": "Typical findings",
+      "nav-ablauf": "Process",
+      "nav-ueber": "About me",
+      "header-cta": "Request a quick check",
+      "hero-eyebrow": "AI Visibility Audit for Swiss Companies",
+      "hero-h1": "Your competitors are recommended by AI. <em>Are you?</em>",
+      "hero-lede": "I check whether ChatGPT, Perplexity and Google AI actually find and recommend your business — and deliver a concrete, prioritized plan to make sure they do.",
+      "hero-btn-primary": "Request a free quick check",
+      "hero-btn-secondary": "How I check",
+      "phone-aria-label": "Simulated AI chat response: three competitors are recommended, your business is not mentioned",
+      "phone-assistant-name": "AI Assistant",
+      "phone-online": "Online",
+      "phone-input-placeholder": "Write a message…",
+      "methode-eyebrow": "Method",
+      "methode-h2": "Six categories, one score",
+      "method-1-p": "How citable your content is for AI systems.",
+      "method-2-h3": "Brand Authority",
+      "method-2-p": "Whether third-party sources confirm your business as a real entity.",
+      "method-3-p": "Experience, expertise, authoritativeness and trustworthiness.",
+      "method-4-h3": "Technical GEO",
+      "method-4-p": "Crawler access, rendering, llms.txt, load time.",
+      "method-5-h3": "Structured Data",
+      "method-5-p": "Schema.org markup — the language machines read.",
+      "method-6-h3": "Platform Optimization",
+      "method-6-p": "Readiness for AI Overviews, ChatGPT, Perplexity, Gemini.",
+      "befunde-eyebrow": "What I typically find",
+      "befunde-h2": "Patterns that repeat",
+      "tag-haeufig": "Common",
+      "tag-regelmaessig": "Regular",
+      "pain-1": "No Organization or industry-specific schema (e.g. LegalService, Dentist, LocalBusiness) — search engines and AI systems can't reliably match name, address and opening hours.",
+      "pain-2": "No legal notice (Impressum), or one linking to a page that doesn't exist — a trust issue that goes beyond GEO.",
+      "pain-3": "Structured data with the wrong contact email — usually a leftover from the website build that nobody fixed.",
+      "pain-4": "No named, qualified person of responsibility — whether physician, lawyer or master craftsperson: one of the most important trust signals, often missing.",
+      "find-note": "Anonymized, recurring patterns from past audits — no details about individual companies.",
+      "ablauf-eyebrow": "Process",
+      "ablauf-h2": "Three steps to your plan",
+      "phase1-h3": "Quick check",
+      "phase1-p": "I review your website at a high level and tell you honestly whether a full audit is worth it.",
+      "phase2-h3": "Full audit",
+      "phase2-p": "Six categories, prioritized findings, a 30-day action plan — in a clearly structured report.",
+      "phase3-h3": "Call & implementation",
+      "phase3-p": "15 minutes where I walk through the report with you. Not a sales call — you decide afterward.",
+      "ac-founder": "Founder",
+      "ac-role": "Zbinden Software · Sisseln, Switzerland",
+      "ac-services": "Services",
+      "ac-list-1": "AI Visibility Audits (GEO)",
+      "ac-list-2": "Custom software for production & operations",
+      "ueber-eyebrow": "About me",
+      "ueber-h2": "I check websites the way AI systems read them — not the way humans see them.",
+      "ueber-p": "As founder of Zbinden Software, I analyze how visible Swiss companies actually are to ChatGPT, Perplexity, Google AI and others. Most websites were built for humans and classic search engines — not for the way AI systems make recommendations today. Every audit follows the same transparent methodology and ends with a concrete, prioritized plan instead of vague recommendations.",
+      "kontakt-h2": "Want to know where your business stands?",
+      "contact-lbl-tel": "Phone",
+      "contact-lbl-mail": "Email",
+      "form-lbl-name": "Name",
+      "form-lbl-email": "Email",
+      "form-lbl-company": "Company",
+      "form-lbl-message": "Your request",
+      "form-placeholder-message": "e.g. your website URL and what you'd like to know",
+      "form-submit": "Send request",
+      "form-sending": "Sending …",
+      "form-note": "I'll get back to you within 1–2 business days.",
+      "form-ok": "Thanks for your request — I'll be in touch shortly.",
+      "form-err": "Something went wrong. Please write to me directly at <a href=\"mailto:info@zbinden.online\" style=\"color:inherit; text-decoration:underline;\">info@zbinden.online</a>."
+    }
+  };
+
+  var SCENARIOS = {
+    fr: [
+      { query: "meilleur institut esthétique zurich ?", intro: "Voici les meilleures options à Zurich :", items: ["Clinique A — soins de la peau", "Clinique B — injections anti-rides", "Clinique C — très bien notée"], closing: "Votre entreprise n'est pas mentionnée." },
+      { query: "meilleur cabinet d'avocats zurich ?", intro: "Voici les meilleurs cabinets à Zurich :", items: ["Cabinet A — droit des affaires", "Cabinet B — droit de la famille", "Cabinet C — très bien noté"], closing: "Votre cabinet n'est pas mentionné." },
+      { query: "meilleur dentiste zurich ?", intro: "Voici les meilleurs cabinets à Zurich :", items: ["Cabinet A — implantologie", "Cabinet B — orthodontie", "Cabinet C — très bien noté"], closing: "Votre cabinet n'est pas mentionné." },
+      { query: "meilleure boutique horlogère zurich ?", intro: "Voici les meilleures adresses à Zurich :", items: ["Boutique A — montres suisses", "Boutique B — bijoux sur mesure", "Boutique C — très bien notée"], closing: "Votre boutique n'est pas mentionnée." }
+    ],
+    de: [
+      { query: "bestes ästhetik-institut zürich?", intro: "Hier sind die besten Optionen in Zürich:", items: ["Klinik A — Hautbehandlungen", "Klinik B — Faltenunterspritzung", "Klinik C — hohe Bewertungen"], closing: "Ihr Unternehmen wird nicht erwähnt." },
+      { query: "beste anwaltskanzlei zürich?", intro: "Hier sind die besten Kanzleien in Zürich:", items: ["Kanzlei A — Wirtschaftsrecht", "Kanzlei B — Familienrecht", "Kanzlei C — hohe Bewertungen"], closing: "Ihre Kanzlei wird nicht erwähnt." },
+      { query: "bester zahnarzt zürich?", intro: "Hier sind die besten Praxen in Zürich:", items: ["Praxis A — Implantologie", "Praxis B — Kieferorthopädie", "Praxis C — hohe Bewertungen"], closing: "Ihre Praxis wird nicht erwähnt." },
+      { query: "beste uhren-boutique zürich?", intro: "Hier sind die besten Adressen in Zürich:", items: ["Boutique A — Schweizer Uhren", "Boutique B — Massgeschneiderter Schmuck", "Boutique C — hohe Bewertungen"], closing: "Ihr Geschäft wird nicht erwähnt." }
+    ],
+    en: [
+      { query: "best aesthetic clinic zurich?", intro: "Here are the best options in Zurich:", items: ["Clinic A — skin treatments", "Clinic B — wrinkle fillers", "Clinic C — highly rated"], closing: "Your business isn't mentioned." },
+      { query: "best law firm zurich?", intro: "Here are the best firms in Zurich:", items: ["Firm A — corporate law", "Firm B — family law", "Firm C — highly rated"], closing: "Your firm isn't mentioned." },
+      { query: "best dentist zurich?", intro: "Here are the best practices in Zurich:", items: ["Practice A — implantology", "Practice B — orthodontics", "Practice C — highly rated"], closing: "Your practice isn't mentioned." },
+      { query: "best watch boutique zurich?", intro: "Here are the best addresses in Zurich:", items: ["Boutique A — Swiss watches", "Boutique B — custom jewelry", "Boutique C — highly rated"], closing: "Your store isn't mentioned." }
+    ]
+  };
+
+  var currentLang = 'de';
+
+  function applyLang(lang){
+    var dict = STRINGS[lang] || STRINGS.de;
+    currentLang = lang;
+    document.documentElement.setAttribute('lang', lang);
+    document.title = dict.title;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if (dict[key] != null) el.textContent = dict[key];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+      var key = el.getAttribute('data-i18n-html');
+      if (dict[key] != null) el.innerHTML = dict[key];
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){
+      var key = el.getAttribute('data-i18n-placeholder');
+      if (dict[key] != null) el.setAttribute('placeholder', dict[key]);
+    });
+    document.querySelectorAll('[data-i18n-aria-label]').forEach(function(el){
+      var key = el.getAttribute('data-i18n-aria-label');
+      if (dict[key] != null) el.setAttribute('aria-label', dict[key]);
+    });
+    document.querySelectorAll('.lang-switch button').forEach(function(btn){
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-lang') === lang ? 'true' : 'false');
+    });
+    try { localStorage.setItem('zsw-lang', lang); } catch (e) {}
+  }
+
+  function detectLang(){
+    try {
+      var stored = localStorage.getItem('zsw-lang');
+      if (stored && STRINGS[stored]) return stored;
+    } catch (e) {}
+    return 'de';
+  }
+
+  document.querySelectorAll('.lang-switch button').forEach(function(btn){
+    btn.addEventListener('click', function(){ applyLang(btn.getAttribute('data-lang')); });
+  });
+
+  applyLang(detectLang());
+
   (function(){
     var phone = document.getElementById('phoneMock');
     if (!phone) return;
@@ -559,47 +843,22 @@
     var listItems = listEl.querySelectorAll('li');
     var closingEl = document.getElementById('aiClosing');
 
-    var scenarios = [
-      {
-        query: 'bestes ästhetik-institut zürich?',
-        intro: 'Hier sind die besten Optionen in Zürich:',
-        items: ['Klinik A — Hautbehandlungen', 'Klinik B — Faltenunterspritzung', 'Klinik C — hohe Bewertungen'],
-        closing: 'Ihr Unternehmen wird nicht erwähnt.'
-      },
-      {
-        query: 'beste anwaltskanzlei zürich?',
-        intro: 'Hier sind die besten Kanzleien in Zürich:',
-        items: ['Kanzlei A — Wirtschaftsrecht', 'Kanzlei B — Familienrecht', 'Kanzlei C — hohe Bewertungen'],
-        closing: 'Ihre Kanzlei wird nicht erwähnt.'
-      },
-      {
-        query: 'bester zahnarzt zürich?',
-        intro: 'Hier sind die besten Praxen in Zürich:',
-        items: ['Praxis A — Implantologie', 'Praxis B — Kieferorthopädie', 'Praxis C — hohe Bewertungen'],
-        closing: 'Ihre Praxis wird nicht erwähnt.'
-      },
-      {
-        query: 'beste uhren-boutique zürich?',
-        intro: 'Hier sind die besten Adressen in Zürich:',
-        items: ['Boutique A — Schweizer Uhren', 'Boutique B — Massgeschneiderter Schmuck', 'Boutique C — hohe Bewertungen'],
-        closing: 'Ihr Geschäft wird nicht erwähnt.'
-      }
-    ];
-    var s = scenarios[Math.floor(Math.random() * scenarios.length)];
+    var scenarioPick = Math.floor(Math.random() * 4);
+    function s(){ return (SCENARIOS[currentLang] || SCENARIOS.de)[scenarioPick]; }
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function finalState(){
-      qEl.textContent = s.query;
+      qEl.textContent = s().query;
       qCursor.style.display = 'none';
       typingDots.style.display = 'none';
       aiRow.classList.add('in');
-      introEl.hidden = false; introEl.textContent = s.intro;
+      introEl.hidden = false; introEl.textContent = s().intro;
       listEl.hidden = false;
       listItems.forEach(function(li, idx){
-        li.querySelector('.li-text').textContent = s.items[idx];
+        li.querySelector('.li-text').textContent = s().items[idx];
         li.classList.add('in');
       });
-      closingEl.hidden = false; closingEl.textContent = s.closing;
+      closingEl.hidden = false; closingEl.textContent = s().closing;
     }
 
     function streamWords(el, text, delay, done){
@@ -615,9 +874,10 @@
 
     function revealListItems(done){
       var idx = 0;
+      var items = s().items;
       var t = setInterval(function(){
         if (idx < listItems.length) {
-          listItems[idx].querySelector('.li-text').textContent = s.items[idx];
+          listItems[idx].querySelector('.li-text').textContent = items[idx];
           listItems[idx].classList.add('in');
           idx++;
         } else { clearInterval(t); if (done) setTimeout(done, 150); }
@@ -627,11 +887,12 @@
     function runSequence(){
       if (reduced) { finalState(); return; }
       // 1. type the question
+      var query = s().query;
       var i = 0;
       var typeTimer = setInterval(function(){
-        qEl.textContent = s.query.slice(0, i + 1);
+        qEl.textContent = query.slice(0, i + 1);
         i++;
-        if (i >= s.query.length) {
+        if (i >= query.length) {
           clearInterval(typeTimer);
           qCursor.style.display = 'none';
           setTimeout(showTyping, 450);
@@ -644,11 +905,11 @@
       setTimeout(function(){
         typingDots.style.display = 'none';
         introEl.hidden = false;
-        streamWords(introEl, s.intro, 110, function(){
+        streamWords(introEl, s().intro, 110, function(){
           listEl.hidden = false;
           revealListItems(function(){
             closingEl.hidden = false;
-            streamWords(closingEl, s.closing, 130);
+            streamWords(closingEl, s().closing, 130);
           });
         });
       }, 850);
@@ -691,8 +952,9 @@
       okBox.hidden = true;
       errBox.hidden = true;
       var submitBtn = form.querySelector('button[type="submit"]');
+      var dict = STRINGS[currentLang] || STRINGS.de;
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Wird gesendet …';
+      submitBtn.textContent = dict['form-sending'];
       fetch(form.action, {
         method: 'POST',
         body: new FormData(form),
@@ -705,15 +967,16 @@
         } else {
           errBox.hidden = false;
           submitBtn.disabled = false;
-          submitBtn.textContent = 'Anfrage senden';
+          submitBtn.textContent = dict['form-submit'];
         }
       }).catch(function () {
         errBox.hidden = false;
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Anfrage senden';
+        submitBtn.textContent = dict['form-submit'];
       });
     });
   }
+})();
 </script>
 </body>
 </html>

@@ -210,9 +210,10 @@
 <header class="section-light">
   <div class="header-row">
     <a class="wordmark" href="#top">ZBINDEN<span class="dot">·</span>SOFTWARE</a>
-    <div class="lang-switch" role="group" aria-label="Langue / Sprache">
+    <div class="lang-switch" role="group" aria-label="Langue / Sprache / Language">
       <button type="button" data-lang="fr" aria-pressed="false">FR</button>
       <button type="button" data-lang="de" aria-pressed="true">DE</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
     </div>
     <a class="header-cta" href="#kontakt" data-i18n="header-cta">Kontakt</a>
   </div>
@@ -379,6 +380,38 @@
       "contact-lbl-mail": "E-Mail",
       "contact-lbl-tel": "Telefon",
       "footer-tagline": "KI-Agenten & Automatisierung · GEO-Audits"
+    },
+    en: {
+      "title": "Zbinden Software",
+      "header-cta": "Contact",
+      "hero-eyebrow": "Zbinden Software",
+      "hero-h1": "Two ways your business benefits from <em>AI</em>.",
+      "hero-lede": "I automate the processes that cost you time, and make sure AI search systems like ChatGPT and Google AI actually find your business. Two standalone, pragmatic offerings for Swiss SMEs.",
+      "hero-btn-primary": "Book a call",
+      "hero-btn-secondary": "View offerings",
+      "services-eyebrow": "Offering",
+      "services-h2": "Two ways I can help",
+      "card1-tag": "AI & Automation",
+      "card1-h3": "AI Agents & Process Automation",
+      "card1-p": "I automate recurring processes and build AI agents that take on real tasks — pragmatic, quick to implement, with measurable impact.",
+      "card1-go": "Discover the packages",
+      "card2-tag": "AI Visibility",
+      "card2-h3": "GEO Audit — AI Visibility Check",
+      "card2-p": "I check whether ChatGPT, Perplexity and Google AI find and recommend your business, and deliver a prioritized action plan.",
+      "card2-go": "Discover the audit",
+      "fit-eyebrow": "Fit",
+      "fit-h2": "Who is this for?",
+      "fit-1": "SMEs with recurring, manual processes that noticeably cost time.",
+      "fit-2": "Companies who want to know whether AI search systems find them at all.",
+      "fit-3": "Teams who want fast, measurable results — not a months-long IT project.",
+      "about-eyebrow": "About me",
+      "about-h2": "Pauline Zbinden",
+      "about-p": "Founder of Zbinden Software. I automate processes with AI agents and analyze how visible Swiss companies are to AI search systems.",
+      "contact-lbl-calendly": "Appointment",
+      "contact-calendly-link": "Book a 30-min call",
+      "contact-lbl-mail": "Email",
+      "contact-lbl-tel": "Phone",
+      "footer-tagline": "AI Agents & Automation · GEO Audits"
     }
   };
 
@@ -405,8 +438,7 @@
       var stored = localStorage.getItem('zsw-lang');
       if (stored && STRINGS[stored]) return stored;
     } catch (e) {}
-    var nav = (navigator.language || 'de').slice(0, 2).toLowerCase();
-    return STRINGS[nav] ? nav : 'de';
+    return 'de';
   }
 
   document.querySelectorAll('.lang-switch button').forEach(function(btn){
