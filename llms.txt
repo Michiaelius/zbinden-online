@@ -1,12 +1,26 @@
 # Zbinden Software
 
-> Audits de processus, logiciels sur mesure et audits de visibilité IA (GEO) pour PME suisses.
+> KI-Agenten, Prozessautomatisierung und GEO-Audits (KI-Sichtbarkeitsprüfung) für Schweizer KMU. Geführt von Pauline Zbinden.
 
-Zbinden Software est dirigée par Pauline Zbinden et propose deux prestations :
+Zbinden Software hilft kleinen und mittleren Unternehmen in der Schweiz, wiederkehrende Prozesse zu automatisieren und in KI-Suchsystemen (ChatGPT, Perplexity, Google AI) auffindbar zu werden. Zwei eigenständige, pragmatische Angebote – keine monatelangen IT-Projekte.
 
-- Audit de processus & logiciels sur mesure : https://www.zbinden.online/custom-software
-  J'observe le fonctionnement réel des équipes, identifie les pertes de temps (ressaisies, fichiers dispersés, validations papier) et développe l'application qui règle précisément ce problème.
-- GEO-Audit (audit de visibilité IA) : https://www.zbinden.online/geo-audit
-  Je vérifie si ChatGPT, Perplexity et Google AI trouvent et recommandent une entreprise, sur six critères pondérés (citabilité IA, autorité de marque, E-E-A-T, GEO technique, données structurées, optimisation plateforme), avec un plan d'action priorisé.
+## Angebote
 
-Contact : info@zbinden.online, +41 79 193 68 02
+- [KI-Agenten & Prozessautomatisierung](https://www.zbinden.online/ki-agenten-automatisierung): Automatisierung wiederkehrender, manueller Prozesse und Aufbau von KI-Agenten, die konkrete Aufgaben übernehmen – schnell umsetzbar, mit messbarem Nutzen. Pakete: Quick Win Automation, KI-Agent Starter.
+- [GEO-Audit (KI-Sichtbarkeitsprüfung)](https://www.zbinden.online/geo-audit): Prüfung, ob ChatGPT, Perplexity und Google AI ein Unternehmen finden und empfehlen. Sechs gewichtete Kriterien (KI-Zitierbarkeit, Markenautorität, E-E-A-T, technisches GEO, strukturierte Daten, Plattform-Optimierung) mit priorisiertem Aktionsplan.
+
+## Über
+
+- [Pauline Zbinden](https://www.zbinden.online/): Gründerin von Zbinden Software. Business Analyst mit Fokus auf Prozessautomatisierung und Generative Engine Optimization (GEO).
+
+## Kontakt
+
+- E-Mail: info@zbinden.online
+- Telefon: +41 79 193 68 02
+- Termin (30 Min): https://calendly.com/zbinden-austausch
+
+## Sprachen
+
+- Deutsch (Standard): https://www.zbinden.online/
+- Français: https://www.zbinden.online/fr/
+- English: https://www.zbinden.online/en/
