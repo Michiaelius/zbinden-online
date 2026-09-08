@@ -257,6 +257,21 @@
   footer .mono{ font-family:var(--font-ui); font-weight:500; letter-spacing:.05em; }
   footer a{ text-decoration:none; color:var(--sec-muted); }
   footer a:hover{ color:var(--sec-gold); }
+
+  /* ---------- Voice-Demo ---------- */
+  .voice-demo-grid{ display:grid; grid-template-columns:1.3fr .7fr; gap:40px; align-items:start; }
+  @media (max-width:780px){ .voice-demo-grid{grid-template-columns:1fr;} }
+  .voice-demo-pointer{ border:1px solid var(--sec-line-gold); border-radius:var(--r-md); background:var(--sec-bg-2); padding:26px 24px; }
+  .voice-demo-pointer-icon{
+    width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    background:var(--sec-gold-soft); color:var(--sec-gold); margin-bottom:14px;
+    animation:voicePulse 2.4s ease-in-out infinite;
+  }
+  @keyframes voicePulse{
+    0%,100%{ box-shadow:0 0 0 0 var(--sec-glow-soft); }
+    50%{ box-shadow:0 0 0 10px transparent; }
+  }
+  @media (prefers-reduced-motion:reduce){ .voice-demo-pointer-icon{ animation:none; } }
 </style>
 </head>
 <body>
@@ -265,6 +280,7 @@
   <div class="header-row">
     <a class="wordmark" href="https://www.zbinden.online/fr/">ZBINDEN<span class="dot">·</span>SOFTWARE <span class="sub">IA &amp; AUTOMATISATION</span></a>
     <nav class="top-nav">
+      <a href="#voice-demo">Démo live</a>
       <a href="#pakete">Forfaits</a>
       <a href="#fuer-wen">Pour qui ?</a>
       <a href="#ueber">À propos</a>
@@ -288,7 +304,34 @@
       <p class="lede reveal d3">Des solutions pragmatiques pour les entreprises suisses — rapides à mettre en place, avec un bénéfice mesurable.</p>
       <div class="cta-row reveal d4">
         <a class="btn-primary" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener">Réserver un appel</a>
+        <a class="btn-secondary" href="#voice-demo">🎙 Écouter la démo live</a>
         <a class="btn-secondary" href="#pakete">Voir les forfaits</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="voice-demo" class="section-dark">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Démo live</span>
+        <h2>Écoutez notre agent vocal IA en action</h2>
+      </div>
+      <div class="voice-demo-grid">
+        <div class="reveal d1">
+          <p style="color:var(--sec-muted); line-height:1.75; font-weight:300; max-width:52ch; margin:0 0 1.4em;">Cet assistant vocal tourne directement dans le navigateur — conçu et développé par Zbinden Software. Il répond à deux types de questions :</p>
+          <ul class="package-list" style="max-width:48ch; margin-bottom:1.6em;">
+            <li>Des questions générales sur les agents vocaux IA — ce qu'ils permettent, où ils sont pertinents, comment se déroule un projet.</li>
+            <li>Des questions concrètes sur Zbinden Software — prestations, prix, déroulement et contact.</li>
+          </ul>
+          <p style="font-size:.86rem; color:var(--sec-muted); font-weight:300;">Accès au microphone requis · fonctionne directement dans le navigateur · aucun téléchargement nécessaire.</p>
+        </div>
+        <div class="voice-demo-pointer reveal d2">
+          <div class="voice-demo-pointer-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Z" stroke="currentColor" stroke-width="1.5"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <p style="margin:0 0 6px; font-family:var(--font-ui); font-weight:600; font-size:.82rem; letter-spacing:.03em; color:var(--sec-ink);">En bas à droite de cette page</p>
+          <p style="margin:0; font-size:.86rem; color:var(--sec-muted); line-height:1.6; font-weight:300;">Cliquez sur la bulle pour démarrer la conversation.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -480,5 +523,18 @@
   }
 })();
 </script>
+
+<!-- Voice-Agent Demo (ElevenLabs Conversational AI) -->
+<elevenlabs-convai
+  agent-id="agent_5301m213h9yhembt38p140jfqzq9"
+  variant="full"
+  override-language="fr"
+  action-text="Tester l'agent vocal"
+  start-call-text="Démarrer l'appel"
+  end-call-text="Terminer"
+  listening-text="Écoute…"
+  speaking-text="Parle…"
+></elevenlabs-convai>
+<script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 </body>
 </html>
