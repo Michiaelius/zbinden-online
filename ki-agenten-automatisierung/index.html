@@ -260,7 +260,7 @@
 
   /* ---------- Voice-Demo ---------- */
   .voice-demo-grid{ display:grid; grid-template-columns:1.3fr .7fr; gap:40px; align-items:start; }
-  @media (max-width:780px){ .voice-demo-grid{grid-template-columns:1fr;} }
+  @media (max-width:780px){ .voice-demo-grid{grid-template-columns:1fr;} .voice-demo-arrow{display:none;} }
   .voice-demo-pointer{ padding-top:4px; }
   .voice-demo-arrow{
     display:block; font-size:1.7rem; line-height:1; color:var(--sec-gold); margin-bottom:12px;
@@ -271,8 +271,6 @@
     50%{ transform:translate(5px,5px); opacity:1; }
   }
   @media (prefers-reduced-motion:reduce){ .voice-demo-arrow{ animation:none; } }
-  .voice-demo-fallback{ margin-top:24px; font-size:.8rem; color:var(--sec-muted); font-weight:300; }
-  .voice-demo-fallback a{ color:var(--sec-gold-light); text-decoration:underline; }
 </style>
 </head>
 <body>
@@ -281,8 +279,8 @@
   <div class="header-row">
     <a class="wordmark" href="https://www.zbinden.online/">ZBINDEN<span class="dot">·</span>SOFTWARE <span class="sub">KI &amp; AUTOMATION</span></a>
     <nav class="top-nav">
-      <a href="#voice-demo">Live-Demo</a>
       <a href="#pakete">Pakete</a>
+      <a href="#voice-demo">Live-Demo</a>
       <a href="#fuer-wen">Für wen?</a>
       <a href="#ueber">Über mich</a>
       <a href="#kontakt">Kontakt</a>
@@ -302,37 +300,13 @@
     <div class="wrap">
       <p class="eyebrow with-rule reveal d1">KI-Agenten &amp; Prozessautomatisierung</p>
       <h1 class="reveal d2">Pragmatische <em>Automatisierung</em> statt monatelanger IT-Projekte.</h1>
-      <p class="lede reveal d3">Pragmatische Lösungen für Schweizer Unternehmen — schnell umsetzbar und mit messbarem Nutzen.</p>
+      <p class="lede reveal d3">Eine funktionierende Automatisierung für Schweizer KMU — in Wochen statt Monaten, zum Fixpreis nach einem kostenlosen Erstgespräch.</p>
       <div class="cta-row reveal d4">
         <a class="btn-primary" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener">Gespräch vereinbaren</a>
         <a class="btn-secondary" href="#voice-demo">🎙 Live-Demo hören</a>
         <a class="btn-secondary" href="#pakete">Pakete ansehen</a>
       </div>
-    </div>
-  </section>
-
-  <section id="voice-demo" class="section-dark">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">Live-Demo</span>
-        <h2>Hören Sie sich unseren KI-Voice-Agenten live an</h2>
-      </div>
-      <div class="voice-demo-grid">
-        <div class="reveal d1">
-          <p style="color:var(--sec-muted); line-height:1.75; font-weight:300; max-width:52ch; margin:0 0 1.4em;">Dieser Sprachassistent läuft direkt im Browser — konzipiert und gebaut von Zbinden Software. Er beantwortet zwei Arten von Fragen:</p>
-          <ul class="package-list" style="max-width:48ch; margin-bottom:1.6em;">
-            <li>Allgemeine Fragen zu KI-Voice-Agenten — was sie können, wo sie sich lohnen, wie ein Projekt typischerweise abläuft.</li>
-            <li>Konkrete Fragen zu Zbinden Software — Leistungen, Preise, Ablauf und Kontakt.</li>
-          </ul>
-          <p style="font-size:.86rem; color:var(--sec-muted); font-weight:300;">Mikrofon-Zugriff erforderlich · läuft direkt im Browser · kein Download nötig.</p>
-          <p class="voice-demo-fallback">Sehen Sie unten rechts keinen Button? Schreiben Sie mir direkt: <a href="mailto:info@zbinden.online">info@zbinden.online</a></p>
-        </div>
-        <div class="voice-demo-pointer reveal d2">
-          <span class="voice-demo-arrow" aria-hidden="true">↘</span>
-          <p style="margin:0 0 6px; font-family:var(--font-ui); font-weight:600; font-size:.82rem; letter-spacing:.03em; color:var(--sec-ink);">Achten Sie auf den Button unten rechts auf Ihrem Bildschirm</p>
-          <p style="margin:0; font-size:.86rem; color:var(--sec-muted); line-height:1.6; font-weight:300;">Er erscheint automatisch, sobald die Seite geladen ist — klicken Sie darauf, um das Gespräch zu starten.</p>
-        </div>
-      </div>
+      <p style="margin:16px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Kostenloses Erstgespräch · Fixpreis nach dem Gespräch · keine offenen Stundenrechnungen.</p>
     </div>
   </section>
 
@@ -381,6 +355,53 @@
         </div>
 
       </div>
+      <p style="margin:22px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Beide Pakete: Fixpreis nach dem kostenlosen Erstgespräch — Sie wissen vorab, was es kostet.</p>
+    </div>
+  </section>
+
+  <section id="beispiel" class="section-light">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Rechenbeispiel</span>
+        <h2>Wie ein Quick Win konkret aussieht</h2>
+      </div>
+      <p style="color:var(--sec-muted); line-height:1.75; font-weight:300; max-width:60ch; margin:0 0 1.8em;">Illustratives Szenario auf Basis typischer KMU-Abläufe — keine reale Kundenreferenz, sondern eine nachvollziehbare Rechnung.</p>
+      <div class="package-card reveal d1" style="max-width:640px;">
+        <span class="package-tag">Beispiel: Angebotserstellung im Innendienst</span>
+        <ul class="package-list">
+          <li><strong>Ausgangslage:</strong> Angebote werden manuell zusammengestellt — Positionen im ERP suchen, Preise prüfen, Vorlage befüllen, PDF erzeugen. Rund 40 Minuten pro Angebot, etwa 15 Angebote pro Woche.</li>
+          <li><strong>Umsetzung:</strong> Ein Agent zieht die Positionen aus dem ERP, rechnet die Preise nach hinterlegten Regeln, füllt die Angebotsvorlage und legt das PDF ab. Der Mitarbeiter prüft und versendet.</li>
+          <li><strong>Ergebnis:</strong> rund 40 → 6 Minuten pro Angebot. Etwa 8 Stunden pro Woche zurückgewonnen.</li>
+        </ul>
+        <div class="package-meta">
+          <div><span class="lbl">Umsetzung</span><span class="val">2 Wochen</span></div>
+          <div><span class="lbl">Fixpreis</span><span class="val price">CHF 4'500</span></div>
+          <div><span class="lbl">Amortisation</span><span class="val">~8 Wochen</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="voice-demo" class="section-dark">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Live-Demo</span>
+        <h2>Hören Sie sich unseren KI-Voice-Agenten live an</h2>
+      </div>
+      <div class="voice-demo-grid">
+        <div class="reveal d1">
+          <p style="color:var(--sec-muted); line-height:1.75; font-weight:300; max-width:52ch; margin:0 0 1.4em;">Dieser Sprachassistent läuft direkt im Browser — konzipiert und gebaut von Zbinden Software. Er beantwortet zwei Arten von Fragen:</p>
+          <ul class="package-list" style="max-width:48ch; margin-bottom:1.6em;">
+            <li>Allgemeine Fragen zu KI-Voice-Agenten — was sie können, wo sie sich lohnen, wie ein Projekt typischerweise abläuft.</li>
+            <li>Konkrete Fragen zu Zbinden Software — Leistungen, Preise, Ablauf und Kontakt.</li>
+          </ul>
+          <p style="font-size:.86rem; color:var(--sec-muted); font-weight:300;">Mikrofon-Zugriff erforderlich · läuft direkt im Browser · kein Download nötig.</p>
+        </div>
+        <div class="voice-demo-pointer reveal d2">
+          <span class="voice-demo-arrow" aria-hidden="true">↘</span>
+          <p style="margin:0; font-size:.9rem; color:var(--sec-muted); line-height:1.6; font-weight:300;">Der Button erscheint automatisch unten rechts, sobald die Seite geladen ist — klicken Sie darauf, um das Gespräch zu starten.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -404,6 +425,7 @@
           <p>Teams, die schnelle, messbare Resultate erwarten — kein monatelanges IT-Projekt, sondern eine funktionierende Lösung in Wochen.</p>
         </div>
       </div>
+      <p style="margin:28px 0 0; font-size:.9rem; color:var(--sec-muted); font-weight:300; max-width:64ch;"><strong style="color:var(--sec-ink); font-weight:600;">Weniger geeignet:</strong> einmalige Aufgaben ohne Wiederholung, oder Unternehmen, die eine vollständige Individualsoftware-Plattform statt einer fokussierten Automatisierung suchen.</p>
     </div>
   </section>
 
@@ -415,6 +437,17 @@
       </div>
       <p style="color:var(--sec-muted); line-height:1.75; max-width:62ch; font-weight:300; margin:0 0 1.2em;">Ich bin Pauline Zbinden, Gründerin von Zbinden Software. Fünf Jahre lang habe ich bei Hexagon Manufacturing Intelligence Embedded-Software in C++ entwickelt, danach als Consultant bei Drees &amp; Sommer Schweiz Anforderungen analysiert und in technische Lösungen übersetzt. Beides fliesst hier ein: saubere Umsetzung und ein klarer Blick dafür, welcher Prozess sich überhaupt zu automatisieren lohnt.</p>
       <a href="https://www.zbinden.online/#ueber-mich" style="display:inline-block; font-family:var(--font-ui); font-weight:600; font-size:.82rem; color:var(--sec-gold-deep); text-decoration:none; border-bottom:1px solid var(--sec-line-gold); padding-bottom:2px;">Mehr über mich &rarr;</a>
+      <div style="margin-top:2.8em; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:22px;">
+        <figure style="margin:0; border-left:2px solid var(--sec-line-gold); padding:2px 0 2px 18px;">
+          <blockquote style="margin:0 0 10px; color:var(--sec-ink); font-weight:300; line-height:1.65; font-size:.92rem;">„Aufgrund ihrer genauen Analysefähigkeit und ihrer Auffassungsgabe war sie jederzeit in der Lage, auch schwierige Situationen sofort zutreffend zu erfassen und schnell gute Lösungen zu finden. […] Frau Zbinden überzeugte durch ihre Zuverlässigkeit.“</blockquote>
+          <figcaption style="font-size:.78rem; color:var(--sec-muted); font-weight:400; font-family:var(--font-ui);">Drees &amp; Sommer Schweiz AG · Arbeitszeugnis, 2025</figcaption>
+        </figure>
+        <figure style="margin:0; border-left:2px solid var(--sec-line-gold); padding:2px 0 2px 18px;">
+          <blockquote style="margin:0 0 10px; color:var(--sec-ink); font-weight:300; line-height:1.65; font-size:.92rem;">„Anspruchsvolle Problemstellungen analysierte sie genau und erarbeitete selbständig Lösungsansätze. […] Insbesondere im Umgang mit externen Partnern wurde sie aufgrund ihrer Fachkompetenz und ihrer angenehmen Persönlichkeit sehr geschätzt.“</blockquote>
+          <figcaption style="font-size:.78rem; color:var(--sec-muted); font-weight:400; font-family:var(--font-ui);">Hexagon Manufacturing Intelligence · Arbeitszeugnis, 2024</figcaption>
+        </figure>
+      </div>
+      <p style="margin:1.4em 0 0; font-size:.76rem; color:var(--sec-muted); font-weight:300;">Auszüge aus Arbeitszeugnissen früherer Anstellungen.</p>
     </div>
   </section>
 
@@ -458,7 +491,7 @@
                 <textarea id="f-message" name="message" placeholder="z. B. welcher Prozess Sie am meisten Zeit kostet"></textarea>
               </div>
               <button type="submit" class="btn-primary">Anfrage senden</button>
-              <p class="form-note">Ich melde mich innerhalb von 1–2 Werktagen zurück.</p>
+              <p class="form-note">Kostenloses, unverbindliches Erstgespräch. Ich melde mich innerhalb von 1–2 Werktagen zurück.</p>
             </form>
             <div class="form-status ok" id="formOk" hidden>Danke für Ihre Anfrage — ich melde mich in Kürze bei Ihnen.</div>
             <div class="form-status err" id="formErr" hidden>Das hat leider nicht geklappt. Schreiben Sie mir direkt an <a href="mailto:info@zbinden.online" style="color:inherit; text-decoration:underline;">info@zbinden.online</a>.</div>
@@ -471,7 +504,7 @@
 </main>
 
 <footer class="section-light">
-  <span>© 2026 Zbinden Software</span>
+  <span>© 2026 Zbinden Software · Einzelunternehmen, Schweiz</span>
   <span class="mono"><a href="https://www.zbinden.online/">Zbinden Software</a> · <a href="https://www.zbinden.online/geo-audit">GEO-Audit →</a></span>
 </footer>
 
@@ -537,5 +570,20 @@
   speaking-text="Spricht…"
 ></elevenlabs-convai>
 <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+<script>
+/* Referme le panneau du voice-agent quand on clique à côté
+   (même effet que la flèche « Einklappen » dans le widget). */
+(function () {
+  var widget = document.querySelector('elevenlabs-convai');
+  if (!widget) return;
+  document.addEventListener('click', function (ev) {
+    var path = typeof ev.composedPath === 'function' ? ev.composedPath() : [];
+    if (path.indexOf(widget) !== -1) return; // clic dans le widget : ne rien faire
+    document.dispatchEvent(new CustomEvent('elevenlabs-agent:expand', {
+      detail: { action: 'collapse' }
+    }));
+  });
+})();
+</script>
 </body>
 </html>

@@ -260,7 +260,7 @@
 
   /* ---------- Voice-Demo ---------- */
   .voice-demo-grid{ display:grid; grid-template-columns:1.3fr .7fr; gap:40px; align-items:start; }
-  @media (max-width:780px){ .voice-demo-grid{grid-template-columns:1fr;} }
+  @media (max-width:780px){ .voice-demo-grid{grid-template-columns:1fr;} .voice-demo-arrow{display:none;} }
   .voice-demo-pointer{ padding-top:4px; }
   .voice-demo-arrow{
     display:block; font-size:1.7rem; line-height:1; color:var(--sec-gold); margin-bottom:12px;
@@ -271,8 +271,6 @@
     50%{ transform:translate(5px,5px); opacity:1; }
   }
   @media (prefers-reduced-motion:reduce){ .voice-demo-arrow{ animation:none; } }
-  .voice-demo-fallback{ margin-top:24px; font-size:.8rem; color:var(--sec-muted); font-weight:300; }
-  .voice-demo-fallback a{ color:var(--sec-gold-light); text-decoration:underline; }
 </style>
 </head>
 <body>
@@ -281,8 +279,8 @@
   <div class="header-row">
     <a class="wordmark" href="https://www.zbinden.online/en/">ZBINDEN<span class="dot">·</span>SOFTWARE <span class="sub">AI &amp; AUTOMATION</span></a>
     <nav class="top-nav">
-      <a href="#voice-demo">Live demo</a>
       <a href="#pakete">Packages</a>
+      <a href="#voice-demo">Live demo</a>
       <a href="#fuer-wen">Who it's for</a>
       <a href="#ueber">About</a>
       <a href="#kontakt">Contact</a>
@@ -302,37 +300,13 @@
     <div class="wrap">
       <p class="eyebrow with-rule reveal d1">AI Agents &amp; Process Automation</p>
       <h1 class="reveal d2">Pragmatic <em>automation</em> instead of months-long IT projects.</h1>
-      <p class="lede reveal d3">Pragmatic solutions for Swiss companies — quick to implement, with measurable impact.</p>
+      <p class="lede reveal d3">Working automation for Swiss SMEs — in weeks rather than months, at a fixed price after a free intro call.</p>
       <div class="cta-row reveal d4">
         <a class="btn-primary" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener">Book a call</a>
         <a class="btn-secondary" href="#voice-demo">🎙 Hear the live demo</a>
         <a class="btn-secondary" href="#pakete">View packages</a>
       </div>
-    </div>
-  </section>
-
-  <section id="voice-demo" class="section-dark">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">Live demo</span>
-        <h2>Hear our AI voice agent in action</h2>
-      </div>
-      <div class="voice-demo-grid">
-        <div class="reveal d1">
-          <p style="color:var(--sec-muted); line-height:1.75; font-weight:300; max-width:52ch; margin:0 0 1.4em;">This voice assistant runs right in your browser — designed and built by Zbinden Software. It answers two kinds of questions:</p>
-          <ul class="package-list" style="max-width:48ch; margin-bottom:1.6em;">
-            <li>General questions about AI voice agents — what they can do, where they pay off, how a project typically runs.</li>
-            <li>Specific questions about Zbinden Software — services, pricing, process and contact.</li>
-          </ul>
-          <p style="font-size:.86rem; color:var(--sec-muted); font-weight:300;">Requires microphone access · runs directly in the browser · no download needed.</p>
-          <p class="voice-demo-fallback">Don't see a button in the bottom-right corner? Write to me directly: <a href="mailto:info@zbinden.online">info@zbinden.online</a></p>
-        </div>
-        <div class="voice-demo-pointer reveal d2">
-          <span class="voice-demo-arrow" aria-hidden="true">↘</span>
-          <p style="margin:0 0 6px; font-family:var(--font-ui); font-weight:600; font-size:.82rem; letter-spacing:.03em; color:var(--sec-ink);">Look for the button in the bottom-right of your screen</p>
-          <p style="margin:0; font-size:.86rem; color:var(--sec-muted); line-height:1.6; font-weight:300;">It appears automatically once the page has loaded — click it to start the conversation.</p>
-        </div>
-      </div>
+      <p style="margin:16px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Free intro call · fixed price after the call · you know the cost up front.</p>
     </div>
   </section>
 
@@ -381,6 +355,53 @@
         </div>
 
       </div>
+      <p style="margin:22px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Both packages: a fixed price after the free intro call — you know the cost before you commit.</p>
+    </div>
+  </section>
+
+  <section id="beispiel" class="section-light">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Worked example</span>
+        <h2>What a Quick Win looks like in practice</h2>
+      </div>
+      <p style="color:var(--sec-muted); line-height:1.75; font-weight:300; max-width:60ch; margin:0 0 1.8em;">Illustrative scenario based on common SME processes — not a real client reference, but a calculation you can check.</p>
+      <div class="package-card reveal d1" style="max-width:640px;">
+        <span class="package-tag">Example: quote preparation in inside sales</span>
+        <ul class="package-list">
+          <li><strong>Starting point:</strong> quotes are assembled by hand — look up line items in the ERP, check prices, fill the template, generate the PDF. Around 40 minutes per quote, about 15 quotes a week.</li>
+          <li><strong>Implementation:</strong> an agent pulls the line items from the ERP, calculates prices from defined rules, fills the quote template and files the PDF. The employee reviews and sends.</li>
+          <li><strong>Result:</strong> from about 40 to 6 minutes per quote. Roughly 8 hours a week recovered.</li>
+        </ul>
+        <div class="package-meta">
+          <div><span class="lbl">Implementation</span><span class="val">2 weeks</span></div>
+          <div><span class="lbl">Fixed price</span><span class="val price">CHF 4'500</span></div>
+          <div><span class="lbl">Payback</span><span class="val">~8 weeks</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="voice-demo" class="section-dark">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Live demo</span>
+        <h2>Hear our AI voice agent in action</h2>
+      </div>
+      <div class="voice-demo-grid">
+        <div class="reveal d1">
+          <p style="color:var(--sec-muted); line-height:1.75; font-weight:300; max-width:52ch; margin:0 0 1.4em;">This voice assistant runs right in your browser — designed and built by Zbinden Software. It answers two kinds of questions:</p>
+          <ul class="package-list" style="max-width:48ch; margin-bottom:1.6em;">
+            <li>General questions about AI voice agents — what they can do, where they pay off, how a project typically runs.</li>
+            <li>Specific questions about Zbinden Software — services, pricing, process and contact.</li>
+          </ul>
+          <p style="font-size:.86rem; color:var(--sec-muted); font-weight:300;">Requires microphone access · runs directly in the browser · no download needed.</p>
+        </div>
+        <div class="voice-demo-pointer reveal d2">
+          <span class="voice-demo-arrow" aria-hidden="true">↘</span>
+          <p style="margin:0; font-size:.9rem; color:var(--sec-muted); line-height:1.6; font-weight:300;">The button appears automatically in the bottom-right once the page has loaded — click it to start the conversation.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -404,6 +425,7 @@
           <p>Teams who expect fast, measurable results — not a months-long IT project, but a working solution within weeks.</p>
         </div>
       </div>
+      <p style="margin:28px 0 0; font-size:.9rem; color:var(--sec-muted); font-weight:300; max-width:64ch;"><strong style="color:var(--sec-ink); font-weight:600;">Less suitable:</strong> one-off tasks with no repetition, or companies looking for a full custom-software platform rather than one focused automation.</p>
     </div>
   </section>
 
@@ -415,6 +437,17 @@
       </div>
       <p style="color:var(--sec-muted); line-height:1.75; max-width:62ch; font-weight:300; margin:0 0 1.2em;">I'm Pauline Zbinden, founder of Zbinden Software. For five years I built embedded software in C++ at Hexagon Manufacturing Intelligence, then, as a consultant at Drees &amp; Sommer Switzerland, I analysed requirements and translated them into technical solutions. Both feed into this work: clean delivery and a clear eye for which process is actually worth automating.</p>
       <a href="https://www.zbinden.online/en/#ueber-mich" style="display:inline-block; font-family:var(--font-ui); font-weight:600; font-size:.82rem; color:var(--sec-gold-deep); text-decoration:none; border-bottom:1px solid var(--sec-line-gold); padding-bottom:2px;">More about me &rarr;</a>
+      <div style="margin-top:2.8em; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:22px;">
+        <figure style="margin:0; border-left:2px solid var(--sec-line-gold); padding:2px 0 2px 18px;">
+          <blockquote style="margin:0 0 10px; color:var(--sec-ink); font-weight:300; line-height:1.65; font-size:.92rem;">"Thanks to her precise analytical ability and quick grasp, she was at all times able to assess even difficult situations correctly and to find good solutions quickly. […] Ms Zbinden stood out for her reliability."</blockquote>
+          <figcaption style="font-size:.78rem; color:var(--sec-muted); font-weight:400; font-family:var(--font-ui);">Drees &amp; Sommer Schweiz AG · Employment reference, 2025 (translated from German)</figcaption>
+        </figure>
+        <figure style="margin:0; border-left:2px solid var(--sec-line-gold); padding:2px 0 2px 18px;">
+          <blockquote style="margin:0 0 10px; color:var(--sec-ink); font-weight:300; line-height:1.65; font-size:.92rem;">"She analysed demanding problems precisely and independently developed solutions. […] She was particularly valued by external partners for her technical expertise and her pleasant personality."</blockquote>
+          <figcaption style="font-size:.78rem; color:var(--sec-muted); font-weight:400; font-family:var(--font-ui);">Hexagon Manufacturing Intelligence · Employment reference, 2024 (translated from German)</figcaption>
+        </figure>
+      </div>
+      <p style="margin:1.4em 0 0; font-size:.76rem; color:var(--sec-muted); font-weight:300;">Excerpts from employment references from previous positions.</p>
     </div>
   </section>
 
@@ -458,7 +491,7 @@
                 <textarea id="f-message" name="message" placeholder="e.g. which process costs you the most time"></textarea>
               </div>
               <button type="submit" class="btn-primary">Send request</button>
-              <p class="form-note">I'll get back to you within 1–2 business days.</p>
+              <p class="form-note">Free, no-obligation intro call. I'll get back to you within 1–2 business days.</p>
             </form>
             <div class="form-status ok" id="formOk" hidden>Thanks for your request — I'll be in touch shortly.</div>
             <div class="form-status err" id="formErr" hidden>Something went wrong. Please write to me directly at <a href="mailto:info@zbinden.online" style="color:inherit; text-decoration:underline;">info@zbinden.online</a>.</div>
@@ -471,7 +504,7 @@
 </main>
 
 <footer class="section-light">
-  <span>© 2026 Zbinden Software</span>
+  <span>© 2026 Zbinden Software · Sole proprietorship, Switzerland</span>
   <span class="mono"><a href="https://www.zbinden.online/en/">Zbinden Software</a> · <a href="https://www.zbinden.online/en/geo-audit">GEO Audit →</a></span>
 </footer>
 
@@ -537,5 +570,20 @@
   speaking-text="Speaking…"
 ></elevenlabs-convai>
 <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+<script>
+/* Collapse the voice-agent panel on an outside click
+   (same effect as the widget's own collapse arrow). */
+(function () {
+  var widget = document.querySelector('elevenlabs-convai');
+  if (!widget) return;
+  document.addEventListener('click', function (ev) {
+    var path = typeof ev.composedPath === 'function' ? ev.composedPath() : [];
+    if (path.indexOf(widget) !== -1) return; // click inside the widget: do nothing
+    document.dispatchEvent(new CustomEvent('elevenlabs-agent:expand', {
+      detail: { action: 'collapse' }
+    }));
+  });
+})();
+</script>
 </body>
 </html>
