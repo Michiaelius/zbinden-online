@@ -271,15 +271,134 @@
     50%{ transform:translate(5px,5px); opacity:1; }
   }
   @media (prefers-reduced-motion:reduce){ .voice-demo-arrow{ animation:none; } }
+
+  /* ---------- Exemples par secteur ---------- */
+  .branchen-intro{ color:var(--sec-muted); line-height:1.75; font-weight:300; max-width:62ch; margin:0 0 2em; }
+  .branchen-intro strong{ color:var(--sec-ink); font-weight:600; }
+  .branchen-picker{ display:grid; gap:8px; max-width:440px; margin-bottom:28px; }
+  .branchen-picker label{ font-family:var(--font-ui); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--sec-muted); font-weight:600; }
+  .branchen-picker select{
+    background:var(--sec-bg); border:1px solid var(--sec-line-strong); border-radius:var(--r-sm); color:var(--sec-ink);
+    font-family:var(--font-ui); font-weight:300; font-size:.98rem; padding:13px 14px; cursor:pointer;
+  }
+  .branchen-picker select:focus{ outline:none; border-color:var(--sec-gold); }
+  .branche-output[hidden]{ display:none; }
+  .branche-output{ animation:brancheIn .4s ease; }
+  @keyframes brancheIn{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:none; } }
+  @media (prefers-reduced-motion:reduce){ .branche-output{ animation:none; } }
+  .branche-card{
+    max-width:640px; display:flex; flex-direction:column; gap:18px;
+    border:1px solid var(--sec-line-gold); border-radius:var(--r-lg); background:var(--sec-bg-2);
+    padding:clamp(24px,4vw,34px); box-shadow:0 30px 70px -34px rgba(0,0,0,.35);
+  }
+  .branche-note{ font-size:.82rem; color:var(--sec-muted); font-weight:300; line-height:1.6; margin:0; }
+  .branche-card .btn-secondary{ align-self:flex-start; }
+
+  /* ---------- Calculateur d'économies ---------- */
+  .branche-list-hint{ margin:-6px 0 0; font-family:var(--font-ui); font-size:.76rem; font-weight:500; color:var(--sec-gold-deep); }
+  #branche-list li.pickable{ padding-left:0; }
+  #branche-list li.pickable::before{ content:none; }
+  .branche-pick{
+    display:flex; gap:14px; align-items:baseline; width:100%; text-align:left; position:relative;
+    background:none; border:none; margin:0; padding:9px 12px 9px 22px; border-radius:var(--r-sm);
+    font-family:inherit; font-size:.94rem; font-weight:300; line-height:1.55; color:var(--sec-ink);
+    cursor:pointer; transition:background .15s ease, color .15s ease;
+  }
+  .branche-pick::before{ content:"—"; position:absolute; left:0; color:var(--sec-gold-deep); }
+  .branche-pick:hover{ background:var(--sec-gold-soft); color:var(--sec-gold-deep); }
+  .branche-pick .pick-cue{
+    margin-left:auto; flex:none; align-self:center; font-family:var(--font-ui); font-weight:600;
+    font-size:.62rem; letter-spacing:.1em; text-transform:uppercase; color:var(--sec-gold-deep);
+    white-space:nowrap; opacity:0; transition:opacity .15s ease;
+  }
+  .branche-pick:hover .pick-cue,
+  .branche-pick:focus-visible .pick-cue,
+  #branche-list li.pickable.active .pick-cue{ opacity:1; }
+  #branche-list li.pickable.active .branche-pick{ background:var(--sec-gold-soft); color:var(--sec-gold-deep); }
+
+  .calc-panel{
+    margin-top:6px; display:flex; flex-direction:column; gap:18px;
+    border:1px solid var(--sec-line-gold); border-radius:var(--r-md); background:var(--sec-bg);
+    padding:clamp(20px,3vw,26px); animation:brancheIn .35s ease;
+  }
+  .calc-panel[hidden]{ display:none; }
+  @media (prefers-reduced-motion:reduce){ .calc-panel{ animation:none; } }
+  .calc-task{ margin:0; font-size:.9rem; color:var(--sec-muted); font-weight:300; line-height:1.55; }
+  .calc-task strong{ color:var(--sec-ink); font-weight:600; }
+  .calc-grid{ display:grid; gap:16px; }
+  .calc-inline{ display:flex; flex-wrap:wrap; gap:10px; }
+  .calc-inline input{ flex:2 1 90px; min-width:80px; }
+  .calc-inline select{ flex:1 1 110px; }
+  .calc-panel input[type=range]{ width:100%; padding:0; border:none; background:transparent; accent-color:var(--sec-gold-deep); }
+  .calc-results{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:14px; padding:16px 0;
+    border-top:1px solid var(--sec-line); border-bottom:1px solid var(--sec-line);
+  }
+  @media (max-width:560px){ .calc-results{ grid-template-columns:1fr; gap:12px; } }
+  .calc-result{ display:flex; flex-direction:column; gap:4px; }
+  .calc-result-lbl{ font-family:var(--font-ui); font-size:.62rem; letter-spacing:.1em; text-transform:uppercase; color:var(--sec-muted); font-weight:600; }
+  .calc-result-val{ font-family:var(--font-display); font-size:1.3rem; font-weight:700; color:var(--sec-ink); }
+  .calc-result-val.price{ color:var(--sec-gold-deep); }
+  .calc-disclaimer{ margin:0; font-size:.76rem; color:var(--sec-muted); font-weight:300; line-height:1.6; }
+  .calc-disclaimer strong{ color:var(--sec-ink); font-weight:600; }
+  .calc-perhead{ margin:0; font-size:.82rem; color:var(--sec-ink); font-weight:300; line-height:1.55; }
+  .calc-perhead strong{ font-weight:600; color:var(--sec-gold-deep); }
+  .calc-grid .field label strong{ color:var(--sec-ink); font-weight:700; }
+  .calc-hint{ margin:2px 0 0; font-size:.78rem; font-style:italic; color:var(--sec-muted); font-weight:300; line-height:1.5; }
+  .calc-help{ margin-top:2px; }
+  .calc-help summary{ cursor:pointer; list-style:none; font-family:var(--font-ui); font-weight:600; font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:var(--sec-gold-deep); }
+  .calc-help summary::-webkit-details-marker{ display:none; }
+  .calc-help summary::before{ content:"+ "; }
+  .calc-help[open] summary::before{ content:"– "; }
+  .calc-help-body{ margin-top:10px; color:var(--sec-muted); font-weight:300; line-height:1.6; }
+  .calc-help-body p{ margin:0 0 10px; font-size:.82rem; }
+  .calc-help-body ul{ margin:0 0 10px; padding-left:18px; display:grid; gap:6px; }
+  .calc-help-body li{ font-size:.82rem; }
+  .calc-help-body strong{ color:var(--sec-ink); font-weight:600; }
+  .calc-help-ex{ border-left:2px solid var(--sec-line-gold); padding-left:12px; }
+
+  /* ---------- Envoi de l'estimation ---------- */
+  .calc-send{ display:grid; gap:8px; margin-top:4px; padding-top:16px; border-top:1px solid var(--sec-line); }
+  .calc-send > label{ font-family:var(--font-ui); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--sec-gold-deep); font-weight:700; }
+  .calc-send-row{ display:flex; flex-wrap:wrap; gap:10px; }
+  .calc-send-row input{
+    flex:1 1 200px; min-width:0; background:var(--sec-bg); border:1px solid var(--sec-line-strong);
+    border-radius:var(--r-sm); color:var(--sec-ink); font-family:var(--font-ui); font-weight:300;
+    font-size:.94rem; padding:11px 12px;
+  }
+  .calc-send-row input:focus{ outline:none; border-color:var(--sec-gold); }
+  .calc-send-row .btn-primary{ border:none; flex:0 0 auto; }
+  .calc-send-note{ margin:0; font-size:.74rem; color:var(--sec-muted); font-weight:300; line-height:1.5; }
+  .calc-send-status{ margin:2px 0 0; font-size:.82rem; font-weight:400; color:var(--sec-gold-deep); line-height:1.5; }
+  .calc-send-status[hidden]{ display:none; }
+
+  /* ---------- Back bar ---------- */
+  .back-bar{ background:rgba(255,255,255,.86); backdrop-filter:blur(10px); border-bottom:1px solid var(--sec-line); }
+  .back-bar .wrap{ padding-top:7px; padding-bottom:7px; }
+  .back-link{
+    display:inline-flex; align-items:center; gap:.55em;
+    font-family:var(--font-ui); font-weight:600; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--sec-muted); text-decoration:none; transition:color .18s ease;
+  }
+  .back-link:hover{ color:var(--sec-gold-deep); }
+  .back-link .arrow{ font-size:1.15em; line-height:1; transition:transform .18s ease; }
+  .back-link:hover .arrow{ transform:translateX(-3px); }
 </style>
 </head>
 <body>
+
+<div class="back-bar">
+  <div class="wrap">
+    <a class="back-link" href="https://www.zbinden.online/fr/" id="backLink"><span class="arrow" aria-hidden="true">&larr;</span> Retour</a>
+  </div>
+</div>
 
 <header class="section-light">
   <div class="header-row">
     <a class="wordmark" href="https://www.zbinden.online/fr/">ZBINDEN<span class="dot">·</span>SOFTWARE <span class="sub">IA &amp; AUTOMATISATION</span></a>
     <nav class="top-nav">
       <a href="#pakete">Forfaits</a>
+      <a href="#branchen">Estimateur</a>
       <a href="#voice-demo">Démo live</a>
       <a href="#fuer-wen">Pour qui ?</a>
       <a href="#ueber">À propos</a>
@@ -377,6 +496,104 @@
           <div><span class="lbl">Mise en œuvre</span><span class="val">2 semaines</span></div>
           <div><span class="lbl">Prix fixe</span><span class="val price">CHF 4'500</span></div>
           <div><span class="lbl">Amortissement</span><span class="val">~8 semaines</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="branchen" class="section-light">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Exemples par secteur + estimateur</span>
+        <h2>Vous ne voyez pas quels processus automatiser dans votre entreprise&nbsp;?</h2>
+      </div>
+      <p class="branchen-intro reveal d1">Sélectionnez votre secteur et parcourez des processus récurrents que d'autres PME suisses ont déjà automatisés. <strong>Chaque exemple est cliquable</strong>&nbsp;: un petit outil estime alors le temps et l'argent que vous pourriez économiser — par personne, puis multiplié par le nombre de collaborateurs qui font cette tâche. Estimation indicative, sans garantie.</p>
+      <div class="branchen-picker reveal d2">
+        <label for="branche-select">Votre secteur d'activité</label>
+        <select id="branche-select">
+          <option value="">Choisissez un secteur …</option>
+        </select>
+      </div>
+      <div id="branche-output" class="branche-output" hidden>
+        <div class="branche-card">
+          <span class="package-tag" id="branche-card-tag"></span>
+          <p class="branche-list-hint">Cliquez sur un exemple pour estimer les économies possibles.</p>
+          <ul class="package-list" id="branche-list"></ul>
+
+          <div id="calc-panel" class="calc-panel" hidden>
+            <p class="calc-task">Tâche&nbsp;: <strong id="calc-task-label"></strong></p>
+            <div class="calc-grid">
+              <div class="field">
+                <label for="calc-time">Temps que cette tâche prend, <strong>par personne</strong></label>
+                <div class="calc-inline">
+                  <input type="number" id="calc-time" min="0" step="5" inputmode="decimal" value="30" aria-label="Durée">
+                  <select id="calc-unit" aria-label="Unité">
+                    <option value="min">minutes</option>
+                    <option value="h">heures</option>
+                  </select>
+                  <select id="calc-period" aria-label="Période">
+                    <option value="day">par jour</option>
+                    <option value="week">par semaine</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field">
+                <label for="calc-heads">Personnes qui font cette tâche dans l'entreprise</label>
+                <input type="number" id="calc-heads" min="1" step="1" inputmode="numeric" value="3">
+              </div>
+              <div class="field">
+                <label for="calc-rate">Coût horaire chargé (CHF / heure)</label>
+                <input type="number" id="calc-rate" min="0" step="5" inputmode="decimal" value="65">
+              </div>
+              <div class="field">
+                <label for="calc-share">Part du temps qu'on peut retirer — pré-estimée selon la tâche&nbsp;: <span id="calc-share-val">70&nbsp;%</span></label>
+                <input type="range" id="calc-share" min="10" max="95" step="5" value="70">
+                <p class="calc-hint" id="calc-hint"></p>
+                <details class="calc-help">
+                  <summary>Comment cette part est-elle estimée&nbsp;?</summary>
+                  <div class="calc-help-body">
+                    <p>Le curseur se positionne automatiquement selon le type de tâche que vous choisissez. C'est notre estimation, pas une mesure&nbsp;: ajustez-le librement à votre réalité.</p>
+                    <p>Le principe&nbsp;: on compte ce qui est vraiment mécanique — recherche d'informations, copier-coller, remplissage de modèles, mise en forme — et on laisse de côté ce qui demande un jugement humain ou la gestion de cas particuliers. Il faut aussi garder un peu de temps pour vérifier le résultat.</p>
+                    <ul>
+                      <li><strong>70–90&nbsp;%</strong> — tâche très répétitive et cadrée&nbsp;: saisie, extraction de données, relances, génération de documents.</li>
+                      <li><strong>40–60&nbsp;%</strong> — tâche mixte&nbsp;: une partie mécanique, quelques décisions à prendre au cas par cas.</li>
+                      <li><strong>15–30&nbsp;%</strong> — tâche qui repose surtout sur l'analyse, le conseil ou la relation client.</li>
+                    </ul>
+                    <p class="calc-help-ex"><strong>Exemple.</strong> Établir une offre prend ~40&nbsp;min&nbsp;: chercher les postes dans l'ERP, vérifier les prix, remplir le modèle, générer le PDF. L'agent prépare tout, le collaborateur relit et envoie en ~6&nbsp;min — soit environ 85&nbsp;% de temps en moins sur cette tâche.</p>
+                  </div>
+                </details>
+              </div>
+            </div>
+            <div class="calc-results">
+              <div class="calc-result">
+                <span class="calc-result-lbl">Temps gagné / semaine</span>
+                <span class="calc-result-val" id="calc-out-hours">–</span>
+              </div>
+              <div class="calc-result">
+                <span class="calc-result-lbl">Économie estimée / mois</span>
+                <span class="calc-result-val" id="calc-out-month">–</span>
+              </div>
+              <div class="calc-result">
+                <span class="calc-result-lbl">Économie estimée / an</span>
+                <span class="calc-result-val price" id="calc-out-year">–</span>
+              </div>
+            </div>
+            <p class="calc-perhead" id="calc-perhead"></p>
+            <p class="calc-disclaimer"><strong>Estimation indicative, sans garantie.</strong> Le résultat réel dépend du processus, des outils déjà en place et du volume traité. Ce calcul ne tient pas compte du coût de mise en œuvre ni du temps de contrôle qui reste à faire, et suppose que chaque personne consacre à peu près le même temps à cette tâche. Hypothèses&nbsp;: 5&nbsp;jours ouvrés par semaine, 46&nbsp;semaines par an.</p>
+
+            <form class="calc-send" id="calcSend" novalidate>
+              <label for="calc-email">Recevez votre estimation (PDF)</label>
+              <div class="calc-send-row">
+                <input type="email" id="calc-email" name="email" placeholder="vous@entreprise.ch" autocomplete="email" required>
+                <button type="submit" class="btn-primary" id="calcSendBtn">Recevoir le PDF</button>
+              </div>
+              <p class="calc-send-note">Le PDF se télécharge tout de suite et vous arrive aussi par e-mail, avec un lien pour prendre rendez-vous. Pas de liste de diffusion.</p>
+              <p class="calc-send-status" id="calcSendStatus" hidden></p>
+            </form>
+          </div>
+
+          <p class="branche-note">Ce ne sont que des exemples. Le premier entretien gratuit sert justement à repérer le processus qui, chez vous, vaut le plus la peine d'être automatisé.</p>
+          <a class="btn-secondary" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener">En parler lors d'un appel</a>
         </div>
       </div>
     </div>
@@ -520,6 +737,507 @@
     items.forEach(function(el){ io.observe(el); });
   } else {
     items.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  var backLink = document.getElementById('backLink');
+  if (backLink) {
+    backLink.addEventListener('click', function (e) {
+      var ref = document.referrer || '';
+      if (ref.indexOf(location.origin + '/') === 0 && history.length > 1) {
+        e.preventDefault();
+        history.back();
+      }
+    });
+  }
+
+  /* ---- Exemples de processus par secteur ----
+     s = part du temps typiquement retirable pour cette tâche (curseur pré-positionné,
+     ajustable). Ordre de grandeur : tâche très mécanique 80–90, mixte 55–70,
+     avec jugement / relation client 40–55. */
+  var branchenData = {
+    fiduciaire: {
+      label: "Fiduciaire & comptabilité",
+      examples: [
+        { t: "Saisie des factures fournisseurs par OCR : écriture comptable pré-remplie, le collaborateur valide et comptabilise.", s: 80 },
+        { t: "Relances clients échelonnées selon l'âge de la créance, avec trace des promesses de paiement.", s: 75 },
+        { t: "Décomptes TVA préparés à partir des données comptables, prêts à être contrôlés.", s: 70 },
+        { t: "Onboarding d'un nouveau mandat : demande des pièces, création des dossiers, checklist d'ouverture.", s: 70 },
+        { t: "Rappels des délais fiscaux et des échéances sociales, par mandant.", s: 90 },
+        { t: "Rapports de bouclement mensuels générés et classés pour chaque client.", s: 80 }
+      ]
+    },
+    avocats: {
+      label: "Cabinet d'avocats & notariat",
+      examples: [
+        { t: "Ouverture de dossier : vérification des conflits d'intérêts, arborescence, fiche client.", s: 70 },
+        { t: "Suivi des délais et péremptions avec rappels en cascade.", s: 85 },
+        { t: "Projets d'actes standards générés depuis un formulaire (baux, statuts, procurations).", s: 65 },
+        { t: "Relevés d'heures consolidés et pré-facturation mensuelle.", s: 75 },
+        { t: "Correspondance entrante triée et classée automatiquement par dossier.", s: 75 },
+        { t: "Relances des honoraires impayés.", s: 80 }
+      ]
+    },
+    medical: {
+      label: "Cabinet médical & clinique privée",
+      examples: [
+        { t: "Rappels de rendez-vous par SMS/e-mail pour réduire les absences.", s: 90 },
+        { t: "Questionnaires patients envoyés et pré-remplis avant la consultation.", s: 80 },
+        { t: "Factures (TARMED / forfaits) préparées et codées pour vérification.", s: 70 },
+        { t: "Demandes de garantie de prise en charge auprès des assureurs, avec suivi.", s: 65 },
+        { t: "Relances des rapports médicaux en attente auprès des confrères.", s: 80 },
+        { t: "Rappels de contrôles périodiques et de rappels vaccinaux.", s: 90 }
+      ]
+    },
+    esthetique: {
+      label: "Clinique esthétique & dermatologie",
+      examples: [
+        { t: "Réponse aux demandes de devis avec fourchette de prix et proposition de rendez-vous.", s: 65 },
+        { t: "Séquences de suivi post-traitement personnalisées selon l'intervention.", s: 85 },
+        { t: "Rappels de séances pour les cures en plusieurs rendez-vous.", s: 90 },
+        { t: "Demande d'avis Google au bon moment après le traitement.", s: 85 },
+        { t: "Qualification des leads Instagram et formulaire avant la prise de rendez-vous.", s: 55 },
+        { t: "Liste d'attente : créneaux annulés reproposés automatiquement.", s: 75 }
+      ]
+    },
+    industrie: {
+      label: "Industrie & production",
+      examples: [
+        { t: "Offres établies à partir de l'ERP : postes, prix selon règles, PDF classé.", s: 75 },
+        { t: "Accusés de réception et confirmations de commande automatiques.", s: 90 },
+        { t: "Suivi des délais fournisseurs et alertes de retard.", s: 80 },
+        { t: "Bons de travail et documents de production générés depuis la commande.", s: 80 },
+        { t: "Rapports de production consolidés chaque matin.", s: 85 },
+        { t: "Relances des certificats matière ou de conformité manquants.", s: 80 }
+      ]
+    },
+    negoce: {
+      label: "Négoce & commerce de gros",
+      examples: [
+        { t: "Commandes reçues par e-mail extraites et saisies dans l'ERP.", s: 75 },
+        { t: "Prix et disponibilités mis à jour vers la boutique et les clients.", s: 85 },
+        { t: "Relances de paiement et mise en attente des comptes à risque.", s: 75 },
+        { t: "Alertes de stock bas avec propositions de réapprovisionnement.", s: 75 },
+        { t: "Rapprochement des bons de livraison et des factures fournisseurs.", s: 80 }
+      ]
+    },
+    immobilier: {
+      label: "Immobilier & gérance",
+      examples: [
+        { t: "Résiliations de bail traitées : accusé, planification de l'état des lieux.", s: 70 },
+        { t: "Demandes de réparation dispatchées aux artisans, avec relances.", s: 65 },
+        { t: "Décomptes de charges annuels préparés par immeuble.", s: 75 },
+        { t: "Dossiers de candidature locataire vérifiés et pré-qualifiés.", s: 55 },
+        { t: "Rappels des échéances de bail et des indexations de loyer.", s: 90 }
+      ]
+    },
+    assurance: {
+      label: "Assurance & courtage",
+      examples: [
+        { t: "Pièces d'une nouvelle affaire collectées auprès du client, avec relances.", s: 75 },
+        { t: "Comparatifs d'offres pré-remplis à partir du besoin saisi.", s: 60 },
+        { t: "Sinistres suivis : accusés, demandes de compléments, relances.", s: 70 },
+        { t: "Rappels des échéances de contrats et opportunités de révision.", s: 85 },
+        { t: "Reporting des commissions consolidé par compagnie.", s: 85 }
+      ]
+    },
+    architecture: {
+      label: "Architecture & ingénierie",
+      examples: [
+        { t: "Dossiers de mise à l'enquête / permis de construire assemblés.", s: 60 },
+        { t: "Appels d'offres suivis, soumissionnaires relancés.", s: 75 },
+        { t: "Heures par projet enregistrées et facturation selon l'avancement.", s: 75 },
+        { t: "Plans et versions classés avec un nommage normalisé.", s: 80 },
+        { t: "Procès-verbaux de séance rédigés à partir des notes.", s: 65 }
+      ]
+    },
+    agence: {
+      label: "Agence, conseil & marketing",
+      examples: [
+        { t: "Leads entrants qualifiés et routés vers la bonne personne.", s: 60 },
+        { t: "Propositions générées depuis un catalogue de prestations.", s: 65 },
+        { t: "Reporting client mensuel : extraction des indicateurs et mise en forme.", s: 80 },
+        { t: "Temps et rentabilité suivis par mandat.", s: 80 },
+        { t: "Onboarding client : accès, dossiers, kick-off, checklist.", s: 70 }
+      ]
+    },
+    hotellerie: {
+      label: "Hôtellerie & restauration",
+      examples: [
+        { t: "Demandes de banquets et de groupes traitées avec devis.", s: 55 },
+        { t: "Confirmations et rappels de réservation, gestion des annulations.", s: 85 },
+        { t: "Demande d'avis après le séjour, au bon moment.", s: 85 },
+        { t: "Commandes fournisseurs récurrentes selon les stocks et l'occupation.", s: 70 },
+        { t: "Planning du personnel pré-rempli selon les prévisions de fréquentation.", s: 60 }
+      ]
+    },
+    transport: {
+      label: "Transport & logistique",
+      examples: [
+        { t: "Confirmations d'enlèvement et de livraison envoyées automatiquement.", s: 90 },
+        { t: "Preuves de livraison rapprochées avec les commandes pour la facturation.", s: 80 },
+        { t: "Retards détectés et clients informés de manière proactive.", s: 75 },
+        { t: "Relances des documents douaniers ou de transport manquants.", s: 80 },
+        { t: "Rapport quotidien des tournées et des kilomètres.", s: 85 }
+      ]
+    },
+    artisanat: {
+      label: "Artisanat & second œuvre",
+      examples: [
+        { t: "Devis générés à partir d'un métré et d'une bibliothèque de prix.", s: 60 },
+        { t: "Interventions planifiées, clients prévenus et rappelés.", s: 75 },
+        { t: "Rapports de chantier et photos classés par projet.", s: 75 },
+        { t: "Facturation à l'avancement et relances des soldes.", s: 75 },
+        { t: "Commandes de matériel liées au planning des chantiers.", s: 70 }
+      ]
+    },
+    rh: {
+      label: "RH & recrutement",
+      examples: [
+        { t: "Candidatures triées et accusées, présélection sur critères définis.", s: 55 },
+        { t: "Entretiens planifiés : créneaux, invitations, rappels.", s: 85 },
+        { t: "Onboarding collaborateur : contrats, accès, matériel, checklist.", s: 70 },
+        { t: "Suivi des fins de période d'essai et des entretiens annuels.", s: 85 },
+        { t: "Rappels des documents à fournir et des certificats de travail à établir.", s: 85 }
+      ]
+    }
+  };
+
+  var brancheSelect = document.getElementById('branche-select');
+  var brancheOutput = document.getElementById('branche-output');
+  var brancheList = document.getElementById('branche-list');
+  var brancheTag = document.getElementById('branche-card-tag');
+
+  /* ---- Calculateur d'économies ---- */
+  var calcPanel = document.getElementById('calc-panel');
+  var calcTaskLabel = document.getElementById('calc-task-label');
+  var calcShareVal = document.getElementById('calc-share-val');
+  var calcHint = document.getElementById('calc-hint');
+  var calcPerhead = document.getElementById('calc-perhead');
+  var currentEstimate = null;
+  var calcIn = {
+    time: document.getElementById('calc-time'),
+    unit: document.getElementById('calc-unit'),
+    period: document.getElementById('calc-period'),
+    heads: document.getElementById('calc-heads'),
+    rate: document.getElementById('calc-rate'),
+    share: document.getElementById('calc-share')
+  };
+  var calcOut = {
+    hours: document.getElementById('calc-out-hours'),
+    month: document.getElementById('calc-out-month'),
+    year: document.getElementById('calc-out-year')
+  };
+  var WORK_DAYS_PER_WEEK = 5, WEEKS_PER_MONTH = 4.33, WEEKS_PER_YEAR = 46;
+
+  function chf(value, roundTo) {
+    var r = Math.round(value / roundTo) * roundTo;
+    return 'CHF ' + String(r).replace(/\B(?=(\d{3})+(?!\d))/g, '’');
+  }
+
+  function shareHint(pct) {
+    if (pct <= 35) return 'Plutôt une tâche d’analyse, de conseil ou de relation client — difficile d’en retirer beaucoup.';
+    if (pct <= 65) return 'Ordre de grandeur réaliste pour une tâche mixte, avec quelques décisions au cas par cas.';
+    return 'Réaliste surtout si la tâche est très répétitive et bien cadrée (saisie, extraction, relances).';
+  }
+
+  function fmtHours(h) {
+    return (Math.round(h * 10) / 10).toLocaleString('fr-CH') + ' h';
+  }
+
+  function updateCalc() {
+    if (!calcPanel || calcPanel.hidden) return;
+    var t = Math.max(0, parseFloat(calcIn.time.value) || 0);
+    var heads = Math.max(1, Math.round(parseFloat(calcIn.heads.value) || 1));
+    var rate = Math.max(0, parseFloat(calcIn.rate.value) || 0);
+    var share = (parseFloat(calcIn.share.value) || 0) / 100;
+    var hoursRaw = calcIn.unit.value === 'min' ? t / 60 : t;
+    var hoursPerWeek = calcIn.period.value === 'day' ? hoursRaw * WORK_DAYS_PER_WEEK : hoursRaw;
+    var savedPerHeadWeek = hoursPerWeek * share;
+    var savedPerWeek = savedPerHeadWeek * heads;
+    var sharePct = Math.round(share * 100);
+    if (calcHint) calcHint.textContent = shareHint(sharePct);
+    if (calcPerhead) {
+      if (heads > 1) {
+        calcPerhead.innerHTML = 'Total pour <strong>' + heads + ' personnes</strong> qui font cette tâche. ' +
+          'Par personne : ~' + fmtHours(savedPerHeadWeek) + ' par semaine, soit ' +
+          chf(savedPerHeadWeek * WEEKS_PER_MONTH * rate, 10) + ' par mois.';
+      } else {
+        calcPerhead.textContent = 'Estimation pour 1 personne. Indiquez combien de personnes font cette tâche dans l’entreprise pour voir le total de l’équipe.';
+      }
+    }
+    calcShareVal.textContent = sharePct + ' %';
+    calcOut.hours.textContent = (Math.round(savedPerWeek * 10) / 10).toLocaleString('fr-CH') + ' h';
+    calcOut.month.textContent = chf(savedPerWeek * WEEKS_PER_MONTH * rate, 10);
+    calcOut.year.textContent = chf(savedPerWeek * WEEKS_PER_YEAR * rate, 50);
+
+    var sectorData = branchenData[brancheSelect.value];
+    currentEstimate = {
+      sector: sectorData ? sectorData.label : '',
+      task: calcTaskLabel.textContent || '',
+      time: (t || 0).toLocaleString('fr-CH') + ' ' + (calcIn.unit.value === 'min' ? 'min' : 'h') +
+        ' ' + (calcIn.period.value === 'day' ? 'par jour' : 'par semaine'),
+      heads: heads,
+      rate: chf(rate, 1) + ' / h',
+      share: sharePct + ' %',
+      outHours: calcOut.hours.textContent,
+      outMonth: calcOut.month.textContent,
+      outYear: calcOut.year.textContent,
+      perHead: calcPerhead ? calcPerhead.textContent : ''
+    };
+  }
+
+  Object.keys(calcIn).forEach(function (k) {
+    if (calcIn[k]) calcIn[k].addEventListener('input', updateCalc);
+  });
+
+  function togglePick(task, li) {
+    var wasActive = li.classList.contains('active');
+    var items = brancheList.querySelectorAll('li.pickable');
+    Array.prototype.forEach.call(items, function (el) {
+      el.classList.remove('active');
+      var b = el.querySelector('.branche-pick');
+      if (b) b.setAttribute('aria-expanded', 'false');
+    });
+    if (wasActive) { calcPanel.hidden = true; return; }
+    li.classList.add('active');
+    var btn = li.querySelector('.branche-pick');
+    if (btn) btn.setAttribute('aria-expanded', 'true');
+    calcTaskLabel.textContent = task.t;
+    if (calcIn.share && typeof task.s === 'number') calcIn.share.value = task.s;
+    calcPanel.hidden = false;
+    updateCalc();
+  }
+
+  if (brancheSelect && brancheOutput && brancheList && brancheTag) {
+    Object.keys(branchenData).forEach(function (key) {
+      var opt = document.createElement('option');
+      opt.value = key;
+      opt.textContent = branchenData[key].label;
+      brancheSelect.appendChild(opt);
+    });
+    brancheSelect.addEventListener('change', function () {
+      if (calcPanel) calcPanel.hidden = true;
+      var data = branchenData[brancheSelect.value];
+      if (!data) { brancheOutput.hidden = true; return; }
+      brancheTag.textContent = 'Exemples typiques · ' + data.label;
+      brancheList.innerHTML = '';
+      data.examples.forEach(function (ex) {
+        var li = document.createElement('li');
+        li.className = 'pickable';
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'branche-pick';
+        btn.setAttribute('aria-expanded', 'false');
+        var label = document.createElement('span');
+        label.className = 'pick-text';
+        label.textContent = ex.t;
+        var cue = document.createElement('span');
+        cue.className = 'pick-cue';
+        cue.setAttribute('aria-hidden', 'true');
+        cue.textContent = 'Estimer →';
+        btn.appendChild(label);
+        btn.appendChild(cue);
+        btn.addEventListener('click', function () { togglePick(ex, li); });
+        li.appendChild(btn);
+        brancheList.appendChild(li);
+      });
+      brancheOutput.hidden = false;
+    });
+  }
+
+  /* ---- Récapitulatif PDF + envoi par e-mail (via /api/estimate) ---- */
+  var LANG = 'fr';
+  var PDF_FILENAME = 'Estimation-automatisation-Zbinden.pdf';
+  var calcSend = document.getElementById('calcSend');
+  var calcSendBtn = document.getElementById('calcSendBtn');
+  var calcSendStatus = document.getElementById('calcSendStatus');
+  var jsPDFPromise = null, fontPromise = null;
+
+  var PDF_TXT = {
+    loc: 'fr-CH',
+    tagline: 'IA & automatisation des processus',
+    title: 'Estimation d’économies',
+    subtitle: 'par l’automatisation d’un processus — générée le ',
+    lSector: 'Secteur', lTask: 'Processus', lAssump: 'Vos hypothèses',
+    aTime: 'Temps par personne :', aPeople: 'Personnes :', aRate: 'Coût horaire :', aShare: 'Part automatisable :',
+    teamHead: 'Estimation pour l’équipe',
+    cWeek: 'Temps gagné / semaine', cMonth: 'Économie / mois', cYear: 'Économie / an',
+    disc: 'Estimation indicative, sans garantie. Le résultat réel dépend du processus, des outils déjà en place ' +
+      'et du volume traité. Ce calcul ne tient pas compte du coût de mise en œuvre ni du temps de contrôle ' +
+      'qui reste à faire, et suppose que chaque personne consacre à peu près le même temps à cette tâche. ' +
+      'Hypothèses : 5 jours ouvrés par semaine, 46 semaines par an.',
+    foot: 'En parler : calendly.com/zbinden-austausch    info@zbinden.online    +41 79 193 68 02'
+  };
+  var MSG = {
+    btn: 'Recevoir le PDF',
+    working: 'Un instant …',
+    badEmail: 'Merci d’indiquer une adresse e-mail valide.',
+    noPick: 'Choisissez d’abord un exemple de processus ci-dessus.',
+    sent: 'PDF téléchargé et envoyé à %s — pensez à vérifier vos spams la première fois.',
+    sendFail: 'PDF téléchargé. L’envoi par e-mail n’a pas fonctionné — écrivez-moi à info@zbinden.online.',
+    pdfFail: 'Impossible de générer le PDF ici. Écrivez-moi à info@zbinden.online et je vous l’envoie.'
+  };
+
+  function loadJsPDF() {
+    if (jsPDFPromise) return jsPDFPromise;
+    jsPDFPromise = new Promise(function (resolve, reject) {
+      var el = document.createElement('script');
+      el.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+      el.onload = function () {
+        if (window.jspdf && window.jspdf.jsPDF) resolve(window.jspdf.jsPDF);
+        else reject(new Error('jsPDF unavailable'));
+      };
+      el.onerror = function () { reject(new Error('jsPDF load failed')); };
+      document.head.appendChild(el);
+    });
+    return jsPDFPromise;
+  }
+
+  function abToB64(buf) {
+    var bytes = new Uint8Array(buf), bin = '';
+    for (var i = 0; i < bytes.length; i += 0x8000) {
+      bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+    }
+    return btoa(bin);
+  }
+
+  /* Police Unicode pour les accents — best effort, sinon repli Helvetica + fold(). */
+  function loadPdfFonts() {
+    if (fontPromise) return fontPromise;
+    var base = 'https://cdn.jsdelivr.net/npm/@expo-google-fonts/jost/';
+    fontPromise = Promise.all([
+      fetch(base + 'Jost_400Regular.ttf').then(function (r) { if (!r.ok) throw 0; return r.arrayBuffer(); }),
+      fetch(base + 'Jost_600SemiBold.ttf').then(function (r) { if (!r.ok) throw 0; return r.arrayBuffer(); })
+    ]).then(function (b) {
+      return { reg: abToB64(b[0]), bold: abToB64(b[1]) };
+    }).catch(function () { return null; });
+    return fontPromise;
+  }
+
+  function fold(s) {
+    s = String(s == null ? '' : s)
+      .replace(/ /g, ' ')
+      .replace(/[‘’]/g, "'").replace(/[“”]/g, '"')
+      .replace(/…/g, '...').replace(/[–—]/g, '-').replace(/·/g, '-')
+      .replace(/ß/g, 'ss').replace(/œ/g, 'oe').replace(/æ/g, 'ae')
+      .replace(/Œ/g, 'OE').replace(/Æ/g, 'AE')
+      .replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue')
+      .replace(/Ä/g, 'Ae').replace(/Ö/g, 'Oe').replace(/Ü/g, 'Ue');
+    if (s.normalize) s = s.normalize('NFD').replace(/[̀-ͯ]/g, '');
+    return s;
+  }
+
+  function buildEstimatePDF(JsPDF, est) {
+    var doc = new JsPDF({ unit: 'mm', format: 'a4', compress: true });
+    return loadPdfFonts().then(function (f) {
+      var FONT = 'helvetica', clean = fold;
+      if (f) {
+        try {
+          doc.addFileToVFS('Jost-Regular.ttf', f.reg); doc.addFont('Jost-Regular.ttf', 'Jost', 'normal');
+          doc.addFileToVFS('Jost-SemiBold.ttf', f.bold); doc.addFont('Jost-SemiBold.ttf', 'Jost', 'bold');
+          FONT = 'Jost';
+          clean = function (s) { return String(s == null ? '' : s).replace(/ /g, ' '); };
+        } catch (e) { FONT = 'helvetica'; clean = fold; }
+      }
+      var M = 18, W = 210, maxW = W - M * 2, y = M, D = PDF_TXT;
+      var gold = [166, 121, 15], ink = [24, 21, 15], muted = [114, 106, 92];
+
+      doc.setFont(FONT, 'bold'); doc.setFontSize(11); doc.setTextColor.apply(doc, gold);
+      doc.text('ZBINDEN - SOFTWARE', M, y);
+      doc.setFont(FONT, 'normal'); doc.setFontSize(8); doc.setTextColor.apply(doc, muted);
+      doc.text(clean(D.tagline), M, y + 5);
+      y += 16;
+
+      doc.setFont(FONT, 'bold'); doc.setFontSize(18); doc.setTextColor.apply(doc, ink);
+      doc.text(clean(D.title), M, y);
+      y += 7;
+      doc.setFont(FONT, 'normal'); doc.setFontSize(9); doc.setTextColor.apply(doc, muted);
+      doc.text(clean(D.subtitle + new Date().toLocaleDateString(D.loc)), M, y);
+      y += 12;
+
+      function row(label, value) {
+        doc.setFont(FONT, 'bold'); doc.setFontSize(8); doc.setTextColor.apply(doc, muted);
+        doc.text(clean(label).toUpperCase(), M, y); y += 5;
+        doc.setFont(FONT, 'normal'); doc.setFontSize(11); doc.setTextColor.apply(doc, ink);
+        var lines = doc.splitTextToSize(clean(value) || '-', maxW);
+        doc.text(lines, M, y); y += lines.length * 5.5 + 4;
+      }
+      row(D.lSector, est.sector);
+      row(D.lTask, est.task);
+      row(D.lAssump, D.aTime + ' ' + est.time + '    |    ' + D.aPeople + ' ' + est.heads +
+        '    |    ' + D.aRate + ' ' + est.rate + '    |    ' + D.aShare + ' ' + est.share);
+
+      y += 2; doc.setDrawColor(210, 200, 180); doc.line(M, y, W - M, y); y += 9;
+      doc.setFont(FONT, 'bold'); doc.setFontSize(8); doc.setTextColor.apply(doc, muted);
+      doc.text(clean(D.teamHead).toUpperCase(), M, y); y += 8;
+
+      var cols = [[D.cWeek, est.outHours], [D.cMonth, est.outMonth], [D.cYear, est.outYear]];
+      var colW = maxW / 3;
+      cols.forEach(function (c, i) {
+        var cx = M + i * colW;
+        doc.setFont(FONT, 'normal'); doc.setFontSize(7.5); doc.setTextColor.apply(doc, muted);
+        doc.text(clean(c[0]), cx, y);
+        doc.setFont(FONT, 'bold'); doc.setFontSize(14); doc.setTextColor.apply(doc, i === 2 ? gold : ink);
+        doc.text(clean(c[1]), cx, y + 7);
+      });
+      y += 17;
+
+      if (est.perHead) {
+        doc.setFont(FONT, 'normal'); doc.setFontSize(9); doc.setTextColor.apply(doc, ink);
+        var ph = doc.splitTextToSize(clean(est.perHead), maxW);
+        doc.text(ph, M, y); y += ph.length * 5 + 4;
+      }
+
+      y += 2;
+      doc.setFont(FONT, 'normal'); doc.setFontSize(8); doc.setTextColor.apply(doc, muted);
+      doc.text(doc.splitTextToSize(clean(D.disc), maxW), M, y);
+
+      doc.setFontSize(8); doc.setTextColor.apply(doc, muted);
+      doc.text(clean(D.foot), M, 286);
+      return doc;
+    });
+  }
+
+  function calcSetStatus(msg) { calcSendStatus.textContent = msg; calcSendStatus.hidden = false; }
+
+  if (calcSend) {
+    calcSend.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var email = (document.getElementById('calc-email').value || '').trim();
+      if (email.indexOf('@') < 1 || email.indexOf('.') < 3) { calcSetStatus(MSG.badEmail); return; }
+      if (!currentEstimate) updateCalc();
+      if (!currentEstimate) { calcSetStatus(MSG.noPick); return; }
+      var est = currentEstimate;
+      calcSendBtn.disabled = true;
+      calcSendBtn.textContent = MSG.working;
+      calcSendStatus.hidden = true;
+
+      loadJsPDF().then(function (JsPDF) {
+        return buildEstimatePDF(JsPDF, est);
+      }).then(function (doc) {
+        doc.save(PDF_FILENAME);
+        var b64 = String(doc.output('datauristring')).split(',')[1] || '';
+        return fetch('/api/estimate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: email, lang: LANG,
+            sector: est.sector, task: est.task,
+            assumptions: 'Temps/pers ' + est.time + ' | Personnes ' + est.heads +
+              ' | Cout horaire ' + est.rate + ' | Part ' + est.share,
+            outHours: est.outHours, outMonth: est.outMonth, outYear: est.outYear, perHead: est.perHead,
+            pdfBase64: b64
+          })
+        }).then(function (r) {
+          calcSetStatus(r && r.ok ? MSG.sent.replace('%s', email) : MSG.sendFail);
+        }).catch(function () { calcSetStatus(MSG.sendFail); });
+      }).catch(function () {
+        calcSetStatus(MSG.pdfFail);
+      }).then(function () {
+        calcSendBtn.disabled = false;
+        calcSendBtn.textContent = MSG.btn;
+      });
+    });
   }
 
   var form = document.getElementById('requestForm');
