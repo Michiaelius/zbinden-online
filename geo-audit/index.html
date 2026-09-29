@@ -32,13 +32,29 @@
   "inLanguage": "de-CH",
   "founder": { "@type": "Person", "name": "Pauline Zbinden" },
   "parentOrganization": { "@type": "Organization", "name": "Zbinden Software", "url": "https://www.zbinden.online/", "@id": "https://www.zbinden.online/#organization" },
-  "makesOffer": {
-    "@type": "Offer",
-    "itemOffered": {
-      "@type": "Service",
-      "name": "GEO-Audit (KI-Sichtbarkeitsprüfung)",
-      "description": "Prüfung, ob ChatGPT, Perplexity und Google AI ein Unternehmen finden und empfehlen, mit priorisiertem Aktionsplan."
-    }
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "GEO-Audit & Webdesign",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "name": "GEO-Light",
+        "description": "Acht gezielte Fragen live an ChatGPT und Perplexity gestellt, um zu prüfen, ob ein Unternehmen überhaupt genannt wird.",
+        "priceSpecification": { "@type": "PriceSpecification", "minPrice": 0, "maxPrice": 0, "priceCurrency": "CHF" }
+      },
+      {
+        "@type": "Offer",
+        "name": "GEO-Audit komplett",
+        "description": "Sechs gewichtete Kategorien, Benchmark gegenüber Mitbewerbern und priorisierter 30-Tage-Aktionsplan.",
+        "priceSpecification": { "@type": "PriceSpecification", "minPrice": 1900, "maxPrice": 3900, "priceCurrency": "CHF" }
+      },
+      {
+        "@type": "Offer",
+        "name": "Webdesign — GEO-ready ab dem ersten Tag",
+        "description": "Individuelle Website mit strukturierten Daten, sauberem semantischem HTML und für KI-Crawler geöffnetem robots.txt.",
+        "priceSpecification": { "@type": "PriceSpecification", "minPrice": 4800, "priceCurrency": "CHF" }
+      }
+    ]
   }
 }
 </script>
@@ -182,6 +198,31 @@
   }
   .btn-secondary:hover{ border-color:var(--sec-gold); color:var(--sec-gold); }
 
+  /* ---------- Package cards ---------- */
+  .package-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:stretch; }
+  @media (max-width:860px){ .package-grid{grid-template-columns:1fr;} }
+  .package-card{
+    display:flex; flex-direction:column; gap:20px;
+    border:1px solid var(--sec-line-gold); border-radius:var(--r-lg); background:var(--sec-bg-2);
+    padding:clamp(28px,4vw,38px); box-shadow:0 30px 70px -34px rgba(0,0,0,.35);
+  }
+  .package-card.featured{ border-color:var(--sec-gold); box-shadow:0 30px 70px -34px rgba(0,0,0,.35), 0 0 40px var(--sec-glow-soft); }
+  .package-tag{
+    font-family:var(--font-ui); font-weight:600; font-size:.66rem; letter-spacing:.1em; text-transform:uppercase;
+    padding:.4em .85em; border-radius:var(--r-pill); width:fit-content;
+    background:var(--sec-gold-soft); color:var(--sec-gold-deep); border:1px solid var(--sec-line-gold);
+  }
+  .package-card h3{ font-family:var(--font-display); font-size:1.7rem; font-weight:700; margin:0; letter-spacing:-.005em; }
+  .package-meta{ display:flex; flex-wrap:wrap; gap:10px 28px; padding:16px 0; border-top:1px solid var(--sec-line); border-bottom:1px solid var(--sec-line); }
+  .package-meta div{ display:flex; flex-direction:column; gap:2px; }
+  .package-meta .lbl{ font-family:var(--font-ui); font-size:.64rem; letter-spacing:.12em; text-transform:uppercase; color:var(--sec-muted); font-weight:600; }
+  .package-meta .val{ font-family:var(--font-display); font-size:1.15rem; font-weight:700; color:var(--sec-ink); }
+  .package-meta .val.price{ color:var(--sec-gold-deep); }
+  .package-list{ list-style:none; padding:0; margin:0; display:grid; gap:11px; flex:1; }
+  .package-list li{ color:var(--sec-ink); font-size:.94rem; font-weight:300; padding-left:22px; position:relative; line-height:1.55; }
+  .package-list li::before{ content:"—"; position:absolute; left:0; color:var(--sec-gold-deep); }
+  .package-card .btn-primary, .package-card .btn-secondary{ align-self:flex-start; }
+
   /* ---------- Phone chat mockup (fixed gold & black device screen, theme-independent) ---------- */
   .phone-frame{
     max-width:336px; margin:0 auto; border:1px solid rgba(201,162,39,.38); border-radius:28px;
@@ -319,6 +360,7 @@
   .form-note{ font-size:.76rem; color:var(--sec-muted); margin-top:-4px; font-weight:300; }
   .form-status{ font-family:var(--font-ui); font-size:.86rem; padding:16px 18px; border-radius:var(--r-sm); margin-top:18px; font-weight:400; }
   .form-status.ok{ background:var(--sec-gold-soft); color:var(--sec-gold-light); border:1px solid var(--sec-line-gold); }
+  .section-light .form-status.ok{ color:var(--sec-gold-deep); }
   .form-status.err{ background:var(--sec-alt-soft); color:var(--sec-ink); border:1px solid var(--sec-line-strong); }
   .form-status[hidden]{ display:none; }
 
@@ -355,9 +397,10 @@
   <div class="header-row">
     <a class="wordmark" href="https://www.zbinden.online/">ZBINDEN<span class="dot">·</span>SOFTWARE <span class="sub">GEO-AUDIT</span></a>
     <nav class="top-nav">
+      <a href="#pakete">Pakete</a>
       <a href="#methode">Methode</a>
       <a href="#befunde">Typische Befunde</a>
-      <a href="#ablauf">Ablauf</a>
+      <a href="#webdesign">Webdesign</a>
       <a href="#ueber">Über mich</a>
     </nav>
     <div class="lang-switch" aria-label="Sprache / Langue / Language">
@@ -365,7 +408,7 @@
       <a href="/geo-audit" hreflang="de" aria-current="page">DE</a>
       <a href="/en/geo-audit" hreflang="en" lang="en">EN</a>
     </div>
-    <a class="header-cta" href="#kontakt">Kurz-Check anfragen</a>
+    <a class="header-cta" href="#pakete">GEO-Light-Test anfragen</a>
   </div>
 </header>
 
@@ -378,7 +421,7 @@
         <h1 class="reveal d2">Ihre Konkurrenz wird von der KI empfohlen. <em>Sie auch?</em></h1>
         <p class="lede reveal d3">Ich prüfe, ob ChatGPT, Perplexity und Google AI Ihr Unternehmen überhaupt finden und empfehlen — und liefere einen konkreten, priorisierten Plan, damit sie es tun.</p>
         <div class="cta-row reveal d4">
-          <a class="btn-primary" href="#kontakt">Kostenlosen Kurz-Check anfragen</a>
+          <a class="btn-primary" href="#pakete">Kostenlosen GEO-Light-Test anfragen</a>
           <a class="btn-secondary" href="#methode">Wie ich prüfe</a>
         </div>
       </div>
@@ -414,6 +457,64 @@
           <span class="phone-send">➤</span>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section id="pakete" class="section-light">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Angebot</span>
+        <h2>Zwei Stufen, ein Einstieg ohne Risiko</h2>
+      </div>
+      <div class="package-grid">
+
+        <div class="package-card reveal d1">
+          <span class="package-tag">Kostenloser Einstieg</span>
+          <h3>GEO-Light</h3>
+          <div class="package-meta">
+            <div><span class="lbl">Dauer</span><span class="val">~48 Stunden</span></div>
+            <div><span class="lbl">Preis</span><span class="val price">Kostenlos</span></div>
+          </div>
+          <ul class="package-list">
+            <li>8 gezielte Fragen live an ChatGPT und Perplexity gestellt</li>
+            <li>Prüfung, ob Ihr Unternehmen überhaupt genannt wird</li>
+            <li>Kurzes Ergebnis mit ehrlicher Einschätzung</li>
+            <li>Keine Verpflichtung</li>
+          </ul>
+          <form class="request" id="geoLightForm" action="https://formspree.io/f/mvkpbaar" method="POST" style="display:grid; gap:12px;">
+            <input type="hidden" name="package" value="GEO-Light">
+            <div class="field">
+              <label for="gl-url">Ihre Website-URL</label>
+              <input type="url" id="gl-url" name="website" placeholder="https://…" required>
+            </div>
+            <div class="field">
+              <label for="gl-email">E-Mail</label>
+              <input type="email" id="gl-email" name="email" placeholder="ihre@email.ch" required>
+            </div>
+            <button type="submit" class="btn-secondary">Test anfordern</button>
+          </form>
+          <div class="form-status ok" id="glOk" hidden>Danke! Ich führe den Test durch und melde mich innerhalb von 48 Stunden mit dem Ergebnis.</div>
+          <div class="form-status err" id="glErr" hidden>Das hat leider nicht geklappt. Schreiben Sie mir direkt an <a href="mailto:info@zbinden.online" style="color:inherit; text-decoration:underline;">info@zbinden.online</a>.</div>
+        </div>
+
+        <div class="package-card featured reveal d2">
+          <span class="package-tag">Empfohlen</span>
+          <h3>GEO-Audit komplett</h3>
+          <div class="package-meta">
+            <div><span class="lbl">Dauer</span><span class="val">~1 Woche</span></div>
+            <div><span class="lbl">Preis</span><span class="val price">ab CHF 1'900</span></div>
+          </div>
+          <ul class="package-list">
+            <li>Sechs gewichtete Kategorien: Citability, Markenautorität, Content E-E-A-T, technisches GEO, strukturierte Daten, Plattform-Optimierung</li>
+            <li>Benchmark gegenüber Mitbewerbern</li>
+            <li>Priorisierter 30-Tage-Aktionsplan</li>
+            <li>30-minütiges Gespräch zur Besprechung des Berichts</li>
+          </ul>
+          <a class="btn-primary" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener">Gespräch vereinbaren</a>
+        </div>
+
+      </div>
+      <p style="margin:22px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Wird im Anschluss eine neue Website bei mir beauftragt, wird der Preis des GEO-Audits vollständig angerechnet.</p>
     </div>
   </section>
 
@@ -495,17 +596,44 @@
       <div class="phase-list">
         <div class="phase">
           <span class="num">01</span>
-          <div><h3>Kurz-Check</h3><p>Ich prüfe Ihre Website in ersten Grundzügen und sage Ihnen ehrlich, ob sich ein vollständiger Audit lohnt.</p></div>
+          <div><h3>GEO-Light</h3><p>Kostenlos und in ~48 Stunden: acht Fragen an ChatGPT und Perplexity zeigen, ob Ihr Unternehmen überhaupt genannt wird.</p></div>
         </div>
         <div class="phase">
           <span class="num">02</span>
-          <div><h3>Vollständiger Audit</h3><p>Sechs Kategorien, priorisierte Befunde, ein 30-Tage-Aktionsplan — als klar strukturierter Bericht.</p></div>
+          <div><h3>GEO-Audit komplett</h3><p>Bei Bedarf: sechs Kategorien, priorisierte Befunde, ein 30-Tage-Aktionsplan — als klar strukturierter Bericht.</p></div>
         </div>
         <div class="phase">
           <span class="num">03</span>
-          <div><h3>Gespräch &amp; Umsetzung</h3><p>15 Minuten, in denen ich den Bericht durchgehe. Kein Verkaufsgespräch — Sie entscheiden danach.</p></div>
+          <div><h3>Gespräch &amp; Umsetzung</h3><p>30 Minuten, in denen ich den Bericht durchgehe. Die Umsetzung liegt bei Ihnen — oder ich übernehme sie, von kleinen Anpassungen bis zur neuen Website.</p></div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section id="webdesign" class="section-dark">
+    <div class="wrap" style="text-align:center;">
+      <div class="section-head" style="grid-template-columns:1fr; justify-items:center;">
+        <span class="eyebrow">Und wenn die Website selbst das Problem ist?</span>
+        <h2>Ich baue Ihre Website gleich GEO-ready</h2>
+      </div>
+      <p style="color:var(--sec-muted); line-height:1.75; font-weight:300; max-width:62ch; margin:0 auto 1.8em;">Ein Audit zeigt, was fehlt — manchmal ist die einfachste Lösung eine neue Website, die von Anfang an so gebaut ist, dass KI-Systeme sie lesen und zitieren können: strukturierte Daten, sauberes semantisches HTML, klare, zitierfähige Inhalte.</p>
+      <div class="package-card featured reveal d1" style="max-width:640px; margin:0 auto; text-align:left;">
+        <span class="package-tag">Webdesign</span>
+        <h3>Website neu, GEO-ready ab dem ersten Tag</h3>
+        <div class="package-meta">
+          <div><span class="lbl">Dauer</span><span class="val">3–4 Wochen</span></div>
+          <div><span class="lbl">Preis</span><span class="val price">ab CHF 4'800</span></div>
+        </div>
+        <ul class="package-list">
+          <li>Individuelles Design, für Mobile optimiert</li>
+          <li>Schema.org-Markup (Organization/LocalBusiness) und FAQPage, wo sinnvoll</li>
+          <li>Sauberes semantisches HTML, robots.txt für KI-Crawler geöffnet</li>
+          <li>Datenschutz &amp; Impressum nach Schweizer Vorgaben</li>
+          <li>Eine Korrekturrunde inklusive</li>
+        </ul>
+        <a class="btn-primary" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener">Gespräch vereinbaren</a>
+      </div>
+      <p style="margin:18px auto 0; max-width:640px; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Vorheriger GEO-Audit bei mir gemacht? Der Preis wird vollständig angerechnet.</p>
     </div>
   </section>
 
@@ -519,6 +647,7 @@
         <span class="ac-eyebrow">Leistungen</span>
         <ul class="ac-list">
           <li>KI-Sichtbarkeits-Audits (GEO)</li>
+          <li>Webdesign mit GEO-Fundament</li>
           <li>Individuelle Software für Produktion &amp; Betrieb</li>
         </ul>
       </div>
@@ -558,6 +687,15 @@
               <div class="field">
                 <label for="f-company">Unternehmen</label>
                 <input type="text" id="f-company" name="company">
+              </div>
+              <div class="field">
+                <label for="f-package">Interesse</label>
+                <select id="f-package" name="package">
+                  <option value="">Noch offen</option>
+                  <option value="GEO-Light">GEO-Light</option>
+                  <option value="GEO-Audit komplett">GEO-Audit komplett</option>
+                  <option value="Webdesign">Webdesign</option>
+                </select>
               </div>
               <div class="field">
                 <label for="f-message">Ihr Anliegen</label>
@@ -712,17 +850,19 @@
     });
   }
 
-  var form = document.getElementById('requestForm');
-  var okBox = document.getElementById('formOk');
-  var errBox = document.getElementById('formErr');
-  if (form) {
+  function wireForm(formId, okId, errId, sendingLabel) {
+    var form = document.getElementById(formId);
+    var okBox = document.getElementById(okId);
+    var errBox = document.getElementById(errId);
+    if (!form) return;
+    var defaultLabel = form.querySelector('button[type="submit"]').textContent;
     form.addEventListener('submit', function (ev) {
       ev.preventDefault();
       okBox.hidden = true;
       errBox.hidden = true;
       var submitBtn = form.querySelector('button[type="submit"]');
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Wird gesendet …';
+      submitBtn.textContent = sendingLabel;
       fetch(form.action, {
         method: 'POST',
         body: new FormData(form),
@@ -735,15 +875,17 @@
         } else {
           errBox.hidden = false;
           submitBtn.disabled = false;
-          submitBtn.textContent = 'Anfrage senden';
+          submitBtn.textContent = defaultLabel;
         }
       }).catch(function () {
         errBox.hidden = false;
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Anfrage senden';
+        submitBtn.textContent = defaultLabel;
       });
     });
   }
+  wireForm('requestForm', 'formOk', 'formErr', 'Wird gesendet …');
+  wireForm('geoLightForm', 'glOk', 'glErr', 'Wird gesendet …');
 })();
 </script>
 </body>
