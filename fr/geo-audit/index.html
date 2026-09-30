@@ -383,6 +383,24 @@
   .back-link:hover{ color:var(--sec-gold-deep); }
   .back-link .arrow{ font-size:1.15em; line-height:1; transition:transform .18s ease; }
   .back-link:hover .arrow{ transform:translateX(-3px); }
+
+  /* ---------- Weitere Angebote ---------- */
+  .more-grid{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
+  @media (max-width:760px){ .more-grid{grid-template-columns:1fr;} }
+  .more-card{
+    display:flex; flex-direction:column; gap:12px; text-decoration:none; color:var(--sec-ink);
+    border:1px solid var(--sec-line-gold); border-radius:var(--r-lg); background:var(--sec-bg-2);
+    padding:clamp(24px,3.5vw,32px); transition:border-color .18s ease, transform .18s ease, box-shadow .18s ease;
+  }
+  .more-card:hover{ transform:translateY(-3px); border-color:var(--sec-gold); box-shadow:0 0 34px var(--sec-glow-soft); }
+  .more-tag{
+    font-family:var(--font-ui); font-weight:600; font-size:.66rem; letter-spacing:.1em; text-transform:uppercase;
+    padding:.4em .85em; border-radius:var(--r-pill); width:fit-content;
+    background:var(--sec-gold-soft); color:var(--sec-gold-deep); border:1px solid var(--sec-line-gold);
+  }
+  .more-card h3{ font-family:var(--font-display); font-size:1.35rem; font-weight:700; margin:0; }
+  .more-card p{ margin:0; color:var(--sec-muted); font-size:.92rem; line-height:1.6; font-weight:300; flex:1; }
+  .more-card .go{ font-family:var(--font-ui); font-weight:600; font-size:.82rem; color:var(--sec-gold-deep); }
 </style>
 </head>
 <body>
@@ -660,6 +678,29 @@
         <p style="color:var(--sec-muted); line-height:1.75; max-width:62ch; font-weight:300;">En tant que fondatrice de Zbinden Software, j'analyse la visibilité réelle des entreprises suisses pour ChatGPT, Perplexity, Google AI et consorts. La plupart des sites web ont été conçus pour les humains et les moteurs de recherche classiques — pas pour la manière dont les systèmes d'IA formulent leurs recommandations aujourd'hui. Chaque audit suit la même méthodologie transparente et se termine par un plan concret et priorisé plutôt que des recommandations vagues.</p>
         <p style="color:var(--sec-muted); line-height:1.75; max-width:62ch; font-weight:300; margin-top:1.1em;">Auparavant, j'ai développé pendant cinq ans des logiciels embarqués en C++ chez Hexagon Manufacturing Intelligence, puis analysé des besoins techniques comme consultante chez Drees &amp; Sommer Suisse.</p>
         <a href="https://www.zbinden.online/fr/#ueber-mich" style="display:inline-block; margin-top:16px; font-family:var(--font-ui); font-weight:600; font-size:.82rem; color:var(--sec-gold-deep); text-decoration:none; border-bottom:1px solid var(--sec-line-gold); padding-bottom:2px;">En savoir plus sur moi &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="weitere-angebote" class="section-light">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Autres offres</span>
+        <h2>Cela pourrait aussi vous intéresser</h2>
+      </div>
+      <div class="more-grid">
+        <a class="more-card" href="https://www.zbinden.online/fr/ki-agenten-automatisierung">
+          <span class="more-tag">IA &amp; automatisation</span>
+          <h3>Agents IA &amp; automatisation des processus</h3>
+          <p>Automatiser les tâches récurrentes — avec des agents IA qui prennent en charge de vraies tâches.</p>
+          <span class="go">En savoir plus →</span>
+        </a>
+        <a class="more-card" href="https://www.zbinden.online/fr/webdesign">
+          <span class="more-tag">Webdesign</span>
+          <h3>Webdesign</h3>
+          <p>Des sites clairs et modernes — Onepager dès CHF 2'400, conçus pour que ChatGPT vous trouve aussi.</p>
+          <span class="go">En savoir plus →</span>
+        </a>
       </div>
     </div>
   </section>

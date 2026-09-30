@@ -410,6 +410,24 @@
   .back-link .arrow{ font-size:1.15em; line-height:1; transition:transform .18s ease; }
   .back-link:hover .arrow{ transform:translateX(-3px); }
 
+  /* ---------- Weitere Angebote ---------- */
+  .more-grid{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
+  @media (max-width:760px){ .more-grid{grid-template-columns:1fr;} }
+  .more-card{
+    display:flex; flex-direction:column; gap:12px; text-decoration:none; color:var(--sec-ink);
+    border:1px solid var(--sec-line-gold); border-radius:var(--r-lg); background:var(--sec-bg-2);
+    padding:clamp(24px,3.5vw,32px); transition:border-color .18s ease, transform .18s ease, box-shadow .18s ease;
+  }
+  .more-card:hover{ transform:translateY(-3px); border-color:var(--sec-gold); box-shadow:0 0 34px var(--sec-glow-soft); }
+  .more-tag{
+    font-family:var(--font-ui); font-weight:600; font-size:.66rem; letter-spacing:.1em; text-transform:uppercase;
+    padding:.4em .85em; border-radius:var(--r-pill); width:fit-content;
+    background:var(--sec-gold-soft); color:var(--sec-gold-deep); border:1px solid var(--sec-line-gold);
+  }
+  .more-card h3{ font-family:var(--font-display); font-size:1.35rem; font-weight:700; margin:0; }
+  .more-card p{ margin:0; color:var(--sec-muted); font-size:.92rem; line-height:1.6; font-weight:300; flex:1; }
+  .more-card .go{ font-family:var(--font-ui); font-weight:600; font-size:.82rem; color:var(--sec-gold-deep); }
+
   /* ---------- Hero showcase ---------- */
   .showcase{ position:relative; padding:0 0 38px 0; }
   .browser{
@@ -482,6 +500,24 @@
     font-family:var(--font-ui); font-weight:300; font-size:.94rem; padding:12px 14px;
   }
   .field .opt{ text-transform:none; letter-spacing:0; font-weight:300; }
+
+  /* ---------- Weitere Angebote ---------- */
+  .more-grid{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
+  @media (max-width:760px){ .more-grid{grid-template-columns:1fr;} }
+  .more-card{
+    display:flex; flex-direction:column; gap:12px; text-decoration:none; color:var(--sec-ink);
+    border:1px solid var(--sec-line-gold); border-radius:var(--r-lg); background:var(--sec-bg-2);
+    padding:clamp(24px,3.5vw,32px); transition:border-color .18s ease, transform .18s ease, box-shadow .18s ease;
+  }
+  .more-card:hover{ transform:translateY(-3px); border-color:var(--sec-gold); box-shadow:0 0 34px var(--sec-glow-soft); }
+  .more-tag{
+    font-family:var(--font-ui); font-weight:600; font-size:.66rem; letter-spacing:.1em; text-transform:uppercase;
+    padding:.4em .85em; border-radius:var(--r-pill); width:fit-content;
+    background:var(--sec-gold-soft); color:var(--sec-gold-deep); border:1px solid var(--sec-line-gold);
+  }
+  .more-card h3{ font-family:var(--font-display); font-size:1.35rem; font-weight:700; margin:0; }
+  .more-card p{ margin:0; color:var(--sec-muted); font-size:.92rem; line-height:1.6; font-weight:300; flex:1; }
+  .more-card .go{ font-family:var(--font-ui); font-weight:600; font-size:.82rem; color:var(--sec-gold-deep); }
 </style>
 </head>
 <body>
@@ -767,6 +803,29 @@
     </div>
   </section>
 
+  <section id="weitere-angebote" class="section-light">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Autres offres</span>
+        <h2>Cela pourrait aussi vous intéresser</h2>
+      </div>
+      <div class="more-grid">
+        <a class="more-card" href="https://www.zbinden.online/fr/ki-agenten-automatisierung">
+          <span class="more-tag">IA &amp; automatisation</span>
+          <h3>Agents IA &amp; automatisation des processus</h3>
+          <p>Automatiser les tâches récurrentes — avec des agents IA qui prennent en charge de vraies tâches.</p>
+          <span class="go">En savoir plus →</span>
+        </a>
+        <a class="more-card" href="https://www.zbinden.online/fr/geo-audit">
+          <span class="more-tag">Visibilité IA</span>
+          <h3>Audit GEO</h3>
+          <p>Vérifier si ChatGPT, Perplexity et Google AI trouvent et recommandent votre entreprise.</p>
+          <span class="go">En savoir plus →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <section id="kontakt" class="section-dark" style="border-top:none;">
     <div class="wrap">
       <div class="cta-band">
@@ -824,7 +883,7 @@
 
 <footer class="section-light">
   <span>© 2026 Zbinden Software</span>
-  <span class="mono"><a href="https://www.zbinden.online/fr/">Zbinden Software</a> · <a href="https://www.zbinden.online/fr/geo-audit">Audit GEO →</a> · <a href="https://www.zbinden.online/fr/ki-agenten-automatisierung">Agents IA &amp; automatisation →</a></span>
+  <span class="mono"><a href="https://www.zbinden.online/fr/">Zbinden Software</a> · <a href="https://www.zbinden.online/fr/ki-agenten-automatisierung">Agents IA &amp; automatisation →</a> · <a href="https://www.zbinden.online/fr/geo-audit">Audit GEO →</a></span>
 </footer>
 
 <script>
