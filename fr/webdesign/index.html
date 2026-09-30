@@ -475,8 +475,22 @@
     font-family:var(--font-ui); font-weight:500; font-size:.95rem;
   }
   .package-list{ align-content:start; }
-  .package-grid.three{ grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
-  @media (max-width:980px){ .package-grid.three{grid-template-columns:1fr;} }
+  .package-grid.rows{ grid-template-columns:1fr; gap:20px; }
+  .package-grid.rows .package-card{ display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); gap:20px clamp(28px,5vw,64px); align-items:start; }
+  .pkg-side{ display:flex; flex-direction:column; gap:18px; align-items:flex-start; }
+  .pkg-side .package-meta{ align-self:stretch; }
+  .pkg-addon{
+    grid-column:1 / -1; display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);
+    gap:20px clamp(28px,5vw,64px); align-items:start; border-top:1px dashed var(--sec-line-gold); padding-top:24px; margin-top:4px;
+  }
+  .addon-tag{
+    font-family:var(--font-ui); font-weight:600; font-size:.64rem; letter-spacing:.1em; text-transform:uppercase;
+    padding:.4em .85em; border-radius:var(--r-pill); color:var(--sec-gold-deep); border:1px dashed var(--sec-line-gold); width:fit-content;
+  }
+  .pkg-addon h4{ font-family:var(--font-display); font-size:1.3rem; font-weight:700; margin:0; }
+  @media (max-width:820px){ .pkg-addon{grid-template-columns:1fr;} }
+  .pkg-body{ display:flex; flex-direction:column; gap:18px; padding-top:4px; }
+  @media (max-width:820px){ .package-grid.rows .package-card{grid-template-columns:1fr;} }
   .pkg-example{ margin:0; font-size:.86rem; color:var(--sec-muted); font-weight:300; }
   .pkg-example a{ font-family:var(--font-ui); font-weight:600; color:var(--sec-gold-deep); text-decoration:none; border-bottom:1px solid var(--sec-line-gold); }
   .pkg-example a:hover{ color:var(--sec-gold); }
@@ -577,15 +591,19 @@
         <span class="eyebrow">Offre</span>
         <h2>Des prix clairs, sans surprise</h2>
       </div>
-      <div class="package-grid three">
+      <div class="package-grid rows">
         <div class="package-card featured reveal d1">
-          <span class="package-tag">1 page</span>
-          <h3>Onepager</h3>
-          <div class="package-meta">
-            <div><span class="lbl">Durée</span><span class="val">env. 2 semaines</span></div>
-            <div><span class="lbl">Prix</span><span class="val price">dès CHF 2'400</span></div>
+          <div class="pkg-side">
+            <span class="package-tag">1 page</span>
+            <h3>Onepager</h3>
+            <div class="package-meta">
+              <div><span class="lbl">Durée</span><span class="val">env. 2 semaines</span></div>
+              <div><span class="lbl">Prix</span><span class="val price">dès CHF 2'400</span></div>
+            </div>
+            <a class="btn-primary" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener">Prendre rendez-vous</a>
           </div>
-          <ul class="package-list">
+          <div class="pkg-body">
+            <ul class="package-list">
             <li>Une seule page avec l'essentiel — offre, horaires, contact</li>
             <li>Design sur mesure, adapté à votre entreprise — pas de modèle tout fait</li>
             <li>Rédaction des textes à partir de vos informations</li>
@@ -594,38 +612,65 @@
             <li>Protection des données &amp; mentions légales conformes aux exigences suisses</li>
             <li>GEO-ready : données structurées, HTML propre, ouvert aux crawlers IA</li>
             <li>Une série de corrections incluse</li>
-          </ul>
-          <p class="pkg-example">Exemple : <a href="#referenz">Spielgruppe Sunneschiin ↓</a></p>
-          <a class="btn-primary" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener">Prendre rendez-vous</a>
-        </div>
-        <div class="package-card reveal d2">
-          <span class="package-tag">Plusieurs pages</span>
-          <h3>Site web</h3>
-          <div class="package-meta">
-            <div><span class="lbl">Durée</span><span class="val">3–4 semaines</span></div>
-            <div><span class="lbl">Prix</span><span class="val price">dès CHF 4'800</span></div>
+            </ul>
+            <p class="pkg-example">Exemple : <a href="#referenz">Spielgruppe Sunneschiin ↓</a></p>
           </div>
-          <ul class="package-list">
-            <li>Autant de pages que votre offre le demande — structurées sur mesure</li>
-            <li>Toutes les prestations du Onepager incluses</li>
-            <li>Un audit GEO déjà réalisé est intégralement déduit</li>
-          </ul>
-          <a class="btn-secondary" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener">Prendre rendez-vous</a>
-        </div>
-        <div class="package-card reveal d3">
-          <span class="package-tag">En option</span>
-          <h3>Abonnement de suivi</h3>
-          <div class="package-meta">
-            <div><span class="lbl">Prix</span><span class="val price">CHF 79.– / mois</span></div>
-            <div><span class="lbl">Durée</span><span class="val">6 mois minimum</span></div>
-          </div>
-          <ul class="package-list">
+          <div class="pkg-addon">
+            <div class="pkg-side">
+              <span class="addon-tag">+ En option</span>
+              <h4>Abonnement de suivi</h4>
+              <div class="package-meta">
+                <div><span class="lbl">Durée</span><span class="val">6 mois minimum</span></div>
+                <div><span class="lbl">Prix</span><span class="val price">CHF 79.– / mois</span></div>
+              </div>
+            </div>
+            <div class="pkg-body">
+              <ul class="package-list">
             <li>Hébergement inclus</li>
             <li>Petites modifications comme textes, images, horaires et actualités</li>
             <li>Jusqu'à env. 1 heure de travail par mois</li>
             <li>Ensuite résiliable chaque mois</li>
-          </ul>
-          <p class="abo-extra">Sans abonnement : modifications facturées selon le temps passé, CHF 120.– de l'heure.</p>
+              </ul>
+              <p class="abo-extra">Sans abonnement : modifications facturées selon le temps passé, CHF 120.– de l'heure.</p>
+            </div>
+          </div>
+        </div>
+        <div class="package-card reveal d2">
+          <div class="pkg-side">
+            <span class="package-tag">Plusieurs pages</span>
+            <h3>Site web</h3>
+            <div class="package-meta">
+              <div><span class="lbl">Durée</span><span class="val">3–4 semaines</span></div>
+              <div><span class="lbl">Prix</span><span class="val price">dès CHF 4'800</span></div>
+            </div>
+            <a class="btn-secondary" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener">Prendre rendez-vous</a>
+          </div>
+          <div class="pkg-body">
+            <ul class="package-list">
+            <li>Autant de pages que votre offre le demande — structurées sur mesure</li>
+            <li>Toutes les prestations du Onepager incluses</li>
+            <li>Un audit GEO déjà réalisé est intégralement déduit</li>
+            </ul>
+          </div>
+          <div class="pkg-addon">
+            <div class="pkg-side">
+              <span class="addon-tag">+ En option</span>
+              <h4>Abonnement de suivi</h4>
+              <div class="package-meta">
+                <div><span class="lbl">Durée</span><span class="val">6 mois minimum</span></div>
+                <div><span class="lbl">Prix</span><span class="val price">CHF 79.– / mois</span></div>
+              </div>
+            </div>
+            <div class="pkg-body">
+              <ul class="package-list">
+            <li>Hébergement inclus</li>
+            <li>Petites modifications comme textes, images, horaires et actualités</li>
+            <li>Jusqu'à env. 1 heure de travail par mois</li>
+            <li>Ensuite résiliable chaque mois</li>
+              </ul>
+              <p class="abo-extra">Sans abonnement : modifications facturées selon le temps passé, CHF 120.– de l'heure.</p>
+            </div>
+          </div>
         </div>
       </div>
       <p class="credit-banner">Un audit GEO déjà réalisé avec moi ? Pour un site de plusieurs pages, son prix est intégralement déduit.</p>
