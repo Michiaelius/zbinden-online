@@ -86,4 +86,33 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.zbinden.online/geo-audit"/>
   </url>
 
+
+  <url>
+    <loc>https://www.zbinden.online/webdesign</loc>
+    <lastmod>2026-09-30</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://www.zbinden.online/webdesign"/>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://www.zbinden.online/fr/webdesign"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.zbinden.online/en/webdesign"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.zbinden.online/webdesign"/>
+  </url>
+  <url>
+    <loc>https://www.zbinden.online/fr/webdesign</loc>
+    <lastmod>2026-09-30</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://www.zbinden.online/webdesign"/>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://www.zbinden.online/fr/webdesign"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.zbinden.online/en/webdesign"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.zbinden.online/webdesign"/>
+  </url>
+  <url>
+    <loc>https://www.zbinden.online/en/webdesign</loc>
+    <lastmod>2026-09-30</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://www.zbinden.online/webdesign"/>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://www.zbinden.online/fr/webdesign"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.zbinden.online/en/webdesign"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.zbinden.online/webdesign"/>
+  </url>
+
 </urlset>

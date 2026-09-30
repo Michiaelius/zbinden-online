@@ -1,13 +1,14 @@
 # Zbinden Software
 
-> KI-Agenten, Prozessautomatisierung und GEO-Audits (KI-Sichtbarkeitsprüfung) für Schweizer KMU. Geführt von Pauline Zbinden.
+> KI-Agenten, Prozessautomatisierung, GEO-Audits (KI-Sichtbarkeitsprüfung) und Webdesign für Schweizer KMU. Geführt von Pauline Zbinden.
 
-Zbinden Software hilft kleinen und mittleren Unternehmen in der Schweiz, wiederkehrende Prozesse zu automatisieren und in KI-Suchsystemen (ChatGPT, Perplexity, Google AI) auffindbar zu werden. Zwei eigenständige, pragmatische Angebote – keine monatelangen IT-Projekte.
+Zbinden Software hilft kleinen und mittleren Unternehmen in der Schweiz, wiederkehrende Prozesse zu automatisieren und in KI-Suchsystemen (ChatGPT, Perplexity, Google AI) auffindbar zu werden – auch mit neuen, GEO-ready gebauten Websites. Drei eigenständige, pragmatische Angebote – keine monatelangen IT-Projekte.
 
 ## Angebote
 
 - [KI-Agenten & Prozessautomatisierung](https://www.zbinden.online/ki-agenten-automatisierung): Automatisierung wiederkehrender, manueller Prozesse und Aufbau von KI-Agenten, die konkrete Aufgaben übernehmen – schnell umsetzbar, mit messbarem Nutzen. Pakete: Quick Win Automation, KI-Agent Starter.
 - [GEO-Audit (KI-Sichtbarkeitsprüfung)](https://www.zbinden.online/geo-audit): Prüfung, ob ChatGPT, Perplexity und Google AI ein Unternehmen finden und empfehlen. Sechs gewichtete Kriterien (KI-Zitierbarkeit, Markenautorität, E-E-A-T, technisches GEO, strukturierte Daten, Plattform-Optimierung) mit priorisiertem Aktionsplan.
+- [Webdesign (GEO-ready)](https://www.zbinden.online/webdesign): Individuelle Websites für kleine Unternehmen, Betriebe und Vereine – mobil optimiert, Datenschutz & Impressum nach Schweizer Vorgaben, mit strukturierten Daten und für KI-Crawler geöffnet. Onepager (eine Seite) ab CHF 2'400, ca. 2 Wochen; Website mit mehreren Seiten ab CHF 4'800, 3–4 Wochen – dort wird ein vorheriger GEO-Audit vollständig angerechnet. Texte inklusive. Optionales Betreuungs-Abo CHF 79.–/Monat (Hosting und kleine Änderungen, mind. 6 Monate). Referenz: Spielgruppe Sunneschiin, Sisseln (https://spielgruppe-sunneschiin.ch/). Kostenloser KI-Check (GEO-Light) auch ohne bestehende Website.
 
 ## Über
 
