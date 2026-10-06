@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gasthaus Lindenstube — Beispiel-Website für ein Restaurant</title>
+<meta name="description" content="Beispiel-Website für ein Restaurant, gestaltet von Zbinden Software. Das Gasthaus Lindenstube ist frei erfunden.">
+<meta name="robots" content="noindex, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#161310; --bg2:#1E1A16; --text:#F4EEE3; --muted:#C9BFAE; --dim:#9C927E;
+  --accent:#B08D57;
+  box-sizing:border-box;
+}
+*{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Source Sans 3',sans-serif;font-weight:300;font-size:17px;line-height:1.6}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+.wrap{max-width:1200px;margin:0 auto}
+header{position:absolute;top:0;left:0;right:0;z-index:5;height:96px;display:flex;align-items:center;justify-content:space-between;padding:0 5vw}
+.logo{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:28px;color:var(--text)}
+nav{display:none;align-items:center;gap:32px;font-size:13px;letter-spacing:.16em;text-transform:uppercase}
+nav a{color:var(--text)}
+.btn-outline{border:1px solid var(--accent);color:var(--accent);padding:11px 24px;letter-spacing:.14em}
+.menu-btn{width:42px;height:42px;border:1px solid rgba(244,238,227,.5);border-radius:4px;background:transparent;color:var(--text);display:flex;align-items:center;justify-content:center}
+.hero{height:80vh;min-height:520px;max-height:900px;position:relative;overflow:hidden}
+@media (max-width:799px){
+  .hero{height:42vh;min-height:300px;max-height:420px}
+  .hero-text{bottom:5vh;gap:12px}
+}
+.hero img{width:100%;height:100%;object-fit:cover}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,12,10,.2) 0%,rgba(15,12,10,.08) 40%,rgba(15,12,10,.65) 100%)}
+.hero-text{position:absolute;left:5vw;right:5vw;bottom:7vh;display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center}
+.kicker{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--accent)}
+.hero-kicker{display:inline-block;padding:7px 20px;border-radius:2px;background:rgba(10,8,7,.45);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+h1{margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-style:italic;font-size:clamp(30px,6vw,72px);line-height:1.12;max-width:900px}
+.cta-link{border-bottom:1px solid var(--accent);color:var(--text);padding-bottom:4px;font-size:14px;letter-spacing:.13em;text-transform:uppercase}
+.quote-section{padding:80px 6vw;text-align:center;display:flex;flex-direction:column;align-items:center;gap:24px}
+.rule{width:40px;height:1px;background:var(--accent)}
+.quote{margin:0;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(19px,2.6vw,28px);line-height:1.55;color:#EFE7D8;max-width:760px}
+.split{display:grid;grid-template-columns:1fr;align-items:stretch}
+.split img{width:100%;height:280px;object-fit:cover}
+.split .txt{padding:56px 6vw;display:flex;flex-direction:column;justify-content:center;gap:20px}
+.split .txt p{margin:0;color:var(--muted);max-width:460px}
+h2{margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(26px,4vw,42px);line-height:1.2}
+.band{position:relative;overflow:hidden;min-height:420px;display:flex;align-items:center}
+.band img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.band-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,12,10,.2) 0%,rgba(15,12,10,.6) 100%)}
+.band-text{position:relative;padding:56px 6vw;display:flex;flex-direction:column;gap:18px;max-width:520px;text-shadow:0 1px 12px rgba(0,0,0,.6)}
+.band-text p{margin:0;color:#DCD3C3}
+.gallery-section{padding:72px 6vw 40px;display:flex;flex-direction:column;align-items:center;gap:36px}
+.gallery-head{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;width:100%;max-width:1200px}
+.gallery img{width:100%;height:180px;object-fit:cover}
+.gallery-desktop-only{display:none}
+.reviews{padding:56px 6vw 8px;display:flex;flex-direction:column;align-items:center;gap:32px}
+.stars{display:flex;gap:3px;color:var(--accent)}
+.review{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;max-width:480px;margin:0 auto}
+.review p{margin:0;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:19px;line-height:1.5;color:#EFE7D8}
+.review span{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.reviews-grid{display:flex;flex-direction:column;gap:32px;width:100%}
+.rating{font-size:13px;color:var(--muted)}
+.reservation{margin:64px 5vw 0;padding:56px 6vw;background:var(--bg2);border-radius:4px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:18px}
+.reservation p{margin:0;color:var(--muted);max-width:480px}
+.phone{color:var(--text);font-family:'Cormorant Garamond',serif;font-size:22px}
+.res-actions{display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:6px}
+.res-form{width:100%;max-width:640px;margin-top:18px;display:flex;flex-direction:column;gap:14px;text-align:left}
+.res-form .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.res-form input,.res-form textarea{background:#262019;border:1px solid #3A3226;color:var(--text);padding:12px 15px;font-size:14px;border-radius:2px;font-family:inherit}
+.res-form textarea{resize:vertical}
+.res-form label{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--muted)}
+.res-form label input{width:auto;padding:0}
+.res-form button{align-self:center;border:1px solid var(--accent);background:transparent;color:var(--accent);padding:14px 32px;letter-spacing:.16em;font-size:13px;text-transform:uppercase;cursor:pointer;margin-top:2px;font-family:inherit}
+@media (max-width:640px){.res-form .row{grid-template-columns:1fr}}
+footer{margin-top:64px;padding:36px 6vw 48px;display:flex;flex-direction:column;gap:8px;border-top:1px solid #2A241E;font-size:14px;color:var(--dim)}
+.foot-name{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:19px;color:var(--text)}
+@media (min-width:800px){
+  nav{display:flex}
+  .menu-btn{display:none}
+  .hero-text{bottom:9vh}
+  .split{grid-template-columns:1fr 1fr}
+  .split.reverse{direction:rtl}
+  .split.reverse .txt, .split.reverse img{direction:ltr}
+  .split img{height:100%;min-height:560px}
+  .split .txt{padding:80px 6vw}
+  .band{min-height:560px}
+  .band-overlay{background:linear-gradient(90deg,rgba(15,12,10,.5) 0%,rgba(15,12,10,.12) 50%,rgba(15,12,10,0) 100%)}
+  .band-text{padding:0 0 0 6vw}
+  .gallery{grid-template-columns:repeat(4,1fr);grid-auto-rows:220px}
+  .gallery img{height:100%}
+  .gallery .tall{grid-row:span 2}
+  .gallery-desktop-only{display:block}
+  .gallery .wide{grid-column:span 2}
+  .reviews-grid{flex-direction:row;justify-content:center;gap:48px}
+  .res-actions{flex-direction:row;gap:28px}
+}
+
+/* ---------- Beispiel-Hinweis + Bild-Platzhalter ---------- */
+.demo-bar{position:relative;z-index:6;display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 20px;padding:9px 5vw;background:#0d0b09;border-bottom:1px solid #2A241E;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.demo-bar a{color:var(--accent)}
+.hero-wrap{position:relative}
+img{background:#262019;color:var(--dim);font-size:13px}
+.review-note{font-size:12px;color:var(--dim);max-width:520px;text-align:center}
+.phone{letter-spacing:.04em}
+.hero-overlay{background:linear-gradient(180deg,rgba(15,12,10,.42) 0%,rgba(15,12,10,.34) 40%,rgba(15,12,10,.78) 100%)}
+h1{text-shadow:0 2px 18px rgba(0,0,0,.55)}
+.gallery img{height:240px}
+@media (min-width:800px){
+  .split img{height:600px;min-height:0}
+  .gallery{grid-auto-rows:440px}
+  .gallery img{height:100%}
+}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">
+<span>Beispiel-Website · Restaurant frei erfunden · Bilder KI-generiert</span>
+<a href="/portfolio#restaurant">&larr; Zurück zu Zbinden Software</a>
+</div>
+
+<div class="hero-wrap">
+<header>
+<a href="#" class="logo">Lindenstube</a>
+<nav>
+<a href="#kueche">Restaurant</a>
+<a href="#kueche">Speisekarte</a>
+<a href="#anlaesse">Anlässe</a>
+<a href="#kontakt">Kontakt</a>
+<a href="#reservation" class="btn-outline">Reservieren</a>
+</nav>
+<button class="menu-btn" aria-label="Menü">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+</button>
+</header>
+
+<section class="hero">
+<img src="/images/beispiel-restaurant/stube.jpg" alt="Gaststube am Abend">
+<div class="hero-overlay"></div>
+<div class="hero-text">
+<h1>Eine herzliche Stube im Herzen des Dorfes</h1>
+<span class="kicker hero-kicker">Musterwil · Seit drei Generationen</span>
+<a href="#reservation" class="cta-link">Tisch reservieren</a>
+</div>
+</section>
+</div>
+
+<section class="quote-section">
+<div class="rule"></div>
+<p class="quote">&laquo;Familie Muster empfängt Sie in ihrer Gaststube &ndash; in dritter Generation. Die gutbürgerliche Küche entsteht wie eh und je: mit Geduld und guten Produkten.&raquo;</p>
+<div class="rule"></div>
+</section>
+
+<section class="split" id="kueche">
+<img src="/images/beispiel-restaurant/leberli.jpg" alt="Leberli mit Rösti" loading="lazy">
+<div class="txt">
+<span class="kicker">Die Küche</span>
+<h2>Gutbürgerlich, ganz direkt</h2>
+<p>Leberli mit Rösti, saisonale Fischgerichte und Saucen, die bei uns noch selbst angesetzt werden. Was auf den Teller kommt, stammt wenn immer möglich aus der Region.</p>
+<a href="#reservation" class="cta-link" style="align-self:flex-start">Zur Speisekarte</a>
+</div>
+</section>
+
+<section class="split reverse">
+<img src="/images/beispiel-restaurant/fisch-abend.jpg" alt="Fischgericht am Abend" loading="lazy">
+<div class="txt">
+<span class="kicker">Der Abend</span>
+<h2>Ein Tisch, ein guter Tropfen</h2>
+<p>Eine kleine, sorgfältig ausgewählte Weinkarte und eine ruhige Stube: der richtige Rahmen für ein Geschäftsessen oder einen Abend zu zweit.</p>
+<a href="#reservation" class="cta-link" style="align-self:flex-start">Weine entdecken</a>
+</div>
+</section>
+
+<section class="band" id="anlaesse">
+<img src="/images/beispiel-restaurant/saal.jpg" alt="Festlich gedeckte Tafel für einen Anlass" loading="lazy">
+<div class="band-overlay"></div>
+<div class="band-text">
+<span class="kicker">Anlässe &amp; Bankette</span>
+<h2 style="font-style:italic">Für Feste, die man sich merkt</h2>
+<p>Unser Säli bietet Platz für bis zu 40 Personen &ndash; für Hochzeiten, Familienfeiern und Geschäftsanlässe, auf Wunsch mit eigenem Menü.</p>
+<a href="#reservation" class="cta-link" style="align-self:flex-start">Anfrage stellen</a>
+</div>
+</section>
+
+<section class="gallery-section">
+<div class="gallery-head">
+<span class="kicker">Impressionen</span>
+<h2 style="font-style:italic">Ein Blick in die Stube</h2>
+</div>
+<div class="gallery">
+<img src="/images/beispiel-restaurant/tisch.jpg" alt="Gedeckter Tisch in der Abendstimmung" loading="lazy">
+<img src="/images/beispiel-restaurant/chickenfilet-salat.jpg" alt="Pouletbrust mit Salat und Bratkartoffeln" loading="lazy">
+<img src="/images/beispiel-restaurant/fisch-beilagen.jpg" alt="Fischfilets mit buntem Salat" loading="lazy">
+<img src="/images/beispiel-restaurant/stube.jpg" alt="Gaststube am Abend" loading="lazy">
+</div>
+</section>
+
+<section class="reviews">
+<div class="gallery-head">
+<span class="kicker">Kundenstimmen</span>
+<h2 style="font-style:italic">Das sagen unsere Gäste</h2>
+<span class="review-note">Beispieltexte &ndash; auf einer echten Website stehen hier die Google-Bewertungen des Restaurants.</span>
+</div>
+<div class="reviews-grid">
+<div class="review">
+<div class="stars"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7L2 9.2l7.1-.6z"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7L2 9.2l7.1-.6z"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7L2 9.2l7.1-.6z"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7L2 9.2l7.1-.6z"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7L2 9.2l7.1-.6z"/></svg></div>
+<p>Volles Haus, und trotzdem hatte das Team für jeden Tisch ein freundliches Wort.</p>
+<span>Beispiel-Gast</span>
+</div>
+<div class="review">
+<div class="stars"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7L2 9.2l7.1-.6z"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7L2 9.2l7.1-.6z"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7L2 9.2l7.1-.6z"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7L2 9.2l7.1-.6z"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7L2 9.2l7.1-.6z"/></svg></div>
+<p>Ehrliche Küche ohne Schnickschnack &ndash; genau so, wie wir es mögen.</p>
+<span>Beispiel-Gast</span>
+</div>
+<div class="review">
+<div class="stars"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7L2 9.2l7.1-.6z"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7L2 9.2l7.1-.6z"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7L2 9.2l7.1-.6z"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7L2 9.2l7.1-.6z"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7L2 9.2l7.1-.6z"/></svg></div>
+<p>Mit den Kindern unkompliziert, das Essen fein: Wir kommen gerne wieder.</p>
+<span>Beispiel-Gast</span>
+</div>
+</div>
+</section>
+
+<section class="reservation" id="reservation">
+<span class="kicker">Reservation</span>
+<h2 style="font-style:italic">Wir freuen uns auf Sie</h2>
+<p>Reservieren Sie online oder rufen Sie uns direkt an &ndash; wir bestätigen Ihren Tisch gerne persönlich.</p>
+<div class="res-actions">
+<span class="phone">000 000 00 00</span>
+</div>
+<form class="res-form" onsubmit="return false">
+<div class="row">
+<input placeholder="Vorname *" aria-label="Vorname">
+<input placeholder="Name *" aria-label="Name">
+</div>
+<div class="row">
+<input placeholder="E-Mail *" aria-label="E-Mail">
+<input placeholder="Telefon *" aria-label="Telefon">
+</div>
+<div class="row">
+<input placeholder="Datum &amp; Uhrzeit *" aria-label="Datum und Uhrzeit">
+<input placeholder="Anzahl Personen *" aria-label="Anzahl Personen">
+</div>
+<textarea placeholder="Bemerkungen (Anlass, Allergien, Bankett usw.)" rows="3" aria-label="Bemerkungen"></textarea>
+<label><input type="checkbox">Ich akzeptiere die Datenschutzerklärung *</label>
+<button type="button">Anfrage senden</button>
+</form>
+</section>
+
+<footer id="kontakt">
+<span class="foot-name">Gasthaus Lindenstube · Musterwil</span>
+<span>Dorfstrasse 1 · 0000 Musterwil</span>
+<span>Beispiel-Website von <a href="/webdesign" style="color:var(--accent)">Zbinden Software</a> &ndash; das Restaurant ist frei erfunden, das Formular sendet nichts.</span>
+</footer>
+
+</body>
+</html>

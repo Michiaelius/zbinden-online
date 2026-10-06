@@ -114,5 +114,32 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://www.zbinden.online/en/webdesign"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.zbinden.online/webdesign"/>
   </url>
+  <url>
+    <loc>https://www.zbinden.online/portfolio</loc>
+    <lastmod>2026-10-06</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://www.zbinden.online/portfolio"/>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://www.zbinden.online/fr/portfolio"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.zbinden.online/en/portfolio"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.zbinden.online/portfolio"/>
+  </url>
+  <url>
+    <loc>https://www.zbinden.online/fr/portfolio</loc>
+    <lastmod>2026-10-06</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://www.zbinden.online/portfolio"/>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://www.zbinden.online/fr/portfolio"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.zbinden.online/en/portfolio"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.zbinden.online/portfolio"/>
+  </url>
+  <url>
+    <loc>https://www.zbinden.online/en/portfolio</loc>
+    <lastmod>2026-10-06</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://www.zbinden.online/portfolio"/>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://www.zbinden.online/fr/portfolio"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.zbinden.online/en/portfolio"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.zbinden.online/portfolio"/>
+  </url>
 
 </urlset>
