@@ -45,7 +45,7 @@
       {
         "@type": "Offer",
         "name": "GEO Audit complete",
-        "description": "Six weighted categories, a competitive benchmark and a prioritized 30-day action plan.",
+        "description": "Six weighted categories, a competitive benchmark and a prioritized 30-day action plan. If the plan works for you, I implement the individual points, quoted after the audit.",
         "priceSpecification": { "@type": "PriceSpecification", "minPrice": 1900, "maxPrice": 3900, "priceCurrency": "CHF" }
       },
       {
@@ -348,11 +348,30 @@
   form.request{ display:grid; gap:18px; }
   .field{ display:grid; gap:8px; }
   .field label{ font-family:var(--font-ui); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--sec-muted); font-weight:600; }
-  .field input, .field textarea{
+  .field input, .field textarea, .field select{
     background:var(--sec-bg); border:1px solid var(--sec-line-strong); border-radius:var(--r-sm); color:var(--sec-ink);
     font-family:"Jost","Helvetica Neue",Helvetica,Arial,sans-serif; font-weight:300; font-size:.94rem; padding:12px 14px; resize:vertical;
   }
-  .field input:focus, .field textarea:focus{ outline:none; border-color:var(--sec-gold); }
+  .field input:focus, .field textarea:focus, .field select:focus{ outline:none; border-color:var(--sec-gold); }
+  .field select{
+    appearance:none; -webkit-appearance:none; width:100%; cursor:pointer; padding-right:42px;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23c9a227' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:right 16px center;
+  }
+  .section-dark .field select{ color-scheme:dark; }
+  .field select option{ background:var(--sec-bg-2); color:var(--sec-ink); font-family:"Jost","Helvetica Neue",Helvetica,Arial,sans-serif; font-weight:300; font-size:.94rem; }
+  @supports (appearance:base-select){
+    .field select, .field select::picker(select){ appearance:base-select; }
+    .field select::picker-icon{ display:none; }
+    .field select::picker(select){
+      background:var(--sec-bg-2); border:1px solid var(--sec-line-gold); border-radius:var(--r-sm); padding:6px; margin-top:6px;
+      box-shadow:0 20px 50px -20px rgba(0,0,0,.6);
+    }
+    .field select option{ padding:10px 12px; border-radius:8px; cursor:pointer; background:transparent; }
+    .field select option:hover, .field select option:focus-visible{ background:var(--sec-gold-soft); color:var(--sec-gold); outline:none; }
+    .field select option:checked{ color:var(--sec-gold); }
+    .field select option::checkmark{ display:none; }
+  }
   .field textarea{ min-height:88px; }
   .field-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
   @media (max-width:480px){ .field-row{grid-template-columns:1fr;} }
@@ -437,7 +456,7 @@
       <div>
         <p class="eyebrow with-rule reveal d1">AI Visibility Audit for Swiss Companies</p>
         <h1 class="reveal d2">Your competitors are recommended by AI. <em>Are you?</em></h1>
-        <p class="lede reveal d3">I check whether ChatGPT, Perplexity and Google AI actually find and recommend your business — and deliver a concrete, prioritized plan to make sure they do.</p>
+        <p class="lede reveal d3">I check whether ChatGPT, Perplexity and Google AI actually find and recommend your business — and deliver a concrete, prioritized plan to make sure they do. If the plan works for you, I implement the individual points.</p>
         <div class="cta-row reveal d4">
           <a class="btn-primary" href="#pakete">Request the free GEO-Light test</a>
           <a class="btn-secondary" href="#methode">How I check</a>
@@ -527,12 +546,14 @@
             <li>Competitive benchmark</li>
             <li>Prioritized 30-day action plan</li>
             <li>30-minute call to walk through the report</li>
+            <li>If the plan works for you, I implement the points — quote after the audit</li>
           </ul>
           <a class="btn-primary" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener">Schedule a call</a>
         </div>
 
       </div>
-      <p style="margin:22px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">If you follow up with a new multi-page website with me, the GEO audit price is fully credited.</p>
+      <p style="margin:22px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>You are not left alone with the plan.</strong> If the plan works for you, I implement the individual points over the 30 days — you receive a quote after the audit.</p>
+      <p style="margin:10px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">If you follow up with a new multi-page website with me, the GEO audit price is fully credited.</p>
     </div>
   </section>
 
@@ -609,7 +630,7 @@
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Process</span>
-        <h2>Three steps to your plan</h2>
+        <h2>Three steps — from test to implementation</h2>
       </div>
       <div class="phase-list">
         <div class="phase">
@@ -622,7 +643,7 @@
         </div>
         <div class="phase">
           <span class="num">03</span>
-          <div><h3>Call &amp; implementation</h3><p>30 minutes where I walk through the report with you. Implementation is up to you — or I take care of it, from small adjustments to a full new website.</p></div>
+          <div><h3>Call &amp; implementation</h3><p>30 minutes where I walk through the report with you. If the plan works for you, I implement the individual points — from small adjustments to a full new website, quoted after the audit. Or you implement it yourself or with your agency.</p></div>
         </div>
       </div>
     </div>
@@ -675,7 +696,7 @@
       <div>
         <span class="eyebrow" style="display:block; margin-bottom:12px;">About me</span>
         <h2 style="font-family:var(--font-display); font-size:1.7rem; margin-bottom:18px; font-weight:600;">I check websites the way AI systems read them — not the way humans see them.</h2>
-        <p style="color:var(--sec-muted); line-height:1.75; max-width:62ch; font-weight:300;">As founder of Zbinden Software, I analyze how visible Swiss companies actually are to ChatGPT, Perplexity, Google AI and others. Most websites were built for humans and classic search engines — not for the way AI systems make recommendations today. Every audit follows the same transparent methodology and ends with a concrete, prioritized plan instead of vague recommendations.</p>
+        <p style="color:var(--sec-muted); line-height:1.75; max-width:62ch; font-weight:300;">As founder of Zbinden Software, I analyze how visible Swiss companies actually are to ChatGPT, Perplexity, Google AI and others. Most websites were built for humans and classic search engines — not for the way AI systems make recommendations today. Every audit follows the same transparent methodology and ends with a concrete, prioritized plan instead of vague recommendations — one I then implement myself.</p>
         <p style="color:var(--sec-muted); line-height:1.75; max-width:62ch; font-weight:300; margin-top:1.1em;">Before this, I spent five years building embedded software in C++ at Hexagon Manufacturing Intelligence and analyzing technical requirements as a consultant at Drees &amp; Sommer Switzerland.</p>
         <a href="https://www.zbinden.online/en/#ueber-mich" style="display:inline-block; margin-top:16px; font-family:var(--font-ui); font-weight:600; font-size:.82rem; color:var(--sec-gold-deep); text-decoration:none; border-bottom:1px solid var(--sec-line-gold); padding-bottom:2px;">More about me &rarr;</a>
       </div>
@@ -738,6 +759,7 @@
                   <option value="">Not sure yet</option>
                   <option value="GEO-Light">GEO-Light</option>
                   <option value="GEO-Audit komplett">GEO Audit complete</option>
+                  <option value="GEO-Audit + Umsetzung">GEO Audit + implementation</option>
                   <option value="Webdesign">Webdesign</option>
                 </select>
               </div>
@@ -930,6 +952,38 @@
   }
   wireForm('requestForm', 'formOk', 'formErr', 'Sending …');
   wireForm('geoLightForm', 'glOk', 'glErr', 'Sending …');
+})();
+</script>
+<style>
+  .to-top{
+    position:fixed; right:max(18px, env(safe-area-inset-right)); bottom:max(18px, env(safe-area-inset-bottom)); z-index:30;
+    width:46px; height:46px; padding:0; border:none; border-radius:999px; cursor:pointer;
+    display:grid; place-items:center; color:#1a1300;
+    background:linear-gradient(120deg,#c9a227,#e8d38a);
+    box-shadow:0 12px 30px -10px rgba(0,0,0,.45), 0 0 22px rgba(201,162,39,.28);
+    opacity:0; visibility:hidden; transform:translateY(10px);
+    transition:opacity .25s ease, transform .25s ease, visibility .25s;
+  }
+  .to-top.show{ opacity:1; visibility:visible; transform:none; }
+  .to-top:hover{ transform:translateY(-2px); }
+  .to-top:focus-visible{ outline:2px solid #c9a227; outline-offset:3px; }
+  @media (prefers-reduced-motion:reduce){ .to-top{ transition:none; } }
+  @media print{ .to-top{ display:none; } }
+</style>
+<button type="button" class="to-top" id="toTop" aria-label="Back to top" title="Back to top">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13V3M3.5 7.5L8 3l4.5 4.5"/></svg>
+</button>
+<script>
+(function(){
+  var btn = document.getElementById('toTop');
+  if (!btn) return;
+  function toggle(){ btn.classList.toggle('show', window.scrollY > 600); }
+  window.addEventListener('scroll', toggle, { passive:true });
+  toggle();
+  btn.addEventListener('click', function(){
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top:0, behavior: reduce ? 'auto' : 'smooth' });
+  });
 })();
 </script>
 </body>

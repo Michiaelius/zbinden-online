@@ -45,7 +45,7 @@
       {
         "@type": "Offer",
         "name": "Audit GEO complet",
-        "description": "Six catégories pondérées, benchmark face aux concurrents et plan d'action priorisé sur 30 jours.",
+        "description": "Six catégories pondérées, benchmark face aux concurrents et plan d'action priorisé sur 30 jours. Si le plan convient, je mets les différents points en œuvre, sur devis après l'audit.",
         "priceSpecification": { "@type": "PriceSpecification", "minPrice": 1900, "maxPrice": 3900, "priceCurrency": "CHF" }
       },
       {
@@ -348,11 +348,30 @@
   form.request{ display:grid; gap:18px; }
   .field{ display:grid; gap:8px; }
   .field label{ font-family:var(--font-ui); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--sec-muted); font-weight:600; }
-  .field input, .field textarea{
+  .field input, .field textarea, .field select{
     background:var(--sec-bg); border:1px solid var(--sec-line-strong); border-radius:var(--r-sm); color:var(--sec-ink);
     font-family:"Jost","Helvetica Neue",Helvetica,Arial,sans-serif; font-weight:300; font-size:.94rem; padding:12px 14px; resize:vertical;
   }
-  .field input:focus, .field textarea:focus{ outline:none; border-color:var(--sec-gold); }
+  .field input:focus, .field textarea:focus, .field select:focus{ outline:none; border-color:var(--sec-gold); }
+  .field select{
+    appearance:none; -webkit-appearance:none; width:100%; cursor:pointer; padding-right:42px;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23c9a227' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:right 16px center;
+  }
+  .section-dark .field select{ color-scheme:dark; }
+  .field select option{ background:var(--sec-bg-2); color:var(--sec-ink); font-family:"Jost","Helvetica Neue",Helvetica,Arial,sans-serif; font-weight:300; font-size:.94rem; }
+  @supports (appearance:base-select){
+    .field select, .field select::picker(select){ appearance:base-select; }
+    .field select::picker-icon{ display:none; }
+    .field select::picker(select){
+      background:var(--sec-bg-2); border:1px solid var(--sec-line-gold); border-radius:var(--r-sm); padding:6px; margin-top:6px;
+      box-shadow:0 20px 50px -20px rgba(0,0,0,.6);
+    }
+    .field select option{ padding:10px 12px; border-radius:8px; cursor:pointer; background:transparent; }
+    .field select option:hover, .field select option:focus-visible{ background:var(--sec-gold-soft); color:var(--sec-gold); outline:none; }
+    .field select option:checked{ color:var(--sec-gold); }
+    .field select option::checkmark{ display:none; }
+  }
   .field textarea{ min-height:88px; }
   .field-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
   @media (max-width:480px){ .field-row{grid-template-columns:1fr;} }
@@ -437,7 +456,7 @@
       <div>
         <p class="eyebrow with-rule reveal d1">Audit de visibilité IA pour les entreprises suisses</p>
         <h1 class="reveal d2">Vos concurrents sont recommandés par l'IA. <em>Et vous ?</em></h1>
-        <p class="lede reveal d3">Je vérifie si ChatGPT, Perplexity et Google AI trouvent et recommandent réellement votre entreprise — et je livre un plan concret et priorisé pour que ce soit le cas.</p>
+        <p class="lede reveal d3">Je vérifie si ChatGPT, Perplexity et Google AI trouvent et recommandent réellement votre entreprise — et je livre un plan concret et priorisé pour que ce soit le cas. Si le plan vous convient, je mets les différents points en œuvre.</p>
         <div class="cta-row reveal d4">
           <a class="btn-primary" href="#pakete">Demander le test GEO-Light gratuit</a>
           <a class="btn-secondary" href="#methode">Comment je procède</a>
@@ -527,12 +546,14 @@
             <li>Benchmark face à vos concurrents</li>
             <li>Plan d'action priorisé sur 30 jours</li>
             <li>Entretien de 30 minutes pour discuter du rapport</li>
+            <li>Si le plan vous convient, je mets les points en œuvre — devis après l'audit</li>
           </ul>
           <a class="btn-primary" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener">Prendre rendez-vous</a>
         </div>
 
       </div>
-      <p style="margin:22px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Si un nouveau site de plusieurs pages m'est ensuite confié, le prix de l'audit GEO est intégralement déduit.</p>
+      <p style="margin:22px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>Vous ne restez pas seul avec votre plan.</strong> Si le plan vous convient, je mets les différents points en œuvre pendant les 30 jours — vous recevez un devis après l'audit.</p>
+      <p style="margin:10px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Si un nouveau site de plusieurs pages m'est ensuite confié, le prix de l'audit GEO est intégralement déduit.</p>
     </div>
   </section>
 
@@ -609,7 +630,7 @@
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Déroulement</span>
-        <h2>Trois étapes jusqu'au plan</h2>
+        <h2>Trois étapes — du test à la mise en œuvre</h2>
       </div>
       <div class="phase-list">
         <div class="phase">
@@ -622,7 +643,7 @@
         </div>
         <div class="phase">
           <span class="num">03</span>
-          <div><h3>Entretien &amp; mise en œuvre</h3><p>30 minutes pendant lesquelles je parcours le rapport avec vous. La mise en œuvre, c'est vous qui décidez — ou je m'en charge, d'un simple ajustement jusqu'à un nouveau site.</p></div>
+          <div><h3>Entretien &amp; mise en œuvre</h3><p>30 minutes pendant lesquelles je parcours le rapport avec vous. Si le plan vous convient, je mets les différents points en œuvre — d'un simple ajustement jusqu'à un nouveau site, sur devis après l'audit. Vous pouvez aussi le réaliser vous-même ou avec votre agence.</p></div>
         </div>
       </div>
     </div>
@@ -675,7 +696,7 @@
       <div>
         <span class="eyebrow" style="display:block; margin-bottom:12px;">À propos</span>
         <h2 style="font-family:var(--font-display); font-size:1.7rem; margin-bottom:18px; font-weight:600;">J'examine les sites web comme les systèmes d'IA les lisent — pas comme les humains les voient.</h2>
-        <p style="color:var(--sec-muted); line-height:1.75; max-width:62ch; font-weight:300;">En tant que fondatrice de Zbinden Software, j'analyse la visibilité réelle des entreprises suisses pour ChatGPT, Perplexity, Google AI et consorts. La plupart des sites web ont été conçus pour les humains et les moteurs de recherche classiques — pas pour la manière dont les systèmes d'IA formulent leurs recommandations aujourd'hui. Chaque audit suit la même méthodologie transparente et se termine par un plan concret et priorisé plutôt que des recommandations vagues.</p>
+        <p style="color:var(--sec-muted); line-height:1.75; max-width:62ch; font-weight:300;">En tant que fondatrice de Zbinden Software, j'analyse la visibilité réelle des entreprises suisses pour ChatGPT, Perplexity, Google AI et consorts. La plupart des sites web ont été conçus pour les humains et les moteurs de recherche classiques — pas pour la manière dont les systèmes d'IA formulent leurs recommandations aujourd'hui. Chaque audit suit la même méthodologie transparente et se termine par un plan concret et priorisé plutôt que des recommandations vagues — un plan que je mets ensuite moi-même en œuvre.</p>
         <p style="color:var(--sec-muted); line-height:1.75; max-width:62ch; font-weight:300; margin-top:1.1em;">Auparavant, j'ai développé pendant cinq ans des logiciels embarqués en C++ chez Hexagon Manufacturing Intelligence, puis analysé des besoins techniques comme consultante chez Drees &amp; Sommer Suisse.</p>
         <a href="https://www.zbinden.online/fr/#ueber-mich" style="display:inline-block; margin-top:16px; font-family:var(--font-ui); font-weight:600; font-size:.82rem; color:var(--sec-gold-deep); text-decoration:none; border-bottom:1px solid var(--sec-line-gold); padding-bottom:2px;">En savoir plus sur moi &rarr;</a>
       </div>
@@ -738,6 +759,7 @@
                   <option value="">Pas encore décidé</option>
                   <option value="GEO-Light">GEO-Light</option>
                   <option value="GEO-Audit komplett">Audit GEO complet</option>
+                  <option value="GEO-Audit + Umsetzung">Audit GEO + mise en œuvre</option>
                   <option value="Webdesign">Webdesign</option>
                 </select>
               </div>
@@ -930,6 +952,38 @@
   }
   wireForm('requestForm', 'formOk', 'formErr', 'Envoi en cours …');
   wireForm('geoLightForm', 'glOk', 'glErr', 'Envoi en cours …');
+})();
+</script>
+<style>
+  .to-top{
+    position:fixed; right:max(18px, env(safe-area-inset-right)); bottom:max(18px, env(safe-area-inset-bottom)); z-index:30;
+    width:46px; height:46px; padding:0; border:none; border-radius:999px; cursor:pointer;
+    display:grid; place-items:center; color:#1a1300;
+    background:linear-gradient(120deg,#c9a227,#e8d38a);
+    box-shadow:0 12px 30px -10px rgba(0,0,0,.45), 0 0 22px rgba(201,162,39,.28);
+    opacity:0; visibility:hidden; transform:translateY(10px);
+    transition:opacity .25s ease, transform .25s ease, visibility .25s;
+  }
+  .to-top.show{ opacity:1; visibility:visible; transform:none; }
+  .to-top:hover{ transform:translateY(-2px); }
+  .to-top:focus-visible{ outline:2px solid #c9a227; outline-offset:3px; }
+  @media (prefers-reduced-motion:reduce){ .to-top{ transition:none; } }
+  @media print{ .to-top{ display:none; } }
+</style>
+<button type="button" class="to-top" id="toTop" aria-label="Haut de page" title="Haut de page">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13V3M3.5 7.5L8 3l4.5 4.5"/></svg>
+</button>
+<script>
+(function(){
+  var btn = document.getElementById('toTop');
+  if (!btn) return;
+  function toggle(){ btn.classList.toggle('show', window.scrollY > 600); }
+  window.addEventListener('scroll', toggle, { passive:true });
+  toggle();
+  btn.addEventListener('click', function(){
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top:0, behavior: reduce ? 'auto' : 'smooth' });
+  });
 })();
 </script>
 </body>

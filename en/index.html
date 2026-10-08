@@ -549,5 +549,37 @@
   }
 })();
 </script>
+<style>
+  .to-top{
+    position:fixed; right:max(18px, env(safe-area-inset-right)); bottom:max(18px, env(safe-area-inset-bottom)); z-index:30;
+    width:46px; height:46px; padding:0; border:none; border-radius:999px; cursor:pointer;
+    display:grid; place-items:center; color:#1a1300;
+    background:linear-gradient(120deg,#c9a227,#e8d38a);
+    box-shadow:0 12px 30px -10px rgba(0,0,0,.45), 0 0 22px rgba(201,162,39,.28);
+    opacity:0; visibility:hidden; transform:translateY(10px);
+    transition:opacity .25s ease, transform .25s ease, visibility .25s;
+  }
+  .to-top.show{ opacity:1; visibility:visible; transform:none; }
+  .to-top:hover{ transform:translateY(-2px); }
+  .to-top:focus-visible{ outline:2px solid #c9a227; outline-offset:3px; }
+  @media (prefers-reduced-motion:reduce){ .to-top{ transition:none; } }
+  @media print{ .to-top{ display:none; } }
+</style>
+<button type="button" class="to-top" id="toTop" aria-label="Back to top" title="Back to top">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13V3M3.5 7.5L8 3l4.5 4.5"/></svg>
+</button>
+<script>
+(function(){
+  var btn = document.getElementById('toTop');
+  if (!btn) return;
+  function toggle(){ btn.classList.toggle('show', window.scrollY > 600); }
+  window.addEventListener('scroll', toggle, { passive:true });
+  toggle();
+  btn.addEventListener('click', function(){
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top:0, behavior: reduce ? 'auto' : 'smooth' });
+  });
+})();
+</script>
 </body>
 </html>
