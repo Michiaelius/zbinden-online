@@ -170,7 +170,23 @@
       "name": "Comment se déroule la collaboration ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Tout commence par un entretien gratuit de 30 minutes pour cerner le besoin concret. Vient ensuite une proposition priorisée : pour l'audit GEO, un rapport d'analyse avec plan d'action ; pour l'automatisation, un premier forfait clairement délimité – Quick Win Automation ou KI-Agent Starter."
+        "text": "Tout commence par un entretien gratuit de 30 minutes pour cerner le besoin concret. Vient ensuite une proposition priorisée : pour l'audit GEO, un rapport d'analyse avec plan d'action ; pour l'automatisation, un premier forfait clairement délimité – Quick Win Automation ou KI-Agent Starter. Si vous voulez d'abord savoir quel processus vaut la peine, vous pouvez commencer après l'entretien par le Prozess-Check (CHF 2'200 prix fixe) : deux à trois processus sont relevés et évalués ; si une mise en œuvre suit, le prix est entièrement déduit."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Que deviennent nos données ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "L'automatisation fonctionne sur vos propres comptes, je ne stocke aucune donnée client chez moi. Avant chaque projet, le lieu de traitement des données est fixé par écrit ; par défaut, la Suisse ou l'UE. Vos données ne sont pas utilisées pour entraîner des modèles d'IA, et un contrat de sous-traitance conforme à la loi suisse sur la protection des données règle l'accès et la suppression."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Combien coûte l'exploitation après le projet ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "L'exploitation est facultative. Betrieb Basis coûte CHF 150 par mois pour une automatisation, Betrieb Plus CHF 350 par mois pour un agent IA. Sont compris la surveillance, les corrections lorsque les logiciels connectés changent et un contingent mensuel d'heures pour de petites adaptations. Les coûts courants des logiciels et des services d'IA sont payés directement au fournisseur."
       }
     }
   ]
@@ -272,6 +288,10 @@
     filter:drop-shadow(0 0 22px var(--sec-glow-soft));
   }
   .hero p.lede{ font-size:1.08rem; line-height:1.7; color:var(--sec-muted); max-width:52ch; margin:0 0 2em; font-weight:300; }
+  .hero-points{ list-style:none; padding:0; margin:0 0 2.2em; display:grid; gap:10px; max-width:66ch; }
+  .hero-points li{ position:relative; padding-left:22px; font-size:.95rem; line-height:1.6; color:var(--sec-muted); font-weight:300; }
+  .hero-points li::before{ content:"—"; position:absolute; left:0; color:var(--sec-gold-deep); }
+  .hero-points strong{ color:var(--sec-ink); font-weight:600; }
   .cta-row{ display:flex; flex-wrap:wrap; gap:16px; align-items:center; }
 
   .btn-primary{
@@ -394,6 +414,11 @@
       <p class="eyebrow reveal d1">Zbinden Software</p>
       <h1 class="reveal d2">Trois leviers pour que votre entreprise profite de l'<em>IA</em>.</h1>
       <p class="lede reveal d3">J'automatise les processus qui vous font perdre du temps, et je vérifie que les IA de recherche comme ChatGPT et Google AI trouvent bien votre entreprise — et je crée des sites conçus pour cela. Trois offres distinctes et pragmatiques pour les PME suisses.</p>
+      <ul class="hero-points reveal d3">
+        <li><strong>Ingénieure plutôt qu'agence :</strong> cinq ans de développement logiciel en C++ chez Hexagon, puis analyse des besoins chez Drees &amp; Sommer</li>
+        <li><strong>Une seule interlocutrice :</strong> j'analyse, je développe et j'assure le suivi moi-même</li>
+        <li><strong>Chez moi dans le Fricktal :</strong> sur place dans le nord-ouest de la Suisse, en allemand et en français</li>
+      </ul>
       <div class="cta-row reveal d4">
         <a class="btn-primary" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener">Réserver un appel</a>
         <a class="btn-secondary" href="#angebote">Voir les offres</a>
@@ -411,8 +436,9 @@
         <a class="service-card" href="https://www.zbinden.online/fr/ki-agenten-automatisierung">
           <span class="service-tag">IA &amp; Automatisation</span>
           <h3>Agents IA &amp; automatisation des processus</h3>
-          <p>J'automatise les processus répétitifs et je conçois des agents IA qui prennent en charge de vraies tâches — pragmatique, rapide à mettre en place, avec un bénéfice mesurable.</p>
+          <p>J'automatise les processus répétitifs et je conçois des agents IA qui prennent en charge de vraies tâches — un processus après l'autre, une première automatisation en production en une à deux semaines, un agent IA en trois à cinq, avec un chiffre à la clé : les heures gagnées par semaine.</p>
           <div class="pkg-chips">
+            <span class="pkg-chip">Prozess-Check</span>
             <span class="pkg-chip">Quick Win Automation</span>
             <span class="pkg-chip">KI-Agent Starter</span>
           </div>
@@ -451,7 +477,7 @@
         </div>
         <div class="fit-item reveal d3">
           <span class="n">03</span>
-          <p>Les équipes qui veulent des résultats rapides et mesurables — pas un projet IT de plusieurs mois.</p>
+          <p>Les équipes qui veulent avoir automatisé un premier processus en deux semaines, plutôt que de lancer un projet d'un an.</p>
         </div>
       </div>
     </div>
@@ -499,7 +525,15 @@
         </details>
         <details class="faq-item">
           <summary>Comment se déroule la collaboration ?</summary>
-          <p class="faq-a">Tout commence par un entretien gratuit de 30 minutes pour cerner le besoin concret. Vient ensuite une proposition priorisée : pour l'audit GEO, un rapport d'analyse avec plan d'action ; pour l'automatisation, un premier forfait clairement délimité – Quick Win Automation ou KI-Agent Starter.</p>
+          <p class="faq-a">Tout commence par un entretien gratuit de 30 minutes pour cerner le besoin concret. Vient ensuite une proposition priorisée : pour l'audit GEO, un rapport d'analyse avec plan d'action ; pour l'automatisation, un premier forfait clairement délimité – Quick Win Automation ou KI-Agent Starter. Si vous voulez d'abord savoir quel processus vaut la peine, vous pouvez commencer après l'entretien par le Prozess-Check (CHF 2'200 prix fixe) : deux à trois processus sont relevés et évalués ; si une mise en œuvre suit, le prix est entièrement déduit.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Que deviennent nos données ?</summary>
+          <p class="faq-a">L'automatisation fonctionne sur vos propres comptes, je ne stocke aucune donnée client chez moi. Avant chaque projet, le lieu de traitement des données est fixé par écrit ; par défaut, la Suisse ou l'UE. Vos données ne sont pas utilisées pour entraîner des modèles d'IA, et un contrat de sous-traitance conforme à la loi suisse sur la protection des données règle l'accès et la suppression.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Combien coûte l'exploitation après le projet ?</summary>
+          <p class="faq-a">L'exploitation est facultative. Betrieb Basis coûte CHF 150 par mois pour une automatisation, Betrieb Plus CHF 350 par mois pour un agent IA. Sont compris la surveillance, les corrections lorsque les logiciels connectés changent et un contingent mensuel d'heures pour de petites adaptations. Les coûts courants des logiciels et des services d'IA sont payés directement au fournisseur.</p>
         </details>
       </div>
     </div>

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Zbinden Software — KI-Agenten &amp; Prozessautomatisierung</title>
-<meta name="description" content="Zwei klar geschnittene Pakete für Schweizer KMU: schnelle Prozessautomatisierung oder ein vollständiger KI-Agent — pragmatisch, schnell umsetzbar, mit messbarem Nutzen.">
+<meta name="description" content="Prozess-Check, schnelle Prozessautomatisierung oder vollständiger KI-Agent für Schweizer KMU — zum Fixpreis, mit klar geregeltem Datenschutz und optionalem Betrieb nach dem Go-Live.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.zbinden.online/ki-agenten-automatisierung">
 <meta property="og:title" content="Zbinden Software — KI-Agenten &amp; Prozessautomatisierung">
@@ -38,6 +38,12 @@
     "itemListElement": [
       {
         "@type": "Offer",
+        "name": "Prozess-Check",
+        "description": "Aufnahme von zwei bis drei wiederkehrenden Abläufen, Schätzung der Zeitersparnis und schriftlicher Bericht mit Fixpreis für die Umsetzung. Der Preis wird bei einer anschliessenden Umsetzung vollständig angerechnet.",
+        "priceSpecification": { "@type": "PriceSpecification", "price": 2200, "priceCurrency": "CHF" }
+      },
+      {
+        "@type": "Offer",
         "name": "Quick Win Automation",
         "description": "Identifikation und Umsetzung der Automatisierung eines prioritären, wiederkehrenden Prozesses.",
         "priceSpecification": { "@type": "PriceSpecification", "minPrice": 4500, "maxPrice": 6500, "priceCurrency": "CHF" }
@@ -47,6 +53,18 @@
         "name": "KI-Agent Starter",
         "description": "Konzeption, Aufbau und Integration eines KI-Agenten inklusive zugehöriger Automatisierungen, Tests und Support nach Go-Live.",
         "priceSpecification": { "@type": "PriceSpecification", "minPrice": 8500, "maxPrice": 14000, "priceCurrency": "CHF" }
+      },
+      {
+        "@type": "Offer",
+        "name": "Betrieb Basis",
+        "description": "Betrieb einer Automatisierung nach dem Go-Live: Überwachung, Korrekturen bei Änderungen an angebundenen Programmen und kleine Anpassungen bis 1 Stunde pro Monat.",
+        "priceSpecification": { "@type": "UnitPriceSpecification", "price": 150, "priceCurrency": "CHF", "unitCode": "MON" }
+      },
+      {
+        "@type": "Offer",
+        "name": "Betrieb Plus",
+        "description": "Betrieb eines KI-Agenten mit zugehörigen Automatisierungen: alles aus Betrieb Basis, Nachschärfen der Anweisungen des Agenten, Anpassungen bis 3 Stunden pro Monat und Quartalsgespräch mit Zahlen.",
+        "priceSpecification": { "@type": "UnitPriceSpecification", "price": 350, "priceCurrency": "CHF", "unitCode": "MON" }
       }
     ]
   }
@@ -192,6 +210,10 @@
   /* ---------- Package cards ---------- */
   .package-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:stretch; }
   @media (max-width:860px){ .package-grid{grid-template-columns:1fr;} }
+  .package-grid.three{ grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .package-grid.three .package-card{ padding:clamp(24px,2.6vw,30px); }
+  .package-grid.three .package-card h3{ font-size:1.45rem; }
+  @media (max-width:1020px){ .package-grid.three{grid-template-columns:1fr;} }
   .package-card{
     display:flex; flex-direction:column; gap:20px;
     border:1px solid var(--sec-line-gold); border-radius:var(--r-lg); background:var(--sec-bg-2);
@@ -212,6 +234,7 @@
   .package-list{ list-style:none; padding:0; margin:0; display:grid; gap:11px; flex:1; }
   .package-list li{ color:var(--sec-ink); font-size:.94rem; font-weight:300; padding-left:22px; position:relative; line-height:1.55; }
   .package-list li::before{ content:"—"; position:absolute; left:0; color:var(--sec-gold-deep); }
+  .package-scope{ margin:0; font-size:.82rem; color:var(--sec-muted); font-weight:300; line-height:1.6; }
   .package-card .btn-primary, .package-card .btn-secondary{ align-self:flex-start; }
 
   /* ---------- Fit / "Für wen" grid ---------- */
@@ -220,6 +243,9 @@
   .fit-item{ background:var(--sec-bg-2); border:1px solid var(--sec-line); border-radius:var(--r-md); padding:26px 24px; }
   .fit-item .n{ font-family:var(--font-display); font-size:1.6rem; color:var(--sec-gold); font-weight:700; display:block; margin-bottom:10px; }
   .fit-item p{ margin:0; font-size:.92rem; color:var(--sec-muted); line-height:1.6; font-weight:300; }
+  .fit-item h3{ font-family:var(--font-ui); font-size:1rem; font-weight:600; margin:0 0 8px; color:var(--sec-ink); }
+  .privacy-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+  @media (max-width:820px){ .privacy-grid{grid-template-columns:1fr;} }
 
   /* ---------- CTA / Kontakt ---------- */
   .cta-band{ border:1px solid var(--sec-line-gold); border-radius:var(--r-lg); background:var(--sec-bg-2); padding:clamp(36px,5vw,58px); box-shadow:0 34px 80px -32px rgba(0,0,0,.5); }
@@ -416,6 +442,7 @@
     <a class="wordmark" href="https://www.zbinden.online/">ZBINDEN<span class="dot">·</span>SOFTWARE <span class="sub">KI &amp; AUTOMATION</span></a>
     <nav class="top-nav">
       <a href="#pakete">Pakete</a>
+      <a href="#datenschutz">Datenschutz</a>
       <a href="#branchen">Rechner</a>
       <a href="#voice-demo">Live-Demo</a>
       <a href="#fuer-wen">Für wen?</a>
@@ -451,11 +478,28 @@
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Angebot</span>
-        <h2>Zwei Pakete, klar abgegrenzt</h2>
+        <h2>Drei Schritte, klar abgegrenzt</h2>
       </div>
-      <div class="package-grid">
+      <div class="package-grid three">
 
         <div class="package-card reveal d1">
+          <span class="package-tag">Einstieg</span>
+          <h3>Prozess-Check</h3>
+          <div class="package-meta">
+            <div><span class="lbl">Dauer</span><span class="val">1 Woche</span></div>
+            <div><span class="lbl">Preis</span><span class="val price">CHF 2'200 Fixpreis</span></div>
+          </div>
+          <ul class="package-list">
+            <li>Aufnahme von 2–3 wiederkehrenden Abläufen vor Ort oder per Video</li>
+            <li>Schätzung der Zeitersparnis pro Ablauf</li>
+            <li>Empfehlung, welcher Ablauf sich zuerst lohnt, und welcher nicht</li>
+            <li>Schriftlicher Bericht mit Fixpreis für die Umsetzung</li>
+          </ul>
+          <p class="package-scope">Bei einer anschliessenden Umsetzung wird der Preis des Prozess-Checks vollständig angerechnet.</p>
+          <a class="btn-secondary" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener">Gespräch vereinbaren</a>
+        </div>
+
+        <div class="package-card reveal d2">
           <span class="package-tag">Schnellstart</span>
           <h3>Quick Win Automation</h3>
           <div class="package-meta">
@@ -469,10 +513,11 @@
             <li>Kurze Einschulung (1–2 Stunden)</li>
             <li>Einfache Dokumentation</li>
           </ul>
+          <p class="package-scope">Im Preis ab CHF 4'500 enthalten: ein Ablauf, bis zu 2 angebundene Systeme. Mehr Systeme oder Sonderfälle erhöhen den Preis; den Fixpreis erhalten Sie vor dem Start.</p>
           <a class="btn-secondary" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener">Gespräch vereinbaren</a>
         </div>
 
-        <div class="package-card featured reveal d2">
+        <div class="package-card featured reveal d3">
           <span class="package-tag">Nächster Schritt</span>
           <h3>KI-Agent Starter</h3>
           <div class="package-meta">
@@ -480,19 +525,122 @@
             <div><span class="lbl">Preis</span><span class="val price">ab CHF 8'500</span></div>
           </div>
           <ul class="package-list">
-            <li>Kick-off / Cadrage-Gespräch</li>
+            <li>Kick-off-Gespräch</li>
             <li>Konzeption und Aufbau eines KI-Agenten</li>
             <li>Grundlegende Integrationen</li>
             <li>Zugehörige Automatisierungen</li>
             <li>Tests und Anpassungen</li>
             <li>Einschulung + Dokumentation</li>
-            <li>2 Wochen Support nach Go-Live</li>
+            <li>2 Wochen Support nach Go-Live, danach optional Betrieb Plus</li>
           </ul>
+          <p class="package-scope">Im Preis ab CHF 8'500 enthalten: ein KI-Agent mit bis zu 3 Integrationen. Den Fixpreis erhalten Sie vor dem Start.</p>
           <a class="btn-primary" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener">Gespräch vereinbaren</a>
         </div>
 
       </div>
-      <p style="margin:22px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Beide Pakete: Fixpreis nach dem kostenlosen Erstgespräch — Sie wissen vorab, was es kostet.</p>
+      <p style="margin:22px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Alle Preise sind Fixpreise. Sie wissen vorab, was es kostet.</p>
+    </div>
+  </section>
+
+  <section id="betrieb" class="section-light">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Nach dem Go-Live</span>
+        <h2>Betrieb &amp; Wartung</h2>
+      </div>
+      <p style="color:var(--sec-muted); line-height:1.75; font-weight:300; max-width:60ch; margin:0 0 1.8em;">Automatisierungen hängen von Programmen ab, die sich ändern. Damit Ihre Lösung zuverlässig weiterläuft, übernehme ich auf Wunsch den Betrieb.</p>
+      <div class="package-grid">
+
+        <div class="package-card reveal d1">
+          <h3>Betrieb Basis</h3>
+          <div class="package-meta">
+            <div><span class="lbl">Preis</span><span class="val price">CHF 150 pro Monat</span></div>
+            <div><span class="lbl">Für</span><span class="val">eine Automatisierung</span></div>
+          </div>
+          <ul class="package-list">
+            <li>Automatische Überwachung mit Meldung bei Fehlern</li>
+            <li>Korrekturen, wenn sich ein angebundenes Programm oder eine Schnittstelle ändert</li>
+            <li>Kleine Anpassungen bis 1 Stunde pro Monat</li>
+            <li>Reaktion innert 2 Arbeitstagen</li>
+            <li>Kurzer Bericht alle sechs Monate</li>
+          </ul>
+        </div>
+
+        <div class="package-card reveal d2">
+          <h3>Betrieb Plus</h3>
+          <div class="package-meta">
+            <div><span class="lbl">Preis</span><span class="val price">CHF 350 pro Monat</span></div>
+            <div><span class="lbl">Für</span><span class="val">einen KI-Agenten mit zugehörigen Automatisierungen</span></div>
+          </div>
+          <ul class="package-list">
+            <li>Alles aus Betrieb Basis</li>
+            <li>Nachschärfen der Anweisungen des Agenten</li>
+            <li>Anpassungen bis 3 Stunden pro Monat</li>
+            <li>Reaktion innert 1 Arbeitstag</li>
+            <li>Quartalsgespräch mit Zahlen: gesparte Zeit, Fehlerquote</li>
+          </ul>
+        </div>
+
+      </div>
+      <p style="margin:22px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300; max-width:74ch; line-height:1.6;"><strong style="color:var(--sec-ink); font-weight:600;">Nicht enthalten:</strong> neue Abläufe und neue Funktionen (nach Offerte), laufende Kosten für Programme und KI-Dienste (zahlen Sie direkt beim Anbieter). Nicht genutzte Stunden verfallen am Monatsende.</p>
+      <p style="margin:10px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300; max-width:74ch; line-height:1.6;">Monatlich kündbar nach den ersten sechs Monaten. Ferienabwesenheiten kündige ich frühzeitig an.</p>
+    </div>
+  </section>
+
+  <section id="datenschutz" class="section-light">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Datenschutz</span>
+        <h2>Ihre Daten bleiben bei Ihnen</h2>
+      </div>
+      <p style="color:var(--sec-muted); line-height:1.75; font-weight:300; max-width:60ch; margin:0 0 1.8em;">Automatisierung heisst nicht, dass Ihre Daten das Haus verlassen. Vor jedem Projekt lege ich mit Ihnen schriftlich fest, welche Daten wohin fliessen.</p>
+      <div class="privacy-grid">
+        <div class="fit-item">
+          <h3>Läuft auf Ihren Konten</h3>
+          <p>Die Automatisierung arbeitet in Ihrer bestehenden Umgebung, zum Beispiel in Microsoft 365 oder in Ihren Fachprogrammen. Ich speichere keine Kundendaten bei mir.</p>
+        </div>
+        <div class="fit-item">
+          <h3>Datenstandort schriftlich vereinbart</h3>
+          <p>Standard ist die Verarbeitung in der Schweiz oder in der EU. Für besonders schützenswerte Daten wähle ich Lösungen mit Hosting in der Schweiz.</p>
+        </div>
+        <div class="fit-item">
+          <h3>Sensible Daten getrennt verarbeitet</h3>
+          <p>Bei heiklen Inhalten lassen sich identifizierende Angaben wie Namen, Adressen oder Kundennummern vor der KI-Verarbeitung durch Platzhalter ersetzen. Der KI-Dienst sieht dann nur den Inhalt, nicht die Person; die Zuordnung bleibt in Ihrer Umgebung und wird erst dort wieder eingesetzt. Ob das für Ihren Ablauf genügt, klären wir im Einzelfall.</p>
+        </div>
+        <div class="fit-item">
+          <h3>Kein Training mit Ihren Daten</h3>
+          <p>Ich setze nur KI-Dienste ein, die Ihre Daten vertraglich nicht zum Training ihrer Modelle verwenden.</p>
+        </div>
+        <div class="fit-item">
+          <h3>Auftragsbearbeitungsvertrag</h3>
+          <p>Mit jedem Kunden schliesse ich einen Vertrag nach Schweizer Datenschutzgesetz (nDSG) ab. Er regelt Zugriff, Vertraulichkeit und Löschung.</p>
+        </div>
+        <div class="fit-item">
+          <h3>Der Mensch entscheidet</h3>
+          <p>Die KI bereitet vor, Ihre Mitarbeitenden prüfen und geben frei.</p>
+        </div>
+        <div class="fit-item">
+          <h3>Kein Lock-in</h3>
+          <p>Alles ist dokumentiert und gehört Ihnen. Sie können jederzeit ohne mich weiterarbeiten.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="praxis" class="section-light">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Aus der Praxis</span>
+        <h2>Kinderbörse: Ordnung in einer WhatsApp-Gruppe mit 529 Mitgliedern</h2>
+      </div>
+      <div class="package-card reveal d1" style="max-width:640px;">
+        <ul class="package-list">
+          <li><strong>Ausgangslage:</strong> Eine Kinderkleiderbörse lief über einen WhatsApp-Chat. Angebote gingen im Verlauf unter, niemand fand, was er suchte.</li>
+          <li><strong>Umsetzung:</strong> Eine Web-App mit Inseraten, Filtern nach Grösse und Kategorie sowie Kinderprofilen. Zugang nur mit Gruppencode.</li>
+          <li><strong>Ergebnis:</strong> 42 Inserate und 71 Nutzerinnen in den ersten drei Tagen nach dem Start am 6. Oktober 2026.</li>
+        </ul>
+        <p class="package-scope">Von mir konzipiert und gebaut, für die Gruppe kostenlos.</p>
+      </div>
     </div>
   </section>
 
@@ -740,6 +888,7 @@
                 <label for="f-package">Interesse</label>
                 <select id="f-package" name="package">
                   <option value="">Noch offen</option>
+                  <option value="Prozess-Check">Prozess-Check</option>
                   <option value="Quick Win Automation">Quick Win Automation</option>
                   <option value="KI-Agent Starter">KI-Agent Starter</option>
                 </select>

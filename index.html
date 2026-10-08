@@ -170,7 +170,23 @@
       "name": "Wie läuft die Zusammenarbeit ab?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Am Anfang steht ein kostenloses 30-minütiges Gespräch, in dem der konkrete Bedarf geklärt wird. Danach folgt ein priorisierter Vorschlag: beim GEO-Audit ein Prüfbericht mit Aktionsplan, bei der Automatisierung ein klar abgegrenztes erstes Paket – Quick Win Automation oder KI-Agent Starter."
+        "text": "Am Anfang steht ein kostenloses 30-minütiges Gespräch, in dem der konkrete Bedarf geklärt wird. Danach folgt ein priorisierter Vorschlag: beim GEO-Audit ein Prüfbericht mit Aktionsplan, bei der Automatisierung ein klar abgegrenztes erstes Paket – Quick Win Automation oder KI-Agent Starter. Wer zuerst wissen will, welcher Ablauf sich lohnt, kann nach dem Gespräch mit dem Prozess-Check starten (CHF 2'200 Fixpreis): Zwei bis drei Abläufe werden aufgenommen und bewertet; bei einer anschliessenden Umsetzung wird der Preis vollständig angerechnet."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Was passiert mit unseren Daten?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Die Automatisierung läuft auf Ihren eigenen Konten, ich speichere keine Kundendaten bei mir. Vor jedem Projekt wird schriftlich festgelegt, wo die Daten verarbeitet werden; Standard ist die Schweiz oder die EU. Ihre Daten werden nicht zum Training von KI-Modellen verwendet, und ein Auftragsbearbeitungsvertrag nach Schweizer Datenschutzgesetz regelt Zugriff und Löschung."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Was kostet der Betrieb nach dem Projekt?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Der Betrieb ist freiwillig. Betrieb Basis kostet CHF 150 pro Monat für eine Automatisierung, Betrieb Plus CHF 350 pro Monat für einen KI-Agenten. Enthalten sind Überwachung, Korrekturen bei Änderungen an angebundenen Programmen und ein monatliches Stundenkontingent für kleine Anpassungen. Laufende Kosten für Programme und KI-Dienste zahlen Sie direkt beim Anbieter."
       }
     }
   ]
@@ -272,6 +288,10 @@
     filter:drop-shadow(0 0 22px var(--sec-glow-soft));
   }
   .hero p.lede{ font-size:1.08rem; line-height:1.7; color:var(--sec-muted); max-width:52ch; margin:0 0 2em; font-weight:300; }
+  .hero-points{ list-style:none; padding:0; margin:0 0 2.2em; display:grid; gap:10px; max-width:66ch; }
+  .hero-points li{ position:relative; padding-left:22px; font-size:.95rem; line-height:1.6; color:var(--sec-muted); font-weight:300; }
+  .hero-points li::before{ content:"—"; position:absolute; left:0; color:var(--sec-gold-deep); }
+  .hero-points strong{ color:var(--sec-ink); font-weight:600; }
   .cta-row{ display:flex; flex-wrap:wrap; gap:16px; align-items:center; }
 
   .btn-primary{
@@ -396,6 +416,11 @@
       <p class="eyebrow reveal d1" data-i18n="hero-eyebrow">Zbinden Software</p>
       <h1 class="reveal d2" data-i18n-html="hero-h1">Drei Wege, wie Ihr Unternehmen von <em>KI</em> profitiert.</h1>
       <p class="lede reveal d3" data-i18n="hero-lede">Ich automatisiere die Prozesse, die Zeit kosten, und sorge dafür, dass KI-Suchsysteme wie ChatGPT und Google AI Ihr Unternehmen überhaupt finden — und baue Websites, die genau dafür gemacht sind. Drei eigenständige, pragmatische Angebote für Schweizer KMU.</p>
+      <ul class="hero-points reveal d3">
+        <li><strong>Ingenieurin statt Agentur:</strong> fünf Jahre Software-Entwicklung in C++ bei Hexagon, danach Anforderungsanalyse bei Drees &amp; Sommer</li>
+        <li><strong>Eine Ansprechperson:</strong> Ich analysiere, baue und betreue selbst</li>
+        <li><strong>Im Fricktal zuhause:</strong> vor Ort in der Nordwestschweiz, auf Deutsch und Französisch</li>
+      </ul>
       <div class="cta-row reveal d4">
         <a class="btn-primary" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener" data-i18n="hero-btn-primary">Gespräch vereinbaren</a>
         <a class="btn-secondary" href="#angebote" data-i18n="hero-btn-secondary">Angebote ansehen</a>
@@ -413,8 +438,9 @@
         <a class="service-card" href="https://www.zbinden.online/ki-agenten-automatisierung">
           <span class="service-tag" data-i18n="card1-tag">KI & Automatisierung</span>
           <h3 data-i18n="card1-h3">KI-Agenten & Prozess&shy;automatisierung</h3>
-          <p data-i18n="card1-p">Ich automatisiere wiederkehrende Prozesse und baue KI-Agenten, die echte Aufgaben übernehmen — pragmatisch, schnell umsetzbar, mit messbarem Nutzen.</p>
+          <p data-i18n="card1-p">Ich automatisiere wiederkehrende Prozesse und baue KI-Agenten, die echte Aufgaben übernehmen — ein Ablauf nach dem anderen, eine erste Automatisierung live in ein bis zwei Wochen, ein KI-Agent in drei bis fünf, mit einer Zahl dazu: gesparte Stunden pro Woche.</p>
           <div class="pkg-chips">
+            <span class="pkg-chip">Prozess-Check</span>
             <span class="pkg-chip">Quick Win Automation</span>
             <span class="pkg-chip">KI-Agent Starter</span>
           </div>
@@ -453,7 +479,7 @@
         </div>
         <div class="fit-item reveal d3">
           <span class="n">03</span>
-          <p data-i18n="fit-3">Teams, die schnelle, messbare Resultate wollen — kein monatelanges IT-Projekt.</p>
+          <p data-i18n="fit-3">Teams, die in zwei Wochen einen ersten Ablauf automatisiert haben wollen, statt ein Jahresprojekt zu starten.</p>
         </div>
       </div>
     </div>
@@ -501,7 +527,15 @@
         </details>
         <details class="faq-item">
           <summary>Wie läuft die Zusammenarbeit ab?</summary>
-          <p class="faq-a">Am Anfang steht ein kostenloses 30-minütiges Gespräch, in dem der konkrete Bedarf geklärt wird. Danach folgt ein priorisierter Vorschlag: beim GEO-Audit ein Prüfbericht mit Aktionsplan, bei der Automatisierung ein klar abgegrenztes erstes Paket – Quick Win Automation oder KI-Agent Starter.</p>
+          <p class="faq-a">Am Anfang steht ein kostenloses 30-minütiges Gespräch, in dem der konkrete Bedarf geklärt wird. Danach folgt ein priorisierter Vorschlag: beim GEO-Audit ein Prüfbericht mit Aktionsplan, bei der Automatisierung ein klar abgegrenztes erstes Paket – Quick Win Automation oder KI-Agent Starter. Wer zuerst wissen will, welcher Ablauf sich lohnt, kann nach dem Gespräch mit dem Prozess-Check starten (CHF 2'200 Fixpreis): Zwei bis drei Abläufe werden aufgenommen und bewertet; bei einer anschliessenden Umsetzung wird der Preis vollständig angerechnet.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Was passiert mit unseren Daten?</summary>
+          <p class="faq-a">Die Automatisierung läuft auf Ihren eigenen Konten, ich speichere keine Kundendaten bei mir. Vor jedem Projekt wird schriftlich festgelegt, wo die Daten verarbeitet werden; Standard ist die Schweiz oder die EU. Ihre Daten werden nicht zum Training von KI-Modellen verwendet, und ein Auftragsbearbeitungsvertrag nach Schweizer Datenschutzgesetz regelt Zugriff und Löschung.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Was kostet der Betrieb nach dem Projekt?</summary>
+          <p class="faq-a">Der Betrieb ist freiwillig. Betrieb Basis kostet CHF 150 pro Monat für eine Automatisierung, Betrieb Plus CHF 350 pro Monat für einen KI-Agenten. Enthalten sind Überwachung, Korrekturen bei Änderungen an angebundenen Programmen und ein monatliches Stundenkontingent für kleine Anpassungen. Laufende Kosten für Programme und KI-Dienste zahlen Sie direkt beim Anbieter.</p>
         </details>
       </div>
     </div>

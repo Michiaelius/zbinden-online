@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Zbinden Software — Agents IA &amp; automatisation des processus</title>
-<meta name="description" content="Deux forfaits clairement définis pour les PME suisses : automatisation rapide d'un processus ou agent IA complet — pragmatique, rapide à mettre en place, avec un bénéfice mesurable.">
+<meta name="description" content="Prozess-Check, automatisation rapide d'un processus ou agent IA complet pour les PME suisses — à prix fixe, avec une protection des données clairement réglée et une exploitation en option après la mise en production.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.zbinden.online/fr/ki-agenten-automatisierung">
 <meta property="og:title" content="Zbinden Software — Agents IA &amp; automatisation des processus">
@@ -38,6 +38,12 @@
     "itemListElement": [
       {
         "@type": "Offer",
+        "name": "Prozess-Check",
+        "description": "Relevé de deux à trois processus récurrents, estimation du temps gagné et rapport écrit avec prix fixe pour la mise en œuvre. Le prix est entièrement déduit si une mise en œuvre suit.",
+        "priceSpecification": { "@type": "PriceSpecification", "price": 2200, "priceCurrency": "CHF" }
+      },
+      {
+        "@type": "Offer",
         "name": "Quick Win Automation",
         "description": "Identification et mise en œuvre de l'automatisation d'un processus prioritaire et récurrent.",
         "priceSpecification": { "@type": "PriceSpecification", "minPrice": 4500, "maxPrice": 6500, "priceCurrency": "CHF" }
@@ -47,6 +53,18 @@
         "name": "KI-Agent Starter",
         "description": "Conception, développement et intégration d'un agent IA, incluant les automatisations associées, les tests et le support après la mise en production.",
         "priceSpecification": { "@type": "PriceSpecification", "minPrice": 8500, "maxPrice": 14000, "priceCurrency": "CHF" }
+      },
+      {
+        "@type": "Offer",
+        "name": "Betrieb Basis",
+        "description": "Exploitation d'une automatisation après la mise en production : surveillance, corrections lorsque les logiciels connectés changent et petites adaptations jusqu'à 1 heure par mois.",
+        "priceSpecification": { "@type": "UnitPriceSpecification", "price": 150, "priceCurrency": "CHF", "unitCode": "MON" }
+      },
+      {
+        "@type": "Offer",
+        "name": "Betrieb Plus",
+        "description": "Exploitation d'un agent IA avec ses automatisations associées : tout ce que comprend Betrieb Basis, affinage des instructions de l'agent, adaptations jusqu'à 3 heures par mois et entretien trimestriel chiffré.",
+        "priceSpecification": { "@type": "UnitPriceSpecification", "price": 350, "priceCurrency": "CHF", "unitCode": "MON" }
       }
     ]
   }
@@ -192,6 +210,10 @@
   /* ---------- Package cards ---------- */
   .package-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:stretch; }
   @media (max-width:860px){ .package-grid{grid-template-columns:1fr;} }
+  .package-grid.three{ grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .package-grid.three .package-card{ padding:clamp(24px,2.6vw,30px); }
+  .package-grid.three .package-card h3{ font-size:1.45rem; }
+  @media (max-width:1020px){ .package-grid.three{grid-template-columns:1fr;} }
   .package-card{
     display:flex; flex-direction:column; gap:20px;
     border:1px solid var(--sec-line-gold); border-radius:var(--r-lg); background:var(--sec-bg-2);
@@ -212,6 +234,7 @@
   .package-list{ list-style:none; padding:0; margin:0; display:grid; gap:11px; flex:1; }
   .package-list li{ color:var(--sec-ink); font-size:.94rem; font-weight:300; padding-left:22px; position:relative; line-height:1.55; }
   .package-list li::before{ content:"—"; position:absolute; left:0; color:var(--sec-gold-deep); }
+  .package-scope{ margin:0; font-size:.82rem; color:var(--sec-muted); font-weight:300; line-height:1.6; }
   .package-card .btn-primary, .package-card .btn-secondary{ align-self:flex-start; }
 
   /* ---------- Fit / "Pour qui" grid ---------- */
@@ -220,6 +243,9 @@
   .fit-item{ background:var(--sec-bg-2); border:1px solid var(--sec-line); border-radius:var(--r-md); padding:26px 24px; }
   .fit-item .n{ font-family:var(--font-display); font-size:1.6rem; color:var(--sec-gold); font-weight:700; display:block; margin-bottom:10px; }
   .fit-item p{ margin:0; font-size:.92rem; color:var(--sec-muted); line-height:1.6; font-weight:300; }
+  .fit-item h3{ font-family:var(--font-ui); font-size:1rem; font-weight:600; margin:0 0 8px; color:var(--sec-ink); }
+  .privacy-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+  @media (max-width:820px){ .privacy-grid{grid-template-columns:1fr;} }
 
   /* ---------- CTA / Kontakt ---------- */
   .cta-band{ border:1px solid var(--sec-line-gold); border-radius:var(--r-lg); background:var(--sec-bg-2); padding:clamp(36px,5vw,58px); box-shadow:0 34px 80px -32px rgba(0,0,0,.5); }
@@ -416,6 +442,7 @@
     <a class="wordmark" href="https://www.zbinden.online/fr/">ZBINDEN<span class="dot">·</span>SOFTWARE <span class="sub">IA &amp; AUTOMATISATION</span></a>
     <nav class="top-nav">
       <a href="#pakete">Forfaits</a>
+      <a href="#datenschutz">Données</a>
       <a href="#branchen">Estimateur</a>
       <a href="#voice-demo">Démo live</a>
       <a href="#fuer-wen">Pour qui ?</a>
@@ -451,11 +478,28 @@
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Offre</span>
-        <h2>Deux forfaits, clairement définis</h2>
+        <h2>Trois étapes, clairement définies</h2>
       </div>
-      <div class="package-grid">
+      <div class="package-grid three">
 
         <div class="package-card reveal d1">
+          <span class="package-tag">Pour commencer</span>
+          <h3>Prozess-Check</h3>
+          <div class="package-meta">
+            <div><span class="lbl">Durée</span><span class="val">1 semaine</span></div>
+            <div><span class="lbl">Prix</span><span class="val price">CHF 2'200 prix fixe</span></div>
+          </div>
+          <ul class="package-list">
+            <li>Relevé de 2–3 processus récurrents, sur place ou en visioconférence</li>
+            <li>Estimation du temps gagné par processus</li>
+            <li>Recommandation : quel processus vaut la peine en premier, et lequel non</li>
+            <li>Rapport écrit avec prix fixe pour la mise en œuvre</li>
+          </ul>
+          <p class="package-scope">Si une mise en œuvre suit, le prix du Prozess-Check est entièrement déduit.</p>
+          <a class="btn-secondary" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener">Réserver un appel</a>
+        </div>
+
+        <div class="package-card reveal d2">
           <span class="package-tag">Démarrage rapide</span>
           <h3>Quick Win Automation</h3>
           <div class="package-meta">
@@ -469,10 +513,11 @@
             <li>Courte formation (1–2 heures)</li>
             <li>Documentation simple</li>
           </ul>
+          <p class="package-scope">Compris dans le prix dès CHF 4'500 : un processus, jusqu'à 2 systèmes connectés. Davantage de systèmes ou des cas particuliers augmentent le prix ; vous recevez le prix fixe avant le démarrage.</p>
           <a class="btn-secondary" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener">Réserver un appel</a>
         </div>
 
-        <div class="package-card featured reveal d2">
+        <div class="package-card featured reveal d3">
           <span class="package-tag">Étape suivante</span>
           <h3>KI-Agent Starter</h3>
           <div class="package-meta">
@@ -486,13 +531,116 @@
             <li>Automatisations associées</li>
             <li>Tests et ajustements</li>
             <li>Formation + documentation</li>
-            <li>2 semaines de support après la mise en production</li>
+            <li>2 semaines de support après la mise en production, puis Betrieb Plus en option</li>
           </ul>
+          <p class="package-scope">Compris dans le prix dès CHF 8'500 : un agent IA avec jusqu'à 3 intégrations. Vous recevez le prix fixe avant le démarrage.</p>
           <a class="btn-primary" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener">Réserver un appel</a>
         </div>
 
       </div>
-      <p style="margin:22px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Les deux forfaits : prix fixe après le premier entretien gratuit — vous savez à l'avance ce que ça coûte.</p>
+      <p style="margin:22px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Tous les prix sont des prix fixes. Vous savez à l'avance ce que ça coûte.</p>
+    </div>
+  </section>
+
+  <section id="betrieb" class="section-light">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Après la mise en production</span>
+        <h2>Exploitation &amp; maintenance</h2>
+      </div>
+      <p style="color:var(--sec-muted); line-height:1.75; font-weight:300; max-width:60ch; margin:0 0 1.8em;">Les automatisations dépendent de logiciels qui évoluent. Pour que votre solution continue de fonctionner de manière fiable, je prends en charge l'exploitation si vous le souhaitez.</p>
+      <div class="package-grid">
+
+        <div class="package-card reveal d1">
+          <h3>Betrieb Basis</h3>
+          <div class="package-meta">
+            <div><span class="lbl">Prix</span><span class="val price">CHF 150 par mois</span></div>
+            <div><span class="lbl">Pour</span><span class="val">une automatisation</span></div>
+          </div>
+          <ul class="package-list">
+            <li>Surveillance automatique avec alerte en cas d'erreur</li>
+            <li>Corrections lorsqu'un logiciel connecté ou une interface change</li>
+            <li>Petites adaptations jusqu'à 1 heure par mois</li>
+            <li>Réaction sous 2 jours ouvrés</li>
+            <li>Bref rapport tous les six mois</li>
+          </ul>
+        </div>
+
+        <div class="package-card reveal d2">
+          <h3>Betrieb Plus</h3>
+          <div class="package-meta">
+            <div><span class="lbl">Prix</span><span class="val price">CHF 350 par mois</span></div>
+            <div><span class="lbl">Pour</span><span class="val">un agent IA avec ses automatisations associées</span></div>
+          </div>
+          <ul class="package-list">
+            <li>Tout ce que comprend Betrieb Basis</li>
+            <li>Affinage des instructions de l'agent</li>
+            <li>Adaptations jusqu'à 3 heures par mois</li>
+            <li>Réaction sous 1 jour ouvré</li>
+            <li>Entretien trimestriel chiffré : temps gagné, taux d'erreur</li>
+          </ul>
+        </div>
+
+      </div>
+      <p style="margin:22px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300; max-width:74ch; line-height:1.6;"><strong style="color:var(--sec-ink); font-weight:600;">Non compris :</strong> nouveaux processus et nouvelles fonctions (sur offre), coûts courants des logiciels et des services d'IA (vous les payez directement au fournisseur). Les heures non utilisées expirent à la fin du mois.</p>
+      <p style="margin:10px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300; max-width:74ch; line-height:1.6;">Résiliable chaque mois après les six premiers mois. J'annonce mes absences pour vacances suffisamment tôt.</p>
+    </div>
+  </section>
+
+  <section id="datenschutz" class="section-light">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Protection des données</span>
+        <h2>Vos données restent chez vous</h2>
+      </div>
+      <p style="color:var(--sec-muted); line-height:1.75; font-weight:300; max-width:60ch; margin:0 0 1.8em;">Automatiser ne veut pas dire que vos données quittent la maison. Avant chaque projet, je fixe avec vous par écrit quelles données vont où.</p>
+      <div class="privacy-grid">
+        <div class="fit-item">
+          <h3>Fonctionne sur vos comptes</h3>
+          <p>L'automatisation travaille dans votre environnement existant, par exemple dans Microsoft 365 ou dans vos logiciels métier. Je ne stocke aucune donnée client chez moi.</p>
+        </div>
+        <div class="fit-item">
+          <h3>Lieu des données convenu par écrit</h3>
+          <p>Par défaut, le traitement a lieu en Suisse ou dans l'UE. Pour les données particulièrement sensibles, je choisis des solutions hébergées en Suisse.</p>
+        </div>
+        <div class="fit-item">
+          <h3>Données sensibles traitées séparément</h3>
+          <p>Pour les contenus délicats, les éléments identifiants comme les noms, les adresses ou les numéros de client peuvent être remplacés par des marqueurs avant le traitement par l'IA. Le service d'IA ne voit alors que le contenu, pas la personne ; la correspondance reste dans votre environnement et n'y est rétablie qu'à ce moment-là. Nous clarifions au cas par cas si cela suffit pour votre processus.</p>
+        </div>
+        <div class="fit-item">
+          <h3>Pas d'entraînement avec vos données</h3>
+          <p>Je n'utilise que des services d'IA qui s'engagent par contrat à ne pas utiliser vos données pour entraîner leurs modèles.</p>
+        </div>
+        <div class="fit-item">
+          <h3>Contrat de sous-traitance</h3>
+          <p>Avec chaque client, je conclus un contrat conforme à la loi suisse sur la protection des données (nLPD). Il règle l'accès, la confidentialité et la suppression.</p>
+        </div>
+        <div class="fit-item">
+          <h3>L'humain décide</h3>
+          <p>L'IA prépare, vos collaborateurs vérifient et valident.</p>
+        </div>
+        <div class="fit-item">
+          <h3>Pas de dépendance</h3>
+          <p>Tout est documenté et vous appartient. Vous pouvez continuer sans moi à tout moment.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="praxis" class="section-light">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Cas concret</span>
+        <h2>Kinderbörse : de l'ordre dans un groupe WhatsApp de 529 membres</h2>
+      </div>
+      <div class="package-card reveal d1" style="max-width:640px;">
+        <ul class="package-list">
+          <li><strong>Situation de départ :</strong> Une bourse aux vêtements d'enfants fonctionnait dans une discussion WhatsApp. Les offres se perdaient dans le fil, personne ne trouvait ce qu'il cherchait.</li>
+          <li><strong>Mise en œuvre :</strong> Une application web avec annonces, filtres par taille et par catégorie, et profils d'enfants. Accès uniquement avec le code du groupe.</li>
+          <li><strong>Résultat :</strong> 42 annonces et 71 utilisatrices dans les trois premiers jours après le lancement, le 6 octobre 2026.</li>
+        </ul>
+        <p class="package-scope">Conçue et développée par mes soins, gratuitement pour le groupe.</p>
+      </div>
     </div>
   </section>
 
@@ -740,6 +888,7 @@
                 <label for="f-package">Intérêt</label>
                 <select id="f-package" name="package">
                   <option value="">Pas encore décidé</option>
+                  <option value="Prozess-Check">Prozess-Check</option>
                   <option value="Quick Win Automation">Quick Win Automation</option>
                   <option value="KI-Agent Starter">KI-Agent Starter</option>
                 </select>
