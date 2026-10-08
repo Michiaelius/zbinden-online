@@ -235,6 +235,19 @@
   .package-list li{ color:var(--sec-ink); font-size:.94rem; font-weight:300; padding-left:22px; position:relative; line-height:1.55; }
   .package-list li::before{ content:"—"; position:absolute; left:0; color:var(--sec-gold-deep); }
   .package-scope{ margin:0; font-size:.82rem; color:var(--sec-muted); font-weight:300; line-height:1.6; }
+  .case-grid{ display:grid; grid-template-columns:220px minmax(0,640px); gap:clamp(28px,5vw,60px); align-items:center; }
+  @media (max-width:760px){ .case-grid{grid-template-columns:minmax(0,1fr); justify-items:center;} .case-grid .package-card{justify-self:stretch;} }
+  .phone{
+    width:100%; max-width:220px; aspect-ratio:390/780; border:7px solid #18150f; border-radius:30px; overflow:hidden; background:#fbf6ee;
+    box-shadow:0 24px 50px -18px rgba(0,0,0,.5);
+  }
+  .phone img{ display:block; width:100%; height:100%; object-fit:cover; object-position:top center; }
+  .case-stat{ display:flex; flex-direction:column; gap:12px; padding-bottom:20px; border-bottom:1px solid var(--sec-line); }
+  .case-stat .big{ font-family:var(--font-display); font-size:clamp(2.6rem,7vw,3.4rem); font-weight:700; line-height:1; color:var(--sec-gold-deep); letter-spacing:-.01em; }
+  .case-stat .big small{ font-size:.42em; font-weight:600; color:var(--sec-muted); letter-spacing:0; }
+  .case-stat p{ margin:0; font-size:.98rem; line-height:1.5; color:var(--sec-ink); font-weight:300; }
+  .case-bar{ height:6px; border-radius:var(--r-pill); background:var(--sec-alt-soft); overflow:hidden; }
+  .case-bar span{ display:block; width:13.4%; height:100%; border-radius:var(--r-pill); background:linear-gradient(90deg,var(--sec-gold-deep),var(--sec-gold)); }
   .package-card .btn-primary, .package-card .btn-secondary{ align-self:flex-start; }
 
   /* ---------- Fit / "Für wen" grid ---------- */
@@ -633,13 +646,21 @@
         <span class="eyebrow">Aus der Praxis</span>
         <h2>Kinderbörse: Ordnung in einer WhatsApp-Gruppe mit 529 Mitgliedern</h2>
       </div>
-      <div class="package-card reveal d1" style="max-width:640px;">
-        <ul class="package-list">
-          <li><strong>Ausgangslage:</strong> Eine Kinderkleiderbörse lief über einen WhatsApp-Chat. Angebote gingen im Verlauf unter, niemand fand, was er suchte.</li>
-          <li><strong>Umsetzung:</strong> Eine Web-App mit Inseraten, Filtern nach Grösse und Kategorie sowie Kinderprofilen. Zugang nur mit Gruppencode.</li>
-          <li><strong>Ergebnis:</strong> 42 Inserate und 71 Nutzerinnen in den ersten drei Tagen nach dem Start am 6. Oktober 2026.</li>
-        </ul>
-        <p class="package-scope">Von mir konzipiert und gebaut, für die Gruppe kostenlos.</p>
+      <div class="case-grid">
+        <div class="phone reveal d1"><img src="../images/referenzen/kinderboerse-mobile.webp" width="780" height="1688" alt="Kinderbörse auf dem Smartphone: Suchfilter und Inserate (Beispieldaten)" loading="lazy"></div>
+        <div class="package-card reveal d2">
+          <div class="case-stat">
+            <span class="big">71 <small>von 529</small></span>
+            <div class="case-bar" role="img" aria-label="71 von 529 Mitgliedern, 13 Prozent"><span></span></div>
+            <p><strong>Mitglieder haben sich in den ersten drei Tagen angemeldet</strong> – 13&nbsp;% der Gruppe.</p>
+          </div>
+          <ul class="package-list">
+            <li><strong>Ausgangslage:</strong> Eine Kinderkleiderbörse lief über einen WhatsApp-Chat. Angebote gingen im Verlauf unter, niemand fand, was er suchte.</li>
+            <li><strong>Umsetzung:</strong> Eine Web-App mit Inseraten, Filtern nach Grösse und Kategorie sowie Kinderprofilen. Zugang nur mit Gruppencode.</li>
+            <li><strong>Ergebnis:</strong> Start am 6. Oktober 2026. Drei Tage später waren 71 der 529 Mitglieder angemeldet und 42 Inserate online.</li>
+          </ul>
+          <p class="package-scope">Von mir konzipiert und gebaut, für die Gruppe kostenlos.</p>
+        </div>
       </div>
     </div>
   </section>

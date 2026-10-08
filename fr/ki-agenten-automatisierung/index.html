@@ -235,6 +235,19 @@
   .package-list li{ color:var(--sec-ink); font-size:.94rem; font-weight:300; padding-left:22px; position:relative; line-height:1.55; }
   .package-list li::before{ content:"—"; position:absolute; left:0; color:var(--sec-gold-deep); }
   .package-scope{ margin:0; font-size:.82rem; color:var(--sec-muted); font-weight:300; line-height:1.6; }
+  .case-grid{ display:grid; grid-template-columns:220px minmax(0,640px); gap:clamp(28px,5vw,60px); align-items:center; }
+  @media (max-width:760px){ .case-grid{grid-template-columns:minmax(0,1fr); justify-items:center;} .case-grid .package-card{justify-self:stretch;} }
+  .phone{
+    width:100%; max-width:220px; aspect-ratio:390/780; border:7px solid #18150f; border-radius:30px; overflow:hidden; background:#fbf6ee;
+    box-shadow:0 24px 50px -18px rgba(0,0,0,.5);
+  }
+  .phone img{ display:block; width:100%; height:100%; object-fit:cover; object-position:top center; }
+  .case-stat{ display:flex; flex-direction:column; gap:12px; padding-bottom:20px; border-bottom:1px solid var(--sec-line); }
+  .case-stat .big{ font-family:var(--font-display); font-size:clamp(2.6rem,7vw,3.4rem); font-weight:700; line-height:1; color:var(--sec-gold-deep); letter-spacing:-.01em; }
+  .case-stat .big small{ font-size:.42em; font-weight:600; color:var(--sec-muted); letter-spacing:0; }
+  .case-stat p{ margin:0; font-size:.98rem; line-height:1.5; color:var(--sec-ink); font-weight:300; }
+  .case-bar{ height:6px; border-radius:var(--r-pill); background:var(--sec-alt-soft); overflow:hidden; }
+  .case-bar span{ display:block; width:13.4%; height:100%; border-radius:var(--r-pill); background:linear-gradient(90deg,var(--sec-gold-deep),var(--sec-gold)); }
   .package-card .btn-primary, .package-card .btn-secondary{ align-self:flex-start; }
 
   /* ---------- Fit / "Pour qui" grid ---------- */
@@ -633,13 +646,21 @@
         <span class="eyebrow">Cas concret</span>
         <h2>Kinderbörse : de l'ordre dans un groupe WhatsApp de 529 membres</h2>
       </div>
-      <div class="package-card reveal d1" style="max-width:640px;">
-        <ul class="package-list">
-          <li><strong>Situation de départ :</strong> Une bourse aux vêtements d'enfants fonctionnait dans une discussion WhatsApp. Les offres se perdaient dans le fil, personne ne trouvait ce qu'il cherchait.</li>
-          <li><strong>Mise en œuvre :</strong> Une application web avec annonces, filtres par taille et par catégorie, et profils d'enfants. Accès uniquement avec le code du groupe.</li>
-          <li><strong>Résultat :</strong> 42 annonces et 71 utilisatrices dans les trois premiers jours après le lancement, le 6 octobre 2026.</li>
-        </ul>
-        <p class="package-scope">Conçue et développée par mes soins, gratuitement pour le groupe.</p>
+      <div class="case-grid">
+        <div class="phone reveal d1"><img src="../../images/referenzen/kinderboerse-mobile.webp" width="780" height="1688" alt="La Kinderbörse sur smartphone : filtres de recherche et annonces (données d’exemple)" loading="lazy"></div>
+        <div class="package-card reveal d2">
+          <div class="case-stat">
+            <span class="big">71 <small>sur 529</small></span>
+            <div class="case-bar" role="img" aria-label="71 membres sur 529, 13 pour cent"><span></span></div>
+            <p><strong>membres inscrites dans les trois premiers jours</strong> – 13&nbsp;% du groupe.</p>
+          </div>
+          <ul class="package-list">
+            <li><strong>Situation de départ :</strong> Une bourse aux vêtements d'enfants fonctionnait dans une discussion WhatsApp. Les offres se perdaient dans le fil, personne ne trouvait ce qu'il cherchait.</li>
+            <li><strong>Mise en œuvre :</strong> Une application web avec annonces, filtres par taille et par catégorie, et profils d'enfants. Accès uniquement avec le code du groupe.</li>
+            <li><strong>Résultat :</strong> lancement le 6 octobre 2026. Trois jours plus tard, 71 des 529 membres étaient inscrites et 42 annonces en ligne.</li>
+          </ul>
+          <p class="package-scope">Conçue et développée par mes soins, gratuitement pour le groupe.</p>
+        </div>
       </div>
     </div>
   </section>
