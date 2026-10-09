@@ -44,6 +44,12 @@
       },
       {
         "@type": "Offer",
+        "name": "GEO-Optimierung einer bestehenden Website",
+        "description": "Für bestehende Websites, die gut gemacht sind, aber von KI-Assistenten nicht genannt werden (Preis gilt bis ca. 5 Seiten): strukturierte Daten zu Unternehmen, Angebot und Öffnungszeiten, Zugang für KI-Crawler geöffnet, technische Grundlagen korrigiert, einheitliche Kontaktangaben und Impressum, Vorher-Nachher-Kontrolle mit dem KI-Check. Einmalig, kein Abo; das Design bleibt unverändert.",
+        "priceSpecification": { "@type": "PriceSpecification", "minPrice": 900, "priceCurrency": "CHF" }
+      },
+      {
+        "@type": "Offer",
         "name": "GEO-Audit komplett",
         "description": "Sechs gewichtete Kategorien, Benchmark gegenüber Mitbewerbern und priorisierter 30-Tage-Aktionsplan. Passt der Plan, setze ich die einzelnen Punkte um, mit Offerte nach dem Audit.",
         "priceSpecification": { "@type": "PriceSpecification", "minPrice": 1900, "maxPrice": 3900, "priceCurrency": "CHF" }
@@ -52,7 +58,7 @@
         "@type": "Offer",
         "name": "Webdesign — GEO-ready ab dem ersten Tag",
         "description": "Individuelle Website mit strukturierten Daten, sauberem semantischem HTML und für KI-Crawler geöffnetem robots.txt.",
-        "priceSpecification": { "@type": "PriceSpecification", "minPrice": 2400, "priceCurrency": "CHF" }
+        "priceSpecification": { "@type": "PriceSpecification", "minPrice": 1800, "priceCurrency": "CHF" }
       }
     ]
   }
@@ -201,6 +207,9 @@
   /* ---------- Package cards ---------- */
   .package-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:stretch; }
   @media (max-width:860px){ .package-grid{grid-template-columns:1fr;} }
+  .package-grid.three{ grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
+  .package-grid.three .package-list{ align-content:start; }
+  @media (max-width:1020px){ .package-grid.three{grid-template-columns:1fr;} }
   .package-card{
     display:flex; flex-direction:column; gap:20px;
     border:1px solid var(--sec-line-gold); border-radius:var(--r-lg); background:var(--sec-bg-2);
@@ -501,9 +510,9 @@
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Angebot</span>
-        <h2>Ein Einstieg ohne Risiko, dann das komplette Audit</h2>
+        <h2>Ein Einstieg ohne Risiko, dann der passende nächste Schritt</h2>
       </div>
-      <div class="package-grid">
+      <div class="package-grid three">
 
         <div class="package-card reveal d1">
           <span class="package-tag">Kostenloser Einstieg</span>
@@ -534,7 +543,27 @@
           <div class="form-status err" id="glErr" hidden>Das hat leider nicht geklappt. Schreiben Sie mir direkt an <a href="mailto:info@zbinden.online" style="color:inherit; text-decoration:underline;">info@zbinden.online</a>.</div>
         </div>
 
-        <div class="package-card featured reveal d2">
+        <div class="package-card reveal d2">
+          <span class="package-tag">Für Ihre bestehende Website</span>
+          <h3>GEO-Optimierung</h3>
+          <div class="package-meta">
+            <div><span class="lbl">Abrechnung</span><span class="val">einmalig, kein Abo</span></div>
+            <div><span class="lbl">Preis</span><span class="val price">ab CHF 900</span></div>
+          </div>
+          <ul class="package-list">
+            <li>Für Websites, die gut gemacht sind, aber von KI-Assistenten nicht genannt werden</li>
+            <li>Strukturierte Daten zu Unternehmen, Angebot und Öffnungszeiten</li>
+            <li>Zugang für KI-Crawler geöffnet, technische Grundlagen korrigiert</li>
+            <li>Einheitliche Kontaktangaben und Impressum</li>
+            <li>Vorher-Nachher-Kontrolle mit dem KI-Check</li>
+            <li>Ihr Design bleibt, wie es ist: die Anpassungen passieren im Hintergrund</li>
+            <li>Der Preis gilt für Websites bis ca. 5 Seiten</li>
+          </ul>
+          <p style="margin:0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Voraussetzung ist ein Zugang zu Ihrer Website. Bei Baukasten-Systemen sind manche Anpassungen eingeschränkt; das kläre ich vor dem Start.</p>
+          <a class="btn-secondary" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener">Gespräch vereinbaren</a>
+        </div>
+
+        <div class="package-card featured reveal d3">
           <span class="package-tag">Empfohlen</span>
           <h3>GEO-Audit komplett</h3>
           <div class="package-meta">
@@ -552,7 +581,8 @@
         </div>
 
       </div>
-      <p style="margin:22px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>Sie bleiben mit dem Plan nicht allein.</strong> Passt der Plan für Sie, setze ich die einzelnen Punkte in den 30 Tagen um — Sie erhalten dafür nach dem Audit eine Offerte.</p>
+      <p style="margin:22px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>Ihre Website ist gut, wird aber von KI-Assistenten nicht genannt?</strong> Wenn sie für Ihre Besucher funktioniert — klar, mobil, mit aktuellen Inhalten —, reicht oft die <a href="/webdesign#angebot" style="color:inherit; text-decoration:none; border-bottom:1px solid var(--sec-line-gold);">GEO-Optimierung ab CHF 900</a>: Die Anpassungen passieren im Hintergrund, Ihr Design bleibt. Der komplette GEO-Audit lohnt sich, wenn die Ursache tiefer liegt: bei Inhalten, Erwähnungen auf anderen Seiten oder im Vergleich zu Mitbewerbern.</p>
+      <p style="margin:10px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>Sie bleiben mit dem Plan nicht allein.</strong> Passt der Plan für Sie, setze ich die einzelnen Punkte in den 30 Tagen um — Sie erhalten dafür nach dem Audit eine Offerte.</p>
       <p style="margin:10px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Wird im Anschluss eine neue Website mit mehreren Seiten bei mir beauftragt, wird der Preis des GEO-Audits vollständig angerechnet.</p>
     </div>
   </section>
@@ -661,7 +691,7 @@
         <h3>Website neu, GEO-ready ab dem ersten Tag</h3>
         <div class="package-meta">
           <div><span class="lbl">Dauer</span><span class="val">2–4 Wochen</span></div>
-          <div><span class="lbl">Preis</span><span class="val price">ab CHF 2'400</span></div>
+          <div><span class="lbl">Preis</span><span class="val price">ab CHF 1'800</span></div>
         </div>
         <ul class="package-list">
           <li>Individuelles Design, für Mobile optimiert</li>

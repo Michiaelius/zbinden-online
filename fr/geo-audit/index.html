@@ -44,6 +44,12 @@
       },
       {
         "@type": "Offer",
+        "name": "Optimisation GEO d'un site existant",
+        "description": "Pour les sites existants bien faits que les assistants IA ne citent pas encore (prix valable jusqu'à env. 5 pages) : données structurées sur l'entreprise, l'offre et les horaires, accès ouvert aux crawlers IA, bases techniques corrigées, coordonnées cohérentes et mentions légales, contrôle avant-après avec le test IA. Paiement unique, sans abonnement ; le design reste inchangé.",
+        "priceSpecification": { "@type": "PriceSpecification", "minPrice": 900, "priceCurrency": "CHF" }
+      },
+      {
+        "@type": "Offer",
         "name": "Audit GEO complet",
         "description": "Six catégories pondérées, benchmark face aux concurrents et plan d'action priorisé sur 30 jours. Si le plan convient, je mets les différents points en œuvre, sur devis après l'audit.",
         "priceSpecification": { "@type": "PriceSpecification", "minPrice": 1900, "maxPrice": 3900, "priceCurrency": "CHF" }
@@ -52,7 +58,7 @@
         "@type": "Offer",
         "name": "Webdesign — GEO-ready dès le premier jour",
         "description": "Site web individuel avec données structurées, HTML sémantique propre et robots.txt ouvert aux crawlers IA.",
-        "priceSpecification": { "@type": "PriceSpecification", "minPrice": 2400, "priceCurrency": "CHF" }
+        "priceSpecification": { "@type": "PriceSpecification", "minPrice": 1800, "priceCurrency": "CHF" }
       }
     ]
   }
@@ -201,6 +207,9 @@
   /* ---------- Package cards ---------- */
   .package-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:stretch; }
   @media (max-width:860px){ .package-grid{grid-template-columns:1fr;} }
+  .package-grid.three{ grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
+  .package-grid.three .package-list{ align-content:start; }
+  @media (max-width:1020px){ .package-grid.three{grid-template-columns:1fr;} }
   .package-card{
     display:flex; flex-direction:column; gap:20px;
     border:1px solid var(--sec-line-gold); border-radius:var(--r-lg); background:var(--sec-bg-2);
@@ -501,9 +510,9 @@
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Offre</span>
-        <h2>Une entrée sans risque, puis l'audit complet</h2>
+        <h2>Une entrée sans risque, puis l'étape qui vous convient</h2>
       </div>
-      <div class="package-grid">
+      <div class="package-grid three">
 
         <div class="package-card reveal d1">
           <span class="package-tag">Entrée gratuite</span>
@@ -534,7 +543,27 @@
           <div class="form-status err" id="glErr" hidden>Un problème est survenu. Écrivez-moi directement à <a href="mailto:info@zbinden.online" style="color:inherit; text-decoration:underline;">info@zbinden.online</a>.</div>
         </div>
 
-        <div class="package-card featured reveal d2">
+        <div class="package-card reveal d2">
+          <span class="package-tag">Pour votre site existant</span>
+          <h3>Optimisation GEO</h3>
+          <div class="package-meta">
+            <div><span class="lbl">Facturation</span><span class="val">unique, sans abonnement</span></div>
+            <div><span class="lbl">Prix</span><span class="val price">dès CHF 900</span></div>
+          </div>
+          <ul class="package-list">
+            <li>Pour les sites bien faits que les assistants IA ne citent pas encore</li>
+            <li>Données structurées sur votre entreprise, votre offre et vos horaires</li>
+            <li>Accès ouvert aux crawlers IA, bases techniques corrigées</li>
+            <li>Coordonnées cohérentes et mentions légales</li>
+            <li>Contrôle avant-après avec le test IA</li>
+            <li>Votre design reste tel quel : les ajustements se font en arrière-plan</li>
+            <li>Le prix vaut pour les sites jusqu'à env. 5 pages</li>
+          </ul>
+          <p style="margin:0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Condition : un accès à votre site. Avec les éditeurs de sites en kit, certains ajustements sont limités ; je clarifie cela avant de commencer.</p>
+          <a class="btn-secondary" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener">Prendre rendez-vous</a>
+        </div>
+
+        <div class="package-card featured reveal d3">
           <span class="package-tag">Recommandé</span>
           <h3>Audit GEO complet</h3>
           <div class="package-meta">
@@ -552,7 +581,8 @@
         </div>
 
       </div>
-      <p style="margin:22px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>Vous ne restez pas seul avec votre plan.</strong> Si le plan vous convient, je mets les différents points en œuvre pendant les 30 jours — vous recevez un devis après l'audit.</p>
+      <p style="margin:22px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>Votre site est bon, mais les assistants IA ne vous citent pas ?</strong> S'il fonctionne pour vos visiteurs — clair, adapté au mobile, avec des contenus à jour —, l'<a href="/fr/webdesign#angebot" style="color:inherit; text-decoration:none; border-bottom:1px solid var(--sec-line-gold);">optimisation GEO dès CHF 900</a> suffit souvent : les ajustements se font en arrière-plan, votre design reste. L'audit GEO complet vaut la peine quand la cause est plus profonde : contenus, mentions sur d'autres sites ou comparaison avec vos concurrents.</p>
+      <p style="margin:10px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>Vous ne restez pas seul avec votre plan.</strong> Si le plan vous convient, je mets les différents points en œuvre pendant les 30 jours — vous recevez un devis après l'audit.</p>
       <p style="margin:10px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Si un nouveau site de plusieurs pages m'est ensuite confié, le prix de l'audit GEO est intégralement déduit.</p>
     </div>
   </section>
@@ -661,7 +691,7 @@
         <h3>Nouveau site, GEO-ready dès le premier jour</h3>
         <div class="package-meta">
           <div><span class="lbl">Durée</span><span class="val">2–4 semaines</span></div>
-          <div><span class="lbl">Prix</span><span class="val price">dès CHF 2'400</span></div>
+          <div><span class="lbl">Prix</span><span class="val price">dès CHF 1'800</span></div>
         </div>
         <ul class="package-list">
           <li>Design individuel, optimisé pour mobile</li>

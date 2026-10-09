@@ -44,6 +44,12 @@
       },
       {
         "@type": "Offer",
+        "name": "GEO optimization of an existing website",
+        "description": "For existing well-made websites that AI assistants don't mention yet (price applies up to about 5 pages): structured data on the business, offering and opening hours, access opened for AI crawlers, technical basics fixed, consistent contact details and legal notice, before-and-after comparison with the AI check. One-off, no subscription; the design stays unchanged.",
+        "priceSpecification": { "@type": "PriceSpecification", "minPrice": 900, "priceCurrency": "CHF" }
+      },
+      {
+        "@type": "Offer",
         "name": "GEO Audit complete",
         "description": "Six weighted categories, a competitive benchmark and a prioritized 30-day action plan. If the plan works for you, I implement the individual points, quoted after the audit.",
         "priceSpecification": { "@type": "PriceSpecification", "minPrice": 1900, "maxPrice": 3900, "priceCurrency": "CHF" }
@@ -52,7 +58,7 @@
         "@type": "Offer",
         "name": "Web design — GEO-ready from day one",
         "description": "A custom website with structured data, clean semantic HTML and a robots.txt open to AI crawlers.",
-        "priceSpecification": { "@type": "PriceSpecification", "minPrice": 2400, "priceCurrency": "CHF" }
+        "priceSpecification": { "@type": "PriceSpecification", "minPrice": 1800, "priceCurrency": "CHF" }
       }
     ]
   }
@@ -201,6 +207,9 @@
   /* ---------- Package cards ---------- */
   .package-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:stretch; }
   @media (max-width:860px){ .package-grid{grid-template-columns:1fr;} }
+  .package-grid.three{ grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
+  .package-grid.three .package-list{ align-content:start; }
+  @media (max-width:1020px){ .package-grid.three{grid-template-columns:1fr;} }
   .package-card{
     display:flex; flex-direction:column; gap:20px;
     border:1px solid var(--sec-line-gold); border-radius:var(--r-lg); background:var(--sec-bg-2);
@@ -501,9 +510,9 @@
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Offer</span>
-        <h2>A risk-free entry point, then the full audit</h2>
+        <h2>A risk-free entry point, then the right next step</h2>
       </div>
-      <div class="package-grid">
+      <div class="package-grid three">
 
         <div class="package-card reveal d1">
           <span class="package-tag">Free entry point</span>
@@ -534,7 +543,27 @@
           <div class="form-status err" id="glErr" hidden>Something went wrong. Please email me directly at <a href="mailto:info@zbinden.online" style="color:inherit; text-decoration:underline;">info@zbinden.online</a>.</div>
         </div>
 
-        <div class="package-card featured reveal d2">
+        <div class="package-card reveal d2">
+          <span class="package-tag">For your existing website</span>
+          <h3>GEO optimization</h3>
+          <div class="package-meta">
+            <div><span class="lbl">Billing</span><span class="val">one-off, no subscription</span></div>
+            <div><span class="lbl">Price</span><span class="val price">from CHF 900</span></div>
+          </div>
+          <ul class="package-list">
+            <li>For well-made websites that AI assistants don't mention yet</li>
+            <li>Structured data on your business, offering and opening hours</li>
+            <li>Access opened for AI crawlers, technical basics fixed</li>
+            <li>Consistent contact details and legal notice</li>
+            <li>Before-and-after comparison with the AI check</li>
+            <li>Your design stays as it is: the changes happen in the background</li>
+            <li>The price applies to websites of up to about 5 pages</li>
+          </ul>
+          <p style="margin:0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Access to your website is required. With website builders, some changes are limited; I'll clarify this before we start.</p>
+          <a class="btn-secondary" href="https://calendly.com/zbinden-austausch" target="_blank" rel="noopener">Schedule a call</a>
+        </div>
+
+        <div class="package-card featured reveal d3">
           <span class="package-tag">Recommended</span>
           <h3>GEO Audit complete</h3>
           <div class="package-meta">
@@ -552,7 +581,8 @@
         </div>
 
       </div>
-      <p style="margin:22px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>You are not left alone with the plan.</strong> If the plan works for you, I implement the individual points over the 30 days — you receive a quote after the audit.</p>
+      <p style="margin:22px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>Your website is good, but AI assistants don't mention you?</strong> If it works for your visitors — clear, mobile-friendly, with up-to-date content — the <a href="/en/webdesign#angebot" style="color:inherit; text-decoration:none; border-bottom:1px solid var(--sec-line-gold);">GEO optimization from CHF 900</a> is often enough: the changes happen in the background, your design stays. The complete GEO audit is worth it when the cause runs deeper: content, mentions on other sites or how you compare with competitors.</p>
+      <p style="margin:10px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>You are not left alone with the plan.</strong> If the plan works for you, I implement the individual points over the 30 days — you receive a quote after the audit.</p>
       <p style="margin:10px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">If you follow up with a new multi-page website with me, the GEO audit price is fully credited.</p>
     </div>
   </section>
@@ -661,7 +691,7 @@
         <h3>New website, GEO-ready from day one</h3>
         <div class="package-meta">
           <div><span class="lbl">Duration</span><span class="val">2–4 weeks</span></div>
-          <div><span class="lbl">Price</span><span class="val price">from CHF 2'400</span></div>
+          <div><span class="lbl">Price</span><span class="val price">from CHF 1'800</span></div>
         </div>
         <ul class="package-list">
           <li>Custom design, optimized for mobile</li>
