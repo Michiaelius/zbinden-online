@@ -44,6 +44,15 @@ Puis **Redeploy** (ou `git push`, le déploiement se relance).
   (vérifier aussi les spams la première fois).
 - Le dashboard Resend → **Logs** montre chaque envoi et les éventuelles erreurs.
 
+## Formulaires de contact et GEO-Light
+
+Les formulaires « GEO-Light » et « Anfrage / Demande » (pages geo-audit, webdesign,
+ki-agenten-automatisierung, DE/FR/EN) passent par `POST /api/contact`
+(`api/contact.mjs`), avec la même clé `RESEND_API_KEY`. La demande arrive sur
+`info@zbinden.online` (variable optionnelle `CONTACT_TO` pour changer l'adresse) ;
+« Répondre » écrit directement au visiteur. Le visiteur reçoit une confirmation
+dans la langue de la page (texte fixe, objet `COPY` en haut de `api/contact.mjs`).
+
 ## Détails techniques
 
 - Aucune dépendance npm : `api/estimate.mjs` appelle l'API REST de Resend avec
