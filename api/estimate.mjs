@@ -9,7 +9,7 @@
  * (optionnel : ESTIMATE_BCC pour changer l'adresse de copie interne)
  */
 
-const CALENDLY = 'https://calendly.com/zbinden-austausch';
+const CALENDLY = 'https://calendly.com/zbinden-austausch/30min';
 const FROM = 'Zbinden Software <info@zbinden.online>';
 
 const COPY = {

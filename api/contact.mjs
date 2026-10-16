@@ -11,7 +11,7 @@
  * (optionnel : CONTACT_TO pour changer l'adresse de réception)
  */
 
-const CALENDLY = 'https://calendly.com/zbinden-austausch';
+const CALENDLY = 'https://calendly.com/zbinden-austausch/30min';
 const FROM = 'Zbinden Software <info@zbinden.online>';
 const PHONE = '+41 79 193 68 02';
 
