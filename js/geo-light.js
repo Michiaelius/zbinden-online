@@ -20,10 +20,10 @@
       analyze: 'Website analysieren', analyzing: 'Ich lese Ihre Website …',
       title: 'Das wird getestet',
       intro: 'Bitte prüfen Sie kurz, ob das stimmt, und korrigieren Sie, was nicht passt. Genau diese Angaben verwende ich für die Fragen an ChatGPT und Perplexity.',
-      several: 'Ihre Website zeigt mehrere Tätigkeiten: {list}. Vorgeschlagen ist „{first}“. Soll eine andere getestet werden, passen Sie Branche und Leistungen einfach an.',
+      choose: 'Ihre Website zeigt mehrere Bereiche. Welchen soll ich testen?', pick: 'Bitte wählen Sie zuerst den Bereich.',
       failed: 'Ihre Website konnte ich nicht automatisch lesen. Ergänzen Sie die Angaben kurz – oder senden Sie die Anfrage einfach so ab, dann übernehme ich das.',
       company: 'Firmenname', city: 'Ort (so, wie Kunden suchen)', branche: 'Branche',
-      offer1: 'Wichtigste Leistung', offer2: 'Zweite Leistung', offer3: 'Dritte Leistung',
+      offer1: 'Wichtigste Leistung', offer2: 'Zweite Leistung (optional)', offer3: 'Dritte Leistung (optional)',
       person: 'Inhaber/in (optional)', role: 'Funktion',
       lang: 'Sprache Ihrer Kundschaft', langs: { de: 'Deutsch', fr: 'Französisch', en: 'Englisch' },
       questions: 'Diese 8 Fragen stelle ich ChatGPT und Perplexity',
@@ -34,10 +34,10 @@
       analyze: 'Analyser le site', analyzing: 'Je lis votre site …',
       title: 'Voici ce qui sera testé',
       intro: 'Vérifiez rapidement que c’est juste et corrigez ce qui ne convient pas. Ce sont exactement ces informations que j’utilise pour les questions posées à ChatGPT et Perplexity.',
-      several: 'Votre site présente plusieurs activités : {list}. La proposition porte sur « {first} ». Si vous souhaitez en tester une autre, adaptez simplement le secteur et les prestations.',
+      choose: 'Votre site présente plusieurs domaines. Lequel dois-je tester ?', pick: 'Veuillez d’abord choisir le domaine.',
       failed: 'Je n’ai pas pu lire votre site automatiquement. Complétez rapidement les informations – ou envoyez simplement la demande telle quelle, je m’en occupe.',
       company: 'Nom de l’entreprise', city: 'Lieu (tel que vos clients le cherchent)', branche: 'Secteur',
-      offer1: 'Prestation principale', offer2: 'Deuxième prestation', offer3: 'Troisième prestation',
+      offer1: 'Prestation principale', offer2: 'Deuxième prestation (facultatif)', offer3: 'Troisième prestation (facultatif)',
       person: 'Propriétaire ou direction (facultatif)', role: 'Fonction',
       lang: 'Langue de vos clients', langs: { de: 'Allemand', fr: 'Français', en: 'Anglais' },
       questions: 'Les 8 questions que je pose à ChatGPT et Perplexity',
@@ -48,10 +48,10 @@
       analyze: 'Analyse website', analyzing: 'Reading your website …',
       title: 'This is what will be tested',
       intro: 'Please check that this is right and correct anything that does not fit. These are exactly the details I use for the questions to ChatGPT and Perplexity.',
-      several: 'Your website shows several activities: {list}. The proposal is based on “{first}”. If another one should be tested, simply adjust the industry and services.',
+      choose: 'Your website shows several areas. Which one should I test?', pick: 'Please choose the area first.',
       failed: 'I could not read your website automatically. Please fill in the details briefly – or simply send the request as it is and I will take care of it.',
       company: 'Business name', city: 'Location (as customers search for it)', branche: 'Industry',
-      offer1: 'Main service', offer2: 'Second service', offer3: 'Third service',
+      offer1: 'Main service', offer2: 'Second service (optional)', offer3: 'Third service (optional)',
       person: 'Owner or management (optional)', role: 'Role',
       lang: 'Language of your customers', langs: { de: 'German', fr: 'French', en: 'English' },
       questions: 'The 8 questions I ask ChatGPT and Perplexity',
@@ -129,7 +129,15 @@
     '.gl-qh{font-family:var(--font-ui);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--sec-muted);font-weight:600;}' +
     '.gl-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;}' +
     '.gl-back{background:none;border:none;color:var(--sec-muted);font:inherit;font-size:.9rem;cursor:pointer;text-decoration:underline;padding:6px 0;}' +
-    '.gl-err{color:#b3261e!important;}';
+    '.gl-err{color:#b3261e!important;}' +
+    '.gl-choose{display:grid;gap:10px;padding:14px;border-radius:var(--r-md);background:var(--sec-gold-soft);}' +
+    '.gl-choose[hidden]{display:none;}' +
+    '.gl-choose p{color:var(--sec-ink)!important;font-weight:500;}' +
+    '.gl-opts{display:flex;flex-wrap:wrap;gap:8px;}' +
+    '.gl-opt{font:inherit;font-size:.9rem;padding:.55em 1.1em;border-radius:var(--r-pill);cursor:pointer;' +
+    'border:1px solid var(--sec-line-strong);background:var(--sec-bg);color:var(--sec-ink);}' +
+    '.gl-opt[aria-pressed="true"]{border-color:var(--sec-gold-deep);background:var(--sec-gold);color:var(--sec-on-gold);font-weight:600;}' +
+    '.gl-opt:focus-visible{outline:2px solid var(--sec-gold);outline-offset:2px;}';
   document.head.appendChild(css);
 
   var dlg = document.createElement('dialog');
@@ -144,7 +152,7 @@
     '<div class="gl-inner">' +
     '<h3 id="gl-title">' + T.title + '</h3>' +
     '<p id="gl-intro"></p>' +
-    '<p class="gl-note" id="gl-note" hidden></p>' +
+    '<div class="gl-choose" id="gl-choose" hidden><p>' + T.choose + '</p><div class="gl-opts" id="gl-opts"></div></div>' +
     '<div class="gl-grid">' +
     field('company', T.company) + field('city', T.city) +
     field('branche', T.branche, true) +
@@ -155,6 +163,7 @@
     '</select></div>' +
     '</div>' +
     '<div><div class="gl-qh">' + T.questions + '</div><ol class="gl-q" id="gl-q"></ol></div>' +
+    '<p class="gl-err" id="gl-pick" hidden>' + T.pick + '</p>' +
     '<p class="gl-err" id="gl-err" hidden>' + T.error + '</p>' +
     '<div class="gl-actions"><button type="button" class="gl-back" id="gl-back">' + T.back + '</button>' +
     '<button type="submit" class="btn-primary" id="gl-send">' + T.submit + '</button></div>' +
@@ -176,6 +185,7 @@
   var profile = null;      // profil courant (modifié par le visiteur)
   var proposed = null;     // profil proposé par l'analyse
   var analyzedUrl = '';
+  var chosen = '';         // domaine choisi quand le site en a plusieurs
 
   function $(id) { return document.getElementById('gl-' + id); }
 
@@ -199,6 +209,7 @@
     var out = {};
     Object.keys(profile).forEach(function (k) { out[k] = profile[k]; });
     if (proposed && proposed.activities) out.activities = proposed.activities;
+    if (chosen) out.chosen = chosen;
     out.domain = domainOf(urlInput.value);
     out.analysis = proposed ? 'ok' : 'failed';
     out.edited = edited;
@@ -217,12 +228,45 @@
     $('offer1').value = profile.offers[0]; $('offer2').value = profile.offers[1]; $('offer3').value = profile.offers[2];
     $('person').value = profile.person; $('person_role').value = profile.person_role; $('lang').value = profile.lang;
     $('intro').textContent = proposed ? T.intro : T.failed;
-    var acts = p.activities || [];
-    $('note').textContent = acts.length > 1
-      ? T.several.replace('{list}', acts.join(', ')).replace('{first}', acts[0])
-      : '';
-    $('note').hidden = acts.length < 2;
     $('err').hidden = true;
+    $('pick').hidden = true;
+    chosen = '';
+    var alts = p.alternatives || [];
+    var opts = $('opts');
+    opts.innerHTML = '';
+    $('choose').hidden = alts.length < 2;
+    if (alts.length > 1) {
+      // Plusieurs domaines : le visiteur doit choisir, rien n'est pré-sélectionné.
+      alts.forEach(function (a) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'gl-opt';
+        b.textContent = a.activity;
+        b.setAttribute('aria-pressed', 'false');
+        b.addEventListener('click', function () { choose(a, b); });
+        opts.appendChild(b);
+      });
+      setArea({ branche: '', offers: [] });
+    }
+    render();
+  }
+
+  function setArea(a) {
+    profile.branche = a.branche || '';
+    profile.offers = [0, 1, 2].map(function (i) { return (a.offers || [])[i] || ''; });
+    ['welche_akk', 'welche_nom', 'quel', 'which'].forEach(function (k) { profile[k] = a[k] || ''; });
+    $('branche').value = profile.branche;
+    $('offer1').value = profile.offers[0]; $('offer2').value = profile.offers[1]; $('offer3').value = profile.offers[2];
+  }
+
+  function choose(a, btn) {
+    chosen = a.activity;
+    Array.prototype.forEach.call($('opts').children, function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
+    setArea(a);
+    // Les modifications du visiteur se mesurent par rapport au domaine choisi.
+    proposed.branche = profile.branche;
+    proposed.offers = profile.offers.slice();
+    $('pick').hidden = true;
     render();
   }
 
@@ -264,6 +308,12 @@
   }
 
   function send() {
+    // Plusieurs domaines : il faut en choisir un, ou saisir soi-même le secteur.
+    if (!$('choose').hidden && !chosen && !profile.branche) {
+      $('pick').hidden = false;
+      $('opts').firstChild.focus();
+      return;
+    }
     var btn = $('send');
     btn.disabled = true;
     btn.textContent = T.sending;

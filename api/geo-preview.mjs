@@ -63,11 +63,20 @@ Regeln:
   der gewählte zuerst. Ein Geschäftsbereich ist eine eigene Branche (z. B. ["Verlag", "Innovationsberatung"]),
   NICHT eine einzelne Leistung: Eine Bank mit Hypotheken und Vermögensverwaltung ist EIN Bereich
   (["Bank"]), eine Zahnarztpraxis mit Implantaten und Bleaching ebenso (["Zahnarztpraxis"]).
+- "alternatives": nur bei 2 oder mehr Geschäftsbereichen, sonst []. Pro Bereich (max. 3, gleiche
+  Reihenfolge wie "activities") ein Objekt mit: activity, branche, offers (genau 3, nur Leistungen
+  DIESES Bereichs), welche_akk, welche_nom, quel, which. Das erste entspricht branche/offers oben.
+  Die offers jedes Bereichs so konkret wie Suchbegriffe eines Kunden ("Coaching für Führungskräfte",
+  nicht "Coaching"; "Workshops für Unternehmen", nicht "Workshops"), nach denselben Regeln wie "offers".
 - "readable": false, wenn der Text nicht reicht, um Branche und Angebote zu bestimmen.
 
-Antworte ausschliesslich mit einem JSON-Objekt mit genau diesen Schlüsseln:
-readable, lang, company, city, city_in, branche, offers, person, person_role,
-welche_akk, welche_nom, quel, which, activities`;
+Vorgehen: Erstelle ZUERST die Liste "activities" – lies dazu Startseite UND Angebotsseite vollständig
+und zähle jeden eigenen Geschäftsbereich auf (Verlag, Beratung, Coaching, Weiterbildung ... sind
+verschiedene Bereiche). Erst danach wählst du den Hauptbereich für branche/offers.
+
+Antworte ausschliesslich mit einem JSON-Objekt mit genau diesen Schlüsseln, in dieser Reihenfolge:
+readable, lang, activities, alternatives, company, city, city_in, branche, offers, person, person_role,
+welche_akk, welche_nom, quel, which`;
 
 function okUrl(raw) {
   let s = String(raw || '').trim();
@@ -174,9 +183,28 @@ function clean(v, max) {
   return String(v == null ? '' : v).replace(/\s+/g, ' ').trim().slice(0, max || 120);
 }
 
+function cleanOffers(list) {
+  return (Array.isArray(list) ? list : []).map(function (o) { return clean(o); }).filter(Boolean).slice(0, 3);
+}
+
 function sanitize(p, uiLang) {
   const lang = ['de', 'fr', 'en'].includes(p.lang) ? p.lang : uiLang;
-  const offers = (Array.isArray(p.offers) ? p.offers : []).map(function (o) { return clean(o); }).filter(Boolean).slice(0, 3);
+  const offers = cleanOffers(p.offers);
+  // Une proposition complète par domaine d'activité : le visiteur choisit celui à tester.
+  const alternatives = (Array.isArray(p.alternatives) ? p.alternatives : [])
+    .filter(function (a) { return a && clean(a.activity) && clean(a.branche) && cleanOffers(a.offers).length; })
+    .slice(0, 3)
+    .map(function (a) {
+      return {
+        activity: clean(a.activity, 60),
+        branche: clean(a.branche),
+        offers: cleanOffers(a.offers),
+        welche_akk: lang === 'de' ? clean(a.welche_akk) : '',
+        welche_nom: lang === 'de' ? clean(a.welche_nom) : '',
+        quel: lang === 'fr' ? clean(a.quel) : '',
+        which: lang === 'en' ? clean(a.which) : '',
+      };
+    });
   return {
     lang: lang,
     company: clean(p.company),
@@ -192,6 +220,7 @@ function sanitize(p, uiLang) {
     quel: lang === 'fr' ? clean(p.quel) : '',
     which: lang === 'en' ? clean(p.which) : '',
     activities: (Array.isArray(p.activities) ? p.activities : []).map(function (a) { return clean(a, 60); }).filter(Boolean).slice(0, 4),
+    alternatives: alternatives.length > 1 ? alternatives : [],
   };
 }
 
@@ -252,7 +281,7 @@ export default async function handler(req, res) {
       headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: process.env.GEO_PREVIEW_MODEL || MODEL_DEFAULT,
-        temperature: 0.1,
+        temperature: 0,
         response_format: { type: 'json_object' },
         messages: [
           { role: 'system', content: SYSTEM },
