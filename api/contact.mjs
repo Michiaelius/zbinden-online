@@ -5,6 +5,8 @@
  *  1. la demande à info@zbinden.online (« Répondre » écrit au visiteur) ;
  *  2. un e-mail de confirmation au visiteur, dans la langue de la page.
  * La confirmation est un texte fixe : rien de ce que le visiteur a saisi n'y est repris.
+ * Formulaire GEO-Light : le champ « profile » (JSON de js/geo-light.js) contient le profil
+ * confirmé par le visiteur ; il est ajouté à la notification avec un kandidat.json prêt à l'emploi.
  *
  * Aucune dépendance : appel direct de l'API REST de Resend via fetch (Node 18+).
  * Variable d'environnement requise dans Vercel : RESEND_API_KEY
@@ -108,6 +110,71 @@ function esc(s) {
   });
 }
 
+/* Profil GEO-Light confirmé dans le formulaire (champ « profile », JSON produit par js/geo-light.js).
+   Renvoie { kandidat, edited, analysis, questions } ou null. Seuls les champs connus sont gardés. */
+const PROFILE_KEYS = ['lang', 'company', 'city', 'city_in', 'domain', 'person', 'person_role', 'branche',
+  'welche_akk', 'welche_nom', 'quel', 'which'];
+
+function parseProfile(raw) {
+  if (!raw || typeof raw !== 'string' || raw.length > 6000) return null;
+  let p;
+  try { p = JSON.parse(raw); } catch (e) { return null; }
+  if (!p || typeof p !== 'object') return null;
+  const k = {};
+  PROFILE_KEYS.forEach(function (key) {
+    const v = String(p[key] == null ? '' : p[key]).trim().slice(0, 120);
+    if (v || ['company', 'city', 'domain', 'person', 'branche'].includes(key)) k[key] = v;
+  });
+  if (!['de', 'fr', 'en'].includes(k.lang)) k.lang = 'de';
+  k.offers = (Array.isArray(p.offers) ? p.offers : []).slice(0, 3).map(function (o) { return String(o || '').trim().slice(0, 120); });
+  const list = function (a, n) { return (Array.isArray(a) ? a : []).slice(0, n).map(function (x) { return String(x).slice(0, 300); }); };
+  return {
+    kandidat: k,
+    edited: list(p.edited, 10),
+    analysis: p.analysis === 'ok' ? 'ok' : 'failed',
+    questions: list(p.questions, 8),
+  };
+}
+
+function profileStatus(pr) {
+  if (pr.analysis !== 'ok') return 'Analyse automatique impossible — champs saisis par le visiteur (à vérifier)';
+  return pr.edited.length ? 'Proposé par l’analyse, corrigé par le visiteur : ' + pr.edited.join(', ') : 'Proposé par l’analyse, confirmé sans modification';
+}
+
+function renderProfileHtml(pr) {
+  const k = pr.kandidat;
+  const rows = [
+    ['Statut', profileStatus(pr)],
+    ['Langue des questions', k.lang],
+    ['Entreprise', k.company],
+    ['Lieu', k.city],
+    ['Branche', k.branche],
+    ['Offres', k.offers.filter(Boolean).join(' · ')],
+    ['Personne', [k.person, k.person_role].filter(Boolean).join(', ')],
+  ].filter(function (r) { return r[1]; })
+    .map(function (r) {
+      return `<tr><td style="padding:5px 14px 5px 0;color:#726a5c;vertical-align:top;white-space:nowrap;">${esc(r[0])}</td>` +
+        `<td style="padding:5px 0;">${esc(r[1])}</td></tr>`;
+    }).join('');
+  const qs = pr.questions.map(function (q) { return `<li style="margin:0 0 4px;">${esc(q)}</li>`; }).join('');
+  return (
+    `<p style="margin:28px 0 10px;font-weight:600;">Profil GEO-Light</p>` +
+    `<table style="border-collapse:collapse;font-size:14px;">${rows}</table>` +
+    (qs ? `<p style="margin:18px 0 6px;color:#726a5c;font-size:13px;">Questions affichées au visiteur</p><ol style="margin:0;padding-left:20px;font-size:14px;">${qs}</ol>` : '') +
+    `<p style="margin:18px 0 6px;color:#726a5c;font-size:13px;">kandidat.json</p>` +
+    `<pre style="margin:0;padding:12px;background:#f2efe7;border-radius:8px;font-size:12px;white-space:pre-wrap;">${esc(JSON.stringify(k, null, 2))}</pre>`
+  );
+}
+
+function renderProfileText(pr) {
+  return [
+    '', '--- Profil GEO-Light ---', profileStatus(pr), '',
+    'Questions affichées au visiteur :',
+  ].concat(pr.questions.map(function (q, i) { return `${i + 1}. ${q}`; }))
+    .concat(['', 'kandidat.json :', JSON.stringify(pr.kandidat, null, 2)])
+    .join('\n');
+}
+
 function renderHtml(d) {
   const rows = Object.keys(LABELS)
     .filter(function (k) { return d[k]; })
@@ -125,6 +192,7 @@ function renderHtml(d) {
     `<div style="font:700 15px Georgia,'Times New Roman',serif;color:#a6790f;letter-spacing:.03em;">ZBINDEN &middot; SOFTWARE</div>` +
     `<p style="margin:26px 0 18px;">Nouvelle demande depuis le site.</p>` +
     `<table style="border-collapse:collapse;font-size:14px;">${rows}</table>` +
+    (d.profile ? renderProfileHtml(d.profile) : '') +
     `</div></body></html>`
   );
 }
@@ -133,7 +201,7 @@ function renderText(d) {
   return Object.keys(LABELS)
     .filter(function (k) { return d[k]; })
     .map(function (k) { return `${LABELS[k]}: ${d[k]}`; })
-    .join('\n');
+    .join('\n') + (d.profile ? '\n' + renderProfileText(d.profile) : '');
 }
 
 function renderConfirmHtml(t, c, link) {
@@ -228,6 +296,7 @@ export default async function handler(req, res) {
     company: String(b.company || '').trim().slice(0, 200),
     message: String(b.message || '').trim().slice(0, 5000),
     page: String(req.headers.referer || '').slice(0, 300),
+    profile: parseProfile(b.profile),
   };
 
   const who = (data.website || data.name || email).replace(/[\r\n]+/g, ' ').slice(0, 120);

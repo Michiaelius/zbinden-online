@@ -1,0 +1,277 @@
+/**
+ * POST /api/geo-preview
+ * Formulaire GEO-Light : lit le site du visiteur (accueil + jusqu'à 3 pages d'offre /
+ * présentation / impressum) et demande à un modèle OpenAI le profil qui sera testé :
+ * langue des questions, nom, lieu, branche, 3 offres, personne. Le visiteur confirme ou
+ * corrige ce profil dans le formulaire avant l'envoi ; rien n'est testé ici.
+ *
+ * Corps : { url, lang }  (lang = langue de la page : de | fr | en)
+ * Réponse : { ok: true, profile: {...} }  ou  { ok: false, reason }
+ *
+ * Aucune dépendance (fetch, Node 18+).
+ * Variable d'environnement requise dans Vercel : OPENAI_API_KEY
+ * (optionnel : GEO_PREVIEW_MODEL, défaut gpt-4o — gpt-4o-mini ne repère pas les activités multiples)
+ * Protection des coûts : fixer une limite de dépenses mensuelle sur la clé OpenAI.
+ */
+
+const MODEL_DEFAULT = 'gpt-4o';
+const MAX_BYTES = 1500000;
+const UA = 'Mozilla/5.0 (compatible; ZbindenGeoLight/1.0; +https://www.zbinden.online/geo-audit)';
+
+// Liens internes à lire en plus de l'accueil, par ordre de priorité.
+const LINK_PATTERNS = [
+  /angebot|leistung|dienstleist|services?\b|prestation|offre|offer|produkt|product|kompetenz|beratung|conseil/i,
+  /ueber-uns|uber-uns|über|about|qui-sommes|a-propos|portrait|team|unternehmen|entreprise/i,
+  /impressum|mentions|imprint|kontakt|contact/i,
+];
+
+const SYSTEM = `Du analysierst die Website eines Unternehmens für einen KI-Sichtbarkeitstest.
+Der Test stellt ChatGPT und Perplexity 8 Fragen, wie potenzielle Kundinnen und Kunden sie stellen,
+und prüft, ob das Unternehmen genannt wird. Leite aus dem Website-Text das Profil ab, das getestet wird.
+
+Regeln:
+- "lang": Sprache, in der die Kundschaft des Unternehmens sucht ("de", "fr" oder "en"): Hauptsprache
+  der Website und der Region. Bei mehrsprachigen Websites entscheidet die Region (Genf, Lausanne → "fr";
+  Zürich, Bern → "de"), nicht die gelesene Sprachversion. "en" nur bei klar englischsprachiger
+  Kundschaft. "ui_lang" ist nur die
+  Sprache des Besuchers und hat mit "lang" NICHTS zu tun: eine deutschsprachige Website
+  ergibt "de", auch wenn ui_lang "fr" ist.
+- Alle Textfelder (branche, offers, person_role) in dieser Sprache "lang".
+- "company": der Name, den das Unternehmen im Alltag für sich verwendet, ohne Rechtsform
+  (ausser sie gehört zum üblichen Namen).
+- "city": der Ort, den Kunden bei der Suche nennen würden. Bedient das Unternehmen klar die ganze
+  Schweiz ohne Laufkundschaft (Software, Online-Dienst, Verlag ...): "Schweiz" / "Suisse" / "Switzerland".
+  Ein kleines Dorf, nach dem niemand sucht: die Region oder den Kanton.
+- "branche": Begriff, den ein Kunde verwenden würde, spezifisch genug, um fair zu sein
+  (ein Nischenanbieter nicht gegen die ganze Branche testen). Ohne Artikel.
+- "offers": genau 3 Kernleistungen, so formuliert, wie ein Interessent sie eintippen würde, ohne Artikel.
+  Die wichtigste zuerst.
+- Kernangebot = was das Unternehmen VERKAUFT, laut Angebots-/Leistungsseite. NICHT aus Slogans,
+  Bannern, Slidern oder Aktions-Teasern ableiten. Betonen Startseite und Angebotsseite
+  Unterschiedliches, gilt die Angebotsseite. Bei mehreren Tätigkeiten die, der die
+  Angebotsseite am meisten Raum gibt.
+- "person": namentlich genannte Inhaberin/Inhaber oder Geschäftsführung (Impressum/Kontakt), sonst "".
+  Nie raten. "person_role": wie diese Person beschrieben würde (z. B. "Rechtsanwältin", "avocat").
+- Grammatik-Felder, damit die Fragen korrekt klingen:
+  de: "city_in" = Form nach "in" ("Winterthur", "der Schweiz"); "welche_akk" (z. B. "welchen Treuhänder",
+      "welche Zahnarztpraxis"); "welche_nom" (z. B. "welcher Treuhänder").
+  fr: "city_in" MIT Präposition ("à Lausanne", "en Suisse", "au Tessin"); "quel" ("quel avocat",
+      "quelle fiduciaire").
+  en: "city_in" = Form nach "in" ("Zurich", "Switzerland"); "which" ("which dentist").
+  Nicht benötigte Felder als "".
+- "activities": die verschiedenen GESCHÄFTSBEREICHE der Website, je 1-4 Wörter in der Sprache "lang",
+  der gewählte zuerst. Ein Geschäftsbereich ist eine eigene Branche (z. B. ["Verlag", "Innovationsberatung"]),
+  NICHT eine einzelne Leistung: Eine Bank mit Hypotheken und Vermögensverwaltung ist EIN Bereich
+  (["Bank"]), eine Zahnarztpraxis mit Implantaten und Bleaching ebenso (["Zahnarztpraxis"]).
+- "readable": false, wenn der Text nicht reicht, um Branche und Angebote zu bestimmen.
+
+Antworte ausschliesslich mit einem JSON-Objekt mit genau diesen Schlüsseln:
+readable, lang, company, city, city_in, branche, offers, person, person_role,
+welche_akk, welche_nom, quel, which, activities`;
+
+function okUrl(raw) {
+  let s = String(raw || '').trim();
+  if (!s) return null;
+  if (!/^https?:\/\//i.test(s)) s = 'https://' + s;
+  let u;
+  try { u = new URL(s); } catch (e) { return null; }
+  if (u.protocol !== 'http:' && u.protocol !== 'https:') return null;
+  const h = u.hostname.toLowerCase();
+  // Pas d'adresses locales ni d'IP brutes : on lit des sites publics.
+  if (!h.includes('.') || h === 'localhost' || h.endsWith('.local') || h.endsWith('.internal')) return null;
+  if (/^[\d.]+$/.test(h) || h.includes(':') || h.startsWith('[')) return null;
+  return u;
+}
+
+async function getPage(url, ms) {
+  const r = await fetch(url, {
+    redirect: 'follow',
+    signal: AbortSignal.timeout(ms),
+    // Pas d'Accept-Language : le site doit répondre dans sa langue par défaut.
+    headers: { 'User-Agent': UA, Accept: 'text/html,application/xhtml+xml' },
+  });
+  if (!r.ok) throw new Error('status ' + r.status);
+  const type = r.headers.get('content-type') || '';
+  if (type && !/html|xml/i.test(type)) throw new Error('not html');
+
+  // Lecture plafonnée : on s'arrête à MAX_BYTES.
+  const reader = r.body.getReader();
+  const chunks = [];
+  let size = 0;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    chunks.push(value);
+    size += value.length;
+    if (size >= MAX_BYTES) { try { await reader.cancel(); } catch (e) {} break; }
+  }
+  const buf = Buffer.concat(chunks.map(function (c) { return Buffer.from(c); }));
+
+  // Les vieux sites ne sont souvent pas en UTF-8.
+  let charset = (/charset=([\w-]+)/i.exec(type) || [])[1];
+  if (!charset) {
+    const head = buf.subarray(0, 4096).toString('latin1');
+    charset = (/<meta[^>]+charset=["']?([\w-]+)/i.exec(head) || [])[1];
+  }
+  let html;
+  try { html = new TextDecoder(charset || 'utf-8').decode(buf); }
+  catch (e) { html = new TextDecoder('utf-8').decode(buf); }
+  return { html: html, finalUrl: r.url || String(url) };
+}
+
+const ENTITIES = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', auml: 'ä', ouml: 'ö', uuml: 'ü',
+  Auml: 'Ä', Ouml: 'Ö', Uuml: 'Ü', szlig: 'ß', eacute: 'é', egrave: 'è', ecirc: 'ê', agrave: 'à', acirc: 'â',
+  ccedil: 'ç', ocirc: 'ô', icirc: 'î', ucirc: 'û', ugrave: 'ù', Eacute: 'É', rsquo: '’', lsquo: '‘',
+  ldquo: '“', rdquo: '”', bdquo: '„', ndash: '–', mdash: '—', hellip: '…', laquo: '«', raquo: '»' };
+
+function decodeEntities(s) {
+  return s.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, function (m, e) {
+    if (e[0] === '#') {
+      const n = e[1] === 'x' || e[1] === 'X' ? parseInt(e.slice(2), 16) : parseInt(e.slice(1), 10);
+      return Number.isFinite(n) && n > 0 && n < 0x110000 ? String.fromCodePoint(n) : ' ';
+    }
+    return ENTITIES[e] !== undefined ? ENTITIES[e] : m;
+  });
+}
+
+function pageText(html, limit) {
+  const title = decodeEntities(((/<title[^>]*>([\s\S]*?)<\/title>/i.exec(html) || [])[1] || '').trim());
+  const desc = decodeEntities((/<meta[^>]+name=["']description["'][^>]+content=["']([^"']*)/i.exec(html) || [])[1] || '');
+  let body = html
+    .replace(/<(script|style|noscript|svg|template|iframe)[\s\S]*?<\/\1>/gi, ' ')
+    .replace(/<!--[\s\S]*?-->/g, ' ')
+    .replace(/<(br|p|div|li|h[1-6]|tr|section|article|header|footer|nav)[^>]*>/gi, '\n')
+    .replace(/<[^>]+>/g, ' ');
+  body = decodeEntities(body).replace(/[ \t ]+/g, ' ').replace(/\s*\n\s*/g, '\n').replace(/\n{2,}/g, '\n').trim();
+  return (`Titel: ${title}\nBeschreibung: ${desc}\n${body}`).slice(0, limit);
+}
+
+function pickLinks(html, base) {
+  const host = base.hostname.replace(/^www\./, '');
+  const found = [];
+  const re = /<a\b[^>]*href=["']([^"'#]+)["'][^>]*>([\s\S]*?)<\/a>/gi;
+  let m;
+  while ((m = re.exec(html))) {
+    let u;
+    try { u = new URL(m[1], base); } catch (e) { continue; }
+    if (!/^https?:$/.test(u.protocol) || u.hostname.replace(/^www\./, '') !== host) continue;
+    if (/\.(pdf|jpe?g|png|gif|zip|docx?)$/i.test(u.pathname)) continue;
+    u.hash = '';
+    const label = m[2].replace(/<[^>]+>/g, ' ') + ' ' + decodeURIComponent(u.pathname);
+    found.push({ url: u.toString(), label: label });
+  }
+  const picked = [];
+  LINK_PATTERNS.forEach(function (re) {
+    const hit = found.find(function (l) {
+      return re.test(l.label) && l.url !== base.toString() && !picked.includes(l.url);
+    });
+    if (hit) picked.push(hit.url);
+  });
+  return picked;
+}
+
+function clean(v, max) {
+  return String(v == null ? '' : v).replace(/\s+/g, ' ').trim().slice(0, max || 120);
+}
+
+function sanitize(p, uiLang) {
+  const lang = ['de', 'fr', 'en'].includes(p.lang) ? p.lang : uiLang;
+  const offers = (Array.isArray(p.offers) ? p.offers : []).map(function (o) { return clean(o); }).filter(Boolean).slice(0, 3);
+  return {
+    lang: lang,
+    company: clean(p.company),
+    city: clean(p.city, 80),
+    // « city_in » suit « in » en allemand et en anglais : pas de préposition en double.
+    city_in: lang === 'fr' ? clean(p.city_in, 80) : clean(p.city_in, 80).replace(/^in\s+/i, ''),
+    branche: clean(p.branche),
+    offers: offers,
+    person: clean(p.person, 80),
+    person_role: clean(p.person_role, 80),
+    welche_akk: lang === 'de' ? clean(p.welche_akk) : '',
+    welche_nom: lang === 'de' ? clean(p.welche_nom) : '',
+    quel: lang === 'fr' ? clean(p.quel) : '',
+    which: lang === 'en' ? clean(p.which) : '',
+    activities: (Array.isArray(p.activities) ? p.activities : []).map(function (a) { return clean(a, 60); }).filter(Boolean).slice(0, 4),
+  };
+}
+
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    res.setHeader('Allow', 'POST');
+    res.status(405).json({ ok: false, reason: 'method' });
+    return;
+  }
+  const key = process.env.OPENAI_API_KEY;
+  if (!key) {
+    res.status(500).json({ ok: false, reason: 'not_configured' });
+    return;
+  }
+
+  let b = req.body;
+  if (typeof b === 'string') {
+    try { b = JSON.parse(b); } catch (e) { b = null; }
+  }
+  const uiLang = b && ['de', 'fr', 'en'].includes(b.lang) ? b.lang : 'de';
+  const start = b ? okUrl(b.url) : null;
+  if (!start) {
+    res.status(400).json({ ok: false, reason: 'bad_url' });
+    return;
+  }
+
+  // 1. Accueil, puis jusqu'à 3 pages internes en parallèle.
+  let home;
+  try {
+    home = await getPage(start, 7000);
+  } catch (e) {
+    res.status(200).json({ ok: false, reason: 'unreachable' });
+    return;
+  }
+  const base = new URL(home.finalUrl);
+  const htmlLang = ((/<html[^>]*\slang=["']?([a-z]{2})/i.exec(home.html) || [])[1] || '').toLowerCase();
+  // Langues proposées par le site : la version servie par défaut n'est pas forcément celle des clients.
+  const hreflangs = Array.from(new Set((home.html.match(/hreflang=["']?[a-z]{2}/gi) || [])
+    .map(function (h) { return h.slice(-2).toLowerCase(); })));
+  const links = pickLinks(home.html, base);
+  const subs = await Promise.allSettled(links.map(function (u) { return getPage(u, 5000); }));
+
+  let text = `=== Startseite (${base}) ===\n` + pageText(home.html, 6000);
+  subs.forEach(function (s, i) {
+    if (s.status === 'fulfilled') text += `\n\n=== Unterseite (${links[i]}) ===\n` + pageText(s.value.html, 3500);
+  });
+  if (text.replace(/\s/g, '').length < 300) {
+    res.status(200).json({ ok: false, reason: 'no_text' });
+    return;
+  }
+
+  // 2. Profil proposé par le modèle.
+  let p;
+  try {
+    const r = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      signal: AbortSignal.timeout(16000),
+      headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: process.env.GEO_PREVIEW_MODEL || MODEL_DEFAULT,
+        temperature: 0.1,
+        response_format: { type: 'json_object' },
+        messages: [
+          { role: 'system', content: SYSTEM },
+          { role: 'user', content: `ui_lang: ${uiLang}\nhtml lang (gelesene Version): ${htmlLang || '?'}\n` +
+            `Sprachversionen der Website (hreflang): ${hreflangs.join(', ') || '?'}\n\n${text}` },
+        ],
+      }),
+    });
+    if (!r.ok) throw new Error('openai ' + r.status);
+    const data = await r.json();
+    p = JSON.parse(data.choices[0].message.content);
+  } catch (e) {
+    res.status(200).json({ ok: false, reason: 'ai_error' });
+    return;
+  }
+
+  if (!p || p.readable === false) {
+    res.status(200).json({ ok: false, reason: 'no_text' });
+    return;
+  }
+  res.status(200).json({ ok: true, profile: sanitize(p, uiLang) });
+}
