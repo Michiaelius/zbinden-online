@@ -20,7 +20,7 @@
       analyze: 'Website analysieren', analyzing: 'Ich lese Ihre Website …',
       title: 'Das wird getestet',
       intro: 'Bitte prüfen Sie kurz, ob das stimmt, und korrigieren Sie, was nicht passt. Genau diese Angaben verwende ich für die Fragen an ChatGPT und Perplexity.',
-      choose: 'Ihre Website zeigt mehrere Bereiche. Welchen soll ich testen?', pick: 'Bitte wählen Sie zuerst den Bereich.',
+      choose: 'Ihre Website zeigt mehrere Bereiche. Getestet wird einer – wählen Sie bei Bedarf einen anderen:', pick: 'Bitte wählen Sie zuerst den Bereich.',
       failed: 'Ihre Website konnte ich nicht automatisch lesen. Ergänzen Sie die Angaben kurz – oder senden Sie die Anfrage einfach so ab, dann übernehme ich das.',
       company: 'Firmenname', city: 'Ort (so, wie Kunden suchen)', branche: 'Branche',
       offer1: 'Wichtigste Leistung', offer2: 'Zweite Leistung (optional)', offer3: 'Dritte Leistung (optional)',
@@ -34,7 +34,7 @@
       analyze: 'Analyser le site', analyzing: 'Je lis votre site …',
       title: 'Voici ce qui sera testé',
       intro: 'Vérifiez rapidement que c’est juste et corrigez ce qui ne convient pas. Ce sont exactement ces informations que j’utilise pour les questions posées à ChatGPT et Perplexity.',
-      choose: 'Votre site présente plusieurs domaines. Lequel dois-je tester ?', pick: 'Veuillez d’abord choisir le domaine.',
+      choose: 'Votre site présente plusieurs domaines. Un seul est testé – choisissez-en un autre si besoin :', pick: 'Veuillez d’abord choisir le domaine.',
       failed: 'Je n’ai pas pu lire votre site automatiquement. Complétez rapidement les informations – ou envoyez simplement la demande telle quelle, je m’en occupe.',
       company: 'Nom de l’entreprise', city: 'Lieu (tel que vos clients le cherchent)', branche: 'Secteur',
       offer1: 'Prestation principale', offer2: 'Deuxième prestation (facultatif)', offer3: 'Troisième prestation (facultatif)',
@@ -48,7 +48,7 @@
       analyze: 'Analyse website', analyzing: 'Reading your website …',
       title: 'This is what will be tested',
       intro: 'Please check that this is right and correct anything that does not fit. These are exactly the details I use for the questions to ChatGPT and Perplexity.',
-      choose: 'Your website shows several areas. Which one should I test?', pick: 'Please choose the area first.',
+      choose: 'Your website shows several areas. One is tested – pick another one if needed:', pick: 'Please choose the area first.',
       failed: 'I could not read your website automatically. Please fill in the details briefly – or simply send the request as it is and I will take care of it.',
       company: 'Business name', city: 'Location (as customers search for it)', branche: 'Industry',
       offer1: 'Main service', offer2: 'Second service (optional)', offer3: 'Third service (optional)',
@@ -185,7 +185,8 @@
   var profile = null;      // profil courant (modifié par le visiteur)
   var proposed = null;     // profil proposé par l'analyse
   var analyzedUrl = '';
-  var chosen = '';         // domaine choisi quand le site en a plusieurs
+  var chosen = '';         // domaine testé quand le site en a plusieurs
+  var chosenBy = '';       // 'default' (premier domaine pré-sélectionné) ou 'visitor'
 
   function $(id) { return document.getElementById('gl-' + id); }
 
@@ -209,7 +210,7 @@
     var out = {};
     Object.keys(profile).forEach(function (k) { out[k] = profile[k]; });
     if (proposed && proposed.activities) out.activities = proposed.activities;
-    if (chosen) out.chosen = chosen;
+    if (chosen) { out.chosen = chosen; out.chosen_by = chosenBy; }
     out.domain = domainOf(urlInput.value);
     out.analysis = proposed ? 'ok' : 'failed';
     out.edited = edited;
@@ -236,17 +237,17 @@
     opts.innerHTML = '';
     $('choose').hidden = alts.length < 2;
     if (alts.length > 1) {
-      // Plusieurs domaines : le visiteur doit choisir, rien n'est pré-sélectionné.
+      // Plusieurs domaines : le premier est pré-sélectionné et remplit les champs, les autres restent au choix.
       alts.forEach(function (a) {
         var b = document.createElement('button');
         b.type = 'button';
         b.className = 'gl-opt';
         b.textContent = a.activity;
         b.setAttribute('aria-pressed', 'false');
-        b.addEventListener('click', function () { choose(a, b); });
+        b.addEventListener('click', function () { choose(a, b, 'visitor'); });
         opts.appendChild(b);
       });
-      setArea({ branche: '', offers: [] });
+      choose(alts[0], opts.firstChild, 'default');
     }
     render();
   }
@@ -259,8 +260,9 @@
     $('offer1').value = profile.offers[0]; $('offer2').value = profile.offers[1]; $('offer3').value = profile.offers[2];
   }
 
-  function choose(a, btn) {
+  function choose(a, btn, by) {
     chosen = a.activity;
+    chosenBy = by;
     Array.prototype.forEach.call($('opts').children, function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
     setArea(a);
     // Les modifications du visiteur se mesurent par rapport au domaine choisi.

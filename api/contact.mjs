@@ -132,6 +132,7 @@ function parseProfile(raw) {
     kandidat: k,
     activities: list(p.activities, 4),
     chosen: String(p.chosen || '').slice(0, 60),
+    chosenBy: p.chosen_by === 'visitor' ? 'visitor' : 'default',
     edited: list(p.edited, 10),
     analysis: p.analysis === 'ok' ? 'ok' : 'failed',
     questions: list(p.questions, 8),
@@ -142,7 +143,9 @@ function profileStatus(pr) {
   if (pr.analysis !== 'ok') return 'Analyse automatique impossible — champs saisis par le visiteur (à vérifier)';
   const base = pr.edited.length ? 'Proposé par l’analyse, corrigé par le visiteur : ' + pr.edited.join(', ') : 'Proposé par l’analyse, confirmé sans modification';
   if (pr.activities.length < 2) return base;
-  const pick = pr.chosen ? 'domaine choisi par le visiteur : ' + pr.chosen : 'aucun domaine choisi, secteur saisi à la main';
+  const pick = !pr.chosen ? 'aucun domaine choisi, secteur saisi à la main'
+    : pr.chosenBy === 'visitor' ? 'domaine choisi par le visiteur : ' + pr.chosen
+    : 'premier domaine gardé par le visiteur : ' + pr.chosen;
   return `${base} — plusieurs domaines (${pr.activities.join(', ')}), ${pick}`;
 }
 
