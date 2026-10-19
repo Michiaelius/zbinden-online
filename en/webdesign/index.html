@@ -469,6 +469,7 @@
     color:var(--sec-gold-deep); text-decoration:none; border-bottom:1px solid var(--sec-line-gold); padding-bottom:2px;
   }
   .ref-link:hover{ color:var(--sec-gold); }
+  .ref-grid + .ref-grid{ margin-top:clamp(48px,7vw,80px); padding-top:clamp(48px,7vw,80px); border-top:1px solid var(--sec-line); }
 
   /* ---------- KI split ---------- */
   .split{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(32px,5vw,56px); align-items:start; }
@@ -834,8 +835,8 @@
   <section id="referenz" class="section-light">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">Reference</span>
-        <h2>A real example</h2>
+        <span class="eyebrow">Reference &amp; example</span>
+        <h2>Two examples</h2>
       </div>
       <div class="ref-grid">
         <div class="ref-copy reveal d1">
@@ -853,6 +854,29 @@
         <div class="showcase ref-phone reveal d2" style="max-width:230px; justify-self:center; padding:0;">
           <div class="mobile" style="position:static; width:100%; border-width:7px; border-radius:30px;">
             <img src="/images/referenzen/sunneschiin-mobile.webp" width="390" height="844" alt="Spielgruppe Sunneschiin website on a smartphone" loading="lazy">
+          </div>
+        </div>
+      </div>
+      <div class="ref-grid">
+        <div class="ref-copy reveal d1">
+          <h3>Example website for a restaurant</h3>
+          <p class="ref-sub">Gasthaus Lindenstube · an entirely fictional restaurant</p>
+          <p>This is what the website of a village restaurant could look like: atmospheric, with large images and a clear path to booking a table. The restaurant is invented and the images are AI-generated — the structure and design are real.</p>
+          <ul class="package-list">
+            <li>Booking is always one click away — by form or by phone</li>
+            <li>The kitchen, the evening atmosphere and banquets each get their own section</li>
+            <li>Room for real Google reviews as proof of trust</li>
+            <li>Just as polished on a phone as on a large screen</li>
+          </ul>
+          <a class="ref-link" href="/beispiel/restaurant">See the example (in German) →</a>
+        </div>
+        <div class="showcase reveal d2">
+          <div class="browser">
+            <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">lindenstube.example</span></div>
+            <img src="/images/referenzen/restaurant-desktop.webp" width="1440" height="900" alt="Home page of the example restaurant website, desktop view" loading="lazy">
+          </div>
+          <div class="mobile">
+            <img src="/images/referenzen/restaurant-mobile.webp" width="390" height="844" alt="Example restaurant website on a smartphone" loading="lazy">
           </div>
         </div>
       </div>
