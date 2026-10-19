@@ -469,7 +469,7 @@
     color:var(--sec-gold-deep); text-decoration:none; border-bottom:1px solid var(--sec-line-gold); padding-bottom:2px;
   }
   .ref-link:hover{ color:var(--sec-gold); }
-  .ref-grid + .ref-grid{ margin-top:clamp(48px,7vw,80px); padding-top:clamp(48px,7vw,80px); border-top:1px solid var(--sec-line); }
+  .ref-demo{ margin-top:clamp(56px,8vw,96px); padding-top:clamp(48px,7vw,80px); border-top:1px solid var(--sec-line); }
 
   /* ---------- KI split ---------- */
   .split{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(32px,5vw,56px); align-items:start; }
@@ -835,8 +835,8 @@
   <section id="referenz" class="section-light">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">Référence &amp; exemple</span>
-        <h2>Deux exemples</h2>
+        <span class="eyebrow">Référence</span>
+        <h2>Un projet réalisé</h2>
       </div>
       <div class="ref-grid">
         <div class="ref-copy reveal d1">
@@ -857,26 +857,32 @@
           </div>
         </div>
       </div>
-      <div class="ref-grid">
-        <div class="ref-copy reveal d1">
-          <h3>Site d’exemple pour un restaurant</h3>
-          <p class="ref-sub">Gasthaus Lindenstube · restaurant entièrement fictif</p>
-          <p>Voici à quoi pourrait ressembler le site d’un restaurant de village : une ambiance chaleureuse, de grandes images et un chemin clair vers la réservation. Le restaurant est inventé et les images sont générées par IA — la structure et le design, eux, sont bien réels.</p>
-          <ul class="package-list">
-            <li>La réservation est toujours à un clic — par formulaire ou par téléphone</li>
-            <li>La cuisine, l’ambiance du soir et les banquets ont chacun leur espace</li>
-            <li>Un emplacement pour de vrais avis Google, comme preuve de confiance</li>
-            <li>Aussi soigné sur smartphone que sur grand écran</li>
-          </ul>
-          <a class="ref-link" href="/beispiel/restaurant">Voir l’exemple (en allemand) →</a>
+      <div class="ref-demo" id="beispiel">
+        <div class="section-head">
+          <span class="eyebrow">Démo</span>
+          <h2>Et pour un restaurant ?</h2>
         </div>
-        <div class="showcase reveal d2">
-          <div class="browser">
-            <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">lindenstube.example</span></div>
-            <img src="/images/referenzen/restaurant-desktop.webp" width="1440" height="900" alt="Page d’accueil du site d’exemple pour un restaurant, vue ordinateur" loading="lazy">
+        <div class="ref-grid">
+          <div class="ref-copy reveal d1">
+            <h3>Site d’exemple pour un restaurant</h3>
+            <p class="ref-sub">Gasthaus Lindenstube · restaurant entièrement fictif</p>
+            <p>Voici à quoi pourrait ressembler le site d’un restaurant de village : une ambiance chaleureuse, de grandes images et un chemin clair vers la réservation. Le restaurant est inventé et les images sont générées par IA — la structure et le design, eux, sont bien réels.</p>
+            <ul class="package-list">
+              <li>La réservation est toujours à un clic — par formulaire ou par téléphone</li>
+              <li>La cuisine, l’ambiance du soir et les banquets ont chacun leur espace</li>
+              <li>Un emplacement pour de vrais avis Google, comme preuve de confiance</li>
+              <li>Aussi soigné sur smartphone que sur grand écran</li>
+            </ul>
+            <a class="ref-link" href="/beispiel/restaurant">Voir l’exemple (en allemand) →</a>
           </div>
-          <div class="mobile">
-            <img src="/images/referenzen/restaurant-mobile.webp" width="390" height="844" alt="Site d’exemple pour un restaurant sur smartphone" loading="lazy">
+          <div class="showcase reveal d2">
+            <div class="browser">
+              <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">lindenstube.example</span></div>
+              <img src="/images/referenzen/restaurant-desktop.webp" width="1440" height="900" alt="Page d’accueil du site d’exemple pour un restaurant, vue ordinateur" loading="lazy">
+            </div>
+            <div class="mobile">
+              <img src="/images/referenzen/restaurant-mobile.webp" width="390" height="844" alt="Site d’exemple pour un restaurant sur smartphone" loading="lazy">
+            </div>
           </div>
         </div>
       </div>

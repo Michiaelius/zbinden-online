@@ -469,7 +469,7 @@
     color:var(--sec-gold-deep); text-decoration:none; border-bottom:1px solid var(--sec-line-gold); padding-bottom:2px;
   }
   .ref-link:hover{ color:var(--sec-gold); }
-  .ref-grid + .ref-grid{ margin-top:clamp(48px,7vw,80px); padding-top:clamp(48px,7vw,80px); border-top:1px solid var(--sec-line); }
+  .ref-demo{ margin-top:clamp(56px,8vw,96px); padding-top:clamp(48px,7vw,80px); border-top:1px solid var(--sec-line); }
 
   /* ---------- KI split ---------- */
   .split{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(32px,5vw,56px); align-items:start; }
@@ -835,8 +835,8 @@
   <section id="referenz" class="section-light">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">Referenz &amp; Beispiel</span>
-        <h2>Zwei Beispiele</h2>
+        <span class="eyebrow">Referenz</span>
+        <h2>Aus der Praxis</h2>
       </div>
       <div class="ref-grid">
         <div class="ref-copy reveal d1">
@@ -857,26 +857,32 @@
           </div>
         </div>
       </div>
-      <div class="ref-grid">
-        <div class="ref-copy reveal d1">
-          <h3>Beispiel-Website für ein Restaurant</h3>
-          <p class="ref-sub">Gasthaus Lindenstube · frei erfundenes Restaurant</p>
-          <p>So könnte die Website eines Dorfrestaurants aussehen: stimmungsvoll, mit grossen Bildern und einem klaren Weg zur Reservation. Das Gasthaus ist erfunden und die Bilder sind KI-generiert — Aufbau und Gestaltung sind echt.</p>
-          <ul class="package-list">
-            <li>Die Reservation ist immer einen Klick entfernt — per Formular oder Telefon</li>
-            <li>Küche, Abendstimmung und Bankette haben je einen eigenen Bereich</li>
-            <li>Platz für echte Google-Bewertungen als Vertrauensbeweis</li>
-            <li>Auf dem Smartphone genauso stimmig wie am grossen Bildschirm</li>
-          </ul>
-          <a class="ref-link" href="/beispiel/restaurant">Beispiel ansehen →</a>
+      <div class="ref-demo" id="beispiel">
+        <div class="section-head">
+          <span class="eyebrow">Beispiel</span>
+          <h2>Und für die Gastronomie?</h2>
         </div>
-        <div class="showcase reveal d2">
-          <div class="browser">
-            <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">lindenstube.example</span></div>
-            <img src="/images/referenzen/restaurant-desktop.webp" width="1440" height="900" alt="Startseite der Beispiel-Website für ein Restaurant, Desktop-Ansicht" loading="lazy">
+        <div class="ref-grid">
+          <div class="ref-copy reveal d1">
+            <h3>Beispiel-Website für ein Restaurant</h3>
+            <p class="ref-sub">Gasthaus Lindenstube · frei erfundenes Restaurant</p>
+            <p>So könnte die Website eines Dorfrestaurants aussehen: stimmungsvoll, mit grossen Bildern und einem klaren Weg zur Reservation. Das Gasthaus ist erfunden und die Bilder sind KI-generiert — Aufbau und Gestaltung sind echt.</p>
+            <ul class="package-list">
+              <li>Die Reservation ist immer einen Klick entfernt — per Formular oder Telefon</li>
+              <li>Küche, Abendstimmung und Bankette haben je einen eigenen Bereich</li>
+              <li>Platz für echte Google-Bewertungen als Vertrauensbeweis</li>
+              <li>Auf dem Smartphone genauso stimmig wie am grossen Bildschirm</li>
+            </ul>
+            <a class="ref-link" href="/beispiel/restaurant">Beispiel ansehen →</a>
           </div>
-          <div class="mobile">
-            <img src="/images/referenzen/restaurant-mobile.webp" width="390" height="844" alt="Beispiel-Website für ein Restaurant auf dem Smartphone" loading="lazy">
+          <div class="showcase reveal d2">
+            <div class="browser">
+              <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">lindenstube.example</span></div>
+              <img src="/images/referenzen/restaurant-desktop.webp" width="1440" height="900" alt="Startseite der Beispiel-Website für ein Restaurant, Desktop-Ansicht" loading="lazy">
+            </div>
+            <div class="mobile">
+              <img src="/images/referenzen/restaurant-mobile.webp" width="390" height="844" alt="Beispiel-Website für ein Restaurant auf dem Smartphone" loading="lazy">
+            </div>
           </div>
         </div>
       </div>
