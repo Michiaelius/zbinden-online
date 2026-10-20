@@ -50,9 +50,15 @@
       },
       {
         "@type": "Offer",
+        "name": "Analyse GEO",
+        "description": "Analyse en six catégories pondérées, benchmark face aux concurrents et plan d'action priorisé sur 30 jours avec entretien – mise en œuvre des bases techniques de l'optimisation GEO incluse (jusqu'à env. 5 pages). Le client réalise le plan lui-même ou avec son agence.",
+        "priceSpecification": { "@type": "PriceSpecification", "minPrice": 2400, "priceCurrency": "CHF" }
+      },
+      {
+        "@type": "Offer",
         "name": "GEO complet",
-        "description": "Analyse en six catégories pondérées, benchmark face aux concurrents et plan d'action priorisé sur 30 jours – mise en œuvre des bases techniques de l'optimisation GEO incluse (jusqu'à env. 5 pages). Contenus, profils et inscriptions dans les annuaires mis en œuvre sur demande, sur devis après l'analyse ; mentions par des tiers sans garantie.",
-        "priceSpecification": { "@type": "PriceSpecification", "minPrice": 2400, "maxPrice": 3900, "priceCurrency": "CHF" }
+        "description": "Tout le contenu de l'analyse GEO, plus la mise en œuvre du plan sur 30 jours (site jusqu'à env. 5 pages) : textes retravaillés, profils et inscriptions dans les annuaires créés ou corrigés, FAQ, processus pour les avis clients, contrôle avec le test IA après 4 à 6 semaines. Mentions par des tiers sans garantie.",
+        "priceSpecification": { "@type": "PriceSpecification", "minPrice": 4200, "priceCurrency": "CHF" }
       },
       {
         "@type": "Offer",
@@ -210,6 +216,9 @@
   .package-grid.three{ grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
   .package-grid.three .package-list{ align-content:start; }
   @media (max-width:1020px){ .package-grid.three{grid-template-columns:1fr;} }
+  .package-grid.four{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
+  .package-grid.four .package-list{ align-content:start; }
+  @media (max-width:860px){ .package-grid.four{grid-template-columns:1fr;} }
   .package-card{
     display:flex; flex-direction:column; gap:20px;
     border:1px solid var(--sec-line-gold); border-radius:var(--r-lg); background:var(--sec-bg-2);
@@ -512,7 +521,7 @@
         <span class="eyebrow">Offre</span>
         <h2>Une entrée sans risque, puis l'étape qui vous convient</h2>
       </div>
-      <div class="package-grid three">
+      <div class="package-grid four">
 
         <div class="package-card reveal d1">
           <span class="package-tag">Entrée gratuite</span>
@@ -565,9 +574,9 @@
           <a class="btn-secondary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Prendre rendez-vous</a>
         </div>
 
-        <div class="package-card featured reveal d3">
-          <span class="package-tag">Technique, contenus &amp; autorité</span>
-          <h3>GEO complet</h3>
+        <div class="package-card reveal d3">
+          <span class="package-tag">Technique &amp; analyse</span>
+          <h3>Analyse GEO</h3>
           <div class="package-meta">
             <div><span class="lbl">Durée</span><span class="val">~2 semaines</span></div>
             <div><span class="lbl">Prix</span><span class="val price">dès CHF 2'400</span></div>
@@ -575,21 +584,42 @@
           <ul class="package-list">
             <li>Tout le contenu de l'optimisation GEO : je mets en œuvre les bases techniques (jusqu'à env. 5 pages, sites plus grands sur devis)</li>
             <li>Analyse en six catégories pondérées : Citability, autorité de marque, Content E-E-A-T, GEO technique, données structurées, optimisation par plateforme</li>
-            <li>Benchmark face à vos concurrents</li>
+            <li>Benchmark face à vos concurrents : pourquoi d'autres sont recommandés</li>
             <li>Plan d'action priorisé sur 30 jours pour vos contenus et vos mentions sur d'autres sites</li>
             <li>Entretien de 30 minutes pour discuter du rapport</li>
-            <li>Sur demande, je mets aussi en œuvre les contenus et crée profils et inscriptions dans les annuaires — devis après l'analyse</li>
+            <li>Vous réalisez le plan vous-même ou avec votre agence</li>
           </ul>
+          <a class="btn-secondary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Prendre rendez-vous</a>
+        </div>
+
+        <div class="package-card featured reveal d4">
+          <span class="package-tag">Analyse &amp; mise en œuvre</span>
+          <h3>GEO complet</h3>
+          <div class="package-meta">
+            <div><span class="lbl">Durée</span><span class="val">~6 semaines</span></div>
+            <div><span class="lbl">Prix</span><span class="val price">dès CHF 4'200</span></div>
+          </div>
+          <ul class="package-list">
+            <li>Tout le contenu de l'analyse GEO, bases techniques incluses</li>
+            <li>Je mets en œuvre le plan sur 30 jours pour vous :</li>
+            <li>Textes de l'accueil, de l'offre et de la page « À propos » retravaillés, pour que les systèmes d'IA comprennent clairement ce que vous proposez et où</li>
+            <li>Profils et inscriptions dans les annuaires créés ou corrigés, p. ex. fiche Google, local.ch, search.ch et annuaires de votre branche</li>
+            <li>FAQ avec les questions que vos clientes et clients posent vraiment</li>
+            <li>Processus pour les avis clients : modèle de texte, lien et code QR</li>
+            <li>Contrôle après 4 à 6 semaines : nouveau test IA avec comparaison avant-après</li>
+            <li>Le prix s'applique aux sites jusqu'à env. 5 pages</li>
+          </ul>
+          <p style="margin:0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Condition : un accès à votre site et à vos profils. Les mentions qui dépendent de tiers — presse, partenaires, avis —, personne ne peut les garantir ; je prépare le terrain.</p>
           <a class="btn-primary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Prendre rendez-vous</a>
         </div>
 
       </div>
-      <p style="margin:22px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>Votre site est bon, mais les assistants IA ne vous citent pas ?</strong> S'il fonctionne pour vos visiteurs — clair, adapté au mobile, avec des contenus à jour —, l'<a href="/fr/webdesign#angebot" style="color:inherit; text-decoration:none; border-bottom:1px solid var(--sec-line-gold);">optimisation GEO dès CHF 900</a> suffit souvent : les ajustements se font en arrière-plan, votre design reste. GEO complet vaut la peine quand la cause est plus profonde : contenus, mentions sur d'autres sites ou comparaison avec vos concurrents — la mise en œuvre technique y est déjà incluse.</p>
-      <p style="margin:10px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>Que couvre chaque offre ?</strong> La technique — accès des crawlers et données structurées — représente environ 25% du score dans ma <a href="#methode" style="color:inherit; text-decoration:none; border-bottom:1px solid var(--sec-line-gold);">méthode</a>. C'est le socle : sans elle, les systèmes d'IA ne lisent pas le reste de manière fiable. Les 75% restants portent sur les contenus, l'autorité de marque et l'optimisation par plateforme. L'optimisation GEO couvre le socle, GEO complet les six catégories.</p>
-      <p style="margin:10px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>Commencer petit ?</strong> Si vous débutez par l'optimisation GEO et passez plus tard à GEO complet, vous ne payez que la différence.</p>
-      <p style="margin:10px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>Un site plus grand ou votre propre agence ?</strong> Pour les entreprises au site étendu, je propose aussi l'analyse seule : six catégories, benchmark et plan d'action — la mise en œuvre est assurée par votre équipe web ou votre agence, que j'accompagne sur demande. Prix sur devis, selon la taille du site.</p>
-      <p style="margin:10px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>Vous ne restez pas seul avec votre plan.</strong> Avec GEO complet, les points techniques sont déjà mis en œuvre. Pour les contenus ainsi que les profils et inscriptions dans les annuaires, vous recevez un devis après l'analyse — ou vous réalisez le plan vous-même ou avec votre agence. Les mentions qui dépendent de tiers — avis, presse, partenaires —, personne ne peut les garantir : je vous montre ce qui est réaliste et vous accompagne.</p>
-      <p style="margin:10px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Si l'analyse montre qu'un nouveau site vaut mieux qu'une adaptation de l'existant, la mise en œuvre technique sur l'ancien site n'a pas lieu. Le nouveau site fait l'objet d'un devis selon les <a href="/fr/webdesign#angebot" style="color:inherit; text-decoration:none; border-bottom:1px solid var(--sec-line-gold);">tarifs webdesign</a> ; pour un site de plusieurs pages, le prix de GEO complet est intégralement déduit.</p>
+      <p style="margin:22px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>Votre site est bon, mais les assistants IA ne vous citent pas ?</strong> S'il fonctionne pour vos visiteurs — clair, adapté au mobile, avec des contenus à jour —, l'<a href="/fr/webdesign#angebot" style="color:inherit; text-decoration:none; border-bottom:1px solid var(--sec-line-gold);">optimisation GEO dès CHF 900</a> suffit souvent : les ajustements se font en arrière-plan, votre design reste. Si la cause est plus profonde — contenus, mentions sur d'autres sites ou comparaison avec vos concurrents —, l'analyse GEO montre ce qu'il faut faire. Avec GEO complet, je le mets aussi en œuvre.</p>
+      <p style="margin:10px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>Que couvre chaque offre ?</strong> La technique — accès des crawlers et données structurées — représente environ 25% du score dans ma <a href="#methode" style="color:inherit; text-decoration:none; border-bottom:1px solid var(--sec-line-gold);">méthode</a>. C'est le socle : sans elle, les systèmes d'IA ne lisent pas le reste de manière fiable. Les 75% restants portent sur les contenus, l'autorité de marque et l'optimisation par plateforme. L'optimisation GEO couvre le socle. L'analyse GEO examine les six catégories et dit ce qu'il faut faire ; GEO complet le met en œuvre.</p>
+      <p style="margin:10px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>Commencer petit ?</strong> Si vous débutez par l'optimisation GEO ou l'analyse GEO et passez plus tard à l'offre suivante, vous ne payez que la différence.</p>
+      <p style="margin:10px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>Un site plus grand ou votre propre agence ?</strong> Pour les sites étendus, l'analyse GEO et GEO complet font l'objet d'un devis, selon la taille du site. Si votre équipe web ou votre agence réalise le plan, je l'accompagne sur demande.</p>
+      <p style="margin:10px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>Vous ne restez pas seul avec votre plan.</strong> Avec l'analyse GEO, les points techniques sont déjà mis en œuvre. Le reste du plan, vous le réalisez vous-même ou avec votre agence — ou vous choisissez GEO complet et je m'en charge. Les mentions qui dépendent de tiers — avis, presse, partenaires —, personne ne peut les garantir : je vous montre ce qui est réaliste et vous accompagne.</p>
+      <p style="margin:10px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Si l'analyse montre qu'un nouveau site vaut mieux qu'une adaptation de l'existant, la mise en œuvre technique sur l'ancien site n'a pas lieu. Le nouveau site fait l'objet d'un devis selon les <a href="/fr/webdesign#angebot" style="color:inherit; text-decoration:none; border-bottom:1px solid var(--sec-line-gold);">tarifs webdesign</a> ; pour un site de plusieurs pages, le prix de l'analyse GEO est intégralement déduit.</p>
     </div>
   </section>
 
@@ -631,7 +661,7 @@
           <div class="bar-track"><div class="bar-fill"></div></div>
         </div>
       </div>
-      <p style="margin:22px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>25% de technique, 75% de contenus et d'autorité.</strong> Je mets en œuvre le GEO technique et les données structurées (25% ensemble) avec l'optimisation GEO. GEO complet analyse en plus les quatre autres catégories (75%) — avec un plan d'action priorisé.</p>
+      <p style="margin:22px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>25% de technique, 75% de contenus et d'autorité.</strong> Je mets en œuvre le GEO technique et les données structurées (25% ensemble) avec l'optimisation GEO. L'analyse GEO examine en plus les quatre autres catégories (75%), avec un plan d'action priorisé ; GEO complet met ce plan en œuvre.</p>
     </div>
   </section>
 
@@ -676,11 +706,11 @@
         </div>
         <div class="phase">
           <span class="num">02</span>
-          <div><h3>Optimisation GEO ou GEO complet</h3><p>Si la base technique suffit, je la mets directement en œuvre avec l'optimisation GEO. Si la cause est plus profonde, GEO complet y ajoute l'analyse : six catégories, des constats priorisés, un plan d'action sur 30 jours — dans un rapport clairement structuré.</p></div>
+          <div><h3>Optimisation GEO ou analyse GEO</h3><p>Si la base technique suffit, je la mets directement en œuvre avec l'optimisation GEO. Si la cause est plus profonde, l'analyse GEO y ajoute l'analyse : six catégories, des constats priorisés, un plan d'action sur 30 jours — dans un rapport clairement structuré.</p></div>
         </div>
         <div class="phase">
           <span class="num">03</span>
-          <div><h3>Entretien &amp; suite de la mise en œuvre</h3><p>Avec GEO complet, je parcours le rapport avec vous pendant 30 minutes. Ce qui dépasse la technique — contenus, profils et inscriptions dans les annuaires, jusqu'à un nouveau site —, je le mets en œuvre sur demande, sur devis après l'analyse. Vous pouvez aussi le réaliser vous-même ou avec votre agence.</p></div>
+          <div><h3>Entretien &amp; mise en œuvre</h3><p>Je parcours le rapport de l'analyse GEO avec vous pendant 30 minutes. Avec GEO complet, je mets le plan en œuvre : textes, profils, inscriptions dans les annuaires, FAQ et avis. Vous pouvez aussi le réaliser vous-même ou avec votre agence. Si l'analyse montre qu'un nouveau site vaut mieux, je le chiffre selon les tarifs webdesign.</p></div>
         </div>
       </div>
     </div>
@@ -712,7 +742,7 @@
           <a class="btn-secondary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Prendre rendez-vous</a>
         </div>
       </div>
-      <p style="margin:18px auto 0; max-width:640px; font-size:.82rem; color:var(--sec-muted); font-weight:300;">GEO complet déjà réalisé avec moi ? Si le nouveau site remplace la mise en œuvre technique sur l'existant, son prix est intégralement déduit pour un site de plusieurs pages.</p>
+      <p style="margin:18px auto 0; max-width:640px; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Analyse GEO déjà réalisée avec moi ? Si le nouveau site remplace la mise en œuvre technique sur l'existant, son prix est intégralement déduit pour un site de plusieurs pages.</p>
     </div>
   </section>
 
@@ -796,6 +826,7 @@
                   <option value="">Pas encore décidé</option>
                   <option value="GEO-Light">GEO-Light</option>
                   <option value="GEO-Optimierung">Optimisation GEO</option>
+                  <option value="GEO-Analyse">Analyse GEO</option>
                   <option value="GEO komplett">GEO complet</option>
                   <option value="Webdesign">Webdesign</option>
                 </select>

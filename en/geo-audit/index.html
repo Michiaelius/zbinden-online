@@ -50,9 +50,15 @@
       },
       {
         "@type": "Offer",
+        "name": "GEO analysis",
+        "description": "Analysis across six weighted categories, a competitive benchmark and a prioritized 30-day action plan with a call – including implementation of the technical basics from the GEO optimization (up to about 5 pages). The client implements the plan themselves or with their agency.",
+        "priceSpecification": { "@type": "PriceSpecification", "minPrice": 2400, "priceCurrency": "CHF" }
+      },
+      {
+        "@type": "Offer",
         "name": "GEO complete",
-        "description": "Analysis across six weighted categories, a competitive benchmark and a prioritized 30-day action plan – including implementation of the technical basics from the GEO optimization (up to about 5 pages). Content, profiles and directory listings implemented on request, quoted after the analysis; third-party mentions without guarantee.",
-        "priceSpecification": { "@type": "PriceSpecification", "minPrice": 2400, "maxPrice": 3900, "priceCurrency": "CHF" }
+        "description": "Everything in the GEO analysis, plus implementation of the 30-day plan (website up to about 5 pages): texts reworked, profiles and directory listings set up or corrected, FAQ, a process for customer reviews, follow-up AI check after 4–6 weeks. Third-party mentions without guarantee.",
+        "priceSpecification": { "@type": "PriceSpecification", "minPrice": 4200, "priceCurrency": "CHF" }
       },
       {
         "@type": "Offer",
@@ -210,6 +216,9 @@
   .package-grid.three{ grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
   .package-grid.three .package-list{ align-content:start; }
   @media (max-width:1020px){ .package-grid.three{grid-template-columns:1fr;} }
+  .package-grid.four{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
+  .package-grid.four .package-list{ align-content:start; }
+  @media (max-width:860px){ .package-grid.four{grid-template-columns:1fr;} }
   .package-card{
     display:flex; flex-direction:column; gap:20px;
     border:1px solid var(--sec-line-gold); border-radius:var(--r-lg); background:var(--sec-bg-2);
@@ -512,7 +521,7 @@
         <span class="eyebrow">Offer</span>
         <h2>A risk-free entry point, then the right next step</h2>
       </div>
-      <div class="package-grid three">
+      <div class="package-grid four">
 
         <div class="package-card reveal d1">
           <span class="package-tag">Free entry point</span>
@@ -565,9 +574,9 @@
           <a class="btn-secondary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Schedule a call</a>
         </div>
 
-        <div class="package-card featured reveal d3">
-          <span class="package-tag">Technical, content &amp; authority</span>
-          <h3>GEO complete</h3>
+        <div class="package-card reveal d3">
+          <span class="package-tag">Technical &amp; analysis</span>
+          <h3>GEO analysis</h3>
           <div class="package-meta">
             <div><span class="lbl">Duration</span><span class="val">~2 weeks</span></div>
             <div><span class="lbl">Price</span><span class="val price">from CHF 2'400</span></div>
@@ -575,21 +584,42 @@
           <ul class="package-list">
             <li>Everything in the GEO optimization: I implement the technical basics (up to about 5 pages, larger websites on quote)</li>
             <li>Analysis across six weighted categories: Citability, Brand Authority, Content E-E-A-T, Technical GEO, Structured Data, Platform Optimization</li>
-            <li>Competitive benchmark</li>
+            <li>Competitive benchmark: why others are recommended</li>
             <li>Prioritized 30-day action plan for content and mentions on other sites</li>
             <li>30-minute call to walk through the report</li>
-            <li>On request, I also implement content and set up profiles and directory listings — quote after the analysis</li>
+            <li>You implement the plan yourself or with your agency</li>
           </ul>
+          <a class="btn-secondary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Schedule a call</a>
+        </div>
+
+        <div class="package-card featured reveal d4">
+          <span class="package-tag">Analysis &amp; implementation</span>
+          <h3>GEO complete</h3>
+          <div class="package-meta">
+            <div><span class="lbl">Duration</span><span class="val">~6 weeks</span></div>
+            <div><span class="lbl">Price</span><span class="val price">from CHF 4'200</span></div>
+          </div>
+          <ul class="package-list">
+            <li>Everything in the GEO analysis, technical basics included</li>
+            <li>I implement the 30-day plan for you:</li>
+            <li>Home, services and about texts reworked, so AI systems clearly understand what you offer and where</li>
+            <li>Profiles and directory listings set up or corrected, e.g. Google Business Profile, local.ch, search.ch and industry directories</li>
+            <li>FAQ with the questions your customers really ask</li>
+            <li>A process for customer reviews: message template, link and QR code</li>
+            <li>Follow-up after 4–6 weeks: new AI check with a before-and-after comparison</li>
+            <li>The price applies to websites up to about 5 pages</li>
+          </ul>
+          <p style="margin:0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Requires access to your website and your profiles. Mentions that depend on third parties — press, partners, reviews — are something nobody can guarantee; I prepare the ground.</p>
           <a class="btn-primary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Schedule a call</a>
         </div>
 
       </div>
-      <p style="margin:22px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>Your website is good, but AI assistants don't mention you?</strong> If it works for your visitors — clear, mobile-friendly, with up-to-date content — the <a href="/en/webdesign#angebot" style="color:inherit; text-decoration:none; border-bottom:1px solid var(--sec-line-gold);">GEO optimization from CHF 900</a> is often enough: the changes happen in the background, your design stays. GEO complete is worth it when the cause runs deeper: content, mentions on other sites or how you compare with competitors — the technical implementation is already included.</p>
-      <p style="margin:10px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>What does each package cover?</strong> The technical side — crawler access and structured data — accounts for about 25% of the score in my <a href="#methode" style="color:inherit; text-decoration:none; border-bottom:1px solid var(--sec-line-gold);">method</a>. It is the foundation: without it, AI systems cannot reliably read the rest. The remaining 75% comes from content, brand authority and platform optimization. The GEO optimization covers the foundation, GEO complete all six categories.</p>
-      <p style="margin:10px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>Prefer to start small?</strong> If you begin with the GEO optimization and move to GEO complete later, you only pay the difference.</p>
-      <p style="margin:10px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>A larger website or your own agency?</strong> For companies with an extensive website, I also offer the analysis on its own: six categories, benchmark and action plan — your web team or agency handles the implementation, and I support them on request. Price on quote, depending on the size of the website.</p>
-      <p style="margin:10px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>You are not left alone with the plan.</strong> With GEO complete, the technical points are already implemented. For content as well as profiles and directory listings, you receive a quote after the analysis — or you implement the plan yourself or with your agency. Mentions that depend on third parties — reviews, press, partners — are something nobody can guarantee: I show you what is realistic and support you along the way.</p>
-      <p style="margin:10px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">If the analysis shows that a new website makes more sense than adapting the existing one, the technical implementation on the old site is dropped. The new website is quoted at the <a href="/en/webdesign#angebot" style="color:inherit; text-decoration:none; border-bottom:1px solid var(--sec-line-gold);">web design prices</a>; for a multi-page website, the GEO complete price is fully credited.</p>
+      <p style="margin:22px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>Your website is good, but AI assistants don't mention you?</strong> If it works for your visitors — clear, mobile-friendly, with up-to-date content — the <a href="/en/webdesign#angebot" style="color:inherit; text-decoration:none; border-bottom:1px solid var(--sec-line-gold);">GEO optimization from CHF 900</a> is often enough: the changes happen in the background, your design stays. If the cause runs deeper — content, mentions on other sites or how you compare with competitors — the GEO analysis shows what to do. With GEO complete, I also implement it.</p>
+      <p style="margin:10px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>What does each package cover?</strong> The technical side — crawler access and structured data — accounts for about 25% of the score in my <a href="#methode" style="color:inherit; text-decoration:none; border-bottom:1px solid var(--sec-line-gold);">method</a>. It is the foundation: without it, AI systems cannot reliably read the rest. The remaining 75% comes from content, brand authority and platform optimization. The GEO optimization covers the foundation. The GEO analysis examines all six categories and tells you what to do; GEO complete implements it.</p>
+      <p style="margin:10px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>Prefer to start small?</strong> If you begin with the GEO optimization or the GEO analysis and move to the next package later, you only pay the difference.</p>
+      <p style="margin:10px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>A larger website or your own agency?</strong> For extensive websites, the GEO analysis and GEO complete are quoted individually, depending on the size of the website. If your web team or agency implements the plan, I support them on request.</p>
+      <p style="margin:10px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>You are not left alone with the plan.</strong> With the GEO analysis, the technical points are already implemented. You implement the rest of the plan yourself or with your agency — or you choose GEO complete and I take care of it. Mentions that depend on third parties — reviews, press, partners — are something nobody can guarantee: I show you what is realistic and support you along the way.</p>
+      <p style="margin:10px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">If the analysis shows that a new website makes more sense than adapting the existing one, the technical implementation on the old site is dropped. The new website is quoted at the <a href="/en/webdesign#angebot" style="color:inherit; text-decoration:none; border-bottom:1px solid var(--sec-line-gold);">web design prices</a>; for a multi-page website, the GEO analysis price is fully credited.</p>
     </div>
   </section>
 
@@ -631,7 +661,7 @@
           <div class="bar-track"><div class="bar-fill"></div></div>
         </div>
       </div>
-      <p style="margin:22px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>25% technical, 75% content and authority.</strong> I implement Technical GEO and Structured Data (25% together) with the GEO optimization. GEO complete additionally analyses the other four categories (75%) — with a prioritized action plan.</p>
+      <p style="margin:22px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>25% technical, 75% content and authority.</strong> I implement Technical GEO and Structured Data (25% together) with the GEO optimization. The GEO analysis additionally examines the other four categories (75%), with a prioritized action plan; GEO complete implements that plan.</p>
     </div>
   </section>
 
@@ -676,11 +706,11 @@
         </div>
         <div class="phase">
           <span class="num">02</span>
-          <div><h3>GEO optimization or GEO complete</h3><p>If the technical basics are enough, I implement them directly with the GEO optimization. If the cause runs deeper, GEO complete adds the analysis: six categories, prioritized findings, a 30-day action plan — in a clearly structured report.</p></div>
+          <div><h3>GEO optimization or GEO analysis</h3><p>If the technical basics are enough, I implement them directly with the GEO optimization. If the cause runs deeper, the GEO analysis adds the analysis: six categories, prioritized findings, a 30-day action plan — in a clearly structured report.</p></div>
         </div>
         <div class="phase">
           <span class="num">03</span>
-          <div><h3>Call &amp; further implementation</h3><p>With GEO complete, I walk through the report with you in 30 minutes. Whatever goes beyond the technical side — content, profiles and directory listings, up to a full new website — I implement on request, quoted after the analysis. Or you implement it yourself or with your agency.</p></div>
+          <div><h3>Call &amp; implementation</h3><p>I walk through the GEO analysis report with you in 30 minutes. With GEO complete, I implement the plan: texts, profiles, directory listings, FAQ and reviews. Or you implement it yourself or with your agency. If the analysis shows that a new website makes more sense, I quote it at the web design prices.</p></div>
         </div>
       </div>
     </div>
@@ -712,7 +742,7 @@
           <a class="btn-secondary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Schedule a call</a>
         </div>
       </div>
-      <p style="margin:18px auto 0; max-width:640px; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Already done GEO complete with me? If the new website replaces the technical implementation on the existing one, its price is fully credited for a multi-page website.</p>
+      <p style="margin:18px auto 0; max-width:640px; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Already done the GEO analysis with me? If the new website replaces the technical implementation on the existing one, its price is fully credited for a multi-page website.</p>
     </div>
   </section>
 
@@ -796,6 +826,7 @@
                   <option value="">Not sure yet</option>
                   <option value="GEO-Light">GEO-Light</option>
                   <option value="GEO-Optimierung">GEO optimization</option>
+                  <option value="GEO-Analyse">GEO analysis</option>
                   <option value="GEO komplett">GEO complete</option>
                   <option value="Webdesign">Web design</option>
                 </select>
