@@ -60,7 +60,7 @@
           {
             "@type": "Offer",
             "name": "Onepager — GEO-ready dès le premier jour",
-            "description": "Site sur mesure d'une seule page avec l'essentiel : offre, horaires, contact. Rédaction des textes incluse, optimisé pour mobile, données structurées.",
+            "description": "Site sur mesure d'une seule page avec l'essentiel : offre, horaires, contact. Rédaction des textes incluse, optimisé pour mobile, données structurées. Durée env. 2 semaines à compter de la réception de tous les documents, plus le temps de vos retours. Paiement : 50 % à la commande, 50 % à la mise en ligne, payable à 30 jours net. Non soumis à la TVA.",
             "priceSpecification": {
               "@type": "PriceSpecification",
               "minPrice": 1800,
@@ -70,7 +70,7 @@
           {
             "@type": "Offer",
             "name": "Site web de plusieurs pages — GEO-ready dès le premier jour",
-            "description": "Site web sur mesure pour petites entreprises : optimisé pour mobile, protection des données & mentions légales conformes aux exigences suisses, données structurées et ouvert aux crawlers IA.",
+            "description": "Site web sur mesure pour petites entreprises : optimisé pour mobile, protection des données & mentions légales conformes aux exigences suisses, données structurées et ouvert aux crawlers IA. Durée 3–4 semaines à compter de la réception de tous les documents, plus le temps de vos retours. Paiement : 30 % à la commande, 40 % après validation du design, 30 % à la mise en ligne, payable à 30 jours net. Non soumis à la TVA.",
             "priceSpecification": {
               "@type": "PriceSpecification",
               "minPrice": 4800,
@@ -79,13 +79,50 @@
           },
           {
             "@type": "Offer",
-            "name": "Abonnement de suivi",
-            "description": "Hébergement et petites modifications comme textes, images, horaires et actualités, jusqu'à env. 1 heure par mois. Durée minimale de 6 mois, puis résiliable chaque mois.",
+            "name": "Hébergement & technique",
+            "description": "Si j'héberge le site : CHF 180 par an, payable annuellement d'avance – hébergement, certificat SSL, surveillance et mises à jour techniques compris. Inclus dans l'abonnement de suivi. Si vous avez déjà votre propre hébergement, j'y installe directement le site — ces frais ne s'appliquent alors pas. Le nom de domaine reste à votre nom. Si vous mettez fin à la collaboration, vous recevez les fichiers de votre site. Non soumis à la TVA.",
             "priceSpecification": {
               "@type": "UnitPriceSpecification",
-              "price": 79,
+              "price": 180,
               "priceCurrency": "CHF",
-              "unitText": "MONTH"
+              "unitCode": "ANN",
+              "unitText": "an"
+            }
+          },
+          {
+            "@type": "Offer",
+            "name": "Abonnement de suivi S",
+            "description": "Modifications jusqu'à 30 min par mois, hébergement & technique inclus. Durée minimale de 6 mois (formule fixe pendant cette période), puis reconduction mensuelle, résiliable moyennant un préavis d'un mois ; passage de S à M (ou inversement) au début du mois suivant. Le temps non utilisé expire à la fin du mois. Non soumis à la TVA.",
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": 59,
+              "priceCurrency": "CHF",
+              "unitCode": "MON",
+              "unitText": "mois"
+            }
+          },
+          {
+            "@type": "Offer",
+            "name": "Abonnement de suivi M",
+            "description": "Modifications jusqu'à 1 h par mois, hébergement & technique inclus. Durée minimale de 6 mois (formule fixe pendant cette période), puis reconduction mensuelle, résiliable moyennant un préavis d'un mois ; passage de S à M (ou inversement) au début du mois suivant. Le temps non utilisé expire à la fin du mois. Non soumis à la TVA.",
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": 99,
+              "priceCurrency": "CHF",
+              "unitCode": "MON",
+              "unitText": "mois"
+            }
+          },
+          {
+            "@type": "Offer",
+            "name": "Modifications sans abonnement",
+            "description": "Modifications facturées selon le temps passé : CHF 120 de l'heure, minimum 30 minutes par demande, puis par tranche de 15 minutes entamée. Non soumis à la TVA.",
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": 120,
+              "priceCurrency": "CHF",
+              "unitCode": "HUR",
+              "unitText": "heure"
             }
           },
           {
@@ -118,7 +155,7 @@
           "name": "Combien de temps faut-il ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Un Onepager est en général prêt en 2 semaines environ, un site de plusieurs pages en 3 à 4 semaines — selon la rapidité avec laquelle les informations et les images sont disponibles."
+            "text": "Comptez environ 2 semaines pour un Onepager et 3 à 4 semaines pour un site de plusieurs pages — à compter de la réception de tous les documents, plus le temps de vos retours."
           }
         },
         {
@@ -126,7 +163,7 @@
           "name": "Où le site est-il hébergé ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Comme c'est le plus simple pour vous : si vous avez déjà un nom de domaine et un hébergement, je remplace le site directement là-bas. Sinon, je mets en place un nouvel hébergement. Les frais courants de nom de domaine et d'hébergement ne sont pas compris dans le prix — avec l'abonnement de suivi, l'hébergement est inclus. Le nom de domaine reste enregistré à votre nom — il vous appartient."
+            "text": "Comme c'est le plus simple pour vous : si vous avez déjà un nom de domaine et un hébergement, je remplace le site directement là-bas. Sinon, je mets en place un nouvel hébergement. Les frais de nom de domaine ne sont pas compris dans le prix. Si j'héberge le site, l'hébergement & la technique coûtent CHF 180 par an — inclus dans l'abonnement de suivi. Le nom de domaine reste enregistré à votre nom — il vous appartient."
           }
         },
         {
@@ -150,7 +187,23 @@
           "name": "Et si quelque chose change plus tard ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Avec l'abonnement de suivi à CHF 79.– par mois, je m'occupe des petites modifications comme les textes, les images, les horaires et les actualités (jusqu'à env. 1 heure par mois) — l'hébergement est inclus. Durée minimale de 6 mois, puis résiliable chaque mois. Sans abonnement, les modifications sont facturées selon le temps passé, à CHF 120.– de l'heure."
+            "text": "Avec un abonnement de suivi, je m'occupe des modifications pour vous : abonnement S à CHF 59 par mois (modifications jusqu'à 30 min par mois) ou abonnement M à CHF 99 par mois (modifications jusqu'à 1 h par mois). L'hébergement & la technique sont inclus dans les deux abonnements. Durée minimale de 6 mois, puis reconduction mensuelle, résiliable moyennant un préavis d'un mois. Le temps non utilisé expire à la fin du mois. Sans abonnement, les modifications sont facturées selon le temps passé : CHF 120 de l'heure, minimum 30 minutes par demande, puis par tranche de 15 minutes entamée."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Combien coûte l'hébergement de mon site ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "L'hébergement & la technique coûtent CHF 180 par an, payables annuellement d'avance — hébergement, certificat SSL, surveillance et mises à jour techniques compris. Avec un abonnement de suivi, ils sont inclus. Si vous avez déjà votre propre hébergement, j'y installe directement le site — ces frais ne s'appliquent alors pas. Le nom de domaine reste à votre nom. Si vous mettez fin à la collaboration, vous recevez les fichiers de votre site."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Que se passe-t-il si j'ai besoin d'une modification sans abonnement ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Écrivez-moi simplement ce qu'il faut changer. Sans abonnement, les modifications sont facturées selon le temps passé : CHF 120 de l'heure, minimum 30 minutes par demande, puis par tranche de 15 minutes entamée. Une petite modification, comme un nouveau numéro de téléphone, coûte donc CHF 60."
           }
         },
         {
@@ -506,6 +559,12 @@
   .pkg-example a{ font-family:var(--font-ui); font-weight:600; color:var(--sec-gold-deep); text-decoration:none; border-bottom:1px solid var(--sec-line-gold); }
   .pkg-example a:hover{ color:var(--sec-gold); }
   .abo-extra{ margin:0; font-size:.82rem; color:var(--sec-muted); font-weight:300; }
+  .package-meta .val-note{ font-family:var(--font-ui); font-size:.74rem; color:var(--sec-muted); font-weight:300; max-width:24ch; line-height:1.4; margin-top:2px; }
+  .abo-table{ width:100%; border-collapse:collapse; font-size:.86rem; }
+  .abo-table caption{ text-align:left; font-family:var(--font-ui); font-size:.64rem; letter-spacing:.12em; text-transform:uppercase; color:var(--sec-muted); font-weight:600; padding-bottom:8px; }
+  .abo-table th, .abo-table td{ text-align:left; padding:9px 0; border-bottom:1px solid var(--sec-line); vertical-align:top; font-weight:300; line-height:1.45; }
+  .abo-table th{ font-family:var(--font-ui); font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:var(--sec-muted); font-weight:600; }
+  .abo-table td:last-child, .abo-table th:last-child{ white-space:nowrap; padding-left:16px; text-align:right; color:var(--sec-gold-deep); font-weight:500; }
   .credit-note{ margin:18px auto 0; max-width:640px; font-size:.82rem; color:var(--sec-muted); font-weight:300; text-align:center; }
 
   /* ---------- FAQ ---------- */
@@ -602,6 +661,7 @@
         <span class="eyebrow">Offre</span>
         <h2>Des prix clairs, sans surprise</h2>
       </div>
+      <p class="credit-note" style="text-align:left; margin:-12px 0 24px; max-width:none;">Tous les prix en CHF. Non soumis à la TVA.</p>
       <div class="package-grid rows">
         <div class="package-card reveal d1">
           <div class="pkg-side">
@@ -632,7 +692,7 @@
             <span class="package-tag">1 page</span>
             <h3>Onepager</h3>
             <div class="package-meta">
-              <div><span class="lbl">Durée</span><span class="val">env. 2 semaines</span></div>
+              <div><span class="lbl">Durée</span><span class="val">env. 2 semaines</span><span class="val-note">à compter de la réception de tous les documents, plus le temps de vos retours</span></div>
               <div><span class="lbl">Prix</span><span class="val price">dès CHF 1'800</span></div>
             </div>
             <a class="btn-primary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Prendre rendez-vous</a>
@@ -648,26 +708,8 @@
             <li>GEO-ready : données structurées, HTML propre, ouvert aux crawlers IA</li>
             <li>Une série de corrections incluse</li>
             </ul>
+            <p class="abo-extra">Paiement : 50 % à la commande, 50 % à la mise en ligne, payable à 30 jours net.</p>
             <p class="pkg-example">Exemple : <a href="#referenz">Spielgruppe Sunneschiin ↓</a></p>
-          </div>
-          <div class="pkg-addon">
-            <div class="pkg-side">
-              <span class="addon-tag">+ En option</span>
-              <h4>Abonnement de suivi</h4>
-              <div class="package-meta">
-                <div><span class="lbl">Durée</span><span class="val">6 mois minimum</span></div>
-                <div><span class="lbl">Prix</span><span class="val price">CHF 79.– / mois</span></div>
-              </div>
-            </div>
-            <div class="pkg-body">
-              <ul class="package-list">
-            <li>Hébergement inclus</li>
-            <li>Petites modifications comme textes, images, horaires et actualités</li>
-            <li>Jusqu'à env. 1 heure de travail par mois</li>
-            <li>Ensuite résiliable chaque mois</li>
-              </ul>
-              <p class="abo-extra">Sans abonnement : modifications facturées selon le temps passé, CHF 120.– de l'heure.</p>
-            </div>
           </div>
         </div>
         <div class="package-card reveal d3">
@@ -675,7 +717,7 @@
             <span class="package-tag">Plusieurs pages</span>
             <h3>Site web</h3>
             <div class="package-meta">
-              <div><span class="lbl">Durée</span><span class="val">3–4 semaines</span></div>
+              <div><span class="lbl">Durée</span><span class="val">3–4 semaines</span><span class="val-note">à compter de la réception de tous les documents, plus le temps de vos retours</span></div>
               <div><span class="lbl">Prix</span><span class="val price">dès CHF 4'800</span></div>
             </div>
             <a class="btn-secondary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Prendre rendez-vous</a>
@@ -686,24 +728,54 @@
             <li>Toutes les prestations du Onepager incluses</li>
             <li>GEO complet est intégralement déduit si le nouveau site remplace la mise en œuvre sur l'ancien</li>
             </ul>
+            <p class="abo-extra">Paiement : 30 % à la commande, 40 % après validation du design, 30 % à la mise en ligne, payable à 30 jours net.</p>
+          </div>
+        </div>
+        <div class="package-card reveal d1" id="betreuung">
+          <div class="pkg-side">
+            <span class="package-tag">Exploitation courante</span>
+            <h3>Hébergement &amp; technique</h3>
+            <div class="package-meta">
+              <div><span class="lbl">Facturation</span><span class="val">annuelle, d'avance</span></div>
+              <div><span class="lbl">Prix</span><span class="val price">CHF 180 / an</span></div>
+            </div>
+          </div>
+          <div class="pkg-body">
+            <ul class="package-list">
+            <li>Hébergement &amp; technique : CHF 180 par an, payable annuellement d'avance – hébergement, certificat SSL, surveillance et mises à jour techniques compris. Inclus dans l'abonnement de suivi.</li>
+            <li>Si vous avez déjà votre propre hébergement, j'y installe directement le site — ces frais ne s'appliquent alors pas.</li>
+            <li>Le nom de domaine reste à votre nom. Si vous mettez fin à la collaboration, vous recevez les fichiers de votre site.</li>
+            </ul>
           </div>
           <div class="pkg-addon">
             <div class="pkg-side">
               <span class="addon-tag">+ En option</span>
               <h4>Abonnement de suivi</h4>
               <div class="package-meta">
-                <div><span class="lbl">Durée</span><span class="val">6 mois minimum</span></div>
-                <div><span class="lbl">Prix</span><span class="val price">CHF 79.– / mois</span></div>
+                <div><span class="lbl">Abonnement S</span><span class="val price">CHF 59 / mois</span><span class="val-note">Modifications jusqu'à 30 min par mois</span></div>
+                <div><span class="lbl">Abonnement M</span><span class="val price">CHF 99 / mois</span><span class="val-note">Modifications jusqu'à 1 h par mois</span></div>
               </div>
             </div>
             <div class="pkg-body">
               <ul class="package-list">
-            <li>Hébergement inclus</li>
-            <li>Petites modifications comme textes, images, horaires et actualités</li>
-            <li>Jusqu'à env. 1 heure de travail par mois</li>
-            <li>Ensuite résiliable chaque mois</li>
+            <li>Hébergement &amp; technique inclus dans les deux abonnements</li>
+            <li>Durée minimale de 6 mois (formule fixe pendant cette période)</li>
+            <li>Ensuite reconduction mensuelle, résiliable moyennant un préavis d'un mois ; passage de S à M (ou inversement) au début du mois suivant</li>
+            <li>Le temps non utilisé expire à la fin du mois</li>
               </ul>
-              <p class="abo-extra">Sans abonnement : modifications facturées selon le temps passé, CHF 120.– de l'heure.</p>
+              <table class="abo-table">
+                <caption>Que représentent 30 minutes ou 1 heure ?</caption>
+                <thead><tr><th scope="col">Exemple de modification</th><th scope="col">Temps env.</th></tr></thead>
+                <tbody>
+                  <tr><td>Modifier un numéro de téléphone, un e-mail ou une région, corriger une faute de frappe</td><td>10–15 min</td></tr>
+                  <tr><td>Remplacer une image</td><td>15 min</td></tr>
+                  <tr><td>Ajouter une nouvelle question à la FAQ avec sa réponse</td><td>20–30 min</td></tr>
+                  <tr><td>Nouveau projet ou nouvelle référence avec image et court texte</td><td>30 min</td></tr>
+                  <tr><td>Reformuler une section</td><td>30–45 min</td></tr>
+                  <tr><td>Nouvelle prestation présentée dans sa propre section</td><td>1 h</td></tr>
+                </tbody>
+              </table>
+              <p class="abo-extra">Sans abonnement : modifications facturées selon le temps passé : CHF 120 de l'heure, minimum 30 minutes par demande, puis par tranche de 15 minutes entamée.</p>
             </div>
           </div>
         </div>
@@ -781,7 +853,7 @@
           <div><h3>Mise en ligne</h3><p>Le site est publié — avec des données structurées pour Google et les systèmes d'IA dès le premier jour.</p></div>
         </div>
       </div>
-      <p class="credit-note" style="text-align:left; margin-left:0;">Comptez environ 2 semaines pour un Onepager et 3 à 4 semaines pour un site de plusieurs pages.</p>
+      <p class="credit-note" style="text-align:left; margin-left:0;">Comptez environ 2 semaines pour un Onepager et 3 à 4 semaines pour un site de plusieurs pages — à compter de la réception de tous les documents, plus le temps de vos retours.</p>
     </div>
   </section>
 
@@ -798,11 +870,11 @@
         </details>
         <details>
           <summary>Combien de temps faut-il ?</summary>
-          <p>Un Onepager est en général prêt en 2 semaines environ, un site de plusieurs pages en 3 à 4 semaines — selon la rapidité avec laquelle les informations et les images sont disponibles.</p>
+          <p>Comptez environ 2 semaines pour un Onepager et 3 à 4 semaines pour un site de plusieurs pages — à compter de la réception de tous les documents, plus le temps de vos retours.</p>
         </details>
         <details>
           <summary>Où le site est-il hébergé ?</summary>
-          <p>Comme c'est le plus simple pour vous : si vous avez déjà un nom de domaine et un hébergement, je remplace le site directement là-bas. Sinon, je mets en place un nouvel hébergement. Les frais courants de nom de domaine et d'hébergement ne sont pas compris dans le prix — avec l'abonnement de suivi, l'hébergement est inclus. Le nom de domaine reste enregistré à votre nom — il vous appartient.</p>
+          <p>Comme c'est le plus simple pour vous : si vous avez déjà un nom de domaine et un hébergement, je remplace le site directement là-bas. Sinon, je mets en place un nouvel hébergement. Les frais de nom de domaine ne sont pas compris dans le prix. Si j'héberge le site, l'hébergement &amp; la technique coûtent CHF 180 par an — inclus dans l'abonnement de suivi. Le nom de domaine reste enregistré à votre nom — il vous appartient.</p>
         </details>
         <details>
           <summary>Qui rédige les textes ?</summary>
@@ -814,7 +886,15 @@
         </details>
         <details>
           <summary>Et si quelque chose change plus tard ?</summary>
-          <p>Avec l'abonnement de suivi à CHF 79.– par mois, je m'occupe des petites modifications comme les textes, les images, les horaires et les actualités (jusqu'à env. 1 heure par mois) — l'hébergement est inclus. Durée minimale de 6 mois, puis résiliable chaque mois. Sans abonnement, les modifications sont facturées selon le temps passé, à CHF 120.– de l'heure.</p>
+          <p>Avec un abonnement de suivi, je m'occupe des modifications pour vous : abonnement S à CHF 59 par mois (modifications jusqu'à 30 min par mois) ou abonnement M à CHF 99 par mois (modifications jusqu'à 1 h par mois). L'hébergement &amp; la technique sont inclus dans les deux abonnements. Durée minimale de 6 mois, puis reconduction mensuelle, résiliable moyennant un préavis d'un mois. Le temps non utilisé expire à la fin du mois. Sans abonnement, les modifications sont facturées selon le temps passé : CHF 120 de l'heure, minimum 30 minutes par demande, puis par tranche de 15 minutes entamée.</p>
+        </details>
+        <details>
+          <summary>Combien coûte l'hébergement de mon site ?</summary>
+          <p>L'hébergement &amp; la technique coûtent CHF 180 par an, payables annuellement d'avance — hébergement, certificat SSL, surveillance et mises à jour techniques compris. Avec un abonnement de suivi, ils sont inclus. Si vous avez déjà votre propre hébergement, j'y installe directement le site — ces frais ne s'appliquent alors pas. Le nom de domaine reste à votre nom. Si vous mettez fin à la collaboration, vous recevez les fichiers de votre site.</p>
+        </details>
+        <details>
+          <summary>Que se passe-t-il si j'ai besoin d'une modification sans abonnement ?</summary>
+          <p>Écrivez-moi simplement ce qu'il faut changer. Sans abonnement, les modifications sont facturées selon le temps passé : CHF 120 de l'heure, minimum 30 minutes par demande, puis par tranche de 15 minutes entamée. Une petite modification, comme un nouveau numéro de téléphone, coûte donc CHF 60.</p>
         </details>
         <details>
           <summary>Que veut dire « GEO-ready » ?</summary>

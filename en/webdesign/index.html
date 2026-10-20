@@ -60,7 +60,7 @@
           {
             "@type": "Offer",
             "name": "One-pager — GEO-ready from day one",
-            "description": "Custom single-page website with everything that matters: offering, opening hours, contact. Copywriting included, mobile-optimized, structured data.",
+            "description": "Custom single-page website with everything that matters: offering, opening hours, contact. Copywriting included, mobile-optimized, structured data. About 2 weeks from receipt of all materials, plus time for your feedback. Payment: 50% on order, 50% at launch, due within 30 days net. Not subject to VAT.",
             "priceSpecification": {
               "@type": "PriceSpecification",
               "minPrice": 1800,
@@ -70,7 +70,7 @@
           {
             "@type": "Offer",
             "name": "Multi-page website — GEO-ready from day one",
-            "description": "Custom website for small businesses: mobile-optimized, data protection & legal notice per Swiss requirements, structured data and open to AI crawlers.",
+            "description": "Custom website for small businesses: mobile-optimized, data protection & legal notice per Swiss requirements, structured data and open to AI crawlers. 3–4 weeks from receipt of all materials, plus time for your feedback. Payment: 30% on order, 40% after design approval, 30% at launch, due within 30 days net. Not subject to VAT.",
             "priceSpecification": {
               "@type": "PriceSpecification",
               "minPrice": 4800,
@@ -79,13 +79,50 @@
           },
           {
             "@type": "Offer",
-            "name": "Care plan",
-            "description": "Hosting plus small changes such as texts, images, opening hours and news, up to about 1 hour per month. Minimum term 6 months, then cancellable monthly.",
+            "name": "Hosting & technical care",
+            "description": "If I host the website: CHF 180 per year, billed annually in advance – including hosting, SSL certificate, monitoring and technical updates. Included with a care plan. If you already have your own hosting, I upload the website there directly — in that case this fee does not apply. The domain stays in your name. If you end our collaboration, you receive your website's files. Not subject to VAT.",
             "priceSpecification": {
               "@type": "UnitPriceSpecification",
-              "price": 79,
+              "price": 180,
               "priceCurrency": "CHF",
-              "unitText": "MONTH"
+              "unitCode": "ANN",
+              "unitText": "year"
+            }
+          },
+          {
+            "@type": "Offer",
+            "name": "Care plan S",
+            "description": "Changes up to 30 min per month, hosting & technical care included. Minimum term 6 months (plan level fixed during this period), then renews monthly, cancellable with one month's notice; switching between S and M takes effect the following month. Unused time expires at the end of the month. Not subject to VAT.",
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": 59,
+              "priceCurrency": "CHF",
+              "unitCode": "MON",
+              "unitText": "month"
+            }
+          },
+          {
+            "@type": "Offer",
+            "name": "Care plan M",
+            "description": "Changes up to 1 hr per month, hosting & technical care included. Minimum term 6 months (plan level fixed during this period), then renews monthly, cancellable with one month's notice; switching between S and M takes effect the following month. Unused time expires at the end of the month. Not subject to VAT.",
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": 99,
+              "priceCurrency": "CHF",
+              "unitCode": "MON",
+              "unitText": "month"
+            }
+          },
+          {
+            "@type": "Offer",
+            "name": "Changes without a plan",
+            "description": "Changes billed by time spent: CHF 120 per hour, minimum charge 30 minutes per request, then per started 15 minutes. Not subject to VAT.",
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": 120,
+              "priceCurrency": "CHF",
+              "unitCode": "HUR",
+              "unitText": "hour"
             }
           },
           {
@@ -118,7 +155,7 @@
           "name": "How long does it take?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "A one-pager is usually ready in about 2 weeks, a multi-page website in 3–4 weeks — depending on how quickly information and images are available."
+            "text": "Expect about 2 weeks for a one-pager and 3–4 weeks for a multi-page website — from receipt of all materials, plus time for your feedback."
           }
         },
         {
@@ -126,7 +163,7 @@
           "name": "Where will the website be hosted?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Whatever is easiest for you: if you already have a domain and hosting, I replace the website right there. Otherwise, I set up new hosting. Ongoing domain and hosting costs are not included in the price — with the care plan, hosting is included. The domain stays registered in your name — it belongs to you."
+            "text": "Whatever is easiest for you: if you already have a domain and hosting, I replace the website right there. Otherwise, I set up new hosting. Domain costs are not included in the price. If I host the website, hosting & technical care costs CHF 180 per year — included with a care plan. The domain stays registered in your name — it belongs to you."
           }
         },
         {
@@ -150,7 +187,23 @@
           "name": "What if something changes later?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "With the care plan at CHF 79 per month, I handle small changes such as texts, images, opening hours and news (up to about 1 hour per month) for you — hosting included. Minimum term 6 months, then cancellable monthly. Without the plan, changes are billed by time spent at CHF 120 per hour."
+            "text": "With a care plan, I handle changes for you: Plan S at CHF 59 per month (changes up to 30 min per month) or Plan M at CHF 99 per month (changes up to 1 hr per month). Hosting & technical care is included in both plans. Minimum term 6 months, then renews monthly, cancellable with one month's notice. Unused time expires at the end of the month. Without a plan, changes are billed by time spent: CHF 120 per hour, minimum charge 30 minutes per request, then per started 15 minutes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does hosting my website cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Hosting & technical care costs CHF 180 per year, billed annually in advance — including hosting, SSL certificate, monitoring and technical updates. With a care plan, it is included. If you already have your own hosting, I upload the website there directly — in that case this fee does not apply. The domain stays in your name. If you end our collaboration, you receive your website's files."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if I need a change and don't have a plan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Just tell me what needs to change. Without a plan, changes are billed by time spent: CHF 120 per hour, minimum charge 30 minutes per request, then per started 15 minutes. A small change such as a new phone number therefore costs CHF 60."
           }
         },
         {
@@ -506,6 +559,12 @@
   .pkg-example a{ font-family:var(--font-ui); font-weight:600; color:var(--sec-gold-deep); text-decoration:none; border-bottom:1px solid var(--sec-line-gold); }
   .pkg-example a:hover{ color:var(--sec-gold); }
   .abo-extra{ margin:0; font-size:.82rem; color:var(--sec-muted); font-weight:300; }
+  .package-meta .val-note{ font-family:var(--font-ui); font-size:.74rem; color:var(--sec-muted); font-weight:300; max-width:24ch; line-height:1.4; margin-top:2px; }
+  .abo-table{ width:100%; border-collapse:collapse; font-size:.86rem; }
+  .abo-table caption{ text-align:left; font-family:var(--font-ui); font-size:.64rem; letter-spacing:.12em; text-transform:uppercase; color:var(--sec-muted); font-weight:600; padding-bottom:8px; }
+  .abo-table th, .abo-table td{ text-align:left; padding:9px 0; border-bottom:1px solid var(--sec-line); vertical-align:top; font-weight:300; line-height:1.45; }
+  .abo-table th{ font-family:var(--font-ui); font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:var(--sec-muted); font-weight:600; }
+  .abo-table td:last-child, .abo-table th:last-child{ white-space:nowrap; padding-left:16px; text-align:right; color:var(--sec-gold-deep); font-weight:500; }
   .credit-note{ margin:18px auto 0; max-width:640px; font-size:.82rem; color:var(--sec-muted); font-weight:300; text-align:center; }
 
   /* ---------- FAQ ---------- */
@@ -602,6 +661,7 @@
         <span class="eyebrow">Offer</span>
         <h2>Clear prices, no surprises</h2>
       </div>
+      <p class="credit-note" style="text-align:left; margin:-12px 0 24px; max-width:none;">All prices in CHF. Not subject to VAT.</p>
       <div class="package-grid rows">
         <div class="package-card reveal d1">
           <div class="pkg-side">
@@ -632,7 +692,7 @@
             <span class="package-tag">1 page</span>
             <h3>One-pager</h3>
             <div class="package-meta">
-              <div><span class="lbl">Duration</span><span class="val">about 2 weeks</span></div>
+              <div><span class="lbl">Duration</span><span class="val">about 2 weeks</span><span class="val-note">from receipt of all materials, plus time for your feedback</span></div>
               <div><span class="lbl">Price</span><span class="val price">from CHF 1'800</span></div>
             </div>
             <a class="btn-primary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Schedule a call</a>
@@ -648,26 +708,8 @@
             <li>GEO-ready: structured data, clean HTML, open to AI crawlers</li>
             <li>One round of revisions included</li>
             </ul>
+            <p class="abo-extra">Payment: 50% on order, 50% at launch, due within 30 days net.</p>
             <p class="pkg-example">Example: <a href="#referenz">Spielgruppe Sunneschiin ↓</a></p>
-          </div>
-          <div class="pkg-addon">
-            <div class="pkg-side">
-              <span class="addon-tag">+ Optional</span>
-              <h4>Care plan</h4>
-              <div class="package-meta">
-                <div><span class="lbl">Term</span><span class="val">6-month minimum</span></div>
-                <div><span class="lbl">Price</span><span class="val price">CHF 79 / month</span></div>
-              </div>
-            </div>
-            <div class="pkg-body">
-              <ul class="package-list">
-            <li>Hosting included</li>
-            <li>Small changes such as texts, images, opening hours and news</li>
-            <li>Up to about 1 hour of work per month</li>
-            <li>Then cancellable monthly</li>
-              </ul>
-              <p class="abo-extra">Without the plan: changes billed by time spent, CHF 120 per hour.</p>
-            </div>
           </div>
         </div>
         <div class="package-card reveal d3">
@@ -675,7 +717,7 @@
             <span class="package-tag">Multiple pages</span>
             <h3>Website</h3>
             <div class="package-meta">
-              <div><span class="lbl">Duration</span><span class="val">3–4 weeks</span></div>
+              <div><span class="lbl">Duration</span><span class="val">3–4 weeks</span><span class="val-note">from receipt of all materials, plus time for your feedback</span></div>
               <div><span class="lbl">Price</span><span class="val price">from CHF 4'800</span></div>
             </div>
             <a class="btn-secondary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Schedule a call</a>
@@ -686,24 +728,54 @@
             <li>Everything in the one-pager included</li>
             <li>GEO complete is fully credited if the new website replaces the implementation on the old one</li>
             </ul>
+            <p class="abo-extra">Payment: 30% on order, 40% after design approval, 30% at launch, due within 30 days net.</p>
+          </div>
+        </div>
+        <div class="package-card reveal d1" id="betreuung">
+          <div class="pkg-side">
+            <span class="package-tag">Ongoing operation</span>
+            <h3>Hosting &amp; technical care</h3>
+            <div class="package-meta">
+              <div><span class="lbl">Billing</span><span class="val">annually in advance</span></div>
+              <div><span class="lbl">Price</span><span class="val price">CHF 180 / year</span></div>
+            </div>
+          </div>
+          <div class="pkg-body">
+            <ul class="package-list">
+            <li>Hosting &amp; technical care: CHF 180 per year, billed annually in advance – including hosting, SSL certificate, monitoring and technical updates. Included with a care plan.</li>
+            <li>If you already have your own hosting, I upload the website there directly — in that case this fee does not apply.</li>
+            <li>The domain stays in your name. If you end our collaboration, you receive your website's files.</li>
+            </ul>
           </div>
           <div class="pkg-addon">
             <div class="pkg-side">
               <span class="addon-tag">+ Optional</span>
               <h4>Care plan</h4>
               <div class="package-meta">
-                <div><span class="lbl">Term</span><span class="val">6-month minimum</span></div>
-                <div><span class="lbl">Price</span><span class="val price">CHF 79 / month</span></div>
+                <div><span class="lbl">Plan S</span><span class="val price">CHF 59 / month</span><span class="val-note">Changes up to 30 min per month</span></div>
+                <div><span class="lbl">Plan M</span><span class="val price">CHF 99 / month</span><span class="val-note">Changes up to 1 hr per month</span></div>
               </div>
             </div>
             <div class="pkg-body">
               <ul class="package-list">
-            <li>Hosting included</li>
-            <li>Small changes such as texts, images, opening hours and news</li>
-            <li>Up to about 1 hour of work per month</li>
-            <li>Then cancellable monthly</li>
+            <li>Hosting &amp; technical care included in both plans</li>
+            <li>Minimum term 6 months (plan level fixed during this period)</li>
+            <li>Then renews monthly, cancellable with one month's notice; switching between S and M takes effect the following month</li>
+            <li>Unused time expires at the end of the month</li>
               </ul>
-              <p class="abo-extra">Without the plan: changes billed by time spent, CHF 120 per hour.</p>
+              <table class="abo-table">
+                <caption>What do 30 minutes or 1 hour cover?</caption>
+                <thead><tr><th scope="col">Example of a change</th><th scope="col">Approx. time</th></tr></thead>
+                <tbody>
+                  <tr><td>Update phone number, email or region, fix a typo</td><td>10–15 min</td></tr>
+                  <tr><td>Replace an image</td><td>15 min</td></tr>
+                  <tr><td>Add a new FAQ question with answer</td><td>20–30 min</td></tr>
+                  <tr><td>New project or reference example with image and short text</td><td>30 min</td></tr>
+                  <tr><td>Rewrite a section</td><td>30–45 min</td></tr>
+                  <tr><td>New service as its own section</td><td>1 hr</td></tr>
+                </tbody>
+              </table>
+              <p class="abo-extra">Without a plan: changes billed by time spent: CHF 120 per hour, minimum charge 30 minutes per request, then per started 15 minutes.</p>
             </div>
           </div>
         </div>
@@ -781,7 +853,7 @@
           <div><h3>Go live</h3><p>The website goes live — with structured data for Google and AI systems from day one.</p></div>
         </div>
       </div>
-      <p class="credit-note" style="text-align:left; margin-left:0;">Expect about 2 weeks for a one-pager and 3–4 weeks for a multi-page website.</p>
+      <p class="credit-note" style="text-align:left; margin-left:0;">Expect about 2 weeks for a one-pager and 3–4 weeks for a multi-page website — from receipt of all materials, plus time for your feedback.</p>
     </div>
   </section>
 
@@ -798,11 +870,11 @@
         </details>
         <details>
           <summary>How long does it take?</summary>
-          <p>A one-pager is usually ready in about 2 weeks, a multi-page website in 3–4 weeks — depending on how quickly information and images are available.</p>
+          <p>Expect about 2 weeks for a one-pager and 3–4 weeks for a multi-page website — from receipt of all materials, plus time for your feedback.</p>
         </details>
         <details>
           <summary>Where will the website be hosted?</summary>
-          <p>Whatever is easiest for you: if you already have a domain and hosting, I replace the website right there. Otherwise, I set up new hosting. Ongoing domain and hosting costs are not included in the price — with the care plan, hosting is included. The domain stays registered in your name — it belongs to you.</p>
+          <p>Whatever is easiest for you: if you already have a domain and hosting, I replace the website right there. Otherwise, I set up new hosting. Domain costs are not included in the price. If I host the website, hosting &amp; technical care costs CHF 180 per year — included with a care plan. The domain stays registered in your name — it belongs to you.</p>
         </details>
         <details>
           <summary>Who writes the texts?</summary>
@@ -814,7 +886,15 @@
         </details>
         <details>
           <summary>What if something changes later?</summary>
-          <p>With the care plan at CHF 79 per month, I handle small changes such as texts, images, opening hours and news (up to about 1 hour per month) for you — hosting included. Minimum term 6 months, then cancellable monthly. Without the plan, changes are billed by time spent at CHF 120 per hour.</p>
+          <p>With a care plan, I handle changes for you: Plan S at CHF 59 per month (changes up to 30 min per month) or Plan M at CHF 99 per month (changes up to 1 hr per month). Hosting &amp; technical care is included in both plans. Minimum term 6 months, then renews monthly, cancellable with one month's notice. Unused time expires at the end of the month. Without a plan, changes are billed by time spent: CHF 120 per hour, minimum charge 30 minutes per request, then per started 15 minutes.</p>
+        </details>
+        <details>
+          <summary>How much does hosting my website cost?</summary>
+          <p>Hosting &amp; technical care costs CHF 180 per year, billed annually in advance — including hosting, SSL certificate, monitoring and technical updates. With a care plan, it is included. If you already have your own hosting, I upload the website there directly — in that case this fee does not apply. The domain stays in your name. If you end our collaboration, you receive your website's files.</p>
+        </details>
+        <details>
+          <summary>What happens if I need a change and don't have a plan?</summary>
+          <p>Just tell me what needs to change. Without a plan, changes are billed by time spent: CHF 120 per hour, minimum charge 30 minutes per request, then per started 15 minutes. A small change such as a new phone number therefore costs CHF 60.</p>
         </details>
         <details>
           <summary>What does “GEO-ready” mean?</summary>
