@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Lancer un GEO-Light</title>
+<!--
+  Page privée : lance un test GEO-Light à la main (URL + e-mail → profil → questions → test).
+  Le résultat arrive comme pour le formulaire : brouillon dans custom-software@ + alerte à info@.
+  Protégée par GEO_RUN_SECRET (saisi une fois, gardé dans ce navigateur). Non liée depuis le site.
+-->
+<style>
+  :root { --ink: #18150f; --muted: #726a5c; --line: #e2ddd2; --bg: #faf8f4; --card: #fff; --accent: #24576b; --err: #9b2222; }
+  @media (prefers-color-scheme: dark) {
+    :root { --ink: #ece8e0; --muted: #a59d8f; --line: #3a362f; --bg: #1a1814; --card: #24211c; --accent: #6fa6bb; --err: #e08a8a; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
+  main { max-width: 560px; margin: 0 auto; padding: 24px 16px 60px; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  .sub { color: var(--muted); font-size: 14px; margin: 0 0 20px; }
+  section { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin: 0 0 14px; }
+  section[hidden] { display: none; }
+  h2 { font-size: 15px; margin: 0 0 12px; }
+  label { display: block; font-size: 13px; color: var(--muted); margin: 10px 0 4px; }
+  input, select { width: 100%; font: inherit; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink); }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  button { margin-top: 14px; width: 100%; font: 600 15px inherit; font-family: inherit; padding: 12px; border: 0; border-radius: 999px; background: var(--accent); color: #fff; cursor: pointer; }
+  button[disabled] { opacity: .5; cursor: wait; }
+  ol { margin: 0; padding-left: 22px; font-size: 14px; }
+  li { margin-bottom: 4px; }
+  .msg { font-size: 14px; margin: 10px 0 0; }
+  .msg.err { color: var(--err); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Lancer un GEO-Light</h1>
+  <p class="sub">Le brouillon de réponse arrive dans custom-software@ en 3 à 5 minutes, avec une alerte à info@.</p>
+
+  <section id="s-key">
+    <h2>Code d’accès</h2>
+    <label for="key">GEO_RUN_SECRET</label>
+    <input id="key" type="password" autocomplete="off">
+  </section>
+
+  <section>
+    <h2>1. Demande</h2>
+    <label for="url">Site web</label>
+    <input id="url" type="url" inputmode="url" placeholder="https://beispiel.ch">
+    <label for="email">E-mail du demandeur</label>
+    <input id="email" type="email" placeholder="anna@beispiel.ch">
+    <label for="rlang">Langue du rapport et de l’e-mail</label>
+    <select id="rlang"><option value="de">Deutsch</option><option value="fr">Français</option><option value="en">English</option></select>
+    <button id="b-read" type="button">Lire le site</button>
+    <p class="msg" id="m-read"></p>
+  </section>
+
+  <section id="s-profile" hidden>
+    <h2>2. Profil testé</h2>
+    <div class="row">
+      <div><label for="company">Entreprise</label><input id="company"></div>
+      <div><label for="city">Lieu</label><input id="city"></div>
+    </div>
+    <label for="branche">Branche</label><input id="branche">
+    <label for="o1">Offre 1 (questions principales)</label><input id="o1">
+    <label for="o2">Offre 2</label><input id="o2">
+    <label for="o3">Offre 3</label><input id="o3">
+    <div class="row">
+      <div><label for="person">Personne</label><input id="person"></div>
+      <div><label for="person_role">Rôle</label><input id="person_role"></div>
+    </div>
+    <label for="lang">Langue des questions</label>
+    <select id="lang"><option value="de">de</option><option value="fr">fr</option><option value="en">en</option></select>
+    <button id="b-questions" type="button">Voir les 8 questions</button>
+    <p class="msg" id="m-questions"></p>
+  </section>
+
+  <section id="s-run" hidden>
+    <h2>3. Questions</h2>
+    <ol id="questions"></ol>
+    <button id="b-run" type="button">Lancer le test (16 appels payants)</button>
+    <p class="msg" id="m-run"></p>
+  </section>
+</main>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var FIELDS = ['company', 'city', 'branche', 'person', 'person_role', 'lang'];
+  var proposed = {};   // profil de geo-preview (garde les champs de grammaire)
+  var kandidat = null; // profil complété par le serveur, envoyé tel quel au test
+
+  try { $('key').value = localStorage.getItem('geoRunKey') || ''; } catch (e) {}
+  if ($('key').value) $('s-key').hidden = true;
+
+  function say(id, text, err) { $(id).textContent = text; $(id).className = 'msg' + (err ? ' err' : ''); }
+  function busy(btn, on) { btn.disabled = on; }
+  function domainOf(u) {
+    try { return new URL(/^https?:\/\//i.test(u) ? u : 'https://' + u).hostname.replace(/^www\./, ''); } catch (e) { return ''; }
+  }
+
+  function profileFromForm() {
+    var p = {};
+    Object.keys(proposed).forEach(function (k) { p[k] = proposed[k]; });
+    FIELDS.forEach(function (k) {
+      if (p[k] !== $(k).value.trim() && (k === 'branche' || k === 'lang' || k === 'city')) {
+        // Branche, lieu ou langue modifiés : les formes grammaticales sont recalculées côté serveur.
+        p.welche_akk = p.welche_nom = p.quel = p.which = '';
+        if (k === 'city' || k === 'lang') p.city_in = '';
+      }
+      p[k] = $(k).value.trim();
+    });
+    p.offers = ['o1', 'o2', 'o3'].map(function (id) { return $(id).value.trim(); }).filter(Boolean);
+    p.domain = domainOf($('url').value);
+    return p;
+  }
+
+  function post(path, body, key) {
+    var h = { 'Content-Type': 'application/json' };
+    if (key) h['x-geo-secret'] = key;
+    return fetch(path, { method: 'POST', headers: h, body: JSON.stringify(body) })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { d._status = r.status; return d; }); });
+  }
+
+  // Toute modification du profil invalide les questions affichées.
+  ['company', 'city', 'branche', 'o1', 'o2', 'o3', 'person', 'person_role', 'lang'].forEach(function (id) {
+    $(id).addEventListener('input', function () { $('s-run').hidden = true; kandidat = null; });
+  });
+
+  $('b-read').addEventListener('click', function () {
+    var btn = this;
+    if (!domainOf($('url').value)) { say('m-read', 'Adresse du site invalide.', true); return; }
+    busy(btn, true);
+    say('m-read', 'Lecture du site… (10 à 20 s)');
+    post('/api/geo-preview', { url: $('url').value.trim(), lang: $('rlang').value }).then(function (d) {
+      proposed = d.ok ? d.profile : { lang: $('rlang').value };
+      FIELDS.forEach(function (k) { $(k).value = proposed[k] || ''; });
+      ['o1', 'o2', 'o3'].forEach(function (id, i) { $(id).value = (proposed.offers || [])[i] || ''; });
+      if (!$('lang').value) $('lang').value = 'de';
+      $('s-profile').hidden = false;
+      $('s-run').hidden = true;
+      var alt = d.ok && proposed.activities && proposed.activities.length > 1 ? ' Plusieurs domaines : ' + proposed.activities.join(', ') + '.' : '';
+      say('m-read', d.ok ? 'Profil proposé, à vérifier.' + alt : 'Lecture automatique impossible (' + (d.reason || d._status) + ') : remplis le profil à la main.', !d.ok);
+    }).catch(function () { say('m-read', 'Erreur réseau.', true); }).then(function () { busy(btn, false); });
+  });
+
+  $('b-questions').addEventListener('click', function () {
+    var btn = this;
+    var key = $('key').value.trim();
+    if (!key) { $('s-key').hidden = false; say('m-questions', 'Saisis d’abord le code d’accès.', true); return; }
+    busy(btn, true);
+    say('m-questions', '');
+    post('/api/geo-light-run', { kandidat: profileFromForm(), dry_run: true }, key).then(function (d) {
+      if (d._status === 401) { $('s-key').hidden = false; say('m-questions', 'Code d’accès refusé.', true); return; }
+      if (!d.ok) { say('m-questions', 'Profil incomplet : entreprise, lieu, branche et site sont obligatoires.', true); return; }
+      try { localStorage.setItem('geoRunKey', key); } catch (e) {}
+      kandidat = d.kandidat;
+      $('questions').innerHTML = '';
+      d.questions.forEach(function (q) { var li = document.createElement('li'); li.textContent = q; $('questions').appendChild(li); });
+      $('s-run').hidden = false;
+      say('m-run', '');
+      $('s-run').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }).catch(function () { say('m-questions', 'Erreur réseau.', true); }).then(function () { busy(btn, false); });
+  });
+
+  $('b-run').addEventListener('click', function () {
+    var btn = this;
+    var email = $('email').value.trim();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { say('m-run', 'E-mail du demandeur invalide (étape 1).', true); return; }
+    if (!kandidat) return;
+    busy(btn, true);
+    post('/api/geo-light-run', { kandidat: kandidat, email: email, report_lang: $('rlang').value, source: 'manual' }, $('key').value.trim())
+      .then(function (d) {
+        if (d._status === 202) say('m-run', 'Test lancé. Le brouillon arrive dans custom-software@ d’ici 3 à 5 minutes.');
+        else { say('m-run', 'Pas lancé : ' + (d.reason || d._status) + '.', true); busy(btn, false); }
+      }).catch(function () { say('m-run', 'Erreur réseau.', true); busy(btn, false); });
+  });
+})();
+</script>
+</body>
+</html>

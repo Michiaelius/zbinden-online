@@ -7,6 +7,8 @@
  * La confirmation est un texte fixe : rien de ce que le visiteur a saisi n'y est repris.
  * Formulaire GEO-Light : le champ « profile » (JSON de js/geo-light.js) contient le profil
  * confirmé par le visiteur ; il est ajouté à la notification avec un kandidat.json prêt à l'emploi.
+ * Si ce profil vient de l'analyse du site, le test automatique est lancé (api/geo-light-run.mjs,
+ * seulement si GEO_RUN_SECRET existe ; voir api/SETUP-geo-light-auto.md).
  *
  * Aucune dépendance : appel direct de l'API REST de Resend via fetch (Node 18+).
  * Variable d'environnement requise dans Vercel : RESEND_API_KEY
@@ -183,6 +185,28 @@ function renderProfileText(pr) {
     .join('\n');
 }
 
+/* Test GEO-Light automatique (api/geo-light-run.mjs) : lancé seulement si le visiteur a confirmé
+   un profil issu de l'analyse du site. Renvoie la ligne de statut affichée dans la notification. */
+async function startAutoRun(req, data, lang) {
+  const pr = data.profile;
+  if (!data.website || !pr) return '';
+  if (pr.analysis !== 'ok') return 'Test automatique non lancé : profil saisi à la main, à vérifier avec /geo-light.';
+  const secret = process.env.GEO_RUN_SECRET;
+  if (!secret) return '';
+  try {
+    const r = await fetch(`https://${req.headers.host}/api/geo-light-run`, {
+      method: 'POST',
+      signal: AbortSignal.timeout(8000),
+      headers: { 'Content-Type': 'application/json', 'x-geo-secret': secret },
+      body: JSON.stringify({ kandidat: pr.kandidat, email: data.email, report_lang: lang, source: 'form' }),
+    });
+    if (r.status === 202) return 'Test automatique lancé : brouillon de réponse dans custom-software@ d’ici 3 à 5 minutes, avec une alerte ici.';
+    return `Test automatique non lancé (erreur ${r.status}) : à faire avec /geo-light.`;
+  } catch (e) {
+    return 'Test automatique non lancé (pas de réponse) : à faire avec /geo-light.';
+  }
+}
+
 function renderHtml(d) {
   const rows = Object.keys(LABELS)
     .filter(function (k) { return d[k]; })
@@ -199,6 +223,7 @@ function renderHtml(d) {
     `<div style="max-width:540px;margin:0 auto;padding:32px 26px;font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;color:#18150f;">` +
     `<div style="font:700 15px Georgia,'Times New Roman',serif;color:#a6790f;letter-spacing:.03em;">ZBINDEN &middot; SOFTWARE</div>` +
     `<p style="margin:26px 0 18px;">Nouvelle demande depuis le site.</p>` +
+    (d.auto ? `<p style="margin:0 0 18px;padding:10px 14px;background:#e7f0f3;border-radius:8px;font-size:14px;">${esc(d.auto)}</p>` : '') +
     `<table style="border-collapse:collapse;font-size:14px;">${rows}</table>` +
     (d.profile ? renderProfileHtml(d.profile) : '') +
     `</div></body></html>`
@@ -206,7 +231,7 @@ function renderHtml(d) {
 }
 
 function renderText(d) {
-  return Object.keys(LABELS)
+  return (d.auto ? d.auto + '\n\n' : '') + Object.keys(LABELS)
     .filter(function (k) { return d[k]; })
     .map(function (k) { return `${LABELS[k]}: ${d[k]}`; })
     .join('\n') + (d.profile ? '\n' + renderProfileText(d.profile) : '');
@@ -313,7 +338,9 @@ export default async function handler(req, res) {
 
   // Langue de la page d'origine (/fr/…, /en/…, sinon allemand).
   const m = /^https?:\/\/[^/]+\/(fr|en)(\/|$)/.exec(data.page);
-  const t = COPY[m ? m[1] : 'de'];
+  const pageLang = m ? m[1] : 'de';
+  const t = COPY[pageLang];
+  data.auto = await startAutoRun(req, data, pageLang);
   // Le formulaire GEO-Light est le seul à envoyer le champ « website ».
   const c = data.website ? t.geoLight : t.request;
   // Lien de la signature : selon l'intérêt choisi dans le formulaire, sinon selon la page d'origine.

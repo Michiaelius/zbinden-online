@@ -1,5 +1,6 @@
 {
   "functions": {
-    "api/geo-preview.mjs": { "maxDuration": 30 }
+    "api/geo-preview.mjs": { "maxDuration": 30 },
+    "api/geo-light-run.mjs": { "maxDuration": 300, "memory": 2048 }
   }
 }
