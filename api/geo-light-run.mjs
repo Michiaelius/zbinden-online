@@ -95,7 +95,15 @@ async function job(cand, email, reportLang, source) {
       zefixLookup(cand.company, cand.city),
     ]);
     transcript = transcriptMarkdown(cand, test);
-    if (test.errors > 4) throw new Error(`${test.errors} réponses sur 16 en erreur`);
+    if (test.errors > 4) {
+      // Messages distincts par moteur (ex. « openai 429: Rate limit… »), pour savoir quoi corriger.
+      const seen = new Set();
+      test.questions.forEach(function (q) {
+        ['chatgpt', 'perplexity'].forEach(function (e) { if (q[e].error) seen.add(q[e].error); });
+      });
+      console.error('geo-light-run engine errors', Array.from(seen));
+      throw new Error(`${test.errors} réponses sur 16 en erreur :\n· ${Array.from(seen).slice(0, 4).join('\n· ')}`);
+    }
 
     step = 'rédaction du rapport';
     const a = await writeReport(cand, test, site.text, zefix, reportLang);

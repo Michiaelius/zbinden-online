@@ -140,6 +140,16 @@ function detectSourceCitation(sources, domain) {
 
 function uniq(list) { return Array.from(new Set(list)); }
 
+// Erreur HTTP d'un moteur : statut, pause demandée (Retry-After) et début du message, pour l'alerte.
+async function httpError(engine, r) {
+  const err = new Error(`${engine} ${r.status}: ${(await r.text().catch(function () { return ''; })).replace(/\s+/g, ' ').slice(0, 160)}`);
+  err.status = r.status;
+  err.retryAfter = parseFloat(r.headers.get('retry-after') || '') || 0;
+  return err;
+}
+
+function sleep(ms) { return new Promise(function (ok) { setTimeout(ok, ms); }); }
+
 // --- Appels aux moteurs ----------------------------------------------------
 
 async function askPerplexity(question, cfg) {
@@ -153,7 +163,7 @@ async function askPerplexity(question, cfg) {
       messages: [{ role: 'system', content: cfg.system }, { role: 'user', content: question }],
     }),
   });
-  if (!r.ok) throw new Error('perplexity ' + r.status);
+  if (!r.ok) throw await httpError('perplexity', r);
   const data = await r.json();
   const answer = (((data.choices || [])[0] || {}).message || {}).content || '';
   const sources = [];
@@ -202,13 +212,14 @@ async function askOpenAI(question, cfg) {
   };
   let r = await call('web_search');
   if (r.status === 400) r = await call('web_search_preview');
-  if (!r.ok) throw new Error('openai ' + r.status);
+  if (!r.ok) throw await httpError('openai', r);
   return openaiExtract(await r.json());
 }
 
+// Limite de débit (429) ou panne passagère (5xx, délai) : jusqu'à 4 essais, avec la pause demandée.
 async function runEngine(engine, question, cfg, variants, dcore) {
   let last;
-  for (let attempt = 0; attempt < 2; attempt++) {
+  for (let attempt = 0; attempt < 4; attempt++) {
     try {
       const out = engine === 'perplexity' ? await askPerplexity(question, cfg) : await askOpenAI(question, cfg);
       return {
@@ -220,7 +231,9 @@ async function runEngine(engine, question, cfg, variants, dcore) {
       };
     } catch (e) {
       last = e;
-      if (attempt === 0) await new Promise(function (ok) { setTimeout(ok, 2000); });
+      const retryable = !e.status || e.status === 429 || e.status >= 500;
+      if (!retryable || attempt === 3) break;
+      await sleep(Math.min(e.retryAfter ? e.retryAfter * 1000 : 3000 * Math.pow(2, attempt), 20000));
     }
   }
   return { named: false, cited_source: false, answer: '', sources: [], error: String(last && last.message || last) };
@@ -244,13 +257,15 @@ export async function runVisibilityTest(cand) {
   const variants = companyVariants(cand.company);
   const dcore = domainCore(cand.domain);
   const questions = buildQuestions(cand);
-  const jobs = [];
-  questions.forEach(function (q) {
-    ['chatgpt', 'perplexity'].forEach(function (eng) {
-      jobs.push(runEngine(eng, q.text, cfg, variants, dcore).then(function (r) { q[eng] = r; }));
-    });
-  });
-  await Promise.all(jobs);
+  // Les 16 appels d'un coup dépassent la limite de débit des comptes (14 erreurs au premier test
+  // sur Vercel) : au plus 4 questions en cours par moteur, les deux moteurs en parallèle.
+  const POOL = 4;
+  await Promise.all(['chatgpt', 'perplexity'].map(async function (eng) {
+    const queue = questions.slice();
+    await Promise.all(Array.from({ length: POOL }, async function () {
+      for (let q = queue.shift(); q; q = queue.shift()) q[eng] = await runEngine(eng, q.text, cfg, variants, dcore);
+    }));
+  }));
 
   const errors = questions.reduce(function (n, q) { return n + (q.chatgpt.error ? 1 : 0) + (q.perplexity.error ? 1 : 0); }, 0);
   const providerQs = questions.filter(function (q) { return q.n >= 3; });
