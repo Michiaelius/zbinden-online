@@ -30,11 +30,14 @@ Grundregeln (von einem erfahrenen Unternehmer geprüft, unbedingt einhalten):
 - Nur Fakten, die du in den Antworten, auf der Website oder im Handelsregister siehst. Nichts behaupten,
   was du nicht prüfen kannst (Jahreszahlen, Telefonnummern, Bewertungen, Mitarbeiterzahlen).
 - Nie versprechen, dass das Unternehmen danach von ChatGPT empfohlen wird.
-- Alle Texte in der Berichtssprache. Zitate aus den Antworten bleiben wörtlich in ihrer Sprache; ist die
-  Berichtssprache anders, folgt in Klammern eine kurze Übersetzung.
+- ALLE Felder AUSSCHLIESSLICH in der Berichtssprache, ohne ein einziges Wort in einer anderen Sprache
+  (Wunsch von Pauline: der Bericht ist ganz in der Sprache des Formulars). Sind die Antworten, die Website
+  oder die Branche in einer anderen Sprache, übersetze: Zitate werden übersetzt wiedergegeben (in «», ohne
+  Originaltext), auch der Text der Massnahme ist in der Berichtssprache. Firmen- und Personennamen
+  bleiben unverändert.
 - Schweizer Schreibweise im Deutschen (ss statt ß). Keine Gedankenstriche als Satzzeichen, keine Emojis.
 - Das Unternehmen immer genau so nennen wie im Profil angegeben (gleiche Schreibweise, keine Rechtsform
-  dazu, keine Grossbuchstaben), ausser in wörtlichen Zitaten.
+  dazu, keine Grossbuchstaben), ausser in Zitaten.
 - Kurz: jedes Feld so knapp wie möglich, der Bericht muss auf zwei A4-Seiten passen.
 
 Felder:
@@ -43,6 +46,9 @@ Felder:
   gleiche Schreibweise in allen Antworten (Rechtsform weglassen, ausser sie gehört zum Namen). NICHT
   das getestete Unternehmen selbst, keine Plattformen/Verzeichnisse (local.ch, Google, Houzz ...),
   keine Behörden. Leere Liste, wenn die Antwort keinen Anbieter nennt.
+- "branche_label" und "city_label": Branche und Ort des Profils, in die Berichtssprache übersetzt
+  (z. B. "Innovationsberater" → fr "conseiller en innovation", "Schweiz" → fr "Suisse"). Ist die
+  Berichtssprache die Sprache des Profils, unverändert übernehmen.
 - "result_note": EIN ruhiger Satz unter dem Ergebnis. Schwach (0 bis 2 von 6): dass das bei kleineren
   Unternehmen dieser Art häufig ist und sich gezielt verbessern lässt. Mittel (3 bis 4): was schon
   funktioniert und dass es ausbaufähig ist. Stark (5 bis 6): klar sagen, dass es ein sehr gutes Ergebnis
@@ -52,7 +58,7 @@ Felder:
   Beispiele: de "jemand in Frick einen Maler sucht" / "ein KMU eine Innovationsberatung sucht";
   fr "quelqu'un cherche un peintre à Frick"; en "someone looks for a painter in Frick".
 - "statements": genau 3 Aussagen, was die KI-Systeme über das Unternehmen oder die Person sagen
-  (wörtliches Zitat in «» oder enge Umschreibung, höchstens 30 Wörter), mit "engine" ("ChatGPT",
+  (Zitat in «», in die Berichtssprache übersetzt, oder enge Umschreibung, höchstens 30 Wörter), mit "engine" ("ChatGPT",
   "Perplexity" oder "beide") und "tag": "ok" (stimmt), "wrong" (stimmt nicht), "mixup" (Verwechslung
   mit einer anderen Firma), "partial" (unvollständig, z. B. Standorte oder Hauptleistung fehlen).
   Bevorzuge, was für die Person nützlich ist: falsche Beschreibungen, Verwechslungen, «kann ich nicht
@@ -89,7 +95,7 @@ Felder:
 const SCHEMA = {
   type: 'object',
   additionalProperties: false,
-  required: ['provider_mentions', 'result_note', 'provider_phrase', 'statements', 'causes', 'measure',
+  required: ['provider_mentions', 'branche_label', 'city_label', 'result_note', 'provider_phrase', 'statements', 'causes', 'measure',
     'offer_lead', 'row_content', 'row_competitors', 'row_causes', 'row_implementation', 'email_paragraph'],
   properties: {
     provider_mentions: {
@@ -103,6 +109,8 @@ const SCHEMA = {
         },
       },
     },
+    branche_label: { type: 'string' },
+    city_label: { type: 'string' },
     result_note: { type: 'string' },
     provider_phrase: { type: 'string' },
     statements: {

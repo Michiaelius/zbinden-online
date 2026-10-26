@@ -248,7 +248,7 @@ export function renderReportHtml(cand, test, a, reportLang) {
 <body>
 
 <h1>${esc(t.title)}</h1>
-<div class="meta"><strong>${esc(name)}</strong> &nbsp;·&nbsp; ${esc(cand.branche)} &nbsp;·&nbsp; ${esc(cand.city)} &nbsp;·&nbsp; ${esc(t.tested.replace('{d}', dateFmt(test.tested_at, reportLang)))}</div>
+<div class="meta"><strong>${esc(name)}</strong> &nbsp;·&nbsp; ${esc(a.branche_label || cand.branche)} &nbsp;·&nbsp; ${esc(a.city_label || cand.city)} &nbsp;·&nbsp; ${esc(t.tested.replace('{d}', dateFmt(test.tested_at, reportLang)))}</div>
 
 <h2><span class="n">1</span>${t.s1}</h2>
 <div class="result">
