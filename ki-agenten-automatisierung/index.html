@@ -567,9 +567,9 @@
   <div class="header-row">
     <a class="wordmark" href="https://www.zbinden.online/">ZBINDEN<span class="dot">·</span>SOFTWARE <span class="sub">KI &amp; AUTOMATION</span></a>
     <nav class="top-nav">
+      <a href="#branchen">Rechner</a>
       <a href="#pakete">Pakete</a>
       <a href="#datenschutz">Datenschutz</a>
-      <a href="#branchen">Rechner</a>
       <a href="#voice-demo">Live-Demo</a>
       <a href="#fuer-wen">Für wen?</a>
       <a href="#ueber">Über mich</a>
@@ -594,9 +594,108 @@
       <div class="cta-row reveal d4">
         <a class="btn-primary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Kostenloses Erstgespräch · 30 Min</a>
         <a class="btn-secondary" href="#standardprozess">Standardprozess · CHF 900</a>
+        <a class="btn-secondary" href="#branchen">🧮 Ersparnis berechnen</a>
         <a class="btn-secondary" href="#voice-demo">🎙 Live-Demo hören</a>
       </div>
       <p style="margin:16px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Erstgespräch kostenlos und unverbindlich · Standardprozess zum Fixpreis von CHF 900 · keine offenen Stundenrechnungen.</p>
+    </div>
+  </section>
+
+  <section id="branchen" class="section-light">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Beispiele nach Branche + Rechner</span>
+        <h2>Sie sehen nicht, welche Prozesse sich in Ihrem Unternehmen automatisieren lassen?</h2>
+      </div>
+      <p class="branchen-intro reveal d1">Wählen Sie Ihre Branche und sehen Sie wiederkehrende Prozesse, die andere Schweizer KMU bereits automatisiert haben. <strong>Jedes Beispiel ist anklickbar</strong>&nbsp;: Ein kleines Tool schätzt dann die Zeit und das Geld, die Sie sparen könnten — pro Person und multipliziert mit der Zahl der Mitarbeitenden, die diese Aufgabe erledigen. Richtwert ohne Gewähr.</p>
+      <div class="branchen-picker reveal d2">
+        <label for="branche-select">Ihre Branche</label>
+        <select id="branche-select">
+          <option value="">Branche wählen …</option>
+        </select>
+      </div>
+      <div id="branche-output" class="branche-output" hidden>
+        <div class="branche-card">
+          <span class="package-tag" id="branche-card-tag"></span>
+          <p class="branche-list-hint">Klicken Sie auf ein Beispiel, um die mögliche Einsparung zu schätzen.</p>
+          <ul class="package-list" id="branche-list"></ul>
+
+          <div id="calc-panel" class="calc-panel" hidden>
+            <p class="calc-task">Aufgabe&nbsp;: <strong id="calc-task-label"></strong></p>
+            <div class="calc-grid">
+              <div class="field">
+                <label for="calc-time">Zeit, die diese Aufgabe kostet, <strong>pro Person</strong></label>
+                <div class="calc-inline">
+                  <input type="number" id="calc-time" min="0" step="5" inputmode="decimal" value="30" aria-label="Dauer">
+                  <select id="calc-unit" aria-label="Einheit">
+                    <option value="min">Minuten</option>
+                    <option value="h">Stunden</option>
+                  </select>
+                  <select id="calc-period" aria-label="Zeitraum">
+                    <option value="day">pro Tag</option>
+                    <option value="week">pro Woche</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field">
+                <label for="calc-heads">Personen, die diese Aufgabe im Unternehmen erledigen</label>
+                <input type="number" id="calc-heads" min="1" step="1" inputmode="numeric" value="3">
+              </div>
+              <div class="field">
+                <label for="calc-rate">Belasteter Stundensatz (CHF / Stunde)</label>
+                <input type="number" id="calc-rate" min="0" step="5" inputmode="decimal" value="65">
+              </div>
+              <div class="field">
+                <label for="calc-share">Anteil der Zeit, der wegfällt — je nach Aufgabe vorgeschätzt&nbsp;: <span id="calc-share-val">70&nbsp;%</span></label>
+                <input type="range" id="calc-share" min="10" max="95" step="5" value="70">
+                <p class="calc-hint" id="calc-hint"></p>
+                <details class="calc-help">
+                  <summary>Wie wird dieser Anteil geschätzt?</summary>
+                  <div class="calc-help-body">
+                    <p>Der Regler stellt sich automatisch nach der Art der gewählten Aufgabe ein. Das ist unsere Schätzung, keine Messung&nbsp;: Passen Sie ihn frei an Ihre Realität an.</p>
+                    <p>Das Prinzip&nbsp;: Man zählt, was wirklich mechanisch ist — Informationen suchen, Copy-Paste, Vorlagen befüllen, Formatierung — und lässt weg, was menschliches Urteil oder das Behandeln von Sonderfällen verlangt. Etwas Zeit fürs Prüfen des Ergebnisses muss ebenfalls bleiben.</p>
+                    <ul>
+                      <li><strong>70–90&nbsp;%</strong> — sehr repetitive, klar geregelte Aufgabe&nbsp;: Erfassung, Datenextraktion, Nachfassen, Dokumenterstellung.</li>
+                      <li><strong>40–60&nbsp;%</strong> — gemischte Aufgabe&nbsp;: ein mechanischer Teil, einige Entscheidungen im Einzelfall.</li>
+                      <li><strong>15–30&nbsp;%</strong> — Aufgabe, die vor allem auf Analyse, Beratung oder Kundenbeziehung beruht.</li>
+                    </ul>
+                    <p class="calc-help-ex"><strong>Beispiel.</strong> Ein Angebot zu erstellen dauert ~40&nbsp;min&nbsp;: Positionen im ERP suchen, Preise prüfen, Vorlage befüllen, PDF erzeugen. Der Agent bereitet alles vor, der Mitarbeiter prüft und versendet in ~6&nbsp;min — also rund 85&nbsp;% weniger Zeit für diese Aufgabe.</p>
+                  </div>
+                </details>
+              </div>
+            </div>
+            <div class="calc-results">
+              <div class="calc-result">
+                <span class="calc-result-lbl">Gewonnene Zeit / Woche</span>
+                <span class="calc-result-val" id="calc-out-hours">–</span>
+              </div>
+              <div class="calc-result">
+                <span class="calc-result-lbl">Geschätzte Einsparung / Monat</span>
+                <span class="calc-result-val" id="calc-out-month">–</span>
+              </div>
+              <div class="calc-result">
+                <span class="calc-result-lbl">Geschätzte Einsparung / Jahr</span>
+                <span class="calc-result-val price" id="calc-out-year">–</span>
+              </div>
+            </div>
+            <p class="calc-perhead" id="calc-perhead"></p>
+            <p class="calc-disclaimer"><strong>Richtwert ohne Gewähr.</strong> Das tatsächliche Ergebnis hängt vom Prozess, den vorhandenen Werkzeugen und dem Volumen ab. Diese Rechnung berücksichtigt weder die Umsetzungskosten noch die verbleibende Prüfzeit und nimmt an, dass jede Person etwa gleich viel Zeit für diese Aufgabe aufwendet. Annahmen&nbsp;: 5&nbsp;Arbeitstage pro Woche, 46&nbsp;Wochen pro Jahr.</p>
+
+            <form class="calc-send" id="calcSend" novalidate>
+              <label for="calc-email">Diese Zusammenfassung als PDF erhalten</label>
+              <div class="calc-send-row">
+                <input type="email" id="calc-email" name="email" placeholder="sie@unternehmen.ch" autocomplete="email" required>
+                <button type="submit" class="btn-primary" id="calcSendBtn">PDF erhalten</button>
+              </div>
+              <p class="calc-send-note">Das PDF wird sofort heruntergeladen und kommt zusätzlich per E-Mail, mit einem Link zur Terminbuchung. Kein Newsletter.</p>
+              <p class="calc-send-status" id="calcSendStatus" hidden></p>
+            </form>
+          </div>
+
+          <p class="branche-note">Das sind nur Beispiele. Das kostenlose Erstgespräch dient genau dazu, den Prozess zu finden, der sich bei Ihnen am meisten zu automatisieren lohnt.</p>
+          <a class="btn-secondary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Im Gespräch besprechen</a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -865,104 +964,6 @@
           <div><span class="lbl">Umsetzung</span><span class="val">2 Wochen</span></div>
           <div><span class="lbl">Fixpreis</span><span class="val price">CHF 4'500</span></div>
           <div><span class="lbl">Amortisation</span><span class="val">~8 Wochen</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="branchen" class="section-light">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">Beispiele nach Branche + Rechner</span>
-        <h2>Sie sehen nicht, welche Prozesse sich in Ihrem Unternehmen automatisieren lassen?</h2>
-      </div>
-      <p class="branchen-intro reveal d1">Wählen Sie Ihre Branche und sehen Sie wiederkehrende Prozesse, die andere Schweizer KMU bereits automatisiert haben. <strong>Jedes Beispiel ist anklickbar</strong>&nbsp;: Ein kleines Tool schätzt dann die Zeit und das Geld, die Sie sparen könnten — pro Person und multipliziert mit der Zahl der Mitarbeitenden, die diese Aufgabe erledigen. Richtwert ohne Gewähr.</p>
-      <div class="branchen-picker reveal d2">
-        <label for="branche-select">Ihre Branche</label>
-        <select id="branche-select">
-          <option value="">Branche wählen …</option>
-        </select>
-      </div>
-      <div id="branche-output" class="branche-output" hidden>
-        <div class="branche-card">
-          <span class="package-tag" id="branche-card-tag"></span>
-          <p class="branche-list-hint">Klicken Sie auf ein Beispiel, um die mögliche Einsparung zu schätzen.</p>
-          <ul class="package-list" id="branche-list"></ul>
-
-          <div id="calc-panel" class="calc-panel" hidden>
-            <p class="calc-task">Aufgabe&nbsp;: <strong id="calc-task-label"></strong></p>
-            <div class="calc-grid">
-              <div class="field">
-                <label for="calc-time">Zeit, die diese Aufgabe kostet, <strong>pro Person</strong></label>
-                <div class="calc-inline">
-                  <input type="number" id="calc-time" min="0" step="5" inputmode="decimal" value="30" aria-label="Dauer">
-                  <select id="calc-unit" aria-label="Einheit">
-                    <option value="min">Minuten</option>
-                    <option value="h">Stunden</option>
-                  </select>
-                  <select id="calc-period" aria-label="Zeitraum">
-                    <option value="day">pro Tag</option>
-                    <option value="week">pro Woche</option>
-                  </select>
-                </div>
-              </div>
-              <div class="field">
-                <label for="calc-heads">Personen, die diese Aufgabe im Unternehmen erledigen</label>
-                <input type="number" id="calc-heads" min="1" step="1" inputmode="numeric" value="3">
-              </div>
-              <div class="field">
-                <label for="calc-rate">Belasteter Stundensatz (CHF / Stunde)</label>
-                <input type="number" id="calc-rate" min="0" step="5" inputmode="decimal" value="65">
-              </div>
-              <div class="field">
-                <label for="calc-share">Anteil der Zeit, der wegfällt — je nach Aufgabe vorgeschätzt&nbsp;: <span id="calc-share-val">70&nbsp;%</span></label>
-                <input type="range" id="calc-share" min="10" max="95" step="5" value="70">
-                <p class="calc-hint" id="calc-hint"></p>
-                <details class="calc-help">
-                  <summary>Wie wird dieser Anteil geschätzt?</summary>
-                  <div class="calc-help-body">
-                    <p>Der Regler stellt sich automatisch nach der Art der gewählten Aufgabe ein. Das ist unsere Schätzung, keine Messung&nbsp;: Passen Sie ihn frei an Ihre Realität an.</p>
-                    <p>Das Prinzip&nbsp;: Man zählt, was wirklich mechanisch ist — Informationen suchen, Copy-Paste, Vorlagen befüllen, Formatierung — und lässt weg, was menschliches Urteil oder das Behandeln von Sonderfällen verlangt. Etwas Zeit fürs Prüfen des Ergebnisses muss ebenfalls bleiben.</p>
-                    <ul>
-                      <li><strong>70–90&nbsp;%</strong> — sehr repetitive, klar geregelte Aufgabe&nbsp;: Erfassung, Datenextraktion, Nachfassen, Dokumenterstellung.</li>
-                      <li><strong>40–60&nbsp;%</strong> — gemischte Aufgabe&nbsp;: ein mechanischer Teil, einige Entscheidungen im Einzelfall.</li>
-                      <li><strong>15–30&nbsp;%</strong> — Aufgabe, die vor allem auf Analyse, Beratung oder Kundenbeziehung beruht.</li>
-                    </ul>
-                    <p class="calc-help-ex"><strong>Beispiel.</strong> Ein Angebot zu erstellen dauert ~40&nbsp;min&nbsp;: Positionen im ERP suchen, Preise prüfen, Vorlage befüllen, PDF erzeugen. Der Agent bereitet alles vor, der Mitarbeiter prüft und versendet in ~6&nbsp;min — also rund 85&nbsp;% weniger Zeit für diese Aufgabe.</p>
-                  </div>
-                </details>
-              </div>
-            </div>
-            <div class="calc-results">
-              <div class="calc-result">
-                <span class="calc-result-lbl">Gewonnene Zeit / Woche</span>
-                <span class="calc-result-val" id="calc-out-hours">–</span>
-              </div>
-              <div class="calc-result">
-                <span class="calc-result-lbl">Geschätzte Einsparung / Monat</span>
-                <span class="calc-result-val" id="calc-out-month">–</span>
-              </div>
-              <div class="calc-result">
-                <span class="calc-result-lbl">Geschätzte Einsparung / Jahr</span>
-                <span class="calc-result-val price" id="calc-out-year">–</span>
-              </div>
-            </div>
-            <p class="calc-perhead" id="calc-perhead"></p>
-            <p class="calc-disclaimer"><strong>Richtwert ohne Gewähr.</strong> Das tatsächliche Ergebnis hängt vom Prozess, den vorhandenen Werkzeugen und dem Volumen ab. Diese Rechnung berücksichtigt weder die Umsetzungskosten noch die verbleibende Prüfzeit und nimmt an, dass jede Person etwa gleich viel Zeit für diese Aufgabe aufwendet. Annahmen&nbsp;: 5&nbsp;Arbeitstage pro Woche, 46&nbsp;Wochen pro Jahr.</p>
-
-            <form class="calc-send" id="calcSend" novalidate>
-              <label for="calc-email">Diese Zusammenfassung als PDF erhalten</label>
-              <div class="calc-send-row">
-                <input type="email" id="calc-email" name="email" placeholder="sie@unternehmen.ch" autocomplete="email" required>
-                <button type="submit" class="btn-primary" id="calcSendBtn">PDF erhalten</button>
-              </div>
-              <p class="calc-send-note">Das PDF wird sofort heruntergeladen und kommt zusätzlich per E-Mail, mit einem Link zur Terminbuchung. Kein Newsletter.</p>
-              <p class="calc-send-status" id="calcSendStatus" hidden></p>
-            </form>
-          </div>
-
-          <p class="branche-note">Das sind nur Beispiele. Das kostenlose Erstgespräch dient genau dazu, den Prozess zu finden, der sich bei Ihnen am meisten zu automatisieren lohnt.</p>
-          <a class="btn-secondary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Im Gespräch besprechen</a>
         </div>
       </div>
     </div>

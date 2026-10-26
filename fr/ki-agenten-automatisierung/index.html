@@ -590,9 +590,9 @@
   <div class="header-row">
     <a class="wordmark" href="https://www.zbinden.online/fr/">ZBINDEN<span class="dot">·</span>SOFTWARE <span class="sub">IA &amp; AUTOMATISATION</span></a>
     <nav class="top-nav">
+      <a href="#branchen">Estimateur</a>
       <a href="#pakete">Forfaits</a>
       <a href="#datenschutz">Données</a>
-      <a href="#branchen">Estimateur</a>
       <a href="#voice-demo">Démo live</a>
       <a href="#fuer-wen">Pour qui ?</a>
       <a href="#ueber">À propos</a>
@@ -617,9 +617,108 @@
       <div class="cta-row reveal d4">
         <a class="btn-primary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Premier entretien gratuit · 30 min</a>
         <a class="btn-secondary" href="#standardprozess">Processus standard · CHF 900</a>
+        <a class="btn-secondary" href="#branchen">🧮 Calculer mes économies</a>
         <a class="btn-secondary" href="#voice-demo">🎙 Écouter la démo live</a>
       </div>
       <p style="margin:16px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Premier entretien gratuit et sans engagement · processus standard à prix fixe de CHF 900 · vous savez à l'avance ce que ça coûte.</p>
+    </div>
+  </section>
+
+  <section id="branchen" class="section-light">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Exemples par secteur + estimateur</span>
+        <h2>Vous ne voyez pas quels processus automatiser dans votre entreprise&nbsp;?</h2>
+      </div>
+      <p class="branchen-intro reveal d1">Sélectionnez votre secteur et parcourez des processus récurrents que d'autres PME suisses ont déjà automatisés. <strong>Chaque exemple est cliquable</strong>&nbsp;: un petit outil estime alors le temps et l'argent que vous pourriez économiser — par personne, puis multiplié par le nombre de collaborateurs qui font cette tâche. Estimation indicative, sans garantie.</p>
+      <div class="branchen-picker reveal d2">
+        <label for="branche-select">Votre secteur d'activité</label>
+        <select id="branche-select">
+          <option value="">Choisissez un secteur …</option>
+        </select>
+      </div>
+      <div id="branche-output" class="branche-output" hidden>
+        <div class="branche-card">
+          <span class="package-tag" id="branche-card-tag"></span>
+          <p class="branche-list-hint">Cliquez sur un exemple pour estimer les économies possibles.</p>
+          <ul class="package-list" id="branche-list"></ul>
+
+          <div id="calc-panel" class="calc-panel" hidden>
+            <p class="calc-task">Tâche&nbsp;: <strong id="calc-task-label"></strong></p>
+            <div class="calc-grid">
+              <div class="field">
+                <label for="calc-time">Temps que cette tâche prend, <strong>par personne</strong></label>
+                <div class="calc-inline">
+                  <input type="number" id="calc-time" min="0" step="5" inputmode="decimal" value="30" aria-label="Durée">
+                  <select id="calc-unit" aria-label="Unité">
+                    <option value="min">minutes</option>
+                    <option value="h">heures</option>
+                  </select>
+                  <select id="calc-period" aria-label="Période">
+                    <option value="day">par jour</option>
+                    <option value="week">par semaine</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field">
+                <label for="calc-heads">Personnes qui font cette tâche dans l'entreprise</label>
+                <input type="number" id="calc-heads" min="1" step="1" inputmode="numeric" value="3">
+              </div>
+              <div class="field">
+                <label for="calc-rate">Coût horaire chargé (CHF / heure)</label>
+                <input type="number" id="calc-rate" min="0" step="5" inputmode="decimal" value="65">
+              </div>
+              <div class="field">
+                <label for="calc-share">Part du temps qu'on peut retirer — pré-estimée selon la tâche&nbsp;: <span id="calc-share-val">70&nbsp;%</span></label>
+                <input type="range" id="calc-share" min="10" max="95" step="5" value="70">
+                <p class="calc-hint" id="calc-hint"></p>
+                <details class="calc-help">
+                  <summary>Comment cette part est-elle estimée&nbsp;?</summary>
+                  <div class="calc-help-body">
+                    <p>Le curseur se positionne automatiquement selon le type de tâche que vous choisissez. C'est notre estimation, pas une mesure&nbsp;: ajustez-le librement à votre réalité.</p>
+                    <p>Le principe&nbsp;: on compte ce qui est vraiment mécanique — recherche d'informations, copier-coller, remplissage de modèles, mise en forme — et on laisse de côté ce qui demande un jugement humain ou la gestion de cas particuliers. Il faut aussi garder un peu de temps pour vérifier le résultat.</p>
+                    <ul>
+                      <li><strong>70–90&nbsp;%</strong> — tâche très répétitive et cadrée&nbsp;: saisie, extraction de données, relances, génération de documents.</li>
+                      <li><strong>40–60&nbsp;%</strong> — tâche mixte&nbsp;: une partie mécanique, quelques décisions à prendre au cas par cas.</li>
+                      <li><strong>15–30&nbsp;%</strong> — tâche qui repose surtout sur l'analyse, le conseil ou la relation client.</li>
+                    </ul>
+                    <p class="calc-help-ex"><strong>Exemple.</strong> Établir une offre prend ~40&nbsp;min&nbsp;: chercher les postes dans l'ERP, vérifier les prix, remplir le modèle, générer le PDF. L'agent prépare tout, le collaborateur relit et envoie en ~6&nbsp;min — soit environ 85&nbsp;% de temps en moins sur cette tâche.</p>
+                  </div>
+                </details>
+              </div>
+            </div>
+            <div class="calc-results">
+              <div class="calc-result">
+                <span class="calc-result-lbl">Temps gagné / semaine</span>
+                <span class="calc-result-val" id="calc-out-hours">–</span>
+              </div>
+              <div class="calc-result">
+                <span class="calc-result-lbl">Économie estimée / mois</span>
+                <span class="calc-result-val" id="calc-out-month">–</span>
+              </div>
+              <div class="calc-result">
+                <span class="calc-result-lbl">Économie estimée / an</span>
+                <span class="calc-result-val price" id="calc-out-year">–</span>
+              </div>
+            </div>
+            <p class="calc-perhead" id="calc-perhead"></p>
+            <p class="calc-disclaimer"><strong>Estimation indicative, sans garantie.</strong> Le résultat réel dépend du processus, des outils déjà en place et du volume traité. Ce calcul ne tient pas compte du coût de mise en œuvre ni du temps de contrôle qui reste à faire, et suppose que chaque personne consacre à peu près le même temps à cette tâche. Hypothèses&nbsp;: 5&nbsp;jours ouvrés par semaine, 46&nbsp;semaines par an.</p>
+
+            <form class="calc-send" id="calcSend" novalidate>
+              <label for="calc-email">Recevez votre estimation (PDF)</label>
+              <div class="calc-send-row">
+                <input type="email" id="calc-email" name="email" placeholder="vous@entreprise.ch" autocomplete="email" required>
+                <button type="submit" class="btn-primary" id="calcSendBtn">Recevoir le PDF</button>
+              </div>
+              <p class="calc-send-note">Le PDF se télécharge tout de suite et vous arrive aussi par e-mail, avec un lien pour prendre rendez-vous. Pas de liste de diffusion.</p>
+              <p class="calc-send-status" id="calcSendStatus" hidden></p>
+            </form>
+          </div>
+
+          <p class="branche-note">Ce ne sont que des exemples. Le premier entretien gratuit sert justement à repérer le processus qui, chez vous, vaut le plus la peine d'être automatisé.</p>
+          <a class="btn-secondary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">En parler lors d'un appel</a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -888,104 +987,6 @@
           <div><span class="lbl">Mise en œuvre</span><span class="val">2 semaines</span></div>
           <div><span class="lbl">Prix fixe</span><span class="val price">CHF 4'500</span></div>
           <div><span class="lbl">Amortissement</span><span class="val">~8 semaines</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="branchen" class="section-light">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">Exemples par secteur + estimateur</span>
-        <h2>Vous ne voyez pas quels processus automatiser dans votre entreprise&nbsp;?</h2>
-      </div>
-      <p class="branchen-intro reveal d1">Sélectionnez votre secteur et parcourez des processus récurrents que d'autres PME suisses ont déjà automatisés. <strong>Chaque exemple est cliquable</strong>&nbsp;: un petit outil estime alors le temps et l'argent que vous pourriez économiser — par personne, puis multiplié par le nombre de collaborateurs qui font cette tâche. Estimation indicative, sans garantie.</p>
-      <div class="branchen-picker reveal d2">
-        <label for="branche-select">Votre secteur d'activité</label>
-        <select id="branche-select">
-          <option value="">Choisissez un secteur …</option>
-        </select>
-      </div>
-      <div id="branche-output" class="branche-output" hidden>
-        <div class="branche-card">
-          <span class="package-tag" id="branche-card-tag"></span>
-          <p class="branche-list-hint">Cliquez sur un exemple pour estimer les économies possibles.</p>
-          <ul class="package-list" id="branche-list"></ul>
-
-          <div id="calc-panel" class="calc-panel" hidden>
-            <p class="calc-task">Tâche&nbsp;: <strong id="calc-task-label"></strong></p>
-            <div class="calc-grid">
-              <div class="field">
-                <label for="calc-time">Temps que cette tâche prend, <strong>par personne</strong></label>
-                <div class="calc-inline">
-                  <input type="number" id="calc-time" min="0" step="5" inputmode="decimal" value="30" aria-label="Durée">
-                  <select id="calc-unit" aria-label="Unité">
-                    <option value="min">minutes</option>
-                    <option value="h">heures</option>
-                  </select>
-                  <select id="calc-period" aria-label="Période">
-                    <option value="day">par jour</option>
-                    <option value="week">par semaine</option>
-                  </select>
-                </div>
-              </div>
-              <div class="field">
-                <label for="calc-heads">Personnes qui font cette tâche dans l'entreprise</label>
-                <input type="number" id="calc-heads" min="1" step="1" inputmode="numeric" value="3">
-              </div>
-              <div class="field">
-                <label for="calc-rate">Coût horaire chargé (CHF / heure)</label>
-                <input type="number" id="calc-rate" min="0" step="5" inputmode="decimal" value="65">
-              </div>
-              <div class="field">
-                <label for="calc-share">Part du temps qu'on peut retirer — pré-estimée selon la tâche&nbsp;: <span id="calc-share-val">70&nbsp;%</span></label>
-                <input type="range" id="calc-share" min="10" max="95" step="5" value="70">
-                <p class="calc-hint" id="calc-hint"></p>
-                <details class="calc-help">
-                  <summary>Comment cette part est-elle estimée&nbsp;?</summary>
-                  <div class="calc-help-body">
-                    <p>Le curseur se positionne automatiquement selon le type de tâche que vous choisissez. C'est notre estimation, pas une mesure&nbsp;: ajustez-le librement à votre réalité.</p>
-                    <p>Le principe&nbsp;: on compte ce qui est vraiment mécanique — recherche d'informations, copier-coller, remplissage de modèles, mise en forme — et on laisse de côté ce qui demande un jugement humain ou la gestion de cas particuliers. Il faut aussi garder un peu de temps pour vérifier le résultat.</p>
-                    <ul>
-                      <li><strong>70–90&nbsp;%</strong> — tâche très répétitive et cadrée&nbsp;: saisie, extraction de données, relances, génération de documents.</li>
-                      <li><strong>40–60&nbsp;%</strong> — tâche mixte&nbsp;: une partie mécanique, quelques décisions à prendre au cas par cas.</li>
-                      <li><strong>15–30&nbsp;%</strong> — tâche qui repose surtout sur l'analyse, le conseil ou la relation client.</li>
-                    </ul>
-                    <p class="calc-help-ex"><strong>Exemple.</strong> Établir une offre prend ~40&nbsp;min&nbsp;: chercher les postes dans l'ERP, vérifier les prix, remplir le modèle, générer le PDF. L'agent prépare tout, le collaborateur relit et envoie en ~6&nbsp;min — soit environ 85&nbsp;% de temps en moins sur cette tâche.</p>
-                  </div>
-                </details>
-              </div>
-            </div>
-            <div class="calc-results">
-              <div class="calc-result">
-                <span class="calc-result-lbl">Temps gagné / semaine</span>
-                <span class="calc-result-val" id="calc-out-hours">–</span>
-              </div>
-              <div class="calc-result">
-                <span class="calc-result-lbl">Économie estimée / mois</span>
-                <span class="calc-result-val" id="calc-out-month">–</span>
-              </div>
-              <div class="calc-result">
-                <span class="calc-result-lbl">Économie estimée / an</span>
-                <span class="calc-result-val price" id="calc-out-year">–</span>
-              </div>
-            </div>
-            <p class="calc-perhead" id="calc-perhead"></p>
-            <p class="calc-disclaimer"><strong>Estimation indicative, sans garantie.</strong> Le résultat réel dépend du processus, des outils déjà en place et du volume traité. Ce calcul ne tient pas compte du coût de mise en œuvre ni du temps de contrôle qui reste à faire, et suppose que chaque personne consacre à peu près le même temps à cette tâche. Hypothèses&nbsp;: 5&nbsp;jours ouvrés par semaine, 46&nbsp;semaines par an.</p>
-
-            <form class="calc-send" id="calcSend" novalidate>
-              <label for="calc-email">Recevez votre estimation (PDF)</label>
-              <div class="calc-send-row">
-                <input type="email" id="calc-email" name="email" placeholder="vous@entreprise.ch" autocomplete="email" required>
-                <button type="submit" class="btn-primary" id="calcSendBtn">Recevoir le PDF</button>
-              </div>
-              <p class="calc-send-note">Le PDF se télécharge tout de suite et vous arrive aussi par e-mail, avec un lien pour prendre rendez-vous. Pas de liste de diffusion.</p>
-              <p class="calc-send-status" id="calcSendStatus" hidden></p>
-            </form>
-          </div>
-
-          <p class="branche-note">Ce ne sont que des exemples. Le premier entretien gratuit sert justement à repérer le processus qui, chez vous, vaut le plus la peine d'être automatisé.</p>
-          <a class="btn-secondary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">En parler lors d'un appel</a>
         </div>
       </div>
     </div>
