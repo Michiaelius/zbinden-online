@@ -216,10 +216,10 @@ async function askOpenAI(question, cfg) {
   return openaiExtract(await r.json());
 }
 
-// Limite de débit (429) ou panne passagère (5xx, délai) : jusqu'à 4 essais, avec la pause demandée.
+// Limite de débit (429) ou panne passagère (5xx, délai) : jusqu'à 5 essais, avec la pause demandée.
 async function runEngine(engine, question, cfg, variants, dcore) {
   let last;
-  for (let attempt = 0; attempt < 4; attempt++) {
+  for (let attempt = 0; attempt < 5; attempt++) {
     try {
       const out = engine === 'perplexity' ? await askPerplexity(question, cfg) : await askOpenAI(question, cfg);
       return {
@@ -232,8 +232,8 @@ async function runEngine(engine, question, cfg, variants, dcore) {
     } catch (e) {
       last = e;
       const retryable = !e.status || e.status === 429 || e.status >= 500;
-      if (!retryable || attempt === 3) break;
-      await sleep(Math.min(e.retryAfter ? e.retryAfter * 1000 : 3000 * Math.pow(2, attempt), 20000));
+      if (!retryable || attempt === 4) break;
+      await sleep(Math.min(e.retryAfter ? e.retryAfter * 1000 : 5000 * Math.pow(2, attempt), 30000));
     }
   }
   return { named: false, cited_source: false, answer: '', sources: [], error: String(last && last.message || last) };
@@ -258,11 +258,12 @@ export async function runVisibilityTest(cand) {
   const dcore = domainCore(cand.domain);
   const questions = buildQuestions(cand);
   // Les 16 appels d'un coup dépassent la limite de débit des comptes (14 erreurs au premier test
-  // sur Vercel) : au plus 4 questions en cours par moteur, les deux moteurs en parallèle.
-  const POOL = 4;
+  // sur Vercel) : au plus 4 questions en cours pour ChatGPT, 2 pour Perplexity (limite plus basse),
+  // les deux moteurs en parallèle.
+  const POOL = { chatgpt: 4, perplexity: 2 };
   await Promise.all(['chatgpt', 'perplexity'].map(async function (eng) {
     const queue = questions.slice();
-    await Promise.all(Array.from({ length: POOL }, async function () {
+    await Promise.all(Array.from({ length: POOL[eng] }, async function () {
       for (let q = queue.shift(); q; q = queue.shift()) q[eng] = await runEngine(eng, q.text, cfg, variants, dcore);
     }));
   }));
