@@ -140,7 +140,7 @@
     --font-ui:"Jost","Helvetica Neue",Helvetica,Arial,sans-serif;
   }
   .section-dark{
-    --sec-bg:#0a0a0a; --sec-bg-2:#141210; --sec-bg-3:#1b1815;
+    --sec-bg:#0a0a0a; --sec-bg-2:#151515; --sec-bg-3:#1e1e1e;
     --sec-ink:#f6f3ec; --sec-muted:#a9a297;
     --sec-line:rgba(255,255,255,.10); --sec-line-strong:rgba(255,255,255,.18); --sec-line-gold:rgba(201,162,39,.38);
     --sec-gold:#e8d38a; --sec-gold-deep:#c9a227; --sec-gold-light:#f2e6bd;
@@ -151,9 +151,9 @@
 
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
-  html,body{margin:0;padding:0;overflow-x:hidden;max-width:100%;}
+  html,body{margin:0;padding:0;overflow-x:hidden;overflow-x:clip;max-width:100%;}
   body{
-    background:#fff; color:#18150f;
+    background:#0a0a0a; color:#18150f;
     font-family:"Jost","Helvetica Neue",Helvetica,Arial,sans-serif; font-weight:300;
     -webkit-font-smoothing:antialiased;
   }
@@ -179,6 +179,7 @@
     border-bottom:1px solid var(--sec-line); position:sticky; top:0;
     background:rgba(255,255,255,.86); backdrop-filter:blur(10px); z-index:20;
   }
+  header.section-dark{ background:rgba(10,10,10,.97); }
   .header-row{
     display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px 16px;
     padding:16px clamp(20px,4vw,40px); max-width:1120px; margin:0 auto;
@@ -525,7 +526,7 @@
   .calc-send-status[hidden]{ display:none; }
 
   /* ---------- Back bar ---------- */
-  .back-bar{ background:rgba(255,255,255,.86); backdrop-filter:blur(10px); border-bottom:1px solid var(--sec-line); }
+  .back-bar{ background:#0a0a0a; backdrop-filter:blur(10px); border-bottom:1px solid var(--sec-line); }
   .back-bar .wrap{ padding-top:7px; padding-bottom:7px; }
   .back-link{
     display:inline-flex; align-items:center; gap:.55em;
@@ -557,13 +558,13 @@
 </head>
 <body>
 
-<div class="back-bar">
+<div class="back-bar section-dark">
   <div class="wrap">
     <a class="back-link" href="https://www.zbinden.online/" id="backLink"><span class="arrow" aria-hidden="true">&larr;</span> Zur&uuml;ck</a>
   </div>
 </div>
 
-<header class="section-light">
+<header class="section-dark">
   <div class="header-row">
     <a class="wordmark" href="https://www.zbinden.online/">ZBINDEN<span class="dot">·</span>SOFTWARE <span class="sub">KI &amp; AUTOMATION</span></a>
     <nav class="top-nav">
@@ -586,7 +587,7 @@
 
 <main id="top">
 
-  <section class="hero section-light">
+  <section class="hero section-dark">
     <div class="wrap">
       <p class="eyebrow with-rule reveal d1">KI-Agenten &amp; Prozessautomatisierung</p>
       <h1 class="reveal d2">Ein erster Ablauf <em>automatisiert</em> in zwei Wochen, zum Fixpreis.</h1>
@@ -881,7 +882,7 @@
     </div>
   </section>
 
-  <section id="datenschutz" class="section-light">
+  <section id="datenschutz" class="section-dark">
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Datenschutz</span>
@@ -1016,7 +1017,7 @@
     </div>
   </section>
 
-  <section id="ueber" class="section-light">
+  <section id="ueber" class="section-dark">
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Über mich</span>
@@ -1144,7 +1145,7 @@
 
 </main>
 
-<footer class="section-light">
+<footer class="section-dark">
   <span>© 2026 Zbinden Software · Einzelunternehmen, Schweiz</span>
   <span class="mono"><a href="https://www.zbinden.online/">Zbinden Software</a> · <a href="https://www.zbinden.online/geo-audit">GEO-Audit →</a> · <a href="https://www.zbinden.online/webdesign">Webdesign →</a></span>
 </footer>
