@@ -28,17 +28,18 @@ const T = {
     s4weak: 'Die drei wichtigsten Ursachen', s4strong: 'Warum Sie gut dastehen, und was noch fehlt', good: 'Gut:', missing: 'Fehlt:',
     s5: 'Eine Massnahme, die Sie sofort umsetzen können', why: 'Warum:',
     s6: 'Ihr nächster Schritt', get: 'Was Sie bekommen', from: 'ab',
-    tiers: ['GEO-Optimierung', 'GEO-Analyse', 'GEO komplett'],
+    tiers: ['GEO-Audit', 'Audit + Umsetzung', 'GEO Aktiv (Abo)'],
+    prices: ['CHF 490', "CHF 1'480", 'CHF 249 / Monat'],
     rowTech: 'KI-Systeme können Ihre Website richtig lesen: strukturierte Daten, einheitliche Firmenangaben, Zugang für KI-Crawler (umgesetzt, nicht nur empfohlen)',
-    rowCheck: 'Nachkontrolle nach 4–6 Wochen: neuer KI-Check mit Vorher-Nachher-Vergleich',
-    rowAnalysis: 'Analyse in sechs Kategorien, priorisierter 30-Tage-Plan und Besprechung (30 Min.)',
+    rowCheck: 'Neuer KI-Check mit Vorher-Nachher-Vergleich (bei der Umsetzung nach 6 Monaten, im Abo jeden Monat)',
+    rowAnalysis: 'Analyse in sechs Kategorien, priorisierter Aktionsplan und Besprechung (30 Min.)',
     rowComp: function (c, name) { return `Vergleich mit ${c.join(', ')} & Co.: warum sie empfohlen werden und wo ${name} erwähnt sein sollte`; },
     rowImpl: 'Umsetzung des Plans:', cause: 'Ursache', causes: 'Ursache', and: 'und',
-    leadTail: 'Die GEO-Analyse zeigt, was dort zu tun ist; mit GEO komplett setze ich es für Sie um.',
+    leadTail: 'Der GEO-Audit zeigt, was dort zu tun ist; mit der Umsetzung oder im Abo mit GEO Aktiv setze ich es für Sie um.',
     gain: 'Ihr Gewinn:',
-    gainWeak: 'Mit der GEO-Analyse wissen Sie genau, warum andere empfohlen werden und was Sie in welcher Reihenfolge ändern. Mit GEO komplett ist es danach auch erledigt, ohne dass Sie selbst Zeit investieren.',
-    gainStrong: 'Sie bauen Ihren Vorsprung gezielt aus, statt ihn dem Zufall zu überlassen. Mit GEO komplett erledige ich das für Sie.',
-    cta: 'Kostenloses Gespräch vereinbaren (30 Min.)', diff: 'Wer mit einem kleineren Paket beginnt und später wechselt, bezahlt nur die Differenz.',
+    gainWeak: 'Mit dem GEO-Audit wissen Sie genau, warum andere empfohlen werden und was Sie in welcher Reihenfolge ändern. Mit der Umsetzung ist es danach auch erledigt, ohne dass Sie selbst Zeit investieren.',
+    gainStrong: 'Sie bauen Ihren Vorsprung gezielt aus, statt ihn dem Zufall zu überlassen. Mit GEO Aktiv beobachte ich Ihre Sichtbarkeit jeden Monat und baue sie für Sie aus.',
+    cta: 'Kostenloses Gespräch vereinbaren (30 Min.)', diff: 'GEO Aktiv: CHF 490 Setup (der Audit), danach CHF 249 pro Monat, Mindestdauer 6 Monate.',
     footer: 'Dieser Test ist kostenlos und unverbindlich. Die Antworten von KI-Systemen ändern sich mit der Zeit; dieser Test ist eine Momentaufnahme.',
     site: 'zbinden.online/geo-audit',
   },
@@ -58,17 +59,18 @@ const T = {
     s4weak: 'Les trois causes principales', s4strong: 'Pourquoi vous êtes bien placé, et ce qui manque encore', good: 'Bien :', missing: 'Manque :',
     s5: 'Une mesure à mettre en place tout de suite', why: 'Pourquoi :',
     s6: 'Votre prochaine étape', get: 'Ce que vous obtenez', from: 'dès',
-    tiers: ['Optimisation GEO', 'Analyse GEO', 'GEO complet'],
+    tiers: ['Audit GEO', 'Audit + mise en œuvre', 'GEO Actif (abo)'],
+    prices: ['CHF 490', "CHF 1'480", 'CHF 249 / mois'],
     rowTech: 'Les systèmes d’IA lisent correctement votre site : données structurées, informations d’entreprise cohérentes, accès pour les robots d’IA (mis en place, pas seulement recommandé)',
-    rowCheck: 'Contrôle après 4 à 6 semaines : nouveau test IA avec comparaison avant-après',
-    rowAnalysis: 'Analyse en six catégories, plan sur 30 jours par priorités et entretien (30 min)',
+    rowCheck: 'Nouveau test IA avec comparaison avant-après (après 6 mois avec la mise en œuvre, chaque mois en abonnement)',
+    rowAnalysis: 'Analyse en six catégories, plan d’action par priorités et entretien (30 min)',
     rowComp: function (c, name) { return `Comparaison avec ${c.join(', ')} & Cie : pourquoi ils sont recommandés et où ${name} devrait être mentionné`; },
     rowImpl: 'Mise en œuvre du plan :', cause: 'Cause', causes: 'Causes', and: 'et',
-    leadTail: 'L’analyse GEO montre ce qu’il faut faire ; avec le GEO complet, je le mets en place pour vous.',
+    leadTail: 'L’audit GEO montre ce qu’il faut faire ; avec la mise en œuvre ou en abonnement avec GEO Actif, je le mets en place pour vous.',
     gain: 'Ce que vous y gagnez :',
-    gainWeak: 'Avec l’analyse GEO, vous savez exactement pourquoi d’autres sont recommandés et quoi changer, dans quel ordre. Avec le GEO complet, c’est ensuite fait, sans que vous y consacriez votre temps.',
-    gainStrong: 'Vous consolidez votre avance de façon ciblée au lieu de la laisser au hasard. Avec le GEO complet, je m’en charge pour vous.',
-    cta: 'Réserver un entretien gratuit (30 min)', diff: 'Si vous commencez par une offre plus petite et changez ensuite, vous ne payez que la différence.',
+    gainWeak: 'Avec l’audit GEO, vous savez exactement pourquoi d’autres sont recommandés et quoi changer, dans quel ordre. Avec la mise en œuvre, c’est ensuite fait, sans que vous y consacriez votre temps.',
+    gainStrong: 'Vous consolidez votre avance de façon ciblée au lieu de la laisser au hasard. Avec GEO Actif, je suis votre visibilité chaque mois et la renforce pour vous.',
+    cta: 'Réserver un entretien gratuit (30 min)', diff: 'GEO Actif : CHF 490 de mise en place (l’audit), puis CHF 249 par mois, durée minimale 6 mois.',
     footer: 'Ce test est gratuit et sans engagement. Les réponses des systèmes d’IA évoluent avec le temps ; ce test est un instantané.',
     site: 'zbinden.online/fr/geo-audit',
   },
@@ -88,23 +90,23 @@ const T = {
     s4weak: 'The three main causes', s4strong: 'Why you are well placed, and what is still missing', good: 'Good:', missing: 'Missing:',
     s5: 'One measure you can put in place right away', why: 'Why:',
     s6: 'Your next step', get: 'What you get', from: 'from',
-    tiers: ['GEO optimisation', 'GEO analysis', 'GEO complete'],
+    tiers: ['GEO audit', 'Audit + implementation', 'GEO Active (subscription)'],
+    prices: ['CHF 490', "CHF 1'480", 'CHF 249 / month'],
     rowTech: 'AI systems read your website correctly: structured data, consistent company details, access for AI crawlers (implemented, not just recommended)',
-    rowCheck: 'Follow-up after 4–6 weeks: new AI check with before/after comparison',
-    rowAnalysis: 'Analysis in six categories, prioritised 30-day plan and discussion (30 min)',
+    rowCheck: 'New AI check with before/after comparison (after 6 months with the implementation, every month by subscription)',
+    rowAnalysis: 'Analysis in six categories, prioritised action plan and discussion (30 min)',
     rowComp: function (c, name) { return `Comparison with ${c.join(', ')} & co.: why they are recommended and where ${name} should be mentioned`; },
     rowImpl: 'Implementation of the plan:', cause: 'Cause', causes: 'Causes', and: 'and',
-    leadTail: 'The GEO analysis shows what to do there; with GEO complete, I implement it for you.',
+    leadTail: 'The GEO audit shows what to do there; with the implementation or by subscription with GEO Active, I implement it for you.',
     gain: 'What you gain:',
-    gainWeak: 'With the GEO analysis you know exactly why others are recommended and what to change in which order. With GEO complete it is then also done, without investing your own time.',
-    gainStrong: 'You build on your lead deliberately instead of leaving it to chance. With GEO complete, I take care of it for you.',
-    cta: 'Book a free call (30 min)', diff: 'If you start with a smaller package and switch later, you only pay the difference.',
+    gainWeak: 'With the GEO audit you know exactly why others are recommended and what to change in which order. With the implementation it is then also done, without investing your own time.',
+    gainStrong: 'You build on your lead deliberately instead of leaving it to chance. With GEO Active, I monitor your visibility every month and build on it for you.',
+    cta: 'Book a free call (30 min)', diff: 'GEO Active: CHF 490 setup (the audit), then CHF 249 per month, minimum term 6 months.',
     footer: 'This test is free and without obligation. AI answers change over time; this test is a snapshot.',
     site: 'zbinden.online/en/geo-audit',
   },
 };
 
-const PRICES = ["CHF 900", "CHF 2'400", "CHF 4'200"];
 
 export function fileStem(reportLang, slug) { return `${T[reportLang].stem}-${slug}`; }
 
@@ -225,17 +227,17 @@ export function renderReportHtml(cand, test, a, reportLang) {
     [first(a.row_causes.content), labelled(causeLabel(t, a.row_causes.content, a.causes, strong), a.row_content)],
     [first(a.row_causes.competitors), labelled(causeLabel(t, a.row_causes.competitors, a.causes, strong),
       a.competitors.length ? t.rowComp(a.competitors.slice(0, 2).map(function (c) { return c.name; }), name) : a.row_competitors)],
-  ].sort(function (x, y) { return x[0] - y[0]; }).map(function (r) { return [r[1], no + yes + yesHl]; });
+  ].sort(function (x, y) { return x[0] - y[0]; }).map(function (r) { return [r[1], yes + yes + yesHl]; });
   const rows = [
-    [esc(t.rowTech), yes + yes + yesHl],
-    [esc(t.rowCheck), yes + yes + yesHl],
+    [esc(t.rowTech), no + yes + yesHl],
+    [esc(t.rowCheck), no + yes + yesHl],
   ].concat(causeRows, [
-    [esc(t.rowAnalysis), no + yes + yesHl],
-    [labelled(t.rowImpl, a.row_implementation), no + no + yesHl],
+    [esc(t.rowAnalysis), yes + yes + yesHl],
+    [labelled(t.rowImpl, a.row_implementation), no + yes + yesHl],
   ]).map(function (r) { return `<tr><td>${r[0]}</td>${r[1]}</tr>`; }).join('');
 
   const heads = t.tiers.map(function (tier, i) {
-    return `<th class="p${i === 2 ? ' hl' : ''}">${esc(tier)}<small>${t.from} ${PRICES[i]}</small></th>`;
+    return `<th class="p${i === 2 ? ' hl' : ''}">${esc(tier)}<small>${t.from} ${t.prices[i]}</small></th>`;
   }).join('');
 
   return `<!DOCTYPE html>

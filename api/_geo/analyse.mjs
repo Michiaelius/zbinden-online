@@ -78,17 +78,16 @@ Felder:
 - "offer_lead": ein bis zwei Sätze für den Abschnitt «Ihr nächster Schritt»: welcher Teil der Ursachen
   mit der Technik allein gelöst ist und welcher Inhalte und Erwähnungen auf anderen Seiten braucht.
   Den wichtigsten Teilsatz zwischen ** ** setzen (wird fett).
-- "row_content": Tabellenzeile (höchstens 22 Wörter), was die GEO-Analyse zu den Inhalten zeigt, mit dem
+- "row_content": Tabellenzeile (höchstens 22 Wörter), was der GEO-Audit zu den Inhalten zeigt, mit dem
   Firmennamen, z. B. "was auf Ihre Startseite und Ihre Angebotsseite gehört, damit innoFutura klar
   als Innovationsberatung erkannt wird" (ohne «Ursache n:»).
 - "row_competitors": nur gebraucht, wenn keine Mitbewerber genannt werden: Tabellenzeile (höchstens
-  22 Wörter), was die GEO-Analyse dann klärt (z. B. wo Kunden in der Region suchen und wo das Unternehmen
+  22 Wörter), was der GEO-Audit dann klärt (z. B. wo Kunden in der Region suchen und wo das Unternehmen
   erwähnt sein sollte). Sonst ein leerer String.
 - "row_causes": welche Ursachen (Nummern 1 bis 3 in der Liste "causes") zu row_content bzw. zum Vergleich
   mit den Mitbewerbern gehören. Nie eine Ursache mit "kind" "good".
-- "row_implementation": höchstens 18 Wörter, was bei GEO komplett konkret umgesetzt wird, passend zu diesem Bericht, z. B.
-  "Texte für Startseite, Angebot und Über uns überarbeitet, Profile und Verzeichniseinträge eingerichtet,
-  FAQ" (ohne «Umsetzung des Plans:»).
+- "row_implementation": höchstens 18 Wörter, was bei der Umsetzung konkret gemacht wird, passend zu diesem Bericht, z. B.
+  "Texte für Startseite und Angebot überarbeitet, FAQ, strukturierte Daten zu Angebot und Öffnungszeiten" (ohne «Umsetzung des Plans:»).
 - "email_paragraph": ein bis zwei Sätze für die E-Mail: wer stattdessen (oder zusätzlich) empfohlen wird
   und was die KI über das Unternehmen sagt, ob es stimmt oder nicht.`;
 

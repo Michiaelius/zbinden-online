@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Zbinden Software — AI Agents &amp; Process Automation</title>
-<meta name="description" content="Process automation and AI agents for Swiss SMEs: free intro call, standard process at a fixed price of CHF 900, Process Check for CHF 2'200 or custom implementation — with clearly defined data protection.">
+<meta name="description" content="Process automation and AI agents for Swiss SMEs: free intro call, automation from CHF 990 at a fixed price or by subscription from CHF 69 per month, an AI agent for your website — with clearly defined data protection.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.zbinden.online/en/ki-agenten-automatisierung">
 <meta property="og:title" content="Zbinden Software — AI Agents &amp; Process Automation">
@@ -37,7 +37,12 @@
     "jobTitle": "Founder · Process consulting & software development",
     "description": "Five years of embedded software development in C++ at Hexagon Manufacturing Intelligence, then requirements analysis and process consulting at Drees & Sommer Switzerland."
   },
-  "parentOrganization": { "@type": "Organization", "name": "Zbinden Software", "url": "https://www.zbinden.online/", "@id": "https://www.zbinden.online/#organization" },
+  "parentOrganization": {
+    "@type": "Organization",
+    "name": "Zbinden Software",
+    "url": "https://www.zbinden.online/",
+    "@id": "https://www.zbinden.online/#organization"
+  },
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "AI Agents & Process Automation",
@@ -45,7 +50,7 @@
       {
         "@type": "Offer",
         "name": "Free intro call",
-        "description": "30-minute call without obligation: clarifies whether a standard process is enough, whether a Process Check is worth it, or whether automation does not pay off.",
+        "description": "30-minute call without obligation: clarifies which automation fits, whether buying or subscribing makes more sense, or whether automation does not pay off.",
         "url": "https://calendly.com/zbinden-austausch/30min",
         "price": 0,
         "priceCurrency": "CHF",
@@ -56,51 +61,55 @@
       },
       {
         "@type": "Offer",
-        "name": "Standard Process Automation",
-        "description": "A proven, clearly scoped process is set up on the client's accounts, tested and handed over. Example: photograph a business card and add a note, the contact is saved automatically in the CRM or a spreadsheet, with a draft follow-up email. Included: 1 standard process, configuration, testing, 1-hour onboarding; lead time 1–2 weeks. Not included: specific adjustments, several processes, connection to systems without a standard interface.",
-        "url": "https://www.zbinden.online/en/ki-agenten-automatisierung#standardprozess",
-        "price": 900,
-        "priceCurrency": "CHF",
+        "name": "Standard automation",
+        "description": "A proven, clearly defined process is set up, tested and handed over, e.g. a qualification quiz for enquiries or capturing networking contacts with a draft follow-up email. Included: 1 standard process, configuration, testing, 1-hour onboarding; 1–2 weeks. Buy: CHF 990 fixed price, operations CHF 29 per month. Subscription: CHF 390 setup + CHF 69 per month, minimum term 24 months.",
         "priceSpecification": {
           "@type": "PriceSpecification",
-          "price": 900,
+          "price": 990,
           "priceCurrency": "CHF"
         },
+        "url": "https://www.zbinden.online/en/ki-agenten-automatisierung#standardprozess",
+        "price": 990,
+        "priceCurrency": "CHF",
         "itemOffered": {
           "@type": "Service",
-          "name": "Standard Process Automation",
+          "name": "Standard automation",
           "serviceType": "Process automation"
         }
       },
       {
         "@type": "Offer",
-        "name": "Process Check",
-        "description": "Review of two to three recurring processes, estimate of the time saved and a written report with a fixed price for implementation. The price is credited in full if implementation follows.",
-        "priceSpecification": { "@type": "PriceSpecification", "price": 2200, "priceCurrency": "CHF" }
+        "name": "Extended automation",
+        "description": "Multi-step automation, e.g. automatic reply to enquiries, CRM connection and automatic follow-up. Buy: CHF 1'490–2'490 fixed price, operations CHF 49 per month. Subscription: CHF 690 setup + CHF 99 per month, minimum term 24 months.",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 1490,
+          "maxPrice": 2490,
+          "priceCurrency": "CHF"
+        }
       },
       {
         "@type": "Offer",
-        "name": "Quick Win Automation",
-        "description": "Identification and implementation of the automation of one priority, recurring process.",
-        "priceSpecification": { "@type": "PriceSpecification", "minPrice": 4500, "maxPrice": 6500, "priceCurrency": "CHF" }
+        "name": "AI agent (website chat)",
+        "description": "AI agent as a chat on the website that answers visitors' questions based on your content, with an allowance of conversations per month. Buy: CHF 1'990–2'490 fixed price, operations from CHF 69 per month. Subscription: CHF 790 setup + CHF 129 per month, minimum term 24 months.",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 1990,
+          "maxPrice": 2490,
+          "priceCurrency": "CHF"
+        }
       },
       {
         "@type": "Offer",
-        "name": "AI Agent Starter",
-        "description": "Design, build and integration of an AI agent including related automations, testing and support after go-live.",
-        "priceSpecification": { "@type": "PriceSpecification", "minPrice": 8500, "maxPrice": 14000, "priceCurrency": "CHF" }
-      },
-      {
-        "@type": "Offer",
-        "name": "Support Essential",
-        "description": "Operation of one automation after go-live: monitoring, fixes when connected applications change and small adjustments of up to 1 hour per month.",
-        "priceSpecification": { "@type": "UnitPriceSpecification", "price": 150, "priceCurrency": "CHF", "unitCode": "MON" }
-      },
-      {
-        "@type": "Offer",
-        "name": "Support Premium",
-        "description": "Operation of one AI agent with its related automations: everything in Support Essential, refining the agent's instructions, adjustments of up to 3 hours per month and a quarterly review with figures.",
-        "priceSpecification": { "@type": "UnitPriceSpecification", "price": 350, "priceCurrency": "CHF", "unitCode": "MON" }
+        "name": "Operations",
+        "description": "Operations after go-live when buying: hosting, AI API and monitoring. Standard automation CHF 29, extended automation CHF 49, AI agent from CHF 69 per month. Included in the subscription.",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "minPrice": 29,
+          "maxPrice": 69,
+          "priceCurrency": "CHF",
+          "unitCode": "MON"
+        }
       }
     ]
   }
@@ -115,35 +124,23 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What does the CHF 900 fixed price for Standard Process Automation include?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "One standard process, set up on your own accounts, with configuration, testing and a one-hour onboarding, delivered in one to two weeks. A typical example is networking automation: you photograph a business card and add a short note, the contact is saved automatically in your CRM or a spreadsheet, and a draft follow-up email is ready for review. Running costs for software and AI services are paid directly to the provider."
-      }
+      "name": "What is included in the CHF 990 fixed price for “Standard automation”?",
+      "acceptedAnswer": { "@type": "Answer", "text": "One standard process with configuration, testing and a one-hour onboarding, delivered in one to two weeks. A typical example is a qualification quiz: prospects answer a few short questions on your website, the enquiry is scored automatically and saved in your CRM or a spreadsheet, and good-fit prospects immediately get a reply with a link to book a call. Another option is capturing business cards from a networking event with a draft follow-up email. Operations — hosting, AI API and monitoring — cost CHF 29 per month; licences for your own software, such as your CRM, are paid directly to the provider." }
     },
     {
       "@type": "Question",
-      "name": "When is a standard process enough, and when is a Process Check needed?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "A standard process is enough when the process is clearly scoped and connects to a destination with a standard interface, such as a common CRM or a spreadsheet. If it needs adjustments to your specific processes, several processes, or a connection to existing systems such as an ERP or industry software, the next step is the Process Check at a fixed price of CHF 2'200. Its price is fully credited if implementation follows. We work out which case applies in the free intro call."
-      }
+      "name": "When is standard automation enough, and when do I need the extended one?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Standard automation is enough when the process is clearly defined and connects to one destination with a standard interface, such as a common CRM or a spreadsheet. If it takes several steps — for example an automatic reply to enquiries, a connection to your CRM and an automatic follow-up — it's an extended automation for CHF 1'490–2'490. Larger projects, such as connecting an ERP or industry software, are quoted individually. We work out which applies in the free intro call." }
+    },
+    {
+      "@type": "Question",
+      "name": "Buy or subscribe — what's the difference?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The service is the same, only the way you pay differs. When you buy, you pay for the implementation once at a fixed price, then operations (hosting, AI API, monitoring) from CHF 29 per month. With a subscription, you pay a setup fee at the start and then a fixed monthly price from go-live, operations included. Minimum term 24 months, then open-ended and cancellable monthly to the end of the month, with no renewal into a new minimum term. The price doesn't increase during the minimum term, and you can take over the solution at any time: purchase price minus the setup. Your data always belongs to you, with a free export at the end." }
     },
     {
       "@type": "Question",
       "name": "What happens in the free intro call?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "In 30 minutes you describe the process that costs you the most time. You get an assessment of whether a standard process for CHF 900 is enough, whether a Process Check is worth it, or whether automation doesn't pay off at all. The call is free and without obligation; you book the time directly online."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is Standard Process Automation the same as GEO optimization for CHF 900?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. Standard Process Automation (CHF 900 fixed price) automates an internal workflow, for example capturing networking contacts. GEO optimization (from CHF 900) is part of the web design offer: it improves the technical foundation of an existing website so that AI assistants such as ChatGPT understand it better. The two offers are independent of each other."
-      }
+      "acceptedAnswer": { "@type": "Answer", "text": "In 30 minutes you describe the process that costs you the most time. You get an assessment of which automation fits, whether buying or subscribing works out better for you, or whether automation doesn't pay off at all. The call is free and without obligation; you book it directly online." }
     }
   ]
 }
@@ -329,7 +326,7 @@
   .case-bar span{ display:block; width:13.4%; height:100%; border-radius:var(--r-pill); background:linear-gradient(90deg,var(--sec-gold-deep),var(--sec-gold)); }
   .package-card .btn-primary, .package-card .btn-secondary{ align-self:flex-start; }
 
-  /* ---------- Stufen: Erstgespräch → Standardprozess → Prozess-Check → massgeschneidert ---------- */
+  /* ---------- Stufen: Erstgespräch → Standard → erweitert → KI-Agent ---------- */
   .ladder{ list-style:none; margin:0 0 clamp(36px,5vw,52px); padding:0; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; counter-reset:step; }
   .ladder li{ position:relative; display:flex; }
   .ladder li:not(:last-child)::after{
@@ -577,6 +574,90 @@
   .more-card h3{ font-family:var(--font-display); font-size:1.35rem; font-weight:700; margin:0; }
   .more-card p{ margin:0; color:var(--sec-muted); font-size:.92rem; line-height:1.6; font-weight:300; flex:1; }
   .more-card .go{ font-family:var(--font-ui); font-weight:600; font-size:.82rem; color:var(--sec-gold-deep); }
+
+  /* ---------- Kauf / Abo ---------- */
+  html:not([data-pay="abo"]) .abo-only, html[data-pay="abo"] .kauf-only{ display:none !important; }
+  .pay-bar{ display:flex; flex-wrap:wrap; align-items:center; gap:12px 22px; margin:-8px 0 28px; }
+  .pay-switch{ position:relative; display:inline-grid; grid-template-columns:1fr 1fr; padding:4px; border:1px solid var(--sec-line-gold); border-radius:var(--r-pill); background:var(--sec-bg-2); }
+  .pay-switch::before{
+    content:""; position:absolute; top:4px; bottom:4px; left:4px; width:calc(50% - 4px); border-radius:var(--r-pill);
+    background:linear-gradient(120deg,var(--sec-gold),var(--sec-gold-light)); box-shadow:0 0 18px var(--sec-glow-soft); transition:transform .25s ease;
+  }
+  html[data-pay="abo"] .pay-switch::before{ transform:translateX(100%); }
+  .pay-switch button{
+    position:relative; z-index:1; border:none; background:none; cursor:pointer; padding:.75em 1.7em; border-radius:var(--r-pill);
+    font-family:var(--font-ui); font-weight:600; font-size:.74rem; letter-spacing:.08em; text-transform:uppercase; color:var(--sec-muted); transition:color .2s ease;
+  }
+  .pay-switch button[aria-pressed="true"]{ color:var(--sec-on-gold); }
+  .pay-hint{ margin:0; flex:1 1 280px; font-size:.86rem; color:var(--sec-muted); font-weight:300; line-height:1.55; }
+  .abo-terms{ margin:24px 0 0; padding:22px clamp(20px,3vw,28px); border:1px dashed var(--sec-line-gold); border-radius:var(--r-md); background:var(--sec-gold-soft); }
+  .abo-terms h3{ font-family:var(--font-display); font-size:1.15rem; font-weight:700; margin:0 0 14px; }
+  .abo-terms .package-list li{ font-size:.9rem; }
+  @media (prefers-reduced-motion:reduce){ .pay-switch::before{ transition:none; } }
+
+  /* ---------- Preis-Karten: schwarz, Preise in Gold, Empfehlung mit Goldrahmen ---------- */
+  .price-zone .package-card{
+    --sec-bg:#0a0a0a; --sec-bg-2:#121212; --sec-bg-3:#1e1e1e;
+    --sec-ink:#f6f3ec; --sec-muted:#a9a297;
+    --sec-line:rgba(255,255,255,.10); --sec-line-strong:rgba(255,255,255,.18); --sec-line-gold:rgba(201,162,39,.38);
+    --sec-gold:#e8d38a; --sec-gold-deep:#c9a227; --sec-gold-light:#f2e6bd;
+    --sec-gold-soft:rgba(201,162,39,.14); --sec-alt-soft:rgba(246,243,236,.06); --sec-on-gold:#171200;
+    --sec-glow:rgba(232,211,138,.7); --sec-glow-soft:rgba(201,162,39,.4);
+    position:relative; background:#121212; color:var(--sec-ink); border:1px solid rgba(255,255,255,.08);
+  }
+  .price-zone .package-card .val.price{
+    font-size:clamp(1.55rem,2.6vw,1.95rem); line-height:1.1;
+    background:linear-gradient(100deg,#c9a227 0%,#e8d38a 55%,#f2e6bd 100%); -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .price-zone .package-card.featured{ background:#121212; border:2px solid #c9a227; box-shadow:0 30px 70px -30px rgba(0,0,0,.5), 0 0 46px rgba(201,162,39,.32); }
+  .price-zone .package-card[data-badge]::before{
+    content:attr(data-badge); position:absolute; top:0; right:clamp(20px,3vw,32px); transform:translateY(-50%);
+    font-family:var(--font-ui); font-weight:600; font-size:.64rem; letter-spacing:.12em; text-transform:uppercase;
+    padding:.5em 1em; border-radius:var(--r-pill); color:#171200; background:linear-gradient(120deg,#c9a227,#e8d38a);
+    box-shadow:0 0 22px rgba(201,162,39,.45);
+  }
+
+  /* ---------- Kopfzeile: Angebots-Switch in der Mitte, Abschnitte im Menü ---------- */
+  html{ scroll-padding-top:96px; }
+  .header-row{ display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:12px 18px; position:relative; }
+  .svc-switch{ justify-self:center; display:inline-flex; gap:2px; padding:4px; border:1px solid var(--sec-line-gold); border-radius:var(--r-pill); background:rgba(255,255,255,.03); }
+  .svc-switch a{
+    font-family:var(--font-ui); font-weight:600; font-size:.72rem; letter-spacing:.07em; text-transform:uppercase; text-decoration:none; white-space:nowrap;
+    color:var(--sec-muted); padding:.65em 1.15em; border-radius:var(--r-pill); transition:color .2s ease, background .2s ease;
+  }
+  .svc-switch a:hover{ color:var(--sec-ink); }
+  .svc-switch a[aria-current="page"]{ background:linear-gradient(120deg,var(--sec-gold),var(--sec-gold-light)); color:var(--sec-on-gold); box-shadow:0 0 18px var(--sec-glow-soft); }
+  .hdr-tools{ display:flex; align-items:center; gap:12px; }
+  .menu-btn{
+    width:42px; height:42px; flex:none; display:grid; place-items:center; padding:0; cursor:pointer;
+    border:1px solid var(--sec-line-strong); border-radius:50%; background:transparent; color:var(--sec-ink); transition:border-color .2s ease, color .2s ease;
+  }
+  .menu-btn:hover, .menu-btn[aria-expanded="true"]{ border-color:var(--sec-gold); color:var(--sec-gold); }
+  .menu-btn line{ transition:transform .2s ease, opacity .2s ease; transform-box:fill-box; transform-origin:center; }
+  .menu-btn[aria-expanded="true"] .l1{ transform:translateY(5px) rotate(45deg); }
+  .menu-btn[aria-expanded="true"] .l2{ opacity:0; }
+  .menu-btn[aria-expanded="true"] .l3{ transform:translateY(-5px) rotate(-45deg); }
+  .menu-panel{
+    position:absolute; z-index:30; top:calc(100% + 6px); right:clamp(20px,4vw,40px); width:min(320px, calc(100vw - 32px));
+    display:grid; gap:2px; padding:12px; background:#121212; border:1px solid var(--sec-line-gold); border-radius:var(--r-md);
+    box-shadow:0 26px 60px -18px rgba(0,0,0,.65); max-height:calc(100vh - 150px); overflow-y:auto; overscroll-behavior:contain;
+  }
+  .menu-panel[hidden]{ display:none; }
+  .menu-link{
+    display:block; padding:.75em .9em; border-radius:var(--r-sm); text-decoration:none;
+    font-family:var(--font-ui); font-weight:500; font-size:.88rem; letter-spacing:.03em; color:var(--sec-ink);
+  }
+  .menu-link:hover{ background:var(--sec-gold-soft); color:var(--sec-gold); }
+  .menu-link.home{ color:var(--sec-muted); border-bottom:1px solid var(--sec-line); border-radius:0; margin-bottom:4px; }
+  .menu-extra{ display:none; }
+  @media (max-width:900px){
+    html{ scroll-padding-top:136px; }
+    .header-row{ grid-template-columns:1fr auto; }
+    .svc-switch{ grid-column:1 / -1; grid-row:2; justify-self:stretch; }
+    .svc-switch a{ flex:1; text-align:center; padding:.65em .4em; font-size:.66rem; letter-spacing:.05em; }
+    .hdr-tools .lang-switch, .hdr-tools .header-cta{ display:none; }
+    .menu-extra{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; margin-top:6px; padding:12px .4em 2px; border-top:1px solid var(--sec-line); }
+  }
 </style>
 </head>
 <body>
@@ -589,22 +670,41 @@
 
 <header class="section-dark">
   <div class="header-row">
-    <a class="wordmark" href="https://www.zbinden.online/en/">ZBINDEN<span class="dot">·</span>SOFTWARE <span class="sub">AI &amp; AUTOMATION</span></a>
-    <nav class="top-nav">
-      <a href="#branchen">Calculator</a>
-      <a href="#pakete">Packages</a>
-      <a href="#datenschutz">Privacy</a>
-      <a href="#voice-demo">Live demo</a>
-      <a href="#fuer-wen">Who it's for</a>
-      <a href="#ueber">About</a>
-      <a href="#kontakt">Contact</a>
+    <a class="wordmark" href="https://www.zbinden.online/en/">ZBINDEN<span class="dot">·</span>SOFTWARE</a>
+    <nav class="svc-switch" aria-label="Services">
+      <a href="/en/geo-audit">GEO</a>
+      <a href="/en/ki-agenten-automatisierung" aria-current="page">Automation</a>
+      <a href="/en/webdesign">Web design</a>
     </nav>
-    <div class="lang-switch" aria-label="Sprache / Langue / Language">
-      <a href="/fr/ki-agenten-automatisierung" hreflang="fr" lang="fr">FR</a>
-      <a href="/ki-agenten-automatisierung" hreflang="de" lang="de">DE</a>
-      <a href="/en/ki-agenten-automatisierung" hreflang="en" aria-current="page">EN</a>
+    <div class="hdr-tools">
+      <div class="lang-switch" aria-label="Sprache / Langue / Language">
+        <a href="/fr/ki-agenten-automatisierung" hreflang="fr" lang="fr">FR</a>
+        <a href="/ki-agenten-automatisierung" hreflang="de" lang="de">DE</a>
+        <a href="/en/ki-agenten-automatisierung" hreflang="en" aria-current="page">EN</a>
+      </div>
+      <a class="header-cta" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Free intro call</a>
+      <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menuPanel" aria-label="Menu">
+        <svg width="18" height="14" viewBox="0 0 18 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><line class="l1" x1="1" y1="2" x2="17" y2="2"/><line class="l2" x1="1" y1="7" x2="17" y2="7"/><line class="l3" x1="1" y1="12" x2="17" y2="12"/></svg>
+      </button>
     </div>
-    <a class="header-cta" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Free intro call</a>
+    <nav class="menu-panel" id="menuPanel" aria-label="Menu" hidden>
+      <a class="menu-link home" href="https://www.zbinden.online/en/">← Home</a>
+      <a class="menu-link" href="#branchen">Calculator</a>
+      <a class="menu-link" href="#pakete">Packages</a>
+      <a class="menu-link" href="#datenschutz">Privacy</a>
+      <a class="menu-link" href="#voice-demo">Live demo</a>
+      <a class="menu-link" href="#fuer-wen">Who it's for</a>
+      <a class="menu-link" href="#ueber">About</a>
+      <a class="menu-link" href="#kontakt">Contact</a>
+      <div class="menu-extra">
+        <div class="lang-switch" aria-label="Sprache / Langue / Language">
+          <a href="/fr/ki-agenten-automatisierung" hreflang="fr" lang="fr">FR</a>
+          <a href="/ki-agenten-automatisierung" hreflang="de" lang="de">DE</a>
+          <a href="/en/ki-agenten-automatisierung" hreflang="en" aria-current="page">EN</a>
+        </div>
+        <a class="header-cta" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Free intro call</a>
+      </div>
+    </nav>
   </div>
 </header>
 
@@ -617,11 +717,11 @@
       <p class="lede reveal d3">For Swiss SMEs: the automation runs on your own accounts, your data stays with you, and you have a single point of contact from analysis to operations.</p>
       <div class="cta-row reveal d4">
         <a class="btn-primary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Free intro call · 30 min</a>
-        <a class="btn-secondary" href="#standardprozess">Standard process · CHF 900</a>
+        <a class="btn-secondary" href="#standardprozess" data-pay-set="abo">Automation · from CHF 69 / month</a>
         <a class="btn-secondary" href="#branchen">🧮 Estimate your savings</a>
         <a class="btn-secondary" href="#voice-demo">🎙 Hear the live demo</a>
       </div>
-      <p style="margin:16px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Free, no-obligation intro call · standard process at a fixed price of CHF 900 · you know the cost up front.</p>
+      <p style="margin:16px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Free, no-obligation intro call · automation from CHF 990 at a fixed price or by subscription from CHF 69 per month · you know the cost up front.</p>
     </div>
   </section>
 
@@ -723,18 +823,26 @@
     </div>
   </section>
 
-  <section id="pakete" class="section-light">
+  <section id="pakete" class="section-light price-zone">
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Offering</span>
-        <h2>From the first call to the right solution</h2>
+        <h2>Less routine, more time for what matters</h2>
+      </div>
+
+      <div class="pay-bar">
+        <div class="pay-switch" role="group" aria-label="Payment option">
+          <button type="button" data-pay="kauf" aria-pressed="true">Buy</button>
+          <button type="button" data-pay="abo" aria-pressed="false">Subscribe</button>
+        </div>
+        <p class="pay-hint"><span class="kauf-only">Buy: a fixed price for the implementation, then a small monthly amount for operations.</span><span class="abo-only">Subscription: a setup fee to start, then a fixed monthly price, operations included.</span> Same service, all prices in CHF, not subject to VAT.</p>
       </div>
 
       <ol class="ladder reveal d1" aria-label="Offer levels">
         <li><a href="#erstgespraech"><span class="step-name">Free intro call</span><span class="step-price">free</span><span class="step-note">30 minutes, no obligation</span></a></li>
-        <li class="current"><a href="#standardprozess"><span class="step-name">Standard Process Automation</span><span class="step-price">CHF 900</span><span class="step-note">fixed price, 1–2 weeks</span></a></li>
-        <li><a href="#prozess-check"><span class="step-name">Process Check</span><span class="step-price">CHF 2'200</span><span class="step-note">credited if implementation follows</span></a></li>
-        <li><a href="#massgeschneidert"><span class="step-name">Custom automation</span><span class="step-price">on quote</span><span class="step-note">Quick Win or AI agent, fixed price before start</span></a></li>
+        <li class="current"><a href="#standardprozess"><span class="step-name">Standard automation</span><span class="step-price kauf-only">CHF 990</span><span class="step-price abo-only">CHF 69 / month</span><span class="step-note kauf-only">fixed price, 1–2 weeks</span><span class="step-note abo-only">+ CHF 390 setup</span></a></li>
+        <li><a href="#erweitert"><span class="step-name">Extended automation</span><span class="step-price kauf-only">CHF 1'490–2'490</span><span class="step-price abo-only">CHF 99 / month</span><span class="step-note kauf-only">auto-reply, CRM, follow-ups</span><span class="step-note abo-only">+ CHF 690 setup</span></a></li>
+        <li><a href="#ki-agent"><span class="step-name">AI agent for your website</span><span class="step-price kauf-only">CHF 1'990–2'490</span><span class="step-price abo-only">CHF 129 / month</span><span class="step-note kauf-only">a chat that advises your customers</span><span class="step-note abo-only">+ CHF 790 setup</span></a></li>
       </ol>
 
       <div class="entry-grid">
@@ -748,36 +856,40 @@
           </div>
           <ul class="package-list">
             <li>You describe the process that costs you the most time</li>
-            <li>I tell you whether a standard process is enough, whether a Process Check is worth it, or whether automating doesn't pay off at all</li>
+            <li>I tell you which automation fits, whether buying or subscribing works out better for you, or whether automating doesn't pay off at all</li>
             <li>You get a clear recommendation for the next step</li>
           </ul>
           <p class="package-scope">No obligation: afterwards you decide in your own time whether to go further.</p>
           <a class="btn-primary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Pick a time</a>
         </div>
 
-        <div class="package-card featured reveal d2" id="standardprozess">
+        <div class="package-card featured reveal d2" id="standardprozess" data-badge="Recommended">
           <span class="package-tag">Fixed-price package</span>
-          <h3>Standard Process Automation</h3>
-          <p class="package-lede">A proven, clearly scoped process is set up on your own accounts, tested and handed over, at a fixed price of CHF 900.</p>
+          <h3>Standard automation</h3>
+          <p class="package-lede">A proven, clearly defined process is set up, tested and handed over, <span class="kauf-only">at a fixed price of CHF 990.</span><span class="abo-only">by subscription for CHF 69 per month.</span></p>
           <div class="package-meta">
-            <div><span class="lbl">Price</span><span class="val price">CHF 900 fixed price</span></div>
+            <div class="kauf-only"><span class="lbl">Price</span><span class="val price">CHF 990 fixed</span></div>
+            <div class="kauf-only"><span class="lbl">Operations</span><span class="val">CHF 29 / month</span></div>
+            <div class="abo-only"><span class="lbl">Subscription</span><span class="val price">CHF 69 / month</span></div>
+            <div class="abo-only"><span class="lbl">Setup</span><span class="val">CHF 390</span></div>
             <div><span class="lbl">Duration</span><span class="val">1–2 weeks</span></div>
             <div><span class="lbl">Onboarding</span><span class="val">1 hour</span></div>
           </div>
-          <p class="flow-label">Example: contacts from a networking event</p>
+          <p class="flow-label">Example: a qualification quiz for your enquiries</p>
           <ol class="flow">
-            <li><strong>Photo and note</strong>You take a photo of the business card with your phone and type a short note about the conversation.</li>
-            <li><strong>Contact saved</strong>Name, company, email and your note land automatically in your CRM or in a spreadsheet.</li>
-            <li><strong>Follow-up prepared</strong>A draft of the follow-up email is ready. You review it, adjust it and send it yourself.</li>
+            <li><strong>Short quiz</strong>Prospects answer 4–5 short questions on your website, for example about their needs, budget and timeline.</li>
+            <li><strong>Enquiry qualified</strong>The answers are scored automatically and saved with the contact details in your CRM or a spreadsheet.</li>
+            <li><strong>Next step ready</strong>Good-fit prospects immediately get a reply with a link to book a call. You see at a glance whom to call first.</li>
           </ol>
           <div class="scope-cols">
             <div>
               <h4>Included</h4>
               <ul class="package-list">
-                <li>1 standard process, set up on your accounts</li>
+                <li>1 standard process, e.g. the qualification quiz above or capturing business cards from a networking event</li>
                 <li>Configuration and connection to one destination with a standard interface, e.g. a common CRM or a spreadsheet (Excel, Google Sheets, Airtable)</li>
                 <li>Testing together with you before handover</li>
                 <li>1-hour onboarding, on site or by video</li>
+                <li>Operations: hosting, AI API and monitoring<span class="kauf-only"> for CHF 29 per month</span><span class="abo-only">, included in the subscription</span></li>
               </ul>
             </div>
             <div>
@@ -786,122 +898,111 @@
                 <li>Adjustments to your specific processes</li>
                 <li>Several processes</li>
                 <li>Connection to existing systems without a standard interface, e.g. ERP or industry software</li>
-                <li>Running costs for software and AI services (paid directly to the provider)</li>
+                <li>Licences for your own software, e.g. your CRM (paid directly to the provider)</li>
               </ul>
             </div>
           </div>
-          <p class="package-scope">If your process needs more than this scope, the Process Check is the right next step. We check in the intro call whether a standard process is enough.</p>
+          <p class="package-scope">If your process needs more than this scope, the extended automation is the right next step. We work out what fits in the intro call.</p>
           <a class="btn-primary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Book the intro call</a>
         </div>
 
       </div>
 
-      <h3 class="sub-head" id="massgeschneidert">When your process needs more</h3>
-      <p class="sub-lede">For processes tailored to your company or that reach into existing systems. You always receive the fixed price as a quote before we start.</p>
-      <div class="package-grid three">
+      <h3 class="sub-head" id="massgeschneidert">Let AI be your assistant</h3>
+      <p class="sub-lede">For processes with several steps and for an AI agent that talks to your customers directly on your website. You get the exact price before the start.</p>
+      <div class="package-grid">
 
-        <div class="package-card reveal d1" id="prozess-check">
-          <span class="package-tag">Analysis</span>
-          <h3>Process Check</h3>
+        <div class="package-card reveal d1" id="erweitert">
+          <span class="package-tag">Several steps</span>
+          <h3>Extended automation</h3>
           <div class="package-meta">
-            <div><span class="lbl">Duration</span><span class="val">1 week</span></div>
-            <div><span class="lbl">Price</span><span class="val price">CHF 2'200 fixed price</span></div>
+            <div class="kauf-only"><span class="lbl">Price</span><span class="val price">CHF 1'490–2'490</span><span class="val-note">fixed price before the start</span></div>
+            <div class="kauf-only"><span class="lbl">Operations</span><span class="val">CHF 49 / month</span></div>
+            <div class="abo-only"><span class="lbl">Subscription</span><span class="val price">CHF 99 / month</span></div>
+            <div class="abo-only"><span class="lbl">Setup</span><span class="val">CHF 690</span></div>
           </div>
           <ul class="package-list">
-            <li>Review of 2–3 recurring processes, on site or by video call</li>
-            <li>Estimate of the time saved per process</li>
-            <li>Recommendation on which process is worth doing first, and which is not</li>
-            <li>Written report with a fixed price for implementation</li>
+            <li>Automatic reply to incoming enquiries</li>
+            <li>Connection to your CRM</li>
+            <li>Automatic follow-up when there's no answer</li>
+            <li>Testing, go-live and a short training</li>
+            <li>Operations: hosting, AI API and monitoring<span class="abo-only">, included in the subscription</span></li>
           </ul>
-          <p class="package-scope">If implementation follows, the price of the Process Check is credited in full.</p>
           <a class="btn-secondary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Book the intro call</a>
         </div>
 
-        <div class="package-card reveal d2">
-          <span class="package-tag">Custom</span>
-          <h3>Quick Win Automation</h3>
+        <div class="package-card reveal d2" id="ki-agent">
+          <span class="package-tag">AI agent</span>
+          <h3>AI agent for your website</h3>
           <div class="package-meta">
-            <div><span class="lbl">Duration</span><span class="val">1–2 weeks</span></div>
-            <div><span class="lbl">Price</span><span class="val price">from CHF 4'500</span></div>
+            <div class="kauf-only"><span class="lbl">Price</span><span class="val price">CHF 1'990–2'490</span><span class="val-note">fixed price before the start</span></div>
+            <div class="kauf-only"><span class="lbl">Operations</span><span class="val">from CHF 69 / month</span></div>
+            <div class="abo-only"><span class="lbl">Subscription</span><span class="val price">CHF 129 / month</span></div>
+            <div class="abo-only"><span class="lbl">Setup</span><span class="val">CHF 790</span></div>
           </div>
           <ul class="package-list">
-            <li>Identification of one priority, recurring process</li>
-            <li>Implementation of the automation</li>
-            <li>Testing and go-live</li>
-            <li>Short onboarding (1–2 hours)</li>
-            <li>Simple documentation</li>
+            <li>A chat on your website that answers questions about your offering — around the clock</li>
+            <li>It answers based on your own content</li>
+            <li>With an allowance of conversations per month</li>
+            <li>Testing, adjustments and training</li>
+            <li>Operations: hosting, AI API and monitoring<span class="abo-only">, included in the subscription</span></li>
           </ul>
-          <p class="package-scope">Included in the price from CHF 4'500: one process, up to 2 connected systems. More systems or special cases increase the price; you receive the fixed price before the start.</p>
-          <a class="btn-secondary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Book the intro call</a>
-        </div>
-
-        <div class="package-card reveal d3">
-          <span class="package-tag">Custom</span>
-          <h3>AI Agent Starter</h3>
-          <div class="package-meta">
-            <div><span class="lbl">Duration</span><span class="val">3–5 weeks</span></div>
-            <div><span class="lbl">Price</span><span class="val price">from CHF 8'500</span></div>
-          </div>
-          <ul class="package-list">
-            <li>Kick-off / scoping call</li>
-            <li>Design and build of an AI agent</li>
-            <li>Basic integrations</li>
-            <li>Related automations</li>
-            <li>Testing and refinements</li>
-            <li>Onboarding + documentation</li>
-            <li>2 weeks of support after go-live, then optional Support Premium</li>
-          </ul>
-          <p class="package-scope">Included in the price from CHF 8'500: one AI agent with up to 3 integrations. You receive the fixed price before the start.</p>
+          <p class="package-scope">Allowance exceeded? I let you know first; then hourly rate, carry-over to the next month or an upgrade.</p>
           <a class="btn-secondary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Book the intro call</a>
         </div>
 
       </div>
-      <p style="margin:22px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">All prices are fixed prices. You know the cost up front.</p>
+      <div class="abo-terms abo-only">
+        <h3>How the subscription works</h3>
+        <ul class="package-list">
+          <li>Minimum term 24 months, then open-ended and cancellable monthly to the end of the month — no renewal into a new minimum term</li>
+          <li>Setup due at the start, monthly price from go-live</li>
+          <li>No price increase during the minimum term</li>
+          <li>Buy-out at any time: you take over the solution for the purchase price minus the setup already paid</li>
+          <li>Content and data always belong to you, with a free export at the end</li>
+        </ul>
+      </div>
+      <p style="margin:22px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">You know the cost up front. Larger projects, such as connecting an ERP or industry software, are quoted individually.</p>
     </div>
   </section>
 
-  <section id="betrieb" class="section-light">
+  <section id="betrieb" class="section-light price-zone">
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">After go-live</span>
-        <h2>Operations &amp; maintenance</h2>
+        <h2>It runs. Even when you're not looking.</h2>
       </div>
-      <p style="color:var(--sec-muted); line-height:1.75; font-weight:300; max-width:60ch; margin:0 0 1.8em;">Automations depend on software that changes. To keep your solution running reliably, I take over operations if you wish.</p>
+      <p style="color:var(--sec-muted); line-height:1.75; font-weight:300; max-width:60ch; margin:0 0 1.8em;">Automations depend on software that changes. To keep your solution running reliably, I take care of operations: hosting, AI API and monitoring.</p>
       <div class="package-grid">
 
         <div class="package-card reveal d1">
-          <h3>Support Essential</h3>
+          <h3>When you buy</h3>
           <div class="package-meta">
-            <div><span class="lbl">Price</span><span class="val price">CHF 150 per month</span></div>
-            <div><span class="lbl">For</span><span class="val">one automation</span></div>
+            <div><span class="lbl">Standard</span><span class="val price">CHF 29 / month</span></div>
+            <div><span class="lbl">Extended</span><span class="val price">CHF 49 / month</span></div>
+            <div><span class="lbl">AI agent</span><span class="val price">from CHF 69 / month</span></div>
           </div>
           <ul class="package-list">
+            <li>Hosting of the automation</li>
+            <li>AI API costs</li>
             <li>Automatic monitoring with alerts on errors</li>
-            <li>Fixes when a connected application or interface changes</li>
-            <li>Small adjustments, up to 1 hour per month</li>
-            <li>Response within 2 business days</li>
-            <li>Short report every six months</li>
           </ul>
         </div>
 
         <div class="package-card reveal d2">
-          <h3>Support Premium</h3>
+          <h3>With a subscription</h3>
           <div class="package-meta">
-            <div><span class="lbl">Price</span><span class="val price">CHF 350 per month</span></div>
-            <div><span class="lbl">For</span><span class="val">one AI agent with its related automations</span></div>
+            <div><span class="lbl">Operations</span><span class="val price">included</span></div>
           </div>
           <ul class="package-list">
-            <li>Everything in Support Essential</li>
-            <li>Refining the agent's instructions</li>
-            <li>Adjustments, up to 3 hours per month</li>
-            <li>Response within 1 business day</li>
-            <li>Quarterly review with figures: time saved, error rate</li>
+            <li>Hosting, AI API and monitoring are included in the monthly price</li>
+            <li>No price increase during the minimum term</li>
           </ul>
         </div>
 
       </div>
-      <p style="margin:22px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300; max-width:74ch; line-height:1.6;"><strong style="color:var(--sec-ink); font-weight:600;">Not included:</strong> new processes and new features (quoted separately), running costs for software and AI services (you pay the provider directly). Unused hours expire at the end of the month.</p>
-      <p style="margin:10px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300; max-width:74ch; line-height:1.6;">Cancellable monthly after the first six months. I announce holiday absences well in advance.</p>
+      <p style="margin:22px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300; max-width:74ch; line-height:1.6;"><strong style="color:var(--sec-ink); font-weight:600;">Not included:</strong> new processes and new features (on quote), licences for your own software (paid directly to the provider).</p>
+      <p style="margin:10px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300; max-width:74ch; line-height:1.6;">I announce holiday absences well in advance.</p>
     </div>
   </section>
 
@@ -974,7 +1075,7 @@
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Worked example</span>
-        <h2>What a Quick Win looks like in practice</h2>
+        <h2>40 minutes per quote? Now it's 6.</h2>
       </div>
       <p style="color:var(--sec-muted); line-height:1.75; font-weight:300; max-width:60ch; margin:0 0 1.8em;">Illustrative scenario based on common SME processes — not a real client reference, but a calculation you can check.</p>
       <div class="package-card reveal d1" style="max-width:640px;">
@@ -986,8 +1087,8 @@
         </ul>
         <div class="package-meta">
           <div><span class="lbl">Implementation</span><span class="val">2 weeks</span></div>
-          <div><span class="lbl">Fixed price</span><span class="val price">CHF 4'500</span></div>
-          <div><span class="lbl">Payback</span><span class="val">~8 weeks</span></div>
+          <div><span class="lbl">Time saved</span><span class="val price">~8 hrs / week</span></div>
+          <div><span class="lbl">Price</span><span class="val">fixed price on quote</span></div>
         </div>
       </div>
     </div>
@@ -1020,7 +1121,7 @@
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Fit</span>
-        <h2>Who is this for?</h2>
+        <h2>For anyone who'd rather spend time with customers than copy-pasting</h2>
       </div>
       <div class="fit-grid">
         <div class="fit-item reveal d1">
@@ -1044,7 +1145,7 @@
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">About me</span>
-        <h2>Who builds the automations</h2>
+        <h2>An engineer, not an agency</h2>
       </div>
       <p style="color:var(--sec-muted); line-height:1.75; max-width:62ch; font-weight:300; margin:0 0 1.2em;">I'm Pauline Zbinden, founder of Zbinden Software. For five years I built embedded software in C++ at Hexagon Manufacturing Intelligence, then, as a consultant at Drees &amp; Sommer Switzerland, I analysed requirements and translated them into technical solutions. Both feed into this work: clean delivery and a clear eye for which process is actually worth automating.</p>
       <p style="color:var(--sec-muted); line-height:1.75; max-width:62ch; font-weight:300; margin:0 0 1.2em;">With AI tools, a lot can be put together quickly today, and that is often a good start. For an automation to run reliably day to day, it takes the parts you don't see in a demo: error handling, testing, data protection and documentation that someone else can work with too. That is the craft I learned as a software developer.</p>
@@ -1071,20 +1172,20 @@
       </div>
       <div class="faq-list">
         <details class="faq-item">
-          <summary>What does the CHF 900 fixed price for Standard Process Automation include?</summary>
-          <p class="faq-a">One standard process, set up on your own accounts, with configuration, testing and a one-hour onboarding, delivered in one to two weeks. A typical example is networking automation: you photograph a business card and add a short note, the contact is saved automatically in your CRM or a spreadsheet, and a draft follow-up email is ready for review. Running costs for software and AI services are paid directly to the provider.</p>
+          <summary>What is included in the CHF 990 fixed price for “Standard automation”?</summary>
+          <p class="faq-a">One standard process with configuration, testing and a one-hour onboarding, delivered in one to two weeks. A typical example is a qualification quiz: prospects answer a few short questions on your website, the enquiry is scored automatically and saved in your CRM or a spreadsheet, and good-fit prospects immediately get a reply with a link to book a call. Another option is capturing business cards from a networking event with a draft follow-up email. Operations — hosting, AI API and monitoring — cost CHF 29 per month; licences for your own software, such as your CRM, are paid directly to the provider.</p>
         </details>
         <details class="faq-item">
-          <summary>When is a standard process enough, and when is a Process Check needed?</summary>
-          <p class="faq-a">A standard process is enough when the process is clearly scoped and connects to a destination with a standard interface, such as a common CRM or a spreadsheet. If it needs adjustments to your specific processes, several processes, or a connection to existing systems such as an ERP or industry software, the next step is the Process Check at a fixed price of CHF 2'200. Its price is fully credited if implementation follows. We work out which case applies in the free intro call.</p>
+          <summary>When is standard automation enough, and when do I need the extended one?</summary>
+          <p class="faq-a">Standard automation is enough when the process is clearly defined and connects to one destination with a standard interface, such as a common CRM or a spreadsheet. If it takes several steps — for example an automatic reply to enquiries, a connection to your CRM and an automatic follow-up — it's an extended automation for CHF 1'490–2'490. Larger projects, such as connecting an ERP or industry software, are quoted individually. We work out which applies in the free intro call.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Buy or subscribe — what's the difference?</summary>
+          <p class="faq-a">The service is the same, only the way you pay differs. When you buy, you pay for the implementation once at a fixed price, then operations (hosting, AI API, monitoring) from CHF 29 per month. With a subscription, you pay a setup fee at the start and then a fixed monthly price from go-live, operations included. Minimum term 24 months, then open-ended and cancellable monthly to the end of the month, with no renewal into a new minimum term. The price doesn't increase during the minimum term, and you can take over the solution at any time: purchase price minus the setup. Your data always belongs to you, with a free export at the end.</p>
         </details>
         <details class="faq-item">
           <summary>What happens in the free intro call?</summary>
-          <p class="faq-a">In 30 minutes you describe the process that costs you the most time. You get an assessment of whether a standard process for CHF 900 is enough, whether a Process Check is worth it, or whether automation doesn't pay off at all. The call is free and without obligation; you book the time directly <a href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">online</a>.</p>
-        </details>
-        <details class="faq-item">
-          <summary>Is Standard Process Automation the same as GEO optimization for CHF 900?</summary>
-          <p class="faq-a">No. Standard Process Automation (CHF 900 fixed price) automates an internal workflow, for example capturing networking contacts. <a href="https://www.zbinden.online/en/webdesign">GEO optimization</a> (from CHF 900) is part of the web design offer: it improves the technical foundation of an existing website so that AI assistants such as ChatGPT understand it better. The two offers are independent of each other.</p>
+          <p class="faq-a">In 30 minutes you describe the process that costs you the most time. You get an assessment of which automation fits, whether buying or subscribing works out better for you, or whether automation doesn't pay off at all. The call is free and without obligation; you book it directly <a href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">online</a>.</p>
         </details>
       </div>
     </div>
@@ -1116,7 +1217,7 @@
   <section id="kontakt" class="section-dark" style="border-top:none;">
     <div class="wrap">
       <div class="cta-band">
-        <h2>Ready for the first step?</h2>
+        <h2>When will you take your time back?</h2>
         <div class="cta-grid">
           <div class="contact">
             <span class="lbl">Phone</span>
@@ -1145,10 +1246,9 @@
                 <select id="f-package" name="package">
                   <option value="">Not decided yet</option>
                   <option value="Free intro call">Free intro call</option>
-                  <option value="Standard Process Automation">Standard Process Automation (CHF 900)</option>
-                  <option value="Process Check">Process Check</option>
-                  <option value="Quick Win Automation">Quick Win Automation</option>
-                  <option value="AI Agent Starter">AI Agent Starter</option>
+                  <option value="Automatisierung Standard">Standard automation</option>
+                  <option value="Automatisierung erweitert">Extended automation</option>
+                  <option value="KI-Agent (Website-Chat)">AI agent for your website</option>
                 </select>
               </div>
               <div class="field">
@@ -1777,6 +1877,48 @@
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     window.scrollTo({ top:0, behavior: reduce ? 'auto' : 'smooth' });
   });
+})();
+</script>
+<script>
+// Kauf / Abo switch on the offer pages: sets data-pay on <html> (the CSS shows
+// .kauf-only or .abo-only accordingly) and remembers the choice per visitor,
+// so it carries over between the webdesign, GEO and automation pages.
+(function () {
+  var KEY = 'zs-pay';
+  var root = document.documentElement;
+  var buttons = document.querySelectorAll('.pay-switch button');
+
+  function set(mode, save) {
+    root.setAttribute('data-pay', mode);
+    buttons.forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-pay') === mode));
+    });
+    if (save) { try { localStorage.setItem(KEY, mode); } catch (e) {} }
+  }
+
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch (e) {}
+  if (/[?&]zahlung=abo\b|[?&]paiement=abonnement\b|[?&]payment=subscription\b/.test(location.search)) saved = 'abo';
+  set(saved === 'abo' ? 'abo' : 'kauf', false);
+
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () { set(b.getAttribute('data-pay'), true); });
+  });
+  // Links that point at an Abo price (e.g. the hero button) switch the cards to Abo too.
+  document.querySelectorAll('[data-pay-set]').forEach(function (a) {
+    a.addEventListener('click', function () { set(a.getAttribute('data-pay-set'), true); });
+  });
+})();
+</script>
+<script>
+(function(){
+  var btn = document.getElementById('menuBtn'), panel = document.getElementById('menuPanel');
+  if (!btn || !panel) return;
+  function set(open){ btn.setAttribute('aria-expanded', String(open)); panel.hidden = !open; }
+  btn.addEventListener('click', function(e){ e.stopPropagation(); set(panel.hidden); });
+  panel.addEventListener('click', function(e){ if (e.target.closest('a')) set(false); });
+  document.addEventListener('click', function(e){ if (!panel.hidden && !panel.contains(e.target)) set(false); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !panel.hidden) { set(false); btn.focus(); } });
 })();
 </script>
 </body>

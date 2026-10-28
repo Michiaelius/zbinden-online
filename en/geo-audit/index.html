@@ -30,8 +30,16 @@
   "telephone": "+41791936802",
   "areaServed": "CH",
   "inLanguage": "en",
-  "founder": { "@type": "Person", "name": "Pauline Zbinden" },
-  "parentOrganization": { "@type": "Organization", "name": "Zbinden Software", "url": "https://www.zbinden.online/", "@id": "https://www.zbinden.online/#organization" },
+  "founder": {
+    "@type": "Person",
+    "name": "Pauline Zbinden"
+  },
+  "parentOrganization": {
+    "@type": "Organization",
+    "name": "Zbinden Software",
+    "url": "https://www.zbinden.online/",
+    "@id": "https://www.zbinden.online/#organization"
+  },
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "GEO Audit & Web design",
@@ -40,31 +48,97 @@
         "@type": "Offer",
         "name": "GEO-Light",
         "description": "Eight targeted questions asked live to ChatGPT and Perplexity to check whether a business is mentioned at all.",
-        "priceSpecification": { "@type": "PriceSpecification", "minPrice": 0, "maxPrice": 0, "priceCurrency": "CHF" }
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 0,
+          "maxPrice": 0,
+          "priceCurrency": "CHF"
+        }
       },
       {
         "@type": "Offer",
-        "name": "GEO optimization of an existing website",
-        "description": "For existing well-made websites that AI assistants don't mention yet (price applies up to about 5 pages): structured data on the business, offering and opening hours, access opened for AI crawlers, technical basics fixed, consistent contact details and legal notice, before-and-after proof that AI systems can read the website and match the details correctly, follow-up with the AI check after 4–6 weeks included. One-off, no subscription; the design stays unchanged.",
-        "priceSpecification": { "@type": "PriceSpecification", "minPrice": 900, "priceCurrency": "CHF" }
+        "name": "GEO audit (buy)",
+        "description": "Analysis in six weighted categories, competitor benchmark, prioritized action plan and a 30-minute call. CHF 490–790 depending on the size of the website.",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 490,
+          "maxPrice": 790,
+          "priceCurrency": "CHF"
+        }
       },
       {
         "@type": "Offer",
-        "name": "GEO analysis",
-        "description": "Analysis across six weighted categories, a competitive benchmark and a prioritized 30-day action plan with a call – including implementation of the technical basics from the GEO optimization (up to about 5 pages). The client implements the plan themselves or with their agency.",
-        "priceSpecification": { "@type": "PriceSpecification", "minPrice": 2400, "priceCurrency": "CHF" }
+        "name": "GEO implementation (buy)",
+        "description": "Implementation of the action plan from the GEO audit (website up to about 5 pages): technical basics and structured data, AI crawler access, texts and FAQ. CHF 990–1'490 depending on the plan; follow-up check after 6 months CHF 190. No ranking guarantee.",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 990,
+          "maxPrice": 1490,
+          "priceCurrency": "CHF"
+        }
       },
       {
         "@type": "Offer",
-        "name": "GEO complete",
-        "description": "Everything in the GEO analysis, plus implementation of the 30-day plan (website up to about 5 pages): texts reworked, profiles and directory listings set up or corrected, FAQ, a process for customer reviews, follow-up AI check after 4–6 weeks. Third-party mentions without guarantee.",
-        "priceSpecification": { "@type": "PriceSpecification", "minPrice": 4200, "priceCurrency": "CHF" }
+        "name": "GEO monitoring (subscription)",
+        "description": "GEO audit as setup (CHF 490), then a monthly test of 10–15 customer questions in ChatGPT, Perplexity, Gemini and Google AI Overviews with a short report and 2–3 recommendations: CHF 89 per month. Minimum term 6 months. No ranking guarantee.",
+        "priceSpecification": [
+          {
+            "@type": "PriceSpecification",
+            "name": "Setup",
+            "price": 490,
+            "priceCurrency": "CHF"
+          },
+          {
+            "@type": "UnitPriceSpecification",
+            "price": 89,
+            "priceCurrency": "CHF",
+            "unitCode": "MON",
+            "unitText": "month"
+          }
+        ]
+      },
+      {
+        "@type": "Offer",
+        "name": "GEO Active (subscription)",
+        "description": "GEO audit as setup (CHF 490), monitoring and implementation of up to about 2 hours per month (texts, FAQ, structured data): CHF 249 per month. Minimum term 6 months. No ranking guarantee.",
+        "priceSpecification": [
+          {
+            "@type": "PriceSpecification",
+            "name": "Setup",
+            "price": 490,
+            "priceCurrency": "CHF"
+          },
+          {
+            "@type": "UnitPriceSpecification",
+            "price": 249,
+            "priceCurrency": "CHF",
+            "unitCode": "MON",
+            "unitText": "month"
+          }
+        ]
+      },
+      {
+        "@type": "Offer",
+        "name": "AI visibility for websites built by Zbinden Software (add-on)",
+        "description": "For websites built by Zbinden Software (GEO foundation already included): monitoring CHF 49 per month or Active CHF 129 per month, whether bought or by subscription.",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "minPrice": 49,
+          "maxPrice": 129,
+          "priceCurrency": "CHF",
+          "unitCode": "MON",
+          "unitText": "month"
+        }
       },
       {
         "@type": "Offer",
         "name": "Web design — GEO-ready from day one",
-        "description": "A custom website with structured data, clean semantic HTML and a robots.txt open to AI crawlers.",
-        "priceSpecification": { "@type": "PriceSpecification", "minPrice": 1800, "priceCurrency": "CHF" }
+        "description": "Custom website with structured data, clean semantic HTML and a robots.txt open to AI crawlers. One-pager CHF 1'790 or by subscription CHF 490 setup + CHF 119 per month.",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": 1790,
+          "priceCurrency": "CHF"
+        }
       }
     ]
   }
@@ -439,6 +513,90 @@
   .more-card h3{ font-family:var(--font-display); font-size:1.35rem; font-weight:700; margin:0; }
   .more-card p{ margin:0; color:var(--sec-muted); font-size:.92rem; line-height:1.6; font-weight:300; flex:1; }
   .more-card .go{ font-family:var(--font-ui); font-weight:600; font-size:.82rem; color:var(--sec-gold-deep); }
+
+  /* ---------- Kauf / Abo ---------- */
+  html:not([data-pay="abo"]) .abo-only, html[data-pay="abo"] .kauf-only{ display:none !important; }
+  .pay-bar{ display:flex; flex-wrap:wrap; align-items:center; gap:12px 22px; margin:-8px 0 28px; }
+  .pay-switch{ position:relative; display:inline-grid; grid-template-columns:1fr 1fr; padding:4px; border:1px solid var(--sec-line-gold); border-radius:var(--r-pill); background:var(--sec-bg-2); }
+  .pay-switch::before{
+    content:""; position:absolute; top:4px; bottom:4px; left:4px; width:calc(50% - 4px); border-radius:var(--r-pill);
+    background:linear-gradient(120deg,var(--sec-gold),var(--sec-gold-light)); box-shadow:0 0 18px var(--sec-glow-soft); transition:transform .25s ease;
+  }
+  html[data-pay="abo"] .pay-switch::before{ transform:translateX(100%); }
+  .pay-switch button{
+    position:relative; z-index:1; border:none; background:none; cursor:pointer; padding:.75em 1.7em; border-radius:var(--r-pill);
+    font-family:var(--font-ui); font-weight:600; font-size:.74rem; letter-spacing:.08em; text-transform:uppercase; color:var(--sec-muted); transition:color .2s ease;
+  }
+  .pay-switch button[aria-pressed="true"]{ color:var(--sec-on-gold); }
+  .pay-hint{ margin:0; flex:1 1 280px; font-size:.86rem; color:var(--sec-muted); font-weight:300; line-height:1.55; }
+  .abo-terms{ margin:24px 0 0; padding:22px clamp(20px,3vw,28px); border:1px dashed var(--sec-line-gold); border-radius:var(--r-md); background:var(--sec-gold-soft); }
+  .abo-terms h3{ font-family:var(--font-display); font-size:1.15rem; font-weight:700; margin:0 0 14px; }
+  .abo-terms .package-list li{ font-size:.9rem; }
+  @media (prefers-reduced-motion:reduce){ .pay-switch::before{ transition:none; } }
+
+  /* ---------- Preis-Karten: schwarz, Preise in Gold, Empfehlung mit Goldrahmen ---------- */
+  .price-zone .package-card{
+    --sec-bg:#0a0a0a; --sec-bg-2:#121212; --sec-bg-3:#1e1e1e;
+    --sec-ink:#f6f3ec; --sec-muted:#a9a297;
+    --sec-line:rgba(255,255,255,.10); --sec-line-strong:rgba(255,255,255,.18); --sec-line-gold:rgba(201,162,39,.38);
+    --sec-gold:#e8d38a; --sec-gold-deep:#c9a227; --sec-gold-light:#f2e6bd;
+    --sec-gold-soft:rgba(201,162,39,.14); --sec-alt-soft:rgba(246,243,236,.06); --sec-on-gold:#171200;
+    --sec-glow:rgba(232,211,138,.7); --sec-glow-soft:rgba(201,162,39,.4);
+    position:relative; background:#121212; color:var(--sec-ink); border:1px solid rgba(255,255,255,.08);
+  }
+  .price-zone .package-card .val.price{
+    font-size:clamp(1.55rem,2.6vw,1.95rem); line-height:1.1;
+    background:linear-gradient(100deg,#c9a227 0%,#e8d38a 55%,#f2e6bd 100%); -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .price-zone .package-card.featured{ background:#121212; border:2px solid #c9a227; box-shadow:0 30px 70px -30px rgba(0,0,0,.5), 0 0 46px rgba(201,162,39,.32); }
+  .price-zone .package-card[data-badge]::before{
+    content:attr(data-badge); position:absolute; top:0; right:clamp(20px,3vw,32px); transform:translateY(-50%);
+    font-family:var(--font-ui); font-weight:600; font-size:.64rem; letter-spacing:.12em; text-transform:uppercase;
+    padding:.5em 1em; border-radius:var(--r-pill); color:#171200; background:linear-gradient(120deg,#c9a227,#e8d38a);
+    box-shadow:0 0 22px rgba(201,162,39,.45);
+  }
+
+  /* ---------- Kopfzeile: Angebots-Switch in der Mitte, Abschnitte im Menü ---------- */
+  html{ scroll-padding-top:96px; }
+  .header-row{ display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:12px 18px; position:relative; }
+  .svc-switch{ justify-self:center; display:inline-flex; gap:2px; padding:4px; border:1px solid var(--sec-line-gold); border-radius:var(--r-pill); background:rgba(255,255,255,.03); }
+  .svc-switch a{
+    font-family:var(--font-ui); font-weight:600; font-size:.72rem; letter-spacing:.07em; text-transform:uppercase; text-decoration:none; white-space:nowrap;
+    color:var(--sec-muted); padding:.65em 1.15em; border-radius:var(--r-pill); transition:color .2s ease, background .2s ease;
+  }
+  .svc-switch a:hover{ color:var(--sec-ink); }
+  .svc-switch a[aria-current="page"]{ background:linear-gradient(120deg,var(--sec-gold),var(--sec-gold-light)); color:var(--sec-on-gold); box-shadow:0 0 18px var(--sec-glow-soft); }
+  .hdr-tools{ display:flex; align-items:center; gap:12px; }
+  .menu-btn{
+    width:42px; height:42px; flex:none; display:grid; place-items:center; padding:0; cursor:pointer;
+    border:1px solid var(--sec-line-strong); border-radius:50%; background:transparent; color:var(--sec-ink); transition:border-color .2s ease, color .2s ease;
+  }
+  .menu-btn:hover, .menu-btn[aria-expanded="true"]{ border-color:var(--sec-gold); color:var(--sec-gold); }
+  .menu-btn line{ transition:transform .2s ease, opacity .2s ease; transform-box:fill-box; transform-origin:center; }
+  .menu-btn[aria-expanded="true"] .l1{ transform:translateY(5px) rotate(45deg); }
+  .menu-btn[aria-expanded="true"] .l2{ opacity:0; }
+  .menu-btn[aria-expanded="true"] .l3{ transform:translateY(-5px) rotate(-45deg); }
+  .menu-panel{
+    position:absolute; z-index:30; top:calc(100% + 6px); right:clamp(20px,4vw,40px); width:min(320px, calc(100vw - 32px));
+    display:grid; gap:2px; padding:12px; background:#121212; border:1px solid var(--sec-line-gold); border-radius:var(--r-md);
+    box-shadow:0 26px 60px -18px rgba(0,0,0,.65); max-height:calc(100vh - 150px); overflow-y:auto; overscroll-behavior:contain;
+  }
+  .menu-panel[hidden]{ display:none; }
+  .menu-link{
+    display:block; padding:.75em .9em; border-radius:var(--r-sm); text-decoration:none;
+    font-family:var(--font-ui); font-weight:500; font-size:.88rem; letter-spacing:.03em; color:var(--sec-ink);
+  }
+  .menu-link:hover{ background:var(--sec-gold-soft); color:var(--sec-gold); }
+  .menu-link.home{ color:var(--sec-muted); border-bottom:1px solid var(--sec-line); border-radius:0; margin-bottom:4px; }
+  .menu-extra{ display:none; }
+  @media (max-width:900px){
+    html{ scroll-padding-top:136px; }
+    .header-row{ grid-template-columns:1fr auto; }
+    .svc-switch{ grid-column:1 / -1; grid-row:2; justify-self:stretch; }
+    .svc-switch a{ flex:1; text-align:center; padding:.65em .4em; font-size:.66rem; letter-spacing:.05em; }
+    .hdr-tools .lang-switch, .hdr-tools .header-cta{ display:none; }
+    .menu-extra{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; margin-top:6px; padding:12px .4em 2px; border-top:1px solid var(--sec-line); }
+  }
 </style>
 </head>
 <body>
@@ -451,20 +609,39 @@
 
 <header class="section-dark">
   <div class="header-row">
-    <a class="wordmark" href="https://www.zbinden.online/en/">ZBINDEN<span class="dot">·</span>SOFTWARE <span class="sub">GEO AUDIT</span></a>
-    <nav class="top-nav">
-      <a href="#pakete">Packages</a>
-      <a href="#methode">Method</a>
-      <a href="#befunde">Typical findings</a>
-      <a href="#webdesign">Web design</a>
-      <a href="#ueber">About me</a>
+    <a class="wordmark" href="https://www.zbinden.online/en/">ZBINDEN<span class="dot">·</span>SOFTWARE</a>
+    <nav class="svc-switch" aria-label="Services">
+      <a href="/en/geo-audit" aria-current="page">GEO</a>
+      <a href="/en/ki-agenten-automatisierung">Automation</a>
+      <a href="/en/webdesign">Web design</a>
     </nav>
-    <div class="lang-switch" aria-label="Sprache / Langue / Language">
-      <a href="/fr/geo-audit" hreflang="fr" lang="fr">FR</a>
-      <a href="/geo-audit" hreflang="de" lang="de">DE</a>
-      <a href="/en/geo-audit" hreflang="en" aria-current="page">EN</a>
+    <div class="hdr-tools">
+      <div class="lang-switch" aria-label="Sprache / Langue / Language">
+        <a href="/fr/geo-audit" hreflang="fr" lang="fr">FR</a>
+        <a href="/geo-audit" hreflang="de" lang="de">DE</a>
+        <a href="/en/geo-audit" hreflang="en" aria-current="page">EN</a>
+      </div>
+      <a class="header-cta" href="#pakete">Request the GEO-Light test</a>
+      <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menuPanel" aria-label="Menu">
+        <svg width="18" height="14" viewBox="0 0 18 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><line class="l1" x1="1" y1="2" x2="17" y2="2"/><line class="l2" x1="1" y1="7" x2="17" y2="7"/><line class="l3" x1="1" y1="12" x2="17" y2="12"/></svg>
+      </button>
     </div>
-    <a class="header-cta" href="#pakete">Request the GEO-Light test</a>
+    <nav class="menu-panel" id="menuPanel" aria-label="Menu" hidden>
+      <a class="menu-link home" href="https://www.zbinden.online/en/">← Home</a>
+      <a class="menu-link" href="#pakete">Packages</a>
+      <a class="menu-link" href="#methode">Method</a>
+      <a class="menu-link" href="#befunde">Typical findings</a>
+      <a class="menu-link" href="#webdesign">Web design</a>
+      <a class="menu-link" href="#ueber">About me</a>
+      <div class="menu-extra">
+        <div class="lang-switch" aria-label="Sprache / Langue / Language">
+          <a href="/fr/geo-audit" hreflang="fr" lang="fr">FR</a>
+          <a href="/geo-audit" hreflang="de" lang="de">DE</a>
+          <a href="/en/geo-audit" hreflang="en" aria-current="page">EN</a>
+        </div>
+        <a class="header-cta" href="#pakete">Request the GEO-Light test</a>
+      </div>
+    </nav>
   </div>
 </header>
 
@@ -479,6 +656,7 @@
         <div class="cta-row reveal d4">
           <a class="btn-primary" href="#pakete">Request the free GEO-Light test</a>
           <a class="btn-secondary" href="#methode">How I check</a>
+          <a class="btn-secondary" href="#pakete" data-pay-set="abo">GEO · from CHF 89 / month</a>
         </div>
       </div>
       <div class="phone-frame reveal d2" id="phoneMock" role="img" aria-label="Simulated AI chat response: three competitors are recommended, your business is not mentioned">
@@ -516,13 +694,20 @@
     </div>
   </section>
 
-  <section id="pakete" class="section-light">
+  <section id="pakete" class="section-light price-zone">
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Offer</span>
         <h2>A risk-free entry point, then the right next step</h2>
       </div>
-      <div class="package-grid four">
+      <div class="pay-bar">
+        <div class="pay-switch" role="group" aria-label="Payment option">
+          <button type="button" data-pay="kauf" aria-pressed="true">Buy</button>
+          <button type="button" data-pay="abo" aria-pressed="false">Subscribe</button>
+        </div>
+        <p class="pay-hint"><span class="kauf-only">Buy: audit and implementation paid once, no ongoing costs.</span><span class="abo-only">Subscription: the audit is the setup, then a fixed monthly price.</span> All prices in CHF, not subject to VAT.</p>
+      </div>
+      <div class="package-grid three">
 
         <div class="package-card reveal d1">
           <span class="package-tag">Free entry point</span>
@@ -554,73 +739,90 @@
           <div class="form-status err" id="glErr" hidden>Something went wrong. Please email me directly at <a href="mailto:info@zbinden.online" style="color:inherit; text-decoration:underline;">info@zbinden.online</a>.</div>
         </div>
 
-        <div class="package-card reveal d2">
-          <span class="package-tag">Technical</span>
-          <h3>GEO optimization</h3>
+        <div class="package-card reveal d2 kauf-only">
+          <span class="package-tag">Analysis</span>
+          <h3>GEO audit</h3>
           <div class="package-meta">
-            <div><span class="lbl">Billing</span><span class="val">one-off, no subscription</span></div>
-            <div><span class="lbl">Price</span><span class="val price">from CHF 900</span></div>
+            <div><span class="lbl">Duration</span><span class="val">~1–2 weeks</span></div>
+            <div><span class="lbl">Price</span><span class="val price">CHF 490–790</span><span class="val-note">depending on the size of the website</span></div>
           </div>
           <ul class="package-list">
-            <li>For well-made websites that AI assistants don't mention yet</li>
-            <li>Structured data on your business, offering and opening hours</li>
-            <li>Access opened for AI crawlers, technical basics fixed</li>
-            <li>Consistent contact details and legal notice</li>
-            <li>Before-and-after proof: AI systems can read your website and match your details correctly</li>
-            <li>Follow-up included: after 4–6 weeks I repeat the AI check and show you what has changed</li>
-            <li>Your design stays as it is: the changes happen in the background</li>
-            <li>The price applies to websites of up to about 5 pages</li>
-          </ul>
-          <p style="margin:0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Access to your website is required. With website builders, some changes are limited; I'll clarify this before we start. AI systems pick up changes with a delay, hence the follow-up. What I can commit to: they will be able to read your website correctly afterwards — who they recommend is their own decision.</p>
-          <a class="btn-secondary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Schedule a call</a>
-        </div>
-
-        <div class="package-card reveal d3">
-          <span class="package-tag">Technical &amp; analysis</span>
-          <h3>GEO analysis</h3>
-          <div class="package-meta">
-            <div><span class="lbl">Duration</span><span class="val">~2 weeks</span></div>
-            <div><span class="lbl">Price</span><span class="val price">from CHF 2'400</span></div>
-          </div>
-          <ul class="package-list">
-            <li>Everything in the GEO optimization: I implement the technical basics (up to about 5 pages, larger websites on quote)</li>
-            <li>Analysis across six weighted categories: Citability, Brand Authority, Content E-E-A-T, Technical GEO, Structured Data, Platform Optimization</li>
-            <li>Competitive benchmark: why others are recommended</li>
-            <li>Prioritized 30-day action plan for content and mentions on other sites</li>
+            <li>Analysis in six weighted categories: citability, brand authority, content E-E-A-T, technical GEO, structured data, platform optimization</li>
+            <li>Benchmark against competitors: why others get recommended</li>
+            <li>Prioritized action plan</li>
             <li>30-minute call to walk through the report</li>
-            <li>You implement the plan yourself or with your agency</li>
+            <li>You implement the plan yourself or with your agency — or I take it on</li>
           </ul>
           <a class="btn-secondary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Schedule a call</a>
         </div>
 
-        <div class="package-card featured reveal d4">
-          <span class="package-tag">Analysis &amp; implementation</span>
-          <h3>GEO complete</h3>
+        <div class="package-card featured reveal d3 kauf-only" data-badge="Recommended">
+          <span class="package-tag">Implementation</span>
+          <h3>GEO implementation</h3>
           <div class="package-meta">
-            <div><span class="lbl">Duration</span><span class="val">~6 weeks</span></div>
-            <div><span class="lbl">Price</span><span class="val price">from CHF 4'200</span></div>
+            <div><span class="lbl">Based on</span><span class="val">Your GEO audit</span></div>
+            <div><span class="lbl">Price</span><span class="val price">CHF 990–1'490</span><span class="val-note">depending on the action plan</span></div>
           </div>
           <ul class="package-list">
-            <li>Everything in the GEO analysis, technical basics included</li>
-            <li>I implement the 30-day plan for you:</li>
-            <li>Home, services and about texts reworked, so AI systems clearly understand what you offer and where</li>
-            <li>Profiles and directory listings set up or corrected, e.g. Google Business Profile, local.ch, search.ch and industry directories</li>
-            <li>FAQ with the questions your customers really ask</li>
-            <li>A process for customer reviews: message template, link and QR code</li>
-            <li>Follow-up after 4–6 weeks: new AI check with a before-and-after comparison</li>
-            <li>The price applies to websites up to about 5 pages</li>
+            <li>I implement the action plan from the GEO audit for you</li>
+            <li>Structured data on your business, offering and opening hours, access for AI crawlers, technical basics fixed</li>
+            <li>Texts and FAQ reworked so AI systems clearly understand what you offer and where</li>
+            <li>Your design stays as it is</li>
+            <li>The price applies to websites of up to about 5 pages</li>
+            <li>Optional: follow-up check after 6 months for CHF 190 — a new test with before/after comparison</li>
           </ul>
-          <p style="margin:0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Requires access to your website and your profiles. Mentions that depend on third parties — press, partners, reviews — are something nobody can guarantee; I prepare the ground.</p>
+          <p style="margin:0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Requires access to your website. With site builders some adjustments are limited; I clarify this before starting.</p>
+          <a class="btn-primary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Schedule a call</a>
+        </div>
+
+        <div class="package-card reveal d2 abo-only">
+          <span class="package-tag">Monitor</span>
+          <h3>GEO monitoring</h3>
+          <div class="package-meta">
+            <div><span class="lbl">Subscription</span><span class="val price">CHF 89 / month</span><span class="val-note">+ CHF 490 setup (GEO audit)</span></div>
+            <div><span class="lbl">Minimum term</span><span class="val">6 months</span></div>
+          </div>
+          <ul class="package-list">
+            <li>To start: GEO audit with analysis in six categories, competitor benchmark and prioritized action plan</li>
+            <li>Every month I test 10–15 typical customer questions in ChatGPT, Perplexity, Gemini and Google AI Overviews</li>
+            <li>Short monthly report with 2–3 concrete recommendations</li>
+            <li>You implement the recommendations yourself or with your agency</li>
+          </ul>
+          <a class="btn-secondary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Schedule a call</a>
+        </div>
+
+        <div class="package-card featured reveal d3 abo-only" data-badge="Recommended">
+          <span class="package-tag">Monitor &amp; implement</span>
+          <h3>GEO Active</h3>
+          <div class="package-meta">
+            <div><span class="lbl">Subscription</span><span class="val price">CHF 249 / month</span><span class="val-note">+ CHF 490 setup (GEO audit)</span></div>
+            <div><span class="lbl">Minimum term</span><span class="val">6 months</span></div>
+          </div>
+          <ul class="package-list">
+            <li>Everything in GEO monitoring</li>
+            <li>I implement the recommendations: up to about 2 hours per month for texts, FAQ and structured data</li>
+            <li>Every month you see what has changed</li>
+            <li>Allowance exceeded? I let you know first; then hourly rate, carry-over to the next month or an upgrade</li>
+          </ul>
+          <p style="margin:0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Requires access to your website.</p>
           <a class="btn-primary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Schedule a call</a>
         </div>
 
       </div>
-      <p style="margin:22px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>Your website is good, but AI assistants don't mention you?</strong> If it works for your visitors — clear, mobile-friendly, with up-to-date content — the <a href="/en/webdesign#angebot" style="color:inherit; text-decoration:none; border-bottom:1px solid var(--sec-line-gold);">GEO optimization from CHF 900</a> is often enough: the changes happen in the background, your design stays. If the cause runs deeper — content, mentions on other sites or how you compare with competitors — the GEO analysis shows what to do. With GEO complete, I also implement it.</p>
-      <p style="margin:10px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>What does each package cover?</strong> The technical side — crawler access and structured data — accounts for about 25% of the score in my <a href="#methode" style="color:inherit; text-decoration:none; border-bottom:1px solid var(--sec-line-gold);">method</a>. It is the foundation: without it, AI systems cannot reliably read the rest. The remaining 75% comes from content, brand authority and platform optimization. The GEO optimization covers the foundation. The GEO analysis examines all six categories and tells you what to do; GEO complete implements it.</p>
-      <p style="margin:10px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>Prefer to start small?</strong> If you begin with the GEO optimization or the GEO analysis and move to the next package later, you only pay the difference.</p>
-      <p style="margin:10px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>A larger website or your own agency?</strong> For extensive websites, the GEO analysis and GEO complete are quoted individually, depending on the size of the website. If your web team or agency implements the plan, I support them on request.</p>
-      <p style="margin:10px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>You are not left alone with the plan.</strong> With the GEO analysis, the technical points are already implemented. You implement the rest of the plan yourself or with your agency — or you choose GEO complete and I take care of it. Mentions that depend on third parties — reviews, press, partners — are something nobody can guarantee: I show you what is realistic and support you along the way.</p>
-      <p style="margin:10px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">If the analysis shows that a new website makes more sense than adapting the existing one, the technical implementation on the old site is dropped. The new website is quoted at the <a href="/en/webdesign#angebot" style="color:inherit; text-decoration:none; border-bottom:1px solid var(--sec-line-gold);">web design prices</a>; for a multi-page website, the GEO analysis price is fully credited.</p>
+      <div class="abo-terms abo-only">
+        <h3>How the subscription works</h3>
+        <ul class="package-list">
+          <li>Minimum term 6 months, then open-ended and cancellable monthly to the end of the month — no renewal into a new minimum term</li>
+          <li>Setup (GEO audit) due at the start, monthly price from the first monitoring</li>
+          <li>No price increase during the minimum term</li>
+          <li>Content and data always belong to you</li>
+        </ul>
+      </div>
+      <p style="margin:22px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>Website built by me?</strong> Then the GEO foundation is already in place and no audit is needed: <a href="/en/webdesign#betreuung" style="color:inherit; text-decoration:none; border-bottom:1px solid var(--sec-line-gold);">monitoring for CHF 49 or Active for CHF 129 per month</a>.</p>
+      <p style="margin:10px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>What does the audit cover?</strong> The technical side — crawler access and structured data — makes up about 25% of the score in my <a href="#methode" style="color:inherit; text-decoration:none; border-bottom:1px solid var(--sec-line-gold);">method</a>. It's the foundation: without it, AI systems can't reliably read the rest. The other 75% is content, brand authority and platform optimization. The GEO audit examines all six categories and says what to do; with the implementation or with GEO Active, I do it.</p>
+      <p style="margin:10px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>Larger website or your own agency?</strong> For extensive websites, the implementation is quoted individually. If your web team or agency implements the plan, I can support them.</p>
+      <p style="margin:10px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>To be honest:</strong> nobody can guarantee a ranking in ChatGPT &amp; co. — AI systems decide for themselves whom they recommend. What I can promise is that they will read your website correctly afterwards. Mentions that depend on third parties — reviews, press, partners — I prepare and show you what's realistic.</p>
+      <p style="margin:10px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">If the audit shows that a new website makes more sense than adapting the existing one, I quote it at the <a href="/en/webdesign#angebot" style="color:inherit; text-decoration:none; border-bottom:1px solid var(--sec-line-gold);">web design prices</a>.</p>
     </div>
   </section>
 
@@ -662,7 +864,7 @@
           <div class="bar-track"><div class="bar-fill"></div></div>
         </div>
       </div>
-      <p style="margin:22px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>25% technical, 75% content and authority.</strong> I implement Technical GEO and Structured Data (25% together) with the GEO optimization. The GEO analysis additionally examines the other four categories (75%), with a prioritized action plan; GEO complete implements that plan.</p>
+      <p style="margin:22px 0 0; font-size:.95rem; color:var(--sec-muted); line-height:1.6; max-width:70ch;"><strong>25% technical, 75% content and authority.</strong> The GEO audit examines all six categories — technical and structured data (25% together) as well as content, authority and platforms (75%) — and ends with a prioritized action plan; with the implementation or with GEO Active, I carry it out.</p>
     </div>
   </section>
 
@@ -707,11 +909,11 @@
         </div>
         <div class="phase">
           <span class="num">02</span>
-          <div><h3>GEO optimization or GEO analysis</h3><p>If the technical basics are enough, I implement them directly with the GEO optimization. If the cause runs deeper, the GEO analysis adds the analysis: six categories, prioritized findings, a 30-day action plan — in a clearly structured report.</p></div>
+          <div><h3>GEO audit</h3><p>Six categories, a competitor benchmark, prioritized findings and an action plan — in a clearly structured report that I walk through with you in 30 minutes.</p></div>
         </div>
         <div class="phase">
           <span class="num">03</span>
-          <div><h3>Call &amp; implementation</h3><p>I walk through the GEO analysis report with you in 30 minutes. With GEO complete, I implement the plan: texts, profiles, directory listings, FAQ and reviews. Or you implement it yourself or with your agency. If the analysis shows that a new website makes more sense, I quote it at the web design prices.</p></div>
+          <div><h3>Implementation &amp; monitoring</h3><p>Once with the GEO implementation, or ongoing by subscription with GEO Active, I carry out the plan: structured data, texts and FAQ. Or you implement it yourself or with your agency. If the audit shows that a new website makes more sense, I quote it at the web design prices.</p></div>
         </div>
       </div>
     </div>
@@ -729,7 +931,8 @@
         <h3>New website, GEO-ready from day one</h3>
         <div class="package-meta">
           <div><span class="lbl">Duration</span><span class="val">2–4 weeks</span></div>
-          <div><span class="lbl">Price</span><span class="val price">from CHF 1'800</span></div>
+          <div class="kauf-only"><span class="lbl">Price</span><span class="val price">from CHF 1'790</span></div>
+          <div class="abo-only"><span class="lbl">Subscription</span><span class="val price">from CHF 119 / month</span><span class="val-note">+ CHF 490 setup</span></div>
         </div>
         <ul class="package-list">
           <li>Custom design, optimized for mobile</li>
@@ -743,7 +946,6 @@
           <a class="btn-secondary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Schedule a call</a>
         </div>
       </div>
-      <p style="margin:18px auto 0; max-width:640px; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Already done the GEO analysis with me? If the new website replaces the technical implementation on the existing one, its price is fully credited for a multi-page website.</p>
     </div>
   </section>
 
@@ -826,9 +1028,10 @@
                 <select id="f-package" name="package">
                   <option value="">Not sure yet</option>
                   <option value="GEO-Light">GEO-Light</option>
-                  <option value="GEO-Optimierung">GEO optimization</option>
-                  <option value="GEO-Analyse">GEO analysis</option>
-                  <option value="GEO komplett">GEO complete</option>
+                  <option value="GEO-Audit">GEO audit</option>
+                  <option value="GEO-Umsetzung">GEO implementation</option>
+                  <option value="GEO-Monitoring">GEO monitoring (subscription)</option>
+                  <option value="GEO Aktiv">GEO Active (subscription)</option>
                   <option value="Webdesign">Web design</option>
                 </select>
               </div>
@@ -1055,5 +1258,47 @@
 })();
 </script>
 <script src="/js/geo-light.js" defer></script>
+<script>
+// Kauf / Abo switch on the offer pages: sets data-pay on <html> (the CSS shows
+// .kauf-only or .abo-only accordingly) and remembers the choice per visitor,
+// so it carries over between the webdesign, GEO and automation pages.
+(function () {
+  var KEY = 'zs-pay';
+  var root = document.documentElement;
+  var buttons = document.querySelectorAll('.pay-switch button');
+
+  function set(mode, save) {
+    root.setAttribute('data-pay', mode);
+    buttons.forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-pay') === mode));
+    });
+    if (save) { try { localStorage.setItem(KEY, mode); } catch (e) {} }
+  }
+
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch (e) {}
+  if (/[?&]zahlung=abo\b|[?&]paiement=abonnement\b|[?&]payment=subscription\b/.test(location.search)) saved = 'abo';
+  set(saved === 'abo' ? 'abo' : 'kauf', false);
+
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () { set(b.getAttribute('data-pay'), true); });
+  });
+  // Links that point at an Abo price (e.g. the hero button) switch the cards to Abo too.
+  document.querySelectorAll('[data-pay-set]').forEach(function (a) {
+    a.addEventListener('click', function () { set(a.getAttribute('data-pay-set'), true); });
+  });
+})();
+</script>
+<script>
+(function(){
+  var btn = document.getElementById('menuBtn'), panel = document.getElementById('menuPanel');
+  if (!btn || !panel) return;
+  function set(open){ btn.setAttribute('aria-expanded', String(open)); panel.hidden = !open; }
+  btn.addEventListener('click', function(e){ e.stopPropagation(); set(panel.hidden); });
+  panel.addEventListener('click', function(e){ if (e.target.closest('a')) set(false); });
+  document.addEventListener('click', function(e){ if (!panel.hidden && !panel.contains(e.target)) set(false); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !panel.hidden) { set(false); btn.focus(); } });
+})();
+</script>
 </body>
 </html>
