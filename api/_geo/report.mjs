@@ -17,16 +17,17 @@ const T = {
     of6: 'von 6',
     result: function (n, name, phrase) {
       return n === 6 ? `Bei allen 6 Fragen, in denen ${phrase}, wurde ${name} genannt.`
-        : n === 0 ? `Bei 6 Fragen, in denen ${phrase}, wurde ${name} nicht genannt.`
-        : `Bei ${n} von 6 Fragen, in denen ${phrase}, wurde ${name} genannt.`;
+        : n === 0 ? `Bei 6 Fragen, in denen ${phrase}, wurde ${name} noch nicht genannt. Das sind 6 Chancen.`
+        : `Bei ${n} von 6 Fragen, in denen ${phrase}, wurde ${name} genannt. ${n === 5 ? 'Die übrige Frage ist eine Chance.' : `Die übrigen ${6 - n} sind Chancen.`}`;
     },
     s1: 'Ergebnis', s2weak: 'Wer stattdessen empfohlen wird', s2strong: 'Wer ausserdem empfohlen wird',
-    provider: 'Anbieter', times: 'Genannt in den 12 Antworten (6 Fragen × 2 KI-Systeme)', count: function (n) { return n + '-mal'; },
-    none: 'In den 12 Antworten wurde kein konkreter Anbieter genannt.',
+    provider: 'Anbieter', times: 'Genannt in den Antworten der KI-Systeme', count: function (n) { return n + '-mal'; },
+    none: 'In den Antworten wurde kein konkreter Anbieter genannt.',
     s3: 'Was die KI über Sie sagt', statement: 'Aussage', source: 'Quelle', true_: 'Stimmt das?', both: 'beide',
-    tags: { ok: 'stimmt', wrong: 'stimmt nicht', mixup: 'Verwechslung', partial: 'unvollständig' },
+    tags: { ok: 'stimmt', wrong: 'stimmt nicht', mixup: 'Verwechslung', partial: 'unvollständig', absent: 'ohne Ihren Firmennamen' },
     s4weak: 'Die drei wichtigsten Ursachen', s4strong: 'Warum Sie gut dastehen, und was noch fehlt', good: 'Gut:', missing: 'Fehlt:',
     s5: 'Eine Massnahme, die Sie sofort umsetzen können', why: 'Warum:',
+    own: 'Formulieren Sie den Text in Ihren eigenen Worten: nur Sie wissen, was heute für Ihr Unternehmen gilt.',
     s6: 'Ihr nächster Schritt', get: 'Was Sie bekommen', from: 'ab',
     tiers: ['GEO-Audit', 'Audit + Umsetzung', 'GEO Aktiv (Abo)'],
     prices: ['CHF 490', "CHF 1'480", 'CHF 249 / Monat'],
@@ -37,7 +38,7 @@ const T = {
     rowImpl: 'Umsetzung des Plans:', cause: 'Ursache', causes: 'Ursache', and: 'und',
     leadTail: 'Der GEO-Audit zeigt, was dort zu tun ist; mit der Umsetzung oder im Abo mit GEO Aktiv setze ich es für Sie um.',
     gain: 'Ihr Gewinn:',
-    gainWeak: 'Mit dem GEO-Audit wissen Sie genau, warum andere empfohlen werden und was Sie in welcher Reihenfolge ändern. Mit der Umsetzung ist es danach auch erledigt, ohne dass Sie selbst Zeit investieren.',
+    gainWeak: 'Mit dem GEO-Audit sehen Sie, warum andere empfohlen werden und welche Schritte bei Ihnen am meisten bewirken. Mit der Umsetzung erledige ich diese Schritte für Sie, ohne dass Sie selbst Zeit investieren.',
     gainStrong: 'Sie bauen Ihren Vorsprung gezielt aus, statt ihn dem Zufall zu überlassen. Mit GEO Aktiv beobachte ich Ihre Sichtbarkeit jeden Monat und baue sie für Sie aus.',
     cta: 'Kostenloses Gespräch vereinbaren (30 Min.)', diff: 'GEO Aktiv: CHF 490 Setup (der Audit), danach CHF 249 pro Monat, Mindestdauer 6 Monate.',
     footer: 'Dieser Test ist kostenlos und unverbindlich. Die Antworten von KI-Systemen ändern sich mit der Zeit; dieser Test ist eine Momentaufnahme.',
@@ -48,16 +49,17 @@ const T = {
     of6: 'sur 6',
     result: function (n, name, phrase) {
       return n === 6 ? `Dans les 6 questions où ${phrase}, ${name} a été cité à chaque fois.`
-        : n === 0 ? `Dans les 6 questions où ${phrase}, ${name} n’a pas été cité.`
-        : `Dans ${n} des 6 questions où ${phrase}, ${name} a été cité.`;
+        : n === 0 ? `Dans les 6 questions où ${phrase}, ${name} n’a pas encore été cité. Ce sont 6 opportunités.`
+        : `Dans ${n} des 6 questions où ${phrase}, ${name} a été cité. ${n === 5 ? 'La question restante est une opportunité.' : `Les ${6 - n} autres sont des opportunités.`}`;
     },
     s1: 'Résultat', s2weak: 'Qui est recommandé à votre place', s2strong: 'Qui est recommandé en plus de vous',
-    provider: 'Prestataire', times: 'Cité dans les 12 réponses (6 questions × 2 systèmes d’IA)', count: function (n) { return n + ' fois'; },
-    none: 'Aucune des 12 réponses ne cite de prestataire concret.',
+    provider: 'Prestataire', times: 'Cité dans les réponses des systèmes d’IA', count: function (n) { return n + ' fois'; },
+    none: 'Aucune réponse ne cite de prestataire concret.',
     s3: 'Ce que l’IA dit de vous', statement: 'Affirmation', source: 'Source', true_: 'Est-ce juste ?', both: 'les deux',
-    tags: { ok: 'correct', wrong: 'faux', mixup: 'confusion', partial: 'incomplet' },
+    tags: { ok: 'correct', wrong: 'faux', mixup: 'confusion', partial: 'incomplet', absent: 'sans votre entreprise' },
     s4weak: 'Les trois causes principales', s4strong: 'Pourquoi vous êtes bien placé, et ce qui manque encore', good: 'Bien :', missing: 'Manque :',
     s5: 'Une mesure à mettre en place tout de suite', why: 'Pourquoi :',
+    own: 'Formulez le texte avec vos propres mots : vous seul savez ce qui vaut aujourd’hui pour votre entreprise.',
     s6: 'Votre prochaine étape', get: 'Ce que vous obtenez', from: 'dès',
     tiers: ['Audit GEO', 'Audit + mise en œuvre', 'GEO Actif (abo)'],
     prices: ['CHF 490', "CHF 1'480", 'CHF 249 / mois'],
@@ -68,7 +70,7 @@ const T = {
     rowImpl: 'Mise en œuvre du plan :', cause: 'Cause', causes: 'Causes', and: 'et',
     leadTail: 'L’audit GEO montre ce qu’il faut faire ; avec la mise en œuvre ou en abonnement avec GEO Actif, je le mets en place pour vous.',
     gain: 'Ce que vous y gagnez :',
-    gainWeak: 'Avec l’audit GEO, vous savez exactement pourquoi d’autres sont recommandés et quoi changer, dans quel ordre. Avec la mise en œuvre, c’est ensuite fait, sans que vous y consacriez votre temps.',
+    gainWeak: 'Avec l’audit GEO, vous voyez pourquoi d’autres sont recommandés et quelles étapes comptent le plus pour vous. Avec la mise en œuvre, je réalise ces étapes pour vous, sans que vous y consacriez votre temps.',
     gainStrong: 'Vous consolidez votre avance de façon ciblée au lieu de la laisser au hasard. Avec GEO Actif, je suis votre visibilité chaque mois et la renforce pour vous.',
     cta: 'Réserver un entretien gratuit (30 min)', diff: 'GEO Actif : CHF 490 de mise en place (l’audit), puis CHF 249 par mois, durée minimale 6 mois.',
     footer: 'Ce test est gratuit et sans engagement. Les réponses des systèmes d’IA évoluent avec le temps ; ce test est un instantané.',
@@ -79,16 +81,17 @@ const T = {
     of6: 'of 6',
     result: function (n, name, phrase) {
       return n === 6 ? `In all 6 questions where ${phrase}, ${name} was named.`
-        : n === 0 ? `In 6 questions where ${phrase}, ${name} was not named.`
-        : `In ${n} of 6 questions where ${phrase}, ${name} was named.`;
+        : n === 0 ? `In 6 questions where ${phrase}, ${name} was not named yet. These are 6 opportunities.`
+        : `In ${n} of 6 questions where ${phrase}, ${name} was named. ${n === 5 ? 'The remaining question is an opportunity.' : `The other ${6 - n} are opportunities.`}`;
     },
     s1: 'Result', s2weak: 'Who is recommended instead', s2strong: 'Who else is recommended',
-    provider: 'Provider', times: 'Named in the 12 answers (6 questions × 2 AI systems)', count: function (n) { return n + (n === 1 ? ' time' : ' times'); },
-    none: 'None of the 12 answers names a specific provider.',
+    provider: 'Provider', times: 'Named in the AI systems’ answers', count: function (n) { return n + (n === 1 ? ' time' : ' times'); },
+    none: 'None of the answers names a specific provider.',
     s3: 'What AI says about you', statement: 'Statement', source: 'Source', true_: 'Accurate?', both: 'both',
-    tags: { ok: 'accurate', wrong: 'inaccurate', mixup: 'confusion', partial: 'incomplete' },
+    tags: { ok: 'accurate', wrong: 'inaccurate', mixup: 'confusion', partial: 'incomplete', absent: 'company not named' },
     s4weak: 'The three main causes', s4strong: 'Why you are well placed, and what is still missing', good: 'Good:', missing: 'Missing:',
     s5: 'One measure you can put in place right away', why: 'Why:',
+    own: 'Write the text in your own words: only you know what applies to your business today.',
     s6: 'Your next step', get: 'What you get', from: 'from',
     tiers: ['GEO audit', 'Audit + implementation', 'GEO Active (subscription)'],
     prices: ['CHF 490', "CHF 1'480", 'CHF 249 / month'],
@@ -99,7 +102,7 @@ const T = {
     rowImpl: 'Implementation of the plan:', cause: 'Cause', causes: 'Causes', and: 'and',
     leadTail: 'The GEO audit shows what to do there; with the implementation or by subscription with GEO Active, I implement it for you.',
     gain: 'What you gain:',
-    gainWeak: 'With the GEO audit you know exactly why others are recommended and what to change in which order. With the implementation it is then also done, without investing your own time.',
+    gainWeak: 'With the GEO audit you see why others are recommended and which steps matter most for you. With the implementation I carry out these steps for you, without you investing your own time.',
     gainStrong: 'You build on your lead deliberately instead of leaving it to chance. With GEO Active, I monitor your visibility every month and build on it for you.',
     cta: 'Book a free call (30 min)', diff: 'GEO Active: CHF 490 setup (the audit), then CHF 249 per month, minimum term 6 months.',
     footer: 'This test is free and without obligation. AI answers change over time; this test is a snapshot.',
@@ -169,6 +172,8 @@ const CSS = `
   .action { border: 1.5px solid #24576b; border-radius: 4px; padding: 3.5mm 4.5mm; }
   .action .where { font-size: 9pt; color: #444; margin-bottom: 2mm; }
   .action .text { background: #f7f7f7; border-left: 3px solid #24576b; padding: 2.5mm 3.5mm; font-size: 9.5pt; }
+  .action ul.points { margin: 0; padding-left: 8mm; }
+  .action ul.points li { margin: 0.6mm 0; }
   .action .why { font-size: 9pt; color: #444; margin: 2mm 0 0; }
   .offer { border: 1.5px solid #24576b; border-radius: 4px; overflow: hidden; break-inside: avoid; }
   .offer .lead { padding: 3mm 4.5mm; font-size: 9.5pt; }
@@ -193,7 +198,7 @@ export function renderReportHtml(cand, test, a, reportLang) {
   const strong = n >= 5;
   const name = cand.company;
   a.provider_phrase = String(a.provider_phrase || '').replace(/^\s*(wenn|où|where)\s+/i, '');
-  const tagClass = { ok: 'ok', wrong: 'wrong', mixup: 'wrong', partial: 'part' };
+  const tagClass = { ok: 'ok', wrong: 'wrong', mixup: 'wrong', partial: 'part', absent: 'part' };
   const engine = function (e) { return e === 'beide' ? t.both : e; };
   const bar = function (c, own) {
     return `<span class="bar" style="width:${Math.min(8 * c, 80)}mm${own ? '' : strong ? ';background:#8aa9b6' : ''}"></span>`;
@@ -274,8 +279,10 @@ ${section2}
 <h2 style="break-before:page;margin-top:0"><span class="n">5</span>${t.s5}</h2>
 <div class="action">
   <div class="where"><strong>${esc(a.measure.label.replace(/\s*:?\s*$/, ''))}${t.colon}</strong> ${rich(a.measure.where)}</div>
-  <div class="text">${rich(a.measure.text)}</div>
-  <p class="why">${t.why} ${rich(a.measure.why)}</p>
+  ${(a.measure.points || []).length
+    ? `<ul class="text points">${a.measure.points.map(function (p) { return `<li>${rich(p)}</li>`; }).join('')}</ul>`
+    : `<div class="text">${rich(a.measure.text)}</div>`}
+  <p class="why">${t.why} ${rich(a.measure.why)}${(a.measure.points || []).length ? ` ${esc(t.own)}` : ''}</p>
 </div>
 
 <div style="break-inside:avoid">
@@ -306,7 +313,7 @@ const MAIL = {
     hi: 'Guten Tag,',
     intro: 'vielen Dank für Ihre Anfrage zum GEO-Light-Test. Ich habe ChatGPT und Perplexity acht Fragen gestellt, wie sie Ihre potenziellen Kundinnen und Kunden heute stellen.',
     result: 'Ergebnis:',
-    pdf: 'Im angehängten PDF finden Sie die drei wichtigsten Ursachen und eine Massnahme, die Sie sofort selbst umsetzen können, mit dem genauen Text dazu.',
+    pdf: 'Im angehängten PDF finden Sie die drei wichtigsten Ursachen und eine Massnahme, die Sie sofort selbst umsetzen können.',
     strongPdf: 'Im angehängten PDF sehen Sie, was bei Ihnen gut funktioniert, was noch fehlt, und eine Massnahme, die Sie sofort selbst umsetzen können.',
     next: `Wenn Sie den nächsten Schritt besprechen möchten, zeige ich Ihnen gern in 30 Minuten, was sich bei Ihnen konkret verbessern lässt, kostenlos und unverbindlich: ${CALENDLY}`,
     regards: 'Freundliche Grüsse,',
@@ -317,7 +324,7 @@ const MAIL = {
     hi: 'Bonjour,',
     intro: 'merci pour votre demande de test GEO-Light. J’ai posé à ChatGPT et Perplexity huit questions, telles que vos clientes et clients potentiels les posent aujourd’hui.',
     result: 'Résultat :',
-    pdf: 'Dans le PDF ci-joint, vous trouverez les trois causes principales et une mesure que vous pouvez mettre en place vous-même tout de suite, avec le texte exact.',
+    pdf: 'Dans le PDF ci-joint, vous trouverez les trois causes principales et une mesure que vous pouvez mettre en place vous-même tout de suite.',
     strongPdf: 'Dans le PDF ci-joint, vous verrez ce qui fonctionne bien chez vous, ce qui manque encore, et une mesure que vous pouvez mettre en place vous-même tout de suite.',
     next: `Si vous souhaitez parler de la prochaine étape, je vous montre volontiers en 30 minutes ce qui peut concrètement être amélioré chez vous, gratuitement et sans engagement : ${CALENDLY}`,
     regards: 'Meilleures salutations,',
@@ -328,7 +335,7 @@ const MAIL = {
     hi: 'Dear Sir or Madam,',
     intro: 'thank you for requesting the GEO-Light test. I asked ChatGPT and Perplexity eight questions of the kind your potential customers ask today.',
     result: 'Result:',
-    pdf: 'The attached PDF shows the three main causes and one measure you can put in place yourself right away, with the exact text.',
+    pdf: 'The attached PDF shows the three main causes and one measure you can put in place yourself right away.',
     strongPdf: 'The attached PDF shows what works well for you, what is still missing, and one measure you can put in place yourself right away.',
     next: `If you would like to discuss the next step, I am happy to show you in 30 minutes what can be improved in your case, free and without obligation: ${CALENDLY}`,
     regards: 'Kind regards,',

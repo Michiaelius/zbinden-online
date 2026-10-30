@@ -30,6 +30,12 @@ Grundregeln (von einem erfahrenen Unternehmer geprüft, unbedingt einhalten):
 - Nur Fakten, die du in den Antworten, auf der Website oder im Handelsregister siehst. Nichts behaupten,
   was du nicht prüfen kannst (Jahreszahlen, Telefonnummern, Bewertungen, Mitarbeiterzahlen).
 - Nie versprechen, dass das Unternehmen danach von ChatGPT empfohlen wird.
+- Keine neue Realität schaffen, sondern abbilden (Heinz Oftinger, 2026-10-30): das Unternehmen nie
+  anders beschreiben, als es sich selbst beschreibt. Keinen fertigen Text formulieren, der sagt, wer das
+  Unternehmen ist, was es anbietet oder wie es organisiert ist. Ein solcher Text kann falsch sein und dem
+  Unternehmen schaden (Haftung). Was nicht wörtlich auf der Website steht, wird nicht behauptet.
+- Geschäftliche Entscheide nie bewerten: ist etwas gewollt (z. B. ein Verlag als Firmenzweck, mehrere
+  Tätigkeiten), ist es kein Fehler. Ursachen beschreiben nur, wie die KI-Systeme das lesen.
 - ALLE Felder AUSSCHLIESSLICH in der Berichtssprache, ohne ein einziges Wort in einer anderen Sprache
   (Wunsch von Pauline: der Bericht ist ganz in der Sprache des Formulars). Sind die Antworten, die Website
   oder die Branche in einer anderen Sprache, übersetze: Zitate werden übersetzt wiedergegeben (in «», ohne
@@ -49,8 +55,9 @@ Felder:
 - "branche_label" und "city_label": Branche und Ort des Profils, in die Berichtssprache übersetzt
   (z. B. "Innovationsberater" → fr "conseiller en innovation", "Schweiz" → fr "Suisse"). Ist die
   Berichtssprache die Sprache des Profils, unverändert übernehmen.
-- "result_note": EIN ruhiger Satz unter dem Ergebnis. Schwach (0 bis 2 von 6): dass das bei kleineren
-  Unternehmen dieser Art häufig ist und sich gezielt verbessern lässt. Mittel (3 bis 4): was schon
+- "result_note": EIN ruhiger Satz unter dem Ergebnis. Schwach (0 bis 2 von 6): positiv formuliert, die
+  nicht genannten Fragen sind Chancen; dass das bei kleineren Unternehmen dieser Art häufig ist und sich
+  gezielt verbessern lässt. Mittel (3 bis 4): was schon
   funktioniert und dass es ausbaufähig ist. Stark (5 bis 6): klar sagen, dass es ein sehr gutes Ergebnis
   ist, und wie sich die beiden KI-Systeme unterscheiden.
 - "provider_phrase": Nebensatz, der den Satz «Bei 6 Fragen, in denen ___, wurde X genannt.» bzw.
@@ -60,21 +67,30 @@ Felder:
 - "statements": genau 3 Aussagen, was die KI-Systeme über das Unternehmen oder die Person sagen
   (Zitat in «», in die Berichtssprache übersetzt, oder enge Umschreibung, höchstens 30 Wörter), mit "engine" ("ChatGPT",
   "Perplexity" oder "beide") und "tag": "ok" (stimmt), "wrong" (stimmt nicht), "mixup" (Verwechslung
-  mit einer anderen Firma), "partial" (unvollständig, z. B. Standorte oder Hauptleistung fehlen).
+  mit einer anderen Firma), "partial" (unvollständig, z. B. Standorte oder Hauptleistung fehlen),
+  "absent" (über die Person oder die Tätigkeit stimmt es, aber das getestete Unternehmen wird nicht
+  genannt: für das Unternehmen ist das kein richtiges Ergebnis, also NIE "ok" in diesem Fall).
   Bevorzuge, was für die Person nützlich ist: falsche Beschreibungen, Verwechslungen, «kann ich nicht
   bestätigen», fehlende Hauptleistung oder fehlende Standorte. Keine banalen Aussagen wie die Adresse.
   Gibt es kaum Aussagen, beschreibe, was fehlt ("partial").
 - "causes": genau 3 Ursachen, je ein bis zwei kurze Sätze, jede belegt durch etwas Gesehenes (Website,
-  Handelsregister, Antworten). Bei 5 bis 6 von 6: GENAU eine erste Ursache mit "kind" "good" (was gut ist),
+  Handelsregister, Antworten). Neutral: was die KI-Systeme sehen und wie sie es deuten, ohne die
+  Ausrichtung des Unternehmens als Fehler darzustellen. Bei 5 bis 6 von 6: GENAU eine erste Ursache mit "kind" "good" (was gut ist),
   dann GENAU zwei mit "kind" "missing" (was fehlt, z. B. weniger Bewertungen als die vorne genannten
   Mitbewerber, Standorte oder Leistungen, die nie genannt werden, ein KI-System nennt sie seltener);
   sonst alle drei "kind" "none". Diagnose, keine Anleitung. Je höchstens 35 Wörter.
 - "measure": EINE Massnahme, die der Inhaber allein und sofort umsetzen kann. "label" = "Wo"/"Où"/"Where"
   (Text auf der Website) oder "Was"/"Quoi"/"What" (andere Handlung). "where": wo genau bzw. was
-  (ein Satz). "text": der genaue Text zum Übernehmen (Einleitung der Startseite: wer, was, wo, für wen,
-  3 bis 4 Sätze, nur mit Fakten von der Website; oder z. B. eine Bitte um eine Bewertung). "why": ein
-  Satz, warum, ohne versprochenes Ergebnis. Bei 5 bis 6 von 6 betrifft die Massnahme etwas, das fehlt
-  (z. B. eine Bitte um Bewertungen), nicht die Startseite, wenn diese schon klar ist. "text" höchstens 70 Wörter.
+  (ein Satz). "why": ein Satz, warum, ohne versprochenes Ergebnis.
+  Betrifft die Massnahme die Beschreibung des Unternehmens (z. B. Einleitung der Startseite): KEINEN
+  fertigen Text schreiben. "points" = 3 bis 4 Fragen, die der erste Satz beantworten sollte (wer, was,
+  für wen, wo), je mit dem, was die Website dazu schon sagt, wörtlich in «» und mit der Seite, auf der es
+  steht (z. B. "Was bieten Sie an? Auf der Seite Angebot: «Coaching», «Mentoring»"). Findest du nichts
+  Eindeutiges, schreibe nur die Frage. "text" = "". Der Inhaber formuliert selbst.
+  Betrifft sie etwas anderes, das das Unternehmen nicht beschreibt (z. B. eine Bitte um eine Bewertung an
+  Kunden): "text" = der Text zum Übernehmen (höchstens 70 Wörter), "points" = [].
+  Bei 5 bis 6 von 6 betrifft die Massnahme etwas, das fehlt (z. B. eine Bitte um Bewertungen), nicht die
+  Startseite, wenn diese schon klar ist.
 - "offer_lead": ein bis zwei Sätze für den Abschnitt «Ihr nächster Schritt»: welcher Teil der Ursachen
   mit der Technik allein gelöst ist und welcher Inhalte und Erwähnungen auf anderen Seiten braucht.
   Den wichtigsten Teilsatz zwischen ** ** setzen (wird fett).
@@ -119,7 +135,7 @@ const SCHEMA = {
         properties: {
           text: { type: 'string' },
           engine: { type: 'string', enum: ['ChatGPT', 'Perplexity', 'beide'] },
-          tag: { type: 'string', enum: ['ok', 'wrong', 'mixup', 'partial'] },
+          tag: { type: 'string', enum: ['ok', 'wrong', 'mixup', 'partial', 'absent'] },
         },
       },
     },
@@ -131,8 +147,11 @@ const SCHEMA = {
       },
     },
     measure: {
-      type: 'object', additionalProperties: false, required: ['label', 'where', 'text', 'why'],
-      properties: { label: { type: 'string' }, where: { type: 'string' }, text: { type: 'string' }, why: { type: 'string' } },
+      type: 'object', additionalProperties: false, required: ['label', 'where', 'points', 'text', 'why'],
+      properties: {
+        label: { type: 'string' }, where: { type: 'string' }, points: { type: 'array', items: { type: 'string' } },
+        text: { type: 'string' }, why: { type: 'string' },
+      },
     },
     offer_lead: { type: 'string' },
     row_content: { type: 'string' },
