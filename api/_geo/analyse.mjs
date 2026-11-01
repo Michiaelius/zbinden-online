@@ -55,9 +55,9 @@ Felder:
 - "branche_label" und "city_label": Branche und Ort des Profils, in die Berichtssprache übersetzt
   (z. B. "Innovationsberater" → fr "conseiller en innovation", "Schweiz" → fr "Suisse"). Ist die
   Berichtssprache die Sprache des Profils, unverändert übernehmen.
-- "result_note": EIN ruhiger Satz unter dem Ergebnis. Schwach (0 bis 2 von 6): positiv formuliert, die
-  nicht genannten Fragen sind Chancen; dass das bei kleineren Unternehmen dieser Art häufig ist und sich
-  gezielt verbessern lässt. Mittel (3 bis 4): was schon
+- "result_note": EIN ruhiger Satz unter dem Ergebnis (der Satz davor nennt die Chancen schon, nicht
+  wiederholen). Schwach (0 bis 2 von 6): dass das bei kleineren Unternehmen dieser Art häufig ist und
+  sich gezielt verbessern lässt. Das Ergebnis nicht schönreden. Mittel (3 bis 4): was schon
   funktioniert und dass es ausbaufähig ist. Stark (5 bis 6): klar sagen, dass es ein sehr gutes Ergebnis
   ist, und wie sich die beiden KI-Systeme unterscheiden.
 - "provider_phrase": Nebensatz, der den Satz «Bei 6 Fragen, in denen ___, wurde X genannt.» bzw.
@@ -75,7 +75,8 @@ Felder:
   Gibt es kaum Aussagen, beschreibe, was fehlt ("partial").
 - "causes": genau 3 Ursachen, je ein bis zwei kurze Sätze, jede belegt durch etwas Gesehenes (Website,
   Handelsregister, Antworten). Neutral: was die KI-Systeme sehen und wie sie es deuten, ohne die
-  Ausrichtung des Unternehmens als Fehler darzustellen. Bei 5 bis 6 von 6: GENAU eine erste Ursache mit "kind" "good" (was gut ist),
+  Ausrichtung des Unternehmens als Fehler darzustellen. Die Ursache trotzdem klar nennen, auch wenn sie
+  unbequem ist (z. B. die Startseite stellt eine andere Tätigkeit in den Vordergrund). Bei 5 bis 6 von 6: GENAU eine erste Ursache mit "kind" "good" (was gut ist),
   dann GENAU zwei mit "kind" "missing" (was fehlt, z. B. weniger Bewertungen als die vorne genannten
   Mitbewerber, Standorte oder Leistungen, die nie genannt werden, ein KI-System nennt sie seltener);
   sonst alle drei "kind" "none". Diagnose, keine Anleitung. Je höchstens 35 Wörter.
