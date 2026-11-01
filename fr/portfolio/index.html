@@ -236,13 +236,6 @@
     text-transform:uppercase; color:var(--sec-gold-deep); background:var(--sec-gold-soft);
     border:1px solid var(--sec-line-gold); padding:.4em .8em; border-radius:var(--r-pill);
   }
-  nav.top-nav{ display:flex; gap:clamp(18px,3vw,34px); font-size:.78rem; }
-  nav.top-nav a{
-    text-decoration:none; color:var(--sec-muted); font-family:var(--font-ui); letter-spacing:.06em;
-    text-transform:uppercase; font-weight:500; transition:color .2s ease;
-  }
-  nav.top-nav a:hover{ color:var(--sec-gold); }
-  @media (max-width:780px){ nav.top-nav{display:none;} }
   .header-cta{
     font-family:var(--font-ui); font-weight:600; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
     padding:.75em 1.3em; border:1px solid var(--sec-gold); border-radius:var(--r-pill); color:var(--sec-gold-deep);
@@ -588,6 +581,69 @@
   .more-grid.three{ grid-template-columns:repeat(3,minmax(0,1fr)); }
   @media (max-width:900px){ .more-grid.three{grid-template-columns:1fr;} }
   .cta-copy p{ color:var(--sec-muted); line-height:1.75; font-weight:300; margin:0 0 1.6em; max-width:48ch; }
+
+  /* ---------- Kopfzeile: Angebots-Switch in der Mitte, Abschnitte im Menü ---------- */
+  html{ scroll-padding-top:96px; }
+  .header-row{ display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:12px 18px; position:relative; }
+  .svc-switch{ justify-self:center; display:inline-flex; gap:2px; padding:4px; border:1px solid var(--sec-line-gold); border-radius:var(--r-pill); background:rgba(255,255,255,.03); }
+  .svc-switch a{
+    font-family:var(--font-ui); font-weight:600; font-size:.72rem; letter-spacing:.07em; text-transform:uppercase; text-decoration:none; white-space:nowrap;
+    color:var(--sec-muted); padding:.65em 1.15em; border-radius:var(--r-pill); transition:color .2s ease, background .2s ease;
+  }
+  .svc-switch a:hover{ color:var(--sec-ink); }
+  .svc-switch a[aria-current="page"]{ background:linear-gradient(120deg,var(--sec-gold),var(--sec-gold-light)); color:var(--sec-on-gold); box-shadow:0 0 18px var(--sec-glow-soft); }
+  .hdr-tools{ display:flex; align-items:center; gap:12px; }
+  .menu-btn{
+    width:42px; height:42px; flex:none; display:grid; place-items:center; padding:0; cursor:pointer;
+    border:1px solid var(--sec-line-strong); border-radius:50%; background:transparent; color:var(--sec-ink); transition:border-color .2s ease, color .2s ease;
+  }
+  .menu-btn:hover, .menu-btn[aria-expanded="true"]{ border-color:var(--sec-gold); color:var(--sec-gold); }
+  .menu-btn line{ transition:transform .2s ease, opacity .2s ease; transform-box:fill-box; transform-origin:center; }
+  .menu-btn[aria-expanded="true"] .l1{ transform:translateY(5px) rotate(45deg); }
+  .menu-btn[aria-expanded="true"] .l2{ opacity:0; }
+  .menu-btn[aria-expanded="true"] .l3{ transform:translateY(-5px) rotate(-45deg); }
+  .menu-panel{
+    position:absolute; z-index:30; top:calc(100% + 6px); right:clamp(20px,4vw,40px); width:min(320px, calc(100vw - 32px));
+    display:grid; gap:2px; padding:12px; background:#121212; border:1px solid var(--sec-line-gold); border-radius:var(--r-md);
+    box-shadow:0 26px 60px -18px rgba(0,0,0,.65); max-height:calc(100vh - 150px); overflow-y:auto; overscroll-behavior:contain;
+  }
+  .menu-panel[hidden]{ display:none; }
+  .menu-link{
+    display:block; padding:.75em .9em; border-radius:var(--r-sm); text-decoration:none;
+    font-family:var(--font-ui); font-weight:500; font-size:.88rem; letter-spacing:.03em; color:var(--sec-ink);
+  }
+  .menu-link:hover{ background:var(--sec-gold-soft); color:var(--sec-gold); }
+  .menu-link.home{ color:var(--sec-muted); border-bottom:1px solid var(--sec-line); border-radius:0; margin-bottom:4px; }
+  .menu-extra{ display:none; }
+  @media (max-width:900px){
+    html{ scroll-padding-top:136px; }
+    .header-row{ grid-template-columns:1fr auto; }
+    .svc-switch{ grid-column:1 / -1; grid-row:2; justify-self:stretch; }
+    .svc-switch a{ flex:1; text-align:center; padding:.65em .4em; font-size:.66rem; letter-spacing:.05em; }
+    .hdr-tools .lang-switch, .hdr-tools .header-cta{ display:none; }
+    .menu-extra{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; margin-top:6px; padding:12px .4em 2px; border-top:1px solid var(--sec-line); }
+  }
+  @media (max-width:520px){ .wordmark .sub{ display:none; } }
+
+  /* ---------- Über mich: gleiches Bio-Modul auf allen Seiten ---------- */
+  .me{ display:grid; grid-template-columns:minmax(200px,280px) 1fr; gap:clamp(28px,5vw,56px); align-items:center; }
+  .me-photo{ display:block; width:100%; height:auto; aspect-ratio:3/4; object-fit:cover; border-radius:var(--r-md); border:1px solid var(--sec-line-gold); box-shadow:0 30px 70px -30px rgba(0,0,0,.45), 0 0 40px var(--sec-glow-soft); }
+  .me-body h2{ font-family:var(--font-display); font-size:clamp(1.5rem,2.6vw,1.9rem); font-weight:600; line-height:1.2; margin:12px 0 10px; }
+  .me-role{ font-family:var(--font-ui); font-weight:600; font-size:.78rem; letter-spacing:.06em; color:var(--sec-gold-deep); margin:0 0 16px; }
+  .me-text{ color:var(--sec-muted); line-height:1.75; max-width:62ch; font-weight:300; margin:0 0 18px; }
+  .me-facts{ list-style:none; padding:0; margin:0 0 24px; display:grid; gap:8px; }
+  .me-facts li{ position:relative; padding-left:18px; font-size:.9rem; line-height:1.5; color:var(--sec-ink); }
+  .me-facts li::before{ content:""; position:absolute; left:0; top:.6em; width:7px; height:7px; border-radius:50%; background:var(--sec-gold); }
+  .me-cta{ display:inline-block; font-family:var(--font-ui); font-weight:600; font-size:.82rem; color:var(--sec-gold-deep); text-decoration:none; border-bottom:1px solid var(--sec-line-gold); padding-bottom:2px; }
+  .me-cta:hover{ color:var(--sec-gold); }
+  .me-quotes{ margin-top:clamp(36px,5vw,52px); display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:22px; }
+  .me-quotes figure{ margin:0; border-left:2px solid var(--sec-line-gold); padding:2px 0 2px 18px; }
+  .me-quotes blockquote{ margin:0 0 10px; color:var(--sec-ink); font-weight:300; line-height:1.65; font-size:.92rem; }
+  .me-quotes figcaption{ font-size:.78rem; color:var(--sec-muted); font-family:var(--font-ui); }
+  .me-note{ margin:1.2em 0 0; font-size:.76rem; color:var(--sec-muted); font-weight:300; }
+  @media (max-width:760px){ .me{ grid-template-columns:1fr; } .me-photo{ max-width:220px; } }
+  .menu-link.about{ color:var(--sec-gold); border-bottom:1px solid var(--sec-line); border-radius:0; margin-bottom:4px; }
+  .menu-link.home:has(+ .menu-link.about){ border-bottom:0; margin-bottom:0; }
 </style>
 </head>
 <body>
@@ -601,17 +657,37 @@
 <header class="section-dark">
   <div class="header-row">
     <a class="wordmark" href="https://www.zbinden.online/fr/">ZBINDEN<span class="dot">·</span>SOFTWARE <span class="sub">PORTFOLIO</span></a>
-    <nav class="top-nav">
-      <a href="#projekte">Projets</a>
-      <a href="#werdegang">Parcours</a>
-      <a href="#angebote">Offres</a>
+    <nav class="svc-switch" aria-label="Offres">
+      <a href="/fr/geo-audit">GEO</a>
+      <a href="/fr/ki-agenten-automatisierung">Automatisation</a>
+      <a href="/fr/webdesign">Webdesign</a>
     </nav>
-    <div class="lang-switch" aria-label="Sprache / Langue / Language">
-      <a href="/fr/portfolio" hreflang="fr" lang="fr" aria-current="page">FR</a>
-      <a href="/portfolio" hreflang="de" lang="de">DE</a>
-      <a href="/en/portfolio" hreflang="en" lang="en">EN</a>
+    <div class="hdr-tools">
+      <div class="lang-switch" aria-label="Sprache / Langue / Language">
+        <a href="/fr/portfolio" hreflang="fr" lang="fr" aria-current="page">FR</a>
+        <a href="/portfolio" hreflang="de" lang="de">DE</a>
+        <a href="/en/portfolio" hreflang="en" lang="en">EN</a>
+      </div>
+      <a class="header-cta" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Prendre rendez-vous</a>
+      <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menuPanel" aria-label="Menu">
+        <svg width="18" height="14" viewBox="0 0 18 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><line class="l1" x1="1" y1="2" x2="17" y2="2"/><line class="l2" x1="1" y1="7" x2="17" y2="7"/><line class="l3" x1="1" y1="12" x2="17" y2="12"/></svg>
+      </button>
     </div>
-    <a class="header-cta" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Prendre rendez-vous</a>
+    <nav class="menu-panel" id="menuPanel" aria-label="Menu" hidden>
+      <a class="menu-link home" href="https://www.zbinden.online/fr/">← Accueil</a>
+      <a class="menu-link" href="#projekte">Projets</a>
+      <a class="menu-link" href="#werdegang">Parcours</a>
+      <a class="menu-link" href="#angebote">Offres</a>
+      <a class="menu-link" href="#kontakt">Contact</a>
+      <div class="menu-extra">
+        <div class="lang-switch" aria-label="Sprache / Langue / Language">
+          <a href="/fr/portfolio" hreflang="fr" lang="fr" aria-current="page">FR</a>
+          <a href="/portfolio" hreflang="de" lang="de">DE</a>
+          <a href="/en/portfolio" hreflang="en" lang="en">EN</a>
+        </div>
+        <a class="header-cta" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Prendre rendez-vous</a>
+      </div>
+    </nav>
   </div>
 </header>
 
@@ -811,6 +887,17 @@
           <li><span class="k">Technologies</span><span class="v">JavaScript, Python, C++, HTML/CSS, Vercel, Supabase, Azure, API d’IA (OpenAI, Perplexity) · développement agile (SCRUM), tests &amp; assurance qualité</span></li>
         </ul>
       </div>
+      <div class="me-quotes">
+        <figure>
+          <blockquote>« Grâce à sa capacité d'analyse précise et à sa vivacité d'esprit, elle était à tout moment en mesure de cerner correctement des situations difficiles et de trouver rapidement de bonnes solutions. […] Mme Zbinden a convaincu par sa fiabilité. »</blockquote>
+          <figcaption>Drees &amp; Sommer Schweiz AG · Certificat de travail, 2025</figcaption>
+        </figure>
+        <figure>
+          <blockquote>« Elle analysait avec précision les problèmes exigeants et élaborait des solutions de façon autonome. […] Elle était particulièrement appréciée des partenaires externes pour ses compétences techniques et sa personnalité agréable. »</blockquote>
+          <figcaption>Hexagon Manufacturing Intelligence · Certificat de travail, 2024</figcaption>
+        </figure>
+      </div>
+      <p class="me-note">Extraits de certificats de travail d'emplois précédents, traduits de l'allemand.</p>
     </div>
   </section>
 
@@ -933,6 +1020,17 @@
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     window.scrollTo({ top:0, behavior: reduce ? 'auto' : 'smooth' });
   });
+})();
+</script>
+<script>
+(function(){
+  var btn = document.getElementById('menuBtn'), panel = document.getElementById('menuPanel');
+  if (!btn || !panel) return;
+  function set(open){ btn.setAttribute('aria-expanded', String(open)); panel.hidden = !open; }
+  btn.addEventListener('click', function(e){ e.stopPropagation(); set(panel.hidden); });
+  panel.addEventListener('click', function(e){ if (e.target.closest('a')) set(false); });
+  document.addEventListener('click', function(e){ if (!panel.hidden && !panel.contains(e.target)) set(false); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !panel.hidden) { set(false); btn.focus(); } });
 })();
 </script>
 </body>

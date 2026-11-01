@@ -508,6 +508,10 @@
     box-shadow:0 24px 50px -18px rgba(0,0,0,.5);
   }
   @media (max-width:520px){ .mobile{ right:-4px; } }
+  a.showcase{ display:block; color:inherit; text-decoration:none; cursor:pointer; }
+  a.showcase .browser, a.showcase .mobile{ transition:transform .3s ease; }
+  a.showcase:hover .browser, a.showcase:focus-visible .browser{ transform:translateY(-4px); }
+  a.showcase:hover .mobile, a.showcase:focus-visible .mobile{ transform:translateY(-8px); }
 
   /* ---------- Reference ---------- */
   .ref-grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:clamp(32px,5vw,56px); align-items:center; }
@@ -685,6 +689,26 @@
     .hdr-tools .lang-switch, .hdr-tools .header-cta{ display:none; }
     .menu-extra{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; margin-top:6px; padding:12px .4em 2px; border-top:1px solid var(--sec-line); }
   }
+
+  /* ---------- Über mich: gleiches Bio-Modul auf allen Seiten ---------- */
+  .me{ display:grid; grid-template-columns:minmax(200px,280px) 1fr; gap:clamp(28px,5vw,56px); align-items:center; }
+  .me-photo{ display:block; width:100%; height:auto; aspect-ratio:3/4; object-fit:cover; border-radius:var(--r-md); border:1px solid var(--sec-line-gold); box-shadow:0 30px 70px -30px rgba(0,0,0,.45), 0 0 40px var(--sec-glow-soft); }
+  .me-body h2{ font-family:var(--font-display); font-size:clamp(1.5rem,2.6vw,1.9rem); font-weight:600; line-height:1.2; margin:12px 0 10px; }
+  .me-role{ font-family:var(--font-ui); font-weight:600; font-size:.78rem; letter-spacing:.06em; color:var(--sec-gold-deep); margin:0 0 16px; }
+  .me-text{ color:var(--sec-muted); line-height:1.75; max-width:62ch; font-weight:300; margin:0 0 18px; }
+  .me-facts{ list-style:none; padding:0; margin:0 0 24px; display:grid; gap:8px; }
+  .me-facts li{ position:relative; padding-left:18px; font-size:.9rem; line-height:1.5; color:var(--sec-ink); }
+  .me-facts li::before{ content:""; position:absolute; left:0; top:.6em; width:7px; height:7px; border-radius:50%; background:var(--sec-gold); }
+  .me-cta{ display:inline-block; font-family:var(--font-ui); font-weight:600; font-size:.82rem; color:var(--sec-gold-deep); text-decoration:none; border-bottom:1px solid var(--sec-line-gold); padding-bottom:2px; }
+  .me-cta:hover{ color:var(--sec-gold); }
+  .me-quotes{ margin-top:clamp(36px,5vw,52px); display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:22px; }
+  .me-quotes figure{ margin:0; border-left:2px solid var(--sec-line-gold); padding:2px 0 2px 18px; }
+  .me-quotes blockquote{ margin:0 0 10px; color:var(--sec-ink); font-weight:300; line-height:1.65; font-size:.92rem; }
+  .me-quotes figcaption{ font-size:.78rem; color:var(--sec-muted); font-family:var(--font-ui); }
+  .me-note{ margin:1.2em 0 0; font-size:.76rem; color:var(--sec-muted); font-weight:300; }
+  @media (max-width:760px){ .me{ grid-template-columns:1fr; } .me-photo{ max-width:220px; } }
+  .menu-link.about{ color:var(--sec-gold); border-bottom:1px solid var(--sec-line); border-radius:0; margin-bottom:4px; }
+  .menu-link.home:has(+ .menu-link.about){ border-bottom:0; margin-bottom:0; }
 </style>
 </head>
 <body>
@@ -716,10 +740,15 @@
     </div>
     <nav class="menu-panel" id="menuPanel" aria-label="Menü" hidden>
       <a class="menu-link home" href="https://www.zbinden.online/">← Startseite</a>
+      <a class="menu-link about" href="/portfolio">Über mich &amp; meine Projekte</a>
       <a class="menu-link" href="#angebot">Angebot</a>
       <a class="menu-link" href="#ki-check">KI-Check</a>
+      <a class="menu-link" href="#ablauf">Ablauf</a>
       <a class="menu-link" href="#faq">FAQ</a>
-      <a class="menu-link" href="#referenz">Referenz</a>
+      <a class="menu-link" href="#referenz">Referenzen</a>
+      <a class="menu-link" href="#ueber">Über mich</a>
+      <a class="menu-link" href="#weitere-angebote">Weitere Angebote</a>
+      <a class="menu-link" href="#kontakt">Kontakt</a>
       <div class="menu-extra">
         <div class="lang-switch" aria-label="Sprache / Langue / Language">
           <a href="/fr/webdesign" hreflang="fr" lang="fr">FR</a>
@@ -747,7 +776,7 @@
         </div>
         <p class="hero-note reveal d4"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="4" fill="#d52b1e"/><path d="M13 6h6v7h7v6h-7v7h-6v-7H6v-6h7z" fill="#fff"/></svg>Gehostet in der Schweiz, mit erneuerbarem Strom</p>
       </div>
-      <div class="showcase reveal d2">
+      <a class="showcase reveal d2" href="#referenz" aria-label="Zur Referenz: Waldmeier Planung&amp;Beratung">
         <div class="browser">
           <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">waldmeier-wpb.ch</span></div>
           <img src="/images/referenzen/waldmeier-desktop.webp" width="1440" height="900" alt="Startseite der Website von Waldmeier Planung&amp;Beratung in Oeschgen, Desktop-Ansicht">
@@ -755,7 +784,7 @@
         <div class="mobile">
           <img src="/images/referenzen/waldmeier-mobile.webp" width="390" height="844" alt="Website von Waldmeier Planung&amp;Beratung auf dem Smartphone" loading="lazy">
         </div>
-      </div>
+      </a>
     </div>
   </section>
 
@@ -1101,25 +1130,33 @@
   </section>
 
   <section id="ueber" class="section-dark">
-    <div class="wrap about-grid">
-      <div class="about-card">
-        <span class="ac-eyebrow">Gründerin</span>
-        <h3 class="ac-name">Pauline Zbinden</h3>
-        <p class="ac-role">Zbinden Software · Sisseln, Schweiz</p>
-        <div class="ac-rule"></div>
-        <span class="ac-eyebrow">Leistungen</span>
-        <ul class="ac-list">
-            <li>Webdesign mit GEO-Fundament</li>
-            <li>KI-Sichtbarkeits-Audits (GEO)</li>
-            <li>KI-Agenten &amp; Prozessautomatisierung</li>
-        </ul>
+    <div class="wrap">
+      <div class="me">
+        <img class="me-photo" src="/Pauline/BusinessAnalyst/pauline-portrait.jpg" alt="Pauline Zbinden, Gründerin von Zbinden Software" width="620" height="822" loading="lazy">
+        <div class="me-body">
+          <span class="eyebrow">Über mich</span>
+          <h2>Persönlich, direkt, aus der Region.</h2>
+          <p class="me-role">Pauline Zbinden · Gründerin von Zbinden Software · Sisseln AG</p>
+          <p class="me-text">Ich baue Websites für kleine Unternehmen, Betriebe und Vereine — ohne Agentur-Overhead: Sie haben von Anfang bis Ende eine Ansprechperson. Weil ich aus der Software-Entwicklung komme, achte ich auch auf das, was man nicht sieht: saubere Technik, schnelle Ladezeiten und Daten, die Google und KI-Systeme verstehen.</p>
+          <ul class="me-facts">
+            <li>Fast 5 Jahre Embedded-Software in C++ bei Hexagon Manufacturing Intelligence, Aarau</li>
+            <li>Anforderungsanalyse als Consultant bei Drees &amp; Sommer Schweiz</li>
+            <li>Mechatronik-Ingenieurin (trinationaler Studiengang CH · DE · FR), Deutsch und Französisch als Muttersprache</li>
+          </ul>
+          <a class="me-cta" href="/portfolio">Mein Werdegang &amp; meine Projekte →</a>
+        </div>
       </div>
-      <div>
-        <span class="eyebrow" style="display:block; margin-bottom:12px;">Über mich</span>
-        <h2 style="font-family:var(--font-display); font-size:1.7rem; margin-bottom:18px; font-weight:600;">Persönlich, direkt, aus der Region.</h2>
-        <p style="color:var(--sec-muted); line-height:1.75; max-width:62ch; font-weight:300;">Ich bin Pauline Zbinden und baue Websites für kleine Unternehmen, Betriebe und Vereine — ohne Agentur-Overhead: Sie haben von Anfang bis Ende eine Ansprechperson. Mein Hintergrund liegt in der Software-Entwicklung und Anforderungsanalyse; deshalb achte ich auf das, was man nicht sieht: saubere Technik, schnelle Ladezeiten und Daten, die Google und KI-Systeme verstehen.</p>
-        <a href="https://www.zbinden.online/#ueber-mich" style="display:inline-block; margin-top:16px; font-family:var(--font-ui); font-weight:600; font-size:.82rem; color:var(--sec-gold-deep); text-decoration:none; border-bottom:1px solid var(--sec-line-gold); padding-bottom:2px;">Mehr über mich →</a>
+      <div class="me-quotes">
+        <figure>
+          <blockquote>„Aufgrund ihrer genauen Analysefähigkeit und ihrer Auffassungsgabe war sie jederzeit in der Lage, auch schwierige Situationen sofort zutreffend zu erfassen und schnell gute Lösungen zu finden. […] Frau Zbinden überzeugte durch ihre Zuverlässigkeit.“</blockquote>
+          <figcaption>Drees &amp; Sommer Schweiz AG · Arbeitszeugnis, 2025</figcaption>
+        </figure>
+        <figure>
+          <blockquote>„Anspruchsvolle Problemstellungen analysierte sie genau und erarbeitete selbständig Lösungsansätze. […] Insbesondere im Umgang mit externen Partnern wurde sie aufgrund ihrer Fachkompetenz und ihrer angenehmen Persönlichkeit sehr geschätzt.“</blockquote>
+          <figcaption>Hexagon Manufacturing Intelligence · Arbeitszeugnis, 2024</figcaption>
+        </figure>
       </div>
+      <p class="me-note">Auszüge aus Arbeitszeugnissen früherer Anstellungen.</p>
     </div>
   </section>
 

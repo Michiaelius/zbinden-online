@@ -635,6 +635,26 @@
     .hdr-tools .lang-switch, .hdr-tools .header-cta{ display:none; }
     .menu-extra{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; margin-top:6px; padding:12px .4em 2px; border-top:1px solid var(--sec-line); }
   }
+
+  /* ---------- Über mich: gleiches Bio-Modul auf allen Seiten ---------- */
+  .me{ display:grid; grid-template-columns:minmax(200px,280px) 1fr; gap:clamp(28px,5vw,56px); align-items:center; }
+  .me-photo{ display:block; width:100%; height:auto; aspect-ratio:3/4; object-fit:cover; border-radius:var(--r-md); border:1px solid var(--sec-line-gold); box-shadow:0 30px 70px -30px rgba(0,0,0,.45), 0 0 40px var(--sec-glow-soft); }
+  .me-body h2{ font-family:var(--font-display); font-size:clamp(1.5rem,2.6vw,1.9rem); font-weight:600; line-height:1.2; margin:12px 0 10px; }
+  .me-role{ font-family:var(--font-ui); font-weight:600; font-size:.78rem; letter-spacing:.06em; color:var(--sec-gold-deep); margin:0 0 16px; }
+  .me-text{ color:var(--sec-muted); line-height:1.75; max-width:62ch; font-weight:300; margin:0 0 18px; }
+  .me-facts{ list-style:none; padding:0; margin:0 0 24px; display:grid; gap:8px; }
+  .me-facts li{ position:relative; padding-left:18px; font-size:.9rem; line-height:1.5; color:var(--sec-ink); }
+  .me-facts li::before{ content:""; position:absolute; left:0; top:.6em; width:7px; height:7px; border-radius:50%; background:var(--sec-gold); }
+  .me-cta{ display:inline-block; font-family:var(--font-ui); font-weight:600; font-size:.82rem; color:var(--sec-gold-deep); text-decoration:none; border-bottom:1px solid var(--sec-line-gold); padding-bottom:2px; }
+  .me-cta:hover{ color:var(--sec-gold); }
+  .me-quotes{ margin-top:clamp(36px,5vw,52px); display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:22px; }
+  .me-quotes figure{ margin:0; border-left:2px solid var(--sec-line-gold); padding:2px 0 2px 18px; }
+  .me-quotes blockquote{ margin:0 0 10px; color:var(--sec-ink); font-weight:300; line-height:1.65; font-size:.92rem; }
+  .me-quotes figcaption{ font-size:.78rem; color:var(--sec-muted); font-family:var(--font-ui); }
+  .me-note{ margin:1.2em 0 0; font-size:.76rem; color:var(--sec-muted); font-weight:300; }
+  @media (max-width:760px){ .me{ grid-template-columns:1fr; } .me-photo{ max-width:220px; } }
+  .menu-link.about{ color:var(--sec-gold); border-bottom:1px solid var(--sec-line); border-radius:0; margin-bottom:4px; }
+  .menu-link.home:has(+ .menu-link.about){ border-bottom:0; margin-bottom:0; }
 </style>
 </head>
 <body>
@@ -666,12 +686,18 @@
     </div>
     <nav class="menu-panel" id="menuPanel" aria-label="Menü" hidden>
       <a class="menu-link home" href="https://www.zbinden.online/">← Startseite</a>
+      <a class="menu-link about" href="/portfolio">Über mich &amp; meine Projekte</a>
       <a class="menu-link" href="#branchen">Rechner</a>
       <a class="menu-link" href="#pakete">Pakete</a>
+      <a class="menu-link" href="#betrieb">Nach dem Go-Live</a>
       <a class="menu-link" href="#datenschutz">Datenschutz</a>
+      <a class="menu-link" href="#praxis">Aus der Praxis</a>
+      <a class="menu-link" href="#beispiel">Rechenbeispiel</a>
       <a class="menu-link" href="#voice-demo">Live-Demo</a>
       <a class="menu-link" href="#fuer-wen">Für wen?</a>
       <a class="menu-link" href="#ueber">Über mich</a>
+      <a class="menu-link" href="#faq">FAQ</a>
+      <a class="menu-link" href="#weitere-angebote">Weitere Angebote</a>
       <a class="menu-link" href="#kontakt">Kontakt</a>
       <div class="menu-extra">
         <div class="lang-switch" aria-label="Sprache / Langue / Language">
@@ -1120,24 +1146,32 @@
 
   <section id="ueber" class="section-dark">
     <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">Über mich</span>
-        <h2>Eine Ingenieurin statt einer Agentur</h2>
+      <div class="me">
+        <img class="me-photo" src="/Pauline/BusinessAnalyst/pauline-portrait.jpg" alt="Pauline Zbinden, Gründerin von Zbinden Software" width="620" height="822" loading="lazy">
+        <div class="me-body">
+          <span class="eyebrow">Über mich</span>
+          <h2>Eine Ingenieurin statt einer Agentur</h2>
+          <p class="me-role">Pauline Zbinden · Gründerin von Zbinden Software · Sisseln AG</p>
+          <p class="me-text">Ich verbinde saubere Umsetzung mit einem klaren Blick dafür, welcher Prozess sich überhaupt zu automatisieren lohnt. Damit eine Automatisierung im Alltag zuverlässig läuft, braucht es die Teile, die man in einer Demo nicht sieht: Fehlerbehandlung, Tests, Datenschutz und eine Dokumentation, mit der auch jemand anderes weiterarbeiten kann.</p>
+          <ul class="me-facts">
+            <li>Fast 5 Jahre Embedded-Software in C++ bei Hexagon Manufacturing Intelligence, Aarau</li>
+            <li>Anforderungsanalyse als Consultant bei Drees &amp; Sommer Schweiz</li>
+            <li>Mechatronik-Ingenieurin (trinationaler Studiengang CH · DE · FR), Deutsch und Französisch als Muttersprache</li>
+          </ul>
+          <a class="me-cta" href="/portfolio">Mein Werdegang &amp; meine Projekte →</a>
+        </div>
       </div>
-      <p style="color:var(--sec-muted); line-height:1.75; max-width:62ch; font-weight:300; margin:0 0 1.2em;">Ich bin Pauline Zbinden, Gründerin von Zbinden Software. Fünf Jahre lang habe ich bei Hexagon Manufacturing Intelligence Embedded-Software in C++ entwickelt, danach als Consultant bei Drees &amp; Sommer Schweiz Anforderungen analysiert und in technische Lösungen übersetzt. Beides fliesst hier ein: saubere Umsetzung und ein klarer Blick dafür, welcher Prozess sich überhaupt zu automatisieren lohnt.</p>
-      <p style="color:var(--sec-muted); line-height:1.75; max-width:62ch; font-weight:300; margin:0 0 1.2em;">Mit KI-Werkzeugen lässt sich heute vieles in kurzer Zeit zusammenbauen, und das ist oft ein guter Anfang. Damit eine Automatisierung auch im Alltag zuverlässig läuft, braucht es die Teile, die man in einer Demo nicht sieht: Fehlerbehandlung, Tests, Datenschutz und eine Dokumentation, mit der auch jemand anderes weiterarbeiten kann. Das ist das Handwerk, das ich als Software-Entwicklerin gelernt habe.</p>
-      <a href="https://www.zbinden.online/#ueber-mich" style="display:inline-block; font-family:var(--font-ui); font-weight:600; font-size:.82rem; color:var(--sec-gold-deep); text-decoration:none; border-bottom:1px solid var(--sec-line-gold); padding-bottom:2px;">Mehr über mich &rarr;</a>
-      <div style="margin-top:2.8em; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:22px;">
-        <figure style="margin:0; border-left:2px solid var(--sec-line-gold); padding:2px 0 2px 18px;">
-          <blockquote style="margin:0 0 10px; color:var(--sec-ink); font-weight:300; line-height:1.65; font-size:.92rem;">„Aufgrund ihrer genauen Analysefähigkeit und ihrer Auffassungsgabe war sie jederzeit in der Lage, auch schwierige Situationen sofort zutreffend zu erfassen und schnell gute Lösungen zu finden. […] Frau Zbinden überzeugte durch ihre Zuverlässigkeit.“</blockquote>
-          <figcaption style="font-size:.78rem; color:var(--sec-muted); font-weight:400; font-family:var(--font-ui);">Drees &amp; Sommer Schweiz AG · Arbeitszeugnis, 2025</figcaption>
+      <div class="me-quotes">
+        <figure>
+          <blockquote>„Aufgrund ihrer genauen Analysefähigkeit und ihrer Auffassungsgabe war sie jederzeit in der Lage, auch schwierige Situationen sofort zutreffend zu erfassen und schnell gute Lösungen zu finden. […] Frau Zbinden überzeugte durch ihre Zuverlässigkeit.“</blockquote>
+          <figcaption>Drees &amp; Sommer Schweiz AG · Arbeitszeugnis, 2025</figcaption>
         </figure>
-        <figure style="margin:0; border-left:2px solid var(--sec-line-gold); padding:2px 0 2px 18px;">
-          <blockquote style="margin:0 0 10px; color:var(--sec-ink); font-weight:300; line-height:1.65; font-size:.92rem;">„Anspruchsvolle Problemstellungen analysierte sie genau und erarbeitete selbständig Lösungsansätze. […] Insbesondere im Umgang mit externen Partnern wurde sie aufgrund ihrer Fachkompetenz und ihrer angenehmen Persönlichkeit sehr geschätzt.“</blockquote>
-          <figcaption style="font-size:.78rem; color:var(--sec-muted); font-weight:400; font-family:var(--font-ui);">Hexagon Manufacturing Intelligence · Arbeitszeugnis, 2024</figcaption>
+        <figure>
+          <blockquote>„Anspruchsvolle Problemstellungen analysierte sie genau und erarbeitete selbständig Lösungsansätze. […] Insbesondere im Umgang mit externen Partnern wurde sie aufgrund ihrer Fachkompetenz und ihrer angenehmen Persönlichkeit sehr geschätzt.“</blockquote>
+          <figcaption>Hexagon Manufacturing Intelligence · Arbeitszeugnis, 2024</figcaption>
         </figure>
       </div>
-      <p style="margin:1.4em 0 0; font-size:.76rem; color:var(--sec-muted); font-weight:300;">Auszüge aus Arbeitszeugnissen früherer Anstellungen.</p>
+      <p class="me-note">Auszüge aus Arbeitszeugnissen früherer Anstellungen.</p>
     </div>
   </section>
 

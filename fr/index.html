@@ -444,6 +444,26 @@
     .hdr-tools .lang-switch, .hdr-tools .header-cta{ display:none; }
     .menu-extra{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; margin-top:6px; padding:12px .4em 2px; border-top:1px solid var(--sec-line); }
   }
+
+  /* ---------- Über mich: gleiches Bio-Modul auf allen Seiten ---------- */
+  .me{ display:grid; grid-template-columns:minmax(200px,280px) 1fr; gap:clamp(28px,5vw,56px); align-items:center; }
+  .me-photo{ display:block; width:100%; height:auto; aspect-ratio:3/4; object-fit:cover; border-radius:var(--r-md); border:1px solid var(--sec-line-gold); box-shadow:0 30px 70px -30px rgba(0,0,0,.45), 0 0 40px var(--sec-glow-soft); }
+  .me-body h2{ font-family:var(--font-display); font-size:clamp(1.5rem,2.6vw,1.9rem); font-weight:600; line-height:1.2; margin:12px 0 10px; }
+  .me-role{ font-family:var(--font-ui); font-weight:600; font-size:.78rem; letter-spacing:.06em; color:var(--sec-gold-deep); margin:0 0 16px; }
+  .me-text{ color:var(--sec-muted); line-height:1.75; max-width:62ch; font-weight:300; margin:0 0 18px; }
+  .me-facts{ list-style:none; padding:0; margin:0 0 24px; display:grid; gap:8px; }
+  .me-facts li{ position:relative; padding-left:18px; font-size:.9rem; line-height:1.5; color:var(--sec-ink); }
+  .me-facts li::before{ content:""; position:absolute; left:0; top:.6em; width:7px; height:7px; border-radius:50%; background:var(--sec-gold); }
+  .me-cta{ display:inline-block; font-family:var(--font-ui); font-weight:600; font-size:.82rem; color:var(--sec-gold-deep); text-decoration:none; border-bottom:1px solid var(--sec-line-gold); padding-bottom:2px; }
+  .me-cta:hover{ color:var(--sec-gold); }
+  .me-quotes{ margin-top:clamp(36px,5vw,52px); display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:22px; }
+  .me-quotes figure{ margin:0; border-left:2px solid var(--sec-line-gold); padding:2px 0 2px 18px; }
+  .me-quotes blockquote{ margin:0 0 10px; color:var(--sec-ink); font-weight:300; line-height:1.65; font-size:.92rem; }
+  .me-quotes figcaption{ font-size:.78rem; color:var(--sec-muted); font-family:var(--font-ui); }
+  .me-note{ margin:1.2em 0 0; font-size:.76rem; color:var(--sec-muted); font-weight:300; }
+  @media (max-width:760px){ .me{ grid-template-columns:1fr; } .me-photo{ max-width:220px; } }
+  .menu-link.about{ color:var(--sec-gold); border-bottom:1px solid var(--sec-line); border-radius:0; margin-bottom:4px; }
+  .menu-link.home:has(+ .menu-link.about){ border-bottom:0; margin-bottom:0; }
 </style>
 </head>
 <body>
@@ -468,7 +488,11 @@
       </button>
     </div>
     <nav class="menu-panel" id="menuPanel" aria-label="Menu" hidden>
-      <a class="menu-link" href="/fr/portfolio">À propos</a>
+      <a class="menu-link about" href="/fr/portfolio">Mon parcours et mes projets</a>
+      <a class="menu-link" href="#angebote">Offres</a>
+      <a class="menu-link" href="#fuer-wen">Pour qui ?</a>
+      <a class="menu-link" href="#ueber-mich">À propos</a>
+      <a class="menu-link" href="#faq">FAQ</a>
       <a class="menu-link" href="#kontakt">Contact</a>
       <div class="menu-extra">
         <div class="lang-switch" aria-label="Sprache / Langue / Language">
@@ -561,19 +585,32 @@
 
   <section id="ueber-mich" class="section-light">
     <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">À propos</span>
-        <h2>Qui se cache derrière Zbinden Software</h2>
-      </div>
-      <div class="bio-grid">
-        <img class="bio-portrait" src="/Pauline/BusinessAnalyst/pauline-portrait.jpg" alt="Pauline Zbinden, fondatrice de Zbinden Software" width="300" height="400">
-        <div class="bio-body reveal d1">
-          <p class="bio-role">Pauline Zbinden — Fondatrice · Conseil en processus &amp; développement logiciel</p>
-          <p>Chez Hexagon Manufacturing Intelligence à Aarau, j'ai développé en C++ des logiciels embarqués pour des systèmes de mesure Laser Tracker, puis, comme Junior Consultant chez Drees &amp; Sommer Suisse, j'ai traduit les besoins entre les métiers, la clientèle et le développement. Avec Zbinden Software, je réunis les deux – réalisation technique et analyse des besoins – au service des PME suisses.</p>
-          <p>J'ai fondé Zbinden Software en 2026 à Sisseln, dans le Fricktal (AG). Mon offre : l'automatisation des processus avec des agents IA, des audits GEO pour la visibilité dans ChatGPT, Perplexity et Google AI, et la création de sites web pour PME et associations.</p>
-          <a href="/fr/portfolio" style="display:inline-block; margin-top:22px; font-family:var(--font-ui); font-weight:600; font-size:.82rem; color:var(--sec-gold-deep); text-decoration:none; border-bottom:1px solid var(--sec-line-gold); padding-bottom:2px;">Voir mes projets et mon parcours →</a>
+      <div class="me">
+        <img class="me-photo" src="/Pauline/BusinessAnalyst/pauline-portrait.jpg" alt="Pauline Zbinden, fondatrice de Zbinden Software" width="620" height="822" loading="lazy">
+        <div class="me-body">
+          <span class="eyebrow">À propos</span>
+          <h2>Qui se cache derrière Zbinden Software</h2>
+          <p class="me-role">Pauline Zbinden · Fondatrice de Zbinden Software · Sisseln AG</p>
+          <p class="me-text">Je réunis deux choses qu'on trouve rarement chez une même personne : construire moi-même le logiciel et écouter attentivement ce dont une entreprise a vraiment besoin. J'aide ainsi les PME suisses — avec l'automatisation des processus par des agents IA, des audits GEO pour la visibilité dans ChatGPT, Perplexity et Google AI, et la création de sites web pour PME et associations.</p>
+          <ul class="me-facts">
+            <li>Près de 5 ans de logiciels embarqués en C++ chez Hexagon Manufacturing Intelligence, Aarau</li>
+            <li>Analyse des besoins comme consultante chez Drees &amp; Sommer Suisse</li>
+            <li>Ingénieure en mécatronique (cursus trinational CH · DE · FR), bilingue français et allemand</li>
+          </ul>
+          <a class="me-cta" href="/fr/portfolio">Mon parcours et mes projets →</a>
         </div>
       </div>
+      <div class="me-quotes">
+        <figure>
+          <blockquote>« Grâce à sa capacité d'analyse précise et à sa vivacité d'esprit, elle était à tout moment en mesure de cerner correctement des situations difficiles et de trouver rapidement de bonnes solutions. […] Mme Zbinden a convaincu par sa fiabilité. »</blockquote>
+          <figcaption>Drees &amp; Sommer Schweiz AG · Certificat de travail, 2025</figcaption>
+        </figure>
+        <figure>
+          <blockquote>« Elle analysait avec précision les problèmes exigeants et élaborait des solutions de façon autonome. […] Elle était particulièrement appréciée des partenaires externes pour ses compétences techniques et sa personnalité agréable. »</blockquote>
+          <figcaption>Hexagon Manufacturing Intelligence · Certificat de travail, 2024</figcaption>
+        </figure>
+      </div>
+      <p class="me-note">Extraits de certificats de travail d'emplois précédents, traduits de l'allemand.</p>
     </div>
   </section>
 
