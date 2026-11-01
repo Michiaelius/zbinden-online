@@ -606,6 +606,71 @@
   .more-card p{ margin:0; color:var(--sec-muted); font-size:.92rem; line-height:1.6; font-weight:300; flex:1; }
   .more-card .go{ font-family:var(--font-ui); font-weight:600; font-size:.82rem; color:var(--sec-gold-deep); }
 
+  /* ---------- Kostenloser Entwurf mit Logo + Farben ---------- */
+  .mp-label{ font-family:var(--font-ui); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--sec-muted); font-weight:600; padding:0; }
+  fieldset.field{ border:none; margin:0; padding:0; min-width:0; }
+  .mp-drop{ position:relative; display:grid; gap:4px; justify-items:center; text-align:center; padding:18px 14px; border:1px dashed var(--sec-line-gold); border-radius:var(--r-sm); background:var(--sec-gold-soft); cursor:pointer; transition:border-color .2s ease; }
+  .mp-drop input{ position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; }
+  .mp-drop:hover, .mp-drop.is-over, .mp-drop:focus-within{ border-color:var(--sec-gold); border-style:solid; }
+  .mp-drop-text{ font-family:var(--font-ui); font-weight:600; font-size:.86rem; color:var(--sec-ink); word-break:break-all; }
+  .mp-drop-hint{ font-size:.74rem; color:var(--sec-muted); font-weight:300; }
+  .mp-drop.has-file .mp-drop-hint{ display:none; }
+  .mp-logo-note{ margin:0; font-size:.8rem; color:var(--sec-gold-deep); font-weight:400; }
+  .mp-logo-note.is-err{ color:#c0392b; }
+  .mp-swatches{ display:grid; grid-template-columns:repeat(auto-fill,minmax(78px,1fr)); gap:12px 6px; margin-top:6px; }
+  .mp-sw{ position:relative; display:grid; justify-items:center; gap:6px; cursor:pointer; text-align:center; }
+  .mp-sw input{ position:absolute; opacity:0; width:1px; height:1px; }
+  .mp-dot{ width:38px; height:38px; border-radius:50%; box-shadow:inset 0 0 0 1px rgba(0,0,0,.08); transition:transform .15s ease, box-shadow .15s ease; transform:rotate(-45deg); }
+  .mp-dot.is-auto{ background:conic-gradient(#6e1f35,#e0893a,#56710f,#1d5a80,#9b1f3a,#6e1f35); }
+  .mp-dot.is-custom{ background:var(--sec-bg-3); box-shadow:inset 0 0 0 1px var(--sec-line-strong); position:relative; }
+  .mp-dot.is-custom::after{ content:"+"; position:absolute; inset:0; display:grid; place-items:center; transform:rotate(45deg); color:var(--sec-ink); font-size:1.2rem; font-weight:300; }
+  .mp-sw input:checked + .mp-dot{ box-shadow:0 0 0 2px var(--sec-bg-2), 0 0 0 4px var(--sec-gold-deep); transform:rotate(-45deg) scale(1.06); }
+  .mp-sw input:focus-visible + .mp-dot{ outline:1px solid var(--sec-gold-deep); outline-offset:5px; }
+  .mp-sw-name{ font-size:.7rem; color:var(--sec-muted); line-height:1.25; font-weight:300; }
+  .mp-sw input:checked ~ .mp-sw-name{ color:var(--sec-ink); font-weight:500; }
+  .mp-custom{ display:flex; flex-wrap:wrap; gap:10px 22px; margin-top:12px; }
+  .mp-custom label{ display:flex; align-items:center; gap:10px; font-size:.86rem; color:var(--sec-ink); font-weight:300; cursor:pointer; }
+  .mp-custom input[type=color]{ width:42px; height:32px; padding:0; border:1px solid var(--sec-line-strong); border-radius:8px; background:none; cursor:pointer; }
+  .mp-umfang{ display:flex; flex-wrap:wrap; gap:8px 20px; }
+  .mp-umfang legend{ margin-bottom:8px; }
+  .mp-umfang label{ display:flex; align-items:center; gap:8px; font-size:.88rem; color:var(--sec-ink); font-weight:300; cursor:pointer; }
+  .mp-umfang input{ accent-color:var(--sec-gold-deep); }
+  #entwurfForm .mp-sw, #entwurfForm .mp-custom label, #entwurfForm .mp-umfang label{ font-family:var(--font-ui); text-transform:none; letter-spacing:normal; font-size:.86rem; }
+  #entwurfForm .mp-sw-name{ font-size:.72rem; }
+  @media (min-width:861px){ .mp-split > .split-copy{ position:sticky; top:110px; } }
+
+  /* Mini-Vorschau: «Browserfenster» in den gewählten Farben */
+  .mp-preview{ --pv-bg:#f3f2ef; --pv-surface:#e2e0db; --pv-accent:#8b5733; --pv-dark:#2d3033; --pv-ink:#1d1e20; --pv-accent-ink:#fff;
+    margin-top:26px; border-radius:14px; overflow:hidden; background:var(--pv-bg); color:var(--pv-ink);
+    box-shadow:0 30px 60px -28px rgba(0,0,0,.45), 0 0 0 1px rgba(0,0,0,.06); font-family:var(--font-ui); }
+  .pv-bar{ display:flex; align-items:center; gap:6px; padding:9px 12px; background:var(--pv-dark); }
+  .pv-dot{ width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,.35); }
+  .pv-pal{ margin-left:auto; font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.85); }
+  .pv-head{ display:flex; align-items:center; gap:10px; padding:12px 16px; border-bottom:1px solid rgba(0,0,0,.07); }
+  .pv-logo{ width:30px; height:30px; flex:none; border-radius:50%; display:grid; place-items:center; background:var(--pv-dark); color:#fff; font-size:.7rem; font-weight:600; overflow:hidden; }
+  .pv-logo.has-img{ background:none; border-radius:4px; width:auto; max-width:90px; }
+  .pv-logo img{ height:30px; width:auto; max-width:90px; object-fit:contain; display:block; }
+  .pv-head .pv-name{ font-weight:600; font-size:.88rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0; }
+  .pv-btn{ margin-left:auto; flex:none; padding:.45em 1em; border-radius:999px; background:var(--pv-accent); color:var(--pv-accent-ink); font-size:.7rem; font-weight:600; }
+  .pv-hero{ display:grid; grid-template-columns:1.2fr .8fr; gap:16px; align-items:center; padding:22px 16px 24px; background:var(--pv-surface); }
+  .pv-hero > div:first-child{ display:grid; gap:8px; justify-items:start; min-width:0; }
+  .pv-kicker{ font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; color:var(--pv-ink); opacity:.7; font-weight:600; }
+  .pv-title{ font-family:var(--font-display); font-size:clamp(1.05rem,2.4vw,1.4rem); font-weight:700; line-height:1.15; overflow-wrap:anywhere; }
+  .pv-line{ height:7px; width:100%; border-radius:4px; background:currentColor; opacity:.14; }
+  .pv-line.short{ width:65%; }
+  .pv-cta{ margin-top:4px; padding:.5em 1.1em; border-radius:999px; background:var(--pv-accent); color:var(--pv-accent-ink); font-size:.7rem; font-weight:600; }
+  .pv-art{ position:relative; height:110px; }
+  .pv-art span{ position:absolute; bottom:0; border-radius:60px 60px 0 0; }
+  .pv-art span:nth-child(1){ left:0; width:30%; height:70%; background:var(--pv-dark); }
+  .pv-art span:nth-child(2){ left:35%; width:32%; height:100%; background:var(--pv-accent); }
+  .pv-art span:nth-child(3){ right:0; width:26%; height:55%; background:var(--pv-dark); opacity:.75; }
+  .pv-foot{ height:16px; background:var(--pv-dark); }
+  .mp-preview, .pv-bar, .pv-btn, .pv-cta, .pv-hero, .pv-art span, .pv-foot{ transition:background-color .35s ease; }
+  .mp-offer-cta{ display:flex; flex-wrap:wrap; align-items:center; gap:10px 18px; margin:28px 0 0; }
+  .mp-offer-cta span{ font-size:.86rem; color:var(--sec-muted); font-weight:300; }
+  .split-copy .mp-caption{ margin:12px 0 0; font-size:.8rem; text-align:center; max-width:none; }
+  @media (prefers-reduced-motion:reduce){ .mp-preview, .pv-bar, .pv-btn, .pv-cta, .pv-hero, .pv-art span, .pv-foot, .mp-dot{ transition:none; } }
+
   /* ---------- Kauf / Abo ---------- */
   html:not([data-pay="abo"]) .abo-only, html[data-pay="abo"] .kauf-only{ display:none !important; }
   .pay-bar{ display:flex; flex-wrap:wrap; align-items:center; gap:12px 22px; margin:-8px 0 28px; }
@@ -742,6 +807,7 @@
       <a class="menu-link home" href="https://www.zbinden.online/">← Startseite</a>
       <a class="menu-link about" href="/portfolio">Über mich &amp; meine Projekte</a>
       <a class="menu-link" href="#angebot">Angebot</a>
+      <a class="menu-link" href="#entwurf">Kostenloser Entwurf</a>
       <a class="menu-link" href="#ki-check">KI-Check</a>
       <a class="menu-link" href="#ablauf">Ablauf</a>
       <a class="menu-link" href="#faq">FAQ</a>
@@ -916,7 +982,97 @@
           <li>Domain, Inhalte und Daten gehören immer Ihnen, der Export am Ende ist kostenlos</li>
         </ul>
       </div>
+      <p class="mp-offer-cta"><a class="btn-primary" href="#entwurf">Kostenlosen Entwurf anfordern</a><span>Mit Ihrem Logo und Ihren Farben, ob Kauf oder Abo.</span></p>
       <p class="credit-banner">Sie haben schon eine Website und möchten nur von KI-Assistenten gefunden werden? <a href="/geo-audit#pakete" style="color:inherit;">GEO-Audit ab CHF 490 →</a></p>
+    </div>
+  </section>
+
+  <section id="entwurf" class="section-light">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Kostenloser Entwurf</span>
+        <h2>Sehen Sie Ihre neue Website, bevor Sie sich entscheiden</h2>
+      </div>
+      <div class="split mp-split">
+        <div class="split-copy">
+          <p>Laden Sie Ihr Logo hoch und wählen Sie Ihre Farben. Ich baue daraus einen ersten Entwurf Ihrer Website, mit Ihren Inhalten. Den Link erhalten Sie innerhalb von 2 Werktagen.</p>
+          <p>Kostenlos und unverbindlich: Gefällt Ihnen der Entwurf, mieten oder kaufen Sie die Website. Sonst nicht.</p>
+          <div class="mp-preview" id="entwurfPreview" aria-hidden="true">
+            <div class="pv-bar"><span class="pv-dot"></span><span class="pv-dot"></span><span class="pv-dot"></span><span class="pv-pal"></span></div>
+            <div class="pv-head"><span class="pv-logo"></span><span class="pv-name"></span><span class="pv-btn">Anfrage</span></div>
+            <div class="pv-hero">
+              <div>
+                <span class="pv-kicker">Willkommen</span>
+                <span class="pv-title pv-name"></span>
+                <span class="pv-line"></span><span class="pv-line short"></span>
+                <span class="pv-cta">Kontakt aufnehmen</span>
+              </div>
+              <div class="pv-art"><span></span><span></span><span></span></div>
+            </div>
+            <div class="pv-foot"></div>
+          </div>
+          <p class="mp-caption">So startet Ihr Entwurf: mit Ihrem Logo und Ihren Farben.</p>
+        </div>
+        <div class="package-card reveal d1">
+          <span class="package-tag">Kostenlos</span>
+          <form class="request" id="entwurfForm"
+            data-lang="de" data-t-auto="Überraschen Sie mich" data-t-auto-short="Passend zu Ihrer Branche" data-t-custom="Eigene Farben"
+            data-t-placeholder="Ihr Unternehmen" data-t-sending="Wird gesendet …"
+            data-t-logo-type="Bitte ein Bild als PNG, JPG, SVG oder WebP." data-t-logo-size="Das Logo ist grösser als 2 MB."
+            data-t-logo-colors="Farben aus Ihrem Logo übernommen. Sie können sie unten anpassen.">
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+            <div class="field">
+              <label for="mp-company">Unternehmen &amp; Ort</label>
+              <input type="text" id="mp-company" name="company" placeholder="z. B. Malerei Vogel, Frick" autocomplete="organization" required>
+            </div>
+            <div class="field">
+              <label for="mp-url">Heutige Website <span class="opt">(falls vorhanden)</span></label>
+              <input type="text" id="mp-url" name="website" inputmode="url" placeholder="www.…" autocomplete="url">
+            </div>
+            <div class="field">
+              <label for="mp-message">Was bieten Sie an? <span class="opt">(ohne Website: bitte kurz beschreiben)</span></label>
+              <textarea id="mp-message" name="message" placeholder="z. B. Malerarbeiten innen und aussen, Fassaden, Tapeten"></textarea>
+            </div>
+            <div class="field">
+              <span class="mp-label">Logo <span class="opt">(falls vorhanden)</span></span>
+              <label class="mp-drop" for="mp-logo">
+                <input type="file" id="mp-logo" name="logo" accept="image/png,image/jpeg,image/svg+xml,image/webp">
+                <span class="mp-drop-text">Logo hochladen oder hierher ziehen</span>
+                <span class="mp-drop-hint">PNG, JPG, SVG · max. 2 MB</span>
+              </label>
+              <p class="mp-logo-note" hidden></p>
+            </div>
+            <fieldset class="field mp-colors">
+              <legend class="mp-label">Farben</legend>
+              <div class="mp-swatches"></div>
+              <div class="mp-custom" hidden>
+                <label><input type="color" name="haupt" value="#2d3033"> Hauptfarbe</label>
+                <label><input type="color" name="akzent" value="#c9a227"> Akzentfarbe</label>
+              </div>
+            </fieldset>
+            <fieldset class="field mp-umfang">
+              <legend class="mp-label">Umfang</legend>
+              <label><input type="radio" name="umfang" value="onepager"> Onepager</label>
+              <label><input type="radio" name="umfang" value="mehrseitig"> Mehrere Seiten</label>
+              <label><input type="radio" name="umfang" value="offen" checked> Weiss noch nicht</label>
+            </fieldset>
+            <div class="field-row">
+              <div class="field">
+                <label for="mp-email">E-Mail</label>
+                <input type="email" id="mp-email" name="email" placeholder="ihre@email.ch" autocomplete="email" required>
+              </div>
+              <div class="field">
+                <label for="mp-phone">Telefon <span class="opt">(optional)</span></label>
+                <input type="tel" id="mp-phone" name="phone" autocomplete="tel">
+              </div>
+            </div>
+            <button type="submit" class="btn-primary">Entwurf anfordern</button>
+            <p class="form-note">Kostenlos und unverbindlich. Ihre Angaben und Ihr Logo verwende ich nur für diesen Entwurf.</p>
+          </form>
+          <div class="form-status ok" id="entwurfOk" hidden>Danke! Ich baue Ihren Entwurf und sende Ihnen den Link innerhalb von 2 Werktagen.</div>
+          <div class="form-status err" id="entwurfErr" hidden>Das hat leider nicht geklappt. Schreiben Sie mir direkt an <a href="mailto:info@zbinden.online" style="color:inherit; text-decoration:underline;">info@zbinden.online</a>.</div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1245,6 +1401,7 @@
   <span class="mono"><a href="https://www.zbinden.online/">Zbinden Software</a> · <a href="https://www.zbinden.online/ki-agenten-automatisierung">KI-Agenten &amp; Automatisierung →</a> · <a href="https://www.zbinden.online/geo-audit">GEO-Audit →</a></span>
 </footer>
 
+<script src="/js/website-entwurf.js" defer></script>
 <script>
 (function(){
   var items = document.querySelectorAll('.reveal');
