@@ -524,6 +524,7 @@
   /* ---------- Reference ---------- */
   .ref-grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:clamp(32px,5vw,56px); align-items:center; }
   @media (max-width:900px){ .ref-grid{grid-template-columns:1fr;} }
+  .ref-grid + .ref-grid{ margin-top:clamp(56px,8vw,96px); padding-top:clamp(48px,7vw,80px); border-top:1px solid var(--sec-line); }
   .ref-copy h3{ font-family:var(--font-display); font-size:1.6rem; font-weight:700; margin:0 0 .4em; }
   .ref-copy .ref-sub{ font-family:var(--font-ui); font-size:.8rem; color:var(--sec-muted); margin:0 0 1.2em; }
   .ref-copy p{ color:var(--sec-muted); line-height:1.7; font-weight:300; margin:0 0 1.4em; max-width:56ch; }
@@ -760,11 +761,11 @@
       </div>
       <div class="showcase reveal d2">
         <div class="browser">
-          <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">spielgruppe-sunneschiin.ch</span></div>
-          <img src="/images/referenzen/sunneschiin-desktop.webp" width="1440" height="900" alt="Page d'accueil du site de la Spielgruppe Sunneschiin à Sisseln, vue ordinateur">
+          <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">waldmeier-wpb.ch</span></div>
+          <img src="/images/referenzen/waldmeier-desktop.webp" width="1440" height="900" alt="Page d’accueil du site de Waldmeier Planung&amp;Beratung à Oeschgen, vue ordinateur">
         </div>
         <div class="mobile">
-          <img src="/images/referenzen/sunneschiin-mobile.webp" width="390" height="844" alt="Site de la Spielgruppe Sunneschiin sur smartphone" loading="lazy">
+          <img src="/images/referenzen/waldmeier-mobile.webp" width="390" height="844" alt="Site de Waldmeier Planung&amp;Beratung sur smartphone" loading="lazy">
         </div>
       </div>
     </div>
@@ -808,7 +809,7 @@
             </ul>
             <p class="abo-extra kauf-only">Paiement : 50 % à la commande, 50 % à la mise en ligne, payable à 30 jours net.</p>
             <p class="abo-extra abo-only">Prix mensuel dès la mise en ligne, durée minimale 24 mois. Garder le site après l'abonnement : uniquement par achat.</p>
-            <p class="pkg-example">Exemple : <a href="#referenz">Spielgruppe Sunneschiin ↓</a></p>
+            <p class="pkg-example">Exemple : <a href="#referenz">Waldmeier Planung&amp;Beratung ↓</a></p>
           </div>
         </div>
         <div class="package-card reveal d2">
@@ -1029,8 +1030,32 @@
   <section id="referenz" class="section-light">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">Référence</span>
-        <h2>Un projet réalisé</h2>
+        <span class="eyebrow">Références</span>
+        <h2>Projets réalisés</h2>
+      </div>
+      <div class="ref-grid">
+        <div class="ref-copy reveal d1">
+          <h3>Waldmeier Planung&amp;Beratung</h3>
+          <p class="ref-sub">Permis de construire, plans &amp; conseil · Oeschgen AG</p>
+          <p>Un responsable communal des constructions qui accompagne les particuliers dans leurs petits projets jusqu’au permis de construire — et un site qui le fait comprendre en quelques secondes et transmet des demandes complètes.</p>
+          <ul class="package-list">
+            <li>Entièrement dans ses couleurs et avec son logo — j’adapte chaque site à l’image du client, pas l’inverse</li>
+            <li>Formulaire de demande guidé en sept étapes : projet, lieu, avancement, photos et plans — la demande arrive complète par e-mail, avec un tableau pour Excel</li>
+            <li>Suggestions de localité dès qu’on tape le code postal, photos et plans envoyés directement depuis le téléphone</li>
+            <li>Animation sur mesure : son vrai plan de situation se dessine trait par trait en arrière-plan</li>
+            <li>Hébergé en Suisse, avec données structurées et llms.txt pour que Google et les assistants IA comme ChatGPT le classent correctement</li>
+          </ul>
+          <a class="ref-link" href="https://waldmeier-wpb.ch/" target="_blank" rel="noopener">Voir le site ↗</a>
+        </div>
+        <div class="showcase reveal d2">
+          <div class="browser">
+            <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="browser-url">waldmeier-wpb.ch</span></div>
+            <img src="/images/referenzen/waldmeier-desktop.webp" width="1440" height="900" alt="Page d’accueil du site de Waldmeier Planung&amp;Beratung à Oeschgen, vue ordinateur" loading="lazy">
+          </div>
+          <div class="mobile">
+            <img src="/images/referenzen/waldmeier-mobile.webp" width="390" height="844" alt="Site de Waldmeier Planung&amp;Beratung sur smartphone" loading="lazy">
+          </div>
+        </div>
       </div>
       <div class="ref-grid">
         <div class="ref-copy reveal d1">
