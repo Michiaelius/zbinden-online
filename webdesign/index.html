@@ -636,7 +636,7 @@
   .mp-chip-txt{ display:grid; line-height:1.2; }
   .mp-chip-name{ font-size:.8rem; font-weight:500; }
   .mp-chip-hex{ font-size:.7rem; color:var(--sec-muted); font-variant-numeric:tabular-nums; letter-spacing:.04em; text-transform:uppercase; }
-  .mp-picker{ display:grid; gap:12px; padding:14px; border-radius:14px; background:var(--sec-bg); border:1px solid var(--sec-line); box-shadow:0 18px 40px -22px rgba(0,0,0,.35); max-width:300px; }
+  .mp-picker{ display:grid; grid-template-columns:minmax(0,1fr); gap:12px; padding:14px; box-sizing:border-box; width:100%; border-radius:14px; background:var(--sec-bg); border:1px solid var(--sec-line); box-shadow:0 18px 40px -22px rgba(0,0,0,.35); max-width:300px; }
   .mp-picker[hidden]{ display:none; }
   .mp-sv{ position:relative; height:150px; border-radius:10px; cursor:crosshair; touch-action:none;
     background:linear-gradient(to top,#000,transparent), linear-gradient(to right,#fff,hsl(var(--h,0),100%,50%)); }
@@ -648,7 +648,7 @@
   .mp-hue::-moz-range-thumb{ width:20px; height:20px; border-radius:50%; background:#fff; border:none; box-shadow:0 0 0 1px rgba(0,0,0,.25), 0 2px 6px rgba(0,0,0,.3); }
   .mp-picker-row{ display:flex; align-items:center; gap:10px; }
   .mp-picker-prev{ width:34px; height:34px; border-radius:50%; flex:none; box-shadow:inset 0 0 0 1px rgba(0,0,0,.1); }
-  #entwurfForm .mp-hex{ flex:1; min-width:0; padding:8px 10px; font-family:var(--font-ui); font-size:.86rem; text-transform:uppercase; letter-spacing:.04em; }
+  #entwurfForm .mp-hex{ flex:1 1 0; min-width:0; width:0; padding:8px 10px; font-family:var(--font-ui); font-size:.86rem; text-transform:uppercase; letter-spacing:.04em; }
   .mp-picker-ok{ border:none; border-radius:999px; padding:.6em 1.1em; cursor:pointer; font-family:var(--font-ui); font-weight:600; font-size:.74rem; letter-spacing:.06em; background:linear-gradient(120deg,var(--sec-gold-deep),var(--sec-gold)); color:var(--sec-on-gold); }
   .mp-tip{ flex-basis:100%; margin:6px 0 0; padding:12px 14px; border-radius:var(--r-sm); background:var(--sec-alt-soft); font-size:.8rem; line-height:1.55; color:var(--sec-muted); font-weight:300; }
   .mp-tip strong{ color:var(--sec-ink); font-weight:600; }
