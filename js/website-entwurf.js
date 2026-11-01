@@ -22,6 +22,11 @@
   };
   var D = form.dataset;
   var lang = D.lang || 'de';
+  var NAMES = {
+    fr: { pistazie: 'Pistache', schiefer: 'Ardoise & cuivre', flamingo: 'Flamant', kiwi: 'Kiwi', kokos: 'Coco', feige: 'Figue', glut: 'Braise', muschel: 'Coquillage', ozean: 'Océan', salbei: 'Sauge' },
+    en: { pistazie: 'Pistachio', schiefer: 'Slate & copper', flamingo: 'Flamingo', kiwi: 'Kiwi', kokos: 'Coconut', feige: 'Fig', glut: 'Ember', muschel: 'Shell', ozean: 'Ocean', salbei: 'Sage' },
+  }[lang];
+  if (NAMES) Object.keys(NAMES).forEach(function (k) { PALETTES[k][0] = NAMES[k]; });
   var grid = form.querySelector('.mp-swatches');
   var custom = form.querySelector('.mp-custom');
   var haupt = form.querySelector('[name="haupt"]');

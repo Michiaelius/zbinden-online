@@ -618,6 +618,92 @@
   .more-card p{ margin:0; color:var(--sec-muted); font-size:.92rem; line-height:1.6; font-weight:300; flex:1; }
   .more-card .go{ font-family:var(--font-ui); font-weight:600; font-size:.82rem; color:var(--sec-gold-deep); }
 
+  /* ---------- Kostenloser Entwurf mit Logo + Farben ---------- */
+  .mp-label{ font-family:var(--font-ui); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--sec-muted); font-weight:600; padding:0; }
+  fieldset.field{ border:none; margin:0; padding:0; min-width:0; }
+  .mp-drop{ position:relative; display:grid; gap:4px; justify-items:center; text-align:center; padding:18px 14px; border:1px dashed var(--sec-line-gold); border-radius:var(--r-sm); background:var(--sec-gold-soft); cursor:pointer; transition:border-color .2s ease; }
+  .mp-drop input{ position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; }
+  .mp-drop:hover, .mp-drop.is-over, .mp-drop:focus-within{ border-color:var(--sec-gold); border-style:solid; }
+  .mp-drop-text{ font-family:var(--font-ui); font-weight:600; font-size:.86rem; color:var(--sec-ink); word-break:break-all; }
+  .mp-drop-hint{ font-size:.74rem; color:var(--sec-muted); font-weight:300; }
+  .mp-drop.has-file .mp-drop-hint{ display:none; }
+  .mp-logo-note{ margin:0; font-size:.8rem; color:var(--sec-gold-deep); font-weight:400; }
+  .mp-logo-note.is-err{ color:#c0392b; }
+  .mp-swatches{ display:grid; grid-template-columns:repeat(auto-fill,minmax(78px,1fr)); gap:12px 6px; margin-top:6px; }
+  .mp-sw{ position:relative; display:grid; justify-items:center; gap:6px; cursor:pointer; text-align:center; }
+  .mp-sw input{ position:absolute; opacity:0; width:1px; height:1px; }
+  .mp-dot{ width:38px; height:38px; border-radius:50%; box-shadow:inset 0 0 0 1px rgba(0,0,0,.08); transition:transform .15s ease, box-shadow .15s ease; transform:rotate(-45deg); }
+  .mp-dot.is-auto{ background:conic-gradient(#6e1f35,#e0893a,#56710f,#1d5a80,#9b1f3a,#6e1f35); }
+  .mp-dot.is-custom{ background:var(--sec-bg-3); box-shadow:inset 0 0 0 1px var(--sec-line-strong); position:relative; }
+  .mp-dot.is-custom::after{ content:"+"; position:absolute; inset:0; display:grid; place-items:center; transform:rotate(45deg); color:var(--sec-ink); font-size:1.2rem; font-weight:300; }
+  .mp-sw input:checked + .mp-dot{ box-shadow:0 0 0 2px var(--sec-bg-2), 0 0 0 4px var(--sec-gold-deep); transform:rotate(-45deg) scale(1.06); }
+  .mp-sw input:focus-visible + .mp-dot{ outline:1px solid var(--sec-gold-deep); outline-offset:5px; }
+  .mp-sw-name{ font-size:.7rem; color:var(--sec-muted); line-height:1.25; font-weight:300; }
+  .mp-sw input:checked ~ .mp-sw-name{ color:var(--sec-ink); font-weight:500; }
+  .mp-custom{ margin-top:14px; display:grid; gap:12px; }
+  .mp-chips{ display:flex; flex-wrap:wrap; gap:10px; }
+  .mp-chip{ display:flex; align-items:center; gap:10px; padding:6px 16px 6px 6px; border-radius:999px; border:1px solid var(--sec-line-strong); background:var(--sec-bg); cursor:pointer; font-family:var(--font-ui); color:var(--sec-ink); text-align:left; transition:border-color .15s ease, box-shadow .15s ease; }
+  .mp-chip:hover, .mp-chip[aria-expanded="true"]{ border-color:var(--sec-gold-deep); box-shadow:0 0 0 3px var(--sec-gold-soft); }
+  .mp-chip-dot{ width:30px; height:30px; border-radius:50%; flex:none; box-shadow:inset 0 0 0 1px rgba(0,0,0,.1); }
+  .mp-chip-txt{ display:grid; line-height:1.2; }
+  .mp-chip-name{ font-size:.8rem; font-weight:500; }
+  .mp-chip-hex{ font-size:.7rem; color:var(--sec-muted); font-variant-numeric:tabular-nums; letter-spacing:.04em; text-transform:uppercase; }
+  .mp-picker{ display:grid; grid-template-columns:minmax(0,1fr); gap:12px; padding:14px; box-sizing:border-box; width:100%; border-radius:14px; background:var(--sec-bg); border:1px solid var(--sec-line); box-shadow:0 18px 40px -22px rgba(0,0,0,.35); max-width:300px; }
+  .mp-picker[hidden]{ display:none; }
+  .mp-sv{ position:relative; height:150px; border-radius:10px; cursor:crosshair; touch-action:none;
+    background:linear-gradient(to top,#000,transparent), linear-gradient(to right,#fff,hsl(var(--h,0),100%,50%)); }
+  .mp-sv:focus-visible{ outline:2px solid var(--sec-gold-deep); outline-offset:2px; }
+  .mp-sv-thumb{ position:absolute; width:18px; height:18px; margin:-9px 0 0 -9px; border-radius:50%; border:2px solid #fff; box-shadow:0 0 0 1px rgba(0,0,0,.3), 0 2px 6px rgba(0,0,0,.3); pointer-events:none; }
+  #entwurfForm .mp-hue{ -webkit-appearance:none; appearance:none; width:100%; height:14px; border-radius:999px; margin:0; padding:0; border:none; cursor:pointer;
+    background:linear-gradient(to right,#f00,#ff0,#0f0,#0ff,#00f,#f0f,#f00); }
+  .mp-hue::-webkit-slider-thumb{ -webkit-appearance:none; width:20px; height:20px; border-radius:50%; background:#fff; border:none; box-shadow:0 0 0 1px rgba(0,0,0,.25), 0 2px 6px rgba(0,0,0,.3); }
+  .mp-hue::-moz-range-thumb{ width:20px; height:20px; border-radius:50%; background:#fff; border:none; box-shadow:0 0 0 1px rgba(0,0,0,.25), 0 2px 6px rgba(0,0,0,.3); }
+  .mp-picker-row{ display:flex; align-items:center; gap:10px; }
+  .mp-picker-prev{ width:34px; height:34px; border-radius:50%; flex:none; box-shadow:inset 0 0 0 1px rgba(0,0,0,.1); }
+  #entwurfForm .mp-hex{ flex:1 1 0; min-width:0; width:0; padding:8px 10px; font-family:var(--font-ui); font-size:.86rem; text-transform:uppercase; letter-spacing:.04em; }
+  .mp-picker-ok{ border:none; border-radius:999px; padding:.6em 1.1em; cursor:pointer; font-family:var(--font-ui); font-weight:600; font-size:.74rem; letter-spacing:.06em; background:linear-gradient(120deg,var(--sec-gold-deep),var(--sec-gold)); color:var(--sec-on-gold); }
+  .mp-tip{ flex-basis:100%; margin:6px 0 0; padding:12px 14px; border-radius:var(--r-sm); background:var(--sec-alt-soft); font-size:.8rem; line-height:1.55; color:var(--sec-muted); font-weight:300; }
+  .mp-tip strong{ color:var(--sec-ink); font-weight:600; }
+  .mp-umfang{ display:flex; flex-wrap:wrap; gap:8px 20px; }
+  .mp-umfang legend{ margin-bottom:8px; }
+  .mp-umfang label{ display:flex; align-items:center; gap:8px; font-size:.88rem; color:var(--sec-ink); font-weight:300; cursor:pointer; }
+  .mp-umfang input{ accent-color:var(--sec-gold-deep); }
+  #entwurfForm .mp-sw, #entwurfForm .mp-custom label, #entwurfForm .mp-umfang label{ font-family:var(--font-ui); text-transform:none; letter-spacing:normal; font-size:.86rem; }
+  #entwurfForm .mp-sw-name{ font-size:.72rem; }
+  @media (min-width:861px){ .mp-split > .split-copy{ position:sticky; top:110px; } }
+
+  /* Mini-Vorschau: «Browserfenster» in den gewählten Farben */
+  .mp-preview{ --pv-bg:#f3f2ef; --pv-surface:#e2e0db; --pv-accent:#8b5733; --pv-dark:#2d3033; --pv-ink:#1d1e20; --pv-accent-ink:#fff;
+    margin-top:26px; border-radius:14px; overflow:hidden; background:var(--pv-bg); color:var(--pv-ink);
+    box-shadow:0 30px 60px -28px rgba(0,0,0,.45), 0 0 0 1px rgba(0,0,0,.06); font-family:var(--font-ui); }
+  .pv-bar{ display:flex; align-items:center; gap:6px; padding:9px 12px; background:var(--pv-dark); }
+  .pv-dot{ width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,.35); }
+  .pv-pal{ margin-left:auto; font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.85); }
+  .pv-head{ display:flex; align-items:center; gap:10px; padding:12px 16px; border-bottom:1px solid rgba(0,0,0,.07); }
+  .pv-logo{ width:30px; height:30px; flex:none; border-radius:50%; display:grid; place-items:center; background:var(--pv-dark); color:#fff; font-size:.7rem; font-weight:600; overflow:hidden; }
+  .pv-logo.has-img{ background:none; border-radius:4px; width:auto; max-width:90px; }
+  .pv-logo img{ height:30px; width:auto; max-width:90px; object-fit:contain; display:block; }
+  .pv-head .pv-name{ font-weight:600; font-size:.88rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0; }
+  .pv-btn{ margin-left:auto; flex:none; padding:.45em 1em; border-radius:999px; background:var(--pv-accent); color:var(--pv-accent-ink); font-size:.7rem; font-weight:600; }
+  .pv-hero{ display:grid; grid-template-columns:1.2fr .8fr; gap:16px; align-items:center; padding:22px 16px 24px; background:var(--pv-surface); }
+  .pv-hero > div:first-child{ display:grid; gap:8px; justify-items:start; min-width:0; }
+  .pv-kicker{ font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; color:var(--pv-ink); opacity:.7; font-weight:600; }
+  .pv-title{ font-family:var(--font-display); font-size:clamp(1.05rem,2.4vw,1.4rem); font-weight:700; line-height:1.15; overflow-wrap:anywhere; }
+  .pv-line{ height:7px; width:100%; border-radius:4px; background:currentColor; opacity:.14; }
+  .pv-line.short{ width:65%; }
+  .pv-cta{ margin-top:4px; padding:.5em 1.1em; border-radius:999px; background:var(--pv-accent); color:var(--pv-accent-ink); font-size:.7rem; font-weight:600; }
+  .pv-art{ position:relative; height:110px; }
+  .pv-art span{ position:absolute; bottom:0; border-radius:60px 60px 0 0; }
+  .pv-art span:nth-child(1){ left:0; width:30%; height:70%; background:var(--pv-dark); }
+  .pv-art span:nth-child(2){ left:35%; width:32%; height:100%; background:var(--pv-accent); }
+  .pv-art span:nth-child(3){ right:0; width:26%; height:55%; background:var(--pv-dark); opacity:.75; }
+  .pv-foot{ height:16px; background:var(--pv-dark); }
+  .mp-preview, .pv-bar, .pv-btn, .pv-cta, .pv-hero, .pv-art span, .pv-foot{ transition:background-color .35s ease; }
+  .mp-offer-cta{ display:flex; flex-wrap:wrap; align-items:center; gap:10px 18px; margin:28px 0 0; }
+  .mp-offer-cta span{ font-size:.86rem; color:var(--sec-muted); font-weight:300; }
+  .split-copy .mp-caption{ margin:12px 0 0; font-size:.8rem; text-align:center; max-width:none; }
+  @media (prefers-reduced-motion:reduce){ .mp-preview, .pv-bar, .pv-btn, .pv-cta, .pv-hero, .pv-art span, .pv-foot, .mp-dot{ transition:none; } }
+
   /* ---------- Kauf / Abo ---------- */
   html:not([data-pay="abo"]) .abo-only, html[data-pay="abo"] .kauf-only{ display:none !important; }
   .pay-bar{ display:flex; flex-wrap:wrap; align-items:center; gap:12px 22px; margin:-8px 0 28px; }
@@ -754,6 +840,7 @@
       <a class="menu-link home" href="https://www.zbinden.online/fr/">← Accueil</a>
       <a class="menu-link about" href="/fr/portfolio">Mon parcours et mes projets</a>
       <a class="menu-link" href="#angebot">Offre</a>
+      <a class="menu-link" href="#entwurf">Ébauche gratuite</a>
       <a class="menu-link" href="#ki-check">Test IA</a>
       <a class="menu-link" href="#ablauf">Déroulement</a>
       <a class="menu-link" href="#faq">FAQ</a>
@@ -928,7 +1015,111 @@
           <li>Le nom de domaine, les contenus et les données vous appartiennent toujours, l'export à la fin est gratuit</li>
         </ul>
       </div>
+      <p class="mp-offer-cta"><a class="btn-primary" href="#entwurf">Demander une ébauche gratuite</a><span>Avec votre logo et vos couleurs, à l’achat comme en abonnement.</span></p>
       <p class="credit-banner">Vous avez déjà un site et voulez simplement être trouvé par les assistants IA ? <a href="/fr/geo-audit#pakete" style="color:inherit;">Audit GEO dès CHF 490 →</a></p>
+    </div>
+  </section>
+
+  <section id="entwurf" class="section-light">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Ébauche gratuite</span>
+        <h2>Découvrez votre nouveau site avant de vous décider</h2>
+      </div>
+      <div class="split mp-split">
+        <div class="split-copy">
+          <p>Téléchargez votre logo et choisissez vos couleurs. J’en fais une première ébauche de votre site, avec vos contenus. Vous recevez le lien dans les 2 jours ouvrables.</p>
+          <p>Gratuit et sans engagement : si l’ébauche vous plaît, vous louez ou achetez le site. Sinon, rien.</p>
+          <div class="mp-preview" id="entwurfPreview" aria-hidden="true">
+            <div class="pv-bar"><span class="pv-dot"></span><span class="pv-dot"></span><span class="pv-dot"></span><span class="pv-pal"></span></div>
+            <div class="pv-head"><span class="pv-logo"></span><span class="pv-name"></span><span class="pv-btn">Contact</span></div>
+            <div class="pv-hero">
+              <div>
+                <span class="pv-kicker">Bienvenue</span>
+                <span class="pv-title pv-name"></span>
+                <span class="pv-line"></span><span class="pv-line short"></span>
+                <span class="pv-cta">Prendre contact</span>
+              </div>
+              <div class="pv-art"><span></span><span></span><span></span></div>
+            </div>
+            <div class="pv-foot"></div>
+          </div>
+          <p class="mp-caption">Votre ébauche commence ainsi : avec votre logo et vos couleurs.</p>
+        </div>
+        <div class="package-card reveal d1">
+          <span class="package-tag">Gratuit</span>
+          <form class="request" id="entwurfForm"
+            data-lang="fr" data-t-auto="Surprenez-moi" data-t-auto-short="Selon votre branche" data-t-custom="Mes couleurs"
+            data-t-placeholder="Votre entreprise" data-t-sending="Envoi en cours …"
+            data-t-logo-type="Merci de choisir une image PNG, JPG, SVG ou WebP." data-t-logo-size="Le logo dépasse 2 Mo."
+            data-t-logo-colors="Couleurs reprises de votre logo. Vous pouvez les ajuster ci-dessous.">
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+            <div class="field">
+              <label for="mp-company">Entreprise &amp; lieu</label>
+              <input type="text" id="mp-company" name="company" placeholder="p. ex. Peinture Rochat, Fribourg" autocomplete="organization" required>
+            </div>
+            <div class="field">
+              <label for="mp-url">Site actuel <span class="opt">(si existant)</span></label>
+              <input type="text" id="mp-url" name="website" inputmode="url" placeholder="www.…" autocomplete="url">
+            </div>
+            <div class="field">
+              <label for="mp-message">Que proposez-vous ? <span class="opt">(sans site : décrivez brièvement)</span></label>
+              <textarea id="mp-message" name="message" placeholder="p. ex. peinture intérieure et extérieure, façades, papiers peints"></textarea>
+            </div>
+            <div class="field">
+              <span class="mp-label">Logo <span class="opt">(si existant)</span></span>
+              <label class="mp-drop" for="mp-logo">
+                <input type="file" id="mp-logo" name="logo" accept="image/png,image/jpeg,image/svg+xml,image/webp">
+                <span class="mp-drop-text">Télécharger le logo ou le glisser ici</span>
+                <span class="mp-drop-hint">PNG, JPG, SVG · max. 2 Mo</span>
+              </label>
+              <p class="mp-logo-note" hidden></p>
+            </div>
+            <fieldset class="field mp-colors">
+              <legend class="mp-label">Couleurs</legend>
+              <div class="mp-swatches"></div>
+              <div class="mp-custom" hidden>
+                <input type="hidden" name="haupt" value="#2d3033">
+                <input type="hidden" name="akzent" value="#c9a227">
+                <div class="mp-chips">
+                  <button type="button" class="mp-chip" data-target="haupt" aria-expanded="false"><span class="mp-chip-dot"></span><span class="mp-chip-txt"><span class="mp-chip-name">Couleur principale</span><span class="mp-chip-hex"></span></span></button>
+                  <button type="button" class="mp-chip" data-target="akzent" aria-expanded="false"><span class="mp-chip-dot"></span><span class="mp-chip-txt"><span class="mp-chip-name">Couleur d’accent</span><span class="mp-chip-hex"></span></span></button>
+                </div>
+                <div class="mp-picker" hidden>
+                  <div class="mp-sv" role="slider" tabindex="0" aria-label="Saturation et luminosité"><span class="mp-sv-thumb"></span></div>
+                  <input type="range" class="mp-hue" min="0" max="360" step="1" aria-label="Teinte">
+                  <div class="mp-picker-row">
+                    <span class="mp-picker-prev"></span>
+                    <input type="text" class="mp-hex" maxlength="7" spellcheck="false" aria-label="Code hex">
+                    <button type="button" class="mp-picker-ok">OK</button>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset class="field mp-umfang">
+              <legend class="mp-label">Ampleur</legend>
+              <label><input type="radio" name="umfang" value="onepager"> Onepager</label>
+              <label><input type="radio" name="umfang" value="mehrseitig"> Plusieurs pages</label>
+              <label><input type="radio" name="umfang" value="offen" checked> Pas encore décidé</label>
+              <p class="mp-tip"><strong>Conseil :</strong> une offre principale qui s’explique sur une seule page ? Un onepager suffit. Vous proposez plusieurs prestations qui méritent chacune leur propre explication ? Un site de plusieurs pages convient mieux, et l’on vous trouve pour chaque prestation séparément. Pas d’inquiétude : ce choix n’est pas définitif, nous en discutons ensemble.</p>
+            </fieldset>
+            <div class="field-row">
+              <div class="field">
+                <label for="mp-email">E-mail</label>
+                <input type="email" id="mp-email" name="email" placeholder="votre@email.ch" autocomplete="email" required>
+              </div>
+              <div class="field">
+                <label for="mp-phone">Téléphone <span class="opt">(facultatif)</span></label>
+                <input type="tel" id="mp-phone" name="phone" autocomplete="tel">
+              </div>
+            </div>
+            <button type="submit" class="btn-primary">Demander l’ébauche</button>
+            <p class="form-note">Gratuit et sans engagement. J’utilise vos données et votre logo uniquement pour cette ébauche.</p>
+          </form>
+          <div class="form-status ok" id="entwurfOk" hidden>Merci ! Je prépare votre ébauche et vous envoie le lien dans les 2 jours ouvrables.</div>
+          <div class="form-status err" id="entwurfErr" hidden>Cela n’a malheureusement pas fonctionné. Écrivez-moi directement à <a href="mailto:info@zbinden.online" style="color:inherit; text-decoration:underline;">info@zbinden.online</a>.</div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1257,6 +1448,7 @@
   <span class="mono"><a href="https://www.zbinden.online/fr/">Zbinden Software</a> · <a href="https://www.zbinden.online/fr/ki-agenten-automatisierung">Agents IA &amp; automatisation →</a> · <a href="https://www.zbinden.online/fr/geo-audit">Audit GEO →</a></span>
 </footer>
 
+<script src="/js/website-entwurf.js" defer></script>
 <script>
 (function(){
   var items = document.querySelectorAll('.reveal');
