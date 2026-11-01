@@ -345,7 +345,7 @@ export default async function handler(req, res) {
   const c = data.website ? t.geoLight : t.request;
   // Lien de la signature : selon l'intérêt choisi dans le formulaire, sinon selon la page d'origine.
   const topic = data.website ? 'geo' : data.package || data.page;
-  const link = /geo/i.test(topic) ? t.geo : /web/i.test(topic) ? t.web : /ki-agenten/i.test(data.page) ? t.ki : t.geo;
+  const link = /geo/i.test(topic) ? t.geo : /web/i.test(topic) ? t.web : /automati|ki-agent/i.test(topic) || /ki-agenten/i.test(data.page) ? t.ki : t.geo;
   const stamp = Date.now();
 
   try {

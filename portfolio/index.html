@@ -353,6 +353,8 @@
   .cta-band h2{ font-family:var(--font-display); font-size:clamp(1.7rem,2.8vw,2.3rem); max-width:34ch; margin:0 0 40px; font-weight:700; }
   .cta-grid{ display:grid; grid-template-columns:.8fr 1.2fr; gap:48px; align-items:start; }
   @media (max-width:780px){ .cta-grid{grid-template-columns:1fr; gap:36px;} }
+  .cta-grid > *{ min-width:0; }
+  .field input, .field select, .field textarea{ width:100%; min-width:0; }
   .contact{ font-size:.88rem; color:var(--sec-muted); line-height:2; font-weight:300; }
   .contact a{ font-family:var(--font-ui); font-weight:600; color:var(--sec-ink); text-decoration:none; }
   .contact a:hover{ color:var(--sec-gold); }
@@ -942,14 +944,42 @@
             <a href="mailto:info@zbinden.online">info@zbinden.online</a>
             <span class="lbl">Termin</span>
             <a href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">30 Minuten online buchen</a>
-            <span class="lbl">LinkedIn</span>
-            <a href="https://www.linkedin.com/in/pauline-zbinden" target="_blank" rel="noopener">Profil ansehen ↗</a>
-            <span class="lbl">Instagram</span>
-            <a href="https://www.instagram.com/zbindensoftware/" target="_blank" rel="noopener">@zbindensoftware ↗</a>
           </div>
-          <div class="cta-copy">
-            <p>Am Anfang steht ein kostenloses 30-minütiges Gespräch. Sie erzählen, was Sie brauchen — ich sage Ihnen ehrlich, ob und wie ich helfen kann.</p>
-            <a class="btn-primary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Gespräch vereinbaren</a>
+          <div>
+            <form class="request" id="requestForm" action="/api/contact" method="POST"><input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+              <div class="field-row">
+                <div class="field">
+                  <label for="f-name">Name</label>
+                  <input type="text" id="f-name" name="name" required>
+                </div>
+                <div class="field">
+                  <label for="f-email">E-Mail</label>
+                  <input type="email" id="f-email" name="email" required>
+                </div>
+              </div>
+              <div class="field">
+                <label for="f-company">Unternehmen</label>
+                <input type="text" id="f-company" name="company">
+              </div>
+              <div class="field">
+                <label for="f-package">Interesse</label>
+                <select id="f-package" name="package">
+                  <option value="">Noch offen</option>
+                  <option value="Automatisierung">Prozessautomatisierung &amp; KI-Agenten</option>
+                  <option value="GEO-Audit">KI-Sichtbarkeit (GEO-Audit)</option>
+                  <option value="Webdesign">Neue Website</option>
+                  <option value="Individuelles Projekt">Individuelle Web-App oder Software</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="f-message">Ihr Anliegen</label>
+                <textarea id="f-message" name="message" placeholder="z. B. was Sie vorhaben oder welches Projekt Sie angesprochen hat"></textarea>
+              </div>
+              <button type="submit" class="btn-primary">Anfrage senden</button>
+              <p class="form-note">Kostenloses, unverbindliches Erstgespräch. Ich melde mich innerhalb von 1–2 Werktagen zurück.</p>
+            </form>
+            <div class="form-status ok" id="formOk" hidden>Danke für Ihre Anfrage — ich melde mich in Kürze bei Ihnen.</div>
+            <div class="form-status err" id="formErr" hidden>Das hat leider nicht geklappt. Schreiben Sie mir direkt an <a href="mailto:info@zbinden.online" style="color:inherit; text-decoration:underline;">info@zbinden.online</a>.</div>
           </div>
         </div>
       </div>
@@ -1031,6 +1061,46 @@
   panel.addEventListener('click', function(e){ if (e.target.closest('a')) set(false); });
   document.addEventListener('click', function(e){ if (!panel.hidden && !panel.contains(e.target)) set(false); });
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !panel.hidden) { set(false); btn.focus(); } });
+})();
+</script>
+<script>
+(function(){
+  function wireForm(formId, okId, errId, sendingLabel) {
+    var form = document.getElementById(formId);
+    var okBox = document.getElementById(okId);
+    var errBox = document.getElementById(errId);
+    if (!form) return;
+    var defaultLabel = form.querySelector('button[type="submit"]').textContent;
+    form.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      okBox.hidden = true;
+      errBox.hidden = true;
+      var submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = sendingLabel;
+      fetch(form.action, {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(form)),
+        headers: { 'Accept': 'application/json' }
+      }).then(function (res) {
+        if (res.ok) {
+          form.reset();
+          form.hidden = true;
+          okBox.hidden = false;
+        } else {
+          errBox.hidden = false;
+          submitBtn.disabled = false;
+          submitBtn.textContent = defaultLabel;
+        }
+      }).catch(function () {
+        errBox.hidden = false;
+        submitBtn.disabled = false;
+        submitBtn.textContent = defaultLabel;
+      });
+    });
+  }
+
+  wireForm('requestForm', 'formOk', 'formErr', 'Wird gesendet …');
 })();
 </script>
 </body>
