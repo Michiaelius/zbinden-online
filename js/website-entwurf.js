@@ -93,7 +93,82 @@
     }
   }
   grid.addEventListener('change', refresh);
-  [haupt, akzent].forEach(function (i) { i.addEventListener('input', function () { fromLogo = false; refresh(); }); });
+
+  // --- sélecteur de couleur maison (au lieu du sélecteur natif du système) ---
+  var picker = custom.querySelector('.mp-picker');
+  var sv = picker.querySelector('.mp-sv');
+  var thumb = picker.querySelector('.mp-sv-thumb');
+  var hue = picker.querySelector('.mp-hue');
+  var hexIn = picker.querySelector('.mp-hex');
+  var prev = picker.querySelector('.mp-picker-prev');
+  var chips = custom.querySelectorAll('.mp-chip');
+  var target = null;
+  var hsv = [0, 0, 0];
+  function hsvToHex(h, s, v) {
+    var f = function (n) { var k = (n + h / 60) % 6; return v - v * s * Math.max(0, Math.min(k, 4 - k, 1)); };
+    return hex([f(5) * 255, f(3) * 255, f(1) * 255]);
+  }
+  function hexToHsv(h) {
+    var c = rgb(h).map(function (x) { return x / 255; });
+    var mx = Math.max.apply(0, c), mn = Math.min.apply(0, c), d = mx - mn, hh = 0;
+    if (d) hh = mx === c[0] ? ((c[1] - c[2]) / d) % 6 : mx === c[1] ? (c[2] - c[0]) / d + 2 : (c[0] - c[1]) / d + 4;
+    return [(hh * 60 + 360) % 360, mx ? d / mx : 0, mx];
+  }
+  function syncChips() {
+    chips.forEach(function (b) {
+      var v = form.querySelector('[name="' + b.dataset.target + '"]').value;
+      b.querySelector('.mp-chip-dot').style.background = v;
+      b.querySelector('.mp-chip-hex').textContent = v;
+    });
+  }
+  function drawPicker(skipHex) {
+    var c = hsvToHex(hsv[0], hsv[1], hsv[2]);
+    sv.style.setProperty('--h', hsv[0]);
+    thumb.style.left = hsv[1] * 100 + '%';
+    thumb.style.top = (1 - hsv[2]) * 100 + '%';
+    thumb.style.background = c;
+    prev.style.background = c;
+    hue.value = hsv[0];
+    if (!skipHex) hexIn.value = c;
+    return c;
+  }
+  function setColor(skipHex) {
+    var c = drawPicker(skipHex);
+    if (!target) return;
+    form.querySelector('[name="' + target + '"]').value = c;
+    fromLogo = false;
+    syncChips(); refresh();
+  }
+  function openPicker(name) {
+    target = target === name ? null : name;
+    chips.forEach(function (b) { b.setAttribute('aria-expanded', String(b.dataset.target === target)); });
+    picker.hidden = !target;
+    if (target) { hsv = hexToHsv(form.querySelector('[name="' + target + '"]').value); drawPicker(); }
+  }
+  chips.forEach(function (b) { b.addEventListener('click', function () { openPicker(b.dataset.target); }); });
+  picker.querySelector('.mp-picker-ok').addEventListener('click', function () { openPicker(target); });
+  function svFrom(e) {
+    var r = sv.getBoundingClientRect();
+    hsv[1] = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width));
+    hsv[2] = 1 - Math.max(0, Math.min(1, (e.clientY - r.top) / r.height));
+    setColor();
+  }
+  sv.addEventListener('pointerdown', function (e) { sv.setPointerCapture(e.pointerId); svFrom(e); });
+  sv.addEventListener('pointermove', function (e) { if (sv.hasPointerCapture(e.pointerId)) svFrom(e); });
+  sv.addEventListener('keydown', function (e) {
+    var k = { ArrowLeft: [-0.03, 0], ArrowRight: [0.03, 0], ArrowUp: [0, 0.03], ArrowDown: [0, -0.03] }[e.key];
+    if (!k) return;
+    e.preventDefault();
+    hsv[1] = Math.max(0, Math.min(1, hsv[1] + k[0])); hsv[2] = Math.max(0, Math.min(1, hsv[2] + k[1]));
+    setColor();
+  });
+  hue.addEventListener('input', function () { hsv[0] = +hue.value; setColor(); });
+  hexIn.addEventListener('input', function () {
+    var v = hexIn.value.trim();
+    if (v[0] !== '#') v = '#' + v;
+    if (/^#[0-9a-f]{6}$/i.test(v)) { hsv = hexToHsv(v.toLowerCase()); setColor(true); }
+  });
+  syncChips();
 
   // --- nom en direct ---
   function nameOnly() { return (company.value.split(',')[0] || '').trim(); }
@@ -163,7 +238,7 @@
         if (!cols) { logoNote.hidden = true; return; }
         haupt.value = cols[0]; akzent.value = cols[1];
         customRadio.checked = true; fromLogo = true;
-        refresh();
+        syncChips(); refresh();
         logoNote.textContent = D.tLogoColors;
         logoNote.hidden = false;
       };

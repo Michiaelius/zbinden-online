@@ -628,9 +628,30 @@
   .mp-sw input:focus-visible + .mp-dot{ outline:1px solid var(--sec-gold-deep); outline-offset:5px; }
   .mp-sw-name{ font-size:.7rem; color:var(--sec-muted); line-height:1.25; font-weight:300; }
   .mp-sw input:checked ~ .mp-sw-name{ color:var(--sec-ink); font-weight:500; }
-  .mp-custom{ display:flex; flex-wrap:wrap; gap:10px 22px; margin-top:12px; }
-  .mp-custom label{ display:flex; align-items:center; gap:10px; font-size:.86rem; color:var(--sec-ink); font-weight:300; cursor:pointer; }
-  .mp-custom input[type=color]{ width:42px; height:32px; padding:0; border:1px solid var(--sec-line-strong); border-radius:8px; background:none; cursor:pointer; }
+  .mp-custom{ margin-top:14px; display:grid; gap:12px; }
+  .mp-chips{ display:flex; flex-wrap:wrap; gap:10px; }
+  .mp-chip{ display:flex; align-items:center; gap:10px; padding:6px 16px 6px 6px; border-radius:999px; border:1px solid var(--sec-line-strong); background:var(--sec-bg); cursor:pointer; font-family:var(--font-ui); color:var(--sec-ink); text-align:left; transition:border-color .15s ease, box-shadow .15s ease; }
+  .mp-chip:hover, .mp-chip[aria-expanded="true"]{ border-color:var(--sec-gold-deep); box-shadow:0 0 0 3px var(--sec-gold-soft); }
+  .mp-chip-dot{ width:30px; height:30px; border-radius:50%; flex:none; box-shadow:inset 0 0 0 1px rgba(0,0,0,.1); }
+  .mp-chip-txt{ display:grid; line-height:1.2; }
+  .mp-chip-name{ font-size:.8rem; font-weight:500; }
+  .mp-chip-hex{ font-size:.7rem; color:var(--sec-muted); font-variant-numeric:tabular-nums; letter-spacing:.04em; text-transform:uppercase; }
+  .mp-picker{ display:grid; gap:12px; padding:14px; border-radius:14px; background:var(--sec-bg); border:1px solid var(--sec-line); box-shadow:0 18px 40px -22px rgba(0,0,0,.35); max-width:300px; }
+  .mp-picker[hidden]{ display:none; }
+  .mp-sv{ position:relative; height:150px; border-radius:10px; cursor:crosshair; touch-action:none;
+    background:linear-gradient(to top,#000,transparent), linear-gradient(to right,#fff,hsl(var(--h,0),100%,50%)); }
+  .mp-sv:focus-visible{ outline:2px solid var(--sec-gold-deep); outline-offset:2px; }
+  .mp-sv-thumb{ position:absolute; width:18px; height:18px; margin:-9px 0 0 -9px; border-radius:50%; border:2px solid #fff; box-shadow:0 0 0 1px rgba(0,0,0,.3), 0 2px 6px rgba(0,0,0,.3); pointer-events:none; }
+  #entwurfForm .mp-hue{ -webkit-appearance:none; appearance:none; width:100%; height:14px; border-radius:999px; margin:0; padding:0; border:none; cursor:pointer;
+    background:linear-gradient(to right,#f00,#ff0,#0f0,#0ff,#00f,#f0f,#f00); }
+  .mp-hue::-webkit-slider-thumb{ -webkit-appearance:none; width:20px; height:20px; border-radius:50%; background:#fff; border:none; box-shadow:0 0 0 1px rgba(0,0,0,.25), 0 2px 6px rgba(0,0,0,.3); }
+  .mp-hue::-moz-range-thumb{ width:20px; height:20px; border-radius:50%; background:#fff; border:none; box-shadow:0 0 0 1px rgba(0,0,0,.25), 0 2px 6px rgba(0,0,0,.3); }
+  .mp-picker-row{ display:flex; align-items:center; gap:10px; }
+  .mp-picker-prev{ width:34px; height:34px; border-radius:50%; flex:none; box-shadow:inset 0 0 0 1px rgba(0,0,0,.1); }
+  #entwurfForm .mp-hex{ flex:1; min-width:0; padding:8px 10px; font-family:var(--font-ui); font-size:.86rem; text-transform:uppercase; letter-spacing:.04em; }
+  .mp-picker-ok{ border:none; border-radius:999px; padding:.6em 1.1em; cursor:pointer; font-family:var(--font-ui); font-weight:600; font-size:.74rem; letter-spacing:.06em; background:linear-gradient(120deg,var(--sec-gold-deep),var(--sec-gold)); color:var(--sec-on-gold); }
+  .mp-tip{ flex-basis:100%; margin:6px 0 0; padding:12px 14px; border-radius:var(--r-sm); background:var(--sec-alt-soft); font-size:.8rem; line-height:1.55; color:var(--sec-muted); font-weight:300; }
+  .mp-tip strong{ color:var(--sec-ink); font-weight:600; }
   .mp-umfang{ display:flex; flex-wrap:wrap; gap:8px 20px; }
   .mp-umfang legend{ margin-bottom:8px; }
   .mp-umfang label{ display:flex; align-items:center; gap:8px; font-size:.88rem; color:var(--sec-ink); font-weight:300; cursor:pointer; }
@@ -1046,8 +1067,21 @@
               <legend class="mp-label">Farben</legend>
               <div class="mp-swatches"></div>
               <div class="mp-custom" hidden>
-                <label><input type="color" name="haupt" value="#2d3033"> Hauptfarbe</label>
-                <label><input type="color" name="akzent" value="#c9a227"> Akzentfarbe</label>
+                <input type="hidden" name="haupt" value="#2d3033">
+                <input type="hidden" name="akzent" value="#c9a227">
+                <div class="mp-chips">
+                  <button type="button" class="mp-chip" data-target="haupt" aria-expanded="false"><span class="mp-chip-dot"></span><span class="mp-chip-txt"><span class="mp-chip-name">Hauptfarbe</span><span class="mp-chip-hex"></span></span></button>
+                  <button type="button" class="mp-chip" data-target="akzent" aria-expanded="false"><span class="mp-chip-dot"></span><span class="mp-chip-txt"><span class="mp-chip-name">Akzentfarbe</span><span class="mp-chip-hex"></span></span></button>
+                </div>
+                <div class="mp-picker" hidden>
+                  <div class="mp-sv" role="slider" tabindex="0" aria-label="Sättigung und Helligkeit"><span class="mp-sv-thumb"></span></div>
+                  <input type="range" class="mp-hue" min="0" max="360" step="1" aria-label="Farbton">
+                  <div class="mp-picker-row">
+                    <span class="mp-picker-prev"></span>
+                    <input type="text" class="mp-hex" maxlength="7" spellcheck="false" aria-label="Hex-Code">
+                    <button type="button" class="mp-picker-ok">OK</button>
+                  </div>
+                </div>
               </div>
             </fieldset>
             <fieldset class="field mp-umfang">
@@ -1055,6 +1089,7 @@
               <label><input type="radio" name="umfang" value="onepager"> Onepager</label>
               <label><input type="radio" name="umfang" value="mehrseitig"> Mehrere Seiten</label>
               <label><input type="radio" name="umfang" value="offen" checked> Weiss noch nicht</label>
+              <p class="mp-tip"><strong>Tipp:</strong> Ein Hauptangebot, das sich auf einer Seite erklären lässt? Dann reicht ein Onepager. Bieten Sie mehrere Leistungen an, die je eine eigene Erklärung verdienen, passt eine Website mit mehreren Seiten besser, und man findet Sie für jede Leistung einzeln. Keine Sorge: Das ist noch nicht definitiv, wir besprechen es gemeinsam.</p>
             </fieldset>
             <div class="field-row">
               <div class="field">
