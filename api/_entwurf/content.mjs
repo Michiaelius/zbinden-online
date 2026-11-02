@@ -59,7 +59,18 @@ Aufbau (5 bis 7 Sektionen, in dieser Reihenfolge sinnvoll wählen):
 - optional region { titel, text, orte } nur wenn der Ort bekannt ist (orte: echte Nachbarorte)
 - faq: 3 bis 5 items { frage, antwort }, Fragen, die Kunden dieser Branche wirklich stellen, Antworten ohne erfundene Fakten
 - kontakt { typ: "kontakt", id: "kontakt", nav, kicker, titel, intro, formular: "kontakt" } (immer zuletzt)
-Jede Sektion mit nav braucht eine id (kleingeschrieben, ohne Umlaute). Höchstens 5 nav-Einträge.
+Jede Sektion mit nav braucht eine id (kleingeschrieben, ohne Umlaute). Höchstens 5 nav-Einträge
+(Sektionen mit nav + seiten zusammen).
+
+Nur wenn der Umfang «mehrseitig» ist: Die fertige Website hat mehrere Seiten, der Entwurf zeigt nur die
+Startseite. Man soll trotzdem sofort sehen, dass es weitere Seiten gibt:
+- "seiten": 2 bis 4 Unterseiten [{ "label", "slug" }] passend zum Angebot (z. B. eine Seite pro Hauptleistung,
+  Produkte, Referenzen, Über uns). Sie erscheinen im Menü. slug: a-z, 0-9, Bindestrich.
+- In leistungen bei jedem item, das eine eigene Seite bekommt: "mehr": { "label": "Mehr erfahren", "ziel": "seite:<slug>" }
+  (Label in der Sprache der Website, gerne konkreter, z. B. «Zu den Produkten»).
+- 1 bis 2 weitere Buttons mit "ziel": "seite:<slug>" (leistungen.cta, split.cta), z. B. «Alle Referenzen ansehen».
+- Die Sektionen der Startseite bleiben eine Übersicht; keine nav-Einträge für Sektionen, die eine eigene Seite werden.
+Bei «onepager» oder «offen»: KEINE seiten und KEINE "seite:"-Ziele.
 KEINE Bilder (kein "src" irgendwo): der Kit zeigt Formen in den Farben der Firma.
 
 Gestaltung:
@@ -90,7 +101,7 @@ function briefText(brief, siteText) {
     `Firma und Ort (wie im Formular eingegeben): ${brief.firma}`,
     `Aktuelle Website: ${brief.website || 'keine'}`,
     `Angebot (Text der Firma): ${brief.angebot || '(nicht angegeben, siehe Website)'}`,
-    `Gewünschter Umfang: ${brief.umfang} (der Entwurf ist immer eine Seite)`,
+    `Gewünschter Umfang: ${brief.umfang}${brief.umfang === 'mehrseitig' ? ' (Startseite mit Links auf die künftigen Unterseiten, siehe Regeln)' : ''}`,
     `Farben: ${farben}`,
     `Logo: ${brief.logo ? 'vorhanden (setzt der Code)' : 'keines (Initialen)'}`,
     `Kontakt aus dem Formular: E-Mail ${brief.kontakt.email}${brief.kontakt.telefon ? `, Telefon ${brief.kontakt.telefon}` : ''}` +

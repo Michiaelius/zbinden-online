@@ -55,15 +55,46 @@ ${notes.map((n, i) => `<div class="tour-note" data-i="${i}" role="note"><b>${i +
 }
 
 // In Vorschauen gibt es kein PHP (z. B. auf Vercel): Formular freundlich abfangen statt Fehlermeldung.
-export function vorschauFormHtml() {
-  return `<script>
+const VORSCHAU_T = {
+  de: { form: 'Vorschau: Das Formular verschickt hier noch nichts. Auf der fertigen Website kommt Ihre Nachricht direkt an.',
+    seite: 'Diese Seite folgt auf der fertigen Website.' },
+  fr: { form: 'Aperçu : le formulaire n’envoie encore rien ici. Sur le site final, votre message arrive directement.',
+    seite: 'Cette page suivra sur le site final.' },
+  en: { form: 'Preview: the form does not send anything yet. On the finished website, your message arrives directly.',
+    seite: 'This page will follow on the finished website.' },
+};
+
+// Nur --vorschau: Formular verschickt nichts; Links auf Unterseiten (data-seite) zeigen einen Hinweis statt einer Fehlerseite
+export function vorschauFormHtml(lang) {
+  const t = VORSCHAU_T[(lang || 'de').slice(0, 2)] || VORSCHAU_T.de;
+  return `<style>
+.seite-toast{position:fixed;left:50%;bottom:96px;z-index:200;width:max-content;max-width:min(92vw,420px);transform:translate(-50%,12px);opacity:0;pointer-events:none;
+  padding:14px 20px;border-radius:14px;background:var(--dark);color:var(--dark-ink);font-size:15px;line-height:1.45;text-align:center;
+  box-shadow:0 12px 32px rgba(0,0,0,.25);transition:opacity .25s,transform .25s}
+.seite-toast.on{opacity:1;transform:translate(-50%,0)}
+@media (min-width:861px){.seite-toast{bottom:32px}}
+</style>
+<script>
 document.addEventListener('submit', function (e) {
   var f = e.target.closest && e.target.closest('.contact-form');
   if (!f) return;
   e.preventDefault(); e.stopImmediatePropagation();
   var s = f.querySelector('.form-status');
-  if (s) { s.className = 'form-status ok'; s.textContent = 'Vorschau: Das Formular verschickt hier noch nichts. Auf der fertigen Website kommt Ihre Nachricht direkt an.'; }
+  if (s) { s.className = 'form-status ok'; s.textContent = ${JSON.stringify(t.form)}; }
 }, true);
+(function () {
+  var toast, timer;
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[data-seite]');
+    if (!a) return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    if (!toast) { toast = document.createElement('div'); toast.className = 'seite-toast'; toast.setAttribute('role', 'status'); document.body.appendChild(toast); }
+    toast.textContent = '«' + a.textContent.trim() + '» – ' + ${JSON.stringify(t.seite)};
+    toast.classList.add('on');
+    clearTimeout(timer);
+    timer = setTimeout(function () { toast.classList.remove('on'); }, 2800);
+  }, true);
+})();
 </script>`;
 }
 

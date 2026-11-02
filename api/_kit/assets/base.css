@@ -109,6 +109,7 @@ p{margin:0}
 .card{display:flex;flex-direction:column;gap:12px;padding:28px;border-radius:18px;background:var(--surface);border:1px solid var(--line)}
 .tone-surface .card{background:var(--bg)}
 .card p{color:var(--muted)}
+.card .card-more{margin-top:auto;font-weight:600}
 .card-icon{display:grid;place-items:center;width:52px;height:52px;border-radius:14px;background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent-text)}
 .price{margin-top:auto;font-weight:600;color:var(--ink)}
 

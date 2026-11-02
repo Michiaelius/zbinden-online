@@ -39,7 +39,7 @@ const MAIL = {
       return `Ich habe ihn ${logo ? 'mit Ihrem Logo und ' : 'mit '}Ihren Farben gestaltet und die Texte aus Ihren Angaben${site ? ' und Ihrer Website' : ''} geschrieben. ` +
         'Es ist ein erster Entwurf: Texte und Aufbau passen wir gemeinsam an, und Fotos von Ihnen und Ihrer Arbeit ersetzen später die farbigen Formen.';
     },
-    multi: 'Der Entwurf zeigt den Stil auf einer Seite. Die weiteren Seiten entstehen im gleichen Design.',
+    multi: 'Der Entwurf zeigt die Startseite. Die fertige Website wird mehrere Seiten haben: Die Links im Menü und die Buttons wie «Mehr erfahren» zeigen schon, wohin es gehen wird. Diese Unterseiten gestalten wir im gleichen Design, sobald wir die Inhalte zusammen festgelegt haben.',
     next: 'Gefällt er Ihnen? Dann besprechen wir gerne in einem kurzen Gespräch die nächsten Schritte, ob Kauf oder Abo. Antworten Sie einfach auf diese E-Mail oder rufen Sie mich an.',
     regards: 'Freundliche Grüsse',
   },
@@ -51,7 +51,7 @@ const MAIL = {
       return `Je l’ai conçue ${logo ? 'avec votre logo et ' : 'avec '}vos couleurs, et j’ai rédigé les textes à partir de vos indications${site ? ' et de votre site' : ''}. ` +
         'C’est une première ébauche : nous ajustons ensemble les textes et la structure, et des photos de vous et de votre travail remplaceront ensuite les formes colorées.';
     },
-    multi: 'L’ébauche montre le style sur une page. Les autres pages suivront dans le même design.',
+    multi: 'L’ébauche montre la page d’accueil. Le site final comptera plusieurs pages : les liens du menu et les boutons comme « En savoir plus » montrent déjà où elles mèneront. Nous créerons ces pages dans le même design, dès que nous aurons défini ensemble leur contenu.',
     next: 'Elle vous plaît ? Parlons volontiers des prochaines étapes lors d’un court entretien, que ce soit pour un achat ou un abonnement. Répondez simplement à cet e-mail ou appelez-moi.',
     regards: 'Meilleures salutations,',
   },
@@ -63,7 +63,7 @@ const MAIL = {
       return `I designed it ${logo ? 'with your logo and ' : 'with '}your colours and wrote the texts based on your details${site ? ' and your website' : ''}. ` +
         'It is a first draft: we will adjust the texts and structure together, and photos of you and your work will later replace the coloured shapes.';
     },
-    multi: 'The draft shows the style on one page. The other pages will follow in the same design.',
+    multi: 'The draft shows the home page. The finished website will have several pages: the menu links and buttons such as “Learn more” already show where they will lead. We will design these pages in the same style once we have agreed on their content together.',
     next: 'Do you like it? I would be happy to discuss the next steps in a short call, whether you want to buy or subscribe. Simply reply to this e-mail or give me a call.',
     regards: 'Kind regards,',
   },
@@ -86,14 +86,15 @@ function clientMail(brief, url, hasSite) {
     body: [
       t.hi, '',
       t.ready, url, '',
-      t.made(!!brief.logo, hasSite) + (brief.umfang === 'mehrseitig' ? ' ' + t.multi : ''), '',
+      t.made(!!brief.logo, hasSite), '',
+    ].concat(brief.umfang === 'mehrseitig' ? [t.multi, ''] : []).concat([
       t.next, '',
       t.regards,
       'Pauline Zbinden',
       'Zbinden Software',
       PHONE,
       'www.zbinden.online',
-    ].join('\n'),
+    ]).join('\n'),
   };
 }
 

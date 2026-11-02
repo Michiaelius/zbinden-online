@@ -126,7 +126,9 @@ export async function build({ content: contentPath, out, vorschau = false, png =
   };
 
   const body = [hero(c.hero, ctx), ...c.sektionen.map((s) => section(s, ctx))].join('\n\n');
-  const nav = c.sektionen.filter((s) => s.nav && s.id).map((s) => ({ id: s.id, label: s.nav }));
+  // Unterseiten (mehrseitige Website) zuerst, dann die Sektionen der Startseite
+  const nav = (c.seiten || []).map((p) => ({ seite: p.slug, label: p.label }))
+    .concat(c.sektionen.filter((s) => s.nav && s.id).map((s) => ({ id: s.id, label: s.nav })));
 
   await writeFile(join(outDir, 'index.html'), pages.indexPage(c, ctx, body, nav, vorschau), 'utf8');
   await writeFile(join(outDir, 'datenschutz.html'), pages.privacyPage(c, ctx, vorschau), 'utf8');

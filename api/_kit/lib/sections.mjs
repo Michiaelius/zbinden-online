@@ -28,9 +28,17 @@ function head(s, center = false) {
 </header>`;
 }
 
+// ziel "seite:<slug>" = Unterseite der fertigen (mehrseitigen) Website. In der Vorschau zeigt ein Klick
+// einen Hinweis statt einer Fehlerseite (vorschauFormHtml).
+export function seiteHref(ziel) {
+  const m = /^seite:([a-z0-9-]+)$/.exec(ziel || '');
+  return m ? { href: m[1], attr: ` data-seite="${esc(m[1])}"` } : null;
+}
+
 function btn(b, cls = 'btn') {
   if (!b || !b.label) return '';
-  return `<a class="${cls}" href="${esc(b.ziel || '#kontakt')}">${esc(b.label)}</a>`;
+  const s = seiteHref(b.ziel);
+  return `<a class="${cls}" href="${esc(s ? s.href : b.ziel || '#kontakt')}"${s ? s.attr : ''}>${esc(b.label)}</a>`;
 }
 
 function picture(bild, ctx, cls, artSeed) {
@@ -107,6 +115,7 @@ const R = {
         <h3>${esc(it.titel)}</h3>
         ${paras(it.text)}
         ${it.preis ? `<p class="price">${esc(it.preis)}</p>` : ''}
+        ${btn(it.mehr, 'btn btn-link card-more')}
       </li>`).join('\n')}
     </ul>
     ${btn(s.cta, 'btn btn-primary sec-cta')}

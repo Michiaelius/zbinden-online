@@ -45,6 +45,7 @@ export function validate(c) {
     if (s.typ === 'faq') need((s.items || []).every((q) => q.frage && q.antwort), `${where}: jede Frage braucht frage + antwort`);
     if (s.typ === 'kontakt') need(s.id === 'kontakt', `${where}: Kontakt-Sektion muss id "kontakt" haben (Buttons verlinken darauf)`);
   });
+  for (const p of c.seiten || []) need(p && p.label && /^[a-z0-9-]+$/.test(p.slug || ''), 'seiten: jede Seite braucht label + slug (a-z, 0-9, -)');
   hint(S.some((s) => s.typ === 'kontakt'), 'Keine Kontakt-Sektion');
   hint(S.some((s) => s.typ === 'faq'), 'Keine FAQ – für KI-Sichtbarkeit sehr empfohlen');
 

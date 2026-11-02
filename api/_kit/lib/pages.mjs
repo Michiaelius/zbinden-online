@@ -101,7 +101,9 @@ function siteHeader(c, ctx, nav) {
       <span class="brand-name">${esc(f.kurzname || f.name)}</span>
     </a>
     <nav class="nav" id="nav" aria-label="Hauptnavigation">
-      <ul>${nav.map((n) => `<li><a href="#${esc(n.id)}">${esc(n.label)}</a></li>`).join('')}</ul>
+      <ul>${nav.map((n) => n.seite
+        ? `<li><a href="${esc(n.seite)}" data-seite="${esc(n.seite)}">${esc(n.label)}</a></li>`
+        : `<li><a href="#${esc(n.id)}">${esc(n.label)}</a></li>`).join('')}</ul>
       <a class="btn btn-primary nav-cta" href="${esc(cta.ziel)}">${esc(cta.label)}</a>
     </nav>
     <button class="menu-btn" type="button" aria-controls="nav" aria-expanded="false" aria-label="${T.menu}">
@@ -167,7 +169,7 @@ ${mobileBar(c)}
 <button class="to-top" type="button" aria-label="${T.top}">${icon('up', 20)}</button>
 <script src="assets/site.js" defer></script>
 <script src="assets/pull-refresh.js" defer></script>
-${vorschau ? vorschauFormHtml() + rundgangHtml(c) : ''}
+${vorschau ? vorschauFormHtml(c.lang) + rundgangHtml(c) : ''}
 </body>
 </html>
 `;
