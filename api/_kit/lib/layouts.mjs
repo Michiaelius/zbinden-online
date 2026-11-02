@@ -51,6 +51,22 @@ export const LAYOUTS = {
     fonts: 'fraunces-wonk',
     passtZu: 'Malerei, Illustration, Kunsthandwerk, Kinderangebote, Kreative',
   },
+  fresque: {
+    label: 'Fresque – Nachtbeton, Sprühfarbe, grosse Wandbilder',
+    hero: 'editorial',
+    header: 'dark',
+    palette: 'beton',
+    fonts: 'anton',
+    passtZu: 'Street Art, Wandmalerei, Graffiti, Tattoo, Urban Culture',
+  },
+  immo: {
+    label: 'Immo – ruhig, hochwertig, Objekte im Mittelpunkt',
+    hero: 'split',
+    header: 'light',
+    palette: 'graphit',
+    fonts: 'cormorant-source',
+    passtZu: 'Immobilienmakler, Verwaltungen, Architekten, Treuhand',
+  },
   stube: {
     label: 'Stube – dunkel, bildstark, Gastronomie',
     hero: 'photo',            // Vollbild-Foto mit Text unten

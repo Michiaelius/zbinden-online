@@ -169,7 +169,7 @@ ${mobileBar(c)}
 <button class="to-top" type="button" aria-label="${T.top}">${icon('up', 20)}</button>
 <script src="assets/site.js" defer></script>
 <script src="assets/pull-refresh.js" defer></script>
-${vorschau ? vorschauFormHtml(c.lang) + rundgangHtml(c) : ''}
+${ctx.layoutJs ? '<script src="assets/layout.js" defer></script>\n' : ''}${vorschau ? vorschauFormHtml(c.lang) + rundgangHtml(c) : ''}
 </body>
 </html>
 `;

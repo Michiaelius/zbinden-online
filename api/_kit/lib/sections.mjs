@@ -51,6 +51,8 @@ function picture(bild, ctx, cls, artSeed) {
 // ---------------- Hero ----------------
 export function hero(h, ctx) {
   const { L, c } = ctx;
+  // Hero-Bild ist das grösste Element über dem Falz: sofort laden statt lazy (LCP)
+  const heroPic = (...a) => picture(...a).replace('loading="lazy"', 'fetchpriority="high"');
   const points = (h.punkte || []).length
     ? `<ul class="hero-points">${h.punkte.map((p) => `<li>${icon('check', 18)}<span>${esc(p)}</span></li>`).join('')}</ul>` : '';
   const actions = `<div class="hero-actions">${btn(h.cta, 'btn btn-primary')}${btn(h.cta2, 'btn btn-ghost')}</div>`;
@@ -63,7 +65,7 @@ export function hero(h, ctx) {
 
   if (L.hero === 'photo') {
     return `<section class="hero hero-photo" id="top">
-  ${picture(h.bild, ctx, 'hero-media', c.firma.name + 'hero')}
+  ${heroPic(h.bild, ctx, 'hero-media', c.firma.name + 'hero')}
   <div class="hero-shade"></div>
   <div class="hero-text wrap">${text}</div>
 </section>`;
@@ -71,14 +73,14 @@ export function hero(h, ctx) {
   if (L.hero === 'center') {
     return `<section class="hero hero-center" id="top">
   <div class="wrap hero-inner reveal">${text}</div>
-  ${h.bild?.src ? `<div class="wrap hero-band">${picture(h.bild, ctx, 'hero-media', c.firma.name)}</div>` : ''}
+  ${h.bild?.src ? `<div class="wrap hero-band">${heroPic(h.bild, ctx, 'hero-media', c.firma.name)}</div>` : ''}
 </section>`;
   }
   if (L.hero === 'editorial') {
     return `<section class="hero hero-editorial" id="top">
   <div class="wrap hero-grid">
     <div class="hero-text reveal">${text}</div>
-    ${picture(h.bild, ctx, 'hero-media', c.firma.name + 'hero')}
+    ${heroPic(h.bild, ctx, 'hero-media', c.firma.name + 'hero')}
   </div>
 </section>`;
   }
@@ -86,7 +88,7 @@ export function hero(h, ctx) {
   return `<section class="hero hero-split" id="top">
   <div class="wrap hero-grid">
     <div class="hero-text reveal">${text}</div>
-    ${picture(h.bild, ctx, 'hero-media', c.firma.name + 'hero')}
+    ${heroPic(h.bild, ctx, 'hero-media', c.firma.name + 'hero')}
   </div>
 </section>`;
 }

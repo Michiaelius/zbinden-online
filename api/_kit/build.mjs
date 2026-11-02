@@ -113,7 +113,9 @@ export async function build({ content: contentPath, out, vorschau = false, png =
   fixImages(c);
 
   c.lang = c.lang || 'de';
-  c.__t = uiTexts(c.lang);
+  c.__t = { ...uiTexts(c.lang) };
+  // Region im lang-Code (z. B. "fr-FR" für Kunden in Frankreich) überschreibt das Standard-de-CH/fr-CH
+  if (/^[a-z]{2}-[A-Z]{2}$/.test(c.lang)) { c.__t.htmlLang = c.lang; c.__t.ogLocale = c.lang.replace('-', '_'); }
   if (c.firma.logo) {
     const l = img(c.firma.logo);
     if (l) c.__logo = l;
@@ -124,6 +126,9 @@ export async function build({ content: contentPath, out, vorschau = false, png =
     artKind: c.grafik || ART_BY_LAYOUT[layoutId] || 'arches',
     defaultTone: { ...DEFAULT_TONE, ...(L.tones || {}) },
   };
+  // Optionales Layout-Script (assets/layouts/<id>.js) für Effekte, die nur zu diesem Layout gehören
+  const layoutJsPath = join(KIT, 'assets', 'layouts', `${layoutId}.js`);
+  if (existsSync(layoutJsPath)) ctx.layoutJs = layoutJsPath;
 
   const body = [hero(c.hero, ctx), ...c.sektionen.map((s) => section(s, ctx))].join('\n\n');
   // Unterseiten (mehrseitige Website) zuerst, dann die Sektionen der Startseite
@@ -151,6 +156,7 @@ export async function build({ content: contentPath, out, vorschau = false, png =
     .replace('__UI__', JSON.stringify({ sending: ui.sending, sent: ui.sent, error: ui.error, send: ui.send, required: ui.required, menu: ui.menu, close: ui.close, zoom: ui.zoom, prev: ui.prev, next: ui.next }));
   await writeFile(join(outDir, 'assets', 'site.js'), siteJs, 'utf8');
   await copyFile(join(KIT, 'assets', 'pull-refresh.js'), join(outDir, 'assets', 'pull-refresh.js'));
+  if (ctx.layoutJs) await copyFile(ctx.layoutJs, join(outDir, 'assets', 'layout.js'));
   await cp(join(KIT, 'assets', 'fonts', fontsId), join(outDir, 'assets', 'fonts'), { recursive: true });
 
   // Bilder kopieren

@@ -46,6 +46,14 @@ export const FONT_PAIRS = {
     displayWeight: 400,
     google: 'https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap',
   },
+  // Anton + Archivo – plakativ, schmal und laut wie Schablonenschrift an der Wand (Street Art)
+  'anton': {
+    label: 'Anton + Archivo',
+    display: "'Anton', Impact, 'Arial Narrow', sans-serif",
+    body: "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+    displayWeight: 400,
+    google: 'https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;700&display=swap',
+  },
   'manrope': {
     label: 'Manrope',
     display: "'Manrope', 'Helvetica Neue', Arial, sans-serif",

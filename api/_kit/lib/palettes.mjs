@@ -98,6 +98,12 @@ export const PALETTES = {
     bg: '#f7f5f1', surface: '#e6e1d9', ink: '#171615', muted: '#57524c', line: '#dcd6cc',
     accent: '#171615', accentInk: '#f7f5f1', accentText: '#8a3a22', dark: '#1d1b19', darkInk: '#f3efe8',
   },
+  // Beton: Nachtbeton + Kreide + Sprühgelb – Street Art, Wandmalerei, Graffiti (Layout «fresque»)
+  beton: {
+    label: 'Beton & Sprühgelb', mode: 'dark',
+    bg: '#161615', surface: '#22211f', ink: '#f1efe9', muted: '#bcb8ae', line: '#34322e',
+    accent: '#f5c400', accentInk: '#141414', accentText: '#f5c400', dark: '#0c0c0b', darkInk: '#f1efe9',
+  },
   // Muschel: Perle + Pfirsich + Aprikose + Taupe – Kosmetik, Hochzeit, Wellness
   muschel: {
     label: 'Muschel', mode: 'light',

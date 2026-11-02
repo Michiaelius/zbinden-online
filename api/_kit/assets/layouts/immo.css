@@ -1,0 +1,38 @@
+/* Immo – ruhig und hochwertig: Serifentitel, viel Luft, Objektfotos im Mittelpunkt.
+   Signatur (immo.js): das Dach aus dem Logo zeichnet sich über dem Hero-Foto und über jedem Sektionstitel. */
+h1{font-size:clamp(42px,7.4vw,84px);line-height:1;letter-spacing:-.01em}
+h2{font-size:clamp(34px,5vw,56px);line-height:1.05}
+.kicker{letter-spacing:.2em;font-weight:600;font-size:12px}
+.btn{border-radius:2px}
+.brand-logo{height:46px}
+.brand-logo+.brand-name{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.site-header{border-top:5px solid var(--accent)}
+
+/* Hero: Foto unter einem gezeichneten Dach */
+.hero-split .hero-media{border-radius:0;aspect-ratio:4/3;width:100%;object-fit:cover;display:block}
+.hero-roofed{position:relative;margin-top:16%;min-width:0}
+.roof{position:absolute;left:-3%;right:-3%;bottom:calc(100% + 6px);aspect-ratio:100/16;pointer-events:none;color:var(--accent)}
+.roof svg{display:block;width:100%;height:100%;overflow:visible}
+.roof path{fill:none;stroke:currentColor;stroke-width:.9;stroke-linejoin:miter;stroke-dasharray:1;stroke-dashoffset:0}
+.hero-points{gap:10px 26px}
+
+/* Kleines Dach über den Sektionstiteln */
+.roof-mini{display:block;width:58px;height:16px;color:var(--accent);margin-bottom:-4px}
+.sec-head.center .roof-mini,.center>.roof-mini{margin-left:auto;margin-right:auto}
+.roof-mini path{fill:none;stroke:currentColor;stroke-width:2.5;stroke-dasharray:1;stroke-dashoffset:0}
+.js .roof path,.js .roof-mini path{stroke-dashoffset:1;transition:stroke-dashoffset 1.3s cubic-bezier(.6,.05,.25,1)}
+.js .roof.on path,.js .roof-mini.on path{stroke-dashoffset:0}
+@media (prefers-reduced-motion:reduce){.js .roof path,.js .roof-mini path{stroke-dashoffset:0;transition:none}}
+
+/* Leistungen: feine Linien statt Kästen */
+.card{border-radius:2px;border-top:3px solid var(--accent)}
+
+/* Vermittelte Objekte */
+.gallery.works .gallery-media{aspect-ratio:4/3}
+.gallery.works img.gallery-media{object-fit:cover;padding:0;border-radius:0;background:none}
+.gallery.works figure:hover img.gallery-media{transform:scale(1.03)}
+.gallery.works figure{overflow:hidden}
+@media (min-width:1080px){.steps{grid-template-columns:repeat(5,1fr)}.cards{grid-template-columns:repeat(3,1fr)}}
+.work-price.sold{color:var(--accent-text);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+.step-no{border-radius:2px}
+.about-media{border-radius:0}

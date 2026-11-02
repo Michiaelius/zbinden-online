@@ -5,9 +5,16 @@
 
 import { esc } from './util.mjs';
 
+const TOGGLE_T = {
+  de: ['Hinweise ausblenden', 'Hinweise einblenden'],
+  fr: ['Masquer les notes', 'Afficher les notes'],
+  en: ['Hide notes', 'Show notes'],
+};
+
 export function rundgangHtml(c) {
   const notes = (c.rundgang || []).filter((n) => n.ziel && n.text);
   if (!notes.length) return '';
+  const tt = TOGGLE_T[(c.lang || 'de').slice(0, 2)] || TOGGLE_T.de;
   const data = JSON.stringify(notes.map((n) => ({ z: n.ziel, s: n.seite === 'links' ? 'l' : 'r', u: !!n.unten, dy: n.dy || 0 }))).replace(/</g, '\\u003c');
   return `
 <style>
@@ -22,7 +29,7 @@ export function rundgangHtml(c) {
 @media (prefers-reduced-motion:reduce){.tour-note{animation:none}}
 </style>
 ${notes.map((n, i) => `<div class="tour-note" data-i="${i}" role="note"><b>${i + 1}</b>${linkVarianten(esc(n.text), c)}</div>`).join('\n')}
-<button class="tour-toggle" type="button" aria-pressed="false">Hinweise ausblenden</button>
+<button class="tour-toggle" type="button" aria-pressed="false">${tt[0]}</button>
 <script>
 (function () {
   var N = ${data};
@@ -46,7 +53,7 @@ ${notes.map((n, i) => `<div class="tour-note" data-i="${i}" role="note"><b>${i +
   var btn = document.querySelector('.tour-toggle');
   btn.addEventListener('click', function () {
     var off = document.documentElement.classList.toggle('tour-off');
-    btn.textContent = off ? 'Hinweise einblenden' : 'Hinweise ausblenden';
+    btn.textContent = off ? ${JSON.stringify(tt[1])} : ${JSON.stringify(tt[0])};
     btn.setAttribute('aria-pressed', off ? 'true' : 'false');
     if (!off) place();
   });

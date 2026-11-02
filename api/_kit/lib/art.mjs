@@ -55,7 +55,7 @@ const KINDS = {
   },
 };
 
-export const ART_BY_LAYOUT = { klar: 'arches', warm: 'circles', kontrast: 'blocks', editorial: 'lines', atelier: 'circles', galerie: 'lines', stube: 'arches' };
+export const ART_BY_LAYOUT = { klar: 'arches', warm: 'circles', kontrast: 'blocks', editorial: 'lines', atelier: 'circles', galerie: 'lines', stube: 'arches', fresque: 'blocks' };
 
 export function art(kind, seedText, label = '') {
   const draw = KINDS[kind] || KINDS.arches;

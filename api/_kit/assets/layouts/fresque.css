@@ -1,0 +1,100 @@
+/* Fresque – Street Art: Nachtbeton, Schablonenschrift, Sprühgelb. Fotos von Wandbildern gross und unbeschnitten,
+   Legenden wie aufgeklebte Sticker. Signatur-Effekte (gesprühtes «?» im Hero, Sprühstrich mit Tropfen unter den
+   Titeln) kommen aus fresque.js und sind ohne JS / bei «weniger Bewegung» einfach fertig gemalt oder weg. */
+:root{
+  --concrete:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .95 0 0 0 0 .93 0 0 0 0 .88 0 0 0 .075 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --stain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1100' height='1100'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.004' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .7 0 0 0 0 .68 0 0 0 0 .64 0 0 0 .12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
+  --photo-shadow:0 2px 0 rgba(0,0,0,.4),0 26px 40px -18px rgba(0,0,0,.85);
+}
+body{background-color:var(--bg);background-image:var(--concrete),var(--stain)}
+
+/* Typografie: laut, schmal, Grossbuchstaben */
+h1,h2{text-transform:uppercase;font-weight:400;letter-spacing:.01em}
+h1{font-size:clamp(104px,26vw,250px);line-height:.86}
+h2{font-size:clamp(42px,7.4vw,86px);line-height:.95}
+h3{font-family:var(--font-display);font-weight:400;text-transform:uppercase;letter-spacing:.02em;font-size:24px;line-height:1.05}
+.lead{color:var(--muted);font-size:clamp(18px,2vw,21px)}
+/* Kicker = Stück Klebeband / Sticker */
+.kicker{display:inline-block;align-self:flex-start;width:fit-content;padding:5px 11px 4px;background:var(--accent);color:var(--accent-ink);font:700 12.5px/1.2 var(--font-body);letter-spacing:.16em;transform:rotate(-1.6deg);box-shadow:0 2px 0 rgba(0,0,0,.35)}
+
+/* Header, Marke = gesprühtes «?» */
+.brand-mark{border-radius:6px;background:var(--accent);color:transparent;font-size:0;position:relative}
+.brand-mark::after{content:"?";position:absolute;inset:0;display:grid;place-items:center;color:var(--accent-ink);font:400 27px/1 var(--font-display)}
+.brand-name{font-family:var(--font-display);font-weight:400;font-size:26px;letter-spacing:.06em}
+.site-header{border-bottom:1px solid var(--line)}
+
+/* Buttons: eckig, Schablone */
+.btn{border-radius:3px;text-transform:uppercase;letter-spacing:.08em;font-size:14.5px;font-weight:700}
+.btn-primary{box-shadow:4px 4px 0 rgba(0,0,0,.55)}
+.btn-primary:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 rgba(0,0,0,.6)}
+.btn-ghost{border-color:var(--ink);color:var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:var(--bg)}
+.nav-cta{border-radius:3px!important}
+
+/* Hero: Titel + gesprühtes «?», daneben das Wandfoto wie aufgeklebt */
+.hero-editorial{position:relative;overflow:hidden}
+.hero-editorial .hero-text{position:relative;z-index:1}
+.hero-editorial h1{display:flex;align-items:flex-end;flex-wrap:nowrap;margin-left:-.03em}
+.hero-editorial .hero-media{aspect-ratio:auto;object-fit:fill;height:auto;border-radius:0;border:7px solid #f4f1ea;transform:rotate(1.2deg);box-shadow:var(--photo-shadow)}
+@media (min-width:900px){
+  .hero-editorial .hero-grid{grid-template-columns:.9fr 1.1fr}
+  .hero-editorial h1{font-size:clamp(140px,15vw,250px)}
+}
+
+/* Signatur 1: das gesprühte Fragezeichen */
+.q-spray{display:inline-block;flex:none;width:.5em;height:.86em;margin-left:.04em;transform:translateY(.02em) rotate(6deg);overflow:visible}
+.q-spray svg{width:100%;height:100%;overflow:visible}
+.q-spray .q-line{fill:none;stroke:var(--accent);stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1}
+.q-spray .q-haze .q-line{stroke-width:24;opacity:.33}
+.q-spray .q-dot{fill:var(--accent);transform-box:fill-box;transform-origin:50% 50%;transform:scale(0)}
+.q-spray .q-drip{fill:var(--accent);transform-box:fill-box;transform-origin:50% 0;transform:scaleY(0)}
+.q-spray.go .q-line{transition:stroke-dashoffset 1.05s cubic-bezier(.55,.1,.35,1);stroke-dashoffset:0}
+.q-spray.go .q-dot{transition:transform .28s cubic-bezier(.3,1.6,.5,1) 1.15s;transform:scale(1)}
+.q-spray.go .q-drip{transition:transform 1.6s cubic-bezier(.5,0,.75,1) 1.35s;transform:scaleY(1)}
+
+/* Signatur 2: Sprühstrich mit Tropfen unter den Sektionstiteln */
+.spray-tag{display:block;width:150px;height:46px;margin:8px 0 -18px;overflow:visible}
+.center .spray-tag,.sec-head.center .spray-tag{margin-left:auto;margin-right:auto}
+.spray-tag .t-line{fill:none;stroke:var(--accent);stroke-width:7;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
+.spray-tag .t-haze{stroke-width:13;opacity:.28}
+.spray-tag .t-drip{fill:var(--accent);transform-box:fill-box;transform-origin:50% 0;transform:scaleY(0)}
+.spray-tag.go .t-line{transition:stroke-dashoffset .55s cubic-bezier(.5,.1,.4,1);stroke-dashoffset:0}
+.spray-tag.go .t-drip{transition:transform 1.2s cubic-bezier(.5,0,.75,1) .5s;transform:scaleY(1)}
+.spray-tag.go .t-drip.d2{transition-delay:.75s;transition-duration:1.5s}
+@media (prefers-reduced-motion:reduce){
+  .q-spray .q-line,.spray-tag .t-line{stroke-dashoffset:0!important;transition:none!important}
+  .q-spray .q-dot,.q-spray .q-drip,.spray-tag .t-drip{transform:none!important;transition:none!important}
+}
+
+/* Wände: gross, unbeschnitten, Legende als Sticker */
+.gallery.works{grid-template-columns:1fr;gap:48px}
+@media (min-width:860px){.gallery.works{grid-template-columns:repeat(2,1fr);gap:64px 44px}.gallery.works figure:first-child{grid-column:1/-1}}
+.gallery.works figure{display:flex;flex-direction:column;align-items:flex-start;overflow:visible;background:none;border-radius:0}
+.gallery.works .gallery-media{width:100%;height:auto;aspect-ratio:auto;object-fit:fill;border-radius:0;box-shadow:var(--photo-shadow)}
+.gallery.works .art-wrap.gallery-media{aspect-ratio:16/10}
+.gallery.works figcaption{position:relative;z-index:1;margin:-22px 0 0 18px;padding:12px 16px 10px;background:#f4f1ea;color:#141414;transform:rotate(-1.4deg);box-shadow:0 3px 0 rgba(0,0,0,.35);max-width:calc(100% - 36px);gap:2px}
+.gallery.works figure:nth-child(even) figcaption{transform:rotate(1.1deg)}
+.work-title{font-family:var(--font-display);text-transform:uppercase;font-size:24px;line-height:1.05;letter-spacing:.02em;color:#141414}
+.work-info{color:#4a4741;font-size:13px}
+.work-ask{color:#141414;font-weight:700;font-size:13.5px;text-decoration:underline;text-decoration-color:#d9ad00;text-decoration-thickness:3px;text-underline-offset:4px}
+.sec-galerie .note{color:var(--muted)}
+
+/* Toile, Über: Foto wie aufgeklebt */
+.split-media,.about-media{border-radius:0!important;box-shadow:var(--photo-shadow)}
+.about-media{transform:rotate(-1deg);border:7px solid #f4f1ea}
+.signature{font-family:var(--font-display);font-size:44px;letter-spacing:.06em;color:var(--accent-text);transform:rotate(-3deg);display:inline-block}
+.checks .ic{color:var(--accent-text)}
+
+/* Karten, Ablauf, FAQ, Formular */
+.card,.step{background:var(--surface)!important;border:0;border-top:4px solid var(--accent);border-radius:0}
+.card-icon{background:var(--accent);color:var(--accent-ink);border-radius:3px}
+.step-no{background:none!important;color:transparent!important;-webkit-text-stroke:2px var(--accent);font:400 64px/1 var(--font-display)!important;width:auto!important;height:auto!important}
+.faq-item{border-color:var(--line)}
+.faq-plus{border-radius:3px}
+.contact-form{border-radius:0;background:var(--surface)!important;border:0;border-top:4px solid var(--accent)}
+.field input,.field textarea{border-radius:2px}
+.to-top{border-radius:3px}
+.mobile-bar a{border-radius:3px}
+.site-footer{border-top:4px solid var(--accent)}
+.gallery.works img.gallery-media{padding:0;background:none}
+.sec-head.center .kicker{align-self:center}
