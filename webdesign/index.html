@@ -795,6 +795,27 @@
   @media (max-width:760px){ .me{ grid-template-columns:1fr; } .me-photo{ max-width:220px; } }
   .menu-link.about{ color:var(--sec-gold); border-bottom:1px solid var(--sec-line); border-radius:0; margin-bottom:4px; }
   .menu-link.home:has(+ .menu-link.about){ border-bottom:0; margin-bottom:0; }
+  /* Paket-Finder: a few questions, then the matching package */
+  .finder{ display:grid; gap:18px; }
+  .finder-progress{ font-family:var(--font-ui); font-weight:600; font-size:.66rem; letter-spacing:.12em; text-transform:uppercase; color:var(--sec-gold-deep); margin:0; }
+  .finder-q{ font-family:var(--font-display); font-size:clamp(1.15rem,2.2vw,1.4rem); font-weight:700; color:var(--sec-ink); margin:0; line-height:1.3; }
+  .finder-opts{ display:grid; gap:10px; }
+  .finder-opt{
+    font:inherit; text-align:left; cursor:pointer; padding:14px 18px; border-radius:var(--r-md);
+    border:1px solid var(--sec-line-gold); background:transparent; color:var(--sec-ink); font-size:.92rem; line-height:1.45; font-weight:300;
+    transition:background .2s, border-color .2s, transform .2s;
+  }
+  .finder-opt strong{ display:block; font-family:var(--font-ui); font-weight:600; font-size:.95rem; }
+  .finder-opt:hover, .finder-opt:focus-visible{ background:var(--sec-gold-soft); border-color:var(--sec-gold); transform:translateY(-1px); }
+  .finder-nav{ display:flex; flex-wrap:wrap; gap:10px 16px; align-items:center; }
+  .finder-back{ font:inherit; cursor:pointer; background:none; border:none; padding:4px 0; color:var(--sec-muted); font-size:.85rem; text-decoration:underline; text-underline-offset:3px; }
+  .finder-back:hover{ color:var(--sec-gold-deep); }
+  .finder-result h3{ font-family:var(--font-display); font-size:clamp(1.3rem,2.6vw,1.7rem); margin:0; color:var(--sec-ink); outline:none; }
+  .finder-why{ margin:0; color:var(--sec-ink); font-size:.98rem; line-height:1.6; font-weight:300; }
+  .finder-note{ margin:0; font-size:.86rem; color:var(--sec-muted); font-weight:300; line-height:1.6; }
+  .finder-panel{ animation:finderIn .35s ease both; }
+  @keyframes finderIn{ from{ opacity:0; transform:translateY(6px); } to{ opacity:1; transform:none; } }
+  @media (prefers-reduced-motion:reduce){ .finder-panel{ animation:none; } .finder-opt{ transition:none; } }
 </style>
 </head>
 <body>
@@ -828,6 +849,7 @@
       <a class="menu-link home" href="https://www.zbinden.online/">← Startseite</a>
       <a class="menu-link about" href="/portfolio">Über mich &amp; meine Projekte</a>
       <a class="menu-link" href="#angebot">Angebot</a>
+      <a class="menu-link" href="#paket-finder">Paket-Finder</a>
       <a class="menu-link" href="#entwurf">Kostenloser Entwurf</a>
       <a class="menu-link" href="#ki-check">KI-Check</a>
       <a class="menu-link" href="#ablauf">Ablauf</a>
@@ -860,6 +882,7 @@
           <a class="btn-primary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Gespräch vereinbaren</a>
           <a class="btn-secondary" href="#referenz">Referenz ansehen</a>
           <a class="btn-secondary" href="#angebot" data-pay-set="abo">Website · ab CHF 119 / Monat</a>
+          <a class="btn-secondary" href="#paket-finder">🧭 Welches Paket passt?</a>
         </div>
         <p class="hero-note reveal d4"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="4" fill="#d52b1e"/><path d="M13 6h6v7h7v6h-7v7h-6v-7H6v-6h7z" fill="#fff"/></svg>Gehostet in der Schweiz, mit erneuerbarem Strom</p>
       </div>
@@ -872,6 +895,20 @@
           <img src="/images/referenzen/waldmeier-mobile.webp" width="390" height="844" alt="Website von Waldmeier Planung&amp;Beratung auf dem Smartphone" loading="lazy">
         </div>
       </a>
+    </div>
+  </section>
+
+  <section id="paket-finder" class="section-light">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Paket-Finder</span>
+        <h2>Welches Paket passt zu Ihnen?</h2>
+      </div>
+      <div class="package-card featured" style="max-width:760px;">
+        <p class="package-lede" style="margin:0; color:var(--sec-ink); font-size:.98rem; line-height:1.6; font-weight:300;">Zwei kurze Fragen, dann sehen Sie, welches Paket passt und was es kostet.</p>
+        <div id="finder" aria-live="polite"></div>
+        <script type="application/json" id="finderData">{"progress": "Frage {n} von {t}", "back": "← Zurück", "again": "Neu starten", "resultLabel": "Meine Empfehlung", "bothNote": "Kauf: Sie zahlen einmal, die Website gehört Ihnen, die Wartung ist optional. Abo: keine Startkosten, Wartung und Änderungen inklusive, Mindestdauer 24 Monate.", "questions": [{"q": "Was soll Ihre Website zeigen?", "options": [{"value": "onepager", "label": "Das Wichtigste auf einer Seite", "hint": "Angebot, Öffnungszeiten und Kontakt auf einen Blick"}, {"value": "website", "label": "Mehrere Themen auf eigenen Seiten", "hint": "z. B. einzelne Leistungen, Team und Referenzen"}, {"value": "unklar", "label": "Ich weiss es noch nicht", "hint": "Sie möchten zuerst sehen, wie es aussehen könnte"}]}, {"q": "Wie möchten Sie lieber bezahlen?", "skipFor": ["unklar"], "options": [{"value": "kauf", "label": "Einmal zahlen", "hint": "Die Website gehört Ihnen, Wartung optional"}, {"value": "abo", "label": "Monatlich im Abo", "hint": "Keine Startkosten, Wartung und Änderungen inklusive"}, {"value": "both", "label": "Zeigen Sie mir beides"}]}], "results": {"onepager": {"name": "Onepager", "why": "Eine Seite mit allem Wichtigen, individuell gestaltet, die Texte verfasse ich für Sie. Ideal für kleine Betriebe und Vereine.", "rows": [["Kauf", "CHF 1'790 einmalig", "kauf"], ["Wartung", "optional ab CHF 39 / Monat", "kauf", "plain"], ["Abo", "CHF 139 / Monat", "abo"], ["Startkosten", "keine", "abo", "plain"], ["Dauer", "ca. 2 Wochen", null, "plain"]], "buttons": [{"label": "Paket ansehen", "href": "#angebot", "pay": true}, {"label": "Kostenlosen Entwurf anfordern", "href": "#entwurf"}, {"label": "Gespräch vereinbaren", "href": "https://calendly.com/zbinden-austausch/30min", "ext": true}]}, "website": {"name": "Website", "why": "Ca. 6 Seiten, individuell strukturiert, mit allen Leistungen des Onepagers. Für Betriebe mit mehreren Leistungen oder Zielgruppen.", "rows": [["Kauf", "CHF 3'900 einmalig", "kauf"], ["Wartung", "optional ab CHF 69 / Monat", "kauf", "plain"], ["Abo", "CHF 239 / Monat", "abo"], ["Startkosten", "keine", "abo", "plain"], ["Dauer", "3–4 Wochen", null, "plain"]], "buttons": [{"label": "Paket ansehen", "href": "#angebot", "pay": true}, {"label": "Kostenlosen Entwurf anfordern", "href": "#entwurf"}, {"label": "Gespräch vereinbaren", "href": "https://calendly.com/zbinden-austausch/30min", "ext": true}]}, "unklar": {"name": "Kostenloser Entwurf", "why": "Laden Sie Ihr Logo hoch und wählen Sie Ihre Farben. Ich baue daraus einen ersten Entwurf Ihrer Website, den Link erhalten Sie innerhalb von 2 Werktagen. Danach entscheiden Sie in Ruhe.", "rows": [["Preis", "Kostenlos"], ["Dauer", "2 Werktage", null, "plain"]], "buttons": [{"label": "Entwurf anfordern", "href": "#entwurf"}, {"label": "Gespräch vereinbaren", "href": "https://calendly.com/zbinden-austausch/30min", "ext": true}]}}}</script>
+      </div>
     </div>
   </section>
 
@@ -1572,6 +1609,97 @@
   panel.addEventListener('click', function(e){ if (e.target.closest('a')) set(false); });
   document.addEventListener('click', function(e){ if (!panel.hidden && !panel.contains(e.target)) set(false); });
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !panel.hidden) { set(false); btn.focus(); } });
+})();
+</script>
+<script>
+// Paket-Finder: questions and results come from the JSON in #finderData.
+// A result is looked up by the joined answers ("why+abo"), else by the first answer;
+// rows with "pay" only show for that payment choice; questions with "skipFor" are skipped.
+(function () {
+  var box = document.getElementById('finder');
+  var dataEl = document.getElementById('finderData');
+  if (!box || !dataEl) return;
+  var T = JSON.parse(dataEl.textContent);
+  var answers = [];
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function pay() { return answers[1] === 'kauf' || answers[1] === 'abo' ? answers[1] : null; }
+
+  function render(focus) {
+    var step = answers.length;
+    while (step < T.questions.length && (T.questions[step].skipFor || []).indexOf(answers[0]) > -1) { answers.push(null); step++; }
+    var html = '<div class="finder-panel">';
+    if (step < T.questions.length) {
+      var q = T.questions[step];
+      html += '<div class="finder" role="group" aria-label="' + esc(q.q) + '">'
+        + '<p class="finder-progress">' + esc(T.progress.replace('{n}', step + 1).replace('{t}', T.questions.length)) + '</p>'
+        + '<p class="finder-q">' + esc(q.q) + '</p><div class="finder-opts">';
+      q.options.forEach(function (o, i) {
+        html += '<button type="button" class="finder-opt" data-i="' + i + '"><strong>' + esc(o.label) + '</strong>' + (o.hint ? esc(o.hint) : '') + '</button>';
+      });
+      html += '</div>' + (step ? '<div class="finder-nav"><button type="button" class="finder-back" data-back>' + esc(T.back) + '</button></div>' : '') + '</div>';
+    } else {
+      html += result();
+    }
+    box.innerHTML = html + '</div>';
+    box.querySelectorAll('.finder-opt').forEach(function (b) {
+      b.addEventListener('click', function () {
+        answers.push(T.questions[step].options[+b.getAttribute('data-i')].value);
+        render(true);
+      });
+    });
+    var back = box.querySelector('[data-back]');
+    if (back) back.addEventListener('click', function () { answers.pop(); while (answers.length && answers[answers.length - 1] === null) answers.pop(); render(true); });
+    var again = box.querySelector('[data-again]');
+    if (again) again.addEventListener('click', function () { answers = []; render(true); });
+    box.querySelectorAll('[data-go]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        var mode = a.getAttribute('data-pay');
+        if (mode) {
+          // Show the recommended price variant on the package cards too.
+          document.documentElement.setAttribute('data-pay', mode);
+          document.querySelectorAll('.pay-switch button').forEach(function (b) {
+            b.setAttribute('aria-pressed', String(b.getAttribute('data-pay') === mode));
+          });
+          try { localStorage.setItem('zs-pay', mode); } catch (e) {}
+        }
+        var f = a.getAttribute('data-focus');
+        if (f) setTimeout(function () { var el = document.getElementById(f); if (el) el.focus({ preventScroll: true }); }, 500);
+      });
+    });
+    if (focus) {
+      var el = box.querySelector('.finder-result h3, .finder-opt');
+      if (el) el.focus({ preventScroll: true });
+    }
+  }
+
+  function result() {
+    var given = answers.filter(function (a) { return a !== null; });
+    var r = T.results[given.join('+')] || T.results[answers[0]];
+    var p = pay();
+    var rows = '';
+    r.rows.forEach(function (row) {
+      if (row[2] && p && row[2] !== p) return;
+      rows += '<div><span class="lbl">' + esc(row[0]) + '</span><span class="val' + (row[3] === 'plain' ? '' : ' price') + '">' + esc(row[1]) + '</span></div>';
+    });
+    var html = '<div class="finder finder-result">'
+      + '<p class="finder-progress">' + esc(T.resultLabel) + '</p>'
+      + '<h3 tabindex="-1">' + esc(r.name) + '</h3>'
+      + '<p class="finder-why">' + esc(r.why) + '</p>'
+      + '<div class="package-meta">' + rows + '</div>';
+    if (r.note) html += '<p class="finder-note">' + esc(r.note) + '</p>';
+    if (answers[1] === 'both' && T.bothNote) html += '<p class="finder-note">' + esc(T.bothNote) + '</p>';
+    html += '<div class="finder-nav">';
+    r.buttons.forEach(function (b, i) {
+      var cls = i ? 'btn-secondary' : 'btn-primary';
+      if (b.ext) html += '<a class="' + cls + '" href="' + b.href + '" target="_blank" rel="noopener">' + esc(b.label) + '</a>';
+      else html += '<a class="' + cls + '" href="' + b.href + '" data-go' + (b.pay && p ? ' data-pay="' + p + '"' : '') + (b.focus ? ' data-focus="' + b.focus + '"' : '') + '>' + esc(b.label) + '</a>';
+    });
+    html += '<button type="button" class="finder-back" data-again>' + esc(T.again) + '</button></div></div>';
+    return html;
+  }
+
+  render(false);
 })();
 </script>
 </body>

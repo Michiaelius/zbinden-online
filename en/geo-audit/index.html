@@ -626,6 +626,27 @@
   @media (max-width:760px){ .me{ grid-template-columns:1fr; } .me-photo{ max-width:220px; } }
   .menu-link.about{ color:var(--sec-gold); border-bottom:1px solid var(--sec-line); border-radius:0; margin-bottom:4px; }
   .menu-link.home:has(+ .menu-link.about){ border-bottom:0; margin-bottom:0; }
+  /* Paket-Finder: a few questions, then the matching package */
+  .finder{ display:grid; gap:18px; }
+  .finder-progress{ font-family:var(--font-ui); font-weight:600; font-size:.66rem; letter-spacing:.12em; text-transform:uppercase; color:var(--sec-gold-deep); margin:0; }
+  .finder-q{ font-family:var(--font-display); font-size:clamp(1.15rem,2.2vw,1.4rem); font-weight:700; color:var(--sec-ink); margin:0; line-height:1.3; }
+  .finder-opts{ display:grid; gap:10px; }
+  .finder-opt{
+    font:inherit; text-align:left; cursor:pointer; padding:14px 18px; border-radius:var(--r-md);
+    border:1px solid var(--sec-line-gold); background:transparent; color:var(--sec-ink); font-size:.92rem; line-height:1.45; font-weight:300;
+    transition:background .2s, border-color .2s, transform .2s;
+  }
+  .finder-opt strong{ display:block; font-family:var(--font-ui); font-weight:600; font-size:.95rem; }
+  .finder-opt:hover, .finder-opt:focus-visible{ background:var(--sec-gold-soft); border-color:var(--sec-gold); transform:translateY(-1px); }
+  .finder-nav{ display:flex; flex-wrap:wrap; gap:10px 16px; align-items:center; }
+  .finder-back{ font:inherit; cursor:pointer; background:none; border:none; padding:4px 0; color:var(--sec-muted); font-size:.85rem; text-decoration:underline; text-underline-offset:3px; }
+  .finder-back:hover{ color:var(--sec-gold-deep); }
+  .finder-result h3{ font-family:var(--font-display); font-size:clamp(1.3rem,2.6vw,1.7rem); margin:0; color:var(--sec-ink); outline:none; }
+  .finder-why{ margin:0; color:var(--sec-ink); font-size:.98rem; line-height:1.6; font-weight:300; }
+  .finder-note{ margin:0; font-size:.86rem; color:var(--sec-muted); font-weight:300; line-height:1.6; }
+  .finder-panel{ animation:finderIn .35s ease both; }
+  @keyframes finderIn{ from{ opacity:0; transform:translateY(6px); } to{ opacity:1; transform:none; } }
+  @media (prefers-reduced-motion:reduce){ .finder-panel{ animation:none; } .finder-opt{ transition:none; } }
 </style>
 </head>
 <body>
@@ -659,6 +680,7 @@
       <a class="menu-link home" href="https://www.zbinden.online/en/">← Home</a>
       <a class="menu-link about" href="/en/portfolio">About me &amp; my projects</a>
       <a class="menu-link" href="#pakete">Packages</a>
+      <a class="menu-link" href="#paket-finder">Package finder</a>
       <a class="menu-link" href="#methode">Method</a>
       <a class="menu-link" href="#befunde">Typical findings</a>
       <a class="menu-link" href="#ablauf">Process</a>
@@ -690,6 +712,7 @@
           <a class="btn-primary" href="#pakete">Request the free GEO-Light test</a>
           <a class="btn-secondary" href="#methode">How I check</a>
           <a class="btn-secondary" href="#pakete" data-pay-set="abo">GEO · from CHF 89 / month</a>
+          <a class="btn-secondary" href="#paket-finder">🧭 Which package fits?</a>
         </div>
       </div>
       <div class="phone-frame reveal d2" id="phoneMock" role="img" aria-label="Simulated AI chat response: three competitors are recommended, your business is not mentioned">
@@ -723,6 +746,20 @@
           <span class="phone-input-placeholder">Write a message…</span>
           <span class="phone-send">➤</span>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="paket-finder" class="section-light">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Package finder</span>
+        <h2>Which package fits you?</h2>
+      </div>
+      <div class="package-card featured" style="max-width:760px;">
+        <p class="package-lede" style="margin:0; color:var(--sec-ink); font-size:.98rem; line-height:1.6; font-weight:300;">Two short questions, then you see which package fits and what it costs.</p>
+        <div id="finder" aria-live="polite"></div>
+        <script type="application/json" id="finderData">{"progress": "Question {n} of {t}", "back": "← Back", "again": "Start over", "resultLabel": "My recommendation", "questions": [{"q": "Where do you stand today?", "options": [{"value": "light", "label": "I don't know whether AI mentions me at all", "hint": "You want an honest picture first"}, {"value": "why", "label": "I'm hardly mentioned and want to know why", "hint": "You want the reasons and a clear plan"}, {"value": "fix", "label": "It should get better, and someone should do it", "hint": "You don't want to deal with it yourself"}, {"value": "web", "label": "I don't have a website yet", "hint": "Or one that can hardly be changed any more"}]}, {"q": "How would you like to proceed?", "skipFor": ["light", "web"], "options": [{"value": "kauf", "label": "One-off", "hint": "Once at a fixed price, no ongoing costs"}, {"value": "abo", "label": "Ongoing subscription", "hint": "Tested again every month, with a report and recommendations"}]}], "results": {"light": {"name": "GEO-Light", "why": "I ask ChatGPT and Perplexity 8 targeted questions live. You see whether your business is mentioned, with an honest assessment.", "rows": [["Price", "Free"], ["Duration", "~48 hours", null, "plain"]], "buttons": [{"label": "Request the test", "href": "#pakete", "focus": "gl-url"}, {"label": "Book a call", "href": "https://calendly.com/zbinden-austausch/30min", "ext": true}]}, "why+kauf": {"name": "GEO audit", "why": "Analysis in six categories, a benchmark against competitors and a prioritised action plan that we go through together in 30 minutes.", "rows": [["Price", "CHF 490–790"], ["Duration", "~1–2 weeks", null, "plain"]], "note": "Tip: the free GEO-Light test shows you where you stand first.", "buttons": [{"label": "See the package", "href": "#pakete", "pay": true}, {"label": "Book a call", "href": "https://calendly.com/zbinden-austausch/30min", "ext": true}]}, "why+abo": {"name": "GEO monitoring", "why": "A GEO audit to start, then every month I test 10–15 typical customer questions and send you 2–3 concrete recommendations. You implement them yourself or with your agency.", "rows": [["Subscription", "CHF 89 / month"], ["Setup", "CHF 490 (GEO audit)", null, "plain"], ["Minimum term", "6 months", null, "plain"]], "buttons": [{"label": "See the package", "href": "#pakete", "pay": true}, {"label": "Book a call", "href": "https://calendly.com/zbinden-austausch/30min", "ext": true}]}, "fix+kauf": {"name": "GEO audit + GEO implementation", "why": "First the audit with an action plan, then I implement it for you: structured data, texts and FAQ. Your design stays as it is.", "rows": [["GEO audit", "CHF 490–790"], ["Implementation", "CHF 990–1'490"]], "note": "The implementation price applies to websites of up to approx. 5 pages.", "buttons": [{"label": "See the packages", "href": "#pakete", "pay": true}, {"label": "Book a call", "href": "https://calendly.com/zbinden-austausch/30min", "ext": true}]}, "fix+abo": {"name": "GEO Active", "why": "Everything in monitoring, and I implement the recommendations for you every month, up to approx. 2 hours for texts, FAQ and structured data.", "rows": [["Subscription", "CHF 249 / month"], ["Setup", "CHF 490 (GEO audit)", null, "plain"], ["Minimum term", "6 months", null, "plain"]], "buttons": [{"label": "See the package", "href": "#pakete", "pay": true}, {"label": "Book a call", "href": "https://calendly.com/zbinden-austausch/30min", "ext": true}]}, "web": {"name": "A website first", "why": "Without a website, ChatGPT and co. have nothing to recommend. I build websites that are prepared for AI assistants from day one.", "rows": [["Buy", "from CHF 1'790"], ["Subscription", "from CHF 119 / month"]], "buttons": [{"label": "More about web design", "href": "#webdesign"}, {"label": "Book a call", "href": "https://calendly.com/zbinden-austausch/30min", "ext": true}]}}}</script>
       </div>
     </div>
   </section>
@@ -1339,6 +1376,97 @@
   panel.addEventListener('click', function(e){ if (e.target.closest('a')) set(false); });
   document.addEventListener('click', function(e){ if (!panel.hidden && !panel.contains(e.target)) set(false); });
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !panel.hidden) { set(false); btn.focus(); } });
+})();
+</script>
+<script>
+// Paket-Finder: questions and results come from the JSON in #finderData.
+// A result is looked up by the joined answers ("why+abo"), else by the first answer;
+// rows with "pay" only show for that payment choice; questions with "skipFor" are skipped.
+(function () {
+  var box = document.getElementById('finder');
+  var dataEl = document.getElementById('finderData');
+  if (!box || !dataEl) return;
+  var T = JSON.parse(dataEl.textContent);
+  var answers = [];
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function pay() { return answers[1] === 'kauf' || answers[1] === 'abo' ? answers[1] : null; }
+
+  function render(focus) {
+    var step = answers.length;
+    while (step < T.questions.length && (T.questions[step].skipFor || []).indexOf(answers[0]) > -1) { answers.push(null); step++; }
+    var html = '<div class="finder-panel">';
+    if (step < T.questions.length) {
+      var q = T.questions[step];
+      html += '<div class="finder" role="group" aria-label="' + esc(q.q) + '">'
+        + '<p class="finder-progress">' + esc(T.progress.replace('{n}', step + 1).replace('{t}', T.questions.length)) + '</p>'
+        + '<p class="finder-q">' + esc(q.q) + '</p><div class="finder-opts">';
+      q.options.forEach(function (o, i) {
+        html += '<button type="button" class="finder-opt" data-i="' + i + '"><strong>' + esc(o.label) + '</strong>' + (o.hint ? esc(o.hint) : '') + '</button>';
+      });
+      html += '</div>' + (step ? '<div class="finder-nav"><button type="button" class="finder-back" data-back>' + esc(T.back) + '</button></div>' : '') + '</div>';
+    } else {
+      html += result();
+    }
+    box.innerHTML = html + '</div>';
+    box.querySelectorAll('.finder-opt').forEach(function (b) {
+      b.addEventListener('click', function () {
+        answers.push(T.questions[step].options[+b.getAttribute('data-i')].value);
+        render(true);
+      });
+    });
+    var back = box.querySelector('[data-back]');
+    if (back) back.addEventListener('click', function () { answers.pop(); while (answers.length && answers[answers.length - 1] === null) answers.pop(); render(true); });
+    var again = box.querySelector('[data-again]');
+    if (again) again.addEventListener('click', function () { answers = []; render(true); });
+    box.querySelectorAll('[data-go]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        var mode = a.getAttribute('data-pay');
+        if (mode) {
+          // Show the recommended price variant on the package cards too.
+          document.documentElement.setAttribute('data-pay', mode);
+          document.querySelectorAll('.pay-switch button').forEach(function (b) {
+            b.setAttribute('aria-pressed', String(b.getAttribute('data-pay') === mode));
+          });
+          try { localStorage.setItem('zs-pay', mode); } catch (e) {}
+        }
+        var f = a.getAttribute('data-focus');
+        if (f) setTimeout(function () { var el = document.getElementById(f); if (el) el.focus({ preventScroll: true }); }, 500);
+      });
+    });
+    if (focus) {
+      var el = box.querySelector('.finder-result h3, .finder-opt');
+      if (el) el.focus({ preventScroll: true });
+    }
+  }
+
+  function result() {
+    var given = answers.filter(function (a) { return a !== null; });
+    var r = T.results[given.join('+')] || T.results[answers[0]];
+    var p = pay();
+    var rows = '';
+    r.rows.forEach(function (row) {
+      if (row[2] && p && row[2] !== p) return;
+      rows += '<div><span class="lbl">' + esc(row[0]) + '</span><span class="val' + (row[3] === 'plain' ? '' : ' price') + '">' + esc(row[1]) + '</span></div>';
+    });
+    var html = '<div class="finder finder-result">'
+      + '<p class="finder-progress">' + esc(T.resultLabel) + '</p>'
+      + '<h3 tabindex="-1">' + esc(r.name) + '</h3>'
+      + '<p class="finder-why">' + esc(r.why) + '</p>'
+      + '<div class="package-meta">' + rows + '</div>';
+    if (r.note) html += '<p class="finder-note">' + esc(r.note) + '</p>';
+    if (answers[1] === 'both' && T.bothNote) html += '<p class="finder-note">' + esc(T.bothNote) + '</p>';
+    html += '<div class="finder-nav">';
+    r.buttons.forEach(function (b, i) {
+      var cls = i ? 'btn-secondary' : 'btn-primary';
+      if (b.ext) html += '<a class="' + cls + '" href="' + b.href + '" target="_blank" rel="noopener">' + esc(b.label) + '</a>';
+      else html += '<a class="' + cls + '" href="' + b.href + '" data-go' + (b.pay && p ? ' data-pay="' + p + '"' : '') + (b.focus ? ' data-focus="' + b.focus + '"' : '') + '>' + esc(b.label) + '</a>';
+    });
+    html += '<button type="button" class="finder-back" data-again>' + esc(T.again) + '</button></div></div>';
+    return html;
+  }
+
+  render(false);
 })();
 </script>
 </body>
