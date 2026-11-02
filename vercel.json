@@ -1,6 +1,7 @@
 {
   "functions": {
     "api/geo-preview.mjs": { "maxDuration": 30 },
-    "api/geo-light-run.mjs": { "maxDuration": 300, "memory": 2048 }
+    "api/geo-light-run.mjs": { "maxDuration": 300, "memory": 2048 },
+    "api/mockup-run.mjs": { "maxDuration": 300, "memory": 2048, "includeFiles": "api/_kit/**" }
   }
 }

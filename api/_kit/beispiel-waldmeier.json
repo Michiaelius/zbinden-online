@@ -1,0 +1,88 @@
+{
+  "lang": "de",
+  "layout": "klar",
+  "palette": "salbei",
+  "domain": "waldmeier-wpb.ch",
+  "firma": {
+    "name": "M. Waldmeier Planung&Beratung",
+    "kurzname": "Waldmeier",
+    "branche": "Baugesuche & Bauberatung",
+    "schemaTyp": "ProfessionalService",
+    "slogan": "Ihr Baugesuch – einfach und vollständig.",
+    "beschreibung": "Baugesuche, Planung und Bauberatung für Privatpersonen im Fricktal und im Aargau – von einem Bauverwalter, der beide Seiten kennt.",
+    "inhaber": "Micha Waldmeier",
+    "adresse": { "strasse": "Mitteldorfstrasse 13", "plz": "5072", "ort": "Oeschgen" },
+    "region": ["Fricktal", "Kanton Aargau", "Nordwestschweiz"],
+    "telefon": "079 386 26 18",
+    "whatsapp": true,
+    "email": "info@waldmeier-wpb.ch"
+  },
+  "seo": {
+    "title": "Baugesuch & Bauberatung im Fricktal | M. Waldmeier Planung&Beratung",
+    "description": "Baugesuche, Planung und Bauberatung für kleinere Bauprojekte im Fricktal und im Aargau. Von einem Bauverwalter, der weiss, was die Gemeinde erwartet. Erstgespräch kostenlos."
+  },
+  "hero": {
+    "kicker": "Baugesuche · Planung · Bauberatung",
+    "titel": "Ihr Baugesuch – einfach und vollständig.",
+    "text": "Ich kenne beide Seiten: Als Bauverwalter weiss ich genau, was eine Gemeinde für ein vollständiges Gesuch erwartet. Ich begleite Sie bei kleineren Bauprojekten, für die sich ein Architekt nicht lohnt – von der ersten Idee bis zur Baubewilligung.",
+    "cta": { "label": "Vorhaben schildern", "ziel": "#kontakt" },
+    "cta2": { "label": "So läuft es ab", "ziel": "#ablauf" },
+    "punkte": ["Bauverwalter einer Gemeinde", "Fricktal & Aargau", "Erstgespräch kostenlos"]
+  },
+  "sektionen": [
+    {
+      "typ": "leistungen", "id": "leistungen", "nav": "Leistungen",
+      "kicker": "Leistungen", "titel": "Was ich für Sie mache",
+      "intro": "Für Privatpersonen, die umbauen, sanieren oder etwas Kleines bauen möchten – und dabei sicher sein wollen, dass das Baugesuch beim ersten Mal stimmt.",
+      "items": [
+        { "icon": "plan", "titel": "Baugesuch", "text": "Ich übernehme die Planung, stelle alle Unterlagen zusammen, reiche Ihr Gesuch bei der Gemeinde ein und begleite Sie bis zur Baubewilligung." },
+        { "icon": "home", "titel": "Planung & Beratung", "text": "Kleine Neubauten, Umbauten und Anbauten, Sanierungen und Erweiterungen." },
+        { "icon": "shield", "titel": "Abklärungen", "text": "Brauche ich überhaupt eine Baubewilligung? Ich kläre die Bewilligungspflicht ab, mache Voranfragen bei der Gemeinde und spreche mit den Fachstellen." },
+        { "icon": "people", "titel": "Begleitung", "text": "Vom ersten Entwurf bis zur Umsetzung vermittle ich zwischen Ihnen, den Planenden und der Gemeinde." }
+      ]
+    },
+    {
+      "typ": "ueber", "id": "ueber-mich", "nav": "Über mich",
+      "kicker": "Über mich", "titel": "Ich kenne beide Seiten",
+      "text": "Ich bin Micha Waldmeier. Hauptberuflich bin ich Bauverwalter (DAS Bauverwalter FHNW), gelernt habe ich Schreiner und Bauzeichner. Ich sehe täglich, was ein Baugesuch vollständig macht – und woran es oft hakt. Dieses Wissen setze ich für Sie als Bauherrschaft ein.",
+      "punkte": [
+        "Ich kenne die Abläufe und Stolpersteine aus Sicht der Gemeinde.",
+        "Ich schliesse die Lücke, wo ein Architekt zu gross und ein Alleingang zu riskant ist.",
+        "Ich mache das Baugesuch für Privatpersonen einfach und verständlich."
+      ],
+      "bild": { "alt": "Porträt Micha Waldmeier (folgt)" }
+    },
+    {
+      "typ": "ablauf", "id": "ablauf", "nav": "Ablauf",
+      "kicker": "Ablauf", "titel": "Schritt für Schritt zur Baubewilligung",
+      "intro": "Sie wissen jederzeit, was benötigt wird und wie es weitergeht.",
+      "schritte": [
+        { "titel": "Erstgespräch", "text": "Kostenlos, ca. 1 Stunde. Ich kläre ab, ob und welche Baubewilligung nötig ist." },
+        { "titel": "Pläne & Unterlagen", "text": "Ich erstelle die Pläne und stelle alle Dokumente vollständig zusammen." },
+        { "titel": "Einreichung", "text": "Ich reiche das Gesuch bei der Gemeinde ein und bin Ansprechperson für Rückfragen." },
+        { "titel": "Baubewilligung", "text": "Ich begleite Sie durch das Verfahren bis zur Bewilligung – auf Wunsch darüber hinaus." }
+      ]
+    },
+    {
+      "typ": "region", "id": "region",
+      "kicker": "Region", "titel": "Zuhause im Fricktal – unterwegs für Sie",
+      "text": "Mein Büro ist in Oeschgen. Ich arbeite hauptsächlich im Fricktal und im Kanton Aargau – und komme gerne auch weiter zu Ihnen.",
+      "orte": ["Frick", "Laufenburg", "Rheinfelden", "Möhlin", "Aarau", "Basel", "Zürich", "Luzern"]
+    },
+    {
+      "typ": "faq", "id": "faq", "nav": "FAQ",
+      "kicker": "Häufige Fragen", "titel": "Diese Fragen höre ich am häufigsten",
+      "items": [
+        { "frage": "Brauche ich für ein Gartenhaus, einen Carport oder eine Pergola eine Baubewilligung?", "antwort": "In der Regel ja. Bewilligungspflichtig sind auch Kleinbauten wie Gartenhäuser, Schöpfe oder Überdachungen. Ausnahmen regelt im Kanton Aargau § 49 der Bauverordnung (BauV). Ob Ihr Vorhaben darunter fällt, kläre ich gerne für Sie ab." },
+        { "frage": "Was passiert, wenn ich ohne Baubewilligung baue?", "antwort": "Die Behörde verfügt einen Baustopp und verlangt ein nachträgliches Baugesuch. Je nach Fall kann die Gemeinde zusätzlich eine Busse aussprechen." },
+        { "frage": "Brauche ich einen Architekten, oder reicht Ihre Unterstützung?", "antwort": "Nicht jedes Bauvorhaben braucht einen Architekten. Bei kleineren, überschaubaren Projekten wie Sanierungen, kleineren An- und Umbauten oder Umnutzungen unterstütze ich Sie gezielt. Im Zweifel klären wir das gemeinsam im Erstgespräch." },
+        { "frage": "In welchen Regionen sind Sie tätig?", "antwort": "Hauptsächlich im Fricktal und im Kanton Aargau. Ich komme aber gerne auch in die ganze Nordwestschweiz, Richtung Basel, Zürich und Luzern." }
+      ]
+    },
+    {
+      "typ": "kontakt", "id": "kontakt", "nav": "Kontakt", "formular": "kontakt",
+      "kicker": "Kontakt", "titel": "Erzählen Sie mir von Ihrem Vorhaben",
+      "intro": "Ich melde mich innert 2–3 Arbeitstagen bei Ihnen. Das Erstgespräch (ca. 1 Stunde) ist kostenlos."
+    }
+  ]
+}

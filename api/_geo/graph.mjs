@@ -40,15 +40,16 @@ async function graph(tok, path, init) {
   return r.status === 204 ? null : r.json();
 }
 
-/** Nombre de brouillons GEO-Light créés aujourd'hui (heure suisse), envoyés ou non. */
-export async function countToday() {
+/** Nombre de brouillons GEO-Light (ou d'une autre catégorie) créés aujourd'hui (heure suisse), envoyés ou non. */
+export async function countToday(category) {
+  const cat = category || CATEGORY;
   const tok = await token();
   const day = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Zurich' }).format(new Date());
   // Minuit à Zurich ≈ 22 h ou 23 h UTC la veille : on prend large puis on filtre la date locale.
   const since = new Date(new Date(day + 'T00:00:00Z').getTime() - 2 * 3600 * 1000).toISOString();
   const data = await graph(tok, `/messages?$filter=createdDateTime ge ${since}&$select=categories,createdDateTime&$top=200`);
   return (data.value || []).filter(function (m) {
-    return (m.categories || []).includes(CATEGORY) &&
+    return (m.categories || []).includes(cat) &&
       new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Zurich' }).format(new Date(m.createdDateTime)) === day;
   }).length;
 }
@@ -69,6 +70,21 @@ export async function createDraft(to, subject, body, pdfName, pdf) {
         contentType: 'application/pdf',
         contentBytes: pdf.toString('base64'),
       }],
+    }),
+  });
+  return { id: msg.id, webLink: msg.webLink || '' };
+}
+
+/** Brouillon texte sans pièce jointe (ébauche gratuite : le lien vers vorschau suffit). */
+export async function createTextDraft(to, subject, body, category) {
+  const tok = await token();
+  const msg = await graph(tok, '/messages', {
+    method: 'POST',
+    body: JSON.stringify({
+      subject: subject,
+      body: { contentType: 'Text', content: body },
+      toRecipients: [{ emailAddress: { address: to } }],
+      categories: [category],
     }),
   });
   return { id: msg.id, webLink: msg.webLink || '' };

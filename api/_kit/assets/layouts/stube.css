@@ -1,0 +1,32 @@
+/* Stube – dunkel, bildstark, kursive Serifen. Basierend auf der Beispiel-Website Lindenstube. */
+body{font-weight:300}
+h1,h2{font-style:italic;font-weight:500}
+h1{font-size:clamp(34px,6.4vw,76px);line-height:1.1}
+h3{font-weight:500}
+.kicker{letter-spacing:.28em;font-weight:400}
+.lead{font-weight:300}
+.btn{border-radius:2px;text-transform:uppercase;letter-spacing:.16em;font-size:13px;font-weight:600}
+.btn-primary{background:transparent;color:var(--accent-text);border-color:var(--accent)}
+.btn-primary:hover{background:var(--accent);color:var(--accent-ink);filter:none}
+.btn-ghost{border-color:rgba(255,255,255,.5)}
+/* Header liegt transparent über dem Foto und wird beim Scrollen dunkel */
+.header-overlay{position:fixed;left:0;right:0;background:transparent;border-bottom-color:transparent;color:#fff;backdrop-filter:none;-webkit-backdrop-filter:none;transition:background-color .35s,border-color .35s}
+.header-overlay.scrolled,.menu-open .header-overlay{background:color-mix(in srgb,var(--bg) 94%,transparent);color:var(--ink);border-bottom-color:var(--line);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.header-overlay .menu-btn{border-color:rgba(255,255,255,.45)}
+.header-overlay .nav-cta{background:transparent;color:inherit;border-color:var(--accent)}
+.brand-mark{background:transparent;border:1px solid var(--accent);color:var(--accent-text);font-style:italic}
+.brand-name{font-style:italic;font-size:24px}
+.hero-photo .hero-text{gap:18px}
+.hero-photo .kicker{padding:7px 18px;background:rgba(10,8,7,.45);backdrop-filter:blur(3px);color:var(--accent-text)}
+.sec-zitat .quote{font-style:italic}
+.card,.step,.review{background:transparent!important;border:0;border-top:1px solid var(--line);border-radius:0;padding:28px 4px}
+.card-icon{background:none;color:var(--accent-text);width:auto;height:auto;justify-content:start}
+.review{align-items:center;text-align:center;border:0}
+.review blockquote{font-style:italic}
+.gallery figure{border-radius:2px}
+.contact-form{background:var(--surface)!important;border-color:var(--line);border-radius:4px}
+.field input,.field textarea{background:color-mix(in srgb,var(--surface) 70%,#000)!important;border-radius:2px;color:var(--ink)}
+.field input::-webkit-calendar-picker-indicator{filter:invert(.8)}
+.about-media,.hero-band .hero-media{border-radius:2px}
+.to-top{border-radius:2px;background:var(--surface);color:var(--accent-text);border-color:var(--accent)}
+.mobile-bar a.primary{background:transparent;color:var(--accent-text);border:1px solid var(--accent)}

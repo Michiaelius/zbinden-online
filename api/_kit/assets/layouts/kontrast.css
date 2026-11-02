@@ -1,0 +1,19 @@
+/* Kontrast – dunkler Kopf und Hero, kräftige Schrift, kantige Formen (wie zbinden.online). */
+h1,h2{text-transform:uppercase;letter-spacing:.01em;line-height:1.02}
+h1{font-size:clamp(40px,8.4vw,80px)}
+h2{font-size:clamp(32px,5.4vw,52px)}
+.hero-split{background:var(--dark);color:var(--dark-ink);--muted:color-mix(in srgb,var(--dark-ink) 78%,var(--dark));--accent-text:var(--accent);--line:color-mix(in srgb,var(--dark-ink) 18%,var(--dark))}
+.hero-split .btn-ghost{color:var(--dark-ink)}
+.hero-media{border-radius:4px}
+.btn{border-radius:4px;text-transform:uppercase;letter-spacing:.06em;font-size:15px}
+.sec-head h2::after{content:"";display:block;width:64px;height:5px;background:var(--accent);margin-top:18px}
+.sec-head.center h2::after{margin-left:auto;margin-right:auto}
+.card,.step,.review,.contact-form{border-radius:4px}
+.card{border-left:5px solid var(--accent)}
+.card-icon{border-radius:4px;background:var(--dark);color:var(--accent)}
+.step-no{border-radius:4px;background:var(--dark);color:var(--accent)}
+.about-media{border-radius:4px}
+.field input,.field textarea{border-radius:4px}
+.brand-mark{border-radius:4px}
+.mobile-bar a{border-radius:4px}
+.to-top{border-radius:4px}

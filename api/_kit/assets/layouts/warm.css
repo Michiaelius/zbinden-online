@@ -1,0 +1,20 @@
+/* Warm – Farbblöcke, weiche Formen, freundlich. Inspiriert von Waldmeier v2 (Farbblöcke). */
+.hero-center{background:var(--surface);overflow:hidden}
+.hero-center::before,.hero-center::after{content:"";position:absolute;border-radius:50%;background:var(--accent);opacity:.14;pointer-events:none}
+.hero-center::before{width:340px;height:340px;left:-120px;top:-90px}
+.hero-center::after{width:220px;height:220px;right:-60px;bottom:30px;opacity:.1}
+.hero-center .hero-inner{position:relative}
+.hero-band .hero-media{border-radius:32px}
+.sec-head{align-items:center;text-align:center;margin-left:auto;margin-right:auto}
+.card,.step,.review,.contact-form{border:0;border-radius:28px}
+.card{background:var(--surface)}
+.tone-surface .card,.tone-surface .step,.tone-surface .contact-form{background:var(--bg)}
+.card-icon{border-radius:50%;background:var(--accent);color:var(--accent-ink)}
+.sec-leistungen .cards{text-align:center}
+.sec-leistungen .card{align-items:center}
+.about-media,.hero-media{border-radius:32px}
+.split-media{border-radius:0}
+.sec-ablauf{background:var(--accent);color:var(--accent-ink);--muted:var(--accent-ink);--accent-text:var(--accent-ink)}
+.sec-ablauf .step{background:color-mix(in srgb,var(--accent-ink) 12%,var(--accent));color:var(--accent-ink)}
+.sec-ablauf .step-no{background:var(--accent-ink);color:var(--accent)}
+.field input,.field textarea{border-radius:16px}

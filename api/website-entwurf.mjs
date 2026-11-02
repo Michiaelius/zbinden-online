@@ -5,7 +5,8 @@
  *  1. la demande à info@zbinden.online (« Répondre » écrit au visiteur), avec le logo en pièce jointe
  *     et entwurf.json = tout ce qu'il faut pour la maquette (Starter-Kit : palette ou farben + logo) ;
  *  2. un e-mail de confirmation au visiteur, dans la langue de la page (texte fixe).
- * Plus tard : lancer api/mockup-run.mjs (maquette générée → vorschau.zbinden.online, brouillon Outlook).
+ *  3. si GEO_RUN_SECRET existe : lance api/mockup-run.mjs (ébauche générée → vorschau.zbinden.online,
+ *     brouillon Outlook, alerte « Ébauche prête »). La notification dit si le lancement a marché.
  *
  * Corps JSON : { company, website?, message?, umfang?, email, phone?, palette, farben?: { haupt, akzent },
  *                logo?: { name, type, data (base64) }, lang, _gotcha }
@@ -101,7 +102,28 @@ function rows(d) {
   ].filter(function (r) { return r[1]; });
 }
 
-function renderHtml(d, brief) {
+/* Ébauche automatique (api/mockup-run.mjs). Renvoie la ligne de statut affichée dans la notification. */
+async function startMockupRun(req, brief, logo) {
+  const secret = process.env.GEO_RUN_SECRET;
+  if (!secret) return '';
+  try {
+    const r = await fetch(`https://${req.headers.host}/api/mockup-run`, {
+      method: 'POST',
+      signal: AbortSignal.timeout(8000),
+      headers: { 'Content-Type': 'application/json', 'x-geo-secret': secret },
+      body: JSON.stringify({ brief, logo: logo ? { ext: logo.ext, data: logo.data } : null, source: 'form' }),
+    });
+    if (r.status === 202) {
+      const j = await r.json().catch(function () { return {}; });
+      return `Ébauche automatique lancée : ${j.url || 'vorschau.zbinden.online'} et brouillon de réponse dans custom-software@ d’ici 2 à 4 minutes, avec une alerte ici.`;
+    }
+    return `Ébauche automatique non lancée (erreur ${r.status}) : à faire à la main avec entwurf.json.`;
+  } catch (e) {
+    return 'Ébauche automatique non lancée (pas de réponse) : à faire à la main avec entwurf.json.';
+  }
+}
+
+function renderHtml(d, brief, status) {
   const swatch = d.palette === 'eigen'
     ? `<p style="margin:0 0 18px;"><span style="display:inline-block;width:28px;height:28px;border-radius:50%;background:${d.farben.haupt};vertical-align:middle;"></span>` +
       `<span style="display:inline-block;width:28px;height:28px;border-radius:50%;background:${d.farben.akzent};vertical-align:middle;margin-left:6px;"></span></p>`
@@ -112,6 +134,7 @@ function renderHtml(d, brief) {
     `<div style="font:700 15px Georgia,'Times New Roman',serif;color:#a6790f;letter-spacing:.03em;">ZBINDEN &middot; SOFTWARE</div>` +
     `<p style="margin:26px 0 18px;">Nouvelle demande <strong>Kostenloser Entwurf</strong> : ébauche gratuite à préparer (promis au visiteur : lien sous 2 jours ouvrables).</p>` +
     swatch +
+    (status ? `<p style="margin:0 0 18px;padding:10px 12px;background:#eef3f5;border-radius:8px;">${esc(status)}</p>` : '') +
     `<table style="border-collapse:collapse;font-size:14px;">` +
     rows(d).map(function (r) {
       return `<tr><td style="padding:7px 14px 7px 0;color:#726a5c;vertical-align:top;white-space:nowrap;">${esc(r[0])}</td><td style="padding:7px 0;white-space:pre-wrap;">${esc(r[1])}</td></tr>`;
@@ -207,6 +230,7 @@ export default async function handler(req, res) {
   const attachments = [{ filename: `entwurf-${stem}.json`, content: Buffer.from(JSON.stringify(brief, null, 2)).toString('base64') }];
   if (d.logo) attachments.push({ filename: brief.logo, content: d.logo.data });
 
+  const status = await startMockupRun(req, brief, d.logo);
   const stamp = Date.now();
   try {
     const r = await sendMail(key, {
@@ -214,7 +238,7 @@ export default async function handler(req, res) {
       to: [process.env.CONTACT_TO || 'info@zbinden.online'],
       reply_to: email,
       subject: `Nouvelle demande Entwurf — ${company.replace(/[\r\n]+/g, ' ').slice(0, 120)}`,
-      html: renderHtml(d, brief),
+      html: renderHtml(d, brief, status),
       text: rows(d).map(function (r) { return `${r[0]}: ${r[1]}`; }).join('\n') + '\n\nentwurf.json :\n' + JSON.stringify(brief, null, 2),
       attachments,
       headers: { 'X-Entity-Ref-ID': `entwurf-${stamp}` },
