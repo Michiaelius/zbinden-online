@@ -464,6 +464,65 @@
   @media (max-width:760px){ .me{ grid-template-columns:1fr; } .me-photo{ max-width:220px; } }
   .menu-link.about{ color:var(--sec-gold); border-bottom:1px solid var(--sec-line); border-radius:0; margin-bottom:4px; }
   .menu-link.home:has(+ .menu-link.about){ border-bottom:0; margin-bottom:0; }
+
+  /* ---------- Angebots-Finder ---------- */
+  .finder-card{
+    max-width:760px; border:1px solid var(--sec-gold); border-radius:var(--r-lg); background:var(--sec-bg-2);
+    padding:clamp(22px,4vw,36px); box-shadow:0 30px 70px -34px rgba(0,0,0,.25), 0 0 40px var(--sec-gold-soft);
+  }
+  .finder-lede{ margin:0 0 18px; color:var(--sec-ink); font-size:.98rem; line-height:1.6; font-weight:300; }
+  .finder{ display:grid; gap:18px; }
+  .finder-progress{ font-family:var(--font-ui); font-weight:600; font-size:.66rem; letter-spacing:.12em; text-transform:uppercase; color:var(--sec-gold-deep); margin:0; }
+  .finder-q{ font-family:var(--font-display); font-size:clamp(1.15rem,2.2vw,1.4rem); font-weight:700; color:var(--sec-ink); margin:0; line-height:1.3; }
+  .finder-opts{ display:grid; gap:10px; }
+  .finder-opt{
+    font:inherit; text-align:left; cursor:pointer; padding:14px 18px; border-radius:var(--r-md);
+    border:1px solid var(--sec-line-gold); background:transparent; color:var(--sec-ink); font-size:.92rem; line-height:1.45; font-weight:300;
+    transition:background .2s, border-color .2s, transform .2s;
+  }
+  .finder-opt strong{ display:block; font-family:var(--font-ui); font-weight:600; font-size:.95rem; }
+  .finder-opt:hover, .finder-opt:focus-visible{ background:var(--sec-gold-soft); border-color:var(--sec-gold); transform:translateY(-1px); }
+  .finder-nav{ display:flex; flex-wrap:wrap; gap:10px 16px; align-items:center; }
+  .finder-back{ font:inherit; cursor:pointer; background:none; border:none; padding:4px 0; color:var(--sec-muted); font-size:.85rem; text-decoration:underline; text-underline-offset:3px; }
+  .finder-back:hover{ color:var(--sec-gold-deep); }
+  .finder-result h3{ font-family:var(--font-display); font-size:clamp(1.3rem,2.6vw,1.7rem); margin:0; color:var(--sec-ink); outline:none; }
+  .finder-why{ margin:0; color:var(--sec-ink); font-size:.98rem; line-height:1.6; font-weight:300; }
+  .finder-price{ margin:0; padding:12px 0; border-top:1px solid var(--sec-line); border-bottom:1px solid var(--sec-line); font-family:var(--font-display); font-weight:700; font-size:1.05rem; color:var(--sec-gold-deep); }
+  .finder-note{ margin:0; font-size:.86rem; color:var(--sec-muted); font-weight:300; line-height:1.6; }
+  .finder-note a{ color:var(--sec-gold-deep); }
+  .finder-panel{ animation:finderIn .35s ease both; }
+  @keyframes finderIn{ from{ opacity:0; transform:translateY(6px); } to{ opacity:1; transform:none; } }
+  @media (prefers-reduced-motion:reduce){ .finder-panel{ animation:none; } .finder-opt{ transition:none; } }
+
+  /* ---------- Kontaktformular ---------- */
+  .contact-grid{ display:grid; grid-template-columns:0.9fr 1.1fr; grid-template-areas:"intro form" "list form"; gap:28px 48px; align-items:start; }
+  .contact-intro{ grid-area:intro; } .contact-list{ grid-area:list; } .contact-grid .contact-card{ grid-area:form; }
+  @media (max-width:780px){ .contact-grid{ grid-template-columns:1fr; grid-template-areas:"intro" "form" "list"; gap:32px; } }
+  .contact-grid > *{ min-width:0; }
+  .contact-intro p{ color:var(--sec-muted); font-size:1rem; line-height:1.75; margin:0; max-width:52ch; font-weight:300; }
+  .contact-list{ display:grid; gap:14px; }
+  .contact-list .lbl{ font-family:var(--font-ui); font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--sec-gold); display:block; margin-bottom:2px; font-weight:600; }
+  .contact-list a{ font-family:var(--font-ui); font-weight:600; text-decoration:none; color:var(--sec-ink); font-size:.95rem; }
+  .contact-list a:hover{ color:var(--sec-gold); }
+  form.request{ display:grid; gap:18px; }
+  .field{ display:grid; gap:8px; }
+  .field label{ font-family:var(--font-ui); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--sec-muted); font-weight:600; }
+  .field .opt{ text-transform:none; letter-spacing:0; font-weight:300; }
+  .field input, .field select, .field textarea{
+    width:100%; min-width:0; background:var(--sec-bg); border:1px solid var(--sec-line-strong); border-radius:var(--r-sm); color:var(--sec-ink);
+    font-family:"Jost","Helvetica Neue",Helvetica,Arial,sans-serif; font-weight:300; font-size:.94rem; padding:12px 14px; resize:vertical;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{ outline:none; border-color:var(--sec-gold); }
+  .field textarea{ min-height:110px; }
+  .field-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:480px){ .field-row{ grid-template-columns:1fr; } }
+  form.request .btn-primary{ justify-self:start; margin-top:4px; border:none; cursor:pointer; }
+  form.request .btn-primary:disabled{ opacity:.6; cursor:default; }
+  .form-note{ font-size:.78rem; color:var(--sec-muted); margin:-4px 0 0; font-weight:300; }
+  .form-status{ font-family:var(--font-ui); font-size:.9rem; padding:16px 18px; border-radius:var(--r-sm); font-weight:400; line-height:1.5; }
+  .form-status.ok{ background:var(--sec-gold-soft); color:var(--sec-gold-light); border:1px solid var(--sec-line-gold); }
+  .form-status.err{ background:var(--sec-alt-soft); color:var(--sec-ink); border:1px solid var(--sec-line-strong); }
+  .form-status[hidden]{ display:none; }
 </style>
 </head>
 <body>
@@ -490,6 +549,7 @@
     <nav class="menu-panel" id="menuPanel" aria-label="Menu" hidden>
       <a class="menu-link about" href="/fr/portfolio">Mon parcours et mes projets</a>
       <a class="menu-link" href="#angebote">Offres</a>
+      <a class="menu-link" href="#welches-angebot">Quelle offre me convient ?</a>
       <a class="menu-link" href="#fuer-wen">Pour qui ?</a>
       <a class="menu-link" href="#ueber-mich">À propos</a>
       <a class="menu-link" href="#faq">FAQ</a>
@@ -521,6 +581,8 @@
       <div class="cta-row reveal d4">
         <a class="btn-primary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Premier entretien gratuit · 30 min</a>
         <a class="btn-secondary" href="#angebote">Voir les offres</a>
+        <a class="btn-secondary" href="#welches-angebot">🧭 Quelle offre me convient ?</a>
+        <a class="btn-secondary" href="#kontakt">✉️ Écrire un message</a>
       </div>
       <p class="cta-note reveal d4">Gratuit et sans engagement : en 30 minutes, nous voyons quel premier pas vaut la peine pour vous.</p>
     </div>
@@ -551,6 +613,20 @@
           <p>Je crée des sites clairs et adaptés au mobile pour les petites entreprises et les associations — construits pour que Google et les assistants IA comme ChatGPT vous comprennent.</p>
           <span class="go">Découvrir le webdesign <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="welches-angebot" class="section-light">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Guide de choix</span>
+        <h2>Quelle offre vous convient ?</h2>
+      </div>
+      <div class="finder-card">
+        <p class="finder-lede">Trois questions rapides, puis vous voyez par quoi commencer.</p>
+        <div id="finder" aria-live="polite"></div>
+        <script type="application/json" id="finderData">{"progress": "Question {n} sur {t}", "back": "← Retour", "again": "Recommencer", "resultLabel": "Ma recommandation", "cta": {"write": "Écrire un message", "call": "Réserver un appel · 30 min", "read": "Voir l’offre"}, "notes": {"geoNoSite": "Sans site web, ChatGPT et compagnie n’ont rien à recommander. Le site vient donc en premier : chaque nouveau site que je crée est préparé pour les assistants IA dès le départ.", "geoOldSite": "Si votre site est très daté, un nouveau peut aussi valoir la peine. Le mieux est d’en parler ensemble.", "webOkSite": "Vous êtes satisfait de votre site ? Le test GEO-Light gratuit vérifie si ChatGPT vous trouve déjà grâce à lui.", "unklarNoSite": "Sans site, la plupart commencent par un site d’une page. Il est vite en ligne et préparé pour Google et les assistants IA dès le départ."}, "questions": [{"q": "Que souhaitez-vous surtout obtenir ?", "options": [{"value": "ki", "label": "Gagner du temps sur les tâches répétitives", "hint": "p. ex. demandes, devis ou relances qui se font automatiquement"}, {"value": "geo", "label": "Être recommandé par ChatGPT et compagnie", "hint": "Quand quelqu’un demande à une IA un prestataire comme vous"}, {"value": "web", "label": "Un site web nouveau ou meilleur", "hint": "Clair, mobile et conçu pour que Google et l’IA vous comprennent"}, {"value": "unklar", "label": "Je ne sais pas encore", "hint": "Vous voulez simplement voir ce qui est possible"}]}, {"q": "Avez-vous déjà un site web ?", "options": [{"value": "ok", "label": "Oui, et j’en suis satisfait"}, {"value": "old", "label": "Oui, mais il a pris de l’âge"}, {"value": "none", "label": "Non, pas encore"}]}, {"q": "Comment souhaitez-vous continuer ?", "options": [{"value": "write", "label": "Écrire un court message", "hint": "Je réponds sous 1 à 2 jours ouvrables"}, {"value": "call", "label": "Réserver directement un appel", "hint": "30 minutes, gratuit et sans engagement"}, {"value": "read", "label": "D’abord lire tranquillement", "hint": "Vous arrivez directement sur la page de l’offre adaptée"}]}], "services": {"ki": {"name": "Agents IA & automatisation des processus", "url": "/fr/ki-agenten-automatisierung", "form": "Automatisierung", "why": "J’automatise un processus après l’autre, avec un chiffre à la clé : les heures gagnées par semaine. Une première automatisation est en ligne en une à deux semaines.", "price": "dès CHF 990 prix fixe ou en abonnement dès CHF 69 / mois"}, "geo": {"name": "Audit GEO : visibilité IA", "url": "/fr/geo-audit", "form": "GEO-Audit", "why": "Je vérifie si ChatGPT, Perplexity et Google AI trouvent et recommandent votre entreprise, et je livre un plan d’action priorisé. Le premier test est gratuit.", "price": "GEO-Light gratuit · audit GEO CHF 490–790"}, "web": {"name": "Création de sites : des sites qu’on trouve", "url": "/fr/webdesign", "form": "Webdesign", "why": "Un site clair et mobile pour votre entreprise ou votre association, conçu pour que Google et les assistants IA comme ChatGPT vous comprennent.", "price": "Site d’une page CHF 1'790 ou en abonnement dès CHF 119 / mois"}, "unklar": {"name": "Un premier échange", "url": "", "form": "", "why": "Dites-moi en quelques mots ce qui vous occupe. Je vous dis honnêtement quel premier pas vaut la peine, et si quelque chose en vaut la peine.", "price": "Gratuit et sans engagement"}}}</script>
       </div>
     </div>
   </section>
@@ -649,33 +725,56 @@
   </section>
 
   <section id="kontakt" class="section-dark">
-    <div class="wrap about-grid">
-      <div>
+    <div class="wrap contact-grid">
+      <div class="contact-intro">
         <span class="eyebrow">Contact</span>
         <h2 style="font-family:var(--font-display); font-size:1.7rem; margin:12px 0 16px; font-weight:700;">Parlons-en</h2>
-        <p>Tout commence par un entretien gratuit de 30 minutes pour cerner votre besoin concret – automatisation des processus, agents IA ou visibilité IA. <a href="#ueber-mich" style="color:var(--sec-gold); text-decoration:none; border-bottom:1px solid var(--sec-line-gold);">En savoir plus sur moi</a>.</p>
+        <p>Écrivez-moi quelques lignes sur votre besoin, je vous réponds personnellement sous 1 à 2 jours ouvrables. Vous préférez en parler directement ? Réservez un entretien gratuit de 30 minutes.</p>
+      </div>
+      <div class="contact-list">
+        <div><span class="lbl">Rendez-vous</span><a href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Réserver un entretien gratuit (30 min)</a></div>
+        <div><span class="lbl">E-mail</span><a href="mailto:info@zbinden.online">info@zbinden.online</a></div>
+        <div><span class="lbl">Téléphone</span><a href="tel:+41791936802">+41 79 193 68 02</a></div>
+        <div><span class="lbl">LinkedIn</span><a href="https://www.linkedin.com/in/pauline-zbinden/" target="_blank" rel="noopener">Pauline Zbinden ↗</a></div>
+        <div><span class="lbl">Instagram</span><a href="https://www.instagram.com/zbindensoftware/" target="_blank" rel="noopener">@zbindensoftware ↗</a></div>
       </div>
       <div class="contact-card">
-        <div>
-          <span class="lbl">Rendez-vous</span>
-          <a href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Réserver le premier entretien gratuit (30 min)</a>
-        </div>
-        <div>
-          <span class="lbl">E-mail</span>
-          <a href="mailto:info@zbinden.online">info@zbinden.online</a>
-        </div>
-        <div>
-          <span class="lbl">Téléphone</span>
-          <a href="tel:+41791936802">+41 79 193 68 02</a>
-        </div>
-        <div>
-          <span class="lbl">LinkedIn</span>
-          <a href="https://www.linkedin.com/in/pauline-zbinden/" target="_blank" rel="noopener">Pauline Zbinden ↗</a>
-        </div>
-        <div>
-          <span class="lbl">Instagram</span>
-          <a href="https://www.instagram.com/zbindensoftware/" target="_blank" rel="noopener">@zbindensoftware ↗</a>
-        </div>
+        <form class="request" id="requestForm" action="/api/contact" method="POST" data-sending="Envoi en cours …"><input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+          <div class="field-row">
+            <div class="field">
+              <label for="f-name">Nom</label>
+              <input type="text" id="f-name" name="name" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="f-email">E-mail</label>
+              <input type="email" id="f-email" name="email" autocomplete="email" required>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="f-company">Entreprise <span class="opt">(facultatif)</span></label>
+              <input type="text" id="f-company" name="company" autocomplete="organization">
+            </div>
+            <div class="field">
+              <label for="f-package">Intérêt</label>
+              <select id="f-package" name="package">
+                <option value="">Pas encore défini</option>
+                <option value="Automatisierung">Automatisation des processus &amp; agents IA</option>
+                <option value="GEO-Audit">Visibilité IA (audit GEO)</option>
+                <option value="Webdesign">Nouveau site web</option>
+                <option value="Individuelles Projekt">Application web ou logiciel sur mesure</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-message">Votre demande</label>
+            <textarea id="f-message" name="message" placeholder="p. ex. ce que vous prévoyez ou pour quoi vous cherchez de l’aide"></textarea>
+          </div>
+          <button type="submit" class="btn-primary">Envoyer le message</button>
+          <p class="form-note">Gratuit et sans engagement. Je réponds sous 1 à 2 jours ouvrables.</p>
+        </form>
+        <div class="form-status ok" id="formOk" role="status" hidden>Merci pour votre message ! Vous recevez une confirmation par e-mail, et je vous réponds personnellement sous 1 à 2 jours ouvrables.</div>
+        <div class="form-status err" id="formErr" role="alert" hidden>Malheureusement, l’envoi n’a pas fonctionné. Écrivez-moi directement à <a href="mailto:info@zbinden.online" style="color:inherit; text-decoration:underline;">info@zbinden.online</a>.</div>
       </div>
     </div>
   </section>
@@ -742,6 +841,119 @@
   panel.addEventListener('click', function(e){ if (e.target.closest('a')) set(false); });
   document.addEventListener('click', function(e){ if (!panel.hidden && !panel.contains(e.target)) set(false); });
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !panel.hidden) { set(false); btn.focus(); } });
+})();
+</script>
+<script>
+// Angebots-Finder: goal + current website + preferred next step -> one of the
+// three services; the texts per language come from the JSON in #finderData.
+(function () {
+  var box = document.getElementById('finder');
+  var dataEl = document.getElementById('finderData');
+  if (!box || !dataEl) return;
+  var T = JSON.parse(dataEl.textContent);
+  var answers = [];
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  function pick() {
+    var goal = answers[0], site = answers[1];
+    // Without a website, AI assistants have nothing to recommend: start with the site.
+    if (goal === 'geo' && site === 'none') return { key: 'web', note: T.notes.geoNoSite };
+    if (goal === 'geo' && site === 'old') return { key: 'geo', note: T.notes.geoOldSite };
+    if (goal === 'web' && site === 'ok') return { key: 'web', note: T.notes.webOkSite };
+    if (goal === 'unklar') return { key: site === 'none' ? 'web' : 'unklar', note: site === 'none' ? T.notes.unklarNoSite : '' };
+    return { key: goal, note: '' };
+  }
+
+  function render(focus) {
+    var step = answers.length;
+    var html = '<div class="finder-panel">';
+    if (step < T.questions.length) {
+      var q = T.questions[step];
+      html += '<div class="finder" role="group" aria-label="' + esc(q.q) + '">'
+        + '<p class="finder-progress">' + esc(T.progress.replace('{n}', step + 1).replace('{t}', T.questions.length)) + '</p>'
+        + '<p class="finder-q">' + esc(q.q) + '</p><div class="finder-opts">';
+      q.options.forEach(function (o, i) {
+        html += '<button type="button" class="finder-opt" data-i="' + i + '"><strong>' + esc(o.label) + '</strong>' + (o.hint ? esc(o.hint) : '') + '</button>';
+      });
+      html += '</div>' + (step ? '<div class="finder-nav"><button type="button" class="finder-back" data-back>' + esc(T.back) + '</button></div>' : '') + '</div>';
+    } else {
+      html += result();
+    }
+    box.innerHTML = html + '</div>';
+    box.querySelectorAll('.finder-opt').forEach(function (b) {
+      b.addEventListener('click', function () {
+        answers.push(T.questions[step].options[+b.getAttribute('data-i')].value);
+        render(true);
+      });
+    });
+    var back = box.querySelector('[data-back]');
+    if (back) back.addEventListener('click', function () { answers.pop(); render(true); });
+    var again = box.querySelector('[data-again]');
+    if (again) again.addEventListener('click', function () { answers = []; render(true); });
+    var write = box.querySelector('[data-write]');
+    if (write) write.addEventListener('click', function () {
+      // Pre-select the recommended service in the contact form.
+      var sel = document.getElementById('f-package');
+      if (sel) sel.value = write.getAttribute('data-write');
+      setTimeout(function () { var n = document.getElementById('f-name'); if (n) n.focus({ preventScroll: true }); }, 400);
+    });
+    if (focus) {
+      var el = box.querySelector('.finder-result h3, .finder-opt');
+      if (el) el.focus({ preventScroll: true });
+    }
+  }
+
+  function result() {
+    var r = pick(), s = T.services[r.key], next = answers[2];
+    var call = '<a class="{c}" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">' + esc(T.cta.call) + '</a>';
+    var write = '<a class="{c}" href="#kontakt" data-write="' + esc(s.form) + '">' + esc(T.cta.write) + '</a>';
+    var read = s.url ? '<a class="{c}" href="' + s.url + '">' + esc(T.cta.read) + '</a>' : '';
+    var order = next === 'call' ? [call, write, read] : next === 'read' && read ? [read, write, call] : [write, call, read];
+    var html = '<div class="finder finder-result">'
+      + '<p class="finder-progress">' + esc(T.resultLabel) + '</p>'
+      + '<h3 tabindex="-1">' + esc(s.name) + '</h3>'
+      + '<p class="finder-why">' + esc(s.why) + '</p>'
+      + '<p class="finder-price">' + esc(s.price) + '</p>';
+    if (r.note) html += '<p class="finder-note">' + esc(r.note) + '</p>';
+    html += '<div class="finder-nav">';
+    order.filter(Boolean).forEach(function (a, i) { html += a.replace('{c}', i ? 'btn-secondary' : 'btn-primary'); });
+    html += '<button type="button" class="finder-back" data-again>' + esc(T.again) + '</button></div></div>';
+    return html;
+  }
+
+  render(false);
+})();
+
+// Kontaktformular: same /api/contact endpoint as the offer pages.
+(function () {
+  var form = document.getElementById('requestForm');
+  var okBox = document.getElementById('formOk');
+  var errBox = document.getElementById('formErr');
+  if (!form) return;
+  var btn = form.querySelector('button[type="submit"]');
+  var label = btn.textContent;
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    okBox.hidden = true;
+    errBox.hidden = true;
+    btn.disabled = true;
+    btn.textContent = form.getAttribute('data-sending');
+    fetch(form.action, {
+      method: 'POST',
+      body: new URLSearchParams(new FormData(form)),
+      headers: { 'Accept': 'application/json' }
+    }).then(function (res) {
+      if (!res.ok) throw new Error(res.status);
+      form.reset();
+      form.hidden = true;
+      okBox.hidden = false;
+    }).catch(function () {
+      errBox.hidden = false;
+      btn.disabled = false;
+      btn.textContent = label;
+    });
+  });
 })();
 </script>
 </body>
