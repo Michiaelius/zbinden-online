@@ -41,6 +41,7 @@ const MAIL = {
     },
     multi: 'Der Entwurf zeigt die Startseite. Die fertige Website wird mehrere Seiten haben: Die Links im Menü und die Buttons wie «Mehr erfahren» zeigen schon, wohin es gehen wird. Diese Unterseiten gestalten wir im gleichen Design, sobald wir die Inhalte zusammen festgelegt haben.',
     one: 'Der Entwurf ist ein Onepager, wie gewünscht. Sie können jederzeit auf eine Website mit mehreren Seiten umsteigen, gleich von Anfang an oder später, je nachdem, was Sie wirklich brauchen.',
+    offen: 'Der Entwurf zeigt die Startseite. Ob eine einzige Seite reicht oder mehrere Seiten sinnvoller sind, entscheiden wir gemeinsam im Gespräch, je nachdem, was Sie wirklich brauchen.',
     next: 'Gefällt er Ihnen? Dann besprechen wir gerne in einem kurzen Gespräch die nächsten Schritte, ob Kauf oder Abo. Antworten Sie einfach auf diese E-Mail oder rufen Sie mich an.',
     regards: 'Freundliche Grüsse',
   },
@@ -54,6 +55,7 @@ const MAIL = {
     },
     multi: 'L’ébauche montre la page d’accueil. Le site final comptera plusieurs pages : les liens du menu et les boutons comme « En savoir plus » montrent déjà où elles mèneront. Nous créerons ces pages dans le même design, dès que nous aurons défini ensemble leur contenu.',
     one: 'L’ébauche est un site d’une seule page, comme demandé. Vous pouvez passer à un site de plusieurs pages à tout moment, dès le départ ou plus tard, selon vos besoins réels.',
+    offen: 'L’ébauche montre la page d’accueil. Une seule page suffit-elle, ou plusieurs pages seraient-elles plus utiles ? Nous le déciderons ensemble lors de notre entretien, selon vos besoins réels.',
     next: 'Elle vous plaît ? Parlons volontiers des prochaines étapes lors d’un court entretien, que ce soit pour un achat ou un abonnement. Répondez simplement à cet e-mail ou appelez-moi.',
     regards: 'Meilleures salutations,',
   },
@@ -67,6 +69,7 @@ const MAIL = {
     },
     multi: 'The draft shows the home page. The finished website will have several pages: the menu links and buttons such as “Learn more” already show where they will lead. We will design these pages in the same style once we have agreed on their content together.',
     one: 'As requested, the draft is a one-page website. You can switch to a website with several pages at any time, right from the start or later, depending on what you really need.',
+    offen: 'The draft shows the home page. Whether a single page is enough or several pages make more sense, we will decide together in our conversation, depending on what you really need.',
     next: 'Do you like it? I would be happy to discuss the next steps in a short call, whether you want to buy or subscribe. Simply reply to this e-mail or give me a call.',
     regards: 'Kind regards,',
   },
@@ -90,7 +93,7 @@ function clientMail(brief, url, hasSite) {
       t.hi, '',
       t.ready, url, '',
       t.made(!!brief.logo, hasSite), '',
-    ].concat(brief.umfang === 'mehrseitig' ? [t.multi, ''] : brief.umfang === 'onepager' ? [t.one, ''] : []).concat([
+    ].concat(brief.umfang === 'mehrseitig' ? [t.multi, ''] : brief.umfang === 'onepager' ? [t.one, ''] : [t.offen, '']).concat([
       t.next, '',
       t.regards,
       'Pauline Zbinden',
