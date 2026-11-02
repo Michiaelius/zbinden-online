@@ -67,7 +67,7 @@
       {
         "@type": "Offer",
         "name": "Standard automation",
-        "description": "A proven, clearly defined process is set up, tested and handed over, e.g. a qualification quiz for enquiries, a service finder that guides prospects to the right offer, or capturing networking contacts with a draft follow-up email. Included: 1 standard process, configuration, testing, 1-hour onboarding; 1–2 weeks. Buy: CHF 990 fixed price, operations CHF 29 per month. Subscription: CHF 390 setup + CHF 69 per month, minimum term 24 months.",
+        "description": "A proven, clearly defined process is set up, tested and handed over, e.g. a qualification quiz for enquiries or capturing networking contacts with a draft follow-up email. Included: 1 standard process, configuration, testing, 1-hour onboarding; 1–2 weeks. Buy: CHF 990 fixed price, operations CHF 29 per month. Subscription: CHF 390 setup + CHF 69 per month, minimum term 24 months.",
         "priceSpecification": {
           "@type": "PriceSpecification",
           "price": 990,
@@ -720,7 +720,7 @@
       <a class="menu-link home" href="https://www.zbinden.online/en/">← Home</a>
       <a class="menu-link about" href="/en/portfolio">About me &amp; my projects</a>
       <a class="menu-link" href="#branchen">Calculator</a>
-      <a class="menu-link" href="#angebots-hilfe">Service finder</a>
+      <a class="menu-link" href="#angebots-hilfe">Package finder</a>
       <a class="menu-link" href="#pakete">Packages</a>
       <a class="menu-link" href="#betrieb">After go-live</a>
       <a class="menu-link" href="#datenschutz">Privacy</a>
@@ -756,7 +756,7 @@
         <a class="btn-secondary" href="#standardprozess" data-pay-set="abo">Automation · from CHF 69 / month</a>
         <a class="btn-secondary" href="#branchen">🧮 Estimate your savings</a>
         <a class="btn-secondary" href="#voice-demo">🎙 Hear the live demo</a>
-        <a class="btn-secondary" href="#angebots-hilfe">🧭 See the service finder</a>
+        <a class="btn-secondary" href="#angebots-hilfe">🧭 Which package fits?</a>
       </div>
       <p style="margin:16px 0 0; font-size:.82rem; color:var(--sec-muted); font-weight:300;">Free, no-obligation intro call · automation from CHF 990 at a fixed price or by subscription from CHF 69 per month · you know the cost up front.</p>
     </div>
@@ -863,19 +863,13 @@
   <section id="angebots-hilfe" class="section-light">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">New: service finder</span>
-        <h2>Your visitors find the right service on their own</h2>
+        <span class="eyebrow">Package finder</span>
+        <h2>Which package fits you?</h2>
       </div>
-      <div class="package-card featured reveal d1">
-        <p class="package-lede">Many prospects don't know which of your offers fits them, so they never get in touch. The service finder asks a few simple questions on your website and then shows the right service, with a direct path to an enquiry.</p>
-        <p class="flow-label">How it works</p>
-        <ol class="flow">
-            <li><strong>A few questions</strong>Visitors click through 3–5 questions, such as “What do you want to achieve?” or “How urgent is it?”</li>
-            <li><strong>Matching recommendation</strong>At the end, the best-fitting service appears, with a short explanation and price range.</li>
-            <li><strong>Enquiry with context</strong>The person books or writes directly. You see their answers and know what it is about before the first call.</li>
-        </ol>
-        <p class="package-scope">As a standard automation: CHF 990 fixed price or by subscription from CHF 69 per month, live in one to two weeks.</p>
-        <a class="btn-secondary" href="#standardprozess">See the package <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <div class="package-card featured" style="max-width:760px;">
+        <p class="package-lede">Three short questions, then you see which package fits and what it costs.</p>
+        <div id="finder" aria-live="polite"></div>
+        <script type="application/json" id="finderData">{"progress": "Question {n} of {t}", "back": "← Back", "again": "Start over", "resultLabel": "My recommendation", "seePackage": "See the package", "book": "Book the intro call", "labels": {"kauf": "Buy", "abo": "Subscription", "dauer": "Duration", "preis": "Price"}, "erpNote": "Connecting to an ERP or industry software is not included in the fixed price. I quote it based on effort; the free intro call is the best place to clarify this.", "unsureNote": "Buy: you pay once and own the solution, plus a small monthly fee for operations. Subscription: low entry cost, operations included, minimum term 24 months.", "questions": [{"q": "What should the automation do for you?", "options": [{"value": "standard", "label": "One single, clear process", "hint": "e.g. sorting enquiries automatically or capturing business cards"}, {"value": "erweitert", "label": "Several steps in a row", "hint": "e.g. reply to an enquiry, add it to the CRM and follow up"}, {"value": "agent", "label": "Answer questions on my website", "hint": "A chat that answers questions about your offer around the clock"}, {"value": "unklar", "label": "I'm not sure yet", "hint": "You have an idea but no concrete process yet"}]}, {"q": "Does the solution need to connect to an ERP or industry software?", "options": [{"value": "standardtools", "label": "No, standard tools are enough", "hint": "e.g. email, Excel, Google Sheets, Airtable or a common CRM"}, {"value": "erp", "label": "Yes, to an ERP or industry software"}, {"value": "unsure", "label": "I don't know"}]}, {"q": "How would you rather pay?", "options": [{"value": "kauf", "label": "Pay once", "hint": "Fixed price, you own the solution, plus a small monthly fee for operations"}, {"value": "abo", "label": "Monthly subscription", "hint": "Low entry cost, operations included"}, {"value": "unsure", "label": "Show me both"}]}], "packages": {"standard": {"name": "Standard automation", "anchor": "standardprozess", "why": "A proven, clearly defined process, set up, tested and handed over, with a one-hour onboarding.", "prices": {"kauf": "CHF 990 + CHF 29 / month operations", "abo": "CHF 69 / month + CHF 390 setup"}, "dauer": "1–2 weeks"}, "erweitert": {"name": "Extended automation", "anchor": "erweitert", "why": "Several steps work together: an automatic reply, a connection to your CRM and a follow-up when nobody answers.", "prices": {"kauf": "CHF 1'490–2'490 + CHF 49 / month operations", "abo": "CHF 99 / month + CHF 690 setup"}}, "agent": {"name": "AI agent for your website", "anchor": "ki-agent", "why": "A chat on your website that answers questions about your offer around the clock, based on your own content.", "prices": {"kauf": "CHF 1'990–2'490 + from CHF 69 / month operations", "abo": "CHF 129 / month + CHF 790 setup"}}, "unklar": {"name": "Free intro call", "why": "In 30 minutes we look at which process costs you the most time and whether automating it pays off. You then get a clear recommendation.", "price": "free"}}}</script>
       </div>
     </div>
   </section>
@@ -942,7 +936,7 @@
             <div>
               <h4>Included</h4>
               <ul class="package-list">
-                <li>1 standard process, e.g. the qualification quiz above, a service finder that guides visitors to the right offer in a few questions, or capturing business cards from a networking event</li>
+                <li>1 standard process, e.g. the qualification quiz above or capturing business cards from a networking event</li>
                 <li>Configuration and connection to one destination with a standard interface, e.g. a common CRM or a spreadsheet (Excel, Google Sheets, Airtable)</li>
                 <li>Testing together with you before handover</li>
                 <li>1-hour onboarding, on site or by video</li>
@@ -1928,6 +1922,27 @@
   .to-top:focus-visible{ outline:2px solid #c9a227; outline-offset:3px; }
   @media (prefers-reduced-motion:reduce){ .to-top{ transition:none; } }
   @media print{ .to-top{ display:none; } }
+  /* Paket-Finder: three questions, then the matching package */
+  .finder{ display:grid; gap:18px; }
+  .finder-progress{ font-family:var(--font-ui); font-weight:600; font-size:.66rem; letter-spacing:.12em; text-transform:uppercase; color:var(--sec-gold-deep); margin:0; }
+  .finder-q{ font-family:var(--font-display); font-size:clamp(1.15rem,2.2vw,1.4rem); font-weight:700; color:var(--sec-ink); margin:0; line-height:1.3; }
+  .finder-opts{ display:grid; gap:10px; }
+  .finder-opt{
+    font:inherit; text-align:left; cursor:pointer; padding:14px 18px; border-radius:var(--r-md);
+    border:1px solid var(--sec-line-gold); background:transparent; color:var(--sec-ink); font-size:.92rem; line-height:1.45; font-weight:300;
+    transition:background .2s, border-color .2s, transform .2s;
+  }
+  .finder-opt strong{ display:block; font-family:var(--font-ui); font-weight:600; font-size:.95rem; }
+  .finder-opt:hover, .finder-opt:focus-visible{ background:var(--sec-gold-soft); border-color:var(--sec-gold); transform:translateY(-1px); }
+  .finder-nav{ display:flex; flex-wrap:wrap; gap:10px 16px; align-items:center; }
+  .finder-back{ font:inherit; cursor:pointer; background:none; border:none; padding:4px 0; color:var(--sec-muted); font-size:.85rem; text-decoration:underline; text-underline-offset:3px; }
+  .finder-back:hover{ color:var(--sec-gold-deep); }
+  .finder-result h3{ font-family:var(--font-display); font-size:clamp(1.3rem,2.6vw,1.7rem); margin:0; color:var(--sec-ink); outline:none; }
+  .finder-why{ margin:0; color:var(--sec-ink); font-size:.98rem; line-height:1.6; font-weight:300; }
+  .finder-note{ margin:0; font-size:.86rem; color:var(--sec-muted); font-weight:300; line-height:1.6; }
+  .finder-panel{ animation:finderIn .35s ease both; }
+  @keyframes finderIn{ from{ opacity:0; transform:translateY(6px); } to{ opacity:1; transform:none; } }
+  @media (prefers-reduced-motion:reduce){ .finder-panel{ animation:none; } .finder-opt{ transition:none; } }
 </style>
 <button type="button" class="to-top" id="toTop" aria-label="Back to top" title="Back to top">
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13V3M3.5 7.5L8 3l4.5 4.5"/></svg>
@@ -1985,6 +2000,88 @@
   panel.addEventListener('click', function(e){ if (e.target.closest('a')) set(false); });
   document.addEventListener('click', function(e){ if (!panel.hidden && !panel.contains(e.target)) set(false); });
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !panel.hidden) { set(false); btn.focus(); } });
+})();
+</script>
+<script>
+// Paket-Finder: three questions (goal, systems, payment) map to one of the
+// packages above; the texts per language come from the JSON in #finderData.
+(function () {
+  var box = document.getElementById('finder');
+  var dataEl = document.getElementById('finderData');
+  if (!box || !dataEl) return;
+  var T = JSON.parse(dataEl.textContent);
+  var answers = [];
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  function render(focus) {
+    var step = answers.length;
+    var html = '<div class="finder-panel">';
+    if (step < T.questions.length) {
+      var q = T.questions[step];
+      html += '<div class="finder" role="group" aria-label="' + esc(q.q) + '">'
+        + '<p class="finder-progress">' + esc(T.progress.replace('{n}', step + 1).replace('{t}', T.questions.length)) + '</p>'
+        + '<p class="finder-q">' + esc(q.q) + '</p><div class="finder-opts">';
+      q.options.forEach(function (o, i) {
+        html += '<button type="button" class="finder-opt" data-i="' + i + '"><strong>' + esc(o.label) + '</strong>' + (o.hint ? esc(o.hint) : '') + '</button>';
+      });
+      html += '</div>' + (step ? '<div class="finder-nav"><button type="button" class="finder-back" data-back>' + esc(T.back) + '</button></div>' : '') + '</div>';
+    } else {
+      html += result();
+    }
+    box.innerHTML = html + '</div>';
+    box.querySelectorAll('.finder-opt').forEach(function (b) {
+      b.addEventListener('click', function () {
+        answers.push(T.questions[step].options[+b.getAttribute('data-i')].value);
+        render(true);
+      });
+    });
+    var back = box.querySelector('[data-back]');
+    if (back) back.addEventListener('click', function () { answers.pop(); render(true); });
+    var again = box.querySelector('[data-again]');
+    if (again) again.addEventListener('click', function () { answers = []; render(true); });
+    var go = box.querySelector('[data-go]');
+    if (go) go.addEventListener('click', function () {
+      // Show the recommended price variant on the package cards too.
+      var mode = answers[2] === 'abo' ? 'abo' : 'kauf';
+      document.documentElement.setAttribute('data-pay', mode);
+      document.querySelectorAll('.pay-switch button').forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b.getAttribute('data-pay') === mode));
+      });
+      try { localStorage.setItem('zs-pay', mode); } catch (e) {}
+    });
+    if (focus) {
+      var el = box.querySelector('.finder-result h3, .finder-opt');
+      if (el) el.focus({ preventScroll: true });
+    }
+  }
+
+  function result() {
+    var goal = answers[0], erp = answers[1] === 'erp', pay = answers[2];
+    var p = T.packages[goal];
+    var rows = '';
+    if (p.prices) {
+      if (pay !== 'abo') rows += '<div><span class="lbl">' + esc(T.labels.kauf) + '</span><span class="val price">' + esc(p.prices.kauf) + '</span></div>';
+      if (pay !== 'kauf') rows += '<div><span class="lbl">' + esc(T.labels.abo) + '</span><span class="val price">' + esc(p.prices.abo) + '</span></div>';
+      if (p.dauer) rows += '<div><span class="lbl">' + esc(T.labels.dauer) + '</span><span class="val">' + esc(p.dauer) + '</span></div>';
+    } else {
+      rows += '<div><span class="lbl">' + esc(T.labels.preis) + '</span><span class="val price">' + esc(p.price) + '</span></div>';
+    }
+    var html = '<div class="finder finder-result">'
+      + '<p class="finder-progress">' + esc(T.resultLabel) + '</p>'
+      + '<h3 tabindex="-1">' + esc(p.name) + '</h3>'
+      + '<p class="finder-why">' + esc(p.why) + '</p>'
+      + '<div class="package-meta">' + rows + '</div>';
+    if (erp) html += '<p class="finder-note">' + esc(T.erpNote) + '</p>';
+    if (p.prices && pay === 'unsure') html += '<p class="finder-note">' + esc(T.unsureNote) + '</p>';
+    html += '<div class="finder-nav">';
+    if (p.prices) html += '<a class="btn-primary" href="#' + p.anchor + '" data-go>' + esc(T.seePackage) + '</a>';
+    html += '<a class="' + (p.prices ? 'btn-secondary' : 'btn-primary') + '" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">' + esc(T.book) + '</a>'
+      + '<button type="button" class="finder-back" data-again>' + esc(T.again) + '</button></div></div>';
+    return html;
+  }
+
+  render(false);
 })();
 </script>
 </body>
