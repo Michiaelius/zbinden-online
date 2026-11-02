@@ -24,6 +24,7 @@
   // 2) Kleines Dach über jedem h2 (Sektionstitel)
   var minis = [];
   document.querySelectorAll('main h2').forEach(function (h) {
+    if (h.closest('.offer')) return; // nicht in der Angebotstabelle der Vorschau
     var m = roof('roof-mini', '0 0 58 16', 'M1 15 L29 2 L57 15');
     h.parentNode.insertBefore(m, h);
     minis.push(m);

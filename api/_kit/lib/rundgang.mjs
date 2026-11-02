@@ -128,9 +128,9 @@ export function variantenHtml(c) {
 .offer-table{width:100%;margin-top:32px;border-collapse:separate;border-spacing:0;background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 0 0 3px #fff,0 18px 40px rgba(40,20,120,.14)}
 .offer-table th{background:#5B3FD9;color:#fff;text-align:left;font:600 14px/1.3 system-ui,-apple-system,"Segoe UI",sans-serif;padding:14px 18px}
 .offer-table td{padding:18px;border-top:1px solid #e6e0fb;vertical-align:top;font-size:15.5px}
-.offer-table td.price{white-space:nowrap;font-weight:700;font-size:18px;color:#3b25a8}
+.offer-table td.price{font-weight:700;font-size:17px;min-width:7.5em;color:#3b25a8}
 .offer-table td.price small{display:none;font-weight:500;font-size:12px;color:#6a5fa0}
-.offer-table .vname{font-weight:700;font-size:17px;white-space:nowrap}
+.offer-table .vname{font-weight:700;font-size:17px;min-width:9em}
 .offer-table tr{scroll-margin-top:110px;transition:background .4s}
 .offer-table tr:target td{background:#fff4c2}
 .offer-cols{display:grid;gap:22px;margin-top:28px}
