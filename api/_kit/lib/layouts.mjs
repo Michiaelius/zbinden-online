@@ -67,6 +67,14 @@ export const LAYOUTS = {
     fonts: 'cormorant-source',
     passtZu: 'Immobilienmakler, Verwaltungen, Architekten, Treuhand',
   },
+  muliwai: {
+    label: 'Muliwai – Beige wie Ton, Wellen in Grün und Terracotta, die sich mischen',
+    hero: 'center',
+    header: 'light',
+    palette: 'terracotta',
+    fonts: 'fraunces-source',
+    passtZu: 'Signatur Muliwai Keramikatelier – für andere Kunden abwandeln',
+  },
   stube: {
     label: 'Stube – dunkel, bildstark, Gastronomie',
     hero: 'photo',            // Vollbild-Foto mit Text unten

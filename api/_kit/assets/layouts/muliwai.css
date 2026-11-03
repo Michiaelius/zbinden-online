@@ -1,0 +1,70 @@
+/* Muliwai – Keramikatelier Ritz: Beige des Logos als Grund, Wellen in Grün und Terracotta,
+   die sich überlagern und mischen («wo Wasser und Erde zusammenkommen»).
+   Signatur dieses Kunden – nicht unverändert für andere Kunden verwenden. */
+:root{--bg:#f1ebdf;--surface:#e7dcc6;--line:#d8c9ad}
+body{background:var(--bg)}
+.site-header{background:color-mix(in srgb,var(--bg) 92%,transparent)}
+.brand-logo{height:48px}
+
+/* Hero: Text auf Beige, unten Wellenbänder */
+.hero-center{position:relative;background:var(--surface);overflow:hidden;padding-bottom:170px}
+.hero-center .hero-inner{position:relative;z-index:1}
+.mw-waves{position:absolute;left:0;right:0;bottom:-1px;height:170px;pointer-events:none}
+.mw-wave{position:absolute;inset:0;-webkit-mask-repeat:repeat-x;mask-repeat:repeat-x;-webkit-mask-size:640px 100%;mask-size:640px 100%}
+.mw-wave.w1{background:var(--accent);opacity:.92;
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 120' preserveAspectRatio='none'%3E%3Cpath d='M0 40 C150 4 150 4 300 40 C450 76 450 76 600 40 L600 64 C450 100 450 100 300 64 C150 28 150 28 0 64 Z'/%3E%3C/svg%3E");
+  mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 120' preserveAspectRatio='none'%3E%3Cpath d='M0 40 C150 4 150 4 300 40 C450 76 450 76 600 40 L600 64 C450 100 450 100 300 64 C150 28 150 28 0 64 Z'/%3E%3C/svg%3E");
+  animation:mw-right 26s linear infinite}
+.mw-wave.w2{background:var(--dark);opacity:.8;mix-blend-mode:multiply;-webkit-mask-size:780px 100%;mask-size:780px 100%;
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 120' preserveAspectRatio='none'%3E%3Cpath d='M0 52 C150 86 150 86 300 52 C450 18 450 18 600 52 L600 72 C450 38 450 38 300 72 C150 106 150 106 0 72 Z'/%3E%3C/svg%3E");
+  mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 120' preserveAspectRatio='none'%3E%3Cpath d='M0 52 C150 86 150 86 300 52 C450 18 450 18 600 52 L600 72 C450 38 450 38 300 72 C150 106 150 106 0 72 Z'/%3E%3C/svg%3E");
+  animation:mw-left 34s linear infinite}
+.mw-wave.w3{background:#6f7d55;opacity:.7;mix-blend-mode:multiply;-webkit-mask-size:520px 100%;mask-size:520px 100%;
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 120' preserveAspectRatio='none'%3E%3Cpath d='M0 62 C150 36 150 36 300 62 C450 88 450 88 600 62 L600 71 C450 97 450 97 300 71 C150 45 150 45 0 71 Z'/%3E%3C/svg%3E");
+  mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 120' preserveAspectRatio='none'%3E%3Cpath d='M0 62 C150 36 150 36 300 62 C450 88 450 88 600 62 L600 71 C450 97 450 97 300 71 C150 45 150 45 0 71 Z'/%3E%3C/svg%3E");
+  animation:mw-right 21s linear infinite}
+.mw-wave.w4{background:var(--bg);-webkit-mask-size:900px 100%;mask-size:900px 100%;
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 120' preserveAspectRatio='none'%3E%3Cpath d='M0 100 C150 82 150 82 300 100 S450 118 600 100 V120 H0Z'/%3E%3C/svg%3E");
+  mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 120' preserveAspectRatio='none'%3E%3Cpath d='M0 100 C150 82 150 82 300 100 S450 118 600 100 V120 H0Z'/%3E%3C/svg%3E");
+  animation:mw-left 40s linear infinite}
+@keyframes mw-right{to{-webkit-mask-position:640px 0;mask-position:640px 0}}
+@keyframes mw-left{to{-webkit-mask-position:-780px 0;mask-position:-780px 0}}
+.mw-wave.w3{animation-name:mw-right3}.mw-wave.w4{animation-name:mw-left4}
+@keyframes mw-right3{to{-webkit-mask-position:520px 0;mask-position:520px 0}}
+@keyframes mw-left4{to{-webkit-mask-position:-900px 0;mask-position:-900px 0}}
+
+/* Kleine Welle unter jedem Sektionstitel: Grün fliesst in Terracotta */
+main h2::after{content:"";display:block;width:92px;height:14px;margin:16px 0 0;
+  background:linear-gradient(90deg,var(--dark),var(--accent));
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 92 14'%3E%3Cpath d='M2 7 C12 -1 22 -1 32 7 S52 15 62 7 S82 -1 90 7' fill='none' stroke='black' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") center/100% 100% no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 92 14'%3E%3Cpath d='M2 7 C12 -1 22 -1 32 7 S52 15 62 7 S82 -1 90 7' fill='none' stroke='black' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") center/100% 100% no-repeat}
+.sec-head h2::after,.hero h2::after{margin-left:auto;margin-right:auto}
+.sec-ablauf h2::after{background:var(--accent-ink)}
+.offer h2::after{display:none}
+
+/* Zitat: Wasser und Erde */
+.sec-zitat blockquote,.sec-zitat q{font-style:italic}
+
+/* Weiche Formen wie Ton */
+.sec-head{align-items:center;text-align:center;margin-left:auto;margin-right:auto}
+.card,.step,.review,.contact-form{border:0;border-radius:32px 32px 32px 12px}
+.card{background:var(--surface)}
+.tone-surface .card,.tone-surface .step,.tone-surface .contact-form{background:var(--bg)}
+.card-icon{border-radius:50%;background:var(--accent);color:var(--accent-ink)}
+.sec-leistungen .cards{text-align:center}
+.sec-leistungen .card{align-items:center}
+.about-media,.hero-media{border-radius:46% 54% 42% 58% / 52% 44% 56% 48%}
+.field input,.field textarea{border-radius:16px;background:#fbf8f2}
+
+/* Kursablauf: Terracotta-Block mit gewellten Rändern */
+.sec-ablauf{position:relative;background:var(--accent);color:var(--accent-ink);--muted:var(--accent-ink);--accent-text:var(--accent-ink);margin:48px 0}
+.sec-ablauf::before,.sec-ablauf::after{content:"";position:absolute;left:0;right:0;height:46px;background:var(--accent);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 46' preserveAspectRatio='none'%3E%3Cpath d='M0 24 C150 0 150 0 300 24 S450 48 600 24 V46 H0Z'/%3E%3C/svg%3E") 0 0/720px 100% repeat-x;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 46' preserveAspectRatio='none'%3E%3Cpath d='M0 24 C150 0 150 0 300 24 S450 48 600 24 V46 H0Z'/%3E%3C/svg%3E") 0 0/720px 100% repeat-x}
+.sec-ablauf::before{top:-45px}
+.sec-ablauf::after{bottom:-45px;transform:scaleY(-1)}
+.sec-ablauf .step{background:color-mix(in srgb,var(--accent-ink) 12%,var(--accent));color:var(--accent-ink)}
+.sec-ablauf .step-no{background:var(--accent-ink);color:var(--accent)}
+
+@media (prefers-reduced-motion:reduce){.mw-wave{animation:none!important}}
+@media (max-width:640px){.hero-center{padding-bottom:120px}.mw-waves{height:120px}}
