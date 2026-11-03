@@ -7,6 +7,12 @@
 //   dark/darkInk dunkle Flächen (Header Kontrast, Footer, Band)
 
 export const PALETTES = {
+  // Rosenquarz: Puderrosa + Altrosa + Champagner – elegant, feminin, Praxis/Beauty (PhysioSolution)
+  rosenquarz: {
+    label: 'Rosenquarz', mode: 'light',
+    bg: '#fcf8f6', surface: '#f5e8e4', ink: '#2e2226', muted: '#6b585d', line: '#ecdad5',
+    accent: '#9b5562', accentInk: '#ffffff', accentText: '#8f4b58', dark: '#3b2b30', darkInk: '#f8ece8',
+  },
   salbei: {
     label: 'Salbei', mode: 'light',
     bg: '#f7f5ef', surface: '#eceee3', ink: '#1f261e', muted: '#4f5a49', line: '#d8dccd',

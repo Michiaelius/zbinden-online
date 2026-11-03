@@ -75,6 +75,14 @@ export const LAYOUTS = {
     fonts: 'fraunces-source',
     passtZu: 'Signatur Muliwai Keramikatelier – für andere Kunden abwandeln',
   },
+  physiosolution: {
+    label: 'PhysioSolution – Puderrosa, Champagnerlinien, Portrait im Bogen',
+    hero: 'split',
+    header: 'light',
+    palette: 'rosenquarz',
+    fonts: 'cormorant-source',
+    passtZu: 'Signatur PhysioSolution (Larissa Mösli) – für andere Kunden abwandeln',
+  },
   stube: {
     label: 'Stube – dunkel, bildstark, Gastronomie',
     hero: 'photo',            // Vollbild-Foto mit Text unten

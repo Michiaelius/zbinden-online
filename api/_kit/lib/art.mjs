@@ -53,9 +53,20 @@ const KINDS = {
     s += `<circle cx="${280 + r() * 60}" cy="${70 + r() * 40}" r="36" fill="${F.a}"/>`;
     return s;
   },
+  // Blüte – weiche, überlappende Kreise in Puderrosa mit feiner Champagnerlinie
+  bloom(r) {
+    let s = `<rect width="400" height="300" fill="${F.s}"/>`;
+    const cx = 170 + r() * 60, cy = 150 + r() * 30;
+    s += `<circle cx="${cx}" cy="${cy}" r="120" fill="${F.l}"/>`;
+    s += `<circle cx="${cx + 70}" cy="${cy - 60}" r="70" fill="${F.a}" opacity=".18"/>`;
+    s += `<circle cx="${cx - 60}" cy="${cy + 70}" r="54" fill="${F.a}" opacity=".12"/>`;
+    s += `<path d="M-10 ${220 - r() * 30}C90 ${120 + r() * 40} 160 ${260 - r() * 30} 250 ${150 + r() * 20}S370 ${70 + r() * 30} 410 ${110 + r() * 20}" stroke="#c6a27c" stroke-width="1.4" fill="none"/>`;
+    s += `<circle cx="${cx + 70}" cy="${cy - 60}" r="3" fill="#c6a27c"/>`;
+    return s;
+  },
 };
 
-export const ART_BY_LAYOUT = { klar: 'arches', warm: 'circles', kontrast: 'blocks', editorial: 'lines', atelier: 'circles', galerie: 'lines', stube: 'arches', fresque: 'blocks' };
+export const ART_BY_LAYOUT = { klar: 'arches', warm: 'circles', kontrast: 'blocks', editorial: 'lines', atelier: 'circles', galerie: 'lines', stube: 'arches', fresque: 'blocks', physiosolution: 'bloom' };
 
 export function art(kind, seedText, label = '') {
   const draw = KINDS[kind] || KINDS.arches;
