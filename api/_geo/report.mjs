@@ -192,9 +192,37 @@ const CSS = `
 `;
 
 /** HTML complet du rapport. a = sortie de writeReport(), test = sortie de runVisibilityTest(). */
-export function renderReportHtml(cand, test, a, reportLang) {
+/**
+ * Depuis 2026-11-08 : pour une entreprise suisse testée en allemand ou en français, une phrase
+ * propose de tester aussi l'autre langue (Romandie / Suisse alémanique). Vente additionnelle,
+ * le test gratuit reste dans une seule langue. Clés : langue du rapport → langue du test.
+ */
+const OTHER_LANG = {
+  de: {
+    de: 'Dieser Test wurde auf Deutsch durchgeführt. Möchten Sie auch Kundinnen und Kunden in der Romandie erreichen? Ich teste Ihre Sichtbarkeit gern auch auf Französisch.',
+    fr: 'Dieser Test wurde auf Französisch durchgeführt. Möchten Sie auch Kundinnen und Kunden in der Deutschschweiz erreichen? Ich teste Ihre Sichtbarkeit gern auch auf Deutsch.',
+  },
+  fr: {
+    de: 'Ce test a été fait en allemand. Vous visez aussi la Romandie ? Je peux tester votre visibilité en français.',
+    fr: 'Ce test a été fait en français. Vous visez aussi la Suisse alémanique ? Je peux tester votre visibilité en allemand.',
+  },
+  en: {
+    de: 'This test was run in German. Would you also like to reach customers in French-speaking Switzerland? I can test your visibility in French too.',
+    fr: 'This test was run in French. Would you also like to reach customers in German-speaking Switzerland? I can test your visibility in German too.',
+  },
+};
+
+/** Phrase « autre langue » ou '' (entreprise non suisse, ou test en anglais). */
+export function otherLangNote(cand, zefix, reportLang) {
+  const host = String(cand.domain || '').replace(/^https?:\/\//i, '').split(/[\/?#]/)[0];
+  const swiss = /\.(ch|swiss)$/i.test(host) || !!zefix;
+  return swiss ? ((OTHER_LANG[reportLang] || {})[cand.lang] || '') : '';
+}
+
+export function renderReportHtml(cand, test, a, reportLang, zefix) {
   const t = T[reportLang];
   const n = test.provider_named;
+  const langNote = otherLangNote(cand, zefix, reportLang);
   const strong = n >= 5;
   const name = cand.company;
   a.provider_phrase = String(a.provider_phrase || '').replace(/^\s*(wenn|où|where)\s+/i, '');
@@ -294,6 +322,7 @@ ${section2}
     <tbody>${rows}</tbody>
   </table>
   <div class="gain"><strong>${t.gain}</strong> ${esc(strong ? t.gainStrong : t.gainWeak)}</div>
+  ${langNote ? `<div class="gain">${esc(langNote)}</div>` : ''}
   <div class="bottom"><a class="cta" href="${CALENDLY}">${esc(t.cta)}</a><span>${esc(t.diff)}</span></div>
 </div>
 </div>
@@ -344,7 +373,8 @@ const MAIL = {
 };
 
 /** { subject, body } de l'e-mail de réponse (texte brut, comme envoi_email.py). */
-export function renderEmail(cand, test, a, reportLang) {
+export function renderEmail(cand, test, a, reportLang, zefix) {
+  const langNote = otherLangNote(cand, zefix, reportLang);
   const m = MAIL[reportLang];
   const t = T[reportLang];
   const strong = test.provider_named >= 5;
@@ -354,6 +384,7 @@ export function renderEmail(cand, test, a, reportLang) {
     `${m.result} ${t.result(test.provider_named, cand.company, a.provider_phrase)}`, '',
     a.email_paragraph.replace(/\*\*/g, ''), '',
     strong ? m.strongPdf : m.pdf, '',
+    ...(langNote ? [langNote, ''] : []),
     m.next, '',
     m.regards, '',
     'Pauline Zbinden', '',

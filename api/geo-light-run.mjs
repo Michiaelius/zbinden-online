@@ -110,8 +110,8 @@ async function job(cand, email, reportLang, source) {
 
     step = 'PDF';
     stem = fileStem(reportLang, slugify(cand.company));
-    pdf = await htmlToPdf(renderReportHtml(cand, test, a, reportLang));
-    mail = renderEmail(cand, test, a, reportLang);
+    pdf = await htmlToPdf(renderReportHtml(cand, test, a, reportLang, zefix));
+    mail = renderEmail(cand, test, a, reportLang, zefix);
 
     step = 'brouillon Outlook';
     const draft = await createDraft(email, mail.subject, mail.body, stem + '.pdf', pdf);
