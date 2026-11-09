@@ -89,6 +89,24 @@
           },
           {
             "@type": "Offer",
+            "name": "Relaunch einer bestehenden Website (Kauf)",
+            "description": "Für Unternehmen, die schon eine Website haben: Ich übernehme die bestehenden Texte und Fotos und bringe sie in ein modernes, handyfreundliches Design, GEO-ready. Bis 6 Seiten, bestehende Inhalte mit leichten Anpassungen. Einmalig ab CHF 2'490; neue Texte oder zusätzliche Seiten nach Aufwand. Nicht MWST-pflichtig.",
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": 2490,
+              "priceCurrency": "CHF"
+            }
+          },
+          {
+            "@type": "Offer",
+            "name": "Relaunch einer bestehenden Website im Abo",
+            "description": "Gleiche Leistung wie beim Relaunch-Kauf: ohne Startkosten CHF 189 pro Monat ab Go-live, gleiche Abo-Bedingungen wie bei den anderen Website-Angeboten (Mindestdauer 24 Monate, danach monatlich auf Monatsende kündbar). Neue Texte oder zusätzliche Seiten nach Aufwand. Nicht MWST-pflichtig.",
+            "priceSpecification": [
+              { "@type": "UnitPriceSpecification", "price": 189, "priceCurrency": "CHF", "unitCode": "MON", "unitText": "Monat" }
+            ]
+          },
+          {
+            "@type": "Offer",
             "name": "Wartung (optional beim Kauf)",
             "description": "Hosting in der Schweiz, SSL-Zertifikat, Überwachung, technische Updates und kleine Anpassungen bis 15 Min. pro Monat: ab CHF 39 pro Monat (CHF 390 pro Jahr) für einen Onepager, ab CHF 69 pro Monat (CHF 690 pro Jahr) für eine Website mit mehreren Seiten. Im Abo inbegriffen. Die Domain bleibt auf Ihrem Namen. Nicht MWST-pflichtig.",
             "priceSpecification": {
@@ -718,6 +736,12 @@
   .abo-terms{ margin:24px 0 0; padding:22px clamp(20px,3vw,28px); border:1px dashed var(--sec-line-gold); border-radius:var(--r-md); background:var(--sec-gold-soft); }
   .abo-terms h3{ font-family:var(--font-display); font-size:1.15rem; font-weight:700; margin:0 0 14px; }
   .abo-terms .package-list li{ font-size:.9rem; }
+  .relaunch-box{ display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); gap:16px clamp(28px,5vw,64px); align-items:start; padding:22px clamp(20px,3vw,28px); border:1px dashed var(--sec-line-gold); border-radius:var(--r-md); background:var(--sec-gold-soft); }
+  .relaunch-box h3{ font-family:var(--font-display); font-size:1.15rem; font-weight:700; margin:0 0 10px; }
+  .relaunch-box p{ margin:0; font-size:.94rem; color:var(--sec-muted); font-weight:300; line-height:1.6; }
+  .relaunch-side{ display:flex; flex-direction:column; gap:16px; align-items:flex-start; }
+  .relaunch-box .package-list li{ font-size:.9rem; }
+  @media (max-width:820px){ .relaunch-box{ grid-template-columns:1fr; } }
   @media (prefers-reduced-motion:reduce){ .pay-switch::before{ transition:none; } }
 
   /* ---------- Preis-Karten: schwarz, Preise in Gold, Empfehlung mit Goldrahmen ---------- */
@@ -983,6 +1007,21 @@
             </ul>
             <p class="abo-extra kauf-only">Zahlung: 30 % bei Auftrag, 40 % nach Design-Freigabe, 30 % beim Livegang, zahlbar innert 30 Tagen netto.</p>
             <p class="abo-extra abo-only">Monatspreis ab Go-live, Mindestdauer 24 Monate. Behalten nach dem Abo nur mit Kauf.</p>
+          </div>
+        </div>
+        <div class="relaunch-box reveal" id="relaunch">
+          <div class="relaunch-copy">
+            <h3>Sie haben schon eine Website?</h3>
+            <p>Ihre Website funktioniert, wirkt aber nicht mehr zeitgemäss? Mit dem Relaunch übernehme ich Ihre bestehenden Texte und Fotos und bringe sie in ein modernes, handyfreundliches Design — GEO-ready, wie alle meine Websites.</p>
+          </div>
+          <div class="relaunch-side">
+            <ul class="package-list">
+              <li>Bis 6 Seiten, bestehende Inhalte mit leichten Anpassungen</li>
+              <li>Kauf: ab CHF 2'490</li>
+              <li>Abo: CHF 189/Monat, ohne Startkosten (gleiche Abo-Bedingungen wie bei den anderen Angeboten)</li>
+              <li>Neue Texte oder zusätzliche Seiten nach Aufwand</li>
+            </ul>
+            <a class="btn-secondary" href="#kontakt" data-package-set="Relaunch">Relaunch anfragen</a>
           </div>
         </div>
         <div class="package-card reveal d3" id="betreuung">
@@ -1461,6 +1500,7 @@
                   <option value="Webdesign">Neue Website</option>
                   <option value="Website im Abo">Website im Abo</option>
                   <option value="GEO-Light">Kostenloser KI-Check</option>
+                  <option value="Relaunch">Relaunch einer bestehenden Website</option>
                   <option value="GEO-Audit">GEO-Audit für meine bestehende Website</option>
                   <option value="">Noch offen</option>
                 </select>
@@ -1610,6 +1650,12 @@
     b.addEventListener('click', function () { set(b.getAttribute('data-pay'), true); });
   });
   // Links that point at an Abo price (e.g. the hero button) switch the cards to Abo too.
+  document.querySelectorAll('[data-package-set]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      var sel = document.getElementById('f-package');
+      if (sel) sel.value = a.getAttribute('data-package-set');
+    });
+  });
   document.querySelectorAll('[data-pay-set]').forEach(function (a) {
     a.addEventListener('click', function () { set(a.getAttribute('data-pay-set'), true); });
   });
