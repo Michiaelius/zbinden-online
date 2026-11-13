@@ -440,19 +440,6 @@
   footer a{ text-decoration:none; color:var(--sec-muted); }
   footer a:hover{ color:var(--sec-gold); }
 
-  /* ---------- Voice-Demo ---------- */
-  .voice-demo-grid{ display:grid; grid-template-columns:1.3fr .7fr; gap:40px; align-items:start; }
-  @media (max-width:780px){ .voice-demo-grid{grid-template-columns:1fr;} .voice-demo-arrow{display:none;} }
-  .voice-demo-pointer{ padding-top:4px; }
-  .voice-demo-arrow{
-    display:block; font-size:1.7rem; line-height:1; color:var(--sec-gold); margin-bottom:12px;
-    animation:arrowNudge 1.8s ease-in-out infinite;
-  }
-  @keyframes arrowNudge{
-    0%,100%{ transform:translate(0,0); opacity:.75; }
-    50%{ transform:translate(5px,5px); opacity:1; }
-  }
-  @media (prefers-reduced-motion:reduce){ .voice-demo-arrow{ animation:none; } }
 
   /* ---------- Examples by industry ---------- */
   .branchen-intro{ color:var(--sec-muted); line-height:1.75; font-weight:300; max-width:62ch; margin:0 0 2em; }
@@ -727,7 +714,6 @@
       <a class="menu-link" href="#datenschutz">Privacy</a>
       <a class="menu-link" href="#praxis">From practice</a>
       <a class="menu-link" href="#beispiel">Worked example</a>
-      <a class="menu-link" href="#voice-demo">Live demo</a>
       <a class="menu-link" href="#fuer-wen">Who it's for</a>
       <a class="menu-link" href="#ueber">About me</a>
       <a class="menu-link" href="#faq">FAQ</a>
@@ -756,7 +742,6 @@
         <a class="btn-primary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Free intro call · 30 min</a>
         <a class="btn-secondary" href="#standardprozess" data-pay-set="abo">Automation · from CHF 69 / month</a>
         <a class="btn-secondary" href="#branchen">🧮 Estimate your savings</a>
-        <a class="btn-secondary" href="#voice-demo">🎙 Hear the live demo</a>
         <a class="btn-secondary" href="#angebots-hilfe">🧭 Which package fits?</a>
       </div>
       <p style="margin:16px 0 0; font-size:.9rem; color:var(--sec-muted); font-weight:300;">Free, no-obligation intro call · automation from CHF 990 at a fixed price or by subscription from CHF 69 per month · you know the cost up front.</p>
@@ -1146,28 +1131,6 @@
     </div>
   </section>
 
-  <section id="voice-demo" class="section-dark">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">Live demo</span>
-        <h2>Hear our AI voice agent in action</h2>
-      </div>
-      <div class="voice-demo-grid">
-        <div class="reveal d1">
-          <p style="color:var(--sec-muted); line-height:1.75; font-weight:300; max-width:52ch; margin:0 0 1.4em;">This voice assistant runs right in your browser — designed and built by Zbinden Software. It answers two kinds of questions:</p>
-          <ul class="package-list" style="max-width:48ch; margin-bottom:1.6em;">
-            <li>General questions about AI voice agents — what they can do, where they pay off, how a project typically runs.</li>
-            <li>Specific questions about Zbinden Software — services, pricing, process and contact.</li>
-          </ul>
-          <p style="font-size:.86rem; color:var(--sec-muted); font-weight:300;">Requires microphone access · runs directly in the browser · no download needed.</p>
-        </div>
-        <div class="voice-demo-pointer reveal d2">
-          <span class="voice-demo-arrow" aria-hidden="true">↘</span>
-          <p style="margin:0; font-size:.9rem; color:var(--sec-muted); line-height:1.6; font-weight:300;">The button appears automatically in the bottom-right once the page has loaded — click it to start the conversation.</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <section id="fuer-wen" class="section-light">
     <div class="wrap">
@@ -1884,31 +1847,6 @@
 })();
 </script>
 
-<!-- Voice-Agent Demo (ElevenLabs Conversational AI) -->
-<elevenlabs-convai
-  agent-id="agent_5301m213h9yhembt38p140jfqzq9"
-  variant="full"
-  override-language="en"
-  markdown-link-allowed-hosts="calendly.com"
-  text-contents='{"main_label":"Need help?","start_call":"Start a call","new_call":"New call","end_call":"End","start_chat":"Message","send_message":"Send","listening_status":"Listening","speaking_status":"Talk to interrupt","connecting_status":"Connecting","input_placeholder":"Send a message…","collapse":"Collapse","expand":"Expand","change_language":"Change language","mute_microphone":"Mute microphone"}'
-></elevenlabs-convai>
-<script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
-<script src="/js/mic-check.js" defer></script>
-<script>
-/* Collapse the voice-agent panel on an outside click
-   (same effect as the widget's own collapse arrow). */
-(function () {
-  var widget = document.querySelector('elevenlabs-convai');
-  if (!widget) return;
-  document.addEventListener('click', function (ev) {
-    var path = typeof ev.composedPath === 'function' ? ev.composedPath() : [];
-    if (path.indexOf(widget) !== -1) return; // click inside the widget: do nothing
-    document.dispatchEvent(new CustomEvent('elevenlabs-agent:expand', {
-      detail: { action: 'collapse' }
-    }));
-  });
-})();
-</script>
 <style>
   .to-top{
     position:fixed; right:max(18px, env(safe-area-inset-right)); bottom:max(18px, env(safe-area-inset-bottom)); z-index:30;
