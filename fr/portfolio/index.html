@@ -122,7 +122,17 @@
             "creator": {
               "@id": "https://www.zbinden.online/#pauline-zbinden"
             },
-            "url": "https://spielgruppe-sunneschiin.ch/"
+            "url": "https://spielgruppe-sunneschiin.ch/",
+            "image": [
+              {
+                "@type": "ImageObject",
+                "name": "Flyer de la Spielgruppe Sunneschiin",
+                "contentUrl": "https://www.zbinden.online/images/referenzen/sunneschiin-flyer.webp",
+                "description": "Flyer de la Spielgruppe Sunneschiin à Sisseln avec le déroulement d’une matinée, les horaires, le lieu et un QR code pour WhatsApp",
+                "width": 800,
+                "height": 1132
+              }
+            ]
           }
         },
         {
@@ -554,6 +564,9 @@
   .proj .ref-link{ margin-top:0; }
   .proj-visual{ display:grid; justify-items:center; min-width:0; }
   .proj-visual .showcase{ width:100%; }
+  .proj-flyer{ margin:0; width:100%; max-width:160px; }
+  .proj-flyer .browser{ display:block; border-radius:10px; box-shadow:0 14px 34px -20px rgba(0,0,0,.3); }
+  .proj-flyer figcaption{ margin-top:10px; text-align:center; font-size:.8rem; }
   .phone{
     width:100%; max-width:220px; aspect-ratio:390/780; border:7px solid #18150f; border-radius:30px; overflow:hidden; background:#fbf6ee;
     box-shadow:0 24px 50px -18px rgba(0,0,0,.5);
@@ -776,6 +789,7 @@
               <li>Contact par WhatsApp en un clic, formulaires d’inscription à télécharger</li>
               <li>Aussi lisible sur smartphone que sur ordinateur</li>
               <li>En coulisses : des données structurées pour que Google et ChatGPT comprennent correctement l’offre</li>
+              <li>Site web et flyer assortis</li>
             </ul>
             <div class="chips"><span class="chip">Concept &amp; design</span><span class="chip">Rédaction</span><span class="chip">Données structurées</span></div>
             <a class="ref-link" href="https://spielgruppe-sunneschiin.ch/" target="_blank" rel="noopener">Voir le site ↗</a>
@@ -790,6 +804,12 @@
               <img src="/images/referenzen/sunneschiin-mobile.webp" width="390" height="844" alt="Le site de la Spielgruppe Sunneschiin sur smartphone" loading="lazy">
             </div>
           </div>
+          <figure class="proj-flyer">
+            <a class="browser" href="/images/referenzen/sunneschiin-flyer.webp" target="_blank" rel="noopener">
+              <img src="/images/referenzen/sunneschiin-flyer.webp" width="800" height="1132" alt="Flyer de la Spielgruppe Sunneschiin à Sisseln avec le déroulement d’une matinée, les horaires, le lieu et un QR code pour WhatsApp" loading="lazy">
+            </a>
+            <figcaption class="proj-note">Flyer assorti pour Stein et environs – le QR code mène directement au contact WhatsApp.</figcaption>
+          </figure>
           </div>
         </article>
         <article class="proj reveal d1" id="restaurant">

@@ -122,7 +122,17 @@
             "creator": {
               "@id": "https://www.zbinden.online/#pauline-zbinden"
             },
-            "url": "https://spielgruppe-sunneschiin.ch/"
+            "url": "https://spielgruppe-sunneschiin.ch/",
+            "image": [
+              {
+                "@type": "ImageObject",
+                "name": "Flyer of the Spielgruppe Sunneschiin",
+                "contentUrl": "https://www.zbinden.online/images/referenzen/sunneschiin-flyer.webp",
+                "description": "Flyer of the Spielgruppe Sunneschiin in Sisseln showing how a morning runs, times, location and a QR code for WhatsApp",
+                "width": 800,
+                "height": 1132
+              }
+            ]
           }
         },
         {
@@ -554,6 +564,9 @@
   .proj .ref-link{ margin-top:0; }
   .proj-visual{ display:grid; justify-items:center; min-width:0; }
   .proj-visual .showcase{ width:100%; }
+  .proj-flyer{ margin:0; width:100%; max-width:160px; }
+  .proj-flyer .browser{ display:block; border-radius:10px; box-shadow:0 14px 34px -20px rgba(0,0,0,.3); }
+  .proj-flyer figcaption{ margin-top:10px; text-align:center; font-size:.8rem; }
   .phone{
     width:100%; max-width:220px; aspect-ratio:390/780; border:7px solid #18150f; border-radius:30px; overflow:hidden; background:#fbf6ee;
     box-shadow:0 24px 50px -18px rgba(0,0,0,.5);
@@ -776,6 +789,7 @@
               <li>Contact via WhatsApp in one click, registration forms to download</li>
               <li>Just as clear on a phone as on a computer</li>
               <li>Behind the scenes: structured data so that Google and ChatGPT understand the playgroup correctly</li>
+              <li>Website and flyer in one consistent design</li>
             </ul>
             <div class="chips"><span class="chip">Concept &amp; design</span><span class="chip">Copywriting</span><span class="chip">Structured data</span></div>
             <a class="ref-link" href="https://spielgruppe-sunneschiin.ch/" target="_blank" rel="noopener">Visit the website ↗</a>
@@ -790,6 +804,12 @@
               <img src="/images/referenzen/sunneschiin-mobile.webp" width="390" height="844" alt="The Spielgruppe Sunneschiin website on a phone" loading="lazy">
             </div>
           </div>
+          <figure class="proj-flyer">
+            <a class="browser" href="/images/referenzen/sunneschiin-flyer.webp" target="_blank" rel="noopener">
+              <img src="/images/referenzen/sunneschiin-flyer.webp" width="800" height="1132" alt="Flyer of the Spielgruppe Sunneschiin in Sisseln showing how a morning runs, times, location and a QR code for WhatsApp" loading="lazy">
+            </a>
+            <figcaption class="proj-note">Matching flyer for Stein and the surrounding area – the QR code leads straight to the WhatsApp contact.</figcaption>
+          </figure>
           </div>
         </article>
         <article class="proj reveal d1" id="restaurant">
