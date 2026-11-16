@@ -120,10 +120,11 @@
           {
             "@type": "Offer",
             "name": "Maintenance (facultative en cas d'achat)",
-            "description": "Hébergement en Suisse, certificat SSL, surveillance, mises à jour techniques et petites adaptations jusqu'à 15 min par mois : dès CHF 39 par mois (CHF 390 par an) pour un Onepager, dès CHF 69 par mois (CHF 690 par an) pour un site de plusieurs pages. Comprise dans l'abonnement. Le nom de domaine reste à votre nom. Non soumis à la TVA.",
+            "description": "Hébergement en Suisse, certificat SSL, surveillance, mises à jour techniques et modifications en trois niveaux : Base jusqu'à 15 min par mois (Onepager CHF 39, site web CHF 69 par mois), S jusqu'à 30 min (CHF 59 / 89), M jusqu'à 1 h (CHF 99 / 129) ; payée à l'année, 2 mois offerts, S et M avec une durée minimale de 6 mois. Comprise dans l'abonnement. Le nom de domaine reste à votre nom. Non soumis à la TVA.",
             "priceSpecification": {
               "@type": "UnitPriceSpecification",
               "minPrice": 39,
+              "maxPrice": 129,
               "priceCurrency": "CHF",
               "unitCode": "MON",
               "unitText": "mois"
@@ -232,7 +233,7 @@
           "name": "Et si quelque chose change plus tard ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Écrivez-moi simplement ce qu'il faut changer. En abonnement, les modifications jusqu'à 30 min par mois (Onepager) ou 1 h par mois (plusieurs pages) sont comprises ; le temps non utilisé expire à la fin du mois. Au-delà et en cas d'achat, les modifications sont facturées selon le temps passé : CHF 120 de l'heure, minimum 30 minutes par demande, puis par tranche de 15 minutes entamée. Une petite modification comme un nouveau numéro de téléphone coûte donc CHF 60."
+            "text": "Écrivez-moi simplement ce qu'il faut changer. En abonnement, les modifications jusqu'à 30 min par mois (Onepager) ou 1 h par mois (plusieurs pages) sont comprises ; le temps non utilisé expire à la fin du mois. En cas d'achat, la maintenance comprend jusqu'à 15 min (Base), 30 min (S) ou 1 h (M) par mois. Au-delà, les modifications sont facturées selon le temps passé : CHF 120 de l'heure, minimum 30 minutes par demande, puis par tranche de 15 minutes entamée. Une petite modification comme un nouveau numéro de téléphone coûte donc CHF 60."
           }
         },
         {
@@ -240,7 +241,7 @@
           "name": "Combien coûte l'hébergement de mon site ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "L'hébergement, le certificat SSL, la surveillance, les mises à jour techniques et de petites adaptations jusqu'à 15 min par mois (p. ex. horaires, numéro de téléphone, prix) sont compris dans la maintenance : dès CHF 39 par mois ou CHF 390 par an pour un Onepager, dès CHF 69 par mois ou CHF 690 par an pour un site de plusieurs pages. Les modifications plus importantes sur devis (CHF 120 de l'heure). En abonnement, la maintenance est comprise. Si vous avez déjà votre propre hébergement, j'y installe directement le site. Le nom de domaine reste à votre nom. Si vous mettez fin à la collaboration, vous recevez les fichiers de votre site."
+            "text": "L'hébergement, le certificat SSL, la surveillance, les mises à jour techniques et de petites adaptations jusqu'à 15 min par mois (p. ex. horaires, numéro de téléphone, prix) sont compris dans la maintenance : dès CHF 39 par mois (CHF 390 par an) pour un Onepager, dès CHF 69 par mois (CHF 690 par an) pour un site de plusieurs pages. Si vous changez plus souvent quelque chose, choisissez le niveau S avec jusqu'à 30 min par mois (CHF 59 ou 89) ou M avec jusqu'à 1 h (CHF 99 ou 129). Les modifications plus importantes sur devis (CHF 120 de l'heure). En abonnement, la maintenance est comprise. Si vous avez déjà votre propre hébergement, j'y installe directement le site. Le nom de domaine reste à votre nom. Si vous mettez fin à la collaboration, vous recevez les fichiers de votre site."
           }
         },
         {
@@ -606,6 +607,11 @@
   .abo-table th, .abo-table td{ text-align:left; padding:9px 0; border-bottom:1px solid var(--sec-line); vertical-align:top; font-weight:300; line-height:1.45; }
   .abo-table th{ font-family:var(--font-ui); font-size:.78rem; letter-spacing:.06em; text-transform:uppercase; color:var(--sec-muted); font-weight:600; }
   .abo-table td:last-child, .abo-table th:last-child{ white-space:nowrap; padding-left:16px; text-align:right; color:var(--sec-gold-deep); font-weight:500; }
+  .tier-table{ margin-bottom:22px; }
+  .tier-table td:nth-child(n+3), .tier-table th:nth-child(n+3){ white-space:nowrap; padding-left:16px; text-align:right; color:var(--sec-gold-deep); font-weight:500; }
+  .tier-table th:nth-child(n+3){ color:var(--sec-muted); font-weight:600; }
+  .tier-table td:first-child{ font-weight:500; }
+  .tier-table td:first-child, .tier-table th:first-child{ padding-right:14px; }
   .credit-note{ margin:18px auto 0; max-width:640px; font-size:.9rem; color:var(--sec-muted); font-weight:300; text-align:center; }
 
   /* ---------- FAQ ---------- */
@@ -1041,8 +1047,8 @@
             <span class="package-tag">Exploitation courante</span>
             <h3>Maintenance</h3>
             <div class="package-meta">
-              <div class="kauf-only"><span class="lbl">Onepager</span><span class="val price">dès CHF 39 / mois</span><span class="val-note">ou CHF 390 / an</span></div>
-              <div class="kauf-only"><span class="lbl">Site web</span><span class="val price">dès CHF 69 / mois</span><span class="val-note">ou CHF 690 / an</span></div>
+              <div class="kauf-only"><span class="lbl">Onepager</span><span class="val price">dès CHF 39 / mois</span><span class="val-note">S CHF 59 · M CHF 99</span></div>
+              <div class="kauf-only"><span class="lbl">Site web</span><span class="val price">dès CHF 69 / mois</span><span class="val-note">S CHF 89 · M CHF 129</span></div>
               <div class="abo-only"><span class="lbl">Onepager en abo</span><span class="val price">30 min / mois</span><span class="val-note">modifications comprises</span></div>
               <div class="abo-only"><span class="lbl">Site web en abo</span><span class="val price">1 h / mois</span><span class="val-note">modifications comprises</span></div>
             </div>
@@ -1051,14 +1057,19 @@
             <ul class="package-list">
             <li>Hébergement en Suisse (Infomaniak), certificat SSL, surveillance et mises à jour techniques</li>
             <li class="abo-only">Comprise dans l'abonnement, avec des modifications jusqu'à 30 min par mois pour un Onepager et jusqu'à 1 h par mois pour un site web. Le temps non utilisé expire à la fin du mois.</li>
-            <li class="kauf-only">S'y ajoutent de petites adaptations jusqu'à 15 min par mois, p. ex. horaires, numéro de téléphone, prix, avis de vacances ou nouvelle image. Les modifications plus importantes, comme de nouveaux contenus ou sections, sur devis (CHF 120 de l'heure). Le temps non utilisé expire à la fin du mois.</li>
-            <li class="kauf-only">Payée à l'année : CHF 390 (Onepager) ou CHF 690 (site web), 2 mois offerts.</li>
+            <li class="kauf-only">Trois niveaux, selon la fréquence de vos changements : Base avec de petites adaptations jusqu'à 15 min par mois (p. ex. horaires, numéro de téléphone, prix, avis de vacances), S avec des modifications jusqu'à 30 min et M jusqu'à 1 h par mois, p. ex. pour un nouvel exemple de projet ou une nouvelle question FAQ. Le temps non utilisé expire à la fin du mois ; au-delà, CHF 120 de l'heure.</li>
+            <li class="kauf-only">Payée à l'année : 2 mois offerts (p. ex. Base Onepager CHF 390 au lieu de 468). S et M : durée minimale de 6 mois, ensuite résiliable chaque mois avec un mois de préavis ; changement de niveau pour le mois suivant.</li>
             <li class="kauf-only">Facultative en cas d'achat. Si vous avez déjà votre propre hébergement, j'y installe directement le site.</li>
             <li class="kauf-only">Le nom de domaine reste à votre nom. Si vous mettez fin à la collaboration, vous recevez les fichiers de votre site.</li>
             <li class="abo-only">Le nom de domaine reste à votre nom. Le site m'appartient tant que l'abonnement court ; vous ne pouvez le garder qu'en l'achetant.</li>
             </ul>
+            <table class="abo-table tier-table kauf-only">
+              <caption>Maintenance en cas d'achat : trois niveaux</caption>
+              <thead><tr><th scope="col">Niveau</th><th scope="col">Modifications par mois</th><th scope="col">Onepager</th><th scope="col">Site web</th></tr></thead>
+              <tbody><tr><td>Base</td><td>jusqu'à 15 min</td><td>CHF 39</td><td>CHF 69</td></tr><tr><td>S</td><td>jusqu'à 30 min</td><td>CHF 59</td><td>CHF 89</td></tr><tr><td>M</td><td>jusqu'à 1 h</td><td>CHF 99</td><td>CHF 129</td></tr></tbody>
+            </table>
             <table class="abo-table">
-              <caption><span class="kauf-only">15 min par mois comprises, au-delà CHF 120 de l'heure</span><span class="abo-only">Que représentent 30 minutes ou 1 heure ?</span></caption>
+              <caption><span class="kauf-only">Que représentent 15 min, 30 min ou 1 heure ?</span><span class="abo-only">Que représentent 30 minutes ou 1 heure ?</span></caption>
               <thead><tr><th scope="col">Exemple de modification</th><th scope="col">Temps env.</th></tr></thead>
               <tbody>
                 <tr><td>Modifier un numéro de téléphone, un e-mail ou une région, corriger une faute de frappe</td><td>10–15 min</td></tr>
@@ -1320,11 +1331,11 @@
         </details>
         <details>
           <summary>Et si quelque chose change plus tard ?</summary>
-          <p>Écrivez-moi simplement ce qu'il faut changer. En abonnement, les modifications jusqu'à 30 min par mois (Onepager) ou 1 h par mois (plusieurs pages) sont comprises ; le temps non utilisé expire à la fin du mois. Au-delà et en cas d'achat, les modifications sont facturées selon le temps passé : CHF 120 de l'heure, minimum 30 minutes par demande, puis par tranche de 15 minutes entamée. Une petite modification comme un nouveau numéro de téléphone coûte donc CHF 60.</p>
+          <p>Écrivez-moi simplement ce qu'il faut changer. En abonnement, les modifications jusqu'à 30 min par mois (Onepager) ou 1 h par mois (plusieurs pages) sont comprises ; le temps non utilisé expire à la fin du mois. En cas d'achat, la maintenance comprend jusqu'à 15 min (Base), 30 min (S) ou 1 h (M) par mois. Au-delà, les modifications sont facturées selon le temps passé : CHF 120 de l'heure, minimum 30 minutes par demande, puis par tranche de 15 minutes entamée. Une petite modification comme un nouveau numéro de téléphone coûte donc CHF 60.</p>
         </details>
         <details>
           <summary>Combien coûte l'hébergement de mon site ?</summary>
-          <p>L'hébergement, le certificat SSL, la surveillance, les mises à jour techniques et de petites adaptations jusqu'à 15 min par mois (p. ex. horaires, numéro de téléphone, prix) sont compris dans la maintenance : dès CHF 39 par mois ou CHF 390 par an pour un Onepager, dès CHF 69 par mois ou CHF 690 par an pour un site de plusieurs pages. Les modifications plus importantes sur devis (CHF 120 de l'heure). En abonnement, la maintenance est comprise. Si vous avez déjà votre propre hébergement, j'y installe directement le site. Le nom de domaine reste à votre nom. Si vous mettez fin à la collaboration, vous recevez les fichiers de votre site.</p>
+          <p>L'hébergement, le certificat SSL, la surveillance, les mises à jour techniques et de petites adaptations jusqu'à 15 min par mois (p. ex. horaires, numéro de téléphone, prix) sont compris dans la maintenance : dès CHF 39 par mois (CHF 390 par an) pour un Onepager, dès CHF 69 par mois (CHF 690 par an) pour un site de plusieurs pages. Si vous changez plus souvent quelque chose, choisissez le niveau S avec jusqu'à 30 min par mois (CHF 59 ou 89) ou M avec jusqu'à 1 h (CHF 99 ou 129). Les modifications plus importantes sur devis (CHF 120 de l'heure). En abonnement, la maintenance est comprise. Si vous avez déjà votre propre hébergement, j'y installe directement le site. Le nom de domaine reste à votre nom. Si vous mettez fin à la collaboration, vous recevez les fichiers de votre site.</p>
         </details>
         <details>
           <summary>Que veut dire « GEO-ready » ?</summary>

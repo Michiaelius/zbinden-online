@@ -108,10 +108,11 @@
           {
             "@type": "Offer",
             "name": "Wartung (optional beim Kauf)",
-            "description": "Hosting in der Schweiz, SSL-Zertifikat, Überwachung, technische Updates und kleine Anpassungen bis 15 Min. pro Monat: ab CHF 39 pro Monat (CHF 390 pro Jahr) für einen Onepager, ab CHF 69 pro Monat (CHF 690 pro Jahr) für eine Website mit mehreren Seiten. Im Abo inbegriffen. Die Domain bleibt auf Ihrem Namen. Nicht MWST-pflichtig.",
+            "description": "Hosting in der Schweiz, SSL-Zertifikat, Überwachung, technische Updates und Änderungen in drei Stufen: Basis bis 15 Min. pro Monat (Onepager CHF 39, Website CHF 69 pro Monat), S bis 30 Min. (CHF 59 / 89), M bis 1 Std. (CHF 99 / 129); jährlich bezahlt 2 Monate geschenkt, S und M mit Mindestdauer 6 Monate. Im Abo inbegriffen. Die Domain bleibt auf Ihrem Namen. Nicht MWST-pflichtig.",
             "priceSpecification": {
               "@type": "UnitPriceSpecification",
               "minPrice": 39,
+              "maxPrice": 129,
               "priceCurrency": "CHF",
               "unitCode": "MON",
               "unitText": "Monat"
@@ -220,7 +221,7 @@
           "name": "Und wenn sich später etwas ändert?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Schreiben Sie mir einfach, was angepasst werden soll. Im Abo sind Änderungen bis 30 Min. pro Monat (Onepager) bzw. 1 Std. pro Monat (mehrere Seiten) inbegriffen; nicht genutzte Zeit verfällt am Monatsende. Darüber hinaus und beim Kauf verrechne ich Änderungen nach Aufwand: CHF 120 pro Stunde, Mindestverrechnung 30 Minuten pro Auftrag, danach pro angefangene 15 Minuten. Eine kleine Anpassung wie eine neue Telefonnummer kostet damit CHF 60."
+            "text": "Schreiben Sie mir einfach, was angepasst werden soll. Im Abo sind Änderungen bis 30 Min. pro Monat (Onepager) bzw. 1 Std. pro Monat (mehrere Seiten) inbegriffen; nicht genutzte Zeit verfällt am Monatsende. Beim Kauf sind in der Wartung bis 15 Min. (Basis), 30 Min. (S) oder 1 Std. (M) pro Monat inbegriffen. Darüber hinaus verrechne ich Änderungen nach Aufwand: CHF 120 pro Stunde, Mindestverrechnung 30 Minuten pro Auftrag, danach pro angefangene 15 Minuten. Eine kleine Anpassung wie eine neue Telefonnummer kostet damit CHF 60."
           }
         },
         {
@@ -228,7 +229,7 @@
           "name": "Was kostet das Hosting meiner Website?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Hosting, SSL-Zertifikat, Überwachung, technische Updates und kleine Anpassungen bis 15 Min. pro Monat (z. B. Öffnungszeiten, Telefonnummer, Preise) sind in der Wartung enthalten: ab CHF 39 pro Monat oder CHF 390 pro Jahr für einen Onepager, ab CHF 69 pro Monat oder CHF 690 pro Jahr für eine Website mit mehreren Seiten. Grössere Änderungen nach Offerte (CHF 120 pro Stunde). Im Abo ist die Wartung inbegriffen. Haben Sie bereits ein eigenes Hosting, lade ich die Website direkt dort hoch. Die Domain bleibt auf Ihrem Namen. Wenn Sie die Zusammenarbeit beenden, erhalten Sie die Dateien Ihrer Website."
+            "text": "Hosting, SSL-Zertifikat, Überwachung, technische Updates und kleine Anpassungen bis 15 Min. pro Monat (z. B. Öffnungszeiten, Telefonnummer, Preise) sind in der Wartung enthalten: ab CHF 39 pro Monat (CHF 390 pro Jahr) für einen Onepager, ab CHF 69 pro Monat (CHF 690 pro Jahr) für eine Website mit mehreren Seiten. Wer öfter etwas ändert, wählt die Stufe S mit bis 30 Min. pro Monat (CHF 59 bzw. 89) oder M mit bis 1 Std. (CHF 99 bzw. 129). Grössere Änderungen nach Offerte (CHF 120 pro Stunde). Im Abo ist die Wartung inbegriffen. Haben Sie bereits ein eigenes Hosting, lade ich die Website direkt dort hoch. Die Domain bleibt auf Ihrem Namen. Wenn Sie die Zusammenarbeit beenden, erhalten Sie die Dateien Ihrer Website."
           }
         },
         {
@@ -594,6 +595,11 @@
   .abo-table th, .abo-table td{ text-align:left; padding:9px 0; border-bottom:1px solid var(--sec-line); vertical-align:top; font-weight:300; line-height:1.45; }
   .abo-table th{ font-family:var(--font-ui); font-size:.78rem; letter-spacing:.06em; text-transform:uppercase; color:var(--sec-muted); font-weight:600; }
   .abo-table td:last-child, .abo-table th:last-child{ white-space:nowrap; padding-left:16px; text-align:right; color:var(--sec-gold-deep); font-weight:500; }
+  .tier-table{ margin-bottom:22px; }
+  .tier-table td:nth-child(n+3), .tier-table th:nth-child(n+3){ white-space:nowrap; padding-left:16px; text-align:right; color:var(--sec-gold-deep); font-weight:500; }
+  .tier-table th:nth-child(n+3){ color:var(--sec-muted); font-weight:600; }
+  .tier-table td:first-child{ font-weight:500; }
+  .tier-table td:first-child, .tier-table th:first-child{ padding-right:14px; }
   .credit-note{ margin:18px auto 0; max-width:640px; font-size:.9rem; color:var(--sec-muted); font-weight:300; text-align:center; }
 
   /* ---------- FAQ ---------- */
@@ -1029,8 +1035,8 @@
             <span class="package-tag">Laufender Betrieb</span>
             <h3>Wartung</h3>
             <div class="package-meta">
-              <div class="kauf-only"><span class="lbl">Onepager</span><span class="val price">ab CHF 39 / Monat</span><span class="val-note">oder CHF 390 / Jahr</span></div>
-              <div class="kauf-only"><span class="lbl">Website</span><span class="val price">ab CHF 69 / Monat</span><span class="val-note">oder CHF 690 / Jahr</span></div>
+              <div class="kauf-only"><span class="lbl">Onepager</span><span class="val price">ab CHF 39 / Monat</span><span class="val-note">S CHF 59 · M CHF 99</span></div>
+              <div class="kauf-only"><span class="lbl">Website</span><span class="val price">ab CHF 69 / Monat</span><span class="val-note">S CHF 89 · M CHF 129</span></div>
               <div class="abo-only"><span class="lbl">Onepager im Abo</span><span class="val price">30 Min. / Monat</span><span class="val-note">Änderungen inklusive</span></div>
               <div class="abo-only"><span class="lbl">Website im Abo</span><span class="val price">1 Std. / Monat</span><span class="val-note">Änderungen inklusive</span></div>
             </div>
@@ -1039,14 +1045,19 @@
             <ul class="package-list">
             <li>Hosting in der Schweiz (Infomaniak), SSL-Zertifikat, Überwachung und technische Updates</li>
             <li class="abo-only">Im Abo inklusive, dazu Änderungen bis 30 Min. pro Monat beim Onepager und bis 1 Std. pro Monat bei der Website. Nicht genutzte Zeit verfällt am Monatsende.</li>
-            <li class="kauf-only">Dazu kleine Anpassungen bis 15 Min. pro Monat, z. B. Öffnungszeiten, Telefonnummer, Preise, ein Ferienhinweis oder ein neues Bild. Grössere Änderungen wie neue Inhalte oder Abschnitte nach Offerte (CHF 120 pro Stunde). Nicht genutzte Zeit verfällt am Monatsende.</li>
-            <li class="kauf-only">Jährlich bezahlt: CHF 390 (Onepager) bzw. CHF 690 (Website), 2 Monate geschenkt.</li>
+            <li class="kauf-only">Drei Stufen, je nachdem, wie oft Sie etwas ändern möchten: Basis mit kleinen Anpassungen bis 15 Min. pro Monat (z. B. Öffnungszeiten, Telefonnummer, Preise, ein Ferienhinweis), S mit Änderungen bis 30 Min. und M bis 1 Std. pro Monat, z. B. für ein neues Projektbeispiel oder eine neue FAQ-Frage. Nicht genutzte Zeit verfällt am Monatsende; darüber CHF 120 pro Stunde.</li>
+            <li class="kauf-only">Jährlich bezahlt: 2 Monate geschenkt (z. B. Basis Onepager CHF 390 statt 468). S und M: Mindestdauer 6 Monate, danach monatlich mit einem Monat Frist kündbar; Wechsel zwischen den Stufen auf den nächsten Monat.</li>
             <li class="kauf-only">Beim Kauf freiwillig. Haben Sie bereits ein eigenes Hosting, lade ich die Website direkt dort hoch.</li>
             <li class="kauf-only">Die Domain bleibt auf Ihrem Namen. Wenn Sie die Zusammenarbeit beenden, erhalten Sie die Dateien Ihrer Website.</li>
             <li class="abo-only">Die Domain bleibt auf Ihrem Namen. Die Website gehört mir, solange das Abo läuft; behalten können Sie sie nur mit Kauf.</li>
             </ul>
+            <table class="abo-table tier-table kauf-only">
+              <caption>Wartung beim Kauf: drei Stufen</caption>
+              <thead><tr><th scope="col">Stufe</th><th scope="col">Änderungen pro Monat</th><th scope="col">Onepager</th><th scope="col">Website</th></tr></thead>
+              <tbody><tr><td>Basis</td><td>bis 15 Min.</td><td>CHF 39</td><td>CHF 69</td></tr><tr><td>S</td><td>bis 30 Min.</td><td>CHF 59</td><td>CHF 89</td></tr><tr><td>M</td><td>bis 1 Std.</td><td>CHF 99</td><td>CHF 129</td></tr></tbody>
+            </table>
             <table class="abo-table">
-              <caption><span class="kauf-only">15 Min. pro Monat inklusive, darüber CHF 120 pro Stunde</span><span class="abo-only">Was passt in 30 Minuten oder 1 Stunde?</span></caption>
+              <caption><span class="kauf-only">Was passt in 15 Min., 30 Min. oder 1 Stunde?</span><span class="abo-only">Was passt in 30 Minuten oder 1 Stunde?</span></caption>
               <thead><tr><th scope="col">Beispiel einer Änderung</th><th scope="col">Zeitaufwand ca.</th></tr></thead>
               <tbody>
                 <tr><td>Telefonnummer, E-Mail oder Region anpassen, Tippfehler korrigieren</td><td>10–15 Min.</td></tr>
@@ -1308,11 +1319,11 @@
         </details>
         <details>
           <summary>Und wenn sich später etwas ändert?</summary>
-          <p>Schreiben Sie mir einfach, was angepasst werden soll. Im Abo sind Änderungen bis 30 Min. pro Monat (Onepager) bzw. 1 Std. pro Monat (mehrere Seiten) inbegriffen; nicht genutzte Zeit verfällt am Monatsende. Darüber hinaus und beim Kauf verrechne ich Änderungen nach Aufwand: CHF 120 pro Stunde, Mindestverrechnung 30 Minuten pro Auftrag, danach pro angefangene 15 Minuten. Eine kleine Anpassung wie eine neue Telefonnummer kostet damit CHF 60.</p>
+          <p>Schreiben Sie mir einfach, was angepasst werden soll. Im Abo sind Änderungen bis 30 Min. pro Monat (Onepager) bzw. 1 Std. pro Monat (mehrere Seiten) inbegriffen; nicht genutzte Zeit verfällt am Monatsende. Beim Kauf sind in der Wartung bis 15 Min. (Basis), 30 Min. (S) oder 1 Std. (M) pro Monat inbegriffen. Darüber hinaus verrechne ich Änderungen nach Aufwand: CHF 120 pro Stunde, Mindestverrechnung 30 Minuten pro Auftrag, danach pro angefangene 15 Minuten. Eine kleine Anpassung wie eine neue Telefonnummer kostet damit CHF 60.</p>
         </details>
         <details>
           <summary>Was kostet das Hosting meiner Website?</summary>
-          <p>Hosting, SSL-Zertifikat, Überwachung, technische Updates und kleine Anpassungen bis 15 Min. pro Monat (z. B. Öffnungszeiten, Telefonnummer, Preise) sind in der Wartung enthalten: ab CHF 39 pro Monat oder CHF 390 pro Jahr für einen Onepager, ab CHF 69 pro Monat oder CHF 690 pro Jahr für eine Website mit mehreren Seiten. Grössere Änderungen nach Offerte (CHF 120 pro Stunde). Im Abo ist die Wartung inbegriffen. Haben Sie bereits ein eigenes Hosting, lade ich die Website direkt dort hoch. Die Domain bleibt auf Ihrem Namen. Wenn Sie die Zusammenarbeit beenden, erhalten Sie die Dateien Ihrer Website.</p>
+          <p>Hosting, SSL-Zertifikat, Überwachung, technische Updates und kleine Anpassungen bis 15 Min. pro Monat (z. B. Öffnungszeiten, Telefonnummer, Preise) sind in der Wartung enthalten: ab CHF 39 pro Monat (CHF 390 pro Jahr) für einen Onepager, ab CHF 69 pro Monat (CHF 690 pro Jahr) für eine Website mit mehreren Seiten. Wer öfter etwas ändert, wählt die Stufe S mit bis 30 Min. pro Monat (CHF 59 bzw. 89) oder M mit bis 1 Std. (CHF 99 bzw. 129). Grössere Änderungen nach Offerte (CHF 120 pro Stunde). Im Abo ist die Wartung inbegriffen. Haben Sie bereits ein eigenes Hosting, lade ich die Website direkt dort hoch. Die Domain bleibt auf Ihrem Namen. Wenn Sie die Zusammenarbeit beenden, erhalten Sie die Dateien Ihrer Website.</p>
         </details>
         <details>
           <summary>Was bedeutet «GEO-ready»?</summary>
