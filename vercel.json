@@ -1,7 +1,48 @@
 {
   "functions": {
-    "api/geo-preview.mjs": { "maxDuration": 30 },
-    "api/geo-light-run.mjs": { "maxDuration": 300, "memory": 2048 },
-    "api/mockup-run.mjs": { "maxDuration": 300, "memory": 2048, "includeFiles": "api/_kit/**" }
-  }
+    "api/geo-preview.mjs": {
+      "maxDuration": 30
+    },
+    "api/geo-light-run.mjs": {
+      "maxDuration": 300,
+      "memory": 2048
+    },
+    "api/mockup-run.mjs": {
+      "maxDuration": 300,
+      "memory": 2048,
+      "includeFiles": "api/_kit/**"
+    }
+  },
+  "redirects": [
+    {
+      "source": "/geo-audit",
+      "destination": "/webdesign#ki-sichtbarkeit",
+      "statusCode": 301
+    },
+    {
+      "source": "/geo-audit/",
+      "destination": "/webdesign#ki-sichtbarkeit",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/geo-audit",
+      "destination": "/fr/webdesign#ki-sichtbarkeit",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/geo-audit/",
+      "destination": "/fr/webdesign#ki-sichtbarkeit",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/geo-audit",
+      "destination": "/en/webdesign#ki-sichtbarkeit",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/geo-audit/",
+      "destination": "/en/webdesign#ki-sichtbarkeit",
+      "statusCode": 301
+    }
+  ]
 }

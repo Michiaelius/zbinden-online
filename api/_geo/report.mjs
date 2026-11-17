@@ -42,7 +42,7 @@ const T = {
     gainStrong: 'Sie bauen Ihren Vorsprung gezielt aus, statt ihn dem Zufall zu überlassen. Mit GEO Aktiv beobachte ich Ihre Sichtbarkeit jeden Monat und baue sie für Sie aus.',
     cta: 'Kostenloses Gespräch vereinbaren (30 Min.)', diff: 'GEO Aktiv: CHF 490 Setup (der Audit), danach CHF 249 pro Monat, Mindestdauer 6 Monate.',
     footer: 'Dieser Test ist kostenlos und unverbindlich. Die Antworten von KI-Systemen ändern sich mit der Zeit; dieser Test ist eine Momentaufnahme.',
-    site: 'zbinden.online/geo-audit',
+    site: 'zbinden.online/webdesign',
   },
   fr: {
     stem: 'Visibilite-IA', colon: ' :', title: 'Test de visibilité IA', tested: 'testé le {d} avec ChatGPT et Perplexity',
@@ -74,7 +74,7 @@ const T = {
     gainStrong: 'Vous consolidez votre avance de façon ciblée au lieu de la laisser au hasard. Avec GEO Actif, je suis votre visibilité chaque mois et la renforce pour vous.',
     cta: 'Réserver un entretien gratuit (30 min)', diff: 'GEO Actif : CHF 490 de mise en place (l’audit), puis CHF 249 par mois, durée minimale 6 mois.',
     footer: 'Ce test est gratuit et sans engagement. Les réponses des systèmes d’IA évoluent avec le temps ; ce test est un instantané.',
-    site: 'zbinden.online/fr/geo-audit',
+    site: 'zbinden.online/fr/webdesign',
   },
   en: {
     stem: 'AI-Visibility', colon: ':', title: 'AI visibility test', tested: 'tested on {d} with ChatGPT and Perplexity',
@@ -106,7 +106,7 @@ const T = {
     gainStrong: 'You build on your lead deliberately instead of leaving it to chance. With GEO Active, I monitor your visibility every month and build on it for you.',
     cta: 'Book a free call (30 min)', diff: 'GEO Active: CHF 490 setup (the audit), then CHF 249 per month, minimum term 6 months.',
     footer: 'This test is free and without obligation. AI answers change over time; this test is a snapshot.',
-    site: 'zbinden.online/en/geo-audit',
+    site: 'zbinden.online/en/webdesign',
   },
 };
 
@@ -346,7 +346,7 @@ const MAIL = {
     strongPdf: 'Im angehängten PDF sehen Sie, was bei Ihnen gut funktioniert, was noch fehlt, und eine Massnahme, die Sie sofort selbst umsetzen können.',
     next: `Wenn Sie den nächsten Schritt besprechen möchten, zeige ich Ihnen gern in 30 Minuten, was sich bei Ihnen konkret verbessern lässt, kostenlos und unverbindlich: ${CALENDLY}`,
     regards: 'Freundliche Grüsse,',
-    site: 'https://www.zbinden.online/geo-audit',
+    site: 'https://www.zbinden.online/webdesign#ki-sichtbarkeit',
   },
   fr: {
     subject: function (name) { return `Votre résultat GEO-Light : ${name} sur ChatGPT et Perplexity`; },
@@ -357,7 +357,7 @@ const MAIL = {
     strongPdf: 'Dans le PDF ci-joint, vous verrez ce qui fonctionne bien chez vous, ce qui manque encore, et une mesure que vous pouvez mettre en place vous-même tout de suite.',
     next: `Si vous souhaitez parler de la prochaine étape, je vous montre volontiers en 30 minutes ce qui peut concrètement être amélioré chez vous, gratuitement et sans engagement : ${CALENDLY}`,
     regards: 'Meilleures salutations,',
-    site: 'https://www.zbinden.online/fr/geo-audit',
+    site: 'https://www.zbinden.online/fr/webdesign#ki-sichtbarkeit',
   },
   en: {
     subject: function (name) { return `Your GEO-Light result: ${name} on ChatGPT and Perplexity`; },
@@ -368,7 +368,7 @@ const MAIL = {
     strongPdf: 'The attached PDF shows what works well for you, what is still missing, and one measure you can put in place yourself right away.',
     next: `If you would like to discuss the next step, I am happy to show you in 30 minutes what can be improved in your case, free and without obligation: ${CALENDLY}`,
     regards: 'Kind regards,',
-    site: 'https://www.zbinden.online/en/geo-audit',
+    site: 'https://www.zbinden.online/en/webdesign#ki-sichtbarkeit',
   },
 };
 

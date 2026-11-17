@@ -4,7 +4,7 @@
 
   <url>
     <loc>https://www.zbinden.online/</loc>
-    <lastmod>2026-08-30</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="de-CH" href="https://www.zbinden.online/"/>
     <xhtml:link rel="alternate" hreflang="fr-CH" href="https://www.zbinden.online/fr/"/>
@@ -13,7 +13,7 @@
   </url>
   <url>
     <loc>https://www.zbinden.online/fr/</loc>
-    <lastmod>2026-08-30</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="de-CH" href="https://www.zbinden.online/"/>
     <xhtml:link rel="alternate" hreflang="fr-CH" href="https://www.zbinden.online/fr/"/>
@@ -22,7 +22,7 @@
   </url>
   <url>
     <loc>https://www.zbinden.online/en/</loc>
-    <lastmod>2026-08-30</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="de-CH" href="https://www.zbinden.online/"/>
     <xhtml:link rel="alternate" hreflang="fr-CH" href="https://www.zbinden.online/fr/"/>
@@ -32,7 +32,7 @@
 
   <url>
     <loc>https://www.zbinden.online/ki-agenten-automatisierung</loc>
-    <lastmod>2026-08-30</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="de-CH" href="https://www.zbinden.online/ki-agenten-automatisierung"/>
     <xhtml:link rel="alternate" hreflang="fr-CH" href="https://www.zbinden.online/fr/ki-agenten-automatisierung"/>
@@ -41,7 +41,7 @@
   </url>
   <url>
     <loc>https://www.zbinden.online/fr/ki-agenten-automatisierung</loc>
-    <lastmod>2026-08-30</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="de-CH" href="https://www.zbinden.online/ki-agenten-automatisierung"/>
     <xhtml:link rel="alternate" hreflang="fr-CH" href="https://www.zbinden.online/fr/ki-agenten-automatisierung"/>
@@ -50,7 +50,7 @@
   </url>
   <url>
     <loc>https://www.zbinden.online/en/ki-agenten-automatisierung</loc>
-    <lastmod>2026-08-30</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="de-CH" href="https://www.zbinden.online/ki-agenten-automatisierung"/>
     <xhtml:link rel="alternate" hreflang="fr-CH" href="https://www.zbinden.online/fr/ki-agenten-automatisierung"/>
@@ -58,38 +58,11 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.zbinden.online/ki-agenten-automatisierung"/>
   </url>
 
-  <url>
-    <loc>https://www.zbinden.online/geo-audit</loc>
-    <lastmod>2026-08-30</lastmod>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="de-CH" href="https://www.zbinden.online/geo-audit"/>
-    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://www.zbinden.online/fr/geo-audit"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.zbinden.online/en/geo-audit"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.zbinden.online/geo-audit"/>
-  </url>
-  <url>
-    <loc>https://www.zbinden.online/fr/geo-audit</loc>
-    <lastmod>2026-08-30</lastmod>
-    <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="de-CH" href="https://www.zbinden.online/geo-audit"/>
-    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://www.zbinden.online/fr/geo-audit"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.zbinden.online/en/geo-audit"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.zbinden.online/geo-audit"/>
-  </url>
-  <url>
-    <loc>https://www.zbinden.online/en/geo-audit</loc>
-    <lastmod>2026-08-30</lastmod>
-    <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="de-CH" href="https://www.zbinden.online/geo-audit"/>
-    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://www.zbinden.online/fr/geo-audit"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.zbinden.online/en/geo-audit"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.zbinden.online/geo-audit"/>
-  </url>
 
 
   <url>
     <loc>https://www.zbinden.online/webdesign</loc>
-    <lastmod>2026-09-30</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="de-CH" href="https://www.zbinden.online/webdesign"/>
     <xhtml:link rel="alternate" hreflang="fr-CH" href="https://www.zbinden.online/fr/webdesign"/>
@@ -98,7 +71,7 @@
   </url>
   <url>
     <loc>https://www.zbinden.online/fr/webdesign</loc>
-    <lastmod>2026-09-30</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="de-CH" href="https://www.zbinden.online/webdesign"/>
     <xhtml:link rel="alternate" hreflang="fr-CH" href="https://www.zbinden.online/fr/webdesign"/>
@@ -107,7 +80,7 @@
   </url>
   <url>
     <loc>https://www.zbinden.online/en/webdesign</loc>
-    <lastmod>2026-09-30</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="de-CH" href="https://www.zbinden.online/webdesign"/>
     <xhtml:link rel="alternate" hreflang="fr-CH" href="https://www.zbinden.online/fr/webdesign"/>

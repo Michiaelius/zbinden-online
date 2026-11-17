@@ -4,7 +4,7 @@
  */
 
 const MAX_BYTES = 1500000;
-const UA = 'Mozilla/5.0 (compatible; ZbindenGeoLight/1.0; +https://www.zbinden.online/geo-audit)';
+const UA = 'Mozilla/5.0 (compatible; ZbindenGeoLight/1.0; +https://www.zbinden.online/webdesign)';
 
 // Liens internes à lire en plus de l'accueil, par ordre de priorité.
 const LINK_PATTERNS = [

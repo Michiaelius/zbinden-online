@@ -1,7 +1,7 @@
 /**
  * POST /api/contact
  * Reçoit les formulaires « GEO-Light » et « Anfrage / Demande » des pages
- * geo-audit, webdesign et ki-agenten-automatisierung (DE/FR/EN) et envoie :
+ * webdesign et ki-agenten-automatisierung (DE/FR/EN) et envoie :
  *  1. la demande à info@zbinden.online (« Répondre » écrit au visiteur) ;
  *  2. un e-mail de confirmation au visiteur, dans la langue de la page.
  * La confirmation est un texte fixe : rien de ce que le visiteur a saisi n'y est repris.
@@ -51,9 +51,9 @@ const COPY = {
       cta: 'Gespräch buchen — 30 Min., unverbindlich',
     },
     regards: 'Freundliche Grüsse,',
-    geo: { label: 'Zbinden Software — GEO-Audit: Ist Ihr Unternehmen für KI sichtbar?', url: 'https://www.zbinden.online/geo-audit' },
-    ki: { label: 'Zbinden Software — KI-Agenten & Prozessautomatisierung', url: 'https://www.zbinden.online/ki-agenten-automatisierung' },
-    web: { label: 'Zbinden Software — Webdesign für Schweizer KMU', url: 'https://www.zbinden.online/webdesign' },
+    geo: { label: 'Zbinden Software — KI-Sichtbarkeit: Wird Ihr Unternehmen von KI empfohlen?', url: 'https://www.zbinden.online/webdesign#ki-sichtbarkeit' },
+    ki: { label: 'Zbinden Software — KI im Arbeitsalltag: Workshops & Automatisierung', url: 'https://www.zbinden.online/ki-agenten-automatisierung' },
+    web: { label: 'Zbinden Software — Websites & KI-Sichtbarkeit für Schweizer KMU', url: 'https://www.zbinden.online/webdesign' },
     why: 'Sie erhalten diese E-Mail, weil auf zbinden.online eine Anfrage mit dieser Adresse gestellt wurde.',
   },
   fr: {
@@ -75,9 +75,9 @@ const COPY = {
       cta: 'Réserver un appel — 30 min, sans engagement',
     },
     regards: 'Meilleures salutations,',
-    geo: { label: 'Zbinden Software — Audit GEO : votre entreprise est-elle visible pour l’IA ?', url: 'https://www.zbinden.online/fr/geo-audit' },
-    ki: { label: 'Zbinden Software — Agents IA & automatisation des processus', url: 'https://www.zbinden.online/fr/ki-agenten-automatisierung' },
-    web: { label: 'Zbinden Software — Création de sites web pour PME suisses', url: 'https://www.zbinden.online/fr/webdesign' },
+    geo: { label: 'Zbinden Software — Visibilité IA : votre entreprise est-elle recommandée par l’IA ?', url: 'https://www.zbinden.online/fr/webdesign#ki-sichtbarkeit' },
+    ki: { label: 'Zbinden Software — L’IA au quotidien : ateliers et automatisation', url: 'https://www.zbinden.online/fr/ki-agenten-automatisierung' },
+    web: { label: 'Zbinden Software — Sites web et visibilité IA pour PME suisses', url: 'https://www.zbinden.online/fr/webdesign' },
     why: 'Vous recevez cet e-mail parce qu’une demande a été envoyée avec cette adresse sur zbinden.online.',
   },
   en: {
@@ -99,9 +99,9 @@ const COPY = {
       cta: 'Book a call — 30 min, no commitment',
     },
     regards: 'Kind regards,',
-    geo: { label: 'Zbinden Software — GEO Audit: Is your business visible to AI?', url: 'https://www.zbinden.online/en/geo-audit' },
-    ki: { label: 'Zbinden Software — AI Agents & Process Automation', url: 'https://www.zbinden.online/en/ki-agenten-automatisierung' },
-    web: { label: 'Zbinden Software — Web design for Swiss SMEs', url: 'https://www.zbinden.online/en/webdesign' },
+    geo: { label: 'Zbinden Software — AI visibility: Does AI recommend your business?', url: 'https://www.zbinden.online/en/webdesign#ki-sichtbarkeit' },
+    ki: { label: 'Zbinden Software — AI at work: workshops & automation', url: 'https://www.zbinden.online/en/ki-agenten-automatisierung' },
+    web: { label: 'Zbinden Software — Websites & AI visibility for Swiss SMEs', url: 'https://www.zbinden.online/en/webdesign' },
     why: 'You are receiving this email because a request was sent with this address on zbinden.online.',
   },
 };
@@ -345,7 +345,7 @@ export default async function handler(req, res) {
   const c = data.website ? t.geoLight : t.request;
   // Lien de la signature : selon l'intérêt choisi dans le formulaire, sinon selon la page d'origine.
   const topic = data.website ? 'geo' : data.package || data.page;
-  const link = /geo/i.test(topic) ? t.geo : /web/i.test(topic) ? t.web : /automati|ki-agent/i.test(topic) || /ki-agenten/i.test(data.page) ? t.ki : t.geo;
+  const link = /geo/i.test(topic) ? t.geo : /web|relaunch/i.test(topic) ? t.web : /automati|ki-agent|workshop/i.test(topic) || /ki-agenten/i.test(data.page) ? t.ki : /webdesign/i.test(data.page) ? t.web : t.geo;
   const stamp = Date.now();
 
   try {

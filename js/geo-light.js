@@ -1,5 +1,5 @@
 /**
- * Formulaire GEO-Light (pages geo-audit DE/FR/EN).
+ * Formulaire GEO-Light (pages webdesign DE/FR/EN, section #ki-check).
  * 1. Le visiteur saisit URL + e-mail → /api/geo-preview lit son site et propose le profil testé.
  * 2. Une fenêtre affiche ce profil (modifiable) et les 8 questions qui seront posées.
  * 3. À la confirmation, la demande part vers /api/contact avec le profil (champ « profile », JSON).

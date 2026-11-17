@@ -46,7 +46,7 @@ Puis **Redeploy** (ou `git push`, le déploiement se relance).
 
 ## Formulaires de contact et GEO-Light
 
-Les formulaires « GEO-Light » et « Anfrage / Demande » (pages geo-audit, webdesign,
+Les formulaires « GEO-Light » et « Anfrage / Demande » (pages webdesign et
 ki-agenten-automatisierung, DE/FR/EN) passent par `POST /api/contact`
 (`api/contact.mjs`), avec la même clé `RESEND_API_KEY`. La demande arrive sur
 `info@zbinden.online` (variable optionnelle `CONTACT_TO` pour changer l'adresse) ;
