@@ -355,6 +355,29 @@
   }
   .btn-secondary:hover{ border-color:var(--sec-gold-deep); color:var(--sec-gold-deep); }
 
+  /* ---------- Referenzen (Startseite) ---------- */
+  .work-lede{ color:var(--sec-muted); font-size:1rem; line-height:1.65; font-weight:300; max-width:60ch; margin:-18px 0 clamp(28px,4vw,40px); }
+  .work-grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
+  @media (max-width:980px){ .work-grid{grid-template-columns:1fr;} }
+  .work-card{
+    border:1px solid var(--sec-line-gold); border-radius:var(--r-lg); background:var(--sec-bg-2); overflow:hidden;
+    display:flex; flex-direction:column; box-shadow:0 30px 70px -34px rgba(0,0,0,.35);
+    transition:border-color .18s ease, transform .18s ease, box-shadow .18s ease;
+  }
+  .work-card:hover{ transform:translateY(-3px); border-color:var(--sec-gold); box-shadow:0 30px 70px -34px rgba(0,0,0,.35), 0 0 34px var(--sec-glow-soft); }
+  .work-shot{ display:block; aspect-ratio:16/10; overflow:hidden; background:var(--sec-bg-3); border-bottom:1px solid var(--sec-line); }
+  .work-shot img{ display:block; width:100%; height:100%; object-fit:cover; object-position:top center; }
+  .work-shot.phone{ display:flex; justify-content:center; align-items:flex-start; padding-top:18px;
+    background:linear-gradient(160deg, var(--sec-bg-3), var(--sec-gold-soft)); }
+  .work-shot.phone img{ width:44%; height:auto; border-radius:16px 16px 0 0; box-shadow:0 18px 40px -18px rgba(0,0,0,.45); }
+  .work-body{ padding:clamp(22px,3vw,28px); display:flex; flex-direction:column; gap:12px; flex:1; }
+  .work-body h3{ font-family:var(--font-display); font-size:1.3rem; font-weight:700; margin:0; hyphens:auto; -webkit-hyphens:auto; }
+  .work-body p{ color:var(--sec-muted); font-size:.93rem; line-height:1.6; margin:0; flex:1; font-weight:300; }
+  .work-links{ display:flex; flex-wrap:wrap; gap:8px 18px; }
+  .work-links a{ font-family:var(--font-ui); font-weight:600; font-size:.88rem; color:var(--sec-gold-deep); text-decoration:none; letter-spacing:.02em; }
+  .work-links a:hover{ text-decoration:underline; text-underline-offset:3px; }
+  .work-more{ margin-top:clamp(24px,3.5vw,34px); }
+
   /* ---------- Service cards ---------- */
   .service-grid{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
   @media (max-width:980px){ .service-grid{grid-template-columns:1fr;} }
@@ -584,6 +607,7 @@
     </div>
     <nav class="menu-panel" id="menuPanel" aria-label="Menu" hidden>
       <a class="menu-link about" href="/en/portfolio">About me &amp; my projects</a>
+      <a class="menu-link" href="#referenzen">Work</a>
       <a class="menu-link" href="#angebote">Services</a>
       <a class="menu-link" href="#welches-angebot">Which service fits?</a>
       <a class="menu-link" href="#fuer-wen">Who it's for</a>
@@ -622,6 +646,54 @@
         <a class="btn-secondary" href="#kontakt">✉️ Send a message</a>
       </div>
       <p class="cta-note reveal d4">Free and without obligation: in 30 minutes we work out which first step is worth it for you.</p>
+    </div>
+  </section>
+
+  <section id="referenzen" class="section-light">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Work</span>
+        <h2>Local projects, already live</h2>
+      </div>
+      <p class="work-lede">Three projects I designed and built myself, for people here in the Fricktal.</p>
+      <div class="work-grid">
+        <article class="work-card reveal d1">
+          <a class="work-shot" href="/en/portfolio#waldmeier" tabindex="-1" aria-hidden="true"><img src="/images/referenzen/waldmeier-desktop.webp" width="1440" height="900" alt="Home page of the Waldmeier Planung&amp;Beratung website in Oeschgen" loading="lazy"></a>
+          <div class="work-body">
+            <span class="service-tag">Website · Oeschgen AG</span>
+            <h3>Waldmeier Planung&amp;Beratung</h3>
+            <p>A municipal building administrator guides private clients all the way to the building permit. His website makes that clear in seconds, and enquiries arrive complete, photos and plans included.</p>
+            <div class="work-links">
+              <a href="/en/portfolio#waldmeier">View project →</a>
+              <a href="https://waldmeier-wpb.ch/" target="_blank" rel="noopener">Visit site ↗</a>
+            </div>
+          </div>
+        </article>
+        <article class="work-card reveal d2">
+          <a class="work-shot" href="/en/portfolio#sunneschiin" tabindex="-1" aria-hidden="true"><img src="/images/referenzen/sunneschiin-desktop.webp" width="1440" height="900" alt="Home page of the Spielgruppe Sunneschiin website in Sisseln" loading="lazy"></a>
+          <div class="work-body">
+            <span class="service-tag">Website · Sisseln AG</span>
+            <h3>Spielgruppe Sunneschiin</h3>
+            <p>Playgroup, baby group and parent-and-child gym: parents find times, ages and sign-up in seconds, and message via WhatsApp in one click.</p>
+            <div class="work-links">
+              <a href="/en/portfolio#sunneschiin">View project →</a>
+              <a href="https://spielgruppe-sunneschiin.ch/" target="_blank" rel="noopener">Visit site ↗</a>
+            </div>
+          </div>
+        </article>
+        <article class="work-card reveal d3">
+          <a class="work-shot phone" href="/en/portfolio#kinderboerse" tabindex="-1" aria-hidden="true"><img src="/images/referenzen/kinderboerse-mobile.webp" width="780" height="1688" alt="Kinderbörse on a phone: search filters and listings (sample data)" loading="lazy"></a>
+          <div class="work-body">
+            <span class="service-tag">Web app · Fricktal</span>
+            <h3>Kinderbörse</h3>
+            <p>More than 500 parents in a WhatsApp group swap children’s clothes and toys. No listing gets buried in the chat any more: search by size, age and radius. From idea to launch: three days.</p>
+            <div class="work-links">
+              <a href="/en/portfolio#kinderboerse">View project →</a>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="work-more"><a class="btn-secondary" href="/en/portfolio#projekte">View all projects →</a></div>
     </div>
   </section>
 
