@@ -612,6 +612,32 @@
     .menu-extra{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; margin-top:6px; padding:12px .4em 2px; border-top:1px solid var(--sec-line); }
   }
   @media (max-width:400px){ .svc-switch a{ font-size:.7rem; letter-spacing:.02em; padding:.65em .2em; } }
+
+  /* ---------- Hauptangebot (Startseite) ---------- */
+  .main-offer{ display:grid; grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); gap:clamp(24px,4vw,48px); align-items:center;
+    background:#121212; color:#f6f3ec; border:2px solid #c9a227; border-radius:var(--r-lg); padding:clamp(26px,4vw,44px);
+    box-shadow:0 30px 70px -30px rgba(0,0,0,.45), 0 0 46px rgba(201,162,39,.28); margin-bottom:clamp(30px,4vw,44px); }
+  @media (max-width:820px){ .main-offer{ grid-template-columns:1fr; } }
+  .main-offer .service-tag{ background:rgba(201,162,39,.16); color:#e8d38a; border-color:rgba(201,162,39,.5); }
+  .main-offer h3{ font-family:var(--font-display); font-size:clamp(1.6rem,3vw,2.2rem); margin:14px 0 10px; color:#f6f3ec; }
+  .main-offer > div > p{ margin:0 0 18px; color:#d9d3c7; font-size:1.02rem; line-height:1.65; font-weight:300; }
+  .mo-list{ list-style:none; margin:0; padding:0; display:grid; gap:10px; }
+  .mo-list li{ position:relative; padding-left:28px; color:#f6f3ec; font-size:.96rem; line-height:1.5; }
+  .mo-list li::before{ content:"✓"; position:absolute; left:0; top:.1em; width:18px; height:18px; display:grid; place-items:center; border-radius:50%;
+    background:linear-gradient(120deg,#c9a227,#e8d38a); color:#171200; font-size:.68rem; font-weight:700; }
+  .mo-price{ border-left:1px solid rgba(201,162,39,.38); padding-left:clamp(0px,3vw,36px); display:grid; gap:6px; }
+  @media (max-width:820px){ .mo-price{ border-left:0; border-top:1px solid rgba(201,162,39,.38); padding:22px 0 0; } }
+  .mo-price .lbl{ font-family:var(--font-ui); font-weight:600; font-size:.76rem; letter-spacing:.12em; text-transform:uppercase; color:#a9a297; }
+  .mo-price .big{ font-family:var(--font-display); font-weight:700; font-size:clamp(2.2rem,4.4vw,2.9rem); line-height:1.05;
+    background:linear-gradient(100deg,#c9a227 0%,#e8d38a 55%,#f2e6bd 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .mo-price .note{ color:#d9d3c7; font-size:.92rem; }
+  .mo-price .alt{ color:#a9a297; font-size:.86rem; margin-bottom:12px; }
+  .mo-price .btn-primary, .mo-price .btn-secondary{ justify-self:start; }
+  .mo-price .btn-secondary{ color:#f6f3ec; border-color:rgba(255,255,255,.25); }
+  .more-label{ margin:0 0 14px; font-family:var(--font-ui); font-weight:600; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--sec-muted); }
+  .service-grid.two{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+  @media (max-width:820px){ .service-grid.two{ grid-template-columns:1fr; } }
+  .service-grid.two .service-card h3{ font-size:1.3rem; }
 </style>
 </head>
 <body>
@@ -666,7 +692,7 @@
         <a class="btn-primary" href="/fr/ki-workshops">Voir les ateliers</a>
         <a class="btn-secondary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Entretien gratuit</a>
       </div>
-      <p class="cta-note reveal d4">Ateliers dès CHF 950 · chez vous, sur place · entretien gratuit et sans engagement</p>
+      <p class="cta-note reveal d4">Atelier d’une demi-journée sur place : CHF 1'900 par équipe · entretien gratuit et sans engagement</p>
     </div>
   </section>
 
@@ -689,22 +715,37 @@
         <span class="eyebrow">Offre</span>
         <h2>Ma façon de travailler</h2>
       </div>
-      <div class="service-grid three">
-        <a class="service-card featured reveal d1" href="/fr/ki-workshops">
+      <div class="main-offer reveal d1">
+        <div>
           <span class="service-tag">Offre principale</span>
           <h3>Atelier IA pour votre équipe</h3>
-          <p>Une demi-journée sur place : protection des données, bons prompts, exercices sur vos propres tâches.</p>
-          <p class="price">Dès CHF 950</p>
-          <span class="go">En savoir plus <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        </a>
-        <a class="service-card reveal d2" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">
+          <p>Une demi-journée chez vous : votre équipe apprend à utiliser l’IA de façon sûre et efficace – avec des exercices sur ses propres tâches.</p>
+          <ul class="mo-list">
+            <li>Protection des données de clients et de personnes</li>
+            <li>De bons prompts et des modèles pour le quotidien</li>
+            <li>Des exercices sur vos propres tâches</li>
+            <li>Pour votre entreprise : une directive IA et la liste des processus automatisables</li>
+          </ul>
+        </div>
+        <div class="mo-price">
+          <span class="lbl">Demi-journée sur place</span>
+          <span class="big">CHF 1'900</span>
+          <span class="note">par équipe, jusqu’à 12 personnes</span>
+          <span class="alt">Introduction (2 h) dès CHF 950</span>
+          <a class="btn-primary" href="/fr/ki-workshops">Voir les ateliers</a>
+          <a class="btn-secondary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Réserver un entretien</a>
+        </div>
+      </div>
+      <p class="more-label">En complément</p>
+      <div class="service-grid two">
+        <a class="service-card reveal d1" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">
           <span class="service-tag">Ensuite</span>
           <h3>Automatisation après l'atelier</h3>
           <p>Les tâches qui prennent le plus de temps, je les automatise pour vous.</p>
           <p class="price">Dès CHF 990, devis après analyse</p>
           <span class="go">Réserver un entretien <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </a>
-        <a class="service-card reveal d3" href="/fr/webdesign">
+        <a class="service-card reveal d2" href="/fr/webdesign">
           <span class="service-tag">Aussi</span>
           <h3>Des sites web qu'on trouve</h3>
           <p>Des sites modernes qui apparaissent sur Google et dans les recherches IA comme ChatGPT.</p>

@@ -642,6 +642,26 @@
   .checks li.no::before{ content:"–"; background:transparent; border:1px solid var(--sec-line-strong); color:var(--sec-muted); box-sizing:border-box; }
   .checks li .val-tag{ display:block; font-family:var(--font-ui); font-weight:600; font-size:.8rem; color:var(--sec-gold); margin-top:2px; }
   .checks li.no .val-tag{ color:inherit; }
+  .card-plus{ margin:0; font-family:var(--font-ui); font-weight:600; font-size:.8rem; letter-spacing:.06em; color:var(--sec-gold); }
+  .checks li.hl{ color:var(--sec-gold-light); font-weight:500; }
+  .card-more{ margin-top:auto; align-self:flex-start; font-family:var(--font-ui); font-weight:600; font-size:.88rem; color:var(--sec-gold); text-decoration:none; border-bottom:1px solid var(--sec-line-gold); padding-bottom:2px; }
+  .card-more:hover{ color:var(--sec-gold-light); }
+  .cmp-wrap{ overflow-x:auto; border:1px solid var(--sec-line); border-radius:var(--r-lg); background:var(--sec-bg-2); }
+  table.cmp{ width:100%; border-collapse:collapse; font-size:.92rem; min-width:560px; }
+  .cmp th, .cmp td{ padding:14px 16px; border-bottom:1px solid var(--sec-line); vertical-align:top; }
+  .cmp thead th{ font-family:var(--font-display); font-weight:700; font-size:1.05rem; text-align:center; color:var(--sec-ink); }
+  .cmp thead th small{ display:block; font-family:var(--font-ui); font-weight:400; font-size:.8rem; color:var(--sec-muted); margin-top:2px; }
+  .cmp thead th.feat{ color:var(--sec-gold-deep); }
+  .cmp tbody th{ text-align:left; font-family:var(--font-ui); font-weight:600; color:var(--sec-ink); width:44%; }
+  .cmp tbody th small{ display:block; font-weight:300; font-size:.86rem; color:var(--sec-muted); line-height:1.5; margin-top:3px; }
+  .cmp td{ text-align:center; color:var(--sec-ink); font-weight:400; }
+  .cmp td.feat, .cmp th.feat{ background:var(--sec-gold-soft); }
+  .cmp tr.grp th{ font-family:var(--font-ui); font-weight:600; font-size:.74rem; letter-spacing:.12em; text-transform:uppercase; color:var(--sec-gold-deep); background:var(--sec-bg-3); padding-top:12px; padding-bottom:10px; }
+  .cmp .ck{ display:inline-grid; place-items:center; width:22px; height:22px; border-radius:50%; background:linear-gradient(120deg,#c9a227,#e8d38a); color:#171200; font-size:.78rem; font-weight:700; }
+  .cmp .nx{ color:var(--sec-muted); opacity:.6; font-size:1.1rem; }
+  .cmp tbody tr:last-child th, .cmp tbody tr:last-child td{ border-bottom:0; }
+  .cmp td.price{ font-family:var(--font-display); font-weight:700; color:var(--sec-gold-deep); white-space:nowrap; }
+  @media (max-width:640px){ .cmp th, .cmp td{ padding:12px 10px; } .cmp thead th{ font-size:.92rem; } }
   .sr{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
   .package-card .incl-block + .incl-block{ padding-top:16px; border-top:1px solid var(--sec-line); }
   #formate .package-card > a{ margin-top:auto; }
@@ -721,6 +741,7 @@
       <a class="menu-link home" href="https://www.zbinden.online/fr/">← Accueil</a>
       <a class="menu-link about" href="/fr/portfolio">Mon parcours et mes projets</a>
       <a class="menu-link" href="#formate">Formats et prix</a>
+      <a class="menu-link" href="#details">En détail</a>
       <a class="menu-link" href="#ablauf">Déroulement de la demi-journée</a>
       <a class="menu-link" href="#fuer-wen">Pour qui ?</a>
       <a class="menu-link" href="#nach-dem-workshop">Après l'atelier</a>
@@ -743,14 +764,14 @@
 
   <section class="hero section-dark">
     <div class="wrap">
-      <p class="eyebrow with-rule reveal d1">Ateliers IA · pour les PME d'Argovie</p>
+      <p class="eyebrow with-rule reveal d1">Mon offre principale · pour les PME d'Argovie</p>
       <h1 class="reveal d2">Ateliers IA pour équipes</h1>
-      <p class="lede reveal d3">Votre équipe apprend à utiliser l'IA au quotidien de façon sûre et efficace – avec des exemples de votre secteur et des exercices sur de vraies tâches.</p>
+      <p class="lede reveal d3">En une demi-journée, votre équipe apprend à utiliser l'IA de façon sûre et efficace – avec des exemples de votre secteur et des exercices sur de vraies tâches. Votre entreprise reçoit en plus sa propre directive IA et la liste des processus qui peuvent être automatisés.</p>
       <div class="cta-row reveal d4">
         <a class="btn-primary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Entretien gratuit</a>
         <a class="btn-secondary" href="#formate">Formats et prix</a>
       </div>
-      <p style="margin:16px 0 0; font-size:.9rem; color:var(--sec-muted); font-weight:300;">Dès CHF 950 · prix fixe par équipe jusqu'à 12 personnes · déplacement inclus en Argovie · entretien gratuit</p>
+      <p style="margin:16px 0 0; font-size:.9rem; color:var(--sec-muted); font-weight:300;">Demi-journée sur place : CHF 1'900 par équipe jusqu'à 12 personnes, directive IA incluse · introduction dès CHF 950 · entretien gratuit</p>
     </div>
   </section>
 
@@ -768,26 +789,14 @@
             <div><span class="lbl">Durée</span><span class="val">2 heures</span><span class="val-note">sur place ou en ligne</span></div>
             <div><span class="lbl">Prix</span><span class="val price">CHF 950</span><span class="val-note">prix fixe par équipe</span></div>
           </div>
-          <div class="incl-block">
-            <p class="incl-h">Contenu</p>
-            <ul class="checks">
-            <li>Ce que l’IA sait faire – et ce qu’elle ne sait pas faire</li>
-            <li>Protection des données : les règles essentielles</li>
+          <p class="card-plus">Ce qui est inclus :</p>
+          <ul class="checks">
+            <li>Ce que l’IA sait faire – et ne sait pas faire</li>
+            <li>Les règles de base de la protection des données</li>
             <li>Premiers exercices de prompts</li>
-            <li class="no"><span class="sr">non inclus : </span>Plusieurs domaines d’application approfondis</li>
-            <li class="no"><span class="sr">non inclus : </span>Analyse de vos processus automatisables</li>
-            </ul>
-          </div>
-          <div class="incl-block">
-            <p class="incl-h">Vous recevez</p>
-            <ul class="checks">
-            <li>Entretien préalable (30 min) adapté à votre secteur</li>
-            <li>Aide-mémoire : règles et modèles de prompts</li>
-            <li>Liste des potentiels d’automatisation</li>
-            <li>Attestation de participation</li>
-            <li class="no"><span class="sr">non inclus : </span>Directive IA pour votre entreprise<span class="val-tag">Valeur CHF 400</span></li>
-            </ul>
-          </div>
+            <li>Aide-mémoire et liste des processus automatisables</li>
+          </ul>
+          <a class="card-more" href="#details">Plus en détail →</a>
           <a class="btn-secondary" href="#kontakt" data-package-set="KI-Workshop Einführung">Demander cet atelier</a>
         </div>
         <div class="package-card featured reveal d2" data-badge="Recommandé">
@@ -797,26 +806,13 @@
             <div><span class="lbl">Durée</span><span class="val">3 h 30</span><span class="val-note">sur place</span></div>
             <div><span class="lbl">Prix</span><span class="val price">CHF 1'900</span><span class="val-note">prix fixe par équipe</span></div>
           </div>
-          <div class="incl-block">
-            <p class="incl-h">Contenu</p>
-            <ul class="checks">
-            <li>Ce que l’IA sait faire – et ce qu’elle ne sait pas faire</li>
-            <li>Protection des données en détail : réglages sûrs, versions professionnelles, modèles locaux, phishing IA</li>
-            <li>Prompts et modèles, exercés sur vos propres tâches</li>
-            <li class="no"><span class="sr">non inclus : </span>Plusieurs domaines d’application approfondis</li>
-            <li class="no"><span class="sr">non inclus : </span>Analyse de vos processus automatisables</li>
-            </ul>
-          </div>
-          <div class="incl-block">
-            <p class="incl-h">Vous recevez</p>
-            <ul class="checks">
-            <li>Entretien préalable (30 min) adapté à votre secteur</li>
-            <li>Aide-mémoire : règles et modèles de prompts</li>
-            <li>Liste des potentiels d’automatisation</li>
-            <li>Attestation de participation</li>
-            <li>Directive IA pour votre entreprise<span class="val-tag">Valeur CHF 400</span></li>
-            </ul>
-          </div>
+          <p class="card-plus">Tout le contenu de l’introduction, plus :</p>
+          <ul class="checks">
+            <li>Protection des données approfondie : réglages sûrs, versions professionnelles, phishing IA</li>
+            <li>Exercices sur vos propres tâches</li>
+            <li class="hl">Directive IA pour votre entreprise<span class="val-tag">Valeur CHF 400</span></li>
+          </ul>
+          <a class="card-more" href="#details">Plus en détail →</a>
           <a class="btn-primary" href="#kontakt" data-package-set="KI-Workshop Halbtag">Demander cet atelier</a>
         </div>
         <div class="package-card reveal d3">
@@ -826,30 +822,50 @@
             <div><span class="lbl">Durée</span><span class="val">7 heures</span><span class="val-note">sur place</span></div>
             <div><span class="lbl">Prix</span><span class="val price">CHF 3'200</span><span class="val-note">prix fixe par équipe</span></div>
           </div>
-          <div class="incl-block">
-            <p class="incl-h">Contenu</p>
-            <ul class="checks">
-            <li>Ce que l’IA sait faire – et ce qu’elle ne sait pas faire</li>
-            <li>Protection des données en détail : réglages sûrs, versions professionnelles, modèles locaux, phishing IA</li>
-            <li>Prompts et modèles, exercés en détail sur vos propres tâches</li>
+          <p class="card-plus">Tout le contenu de la demi-journée, plus :</p>
+          <ul class="checks">
             <li>Plusieurs domaines d’application approfondis</li>
             <li>Analyse de vos processus automatisables</li>
-            </ul>
-          </div>
-          <div class="incl-block">
-            <p class="incl-h">Vous recevez</p>
-            <ul class="checks">
-            <li>Entretien préalable (30 min) adapté à votre secteur</li>
-            <li>Aide-mémoire : règles et modèles de prompts</li>
-            <li>Liste des potentiels d’automatisation</li>
-            <li>Attestation de participation</li>
-            <li>Directive IA pour votre entreprise<span class="val-tag">Valeur CHF 400</span></li>
-            </ul>
-          </div>
+            <li>Plus de temps pour des exercices détaillés</li>
+          </ul>
+          <a class="card-more" href="#details">Plus en détail →</a>
           <a class="btn-secondary" href="#kontakt" data-package-set="KI-Workshop ganzer Tag">Demander cet atelier</a>
         </div>
       </div>
       <p class="price-foot"><strong>Prix fixe par équipe jusqu'à 12 personnes</strong>, CHF 90 par personne supplémentaire. Déplacement inclus dans le canton d'Argovie. Non assujettie à la TVA.</p>
+    </div>
+  </section>
+
+  <section id="details" class="section-light">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">En détail</span>
+        <h2>Que comprend exactement chaque format ?</h2>
+      </div>
+      <p class="section-lede">Tous les formats côte à côte. Je recommande la demi-journée à la plupart des équipes : assez de temps pour s’exercer sur ses propres tâches, et une directive IA utilisable tout de suite.</p>
+      <div class="cmp-wrap reveal d1">
+        <table class="cmp">
+          <thead><tr><th scope="col"><span class="sr">Prestation</span></th><th scope="col">Introduction<small>2 h</small></th><th scope="col" class="feat">Demi-journée<small>3 h 30</small></th><th scope="col">Journée complète<small>7 h</small></th></tr></thead>
+          <tbody>
+          <tr class="grp"><th colspan="4" scope="colgroup">Contenu</th></tr>
+          <tr><th scope="row">Ce que l’IA sait faire – et ne sait pas faire<small>Comment fonctionnent ChatGPT, Copilot & Co., à quoi ils servent et où ils se trompent.</small></th><td><span class="ck" aria-label="inclus">✓</span></td><td class="feat"><span class="ck" aria-label="inclus">✓</span></td><td><span class="ck" aria-label="inclus">✓</span></td></tr>
+          <tr><th scope="row">Protection des données : les règles de base<small>Les données qui n’ont rien à faire dans un outil d’IA et ce qu’exige la loi sur la protection des données.</small></th><td><span class="ck" aria-label="inclus">✓</span></td><td class="feat"><span class="ck" aria-label="inclus">✓</span></td><td><span class="ck" aria-label="inclus">✓</span></td></tr>
+          <tr><th scope="row">Protection des données approfondie<small>Réglages sûrs, versions gratuites ou professionnelles, modèles d’IA locaux, reconnaître le phishing généré par IA.</small></th><td><span class="nx" aria-label="non inclus">–</span></td><td class="feat"><span class="ck" aria-label="inclus">✓</span></td><td><span class="ck" aria-label="inclus">✓</span></td></tr>
+          <tr><th scope="row">Prompts et modèles<small>Bien formuler ses demandes et créer des modèles pour les tâches récurrentes, exercés sur place.</small></th><td>premiers exercices</td><td class="feat">sur vos tâches</td><td>en détail</td></tr>
+          <tr><th scope="row">Plusieurs domaines d’application<small>Approfondissement dans plusieurs domaines de votre quotidien.</small></th><td><span class="nx" aria-label="non inclus">–</span></td><td class="feat"><span class="nx" aria-label="non inclus">–</span></td><td><span class="ck" aria-label="inclus">✓</span></td></tr>
+          <tr><th scope="row">Analyse de vos processus<small>Examiner ensemble quels processus peuvent être automatisés et ce que cela apporte.</small></th><td><span class="nx" aria-label="non inclus">–</span></td><td class="feat"><span class="nx" aria-label="non inclus">–</span></td><td><span class="ck" aria-label="inclus">✓</span></td></tr>
+          <tr class="grp"><th colspan="4" scope="colgroup">Vous recevez</th></tr>
+          <tr><th scope="row">Entretien préalable (30 min)<small>Pour que l’atelier corresponde à votre secteur et à vos tâches.</small></th><td><span class="ck" aria-label="inclus">✓</span></td><td class="feat"><span class="ck" aria-label="inclus">✓</span></td><td><span class="ck" aria-label="inclus">✓</span></td></tr>
+          <tr><th scope="row">Aide-mémoire pour les collaborateurs<small>Règles et modèles de prompts en un coup d’œil, à garder au poste de travail.</small></th><td><span class="ck" aria-label="inclus">✓</span></td><td class="feat"><span class="ck" aria-label="inclus">✓</span></td><td><span class="ck" aria-label="inclus">✓</span></td></tr>
+          <tr><th scope="row">Liste des processus automatisables<small>Les tâches rassemblées par l’équipe – point de départ d’une automatisation.</small></th><td><span class="ck" aria-label="inclus">✓</span></td><td class="feat"><span class="ck" aria-label="inclus">✓</span></td><td><span class="ck" aria-label="inclus">✓</span></td></tr>
+          <tr><th scope="row">Directive IA pour votre entreprise<small>1–2 pages, utilisable telle quelle : ce qui est permis, ce qui ne l’est pas et avec quels outils. Valeur CHF 400.</small></th><td><span class="nx" aria-label="non inclus">–</span></td><td class="feat"><span class="ck" aria-label="inclus">✓</span></td><td><span class="ck" aria-label="inclus">✓</span></td></tr>
+          <tr><th scope="row">Attestation de participation<small>Pour chaque participant.</small></th><td><span class="ck" aria-label="inclus">✓</span></td><td class="feat"><span class="ck" aria-label="inclus">✓</span></td><td><span class="ck" aria-label="inclus">✓</span></td></tr>
+          <tr class="grp"><th colspan="4" scope="colgroup">Cadre</th></tr>
+          <tr><th scope="row">Lieu</th><td>sur place ou en ligne</td><td class="feat">sur place</td><td>sur place</td></tr>
+          <tr><th scope="row">Prix par équipe jusqu’à 12 personnes<small>CHF 90 par personne supplémentaire, déplacement inclus en Argovie, non assujettie à la TVA.</small></th><td class="price">CHF 950</td><td class="feat price">CHF 1'900</td><td class="price">CHF 3'200</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
 
@@ -875,14 +891,12 @@
         <span class="eyebrow">Pour qui</span>
         <h2>Pour les équipes qui travaillent avec des données sensibles</h2>
       </div>
-      <p class="who-text">PME de 5 à 30 collaborateurs qui traitent des données de clients ou de personnes – par exemple :</p>
+      <p class="who-text">PME de 5 à 30 collaborateurs qui traitent des données sensibles de clients ou de personnes, sans service informatique propre – surtout :</p>
       <ul class="chips">
         <li>Fiduciaires</li>
-        <li>Gestionnaires de fortune</li>
+        <li>Gérants de fortune indépendants</li>
         <li>Courtiers en assurance</li>
         <li>Gérances immobilières</li>
-        <li>Études d'avocats</li>
-        <li>Administrations communales</li>
       </ul>
       <p class="who-plain">Aucune connaissance informatique nécessaire.</p>
       <p class="limit-note"><strong>Bon à savoir :</strong> l'atelier forme à une utilisation sûre de l'IA. Il ne remplace pas la sécurité informatique (pare-feu, sauvegardes, tests d'intrusion) – pour cela, je vous mets volontiers en contact avec des spécialistes.</p>

@@ -612,6 +612,32 @@
     .menu-extra{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; margin-top:6px; padding:12px .4em 2px; border-top:1px solid var(--sec-line); }
   }
   @media (max-width:400px){ .svc-switch a{ font-size:.7rem; letter-spacing:.02em; padding:.65em .2em; } }
+
+  /* ---------- Hauptangebot (Startseite) ---------- */
+  .main-offer{ display:grid; grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); gap:clamp(24px,4vw,48px); align-items:center;
+    background:#121212; color:#f6f3ec; border:2px solid #c9a227; border-radius:var(--r-lg); padding:clamp(26px,4vw,44px);
+    box-shadow:0 30px 70px -30px rgba(0,0,0,.45), 0 0 46px rgba(201,162,39,.28); margin-bottom:clamp(30px,4vw,44px); }
+  @media (max-width:820px){ .main-offer{ grid-template-columns:1fr; } }
+  .main-offer .service-tag{ background:rgba(201,162,39,.16); color:#e8d38a; border-color:rgba(201,162,39,.5); }
+  .main-offer h3{ font-family:var(--font-display); font-size:clamp(1.6rem,3vw,2.2rem); margin:14px 0 10px; color:#f6f3ec; }
+  .main-offer > div > p{ margin:0 0 18px; color:#d9d3c7; font-size:1.02rem; line-height:1.65; font-weight:300; }
+  .mo-list{ list-style:none; margin:0; padding:0; display:grid; gap:10px; }
+  .mo-list li{ position:relative; padding-left:28px; color:#f6f3ec; font-size:.96rem; line-height:1.5; }
+  .mo-list li::before{ content:"✓"; position:absolute; left:0; top:.1em; width:18px; height:18px; display:grid; place-items:center; border-radius:50%;
+    background:linear-gradient(120deg,#c9a227,#e8d38a); color:#171200; font-size:.68rem; font-weight:700; }
+  .mo-price{ border-left:1px solid rgba(201,162,39,.38); padding-left:clamp(0px,3vw,36px); display:grid; gap:6px; }
+  @media (max-width:820px){ .mo-price{ border-left:0; border-top:1px solid rgba(201,162,39,.38); padding:22px 0 0; } }
+  .mo-price .lbl{ font-family:var(--font-ui); font-weight:600; font-size:.76rem; letter-spacing:.12em; text-transform:uppercase; color:#a9a297; }
+  .mo-price .big{ font-family:var(--font-display); font-weight:700; font-size:clamp(2.2rem,4.4vw,2.9rem); line-height:1.05;
+    background:linear-gradient(100deg,#c9a227 0%,#e8d38a 55%,#f2e6bd 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .mo-price .note{ color:#d9d3c7; font-size:.92rem; }
+  .mo-price .alt{ color:#a9a297; font-size:.86rem; margin-bottom:12px; }
+  .mo-price .btn-primary, .mo-price .btn-secondary{ justify-self:start; }
+  .mo-price .btn-secondary{ color:#f6f3ec; border-color:rgba(255,255,255,.25); }
+  .more-label{ margin:0 0 14px; font-family:var(--font-ui); font-weight:600; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--sec-muted); }
+  .service-grid.two{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+  @media (max-width:820px){ .service-grid.two{ grid-template-columns:1fr; } }
+  .service-grid.two .service-card h3{ font-size:1.3rem; }
 </style>
 </head>
 <body>
@@ -666,7 +692,7 @@
         <a class="btn-primary" href="/en/ki-workshops">See the workshops</a>
         <a class="btn-secondary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Free intro call</a>
       </div>
-      <p class="cta-note reveal d4">Workshops from CHF 950 · on site at your company · intro call free and without obligation</p>
+      <p class="cta-note reveal d4">Half-day workshop on site: CHF 1'900 per team · intro call free and without obligation</p>
     </div>
   </section>
 
@@ -689,22 +715,37 @@
         <span class="eyebrow">Services</span>
         <h2>How I work</h2>
       </div>
-      <div class="service-grid three">
-        <a class="service-card featured reveal d1" href="/en/ki-workshops">
+      <div class="main-offer reveal d1">
+        <div>
           <span class="service-tag">Main service</span>
           <h3>AI workshop for your team</h3>
-          <p>Half a day on site: handling data safely, good prompts, exercises with your own tasks.</p>
-          <p class="price">From CHF 950</p>
-          <span class="go">Learn more <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        </a>
-        <a class="service-card reveal d2" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">
+          <p>Half a day at your company: your team learns to use AI safely and efficiently – with exercises on its own tasks.</p>
+          <ul class="mo-list">
+            <li>Handling customer and personal data safely</li>
+            <li>Good prompts and templates for everyday work</li>
+            <li>Exercises with your own tasks</li>
+            <li>For your company: an AI policy and a list of the processes that can be automated</li>
+          </ul>
+        </div>
+        <div class="mo-price">
+          <span class="lbl">Half day on site</span>
+          <span class="big">CHF 1'900</span>
+          <span class="note">per team, up to 12 people</span>
+          <span class="alt">Introduction (2 h) from CHF 950</span>
+          <a class="btn-primary" href="/en/ki-workshops">See the workshops</a>
+          <a class="btn-secondary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Book an intro call</a>
+        </div>
+      </div>
+      <p class="more-label">Also available</p>
+      <div class="service-grid two">
+        <a class="service-card reveal d1" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">
           <span class="service-tag">Next step</span>
           <h3>Automation after the workshop</h3>
           <p>I automate the tasks that eat up the most time.</p>
           <p class="price">From CHF 990, quote after analysis</p>
           <span class="go">Book an intro call <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </a>
-        <a class="service-card reveal d3" href="/en/webdesign">
+        <a class="service-card reveal d2" href="/en/webdesign">
           <span class="service-tag">Also</span>
           <h3>Websites that get found</h3>
           <p>Modern websites that show up on Google and in AI search like ChatGPT.</p>

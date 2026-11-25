@@ -614,6 +614,32 @@
     .menu-extra{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; margin-top:6px; padding:12px .4em 2px; border-top:1px solid var(--sec-line); }
   }
   @media (max-width:400px){ .svc-switch a{ font-size:.7rem; letter-spacing:.02em; padding:.65em .2em; } }
+
+  /* ---------- Hauptangebot (Startseite) ---------- */
+  .main-offer{ display:grid; grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); gap:clamp(24px,4vw,48px); align-items:center;
+    background:#121212; color:#f6f3ec; border:2px solid #c9a227; border-radius:var(--r-lg); padding:clamp(26px,4vw,44px);
+    box-shadow:0 30px 70px -30px rgba(0,0,0,.45), 0 0 46px rgba(201,162,39,.28); margin-bottom:clamp(30px,4vw,44px); }
+  @media (max-width:820px){ .main-offer{ grid-template-columns:1fr; } }
+  .main-offer .service-tag{ background:rgba(201,162,39,.16); color:#e8d38a; border-color:rgba(201,162,39,.5); }
+  .main-offer h3{ font-family:var(--font-display); font-size:clamp(1.6rem,3vw,2.2rem); margin:14px 0 10px; color:#f6f3ec; }
+  .main-offer > div > p{ margin:0 0 18px; color:#d9d3c7; font-size:1.02rem; line-height:1.65; font-weight:300; }
+  .mo-list{ list-style:none; margin:0; padding:0; display:grid; gap:10px; }
+  .mo-list li{ position:relative; padding-left:28px; color:#f6f3ec; font-size:.96rem; line-height:1.5; }
+  .mo-list li::before{ content:"✓"; position:absolute; left:0; top:.1em; width:18px; height:18px; display:grid; place-items:center; border-radius:50%;
+    background:linear-gradient(120deg,#c9a227,#e8d38a); color:#171200; font-size:.68rem; font-weight:700; }
+  .mo-price{ border-left:1px solid rgba(201,162,39,.38); padding-left:clamp(0px,3vw,36px); display:grid; gap:6px; }
+  @media (max-width:820px){ .mo-price{ border-left:0; border-top:1px solid rgba(201,162,39,.38); padding:22px 0 0; } }
+  .mo-price .lbl{ font-family:var(--font-ui); font-weight:600; font-size:.76rem; letter-spacing:.12em; text-transform:uppercase; color:#a9a297; }
+  .mo-price .big{ font-family:var(--font-display); font-weight:700; font-size:clamp(2.2rem,4.4vw,2.9rem); line-height:1.05;
+    background:linear-gradient(100deg,#c9a227 0%,#e8d38a 55%,#f2e6bd 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .mo-price .note{ color:#d9d3c7; font-size:.92rem; }
+  .mo-price .alt{ color:#a9a297; font-size:.86rem; margin-bottom:12px; }
+  .mo-price .btn-primary, .mo-price .btn-secondary{ justify-self:start; }
+  .mo-price .btn-secondary{ color:#f6f3ec; border-color:rgba(255,255,255,.25); }
+  .more-label{ margin:0 0 14px; font-family:var(--font-ui); font-weight:600; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--sec-muted); }
+  .service-grid.two{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+  @media (max-width:820px){ .service-grid.two{ grid-template-columns:1fr; } }
+  .service-grid.two .service-card h3{ font-size:1.3rem; }
 </style>
 </head>
 <body>
@@ -668,7 +694,7 @@
         <a class="btn-primary" href="/ki-workshops">Workshops ansehen</a>
         <a class="btn-secondary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Kostenloses Erstgespräch</a>
       </div>
-      <p class="cta-note reveal d4">Workshops ab CHF 950 · vor Ort bei Ihnen · Erstgespräch kostenlos und unverbindlich</p>
+      <p class="cta-note reveal d4">Halbtag-Workshop vor Ort: CHF 1'900 pro Team · Erstgespräch kostenlos und unverbindlich</p>
     </div>
   </section>
 
@@ -691,22 +717,37 @@
         <span class="eyebrow">Angebot</span>
         <h2>So arbeite ich</h2>
       </div>
-      <div class="service-grid three">
-        <a class="service-card featured reveal d1" href="/ki-workshops">
+      <div class="main-offer reveal d1">
+        <div>
           <span class="service-tag">Hauptangebot</span>
           <h3>KI-Workshop für Ihr Team</h3>
-          <p>Ein halber Tag vor Ort: sicherer Umgang mit Daten, gute Prompts, Übungen mit eigenen Aufgaben.</p>
-          <p class="price">Ab CHF 950</p>
-          <span class="go">Mehr erfahren <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        </a>
-        <a class="service-card reveal d2" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">
+          <p>Ein halber Tag bei Ihnen vor Ort: Ihr Team lernt, KI sicher und effizient zu nutzen – mit Übungen an eigenen Aufgaben.</p>
+          <ul class="mo-list">
+            <li>Sicherer Umgang mit Kunden- und Personendaten</li>
+            <li>Gute Prompts und Vorlagen für den Alltag</li>
+            <li>Übungen mit Ihren eigenen Aufgaben</li>
+            <li>Für Ihre Firma: eine KI-Richtlinie und eine Liste der Abläufe, die sich automatisieren lassen</li>
+          </ul>
+        </div>
+        <div class="mo-price">
+          <span class="lbl">Halbtag vor Ort</span>
+          <span class="big">CHF 1'900</span>
+          <span class="note">pro Team, bis 12 Personen</span>
+          <span class="alt">Einführung (2 Std.) ab CHF 950</span>
+          <a class="btn-primary" href="/ki-workshops">Workshops ansehen</a>
+          <a class="btn-secondary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Erstgespräch buchen</a>
+        </div>
+      </div>
+      <p class="more-label">Ergänzend</p>
+      <div class="service-grid two">
+        <a class="service-card reveal d1" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">
           <span class="service-tag">Danach</span>
           <h3>Automatisierung nach dem Workshop</h3>
           <p>Die Aufgaben, die am meisten Zeit fressen, automatisiere ich für Sie.</p>
           <p class="price">Ab CHF 990, Offerte nach Analyse</p>
           <span class="go">Erstgespräch buchen <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </a>
-        <a class="service-card reveal d3" href="/webdesign">
+        <a class="service-card reveal d2" href="/webdesign">
           <span class="service-tag">Auch</span>
           <h3>Websites, die gefunden werden</h3>
           <p>Moderne Websites, die bei Google und in KI-Suchen wie ChatGPT erscheinen.</p>

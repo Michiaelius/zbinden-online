@@ -642,6 +642,26 @@
   .checks li.no::before{ content:"–"; background:transparent; border:1px solid var(--sec-line-strong); color:var(--sec-muted); box-sizing:border-box; }
   .checks li .val-tag{ display:block; font-family:var(--font-ui); font-weight:600; font-size:.8rem; color:var(--sec-gold); margin-top:2px; }
   .checks li.no .val-tag{ color:inherit; }
+  .card-plus{ margin:0; font-family:var(--font-ui); font-weight:600; font-size:.8rem; letter-spacing:.06em; color:var(--sec-gold); }
+  .checks li.hl{ color:var(--sec-gold-light); font-weight:500; }
+  .card-more{ margin-top:auto; align-self:flex-start; font-family:var(--font-ui); font-weight:600; font-size:.88rem; color:var(--sec-gold); text-decoration:none; border-bottom:1px solid var(--sec-line-gold); padding-bottom:2px; }
+  .card-more:hover{ color:var(--sec-gold-light); }
+  .cmp-wrap{ overflow-x:auto; border:1px solid var(--sec-line); border-radius:var(--r-lg); background:var(--sec-bg-2); }
+  table.cmp{ width:100%; border-collapse:collapse; font-size:.92rem; min-width:560px; }
+  .cmp th, .cmp td{ padding:14px 16px; border-bottom:1px solid var(--sec-line); vertical-align:top; }
+  .cmp thead th{ font-family:var(--font-display); font-weight:700; font-size:1.05rem; text-align:center; color:var(--sec-ink); }
+  .cmp thead th small{ display:block; font-family:var(--font-ui); font-weight:400; font-size:.8rem; color:var(--sec-muted); margin-top:2px; }
+  .cmp thead th.feat{ color:var(--sec-gold-deep); }
+  .cmp tbody th{ text-align:left; font-family:var(--font-ui); font-weight:600; color:var(--sec-ink); width:44%; }
+  .cmp tbody th small{ display:block; font-weight:300; font-size:.86rem; color:var(--sec-muted); line-height:1.5; margin-top:3px; }
+  .cmp td{ text-align:center; color:var(--sec-ink); font-weight:400; }
+  .cmp td.feat, .cmp th.feat{ background:var(--sec-gold-soft); }
+  .cmp tr.grp th{ font-family:var(--font-ui); font-weight:600; font-size:.74rem; letter-spacing:.12em; text-transform:uppercase; color:var(--sec-gold-deep); background:var(--sec-bg-3); padding-top:12px; padding-bottom:10px; }
+  .cmp .ck{ display:inline-grid; place-items:center; width:22px; height:22px; border-radius:50%; background:linear-gradient(120deg,#c9a227,#e8d38a); color:#171200; font-size:.78rem; font-weight:700; }
+  .cmp .nx{ color:var(--sec-muted); opacity:.6; font-size:1.1rem; }
+  .cmp tbody tr:last-child th, .cmp tbody tr:last-child td{ border-bottom:0; }
+  .cmp td.price{ font-family:var(--font-display); font-weight:700; color:var(--sec-gold-deep); white-space:nowrap; }
+  @media (max-width:640px){ .cmp th, .cmp td{ padding:12px 10px; } .cmp thead th{ font-size:.92rem; } }
   .sr{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
   .package-card .incl-block + .incl-block{ padding-top:16px; border-top:1px solid var(--sec-line); }
   #formate .package-card > a{ margin-top:auto; }
@@ -721,6 +741,7 @@
       <a class="menu-link home" href="https://www.zbinden.online/">← Startseite</a>
       <a class="menu-link about" href="/portfolio">Über mich &amp; meine Projekte</a>
       <a class="menu-link" href="#formate">Formate &amp; Preise</a>
+      <a class="menu-link" href="#details">Im Detail</a>
       <a class="menu-link" href="#ablauf">Ablauf des Halbtags</a>
       <a class="menu-link" href="#fuer-wen">Für wen?</a>
       <a class="menu-link" href="#nach-dem-workshop">Nach dem Workshop</a>
@@ -743,14 +764,14 @@
 
   <section class="hero section-dark">
     <div class="wrap">
-      <p class="eyebrow with-rule reveal d1">KI-Workshops · für KMU im Aargau</p>
+      <p class="eyebrow with-rule reveal d1">Mein Hauptangebot · für KMU im Aargau</p>
       <h1 class="reveal d2">KI-Workshops für Teams</h1>
-      <p class="lede reveal d3">Ihr Team lernt, KI im Arbeitsalltag sicher und effizient zu nutzen – mit Beispielen aus Ihrer Branche und Übungen mit echten Aufgaben.</p>
+      <p class="lede reveal d3">In einem halben Tag lernt Ihr Team, KI sicher und effizient zu nutzen – mit Beispielen aus Ihrer Branche und Übungen mit echten Aufgaben. Ihre Firma erhält dazu eine eigene KI-Richtlinie und eine Liste der Abläufe, die sich automatisieren lassen.</p>
       <div class="cta-row reveal d4">
         <a class="btn-primary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Kostenloses Erstgespräch</a>
         <a class="btn-secondary" href="#formate">Formate &amp; Preise</a>
       </div>
-      <p style="margin:16px 0 0; font-size:.9rem; color:var(--sec-muted); font-weight:300;">Ab CHF 950 · Fixpreis pro Team bis 12 Personen · Anfahrt im Aargau inbegriffen · Erstgespräch kostenlos</p>
+      <p style="margin:16px 0 0; font-size:.9rem; color:var(--sec-muted); font-weight:300;">Halbtag vor Ort: CHF 1'900 pro Team bis 12 Personen, inklusive KI-Richtlinie · Einführung ab CHF 950 · Erstgespräch kostenlos</p>
     </div>
   </section>
 
@@ -768,26 +789,14 @@
             <div><span class="lbl">Dauer</span><span class="val">2 Stunden</span><span class="val-note">vor Ort oder online</span></div>
             <div><span class="lbl">Preis</span><span class="val price">CHF 950</span><span class="val-note">Fixpreis pro Team</span></div>
           </div>
-          <div class="incl-block">
-            <p class="incl-h">Inhalte</p>
-            <ul class="checks">
+          <p class="card-plus">Das ist enthalten:</p>
+          <ul class="checks">
             <li>Was KI kann – und was nicht</li>
-            <li>Datenschutz: die wichtigsten Regeln</li>
+            <li>Die Grundregeln zum Datenschutz</li>
             <li>Erste Übungen mit Prompts</li>
-            <li class="no"><span class="sr">nicht enthalten: </span>Mehrere Einsatzbereiche vertieft</li>
-            <li class="no"><span class="sr">nicht enthalten: </span>Analyse Ihrer automatisierbaren Abläufe</li>
-            </ul>
-          </div>
-          <div class="incl-block">
-            <p class="incl-h">Sie erhalten</p>
-            <ul class="checks">
-            <li>Vorgespräch (30 Min.) zur Abstimmung auf Ihre Branche</li>
-            <li>Spickzettel: Regeln und Prompt-Vorlagen</li>
-            <li>Liste der Automatisierungs-Potenziale</li>
-            <li>Teilnahmebestätigung</li>
-            <li class="no"><span class="sr">nicht enthalten: </span>KI-Richtlinie für Ihr Unternehmen<span class="val-tag">Wert CHF 400</span></li>
-            </ul>
-          </div>
+            <li>Spickzettel und Liste der automatisierbaren Abläufe</li>
+          </ul>
+          <a class="card-more" href="#details">Mehr im Detail →</a>
           <a class="btn-secondary" href="#kontakt" data-package-set="KI-Workshop Einführung">Workshop anfragen</a>
         </div>
         <div class="package-card featured reveal d2" data-badge="Empfohlen">
@@ -797,26 +806,13 @@
             <div><span class="lbl">Dauer</span><span class="val">3,5 Stunden</span><span class="val-note">vor Ort</span></div>
             <div><span class="lbl">Preis</span><span class="val price">CHF 1'900</span><span class="val-note">Fixpreis pro Team</span></div>
           </div>
-          <div class="incl-block">
-            <p class="incl-h">Inhalte</p>
-            <ul class="checks">
-            <li>Was KI kann – und was nicht</li>
-            <li>Datenschutz ausführlich: sichere Einstellungen, Business-Versionen, lokale Modelle, KI-Phishing</li>
-            <li>Prompts und Vorlagen, geübt an eigenen Aufgaben</li>
-            <li class="no"><span class="sr">nicht enthalten: </span>Mehrere Einsatzbereiche vertieft</li>
-            <li class="no"><span class="sr">nicht enthalten: </span>Analyse Ihrer automatisierbaren Abläufe</li>
-            </ul>
-          </div>
-          <div class="incl-block">
-            <p class="incl-h">Sie erhalten</p>
-            <ul class="checks">
-            <li>Vorgespräch (30 Min.) zur Abstimmung auf Ihre Branche</li>
-            <li>Spickzettel: Regeln und Prompt-Vorlagen</li>
-            <li>Liste der Automatisierungs-Potenziale</li>
-            <li>Teilnahmebestätigung</li>
-            <li>KI-Richtlinie für Ihr Unternehmen<span class="val-tag">Wert CHF 400</span></li>
-            </ul>
-          </div>
+          <p class="card-plus">Alles aus der Einführung, plus:</p>
+          <ul class="checks">
+            <li>Datenschutz vertieft: sichere Einstellungen, Business-Versionen, KI-Phishing</li>
+            <li>Übungen mit Ihren eigenen Aufgaben</li>
+            <li class="hl">KI-Richtlinie für Ihr Unternehmen<span class="val-tag">Wert CHF 400</span></li>
+          </ul>
+          <a class="card-more" href="#details">Mehr im Detail →</a>
           <a class="btn-primary" href="#kontakt" data-package-set="KI-Workshop Halbtag">Workshop anfragen</a>
         </div>
         <div class="package-card reveal d3">
@@ -826,30 +822,50 @@
             <div><span class="lbl">Dauer</span><span class="val">7 Stunden</span><span class="val-note">vor Ort</span></div>
             <div><span class="lbl">Preis</span><span class="val price">CHF 3'200</span><span class="val-note">Fixpreis pro Team</span></div>
           </div>
-          <div class="incl-block">
-            <p class="incl-h">Inhalte</p>
-            <ul class="checks">
-            <li>Was KI kann – und was nicht</li>
-            <li>Datenschutz ausführlich: sichere Einstellungen, Business-Versionen, lokale Modelle, KI-Phishing</li>
-            <li>Prompts und Vorlagen, ausführlich geübt an eigenen Aufgaben</li>
+          <p class="card-plus">Alles aus dem Halbtag, plus:</p>
+          <ul class="checks">
             <li>Mehrere Einsatzbereiche vertieft</li>
             <li>Analyse Ihrer automatisierbaren Abläufe</li>
-            </ul>
-          </div>
-          <div class="incl-block">
-            <p class="incl-h">Sie erhalten</p>
-            <ul class="checks">
-            <li>Vorgespräch (30 Min.) zur Abstimmung auf Ihre Branche</li>
-            <li>Spickzettel: Regeln und Prompt-Vorlagen</li>
-            <li>Liste der Automatisierungs-Potenziale</li>
-            <li>Teilnahmebestätigung</li>
-            <li>KI-Richtlinie für Ihr Unternehmen<span class="val-tag">Wert CHF 400</span></li>
-            </ul>
-          </div>
+            <li>Mehr Zeit für ausführliche Übungen</li>
+          </ul>
+          <a class="card-more" href="#details">Mehr im Detail →</a>
           <a class="btn-secondary" href="#kontakt" data-package-set="KI-Workshop ganzer Tag">Workshop anfragen</a>
         </div>
       </div>
       <p class="price-foot"><strong>Fixpreis pro Team bis 12 Personen</strong>, jede weitere Person CHF 90. Anfahrt im Aargau inbegriffen. Nicht MWST-pflichtig.</p>
+    </div>
+  </section>
+
+  <section id="details" class="section-light">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Im Detail</span>
+        <h2>Was genau ist enthalten?</h2>
+      </div>
+      <p class="section-lede">Alle Formate im Vergleich. Den Halbtag empfehle ich den meisten Teams: genug Zeit, um mit eigenen Aufgaben zu üben, und eine KI-Richtlinie, die Sie direkt einsetzen können.</p>
+      <div class="cmp-wrap reveal d1">
+        <table class="cmp">
+          <thead><tr><th scope="col"><span class="sr">Leistung</span></th><th scope="col">Einführung<small>2 Std.</small></th><th scope="col" class="feat">Halbtag<small>3,5 Std.</small></th><th scope="col">Ganzer Tag<small>7 Std.</small></th></tr></thead>
+          <tbody>
+          <tr class="grp"><th colspan="4" scope="colgroup">Inhalte</th></tr>
+          <tr><th scope="row">Was KI kann – und was nicht<small>Wie ChatGPT, Copilot & Co. funktionieren, wofür sie taugen und wo sie Fehler machen.</small></th><td><span class="ck" aria-label="enthalten">✓</span></td><td class="feat"><span class="ck" aria-label="enthalten">✓</span></td><td><span class="ck" aria-label="enthalten">✓</span></td></tr>
+          <tr><th scope="row">Datenschutz: die Grundregeln<small>Welche Daten nie in ein KI-Tool gehören und was das Datenschutzgesetz verlangt.</small></th><td><span class="ck" aria-label="enthalten">✓</span></td><td class="feat"><span class="ck" aria-label="enthalten">✓</span></td><td><span class="ck" aria-label="enthalten">✓</span></td></tr>
+          <tr><th scope="row">Datenschutz vertieft<small>Sichere Einstellungen, Gratis- vs. Business-Versionen, lokale KI-Modelle, KI-Phishing erkennen.</small></th><td><span class="nx" aria-label="nicht enthalten">–</span></td><td class="feat"><span class="ck" aria-label="enthalten">✓</span></td><td><span class="ck" aria-label="enthalten">✓</span></td></tr>
+          <tr><th scope="row">Prompts und Vorlagen<small>Gute Fragen stellen und Vorlagen für wiederkehrende Aufgaben, direkt geübt.</small></th><td>erste Übungen</td><td class="feat">mit eigenen Aufgaben</td><td>ausführlich</td></tr>
+          <tr><th scope="row">Mehrere Einsatzbereiche<small>Vertiefung in mehreren Bereichen Ihres Arbeitsalltags.</small></th><td><span class="nx" aria-label="nicht enthalten">–</span></td><td class="feat"><span class="nx" aria-label="nicht enthalten">–</span></td><td><span class="ck" aria-label="enthalten">✓</span></td></tr>
+          <tr><th scope="row">Analyse Ihrer Abläufe<small>Gemeinsam prüfen, welche Abläufe sich automatisieren lassen und was das bringt.</small></th><td><span class="nx" aria-label="nicht enthalten">–</span></td><td class="feat"><span class="nx" aria-label="nicht enthalten">–</span></td><td><span class="ck" aria-label="enthalten">✓</span></td></tr>
+          <tr class="grp"><th colspan="4" scope="colgroup">Sie erhalten</th></tr>
+          <tr><th scope="row">Vorgespräch (30 Min.)<small>Damit der Workshop zu Ihrer Branche und Ihren Aufgaben passt.</small></th><td><span class="ck" aria-label="enthalten">✓</span></td><td class="feat"><span class="ck" aria-label="enthalten">✓</span></td><td><span class="ck" aria-label="enthalten">✓</span></td></tr>
+          <tr><th scope="row">Spickzettel für Mitarbeitende<small>Regeln und Prompt-Vorlagen auf einen Blick, für den Arbeitsplatz.</small></th><td><span class="ck" aria-label="enthalten">✓</span></td><td class="feat"><span class="ck" aria-label="enthalten">✓</span></td><td><span class="ck" aria-label="enthalten">✓</span></td></tr>
+          <tr><th scope="row">Liste der automatisierbaren Abläufe<small>Die Aufgaben, die das Team gesammelt hat – Ausgangspunkt für eine Automatisierung.</small></th><td><span class="ck" aria-label="enthalten">✓</span></td><td class="feat"><span class="ck" aria-label="enthalten">✓</span></td><td><span class="ck" aria-label="enthalten">✓</span></td></tr>
+          <tr><th scope="row">KI-Richtlinie für Ihr Unternehmen<small>1–2 Seiten, direkt einsetzbar: was erlaubt ist, was nicht und mit welchen Tools. Wert CHF 400.</small></th><td><span class="nx" aria-label="nicht enthalten">–</span></td><td class="feat"><span class="ck" aria-label="enthalten">✓</span></td><td><span class="ck" aria-label="enthalten">✓</span></td></tr>
+          <tr><th scope="row">Teilnahmebestätigung<small>Für alle Teilnehmenden.</small></th><td><span class="ck" aria-label="enthalten">✓</span></td><td class="feat"><span class="ck" aria-label="enthalten">✓</span></td><td><span class="ck" aria-label="enthalten">✓</span></td></tr>
+          <tr class="grp"><th colspan="4" scope="colgroup">Rahmen</th></tr>
+          <tr><th scope="row">Ort</th><td>vor Ort oder online</td><td class="feat">vor Ort</td><td>vor Ort</td></tr>
+          <tr><th scope="row">Preis pro Team bis 12 Personen<small>Jede weitere Person CHF 90, Anfahrt im Aargau inbegriffen, nicht MWST-pflichtig.</small></th><td class="price">CHF 950</td><td class="feat price">CHF 1'900</td><td class="price">CHF 3'200</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
 
@@ -875,14 +891,12 @@
         <span class="eyebrow">Für wen</span>
         <h2>Für Teams, die mit sensiblen Daten arbeiten</h2>
       </div>
-      <p class="who-text">KMU mit 5–30 Mitarbeitenden, die mit Kunden- oder Personendaten arbeiten – zum Beispiel:</p>
+      <p class="who-text">KMU mit 5–30 Mitarbeitenden, die mit sensiblen Kunden- oder Personendaten arbeiten und keine eigene IT-Abteilung haben – vor allem:</p>
       <ul class="chips">
         <li>Treuhandbüros</li>
-        <li>Vermögensverwaltungen</li>
+        <li>Unabhängige Vermögensverwalter</li>
         <li>Versicherungsbroker</li>
         <li>Liegenschaftsverwaltungen</li>
-        <li>Anwaltskanzleien</li>
-        <li>Gemeindeverwaltungen</li>
       </ul>
       <p class="who-plain">Keine IT-Kenntnisse nötig.</p>
       <p class="limit-note"><strong>Gut zu wissen:</strong> Der Workshop schult den sicheren Umgang mit KI. Er ersetzt keine IT-Sicherheit wie Firewalls, Backups oder Penetrationstests – dafür vermittle ich gerne einen Kontakt zu Spezialisten.</p>
