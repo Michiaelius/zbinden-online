@@ -636,7 +636,18 @@
   /* ---------- KI-Workshops (neue Hauptseite) ---------- */
   .package-meta .val-note{ font-family:var(--font-ui); font-size:.82rem; color:var(--sec-muted); font-weight:300; line-height:1.4; margin-top:2px; }
   .package-grid.three .package-meta{ flex-direction:column; gap:14px; }
-  .pkg-plus{ margin:-6px 0 0; font-family:var(--font-ui); font-weight:500; font-size:.9rem; color:var(--sec-gold); line-height:1.5; }
+  .incl-block{ display:grid; gap:10px; }
+  .incl-h{ margin:0; font-family:var(--font-ui); font-weight:600; font-size:.74rem; letter-spacing:.12em; text-transform:uppercase; color:var(--sec-muted); }
+  .checks{ list-style:none; margin:0; padding:0; display:grid; gap:9px; }
+  .checks li{ position:relative; padding-left:28px; font-size:.93rem; line-height:1.45; color:var(--sec-ink); font-weight:400; }
+  .checks li::before{ content:"✓"; position:absolute; left:0; top:.05em; width:18px; height:18px; display:grid; place-items:center; border-radius:50%; background:linear-gradient(120deg,#c9a227,#e8d38a); color:#171200; font-size:.68rem; font-weight:700; }
+  .checks li.no{ color:var(--sec-muted); font-weight:300; opacity:.6; }
+  .checks li.no::before{ content:"–"; background:transparent; border:1px solid var(--sec-line-strong); color:var(--sec-muted); box-sizing:border-box; }
+  .checks li .val-tag{ display:block; font-family:var(--font-ui); font-weight:600; font-size:.8rem; color:var(--sec-gold); margin-top:2px; }
+  .checks li.no .val-tag{ color:inherit; }
+  .sr{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+  .package-card .incl-block + .incl-block{ padding-top:16px; border-top:1px solid var(--sec-line); }
+  #formate .package-card > a{ margin-top:auto; }
   .price-foot{ margin:26px 0 0; font-size:.95rem; color:var(--sec-ink); line-height:1.65; font-weight:300; max-width:72ch; }
   .price-foot strong{ font-weight:600; }
   .incl-grid{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px 32px; }
@@ -713,7 +724,6 @@
       <a class="menu-link home" href="https://www.zbinden.online/en/">← Home</a>
       <a class="menu-link about" href="/en/portfolio">About me &amp; my projects</a>
       <a class="menu-link" href="#formate">Formats &amp; prices</a>
-      <a class="menu-link" href="#inklusive">Included</a>
       <a class="menu-link" href="#ablauf">Half-day agenda</a>
       <a class="menu-link" href="#fuer-wen">Who is it for?</a>
       <a class="menu-link" href="#nach-dem-workshop">After the workshop</a>
@@ -753,7 +763,7 @@
         <span class="eyebrow">Formats</span>
         <h2>Three formats, one goal: using AI safely</h2>
       </div>
-      <div class="package-grid three">
+      <div class="package-grid three" id="inklusive">
         <div class="package-card reveal d1">
           <span class="package-tag">Getting started</span>
           <h3>Introduction</h3>
@@ -761,7 +771,26 @@
             <div><span class="lbl">Duration</span><span class="val">2 hours</span><span class="val-note">on site or online</span></div>
             <div><span class="lbl">Price</span><span class="val price">CHF 950</span><span class="val-note">fixed price per team</span></div>
           </div>
-          <p class="pkg-lede">What AI can and cannot do, the key data protection rules, first exercises.</p>
+          <div class="incl-block">
+            <p class="incl-h">Content</p>
+            <ul class="checks">
+            <li>What AI can – and can’t – do</li>
+            <li>Data protection: the key rules</li>
+            <li>First prompt exercises</li>
+            <li class="no"><span class="sr">not included: </span>Several areas of use in depth</li>
+            <li class="no"><span class="sr">not included: </span>Analysis of your automatable processes</li>
+            </ul>
+          </div>
+          <div class="incl-block">
+            <p class="incl-h">You receive</p>
+            <ul class="checks">
+            <li>Preliminary call (30 min) tailored to your industry</li>
+            <li>Cheat sheet: rules and prompt templates</li>
+            <li>List of automation opportunities</li>
+            <li>Certificate of attendance</li>
+            <li class="no"><span class="sr">not included: </span>AI policy for your company<span class="val-tag">Worth CHF 400</span></li>
+            </ul>
+          </div>
           <a class="btn-secondary" href="#kontakt" data-package-set="KI-Workshop Einführung">Request this workshop</a>
         </div>
         <div class="package-card featured reveal d2" data-badge="Recommended">
@@ -771,8 +800,26 @@
             <div><span class="lbl">Duration</span><span class="val">3.5 hours</span><span class="val-note">on site</span></div>
             <div><span class="lbl">Price</span><span class="val price">CHF 1'900</span><span class="val-note">fixed price per team</span></div>
           </div>
-          <p class="pkg-lede">More time for exercises: the team works on its own tasks.</p>
-          <p class="pkg-plus">Includes an AI policy for your company<br>Worth CHF 400</p>
+          <div class="incl-block">
+            <p class="incl-h">Content</p>
+            <ul class="checks">
+            <li>What AI can – and can’t – do</li>
+            <li>Data protection in depth: safe settings, business versions, local models, AI phishing</li>
+            <li>Prompts and templates, practised on your own tasks</li>
+            <li class="no"><span class="sr">not included: </span>Several areas of use in depth</li>
+            <li class="no"><span class="sr">not included: </span>Analysis of your automatable processes</li>
+            </ul>
+          </div>
+          <div class="incl-block">
+            <p class="incl-h">You receive</p>
+            <ul class="checks">
+            <li>Preliminary call (30 min) tailored to your industry</li>
+            <li>Cheat sheet: rules and prompt templates</li>
+            <li>List of automation opportunities</li>
+            <li>Certificate of attendance</li>
+            <li>AI policy for your company<span class="val-tag">Worth CHF 400</span></li>
+            </ul>
+          </div>
           <a class="btn-primary" href="#kontakt" data-package-set="KI-Workshop Halbtag">Request this workshop</a>
         </div>
         <div class="package-card reveal d3">
@@ -782,23 +829,30 @@
             <div><span class="lbl">Duration</span><span class="val">7 hours</span><span class="val-note">on site</span></div>
             <div><span class="lbl">Price</span><span class="val price">CHF 3'200</span><span class="val-note">fixed price per team</span></div>
           </div>
-          <p class="pkg-lede">In depth: several areas of use, extensive exercises and an analysis of the processes that can be automated.</p>
-          <p class="pkg-plus">Includes an AI policy for your company<br>Worth CHF 400</p>
+          <div class="incl-block">
+            <p class="incl-h">Content</p>
+            <ul class="checks">
+            <li>What AI can – and can’t – do</li>
+            <li>Data protection in depth: safe settings, business versions, local models, AI phishing</li>
+            <li>Prompts and templates, practised in depth on your own tasks</li>
+            <li>Several areas of use in depth</li>
+            <li>Analysis of your automatable processes</li>
+            </ul>
+          </div>
+          <div class="incl-block">
+            <p class="incl-h">You receive</p>
+            <ul class="checks">
+            <li>Preliminary call (30 min) tailored to your industry</li>
+            <li>Cheat sheet: rules and prompt templates</li>
+            <li>List of automation opportunities</li>
+            <li>Certificate of attendance</li>
+            <li>AI policy for your company<span class="val-tag">Worth CHF 400</span></li>
+            </ul>
+          </div>
           <a class="btn-secondary" href="#kontakt" data-package-set="KI-Workshop ganzer Tag">Request this workshop</a>
         </div>
       </div>
       <p class="price-foot"><strong>Fixed price per team for up to 12 people</strong>, CHF 90 for each additional person. Travel within the canton of Aargau included. Not subject to VAT.</p>
-      <div class="abo-terms" id="inklusive">
-        <h3>Included in every format</h3>
-        <ul class="package-list incl-grid">
-          <li>Preliminary call (30 min) to tailor the workshop to your industry</li>
-          <li>Exercises with your own tasks</li>
-          <li>Cheat sheet for employees (rules and prompt templates)</li>
-          <li>List of automation opportunities</li>
-          <li>Certificate of attendance</li>
-          <li class="plus">Half day and full day also include: an AI policy for your company (1–2 pages, ready to use, worth CHF 400)</li>
-        </ul>
-      </div>
     </div>
   </section>
 

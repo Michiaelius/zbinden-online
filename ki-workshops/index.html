@@ -633,7 +633,18 @@
   /* ---------- KI-Workshops (neue Hauptseite) ---------- */
   .package-meta .val-note{ font-family:var(--font-ui); font-size:.82rem; color:var(--sec-muted); font-weight:300; line-height:1.4; margin-top:2px; }
   .package-grid.three .package-meta{ flex-direction:column; gap:14px; }
-  .pkg-plus{ margin:-6px 0 0; font-family:var(--font-ui); font-weight:500; font-size:.9rem; color:var(--sec-gold); line-height:1.5; }
+  .incl-block{ display:grid; gap:10px; }
+  .incl-h{ margin:0; font-family:var(--font-ui); font-weight:600; font-size:.74rem; letter-spacing:.12em; text-transform:uppercase; color:var(--sec-muted); }
+  .checks{ list-style:none; margin:0; padding:0; display:grid; gap:9px; }
+  .checks li{ position:relative; padding-left:28px; font-size:.93rem; line-height:1.45; color:var(--sec-ink); font-weight:400; }
+  .checks li::before{ content:"✓"; position:absolute; left:0; top:.05em; width:18px; height:18px; display:grid; place-items:center; border-radius:50%; background:linear-gradient(120deg,#c9a227,#e8d38a); color:#171200; font-size:.68rem; font-weight:700; }
+  .checks li.no{ color:var(--sec-muted); font-weight:300; opacity:.6; }
+  .checks li.no::before{ content:"–"; background:transparent; border:1px solid var(--sec-line-strong); color:var(--sec-muted); box-sizing:border-box; }
+  .checks li .val-tag{ display:block; font-family:var(--font-ui); font-weight:600; font-size:.8rem; color:var(--sec-gold); margin-top:2px; }
+  .checks li.no .val-tag{ color:inherit; }
+  .sr{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+  .package-card .incl-block + .incl-block{ padding-top:16px; border-top:1px solid var(--sec-line); }
+  #formate .package-card > a{ margin-top:auto; }
   .price-foot{ margin:26px 0 0; font-size:.95rem; color:var(--sec-ink); line-height:1.65; font-weight:300; max-width:72ch; }
   .price-foot strong{ font-weight:600; }
   .incl-grid{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px 32px; }
@@ -710,7 +721,6 @@
       <a class="menu-link home" href="https://www.zbinden.online/">← Startseite</a>
       <a class="menu-link about" href="/portfolio">Über mich &amp; meine Projekte</a>
       <a class="menu-link" href="#formate">Formate &amp; Preise</a>
-      <a class="menu-link" href="#inklusive">Inklusive</a>
       <a class="menu-link" href="#ablauf">Ablauf des Halbtags</a>
       <a class="menu-link" href="#fuer-wen">Für wen?</a>
       <a class="menu-link" href="#nach-dem-workshop">Nach dem Workshop</a>
@@ -750,7 +760,7 @@
         <span class="eyebrow">Formate</span>
         <h2>Drei Formate, ein Ziel: KI sicher nutzen</h2>
       </div>
-      <div class="package-grid three">
+      <div class="package-grid three" id="inklusive">
         <div class="package-card reveal d1">
           <span class="package-tag">Einstieg</span>
           <h3>Einführung</h3>
@@ -758,7 +768,26 @@
             <div><span class="lbl">Dauer</span><span class="val">2 Stunden</span><span class="val-note">vor Ort oder online</span></div>
             <div><span class="lbl">Preis</span><span class="val price">CHF 950</span><span class="val-note">Fixpreis pro Team</span></div>
           </div>
-          <p class="pkg-lede">Was KI kann und was nicht, die wichtigsten Regeln zum Datenschutz, erste Übungen.</p>
+          <div class="incl-block">
+            <p class="incl-h">Inhalte</p>
+            <ul class="checks">
+            <li>Was KI kann – und was nicht</li>
+            <li>Datenschutz: die wichtigsten Regeln</li>
+            <li>Erste Übungen mit Prompts</li>
+            <li class="no"><span class="sr">nicht enthalten: </span>Mehrere Einsatzbereiche vertieft</li>
+            <li class="no"><span class="sr">nicht enthalten: </span>Analyse Ihrer automatisierbaren Abläufe</li>
+            </ul>
+          </div>
+          <div class="incl-block">
+            <p class="incl-h">Sie erhalten</p>
+            <ul class="checks">
+            <li>Vorgespräch (30 Min.) zur Abstimmung auf Ihre Branche</li>
+            <li>Spickzettel: Regeln und Prompt-Vorlagen</li>
+            <li>Liste der Automatisierungs-Potenziale</li>
+            <li>Teilnahmebestätigung</li>
+            <li class="no"><span class="sr">nicht enthalten: </span>KI-Richtlinie für Ihr Unternehmen<span class="val-tag">Wert CHF 400</span></li>
+            </ul>
+          </div>
           <a class="btn-secondary" href="#kontakt" data-package-set="KI-Workshop Einführung">Workshop anfragen</a>
         </div>
         <div class="package-card featured reveal d2" data-badge="Empfohlen">
@@ -768,8 +797,26 @@
             <div><span class="lbl">Dauer</span><span class="val">3,5 Stunden</span><span class="val-note">vor Ort</span></div>
             <div><span class="lbl">Preis</span><span class="val price">CHF 1'900</span><span class="val-note">Fixpreis pro Team</span></div>
           </div>
-          <p class="pkg-lede">Mehr Zeit für Übungen: Das Team arbeitet mit eigenen Aufgaben.</p>
-          <p class="pkg-plus">Inklusive KI-Richtlinie für Ihr Unternehmen<br>Wert CHF 400</p>
+          <div class="incl-block">
+            <p class="incl-h">Inhalte</p>
+            <ul class="checks">
+            <li>Was KI kann – und was nicht</li>
+            <li>Datenschutz ausführlich: sichere Einstellungen, Business-Versionen, lokale Modelle, KI-Phishing</li>
+            <li>Prompts und Vorlagen, geübt an eigenen Aufgaben</li>
+            <li class="no"><span class="sr">nicht enthalten: </span>Mehrere Einsatzbereiche vertieft</li>
+            <li class="no"><span class="sr">nicht enthalten: </span>Analyse Ihrer automatisierbaren Abläufe</li>
+            </ul>
+          </div>
+          <div class="incl-block">
+            <p class="incl-h">Sie erhalten</p>
+            <ul class="checks">
+            <li>Vorgespräch (30 Min.) zur Abstimmung auf Ihre Branche</li>
+            <li>Spickzettel: Regeln und Prompt-Vorlagen</li>
+            <li>Liste der Automatisierungs-Potenziale</li>
+            <li>Teilnahmebestätigung</li>
+            <li>KI-Richtlinie für Ihr Unternehmen<span class="val-tag">Wert CHF 400</span></li>
+            </ul>
+          </div>
           <a class="btn-primary" href="#kontakt" data-package-set="KI-Workshop Halbtag">Workshop anfragen</a>
         </div>
         <div class="package-card reveal d3">
@@ -779,23 +826,30 @@
             <div><span class="lbl">Dauer</span><span class="val">7 Stunden</span><span class="val-note">vor Ort</span></div>
             <div><span class="lbl">Preis</span><span class="val price">CHF 3'200</span><span class="val-note">Fixpreis pro Team</span></div>
           </div>
-          <p class="pkg-lede">Vertiefung: mehrere Einsatzbereiche, ausführliche Übungen und Analyse der Abläufe, die sich automatisieren lassen.</p>
-          <p class="pkg-plus">Inklusive KI-Richtlinie für Ihr Unternehmen<br>Wert CHF 400</p>
+          <div class="incl-block">
+            <p class="incl-h">Inhalte</p>
+            <ul class="checks">
+            <li>Was KI kann – und was nicht</li>
+            <li>Datenschutz ausführlich: sichere Einstellungen, Business-Versionen, lokale Modelle, KI-Phishing</li>
+            <li>Prompts und Vorlagen, ausführlich geübt an eigenen Aufgaben</li>
+            <li>Mehrere Einsatzbereiche vertieft</li>
+            <li>Analyse Ihrer automatisierbaren Abläufe</li>
+            </ul>
+          </div>
+          <div class="incl-block">
+            <p class="incl-h">Sie erhalten</p>
+            <ul class="checks">
+            <li>Vorgespräch (30 Min.) zur Abstimmung auf Ihre Branche</li>
+            <li>Spickzettel: Regeln und Prompt-Vorlagen</li>
+            <li>Liste der Automatisierungs-Potenziale</li>
+            <li>Teilnahmebestätigung</li>
+            <li>KI-Richtlinie für Ihr Unternehmen<span class="val-tag">Wert CHF 400</span></li>
+            </ul>
+          </div>
           <a class="btn-secondary" href="#kontakt" data-package-set="KI-Workshop ganzer Tag">Workshop anfragen</a>
         </div>
       </div>
       <p class="price-foot"><strong>Fixpreis pro Team bis 12 Personen</strong>, jede weitere Person CHF 90. Anfahrt im Aargau inbegriffen. Nicht MWST-pflichtig.</p>
-      <div class="abo-terms" id="inklusive">
-        <h3>Inklusive bei allen Formaten</h3>
-        <ul class="package-list incl-grid">
-          <li>Vorgespräch (30 Min.), um den Workshop auf Ihre Branche abzustimmen</li>
-          <li>Übungen mit Ihren eigenen Aufgaben</li>
-          <li>Spickzettel für Mitarbeitende (Regeln und Prompt-Vorlagen)</li>
-          <li>Liste der Automatisierungs-Potenziale</li>
-          <li>Teilnahmebestätigung</li>
-          <li class="plus">Beim Halbtag und Ganztag zusätzlich: KI-Richtlinie für Ihr Unternehmen (1–2 Seiten, direkt einsetzbar, Wert CHF 400)</li>
-        </ul>
-      </div>
     </div>
   </section>
 
