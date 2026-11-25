@@ -15,6 +15,46 @@
   },
   "redirects": [
     {
+      "source": "/ki-agenten-automatisierung",
+      "destination": "/ki-workshops",
+      "statusCode": 301
+    },
+    {
+      "source": "/ki-agenten-automatisierung/",
+      "destination": "/ki-workshops",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/ki-agenten-automatisierung",
+      "destination": "/fr/ki-workshops",
+      "statusCode": 301
+    },
+    {
+      "source": "/fr/ki-agenten-automatisierung/",
+      "destination": "/fr/ki-workshops",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/ki-agenten-automatisierung",
+      "destination": "/en/ki-workshops",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/ki-agenten-automatisierung/",
+      "destination": "/en/ki-workshops",
+      "statusCode": 301
+    },
+    {
+      "source": "/custom-software",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/custom-software/",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
       "source": "/geo-audit",
       "destination": "/webdesign#ki-sichtbarkeit",
       "statusCode": 301

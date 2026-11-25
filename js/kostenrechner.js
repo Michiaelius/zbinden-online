@@ -1,10 +1,10 @@
 /**
  * Kostenrechner (pages webdesign DE/FR/EN, section #kostenrechner).
  * Le visiteur choisit site web, paiement (Kauf/Abo, synchronisé avec les autres
- * .pay-switch de la page via html[data-pay]), maintenance, visibilité IA et, en option,
- * atelier IA et automatisation. Le résultat sépare « einmalig » et « pro Monat »
- * et donne un total sur 24 mois. Les prix ci-dessous doivent suivre ceux des pages
- * webdesign et ki-agenten-automatisierung (et llms.txt).
+ * .pay-switch de la page via html[data-pay]), maintenance et visibilité IA (sans nouveau
+ * site : GEO-Optimierung ab CHF 900). Le résultat sépare « einmalig » et « pro Monat »
+ * et donne un total sur 24 mois. Les prix ci-dessous doivent suivre ceux de la page
+ * webdesign (et llms.txt). Ateliers IA et automatisation : page /ki-workshops, pas ici.
  */
 (function () {
   var box = document.getElementById('calc');
@@ -21,15 +21,7 @@
       relaunch: { kauf: [2490, 2490], from: true, abo: 189, start: null, wart: [69, 89, 129] }
     },
     addon: { monitoring: 49, aktiv: 129 },
-    geo: {
-      kauf: { audit: { once: [490, 790], month: 0 }, umsetzung: { once: [1480, 2280], month: 0 } },
-      abo: { monitoring: { once: [490, 490], month: 89 }, aktiv: { once: [490, 490], month: 249 } }
-    },
-    workshop: { einfuehrung: 690, halbtag: 1290, tag: 2190 },
-    auto: {
-      kauf: { standard: { once: [990, 990], month: 29 }, erweitert: { once: [1490, 2490], month: 49 }, agent: { once: [1990, 2490], month: 69, from: true } },
-      abo: { standard: { once: [390, 390], month: 69 }, erweitert: { once: [690, 690], month: 99 }, agent: { once: [790, 790], month: 129 } }
-    }
+    geo: { once: [900, 900], month: 0, from: true }
   };
 
   var T = {
@@ -40,17 +32,14 @@
       wartNone: 'eigenes Hosting, ohne Überwachung',
       start: 'Startbeitrag', startOpts: ['Ohne Startbeitrag', 'Mit Startbeitrag'],
       kiVis: 'KI-Sichtbarkeit', kiNone: 'Keine', addonOpts: { monitoring: 'GEO-Monitoring', aktiv: 'GEO Aktiv' },
-      geoKauf: { audit: 'GEO-Audit', umsetzung: 'GEO-Audit + Umsetzung' }, geoAbo: { monitoring: 'GEO-Monitoring', aktiv: 'GEO Aktiv' },
-      optional: 'Optional: KI im Arbeitsalltag',
-      ws: 'KI-Workshop für Ihr Team', wsOpts: { none: 'Kein Workshop', einfuehrung: 'Einführung · 2 Std.', halbtag: 'Halbtag · 3–4 Std.', tag: 'Ganzer Tag' },
-      auto: 'Automatisierung', autoOpts: { none: 'Keine', standard: 'Automatisierung Standard', erweitert: 'Automatisierung erweitert', agent: 'KI-Agent für Ihre Website' },
+      geoOpt: 'GEO-Optimierung',
       perMonth: '/ Monat', once: 'einmalig', monthly: 'pro Monat', from: 'ab', setup: 'Setup', incl: 'inklusive',
       result: 'Ihre Schätzung', item: 'Posten', empty: 'Wählen Sie oben, was Sie brauchen.',
       total: 'Total', total24: 'Total über 24 Monate', compareAbo: 'Im Abo wären es über 24 Monate', compareKauf: 'Beim Kauf wären es über 24 Monate',
-      lines: { site: 'Website', wart: 'Wartung', start: 'Startbeitrag', addon: 'KI-Sichtbarkeit', geo: 'KI-Sichtbarkeit', ws: 'KI-Workshop', auto: 'Automatisierung', betrieb: 'Betrieb' },
+      lines: { site: 'Website', wart: 'Wartung', start: 'Startbeitrag', addon: 'KI-Sichtbarkeit', geo: 'KI-Sichtbarkeit' },
       aboWart: 'Wartung und Änderungen im Abo inklusive',
       yearly: function (a, b) { return 'Tipp: Wartung jährlich bezahlt kostet CHF ' + a + ' statt ' + b + ' pro Jahr (2 Monate geschenkt).'; },
-      min: { site: 'Website-Abo: Mindestdauer 24 Monate', geo: 'GEO-Abo und KI-Sichtbarkeit: Mindestdauer 6 Monate', wart: 'Wartung S und M: Mindestdauer 6 Monate', auto: 'Automatisierung im Abo: Mindestdauer 24 Monate' },
+      min: { site: 'Website-Abo: Mindestdauer 24 Monate', geo: 'KI-Sichtbarkeit (Monitoring/Aktiv): Mindestdauer 6 Monate', wart: 'Wartung S und M: Mindestdauer 6 Monate' },
       note: 'Richtwerte. Verbindlich ist die Offerte nach dem kostenlosen Erstgespräch. Alle Preise in CHF, nicht MWST-pflichtig, Domain nicht inbegriffen.',
       ask: 'Offerte für diese Auswahl anfragen', call: 'Gespräch vereinbaren',
       msg: 'Meine Auswahl im Kostenrechner:', see: 'Details ↓', msgTotal: 'Geschätzt:'
@@ -62,17 +51,14 @@
       wartNone: 'votre propre hébergement, sans surveillance',
       start: 'Contribution de départ', startOpts: ['Sans contribution de départ', 'Avec contribution de départ'],
       kiVis: 'Visibilité IA', kiNone: 'Aucune', addonOpts: { monitoring: 'Suivi GEO', aktiv: 'GEO Actif' },
-      geoKauf: { audit: 'Audit GEO', umsetzung: 'Audit GEO + mise en œuvre' }, geoAbo: { monitoring: 'Suivi GEO', aktiv: 'GEO Actif' },
-      optional: 'En option : l’IA au quotidien',
-      ws: 'Atelier IA pour votre équipe', wsOpts: { none: 'Pas d’atelier', einfuehrung: 'Introduction · 2 h', halbtag: 'Demi-journée · 3–4 h', tag: 'Journée entière' },
-      auto: 'Automatisation', autoOpts: { none: 'Aucune', standard: 'Automatisation standard', erweitert: 'Automatisation avancée', agent: 'Agent IA pour votre site' },
+      geoOpt: 'Optimisation GEO',
       perMonth: '/ mois', once: 'unique', monthly: 'par mois', from: 'dès', setup: 'mise en place', incl: 'inclus',
       result: 'Votre estimation', item: 'Poste', empty: 'Choisissez ci-dessus ce dont vous avez besoin.',
       total: 'Total', total24: 'Total sur 24 mois', compareAbo: 'En abonnement, cela ferait sur 24 mois', compareKauf: 'À l’achat, cela ferait sur 24 mois',
-      lines: { site: 'Site web', wart: 'Maintenance', start: 'Contribution de départ', addon: 'Visibilité IA', geo: 'Visibilité IA', ws: 'Atelier IA', auto: 'Automatisation', betrieb: 'Exploitation' },
+      lines: { site: 'Site web', wart: 'Maintenance', start: 'Contribution de départ', addon: 'Visibilité IA', geo: 'Visibilité IA' },
       aboWart: 'Maintenance et modifications incluses dans l’abonnement',
       yearly: function (a, b) { return 'Astuce : payée à l’année, la maintenance coûte CHF ' + a + ' au lieu de ' + b + ' par an (2 mois offerts).'; },
-      min: { site: 'Abonnement site : durée minimale 24 mois', geo: 'Abonnement GEO et visibilité IA : durée minimale 6 mois', wart: 'Maintenance S et M : durée minimale 6 mois', auto: 'Automatisation en abonnement : durée minimale 24 mois' },
+      min: { site: 'Abonnement site : durée minimale 24 mois', geo: 'Visibilité IA (suivi/actif) : durée minimale 6 mois', wart: 'Maintenance S et M : durée minimale 6 mois' },
       note: 'Valeurs indicatives. Seule l’offre après le premier entretien gratuit fait foi. Tous les prix en CHF, non soumis à la TVA, nom de domaine non compris.',
       ask: 'Demander une offre pour ce choix', call: 'Prendre rendez-vous',
       msg: 'Mon choix dans le calculateur de coûts :', see: 'Détails ↓', msgTotal: 'Estimation :'
@@ -84,24 +70,21 @@
       wartNone: 'your own hosting, no monitoring',
       start: 'Start-up fee', startOpts: ['No start-up fee', 'With start-up fee'],
       kiVis: 'AI visibility', kiNone: 'None', addonOpts: { monitoring: 'GEO monitoring', aktiv: 'GEO Active' },
-      geoKauf: { audit: 'GEO audit', umsetzung: 'GEO audit + implementation' }, geoAbo: { monitoring: 'GEO monitoring', aktiv: 'GEO Active' },
-      optional: 'Optional: AI at work',
-      ws: 'AI workshop for your team', wsOpts: { none: 'No workshop', einfuehrung: 'Introduction · 2 h', halbtag: 'Half day · 3–4 h', tag: 'Full day' },
-      auto: 'Automation', autoOpts: { none: 'None', standard: 'Standard automation', erweitert: 'Extended automation', agent: 'AI agent for your website' },
+      geoOpt: 'GEO optimisation',
       perMonth: '/ month', once: 'one-off', monthly: 'per month', from: 'from', setup: 'setup', incl: 'included',
       result: 'Your estimate', item: 'Item', empty: 'Choose what you need above.',
       total: 'Total', total24: 'Total over 24 months', compareAbo: 'By subscription it would be, over 24 months,', compareKauf: 'Buying, it would be, over 24 months,',
-      lines: { site: 'Website', wart: 'Maintenance', start: 'Start-up fee', addon: 'AI visibility', geo: 'AI visibility', ws: 'AI workshop', auto: 'Automation', betrieb: 'Operation' },
+      lines: { site: 'Website', wart: 'Maintenance', start: 'Start-up fee', addon: 'AI visibility', geo: 'AI visibility' },
       aboWart: 'Maintenance and changes included in the subscription',
       yearly: function (a, b) { return 'Tip: paid yearly, maintenance costs CHF ' + a + ' instead of ' + b + ' per year (2 months free).'; },
-      min: { site: 'Website subscription: minimum term 24 months', geo: 'GEO subscription and AI visibility: minimum term 6 months', wart: 'Maintenance S and M: minimum term 6 months', auto: 'Automation by subscription: minimum term 24 months' },
+      min: { site: 'Website subscription: minimum term 24 months', geo: 'AI visibility (monitoring/active): minimum term 6 months', wart: 'Maintenance S and M: minimum term 6 months' },
       note: 'Estimates only. The quote after the free intro call is binding. All prices in CHF, not subject to VAT, domain not included.',
       ask: 'Request a quote for this selection', call: 'Schedule a call',
       msg: 'My selection in the cost calculator:', see: 'Details ↓', msgTotal: 'Estimated:'
     }
   }[LANG];
 
-  var state = { site: 'onepager', wart: 1, start: 0, addon: 'none', geo: 'none', ws: 'none', auto: 'none' };
+  var state = { site: 'onepager', wart: 1, start: 0, addon: 'none', geo: 'none' };
 
   function pay() { return root.getAttribute('data-pay') === 'abo' ? 'abo' : 'kauf'; }
   function n(x) { return String(Math.round(x)).replace(/\B(?=(\d{3})+(?!\d))/g, "'"); }
@@ -126,14 +109,7 @@
       }
       if (s.addon !== 'none') L.push({ k: 'addon', label: T.addonOpts[s.addon], once: [0, 0], month: P.addon[s.addon] });
     } else if (s.geo !== 'none') {
-      var gk = mode === 'kauf' ? ({ monitoring: 'audit', aktiv: 'umsetzung' }[s.geo] || s.geo) : ({ audit: 'monitoring', umsetzung: 'aktiv' }[s.geo] || s.geo);
-      var g = P.geo[mode][gk];
-      L.push({ k: 'geo', label: (mode === 'kauf' ? T.geoKauf : T.geoAbo)[gk], once: g.once, month: g.month, setup: mode === 'abo' });
-    }
-    if (s.ws !== 'none') L.push({ k: 'ws', label: T.lines.ws + ' · ' + T.wsOpts[s.ws].split(' ·')[0], once: [P.workshop[s.ws], P.workshop[s.ws]], month: 0 });
-    if (s.auto !== 'none') {
-      var a = P.auto[mode][s.auto];
-      L.push({ k: 'auto', label: T.autoOpts[s.auto], once: a.once, month: a.month, from: a.from, setup: mode === 'abo', betrieb: mode === 'kauf' });
+      L.push({ k: 'geo', label: T.geoOpt, once: P.geo.once, month: 0, from: P.geo.from });
     }
     return L;
   }
@@ -178,24 +154,8 @@
         return radio('addon', k, T.addonOpts[k], '', 'CHF ' + P.addon[k] + ' ' + T.perMonth);
       }).join(''));
     } else {
-      var geoKeys = mode === 'kauf' ? ['audit', 'umsetzung'] : ['monitoring', 'aktiv'];
-      if (mode === 'kauf' && (s.geo === 'monitoring' || s.geo === 'aktiv')) s.geo = { monitoring: 'audit', aktiv: 'umsetzung' }[s.geo];
-      if (mode === 'abo' && (s.geo === 'audit' || s.geo === 'umsetzung')) s.geo = { audit: 'monitoring', umsetzung: 'aktiv' }[s.geo];
-      h += group(T.kiVis, radio('geo', 'none', T.kiNone, '', '') + geoKeys.map(function (k) {
-        var g = P.geo[mode][k];
-        var price = mode === 'kauf' ? money(g.once) : 'CHF ' + g.month + ' ' + T.perMonth + ' + ' + n(g.once[0]) + ' ' + T.setup;
-        return radio('geo', k, (mode === 'kauf' ? T.geoKauf : T.geoAbo)[k], '', price);
-      }).join(''));
+      h += group(T.kiVis, radio('geo', 'none', T.kiNone, '', '') + radio('geo', 'opt', T.geoOpt, '', money(P.geo.once, P.geo.from)));
     }
-    h += '<p class="kr-sub">' + esc(T.optional) + '</p>';
-    h += group(T.ws, ['none', 'einfuehrung', 'halbtag', 'tag'].map(function (k) {
-      return radio('ws', k, T.wsOpts[k], '', k === 'none' ? '' : 'CHF ' + n(P.workshop[k]));
-    }).join(''));
-    h += group(T.auto, ['none', 'standard', 'erweitert', 'agent'].map(function (k) {
-      if (k === 'none') return radio('auto', k, T.autoOpts[k], '', '');
-      var a = P.auto[mode][k];
-      return radio('auto', k, T.autoOpts[k], '', money(a.once, a.from) + ' + ' + (a.from ? T.from + ' ' : '') + 'CHF ' + a.month + ' ' + T.perMonth);
-    }).join(''));
 
     var L = lines(mode), S = sum(L);
     var r = '<div class="kr-result" aria-live="polite"><p class="kr-rh">' + esc(T.result) + '</p>';
@@ -203,23 +163,21 @@
     else {
       r += '<table class="kr-table"><thead><tr><th scope="col">' + esc(T.item) + '</th><th scope="col">' + esc(T.once) + '</th><th scope="col">' + esc(T.monthly) + '</th></tr></thead><tbody>';
       L.forEach(function (l) {
-        var o = l.once[1] ? money(l.once, l.from && l.k !== 'auto') + (l.setup ? ' ' + T.setup : '') : '–';
-        var m = l.month ? (l.from && l.k === 'auto' ? T.from + ' ' : '') + 'CHF ' + n(l.month) + (l.betrieb ? ' ' + T.lines.betrieb : '') : '–';
+        var o = l.once[1] ? money(l.once, l.from) : '–';
+        var m = l.month ? 'CHF ' + n(l.month) : '–';
         r += '<tr><th scope="row">' + esc(l.label) + (l.note ? '<small>' + esc(l.note) + '</small>' : '') + '</th><td>' + esc(o) + '</td><td>' + esc(m) + '</td></tr>';
       });
       r += '</tbody><tfoot><tr><th scope="row">' + esc(T.total) + '</th><td>' + esc(S.once[1] ? money(S.once, S.from) : '–') + '</td><td>' + esc(S.month ? 'CHF ' + n(S.month) : '–') + '</td></tr></tfoot></table>';
       r += '<div class="kr-big"><span>' + esc(T.total24) + '</span><strong>' + esc(money(S.t24, S.from)) + '</strong></div>';
-      var hasGeoOnly = !site && s.geo !== 'none';
-      if ((site || s.auto !== 'none') && !hasGeoOnly) {
+      if (site) {
         var other = mode === 'kauf' ? 'abo' : 'kauf', O = sum(lines(other));
         r += '<p class="kr-compare">' + esc(mode === 'kauf' ? T.compareAbo : T.compareKauf) + ' <strong>' + esc(money(O.t24, O.from)) + '</strong>. <button type="button" class="kr-switch" data-to="' + other + '">' + esc(other === 'abo' ? 'Abo' : (LANG === 'fr' ? 'Achat' : LANG === 'en' ? 'Buy' : 'Kauf')) + ' →</button></p>';
       }
       var notes = [];
       if (site && mode === 'kauf' && s.wart > 0) notes.push(T.yearly(n(site.wart[s.wart - 1] * 10), n(site.wart[s.wart - 1] * 12)));
       if (site && mode === 'abo') notes.push(T.min.site);
-      if ((site && s.addon !== 'none') || (!site && s.geo !== 'none' && mode === 'abo')) notes.push(T.min.geo);
+      if (site && s.addon !== 'none') notes.push(T.min.geo);
       if (site && mode === 'kauf' && s.wart > 1) notes.push(T.min.wart);
-      if (s.auto !== 'none' && mode === 'abo') notes.push(T.min.auto);
       notes.push(T.note);
       r += '<ul class="kr-notes">' + notes.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>';
       r += '<div class="kr-cta"><a class="btn-primary" href="#kontakt" data-kr-ask>' + esc(T.ask) + '</a><a class="btn-secondary" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">' + esc(T.call) + '</a></div>';

@@ -666,6 +666,17 @@
   .menu-link.about{ color:var(--sec-gold); border-bottom:1px solid var(--sec-line); border-radius:0; margin-bottom:4px; }
   .menu-link.home:has(+ .menu-link.about){ border-bottom:0; margin-bottom:0; }
   @media (max-width:400px){ .svc-switch a{ flex:1 1 auto; padding:.65em .3em; letter-spacing:.02em; } }
+
+  /* ---------- Kopfzeile mit drei Menüpunkten: früher auf zwei Zeilen umbrechen ---------- */
+  @media (max-width:1080px){
+    html{ scroll-padding-top:136px; }
+    .header-row{ grid-template-columns:1fr auto; }
+    .svc-switch{ grid-column:1 / -1; grid-row:2; justify-self:stretch; }
+    .svc-switch a{ flex:1; text-align:center; padding:.65em .4em; font-size:.75rem; letter-spacing:.05em; }
+    .hdr-tools .lang-switch, .hdr-tools .header-cta{ display:none; }
+    .menu-extra{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; margin-top:6px; padding:12px .4em 2px; border-top:1px solid var(--sec-line); }
+  }
+  @media (max-width:400px){ .svc-switch a{ font-size:.7rem; letter-spacing:.02em; padding:.65em .2em; } }
 </style>
 </head>
 <body>
@@ -680,8 +691,9 @@
   <div class="header-row">
     <a class="wordmark" href="https://www.zbinden.online/en/">ZBINDEN<span class="dot">·</span>SOFTWARE <span class="sub">PORTFOLIO</span></a>
     <nav class="svc-switch" aria-label="Services">
+      <a href="/en/ki-workshops">AI workshops</a>
       <a href="/en/webdesign">Websites</a>
-      <a href="/en/ki-agenten-automatisierung">AI at work</a>
+      <a href="/en/portfolio" aria-current="page">About me</a>
     </nav>
     <div class="hdr-tools">
       <div class="lang-switch" aria-label="Sprache / Langue / Language">
@@ -689,7 +701,7 @@
         <a href="/portfolio" hreflang="de" lang="de">DE</a>
         <a href="/en/portfolio" hreflang="en" lang="en" aria-current="page">EN</a>
       </div>
-      <a class="header-cta" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Book a call</a>
+      <a class="header-cta" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Free intro call</a>
       <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menuPanel" aria-label="Menu">
         <svg width="18" height="14" viewBox="0 0 18 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><line class="l1" x1="1" y1="2" x2="17" y2="2"/><line class="l2" x1="1" y1="7" x2="17" y2="7"/><line class="l3" x1="1" y1="12" x2="17" y2="12"/></svg>
       </button>
@@ -706,7 +718,7 @@
           <a href="/portfolio" hreflang="de" lang="de">DE</a>
           <a href="/en/portfolio" hreflang="en" lang="en" aria-current="page">EN</a>
         </div>
-        <a class="header-cta" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Book a call</a>
+        <a class="header-cta" href="https://calendly.com/zbinden-austausch/30min" target="_blank" rel="noopener">Free intro call</a>
       </div>
     </nav>
   </div>
@@ -856,7 +868,6 @@
               <li>Built without a site builder: fast pages, structured data, open to AI crawlers</li>
             </ul>
             <div class="chips"><span class="chip">HTML · CSS · JavaScript</span><span class="chip">jsPDF</span><span class="chip">Vercel Functions</span><span class="chip">Resend</span></div>
-            <a class="ref-link" href="/en/ki-agenten-automatisierung#branchen">Try the calculator →</a>
           </div>
           <div class="proj-visual">
           <ol class="flow">
@@ -876,7 +887,7 @@
             <ul class="package-list">
               <li>Eight questions, the way real customers ask them — live to ChatGPT and Perplexity</li>
               <li>The result is a short PDF report in plain language, without jargon</li>
-              <li>The basis of my free AI check and of the GEO audit</li>
+              <li>The basis of my free AI check and of GEO optimisation</li>
             </ul>
             <div class="chips"><span class="chip">Python</span><span class="chip">OpenAI API</span><span class="chip">Perplexity API</span></div>
             <a class="ref-link" href="/en/webdesign#ki-sichtbarkeit">To AI visibility →</a>
@@ -942,10 +953,10 @@
           <p>Custom websites for small businesses and associations — clear, mobile-friendly and built so that ChatGPT finds you too.</p>
           <span class="go">Learn more →</span>
         </a>
-        <a class="more-card" href="/en/ki-agenten-automatisierung">
-          <span class="more-tag">AI at work</span>
-          <h3>AI workshops &amp; automation</h3>
-          <p>Your team learns to use AI sensibly in a workshop, and recurring processes run automatically.</p>
+        <a class="more-card" href="/en/ki-workshops">
+          <span class="more-tag">AI workshops</span>
+          <h3>AI workshops for teams</h3>
+          <p>Your team learns to use AI safely and efficiently – with exercises on its own tasks. From CHF 950.</p>
           <span class="go">Learn more →</span>
         </a>
       </div>
@@ -985,10 +996,9 @@
                 <label for="f-package">Interested in</label>
                 <select id="f-package" name="package">
                   <option value="">Not sure yet</option>
-                  <option value="Automatisierung">Process automation &amp; AI agents</option>
-                  <option value="GEO-Audit">AI visibility (GEO audit)</option>
-                  <option value="Webdesign">New website</option>
-                  <option value="Individuelles Projekt">Custom web app or software</option>
+                  <option value="KI-Workshop">AI workshop for my team</option>
+                  <option value="Automatisierung">Automation after the workshop</option>
+                  <option value="Webdesign">New website or GEO optimisation</option>
                 </select>
               </div>
               <div class="field">
@@ -1011,7 +1021,7 @@
 <footer class="section-dark">
   <span>© 2026 Zbinden Software</span>
   <span class="social"><a href="https://www.linkedin.com/in/pauline-zbinden/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn · Pauline</a><a href="https://www.linkedin.com/company/zbinden-software/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn · Zbinden Software</a><a href="https://www.instagram.com/zbindensoftware/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1" fill="currentColor" stroke="none"/></svg>Instagram</a></span>
-  <span class="mono"><a href="https://www.zbinden.online/en/">Zbinden Software</a> · <a href="/en/webdesign">Websites &amp; AI visibility →</a> · <a href="/en/ki-agenten-automatisierung">AI at work →</a></span>
+  <span class="mono"><a href="https://www.zbinden.online/en/">Zbinden Software</a> · <a href="/en/webdesign">Websites &amp; AI visibility →</a> · <a href="/en/ki-workshops">AI workshops →</a></span>
 </footer>
 
 <script>
