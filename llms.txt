@@ -14,7 +14,7 @@ Zbinden Software zeigt KMU-Teams, wie sie KI im Arbeitsalltag sicher und effizie
 ## Über
 
 - [Pauline Zbinden](https://www.zbinden.online/): Gründerin von Zbinden Software – Software-Entwicklerin (C++, Embedded) und Beraterin, gibt KI-Workshops für KMU-Teams und automatisiert Abläufe; dazu Websites und Generative Engine Optimization (GEO).
-- [Portfolio von Pauline Zbinden](https://www.zbinden.online/portfolio): Sechs selbst konzipierte und umgesetzte Projekte – Kinderbörse (Web-App für eine Tauschgruppe mit über 500 Mitgliedern im Fricktal), Website von Waldmeier Planung&Beratung (Baugesuche, Oeschgen), Website der Spielgruppe Sunneschiin, eine Beispiel-Website für ein (frei erfundenes) Restaurant, zbinden.online mit Sparrechner und der KI-Sichtbarkeitstest für ChatGPT und Perplexity – sowie Werdegang. Auch auf [Französisch](https://www.zbinden.online/fr/portfolio) und [Englisch](https://www.zbinden.online/en/portfolio).
+- [Portfolio von Pauline Zbinden](https://www.zbinden.online/portfolio): Sechs selbst konzipierte und umgesetzte Projekte – Kinderbörse (Web-App für eine Tauschgruppe mit über 500 Mitgliedern im Fricktal), Website von Waldmeier Planung&Beratung (Baugesuche, Oeschgen), Website der Spielgruppe Sunneschiin, eine Beispiel-Website für ein (frei erfundenes) Restaurant, zbinden.online mit Paket-Finder und Kostenrechner und der KI-Sichtbarkeitstest für ChatGPT und Perplexity – sowie Werdegang. Auch auf [Französisch](https://www.zbinden.online/fr/portfolio) und [Englisch](https://www.zbinden.online/en/portfolio).
 
 ## Kontakt
 
